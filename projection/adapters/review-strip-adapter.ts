@@ -1,6 +1,8 @@
-import type { ActionDispatchOutcome } from "../../../Cognitive_OS/runtime/execution/action-dispatcher.ts";
-import type { ExecutionEventContract } from "../../../Cognitive_OS/runtime/execution/execution-events.ts";
-import type { PreferenceWritebackResult } from "../../../Cognitive_OS/runtime/learning/preference-writeback.ts";
+import type {
+  ActionDispatchOutcome,
+  ExecutionEventContract,
+  PreferenceWritebackResult,
+} from "../../runtime-imports/cognitive-runtime.ts";
 import { createReviewStrip, type ReviewStrip } from "../objects/review-strip.ts";
 import type {
   ObjectiveRecord,

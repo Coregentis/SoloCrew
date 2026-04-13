@@ -22,18 +22,21 @@ test("[app] return-and-continue reloads the same state and surfaces anchor compa
     session.runtime.seeded_ids.preference_profile_id
   );
 
-  assert.equal(loaded.crew.crew_id, session.shell.crew.crew_id);
+  assert.equal(loaded.shell.crew.crew_id, session.shell.crew.crew_id);
   assert.equal(
-    loaded.objective.objective_id,
+    loaded.shell.objective.objective_id,
     session.shell.objective.objective_id
   );
-  assert.equal(loaded.continuity.objective_anchor_compare?.anchor_present, true);
+  assert.equal(
+    loaded.shell.continuity.objective_anchor_compare?.anchor_present,
+    true
+  );
   assert.equal(
     preference_profile?.preference_summary,
     correction_result.correction.correction_summary
   );
   assert.ok(
-    loaded.memory_summaries.some(
+    loaded.shell.memory_summaries.some(
       (summary) =>
         summary.recent_correction_summary ===
         correction_result.correction.correction_summary

@@ -1,11 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
+import { createRuntimeSession } from "../../app/shell/create-runtime-session.ts";
 import { adaptMemorySummary } from "../../projection/adapters/memory-summary-adapter.ts";
 import { seedBaselineState } from "../../projection/assembly/seed-baseline.ts";
 
 test("[projection] memory-profile and preference-profile adapt to MemorySummary with bounded correction signal", () => {
-  const runtime = seedBaselineState();
+  const runtime = seedBaselineState(createRuntimeSession());
   const memory_profile = runtime.memory_store.list(runtime.project_id)[0];
 
   assert.ok(memory_profile);
@@ -54,4 +55,5 @@ test("[projection] memory-profile and preference-profile adapt to MemorySummary 
       (ref) => ref.upstream_object_type === "correction-capture"
     )
   );
+  runtime.close();
 });

@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
+import { createRuntimeSession } from "../../app/shell/create-runtime-session.ts";
 import { adaptAgentGroupToCrew } from "../../projection/adapters/crew-adapter.ts";
 import {
   load_agent_group,
@@ -8,7 +9,7 @@ import {
 } from "../../projection/assembly/seed-baseline.ts";
 
 test("[projection] agent-group adapts to Crew with upstream refs preserved", () => {
-  const runtime = seedBaselineState();
+  const runtime = seedBaselineState(createRuntimeSession());
   const agent_group = load_agent_group(
     runtime.state_store,
     runtime.seeded_ids.group_id
@@ -28,4 +29,5 @@ test("[projection] agent-group adapts to Crew with upstream refs preserved", () 
   assert.equal("authority_class" in crew, false);
   assert.equal("primary_layer" in crew, false);
   assert.equal("group_name" in crew, false);
+  runtime.close();
 });

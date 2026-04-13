@@ -1,12 +1,20 @@
-import type { ObjectiveAnchorComparison } from "../../../Cognitive_OS/runtime/learning/objective-anchor.ts";
+import type { ObjectiveAnchorComparison } from "../../runtime-imports/cognitive-runtime.ts";
 import type { Crew } from "../../projection/objects/crew.ts";
 import type { CrewMember } from "../../projection/objects/crew-member.ts";
 import type { Objective } from "../../projection/objects/objective.ts";
 import type { WorkItem } from "../../projection/objects/work-item.ts";
 import type { MemorySummary } from "../../projection/objects/memory-summary.ts";
 import type { ReviewStrip } from "../../projection/objects/review-strip.ts";
-import { seedBaselineState, type BaselineRuntimeContext, type BaselineSeedOptions } from "../../projection/assembly/seed-baseline.ts";
+import {
+  seedBaselineState,
+  type BaselineRuntimeSession,
+  type BaselineSeedOptions,
+} from "../../projection/assembly/seed-baseline.ts";
 import { assembleObjectiveView } from "../../projection/assembly/flow-assembly.ts";
+import {
+  createRuntimeSession,
+  type RuntimeSessionOptions,
+} from "./create-runtime-session.ts";
 
 export interface SoloCrewShellPayload {
   project_id: string;
@@ -23,14 +31,19 @@ export interface SoloCrewShellPayload {
 }
 
 export interface BaselineShellSession {
-  runtime: BaselineRuntimeContext;
+  runtime: BaselineRuntimeSession;
   shell: SoloCrewShellPayload;
 }
 
+export interface CreateBaselineShellOptions extends BaselineSeedOptions {
+  session?: RuntimeSessionOptions;
+}
+
 export function createBaselineShell(
-  options: BaselineSeedOptions = {}
+  options: CreateBaselineShellOptions = {}
 ): BaselineShellSession {
-  const runtime = seedBaselineState(options);
+  const session = createRuntimeSession(options.session);
+  const runtime = seedBaselineState(session, options);
   const objective_view = assembleObjectiveView(runtime);
 
   runtime.objective_anchor.capture_anchor(objective_view.objective.objective_id);

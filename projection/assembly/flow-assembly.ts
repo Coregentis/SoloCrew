@@ -1,15 +1,16 @@
 import type {
   ActionDispatchHandler,
   ActionDispatchOutcome,
-} from "../../../Cognitive_OS/runtime/execution/action-dispatcher.ts";
-import type { ExecutionRequestEnvelope } from "../../../Cognitive_OS/runtime/execution/execution-envelope.ts";
-import type { ExecutionEventContract } from "../../../Cognitive_OS/runtime/execution/execution-events.ts";
-import type {
+  ExecutionRequestEnvelope,
+  ExecutionEventContract,
   CorrectionCaptureInput,
   CorrectionCaptureRecord,
-} from "../../../Cognitive_OS/runtime/learning/correction-capture.ts";
-import type { PreferenceWritebackResult } from "../../../Cognitive_OS/runtime/learning/preference-writeback.ts";
-import type { ObjectiveAnchorComparison } from "../../../Cognitive_OS/runtime/learning/objective-anchor.ts";
+  PreferenceWritebackResult,
+  ObjectiveAnchorComparison,
+} from "../../runtime-imports/cognitive-runtime.ts";
+import type {
+  BaselineRuntimeSession,
+} from "./seed-baseline.ts";
 import { adaptAgentGroupToCrew } from "../adapters/crew-adapter.ts";
 import { adaptAgentWorkerToCrewMember } from "../adapters/crew-member-adapter.ts";
 import { adaptMemorySummary } from "../adapters/memory-summary-adapter.ts";
@@ -25,7 +26,6 @@ import {
   load_review_cycle,
   load_role_profile,
   load_work_item,
-  type BaselineRuntimeContext,
 } from "./seed-baseline.ts";
 import type {
   AgentWorkerRecord,
@@ -85,7 +85,7 @@ function assert_exists<TValue>(
   return value;
 }
 
-function load_current_group(context: BaselineRuntimeContext) {
+function load_current_group(context: BaselineRuntimeSession) {
   return assert_exists(
     load_agent_group(context.state_store, context.seeded_ids.group_id) ??
       list_agent_groups(context.state_store, context.project_id)[0],
@@ -93,7 +93,7 @@ function load_current_group(context: BaselineRuntimeContext) {
   );
 }
 
-function load_current_objective(context: BaselineRuntimeContext): ObjectiveRecord {
+function load_current_objective(context: BaselineRuntimeSession): ObjectiveRecord {
   return assert_exists(
     context.objective_store.load(context.seeded_ids.objective_id),
     "Baseline objective is required for projection assembly."
@@ -101,7 +101,7 @@ function load_current_objective(context: BaselineRuntimeContext): ObjectiveRecor
 }
 
 function load_current_review_cycle(
-  context: BaselineRuntimeContext
+  context: BaselineRuntimeSession
 ): ReviewCycleRecord | undefined {
   return (
     load_review_cycle(context.state_store, context.seeded_ids.review_cycle_id) ??
@@ -109,12 +109,12 @@ function load_current_review_cycle(
   );
 }
 
-function load_worker_records(context: BaselineRuntimeContext): AgentWorkerRecord[] {
+function load_worker_records(context: BaselineRuntimeSession): AgentWorkerRecord[] {
   return context.worker_store.list(context.project_id);
 }
 
 function load_memory_summaries(
-  context: BaselineRuntimeContext
+  context: BaselineRuntimeSession
 ): MemorySummary[] {
   const corrections = context.correction_capture.list({
     project_id: context.project_id,
@@ -139,7 +139,7 @@ function load_memory_summaries(
 }
 
 function build_crew_members(
-  context: BaselineRuntimeContext,
+  context: BaselineRuntimeSession,
   params: {
     recent_action_summary_by_worker_id?: Map<string, string>;
   } = {}
@@ -173,7 +173,7 @@ function build_crew_members(
 }
 
 function build_review_strip(
-  context: BaselineRuntimeContext,
+  context: BaselineRuntimeSession,
   params: {
     work_items?: WorkItemRecord[];
     action_outcomes?: ActionDispatchOutcome[];
@@ -199,7 +199,7 @@ function build_review_strip(
 }
 
 export function assembleCreateCrewView(
-  context: BaselineRuntimeContext
+  context: BaselineRuntimeSession
 ): CreateCrewView {
   const group = load_current_group(context);
   const crew = adaptAgentGroupToCrew({
@@ -216,7 +216,7 @@ export function assembleCreateCrewView(
 }
 
 export function assembleObjectiveView(
-  context: BaselineRuntimeContext
+  context: BaselineRuntimeSession
 ): ObjectiveView {
   const create_view = assembleCreateCrewView(context);
   const objective_record = load_current_objective(context);
@@ -243,7 +243,7 @@ export function assembleObjectiveView(
 }
 
 export function assembleReturnAndContinueView(
-  context: BaselineRuntimeContext
+  context: BaselineRuntimeSession
 ): ReturnAndContinueView {
   const objective_view = assembleObjectiveView(context);
   const objective_anchor_compare = context.objective_anchor.compare_to_anchor(
@@ -301,7 +301,7 @@ export function createLocalFakeActionHandler(): ActionDispatchHandler {
   };
 }
 
-function ensure_local_fake_handler(context: BaselineRuntimeContext): void {
+function ensure_local_fake_handler(context: BaselineRuntimeSession): void {
   if (
     context.action_dispatcher
       .list_handler_ids()
@@ -342,7 +342,7 @@ function mutate_stateful_record<TRecord extends { mutation?: Record<string, unkn
 }
 
 export async function assembleBoundedMotionView(
-  context: BaselineRuntimeContext,
+  context: BaselineRuntimeSession,
   request: ExecutionRequestEnvelope
 ): Promise<BoundedMotionAssemblyResult> {
   ensure_local_fake_handler(context);
@@ -418,7 +418,7 @@ export async function assembleBoundedMotionView(
 }
 
 export function applyUserCorrectionAndAssemble(
-  context: BaselineRuntimeContext,
+  context: BaselineRuntimeSession,
   input: CorrectionCaptureInput
 ): CorrectionAssemblyResult {
   const correction = context.correction_capture.capture(input);

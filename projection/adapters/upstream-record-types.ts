@@ -1,8 +1,10 @@
-import type { WorkforceStateRecord } from "../../../Cognitive_OS/runtime/state/state-store-port.ts";
-import type { AgentWorkerRecord } from "../../../Cognitive_OS/runtime/state/worker-store.ts";
-import type { ObjectiveRecord } from "../../../Cognitive_OS/runtime/state/objective-store.ts";
-import type { MemoryProfileRecord } from "../../../Cognitive_OS/runtime/state/memory-store.ts";
-import type { PreferenceProfileRecord } from "../../../Cognitive_OS/runtime/state/preference-store.ts";
+import type {
+  WorkforceStateRecord,
+  AgentWorkerRecord,
+  ObjectiveRecord,
+  MemoryProfileRecord,
+  PreferenceProfileRecord,
+} from "../../runtime-imports/cognitive-runtime.ts";
 
 export type {
   AgentWorkerRecord,

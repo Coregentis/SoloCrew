@@ -1,21 +1,10 @@
-import { InMemoryStateStore } from "../../../Cognitive_OS/runtime/state/in-memory-state-store.ts";
-import { WorkerStore } from "../../../Cognitive_OS/runtime/state/worker-store.ts";
-import { ObjectiveStore } from "../../../Cognitive_OS/runtime/state/objective-store.ts";
-import { MemoryStore } from "../../../Cognitive_OS/runtime/state/memory-store.ts";
-import { PreferenceStore } from "../../../Cognitive_OS/runtime/state/preference-store.ts";
 import type {
   StateStorePort,
-  WorkforceStateRecord,
-} from "../../../Cognitive_OS/runtime/state/state-store-port.ts";
-import { WorkerLifecycleRuntime } from "../../../Cognitive_OS/runtime/lifecycle/worker-lifecycle.ts";
-import { InMemoryObjectiveAnchor } from "../../../Cognitive_OS/runtime/learning/objective-anchor.ts";
-import { InMemoryCorrectionCapture } from "../../../Cognitive_OS/runtime/learning/correction-capture.ts";
-import { PreferenceWritebackService } from "../../../Cognitive_OS/runtime/learning/preference-writeback.ts";
-import { ActionDispatcher } from "../../../Cognitive_OS/runtime/execution/action-dispatcher.ts";
-import type { AgentWorkerRecord } from "../../../Cognitive_OS/runtime/state/worker-store.ts";
-import type { ObjectiveRecord } from "../../../Cognitive_OS/runtime/state/objective-store.ts";
-import type { MemoryProfileRecord } from "../../../Cognitive_OS/runtime/state/memory-store.ts";
-import type { PreferenceProfileRecord } from "../../../Cognitive_OS/runtime/state/preference-store.ts";
+  AgentWorkerRecord,
+  ObjectiveRecord,
+  MemoryProfileRecord,
+  PreferenceProfileRecord,
+} from "../../runtime-imports/cognitive-runtime.ts";
 import type {
   AgentGroupRecord,
   ReviewCycleRecord,
@@ -28,6 +17,7 @@ import {
   is_role_profile_record,
   is_work_item_record,
 } from "../adapters/upstream-record-types.ts";
+import type { SoloCrewRuntimeSession } from "../../app/shell/create-runtime-session.ts";
 
 const BASELINE_TIMESTAMPS = {
   created: "2026-04-14T00:00:00.000Z",
@@ -58,18 +48,11 @@ export interface BaselineSeedIds {
 
 export interface BaselineRuntimeContext {
   project_id: string;
-  state_store: StateStorePort;
-  worker_store: WorkerStore;
-  objective_store: ObjectiveStore;
-  memory_store: MemoryStore;
-  preference_store: PreferenceStore;
-  worker_lifecycle: WorkerLifecycleRuntime;
-  objective_anchor: InMemoryObjectiveAnchor;
-  correction_capture: InMemoryCorrectionCapture;
-  preference_writeback: PreferenceWritebackService;
-  action_dispatcher: ActionDispatcher;
   seeded_ids: BaselineSeedIds;
 }
+
+export type BaselineRuntimeSession = SoloCrewRuntimeSession &
+  BaselineRuntimeContext;
 
 export interface BaselineSeedOptions {
   include_memory_profile?: boolean;
@@ -77,31 +60,16 @@ export interface BaselineSeedOptions {
   include_review_cycle?: boolean;
 }
 
-function create_base_record<TRecord extends WorkforceStateRecord>(
+function create_base_record<
+  TRecord extends Record<string, unknown> & {
+    temporal?: Record<string, unknown>;
+    mutation?: Record<string, unknown>;
+    lineage?: Record<string, unknown>;
+    governance?: Record<string, unknown>;
+  },
+>(
   project_id: string,
-  overrides: Omit<
-    TRecord,
-    | "schema_version"
-    | "authority_class"
-    | "primary_layer"
-    | "project_id"
-    | "temporal"
-    | "mutation"
-    | "lineage"
-    | "governance"
-  > &
-    Partial<
-      Pick<
-        TRecord,
-        | "schema_version"
-        | "authority_class"
-        | "primary_layer"
-        | "temporal"
-        | "mutation"
-        | "lineage"
-        | "governance"
-      >
-    >
+  overrides: TRecord
 ): TRecord {
   return {
     schema_version: "0.1.0",
@@ -579,69 +547,52 @@ export function create_seed_ids(): BaselineSeedIds {
   };
 }
 
-export function seedBaselineState(
-  options: BaselineSeedOptions = {}
-): BaselineRuntimeContext {
-  const ids = create_seed_ids();
-  const state_store = new InMemoryStateStore();
-  const worker_store = new WorkerStore(state_store);
-  const objective_store = new ObjectiveStore(state_store);
-  const memory_store = new MemoryStore(state_store);
-  const preference_store = new PreferenceStore(state_store);
-  const worker_lifecycle = new WorkerLifecycleRuntime({
-    worker_store,
-  });
-  const correction_capture = new InMemoryCorrectionCapture();
-  const preference_writeback = new PreferenceWritebackService({
-    preference_store,
-    correction_capture,
-  });
-  const objective_anchor = new InMemoryObjectiveAnchor({
-    objective_store,
-  });
-  const action_dispatcher = new ActionDispatcher();
+export function bindBaselineRuntimeContext(
+  session: SoloCrewRuntimeSession,
+  seeded_ids: BaselineSeedIds = create_seed_ids()
+): BaselineRuntimeSession {
+  return {
+    ...session,
+    project_id: seeded_ids.project_id,
+    seeded_ids,
+  };
+}
 
-  seed_role_profiles(state_store, ids.project_id, ids.role_profile_ids);
+export function seedBaselineState(
+  session: SoloCrewRuntimeSession,
+  options: BaselineSeedOptions = {}
+): BaselineRuntimeSession {
+  const ids = create_seed_ids();
+  const runtime = bindBaselineRuntimeContext(session, ids);
+
+  seed_role_profiles(runtime.state_store, ids.project_id, ids.role_profile_ids);
   seed_agent_workers(
-    worker_store,
+    runtime.worker_store,
     ids.project_id,
     ids.group_id,
     ids.role_profile_ids,
     ids.worker_ids,
     ids.objective_id
   );
-  seed_work_items(state_store, ids.project_id, ids);
-  seed_objective(objective_store, ids.project_id, ids);
-  seed_agent_group(state_store, ids.project_id, ids);
+  seed_work_items(runtime.state_store, ids.project_id, ids);
+  seed_objective(runtime.objective_store, ids.project_id, ids);
+  seed_agent_group(runtime.state_store, ids.project_id, ids);
 
   if (options.include_memory_profile !== false) {
-    seed_memory_profiles(memory_store, ids.project_id, ids);
+    seed_memory_profiles(runtime.memory_store, ids.project_id, ids);
   }
 
   if (options.include_preference_profile !== false) {
     seed_preference_profile(
-      preference_store,
+      runtime.preference_store,
       ids.project_id,
       ids.preference_profile_id
     );
   }
 
   if (options.include_review_cycle !== false) {
-    seed_review_cycle(state_store, ids.project_id, ids);
+    seed_review_cycle(runtime.state_store, ids.project_id, ids);
   }
 
-  return {
-    project_id: ids.project_id,
-    state_store,
-    worker_store,
-    objective_store,
-    memory_store,
-    preference_store,
-    worker_lifecycle,
-    objective_anchor,
-    correction_capture,
-    preference_writeback,
-    action_dispatcher,
-    seeded_ids: ids,
-  };
+  return runtime;
 }

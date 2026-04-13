@@ -1,4 +1,4 @@
-import type { CorrectionCaptureRecord } from "../../../Cognitive_OS/runtime/learning/correction-capture.ts";
+import type { CorrectionCaptureRecord } from "../../runtime-imports/cognitive-runtime.ts";
 import {
   createMemorySummary,
   type MemorySummary,

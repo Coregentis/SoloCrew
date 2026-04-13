@@ -1,13 +1,25 @@
-import type { BaselineRuntimeContext } from "../../projection/assembly/seed-baseline.ts";
+import {
+  bindBaselineRuntimeContext,
+  type BaselineRuntimeSession,
+} from "../../projection/assembly/seed-baseline.ts";
 import { assembleReturnAndContinueView } from "../../projection/assembly/flow-assembly.ts";
-import type { SoloCrewShellPayload } from "./create-baseline-shell.ts";
+import type { BaselineShellSession, SoloCrewShellPayload } from "./create-baseline-shell.ts";
+import {
+  isRuntimeSession,
+  type RuntimeSessionOptions,
+} from "./create-runtime-session.ts";
+import { loadRuntimeSession } from "./load-runtime-session.ts";
 
 export function loadBaselineShell(
-  runtime: BaselineRuntimeContext
-): SoloCrewShellPayload {
+  input: BaselineRuntimeSession | RuntimeSessionOptions
+): BaselineShellSession {
+  const session = isRuntimeSession(input)
+    ? input
+    : loadRuntimeSession(input);
+  const runtime = bindBaselineRuntimeContext(session);
   const continuation_view = assembleReturnAndContinueView(runtime);
 
-  return {
+  const shell: SoloCrewShellPayload = {
     project_id: runtime.project_id,
     crew: continuation_view.crew,
     crew_members: continuation_view.crew_members,
@@ -16,5 +28,10 @@ export function loadBaselineShell(
     memory_summaries: continuation_view.memory_summaries,
     review_strip: continuation_view.review_strip,
     continuity: continuation_view.continuity,
+  };
+
+  return {
+    runtime,
+    shell,
   };
 }

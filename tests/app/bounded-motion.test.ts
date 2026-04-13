@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 
 import { createBaselineShell } from "../../app/shell/create-baseline-shell.ts";
 import { assembleBoundedMotionView } from "../../projection/assembly/flow-assembly.ts";
-import type { ExecutionRequestEnvelope } from "../../../Cognitive_OS/runtime/execution/execution-envelope.ts";
+import type { ExecutionRequestEnvelope } from "../../runtime-imports/cognitive-runtime.ts";
 
 test("[app] bounded motion uses local fake handler and maps execution events into projection summaries", async () => {
   const session = createBaselineShell();
