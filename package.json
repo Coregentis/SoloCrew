@@ -1,0 +1,10 @@
+{
+  "name": "@coregentis/solocrew",
+  "version": "0.1.0-baseline",
+  "private": true,
+  "type": "module",
+  "description": "SoloCrew product baseline repository for projection and app contracts on top of Cognitive_OS.",
+  "engines": {
+    "node": ">=22"
+  }
+}
