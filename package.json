@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "description": "SoloCrew product baseline repository for projection and app contracts on top of Cognitive_OS.",
+  "scripts": {
+    "test": "node --experimental-strip-types --test tests/projection/*.test.ts tests/app/*.test.ts"
+  },
   "engines": {
     "node": ">=22"
   }
