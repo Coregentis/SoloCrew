@@ -18,18 +18,27 @@ This repository is:
 - the place where SoloCrew projection and app baselines are frozen
 - the place where downstream product contracts are mapped over upstream mother-runtime truth
 
-## Current Phase
+## Current Release Status
 
-Current phase is `v0.1-baseline`.
+Current release status is `v0.1 sealed`.
 
-This phase establishes:
+The implementation line was established as `v0.1-baseline` and then closed with:
+
+- projection assembly over bounded upstream runtime surfaces
+- memory-backed and sqlite-backed runtime sessions
+- executable truth tests for continuity, bounded motion, failure, recovery, and correction/writeback
+- product requirement revalidation and closure documentation
+
+The sealed `v0.1` line establishes:
 
 - governance and reconciliation documents
 - projection boundary and DTO contracts
 - workflow baseline for the first five flows
-- minimal `projection/` and `app/` skeletons
+- projection adapters and flow assembly helpers
+- runtime session entrypoints for memory/sqlite shell loading
+- executable projection and app shell truth tests
 
-This phase does not claim:
+The sealed `v0.1` line does not claim:
 
 - full SoloCrew runtime
 - provider execution implementation
@@ -55,12 +64,14 @@ This phase does not claim:
   - runtime-consumption, DTO, and workflow contracts
 - `governance/baselines/`
   - frozen SoloCrew projection baseline
+- `governance/releases/`
+  - release notes and closure records for sealed product lines
 - `projection/`
-  - contract-first projection types, objects, mappings, and flow baseline
+  - projection contracts, objects, adapters, mappings, and flow assembly helpers
 - `app/`
-  - product shell boundary and page placeholders
+  - product shell boundary, runtime session entry, and page placeholders
 - `tests/`
-  - reserved for downstream executable checks after projection adapters exist
+  - executable projection and app shell truth checks for the sealed `v0.1` line
 
 ## Scope Discipline
 
