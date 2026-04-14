@@ -270,6 +270,10 @@ export function createLocalFakeActionHandler(): ActionDispatchHandler {
       return true;
     },
     handle(request) {
+      if (request.metadata?.force_failure === true) {
+        throw new Error("Local fake motion forced failure.");
+      }
+
       const completed_at = new Date(
         Date.parse(request.created_at) + 1000
       ).toISOString();
