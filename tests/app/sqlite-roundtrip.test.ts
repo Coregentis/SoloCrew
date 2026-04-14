@@ -26,12 +26,26 @@ test("[app] sqlite roundtrip preserves baseline identity and persisted preferenc
       sqlite_path,
     });
 
+    assert.ok(
+      initial.shell.continuity.notes.includes(
+        "Baseline shell created over a sqlite-backed runtime session."
+      )
+    );
     assert.equal(first_reload.shell.crew.crew_id, initial.shell.crew.crew_id);
     assert.equal(
       first_reload.shell.objective.objective_id,
       initial.shell.objective.objective_id
     );
     assert.ok(first_reload.shell.memory_summaries.length >= 1);
+    assert.equal(
+      first_reload.shell.continuity.objective_anchor_compare.anchor_present,
+      false
+    );
+    assert.ok(
+      first_reload.shell.continuity.notes.includes(
+        "Objective anchor was not captured in this runtime context."
+      )
+    );
 
     const correction_result = applyUserCorrectionAndAssemble(
       first_reload.runtime,
@@ -62,6 +76,15 @@ test("[app] sqlite roundtrip preserves baseline identity and persisted preferenc
     assert.equal(
       second_reload.shell.objective.objective_id,
       initial.shell.objective.objective_id
+    );
+    assert.equal(
+      second_reload.shell.continuity.objective_anchor_compare.anchor_present,
+      false
+    );
+    assert.ok(
+      second_reload.shell.continuity.notes.includes(
+        "Objective anchor was not captured in this runtime context."
+      )
     );
     assert.ok(
       second_reload.shell.memory_summaries.some(

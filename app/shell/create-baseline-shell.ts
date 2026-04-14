@@ -39,6 +39,14 @@ export interface CreateBaselineShellOptions extends BaselineSeedOptions {
   session?: RuntimeSessionOptions;
 }
 
+function build_session_note(mode: RuntimeSessionOptions["mode"]): string {
+  if (mode === "sqlite") {
+    return "Baseline shell created over a sqlite-backed runtime session.";
+  }
+
+  return "Baseline shell created over an in-memory runtime session.";
+}
+
 export function createBaselineShell(
   options: CreateBaselineShellOptions = {}
 ): BaselineShellSession {
@@ -60,7 +68,7 @@ export function createBaselineShell(
       review_strip: objective_view.review_strip,
       continuity: {
         notes: [
-          "Baseline shell created over InMemoryStateStore.",
+          build_session_note(session.mode),
           "Objective anchor captured for later return-and-continue comparison.",
         ],
       },
