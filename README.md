@@ -57,7 +57,12 @@ That means `v0.4` is now defined as the line that will freeze:
 - the minimum management object family
 - product-layer versus later upstream runtime-blocker boundaries
 
-It does not mean `v0.4` is already implemented.
+This repo now contains the first bounded `v0.4` implementation surface:
+
+- one read/inspect-oriented multi-cell foundation overview page
+- bounded per-cell summary projections derived from existing single-cell product truth
+
+It does not mean `v0.4` is fully implemented.
 It does not mean Secretary beta, portfolio orchestration, provider execution, or channel behavior now exist in this repo.
 
 ## Version Semantics

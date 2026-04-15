@@ -2,6 +2,8 @@
 
 ## 2026-04-15
 
+- implemented the first bounded `v0.4-multi-cell-foundation` code surface as a read/inspect-oriented multi-cell overview with bounded per-cell summary projections
+- kept Secretary behavior, portfolio dispatch UX, provider execution, channel integrations, broad KPI cockpit behavior, and runtime-complete orchestration explicitly out of scope for that `v0.4` implementation wave
 - introduced `v0.4-multi-cell-foundation` as the missing intermediate release line and froze its scope as a docs-only governance wave without claiming Secretary beta or runtime expansion
 - sealed SoloCrew `v0.3-single-cell-usable` as the first bounded single-cell usable release line with an actual operator console page, bounded bootstrap path, and bounded console-side correction/apply path over sealed `v0.1` truth
 - froze SoloCrew `v0.3-single-cell-usable` scope, cell-console UX baseline, usable contract, and non-goals as docs-only pre-implementation assets
