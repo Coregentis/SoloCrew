@@ -2,6 +2,7 @@
 
 ## 2026-04-15
 
+- froze SoloCrew `v0.3-single-cell-usable` scope, cell-console UX baseline, usable contract, and non-goals as docs-only pre-implementation assets
 - sealed SoloCrew `v0.2-structural-constitution` as a structural constitution line over the sealed `v0.1` baseline
 - added the structural object layer and management contract layer for single-cell constitutional objects and management exchange objects
 - added the single-cell structural assembly, console state, view-model, shell composition, and shell entry adapter scaffolds
