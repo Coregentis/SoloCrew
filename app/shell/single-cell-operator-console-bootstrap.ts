@@ -18,6 +18,9 @@ import {
   renderSingleCellOperatorConsolePage,
 } from "../pages/single-cell-operator-console-page.ts";
 import {
+  assembleSingleCellCorrectionReviewInteraction,
+} from "./single-cell-correction-review-interaction.ts";
+import {
   createBaselineShell,
   type CreateBaselineShellOptions,
 } from "./create-baseline-shell.ts";
@@ -141,19 +144,28 @@ export function bootstrapSingleCellOperatorConsolePage(
     adaptSingleCellShellEntry(shell_composition);
   const console_shell =
     composeSingleCellOperatorConsoleShell(shell_entry_package);
+  const correction_review_interaction =
+    assembleSingleCellCorrectionReviewInteraction({
+      baseline_shell_session,
+      structural_assembly,
+      console_shell,
+    });
   const page = renderSingleCellOperatorConsolePage(console_shell, {
     template_seed,
+    correction_review_interaction,
   });
   const deferred_items = unique_items([
     ...structural_assembly.deferred_items,
     ...shell_entry_package.deferred_items,
     ...console_shell.deferred_items,
+    ...correction_review_interaction.deferred_items,
     ...(template_seed?.deferred_surfaces ?? []),
   ]);
   const projection_notes = unique_items([
     ...structural_assembly.projection_notes,
     ...shell_entry_package.projection_notes,
     ...console_shell.projection_notes,
+    ...correction_review_interaction.projection_notes,
     ...(template_seed?.projection_notes ?? []),
     "Single-cell operator console bootstrap reuses the existing baseline shell/runtime path and app-shell projection chain.",
     "Bootstrap remains operator-facing only and does not introduce multi-cell, secretary, provider, or channel behavior.",
@@ -180,6 +192,7 @@ export function bootstrapSingleCellOperatorConsolePage(
     structural_assembly,
     shell_entry_package,
     console_shell,
+    correction_review_interaction,
     page,
     projection_notes,
     deferred_items,

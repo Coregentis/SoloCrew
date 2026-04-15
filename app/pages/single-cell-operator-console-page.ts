@@ -2,6 +2,9 @@ import type {
   DevDeliveryPackTemplateSeed,
 } from "../../projection/contracts/dev-delivery-pack-template-contract.ts";
 import type {
+  SingleCellCorrectionReviewInteraction,
+} from "../shell/single-cell-correction-review-interaction-contract.ts";
+import type {
   SingleCellOperatorConsoleShell,
 } from "../shell/single-cell-operator-console-shell-contract.ts";
 
@@ -18,6 +21,7 @@ export type SingleCellOperatorConsolePageSectionKey =
   | "crew_overview"
   | "objective_overview"
   | "work_item_execution_overview"
+  | "correction_review"
   | "memory_continuity_overview"
   | "deferred_surfaces"
   | "truth_boundary";
@@ -50,6 +54,7 @@ export interface SingleCellOperatorConsolePage {
     crew_overview: SingleCellOperatorConsolePageSection;
     objective_overview: SingleCellOperatorConsolePageSection;
     work_item_execution_overview: SingleCellOperatorConsolePageSection;
+    correction_review: SingleCellOperatorConsolePageSection;
     memory_continuity_overview: SingleCellOperatorConsolePageSection;
     deferred_surfaces: SingleCellOperatorConsolePageSection;
     truth_boundary: SingleCellOperatorConsolePageSection;
@@ -60,6 +65,7 @@ export interface SingleCellOperatorConsolePage {
 
 export interface RenderSingleCellOperatorConsolePageOptions {
   template_seed?: DevDeliveryPackTemplateSeed;
+  correction_review_interaction?: SingleCellCorrectionReviewInteraction;
 }
 
 function escape_html(value: string): string {
@@ -93,6 +99,8 @@ export function renderSingleCellOperatorConsolePage(
   options: RenderSingleCellOperatorConsolePageOptions = {}
 ): SingleCellOperatorConsolePage {
   const template_seed = options.template_seed;
+  const correction_review_interaction =
+    options.correction_review_interaction;
   const sections = {
     header: {
       section_key: "header",
@@ -185,6 +193,39 @@ export function renderSingleCellOperatorConsolePage(
         ),
       ],
     },
+    correction_review: {
+      section_key: "correction_review",
+      heading: "Correction / Review",
+      body_lines: correction_review_interaction
+        ? [
+            `Interaction boundary: ${correction_review_interaction.execution_boundary}`,
+            `Runtime mode: ${correction_review_interaction.runtime_mode}`,
+            `Suggested target scope: ${correction_review_interaction.correction_input_seed.suggested_target_scope}`,
+            `Suggested runtime target: ${correction_review_interaction.correction_input_seed.suggested_runtime_target}`,
+            `Suggested target ref: ${correction_review_interaction.correction_input_seed.suggested_target_ref_id}`,
+            `Review posture: ${correction_review_interaction.review_intent_seed.review_posture}`,
+            `Default review intent: ${correction_review_interaction.review_intent_seed.default_review_intent}`,
+            ...correction_review_interaction.review_intent_seed.supported_review_intents.map(
+              (intent) => `Supported review intent: ${intent}`
+            ),
+            ...correction_review_interaction.target_scope_hints.map(
+              (hint) =>
+                `Target scope hint: ${hint.target_scope} -> ${hint.display_label} [${hint.support_level}] via ${hint.runtime_mapping_target}`
+            ),
+            ...correction_review_interaction.expected_outcome_hints.supported_writeback_hints.map(
+              (hint) => `Supported writeback hint: ${hint}`
+            ),
+            ...correction_review_interaction.expected_outcome_hints.deferred_outcome_hints.map(
+              (hint) => `Deferred review outcome: ${hint}`
+            ),
+            ...correction_review_interaction.non_claims.map(
+              (claim) => `Non-claim: ${claim}`
+            ),
+          ]
+        : [
+            "Correction/review interaction scaffold is not assembled for this page.",
+          ],
+    },
     memory_continuity_overview: {
       section_key: "memory_continuity_overview",
       heading: "Memory / Continuity Overview",
@@ -246,6 +287,7 @@ export function renderSingleCellOperatorConsolePage(
   const non_claims = unique_items([
     ...console_shell.truth_boundary.non_claims,
     ...(template_seed?.non_claims ?? []),
+    ...(correction_review_interaction?.non_claims ?? []),
   ]);
   const html = [
     `<main data-route="${SINGLE_CELL_OPERATOR_CONSOLE_ROUTE}">`,
@@ -259,6 +301,7 @@ export function renderSingleCellOperatorConsolePage(
     render_section(sections.crew_overview),
     render_section(sections.objective_overview),
     render_section(sections.work_item_execution_overview),
+    render_section(sections.correction_review),
     render_section(sections.memory_continuity_overview),
     render_section(sections.deferred_surfaces),
     render_section(sections.truth_boundary),

@@ -10,6 +10,9 @@ import type {
 import type { BaselineShellSession } from "./create-baseline-shell.ts";
 import type { RuntimeSessionMode } from "./create-runtime-session.ts";
 import type {
+  SingleCellCorrectionReviewInteraction,
+} from "./single-cell-correction-review-interaction-contract.ts";
+import type {
   SingleCellOperatorConsoleShell,
 } from "./single-cell-operator-console-shell-contract.ts";
 import type {
@@ -52,6 +55,7 @@ export interface SingleCellOperatorConsoleBootstrap {
   structural_assembly: SingleCellStructuralAssemblyPackage;
   shell_entry_package: SingleCellShellEntryPackage;
   console_shell: SingleCellOperatorConsoleShell;
+  correction_review_interaction: SingleCellCorrectionReviewInteraction;
   page: SingleCellOperatorConsolePage;
   projection_notes: string[];
   deferred_items: string[];
