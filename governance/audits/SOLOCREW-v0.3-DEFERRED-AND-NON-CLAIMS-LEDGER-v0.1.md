@@ -6,6 +6,9 @@ This ledger freezes what is still explicitly deferred or unavailable in the curr
 
 It exists to prevent the repo from overstating current product truth.
 
+One bounded console-side correction/apply path is now present on `main`.
+This ledger records what still remains deferred beyond that bounded path.
+
 ## Product-Line Deferred Scope
 
 The following remain explicitly deferred at the product boundary:
@@ -48,6 +51,7 @@ Primary evidence:
 | Event timeline persistence | `app/shell/single-cell-continuity-reload-presentation.ts` | Continuity is honest about not having a full persisted event timeline. |
 | Process resume lineage | `app/shell/single-cell-continuity-reload-presentation.ts` | Fresh reload does not restore a runtime-complete process lineage. |
 | Fresh-reload session draft restore | `app/shell/single-cell-operator-in-session-draft-state.ts` | Session-only draft values do not persist across a fresh reload. |
+| Persistent correction/apply timeline | `app/shell/single-cell-operator-correction-apply.ts` | The bounded apply path does not create a persisted correction/apply timeline across sessions. |
 
 ## Portfolio / Secretary / Cross-Cell Deferrals
 
@@ -65,6 +69,10 @@ Primary evidence:
 
 | Deferred / Unavailable Surface | Primary Repo Evidence | Current Truth |
 | --- | --- | --- |
+| Provider-backed correction apply | `app/shell/single-cell-operator-correction-apply.ts` | The current console-side apply path does not dispatch provider execution or rerun behavior. |
+| Channel-routed correction apply handoff | `app/shell/single-cell-operator-correction-apply.ts` | The current console-side apply path does not hand corrections into channel routing. |
+| Multi-cell correction routing | `app/shell/single-cell-operator-correction-apply.ts` | The current console-side apply path remains single-cell only. |
+| Secretary correction routing | `app/shell/single-cell-operator-correction-apply.ts` | No Secretary layer receives or triages console-side correction/apply requests. |
 | Provider-backed rerun after correction | `app/shell/single-cell-correction-review-interaction.ts` | Correction does not trigger a provider-backed rerun path. |
 | Channel-routed review handoff | `app/shell/single-cell-correction-review-interaction.ts` | No channel review routing exists. |
 | Multi-step approval workflow | `app/shell/single-cell-correction-review-interaction.ts` | No approval engine or multi-step review chain exists. |
@@ -74,8 +82,11 @@ Primary evidence:
 The current `v0.3` line must continue to make these explicit non-claims:
 
 - no actual provider-backed request/action/input submission
+- no provider-backed correction apply or rerun behavior
 - no channel-routed action, input, request, or review routing
+- no channel-routed correction/apply handoff
 - no persistent action/request/review timeline
+- no persistent correction/apply timeline
 - no fresh-reload restore of session-only draft state
 - no Secretary behavior
 - no multi-cell portfolio behavior
@@ -89,6 +100,7 @@ The current repo truth supports:
 
 - bounded operator visibility
 - bounded preview/readiness packaging
+- one bounded console-side correction/apply path
 - honest continuity and deferred-surface messaging
 
 It does not support:
@@ -99,5 +111,4 @@ It does not support:
 - real secretary or portfolio behavior
 - real persistent operator workflow history
 
-That boundary must remain explicit until a later bounded wave actually changes repo truth.
-
+The presence of one bounded correction/apply path does not relax those later-version non-claims.

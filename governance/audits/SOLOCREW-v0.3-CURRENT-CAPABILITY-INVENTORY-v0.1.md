@@ -25,7 +25,7 @@ It distinguishes:
 | Surface Family | Status | Primary Repo Evidence | Audit Judgment |
 | --- | --- | --- | --- |
 | Single-cell operator console page | Present | `app/pages/single-cell-operator-console-page.ts`, `app/pages/README.md` | There is now one actual bounded operator-facing page surface with route identity `/cell` and generated HTML output. |
-| Core console sections | Present | `app/pages/single-cell-operator-console-page.ts` | The page renders header, delivery, crew overview, objective overview, work/execution overview, memory/continuity overview, deferred surfaces, and truth boundary sections. |
+| Core console sections | Present | `app/pages/single-cell-operator-console-page.ts` | The page renders header, delivery, crew overview, objective overview, work/execution overview, correction/apply, memory/continuity overview, deferred surfaces, and truth boundary sections. |
 | Product bootstrap-to-page path | Present | `app/shell/single-cell-operator-console-bootstrap.ts`, `tests/app/single-cell-operator-console-bootstrap.test.ts`, `tests/app/single-cell-operator-console-page.test.ts` | The repo now has one actual app-shell-facing boot path that can assemble the single-cell console page from current shell/runtime truth. |
 
 ## Interaction / Presentation Present
@@ -40,6 +40,7 @@ It distinguishes:
 | Input-draft presentation | Present | `app/shell/single-cell-operator-input-draft.ts`, `tests/app/single-cell-operator-input-draft.test.ts`, `tests/app/single-cell-operator-input-draft-page.test.ts` | The console can present bounded input slots and draftable operator-facing targets. |
 | In-session draft-state presentation | Present | `app/shell/single-cell-operator-in-session-draft-state.ts`, `tests/app/single-cell-operator-in-session-draft-state.test.ts`, `tests/app/single-cell-operator-in-session-draft-state-page.test.ts` | The console can hold and show current session-only draft values honestly. |
 | Session-draft controls presentation | Present | `app/shell/single-cell-operator-session-draft-controls.ts`, `tests/app/single-cell-operator-session-draft-controls.test.ts`, `tests/app/single-cell-operator-session-draft-controls-page.test.ts` | The console can present keep/clear/promote hints without claiming actual draft mutation or submission. |
+| Console-side correction/apply path | Present | `app/shell/single-cell-operator-correction-apply.ts`, `tests/app/single-cell-operator-correction-apply.test.ts`, `tests/app/single-cell-operator-correction-apply-page.test.ts`, `tests/app/sqlite-single-cell-operator-correction-apply-reload.test.ts` | The console now exposes one bounded operator-usable correction/apply path over the sealed `v0.1` correction/writeback helper. |
 | Request-package presentation | Present | `app/shell/single-cell-operator-request-package.ts`, `tests/app/single-cell-operator-request-package.test.ts`, `tests/app/single-cell-operator-request-package-page.test.ts` | The console can assemble and display one bounded next-step request package from current focus, intent, drafts, and acceptance truth. |
 | Request review / submit-preview presentation | Present | `app/shell/single-cell-operator-request-review-submit-preview.ts`, `tests/app/single-cell-operator-request-review-submit-preview.test.ts`, `tests/app/single-cell-operator-request-review-submit-preview-page.test.ts` | The console can show whether a request is review-ready or preview-ready and what is still missing or deferred. |
 | Readiness summary | Present | `app/shell/single-cell-operator-readiness-summary.ts`, `tests/app/single-cell-operator-readiness-summary.test.ts`, `tests/app/single-cell-operator-readiness-summary-page.test.ts` | The console can summarize current readiness across focus, request packaging, preview posture, delivery acceptance, and in-session draft truth. |
@@ -49,7 +50,8 @@ It distinguishes:
 | Surface | Current Boundary Evidence | Audit Judgment |
 | --- | --- | --- |
 | Continuity / reload | `execution_boundary: "presentation_scaffold_only"` in `app/shell/single-cell-continuity-reload-presentation.ts` | Continuity is truthfully presented, but the console does not become a runtime-complete resume engine or event-history viewer. |
-| Correction / review | `execution_boundary: "interaction_scaffold_only"` in `app/shell/single-cell-correction-review-interaction.ts` | Correction/review is visible, but the current v0.3 console path does not yet expose a page-driven apply/commit interaction. |
+| Correction / review | `execution_boundary: "interaction_scaffold_only"` in `app/shell/single-cell-correction-review-interaction.ts` | The correction/review framing layer remains scaffold-oriented, but it now feeds one separate bounded console-side apply path. |
+| Correction / apply | `execution_boundary: "console_apply_path_only"` in `app/shell/single-cell-operator-correction-apply.ts` | One real bounded apply path exists, but it remains intentionally narrow and does not become provider execution, request submission, or a runtime-complete workflow engine. |
 | Task focus | `execution_boundary: "interaction_scaffold_only"` in `app/shell/single-cell-task-focus-interaction.ts` | Focus-switching remains a bounded hint surface, not a committed runtime routing layer. |
 | Action intents | `execution_boundary: "interaction_scaffold_only"` in `app/shell/single-cell-operator-action-intent.ts` | Next actions are suggested honestly, but not executed. |
 | Input drafts | `execution_boundary: "draft_scaffold_only"` in `app/shell/single-cell-operator-input-draft.ts` | Draft slots are visible, but current repo truth does not expose a committed operator-input application path from the console. |
@@ -67,11 +69,11 @@ It distinguishes:
 1. structural shell-entry reuse
 2. actual bootstrap path
 3. actual page rendering
-4. visible continuity, correction/review, task-focus, action-intent, input-draft, request-package, preview, and readiness sections
+4. visible continuity, correction/review, task-focus, action-intent, input-draft, request-package, preview, readiness, and correction/apply sections
+5. one bounded operator-usable correction/apply path over sealed `v0.1` truth
 
 What is still not true is equally important:
 
-- the operator console is still scaffold-heavy in its next-step interaction layers
-- the repo truth is stronger on visibility and bounded packaging than on console-driven mutation/application
-- the current line is closer to `truthful bounded product surface` than to `runtime-complete workflow product`
-
+- many operator-facing layers remain scaffold-shaped and bounded
+- the new correction/apply path is intentionally narrow rather than a broad workflow engine
+- the current line is now honestly usable as a bounded single-cell operator console, while still remaining far below runtime-complete workflow breadth

@@ -20,7 +20,31 @@ This repository is:
 
 ## Current Release Status
 
-Current release status is `v0.2-structural-constitution sealed`.
+Current release status is `v0.3-single-cell-usable sealed`.
+
+The sealed `v0.3` line extends the sealed `v0.2` and `v0.1` baselines with:
+
+- one actual bounded single-cell operator console page
+- one actual bounded single-cell bootstrap path
+- visible current objective, work, delivery, continuity, deferred-surface, and truth-boundary sections
+- bounded operator-facing interaction and presentation layers for correction/review, continuity, task focus, action intents, input drafts, request packaging, request preview, and readiness
+- one bounded console-side correction/apply path over the sealed `v0.1` correction/writeback truth
+
+This sealed `v0.3` line does not claim:
+
+- multi-cell portfolio behavior
+- Secretary behavior
+- provider execution
+- channel integrations
+- broad KPI cockpit behavior
+- broad business-pack execution breadth
+- actual request submission
+- runtime-complete workflow state
+- runtime-complete product state
+
+The sealed `v0.3` line is the first bounded single-cell usable release line for SoloCrew.
+
+Current structural foundation under that line remains the sealed `v0.2-structural-constitution`.
 
 The sealed `v0.2` line extends the sealed `v0.1` baseline with:
 
@@ -86,9 +110,9 @@ The sealed `v0.1` line does not claim:
 - `projection/`
   - projection contracts, objects, adapters, mappings, and flow assembly helpers
 - `app/`
-  - product shell boundary, runtime session entry, and bounded shell entry scaffolds
+  - product shell boundary, runtime session entry, bounded single-cell console bootstrap, and current bounded page surface
 - `tests/`
-  - executable projection and app shell truth checks for the sealed `v0.1` and `v0.2` lines
+  - executable projection and app shell truth checks for the sealed `v0.1`, `v0.2`, and `v0.3` lines
 
 ## Scope Discipline
 

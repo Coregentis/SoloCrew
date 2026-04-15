@@ -2,6 +2,7 @@
 
 ## 2026-04-15
 
+- sealed SoloCrew `v0.3-single-cell-usable` as the first bounded single-cell usable release line with an actual operator console page, bounded bootstrap path, and bounded console-side correction/apply path over sealed `v0.1` truth
 - froze SoloCrew `v0.3-single-cell-usable` scope, cell-console UX baseline, usable contract, and non-goals as docs-only pre-implementation assets
 - sealed SoloCrew `v0.2-structural-constitution` as a structural constitution line over the sealed `v0.1` baseline
 - added the structural object layer and management contract layer for single-cell constitutional objects and management exchange objects
