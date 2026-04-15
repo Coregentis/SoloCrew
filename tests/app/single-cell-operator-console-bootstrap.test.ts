@@ -62,6 +62,9 @@ test("[app] single-cell operator console page bootstraps coherently from existin
     );
     assert.ok(bootstrap.deferred_items.includes("provider_execution"));
     assert.ok(
+      bootstrap.deferred_items.includes("delivery_acceptance_workflow_runtime")
+    );
+    assert.ok(
       bootstrap.page.non_claims.includes(
         "no_runtime_complete_product_state"
       )
@@ -73,6 +76,7 @@ test("[app] single-cell operator console page bootstraps coherently from existin
       bootstrap.console_shell,
       bootstrap.page.sections.header,
       bootstrap.page.sections.delivery,
+      bootstrap.page.sections.delivery_acceptance,
       bootstrap.page.sections.crew_overview,
       bootstrap.page.sections.objective_overview,
       bootstrap.page.sections.task_focus,

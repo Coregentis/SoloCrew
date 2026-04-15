@@ -8,6 +8,9 @@ import type {
   SingleCellOperatorConsolePage,
 } from "../pages/single-cell-operator-console-page.ts";
 import type {
+  SingleCellDeliveryAcceptanceScaffold,
+} from "./single-cell-delivery-acceptance-contract.ts";
+import type {
   SingleCellOperatorActionIntentScaffold,
 } from "./single-cell-operator-action-intent-contract.ts";
 import type { BaselineShellSession } from "./create-baseline-shell.ts";
@@ -79,6 +82,7 @@ export interface SingleCellOperatorConsoleBootstrap {
   state_transition_scaffold: SingleCellOperatorConsoleStateTransitionScaffold;
   task_focus_interaction: SingleCellTaskFocusInteraction;
   action_intent_scaffold: SingleCellOperatorActionIntentScaffold;
+  delivery_acceptance_scaffold: SingleCellDeliveryAcceptanceScaffold;
   page: SingleCellOperatorConsolePage;
   projection_notes: string[];
   deferred_items: string[];

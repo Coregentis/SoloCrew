@@ -21,6 +21,9 @@ import {
 import type { CrewMemberRole } from "../../projection/objects/crew-member.ts";
 import type { WorkItem } from "../../projection/objects/work-item.ts";
 import {
+  assembleSingleCellDeliveryAcceptanceScaffold,
+} from "./single-cell-delivery-acceptance.ts";
+import {
   renderSingleCellOperatorConsolePage,
 } from "../pages/single-cell-operator-console-page.ts";
 import {
@@ -208,6 +211,13 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
       correction_review_interaction,
       task_focus_interaction,
     });
+  const delivery_acceptance_scaffold =
+    assembleSingleCellDeliveryAcceptanceScaffold({
+      baseline_shell_session,
+      structural_assembly,
+      console_shell,
+      action_intent_scaffold,
+    });
   const page = renderSingleCellOperatorConsolePage(console_shell, {
     template_seed,
     continuity_reload_presentation,
@@ -215,6 +225,7 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
     state_transition_scaffold,
     task_focus_interaction,
     action_intent_scaffold,
+    delivery_acceptance_scaffold,
   });
   const deferred_items = unique_items([
     ...structural_assembly.deferred_items,
@@ -225,6 +236,7 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
     ...state_transition_scaffold.deferred_items,
     ...task_focus_interaction.deferred_items,
     ...action_intent_scaffold.deferred_items,
+    ...delivery_acceptance_scaffold.deferred_items,
     ...(template_seed?.deferred_surfaces ?? []),
   ]);
   const projection_notes = unique_items([
@@ -236,6 +248,7 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
     ...state_transition_scaffold.projection_notes,
     ...task_focus_interaction.projection_notes,
     ...action_intent_scaffold.projection_notes,
+    ...delivery_acceptance_scaffold.projection_notes,
     ...(template_seed?.projection_notes ?? []),
     "Single-cell operator console bootstrap reuses the existing baseline shell/runtime path and app-shell projection chain.",
     "Bootstrap remains operator-facing only and does not introduce multi-cell, secretary, provider, or channel behavior.",
@@ -267,6 +280,7 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
     state_transition_scaffold,
     task_focus_interaction,
     action_intent_scaffold,
+    delivery_acceptance_scaffold,
     page,
     projection_notes,
     deferred_items,

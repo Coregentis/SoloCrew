@@ -55,6 +55,7 @@ test("[app] single-cell operator console page renders from current shell adapter
 
   assert.ok(page.sections.header);
   assert.ok(page.sections.delivery);
+  assert.ok(page.sections.delivery_acceptance);
   assert.ok(page.sections.crew_overview);
   assert.ok(page.sections.objective_overview);
   assert.ok(page.sections.task_focus);
@@ -67,6 +68,7 @@ test("[app] single-cell operator console page renders from current shell adapter
   assert.match(page.html, /<h1>Solo Operator Cell<\/h1>/);
   assert.match(page.html, /Header/);
   assert.match(page.html, /Delivery/);
+  assert.match(page.html, /Delivery Acceptance/);
   assert.match(page.html, /Crew Overview/);
   assert.match(page.html, /Objective Overview/);
   assert.match(page.html, /Task Focus/);
@@ -83,6 +85,7 @@ test("[app] single-cell operator console page renders from current shell adapter
     page,
     page.sections.header,
     page.sections.delivery,
+    page.sections.delivery_acceptance,
     page.sections.crew_overview,
     page.sections.objective_overview,
     page.sections.task_focus,

@@ -17,6 +17,9 @@ import type {
   SingleCellOperatorActionIntentScaffold,
 } from "../shell/single-cell-operator-action-intent-contract.ts";
 import type {
+  SingleCellDeliveryAcceptanceScaffold,
+} from "../shell/single-cell-delivery-acceptance-contract.ts";
+import type {
   SingleCellTaskFocusInteraction,
 } from "../shell/single-cell-task-focus-interaction-contract.ts";
 
@@ -30,6 +33,7 @@ export type SingleCellOperatorConsolePageAuthorityBoundary =
 export type SingleCellOperatorConsolePageSectionKey =
   | "header"
   | "delivery"
+  | "delivery_acceptance"
   | "crew_overview"
   | "objective_overview"
   | "task_focus"
@@ -67,6 +71,7 @@ export interface SingleCellOperatorConsolePage {
   sections: {
     header: SingleCellOperatorConsolePageSection;
     delivery: SingleCellOperatorConsolePageSection;
+    delivery_acceptance: SingleCellOperatorConsolePageSection;
     crew_overview: SingleCellOperatorConsolePageSection;
     objective_overview: SingleCellOperatorConsolePageSection;
     task_focus: SingleCellOperatorConsolePageSection;
@@ -90,6 +95,7 @@ export interface RenderSingleCellOperatorConsolePageOptions {
   state_transition_scaffold?: SingleCellOperatorConsoleStateTransitionScaffold;
   task_focus_interaction?: SingleCellTaskFocusInteraction;
   action_intent_scaffold?: SingleCellOperatorActionIntentScaffold;
+  delivery_acceptance_scaffold?: SingleCellDeliveryAcceptanceScaffold;
 }
 
 function escape_html(value: string): string {
@@ -130,6 +136,7 @@ export function renderSingleCellOperatorConsolePage(
   const state_transition_scaffold = options.state_transition_scaffold;
   const task_focus_interaction = options.task_focus_interaction;
   const action_intent_scaffold = options.action_intent_scaffold;
+  const delivery_acceptance_scaffold = options.delivery_acceptance_scaffold;
   const sections = {
     header: {
       section_key: "header",
@@ -160,6 +167,45 @@ export function renderSingleCellOperatorConsolePage(
           (surface) => `Deferred delivery surface: ${surface}`
         ),
       ],
+    },
+    delivery_acceptance: {
+      section_key: "delivery_acceptance",
+      heading: "Delivery Acceptance",
+      body_lines: delivery_acceptance_scaffold
+        ? [
+            `Acceptance boundary: ${delivery_acceptance_scaffold.execution_boundary}`,
+            `Delivery contract id: ${delivery_acceptance_scaffold.current_delivery_contract_summary.delivery_contract_id}`,
+            `Delivery acceptance status: ${delivery_acceptance_scaffold.current_delivery_contract_summary.acceptance_status}`,
+            `Delivery target: ${delivery_acceptance_scaffold.current_delivery_contract_summary.delivery_target}`,
+            `Done definition: ${delivery_acceptance_scaffold.current_delivery_contract_summary.done_definition}`,
+            `Return shape: ${delivery_acceptance_scaffold.current_delivery_contract_summary.return_shape}`,
+            `Review posture: ${delivery_acceptance_scaffold.current_delivery_contract_summary.review_posture}`,
+            ...delivery_acceptance_scaffold.acceptance_criteria_visibility.map(
+              (criterion) =>
+                `Acceptance criterion: ${criterion.criterion_id} -> ${criterion.display_label} [${criterion.visibility_status}] via ${criterion.source_surface}`
+            ),
+            ...delivery_acceptance_scaffold.completed_acceptance_signals.map(
+              (signal) =>
+                `Completed acceptance signal: ${signal.signal_id} -> ${signal.display_label} [${signal.support_level}] via ${signal.source_surface}`
+            ),
+            ...delivery_acceptance_scaffold.unmet_or_deferred_acceptance_signals.map(
+              (signal) =>
+                `Open acceptance signal: ${signal.signal_id} -> ${signal.display_label} [${signal.signal_status}] via ${signal.source_surface}`
+            ),
+            ...delivery_acceptance_scaffold.unavailable_acceptance_surfaces.map(
+              (surface) =>
+                `Unavailable acceptance surface: ${surface.display_label} -> ${surface.reason}`
+            ),
+            ...delivery_acceptance_scaffold.deferred_items.map(
+              (item) => `Deferred acceptance item: ${item}`
+            ),
+            ...delivery_acceptance_scaffold.non_claims.map(
+              (claim) => `Non-claim: ${claim}`
+            ),
+          ]
+        : [
+            "Delivery acceptance scaffold is not assembled for this page.",
+          ],
     },
     crew_overview: {
       section_key: "crew_overview",
@@ -472,6 +518,7 @@ export function renderSingleCellOperatorConsolePage(
     ...(state_transition_scaffold?.non_claims ?? []),
     ...(task_focus_interaction?.non_claims ?? []),
     ...(action_intent_scaffold?.non_claims ?? []),
+    ...(delivery_acceptance_scaffold?.non_claims ?? []),
   ]);
   const html = [
     `<main data-route="${SINGLE_CELL_OPERATOR_CONSOLE_ROUTE}">`,
@@ -482,6 +529,7 @@ export function renderSingleCellOperatorConsolePage(
     `</header>`,
     render_section(sections.header),
     render_section(sections.delivery),
+    render_section(sections.delivery_acceptance),
     render_section(sections.crew_overview),
     render_section(sections.objective_overview),
     render_section(sections.task_focus),
