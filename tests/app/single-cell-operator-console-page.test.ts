@@ -58,6 +58,7 @@ test("[app] single-cell operator console page renders from current shell adapter
   assert.ok(page.sections.crew_overview);
   assert.ok(page.sections.objective_overview);
   assert.ok(page.sections.task_focus);
+  assert.ok(page.sections.action_intents);
   assert.ok(page.sections.work_item_execution_overview);
   assert.ok(page.sections.memory_continuity_overview);
   assert.ok(page.sections.deferred_surfaces);
@@ -69,6 +70,7 @@ test("[app] single-cell operator console page renders from current shell adapter
   assert.match(page.html, /Crew Overview/);
   assert.match(page.html, /Objective Overview/);
   assert.match(page.html, /Task Focus/);
+  assert.match(page.html, /Action Intents/);
   assert.match(page.html, /Work Item \/ Execution Overview/);
   assert.match(page.html, /Memory \/ Continuity Overview/);
   assert.match(page.html, /Deferred Surfaces/);
@@ -84,6 +86,7 @@ test("[app] single-cell operator console page renders from current shell adapter
     page.sections.crew_overview,
     page.sections.objective_overview,
     page.sections.task_focus,
+    page.sections.action_intents,
     page.sections.work_item_execution_overview,
     page.sections.memory_continuity_overview,
     page.sections.deferred_surfaces,
