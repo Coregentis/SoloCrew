@@ -1,7 +1,14 @@
 import {
+  applyDevDeliveryPackTemplateSeed,
+  assembleDevDeliveryPackTemplateSeed,
+} from "../../projection/assembly/dev-delivery-pack-template.ts";
+import {
   initializeSingleCellStructuralAssembly,
   type InitializeSingleCellInput,
 } from "../../projection/assembly/single-cell-initializer.ts";
+import type {
+  DevDeliveryPackTemplateSeed,
+} from "../../projection/contracts/dev-delivery-pack-template-contract.ts";
 import {
   composeSingleCellShellScaffold,
 } from "../../projection/assembly/single-cell-shell-composer.ts";
@@ -50,6 +57,7 @@ export interface SingleCellOperatorConsoleBootstrapStructuralOverrides {
 export interface CreateSingleCellOperatorConsoleBootstrapOptions {
   baseline?: CreateBaselineShellOptions;
   structural?: SingleCellOperatorConsoleBootstrapStructuralOverrides;
+  template?: "dev_delivery_pack";
 }
 
 function create_structural_seed_from_baseline_truth(
@@ -57,6 +65,7 @@ function create_structural_seed_from_baseline_truth(
 ): {
   baseline_shell_session: ReturnType<typeof createBaselineShell>;
   structural_input: InitializeSingleCellInput;
+  template_seed?: DevDeliveryPackTemplateSeed;
 } {
   const baseline_shell_session = createBaselineShell(options.baseline);
   const { structural } = options;
@@ -72,38 +81,47 @@ function create_structural_seed_from_baseline_truth(
     "Derived bootstrap structure remains product-owned and does not become upstream runtime law.",
     "Cell scope is projected from current single-project baseline truth for bounded operator-console bootstrapping only.",
   ];
+  const template_seed =
+    options.template === "dev_delivery_pack"
+      ? assembleDevDeliveryPackTemplateSeed()
+      : undefined;
+
+  const structural_input: InitializeSingleCellInput = {
+    assembly_id:
+      structural?.assembly_id ??
+      `${shell.project_id}-single-cell-operator-console-bootstrap`,
+    cell_id: structural?.cell_id ?? shell.project_id,
+    cell_name: shell.crew.display_name,
+    operator_id:
+      structural?.operator_id ?? `${shell.project_id}-operator`,
+    mission: shell.crew.mission,
+    business_scope: structural?.business_scope ?? shell.project_id,
+    current_objective_id: shell.objective.objective_id,
+    current_objective_headline: shell.objective.title,
+    delivery_target:
+      structural?.delivery_target ?? shell.objective.title,
+    active_work_count,
+    blocked_work_count,
+    required_role_keys,
+    continuity_note,
+    business_pack_mount_keys: [
+      ...(structural?.business_pack_mount_keys ?? []),
+    ],
+    metrics_pack_mount_keys: [
+      ...(structural?.metrics_pack_mount_keys ?? []),
+    ],
+    projection_notes: [
+      ...default_projection_notes,
+      ...(structural?.projection_notes ?? []),
+    ],
+  };
 
   return {
     baseline_shell_session,
-    structural_input: {
-      assembly_id:
-        structural?.assembly_id ??
-        `${shell.project_id}-single-cell-operator-console-bootstrap`,
-      cell_id: structural?.cell_id ?? shell.project_id,
-      cell_name: shell.crew.display_name,
-      operator_id:
-        structural?.operator_id ?? `${shell.project_id}-operator`,
-      mission: shell.crew.mission,
-      business_scope: structural?.business_scope ?? shell.project_id,
-      current_objective_id: shell.objective.objective_id,
-      current_objective_headline: shell.objective.title,
-      delivery_target:
-        structural?.delivery_target ?? shell.objective.title,
-      active_work_count,
-      blocked_work_count,
-      required_role_keys,
-      continuity_note,
-      business_pack_mount_keys: [
-        ...(structural?.business_pack_mount_keys ?? []),
-      ],
-      metrics_pack_mount_keys: [
-        ...(structural?.metrics_pack_mount_keys ?? []),
-      ],
-      projection_notes: [
-        ...default_projection_notes,
-        ...(structural?.projection_notes ?? []),
-      ],
-    },
+    structural_input: template_seed
+      ? applyDevDeliveryPackTemplateSeed(structural_input, template_seed)
+      : structural_input,
+    template_seed,
   };
 }
 
@@ -113,6 +131,7 @@ export function bootstrapSingleCellOperatorConsolePage(
   const {
     baseline_shell_session,
     structural_input,
+    template_seed,
   } = create_structural_seed_from_baseline_truth(options);
   const structural_assembly =
     initializeSingleCellStructuralAssembly(structural_input);
@@ -122,16 +141,20 @@ export function bootstrapSingleCellOperatorConsolePage(
     adaptSingleCellShellEntry(shell_composition);
   const console_shell =
     composeSingleCellOperatorConsoleShell(shell_entry_package);
-  const page = renderSingleCellOperatorConsolePage(console_shell);
+  const page = renderSingleCellOperatorConsolePage(console_shell, {
+    template_seed,
+  });
   const deferred_items = unique_items([
     ...structural_assembly.deferred_items,
     ...shell_entry_package.deferred_items,
     ...console_shell.deferred_items,
+    ...(template_seed?.deferred_surfaces ?? []),
   ]);
   const projection_notes = unique_items([
     ...structural_assembly.projection_notes,
     ...shell_entry_package.projection_notes,
     ...console_shell.projection_notes,
+    ...(template_seed?.projection_notes ?? []),
     "Single-cell operator console bootstrap reuses the existing baseline shell/runtime path and app-shell projection chain.",
     "Bootstrap remains operator-facing only and does not introduce multi-cell, secretary, provider, or channel behavior.",
   ]);
@@ -152,6 +175,7 @@ export function bootstrapSingleCellOperatorConsolePage(
     broad_kpi_cockpit_available: false,
     runtime_complete_product_state_available: false,
     runtime_mode: baseline_shell_session.runtime.mode,
+    template_seed,
     baseline_shell_session,
     structural_assembly,
     shell_entry_package,

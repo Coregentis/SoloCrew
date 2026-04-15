@@ -1,4 +1,7 @@
 import type {
+  DevDeliveryPackTemplateSeed,
+} from "../../projection/contracts/dev-delivery-pack-template-contract.ts";
+import type {
   SingleCellOperatorConsoleShell,
 } from "../shell/single-cell-operator-console-shell-contract.ts";
 
@@ -55,6 +58,10 @@ export interface SingleCellOperatorConsolePage {
   html: string;
 }
 
+export interface RenderSingleCellOperatorConsolePageOptions {
+  template_seed?: DevDeliveryPackTemplateSeed;
+}
+
 function escape_html(value: string): string {
   return value
     .replaceAll("&", "&amp;")
@@ -77,9 +84,15 @@ function render_section(section: SingleCellOperatorConsolePageSection): string {
   ].join("");
 }
 
+function unique_items(values: readonly string[]): string[] {
+  return [...new Set(values)];
+}
+
 export function renderSingleCellOperatorConsolePage(
-  console_shell: SingleCellOperatorConsoleShell
+  console_shell: SingleCellOperatorConsoleShell,
+  options: RenderSingleCellOperatorConsolePageOptions = {}
 ): SingleCellOperatorConsolePage {
+  const template_seed = options.template_seed;
   const sections = {
     header: {
       section_key: "header",
@@ -89,6 +102,9 @@ export function renderSingleCellOperatorConsolePage(
         `Objective: ${console_shell.header.current_objective_headline}`,
         `Delivery posture: ${console_shell.header.delivery_posture}`,
         `Continuity note: ${console_shell.header.continuity_note}`,
+        ...(template_seed
+          ? [`Template seed: ${template_seed.template_label}`]
+          : []),
       ],
     },
     delivery: {
@@ -98,6 +114,11 @@ export function renderSingleCellOperatorConsolePage(
         `Delivery target: ${console_shell.delivery.delivery_target}`,
         `Done definition: ${console_shell.delivery.done_definition}`,
         `Review posture: ${console_shell.delivery.review_posture}`,
+        ...(template_seed
+          ? [
+              `Template objective framing: ${template_seed.default_objective_framing}`,
+            ]
+          : []),
         ...console_shell.delivery.deferred_surfaces.map(
           (surface) => `Deferred delivery surface: ${surface}`
         ),
@@ -114,6 +135,11 @@ export function renderSingleCellOperatorConsolePage(
         `Runtime worker state available: ${String(
           console_shell.crew_overview.runtime_worker_state_available
         )}`,
+        ...(template_seed
+          ? [
+              `Template crew-role hints: ${template_seed.default_crew_role_hints.join(", ")}`,
+            ]
+          : []),
       ],
     },
     objective_overview: {
@@ -144,6 +170,16 @@ export function renderSingleCellOperatorConsolePage(
         `Work-item timeline available: ${String(
           console_shell.work_item_execution_overview.work_item_timeline_available
         )}`,
+        ...(template_seed
+          ? template_seed.default_workstream_hints.map(
+              (hint) => `Template workstream hint: ${hint}`
+            )
+          : []),
+        ...(template_seed
+          ? template_seed.default_work_item_seed_hints.map(
+              (hint) => `Template work-item seed hint: ${hint}`
+            )
+          : []),
         ...console_shell.work_item_execution_overview.non_claims.map(
           (claim) => `Non-claim: ${claim}`
         ),
@@ -174,6 +210,11 @@ export function renderSingleCellOperatorConsolePage(
         ...console_shell.deferred_surfaces.metrics_pack_mount_keys.map(
           (mount_key) => `Metrics pack mount: ${mount_key}`
         ),
+        ...(template_seed
+          ? template_seed.deferred_surfaces.map(
+              (surface) => `Template deferred surface: ${surface}`
+            )
+          : []),
         ...console_shell.deferred_surfaces.deferred_items.map(
           (item) => `Deferred item: ${item}`
         ),
@@ -192,14 +233,20 @@ export function renderSingleCellOperatorConsolePage(
         ...console_shell.truth_boundary.deferred_items.map(
           (item) => `Deferred boundary item: ${item}`
         ),
-        ...console_shell.truth_boundary.non_claims.map(
+        ...unique_items([
+          ...console_shell.truth_boundary.non_claims,
+          ...(template_seed?.non_claims ?? []),
+        ]).map(
           (claim) => `Non-claim: ${claim}`
         ),
       ],
     },
   } satisfies SingleCellOperatorConsolePage["sections"];
 
-  const non_claims = [...console_shell.truth_boundary.non_claims];
+  const non_claims = unique_items([
+    ...console_shell.truth_boundary.non_claims,
+    ...(template_seed?.non_claims ?? []),
+  ]);
   const html = [
     `<main data-route="${SINGLE_CELL_OPERATOR_CONSOLE_ROUTE}">`,
     `<header>`,

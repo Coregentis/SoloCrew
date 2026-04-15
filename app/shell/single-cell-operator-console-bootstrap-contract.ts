@@ -1,4 +1,7 @@
 import type {
+  DevDeliveryPackTemplateSeed,
+} from "../../projection/contracts/dev-delivery-pack-template-contract.ts";
+import type {
   SingleCellStructuralAssemblyPackage,
 } from "../../projection/contracts/single-cell-assembly-contract.ts";
 import type {
@@ -44,6 +47,7 @@ export interface SingleCellOperatorConsoleBootstrap {
   broad_kpi_cockpit_available: false;
   runtime_complete_product_state_available: false;
   runtime_mode: RuntimeSessionMode;
+  template_seed?: DevDeliveryPackTemplateSeed;
   baseline_shell_session: BaselineShellSession;
   structural_assembly: SingleCellStructuralAssemblyPackage;
   shell_entry_package: SingleCellShellEntryPackage;
