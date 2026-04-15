@@ -68,6 +68,9 @@ test("[app] single-cell operator console page bootstraps coherently from existin
       bootstrap.deferred_items.includes("persistent_input_draft_history")
     );
     assert.ok(
+      bootstrap.deferred_items.includes("persistent_request_package_history")
+    );
+    assert.ok(
       bootstrap.page.non_claims.includes(
         "no_runtime_complete_product_state"
       )
@@ -85,6 +88,7 @@ test("[app] single-cell operator console page bootstraps coherently from existin
       bootstrap.page.sections.task_focus,
       bootstrap.page.sections.action_intents,
       bootstrap.page.sections.input_drafts,
+      bootstrap.page.sections.request_package,
       bootstrap.page.sections.work_item_execution_overview,
       bootstrap.page.sections.memory_continuity_overview,
       bootstrap.page.sections.deferred_surfaces,

@@ -23,6 +23,9 @@ import type {
   SingleCellOperatorInputDraftScaffold,
 } from "../shell/single-cell-operator-input-draft-contract.ts";
 import type {
+  SingleCellOperatorRequestPackageScaffold,
+} from "../shell/single-cell-operator-request-package-contract.ts";
+import type {
   SingleCellTaskFocusInteraction,
 } from "../shell/single-cell-task-focus-interaction-contract.ts";
 
@@ -42,6 +45,7 @@ export type SingleCellOperatorConsolePageSectionKey =
   | "task_focus"
   | "action_intents"
   | "input_drafts"
+  | "request_package"
   | "work_item_execution_overview"
   | "correction_review"
   | "state_transition"
@@ -81,6 +85,7 @@ export interface SingleCellOperatorConsolePage {
     task_focus: SingleCellOperatorConsolePageSection;
     action_intents: SingleCellOperatorConsolePageSection;
     input_drafts: SingleCellOperatorConsolePageSection;
+    request_package: SingleCellOperatorConsolePageSection;
     work_item_execution_overview: SingleCellOperatorConsolePageSection;
     correction_review: SingleCellOperatorConsolePageSection;
     state_transition: SingleCellOperatorConsolePageSection;
@@ -102,6 +107,7 @@ export interface RenderSingleCellOperatorConsolePageOptions {
   action_intent_scaffold?: SingleCellOperatorActionIntentScaffold;
   delivery_acceptance_scaffold?: SingleCellDeliveryAcceptanceScaffold;
   input_draft_scaffold?: SingleCellOperatorInputDraftScaffold;
+  request_package_scaffold?: SingleCellOperatorRequestPackageScaffold;
 }
 
 function escape_html(value: string): string {
@@ -144,6 +150,7 @@ export function renderSingleCellOperatorConsolePage(
   const action_intent_scaffold = options.action_intent_scaffold;
   const delivery_acceptance_scaffold = options.delivery_acceptance_scaffold;
   const input_draft_scaffold = options.input_draft_scaffold;
+  const request_package_scaffold = options.request_package_scaffold;
   const sections = {
     header: {
       section_key: "header",
@@ -340,6 +347,47 @@ export function renderSingleCellOperatorConsolePage(
           ]
         : [
             "Operator input-draft scaffold is not assembled for this page.",
+          ],
+    },
+    request_package: {
+      section_key: "request_package",
+      heading: "Request Package",
+      body_lines: request_package_scaffold
+        ? [
+            `Package boundary: ${request_package_scaffold.execution_boundary}`,
+            `Request package id: ${request_package_scaffold.current_request_package.request_package_id}`,
+            `Package fields present: ${request_package_scaffold.current_request_package.package_fields_present.join(", ")}`,
+            `Packaged objective focus: ${request_package_scaffold.current_request_package.current_focus.objective_focus_label}`,
+            `Packaged work-item focus: ${request_package_scaffold.current_request_package.current_focus.work_item_focus_label}`,
+            ...(request_package_scaffold.current_request_package.selected_action_intent
+              ? [
+                  `Selected action intent: ${request_package_scaffold.current_request_package.selected_action_intent.intent_kind} -> ${request_package_scaffold.current_request_package.selected_action_intent.display_label} [${request_package_scaffold.current_request_package.selected_action_intent.support_level}] confirmed=${String(request_package_scaffold.current_request_package.selected_action_intent.selection_confirmed)} via ${request_package_scaffold.current_request_package.selected_action_intent.selection_basis}`,
+                ]
+              : [
+                  "Selected action intent: none currently packaged.",
+                ]),
+            `Correction/review target: ${request_package_scaffold.current_request_package.correction_review_target.target_scope} -> ${request_package_scaffold.current_request_package.correction_review_target.target_ref_id}`,
+            `Review intent: ${request_package_scaffold.current_request_package.correction_review_target.review_intent}`,
+            `Delivery acceptance status: ${request_package_scaffold.current_request_package.delivery_acceptance_context.acceptance_status}`,
+            `Completed acceptance signals: ${String(request_package_scaffold.current_request_package.delivery_acceptance_context.completed_signal_count)}`,
+            `Open acceptance signals: ${String(request_package_scaffold.current_request_package.delivery_acceptance_context.open_signal_count)}`,
+            ...request_package_scaffold.current_request_package.input_drafts.map(
+              (draft) =>
+                `Packaged input draft: ${draft.draft_kind} -> ${draft.target_label} [${draft.support_level}] has_text=${String(draft.has_text)} via ${draft.target_surface}`
+            ),
+            ...request_package_scaffold.unavailable_request_surfaces.map(
+              (surface) =>
+                `Unavailable request surface: ${surface.display_label} -> ${surface.reason}`
+            ),
+            ...request_package_scaffold.deferred_items.map(
+              (item) => `Deferred request item: ${item}`
+            ),
+            ...request_package_scaffold.non_claims.map(
+              (claim) => `Non-claim: ${claim}`
+            ),
+          ]
+        : [
+            "Operator request-package scaffold is not assembled for this page.",
           ],
     },
     work_item_execution_overview: {
@@ -561,6 +609,7 @@ export function renderSingleCellOperatorConsolePage(
     ...(action_intent_scaffold?.non_claims ?? []),
     ...(delivery_acceptance_scaffold?.non_claims ?? []),
     ...(input_draft_scaffold?.non_claims ?? []),
+    ...(request_package_scaffold?.non_claims ?? []),
   ]);
   const html = [
     `<main data-route="${SINGLE_CELL_OPERATOR_CONSOLE_ROUTE}">`,
@@ -577,6 +626,7 @@ export function renderSingleCellOperatorConsolePage(
     render_section(sections.task_focus),
     render_section(sections.action_intents),
     render_section(sections.input_drafts),
+    render_section(sections.request_package),
     render_section(sections.work_item_execution_overview),
     render_section(sections.correction_review),
     render_section(sections.state_transition),
