@@ -104,6 +104,11 @@ test("[app] single-cell operator console page bootstraps coherently from existin
         "no_runtime_complete_readiness_summary"
       )
     );
+    assert.ok(
+      bootstrap.page.non_claims.includes(
+        "no_runtime_complete_correction_apply_workflow"
+      )
+    );
 
     const boundary_targets = [
       bootstrap,
@@ -119,6 +124,7 @@ test("[app] single-cell operator console page bootstraps coherently from existin
       bootstrap.page.sections.input_drafts,
       bootstrap.page.sections.in_session_draft_state,
       bootstrap.page.sections.session_draft_controls,
+      bootstrap.page.sections.correction_apply,
       bootstrap.page.sections.readiness_summary,
       bootstrap.page.sections.request_package,
       bootstrap.page.sections.request_review_submit_preview,

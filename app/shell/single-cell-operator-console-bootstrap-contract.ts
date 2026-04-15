@@ -29,6 +29,10 @@ import type {
   SingleCellOperatorReadinessSummaryScaffold,
 } from "./single-cell-operator-readiness-summary-contract.ts";
 import type {
+  SingleCellOperatorCorrectionApplyRequest,
+  SingleCellOperatorCorrectionApplyScaffold,
+} from "./single-cell-operator-correction-apply-contract.ts";
+import type {
   SingleCellOperatorRequestReviewSubmitPreviewScaffold,
 } from "./single-cell-operator-request-review-submit-preview-contract.ts";
 import type { BaselineShellSession } from "./create-baseline-shell.ts";
@@ -74,6 +78,9 @@ export interface SingleCellOperatorConsoleBootstrapContinuityOptions {
   reference?: SingleCellContinuityReference;
 }
 
+export interface SingleCellOperatorConsoleBootstrapCorrectionApplyOptions
+  extends SingleCellOperatorCorrectionApplyRequest {}
+
 export interface SingleCellOperatorConsoleBootstrap {
   bootstrap_id: string;
   bootstrap_scope: "single_cell_only";
@@ -106,6 +113,7 @@ export interface SingleCellOperatorConsoleBootstrap {
     SingleCellOperatorInSessionDraftStateScaffold;
   session_draft_controls_scaffold:
     SingleCellOperatorSessionDraftControlsScaffold;
+  correction_apply_scaffold: SingleCellOperatorCorrectionApplyScaffold;
   readiness_summary_scaffold: SingleCellOperatorReadinessSummaryScaffold;
   request_package_scaffold: SingleCellOperatorRequestPackageScaffold;
   request_review_submit_preview_scaffold:

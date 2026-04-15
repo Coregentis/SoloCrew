@@ -63,6 +63,7 @@ test("[app] single-cell operator console page renders from current shell adapter
   assert.ok(page.sections.input_drafts);
   assert.ok(page.sections.in_session_draft_state);
   assert.ok(page.sections.session_draft_controls);
+  assert.ok(page.sections.correction_apply);
   assert.ok(page.sections.readiness_summary);
   assert.ok(page.sections.request_package);
   assert.ok(page.sections.request_review_submit_preview);
@@ -82,6 +83,7 @@ test("[app] single-cell operator console page renders from current shell adapter
   assert.match(page.html, /Input Drafts/);
   assert.match(page.html, /In-Session Draft State/);
   assert.match(page.html, /Session Draft Controls/);
+  assert.match(page.html, /Correction Apply/);
   assert.match(page.html, /Readiness Summary/);
   assert.match(page.html, /Request Package/);
   assert.match(page.html, /Request Review \/ Submit Preview/);
@@ -105,6 +107,7 @@ test("[app] single-cell operator console page renders from current shell adapter
     page.sections.input_drafts,
     page.sections.in_session_draft_state,
     page.sections.session_draft_controls,
+    page.sections.correction_apply,
     page.sections.readiness_summary,
     page.sections.request_package,
     page.sections.request_review_submit_preview,

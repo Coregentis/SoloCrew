@@ -29,6 +29,9 @@ import type {
   SingleCellOperatorSessionDraftControlsScaffold,
 } from "../shell/single-cell-operator-session-draft-controls-contract.ts";
 import type {
+  SingleCellOperatorCorrectionApplyScaffold,
+} from "../shell/single-cell-operator-correction-apply-contract.ts";
+import type {
   SingleCellOperatorRequestPackageScaffold,
 } from "../shell/single-cell-operator-request-package-contract.ts";
 import type {
@@ -59,6 +62,7 @@ export type SingleCellOperatorConsolePageSectionKey =
   | "input_drafts"
   | "in_session_draft_state"
   | "session_draft_controls"
+  | "correction_apply"
   | "readiness_summary"
   | "request_package"
   | "request_review_submit_preview"
@@ -103,6 +107,7 @@ export interface SingleCellOperatorConsolePage {
     input_drafts: SingleCellOperatorConsolePageSection;
     in_session_draft_state: SingleCellOperatorConsolePageSection;
     session_draft_controls: SingleCellOperatorConsolePageSection;
+    correction_apply: SingleCellOperatorConsolePageSection;
     readiness_summary: SingleCellOperatorConsolePageSection;
     request_package: SingleCellOperatorConsolePageSection;
     request_review_submit_preview: SingleCellOperatorConsolePageSection;
@@ -131,6 +136,7 @@ export interface RenderSingleCellOperatorConsolePageOptions {
     SingleCellOperatorInSessionDraftStateScaffold;
   session_draft_controls_scaffold?:
     SingleCellOperatorSessionDraftControlsScaffold;
+  correction_apply_scaffold?: SingleCellOperatorCorrectionApplyScaffold;
   readiness_summary_scaffold?: SingleCellOperatorReadinessSummaryScaffold;
   request_package_scaffold?: SingleCellOperatorRequestPackageScaffold;
   request_review_submit_preview_scaffold?:
@@ -181,6 +187,8 @@ export function renderSingleCellOperatorConsolePage(
     options.in_session_draft_state_scaffold;
   const session_draft_controls_scaffold =
     options.session_draft_controls_scaffold;
+  const correction_apply_scaffold =
+    options.correction_apply_scaffold;
   const readiness_summary_scaffold =
     options.readiness_summary_scaffold;
   const request_package_scaffold = options.request_package_scaffold;
@@ -454,6 +462,73 @@ export function renderSingleCellOperatorConsolePage(
           ]
         : [
             "Operator session-draft controls scaffold is not assembled for this page.",
+          ],
+    },
+    correction_apply: {
+      section_key: "correction_apply",
+      heading: "Correction Apply",
+      body_lines: correction_apply_scaffold
+        ? [
+            `Apply boundary: ${correction_apply_scaffold.execution_boundary}`,
+            `Apply status: ${correction_apply_scaffold.current_apply_status}`,
+            `Selected target scope: ${correction_apply_scaffold.current_apply_target.target_scope}`,
+            `Selected runtime target: ${correction_apply_scaffold.current_apply_target.runtime_mapping_target}`,
+            `Selected target ref: ${correction_apply_scaffold.current_apply_target.target_ref_id}`,
+            `Correction summary source: ${correction_apply_scaffold.current_apply_input.correction_summary_source}`,
+            `Current correction summary: ${correction_apply_scaffold.current_apply_input.correction_summary ?? "(absent)"}`,
+            `Corrected value source: ${correction_apply_scaffold.current_apply_input.corrected_value_source}`,
+            `Current corrected value: ${correction_apply_scaffold.current_apply_input.corrected_value}`,
+            `Operator input ready: ${String(correction_apply_scaffold.current_apply_input.operator_input_ready)}`,
+            `Current review intent: ${correction_apply_scaffold.current_apply_input.current_review_intent}`,
+            `Current submit-preview status: ${correction_apply_scaffold.current_apply_input.request_submit_preview_status}`,
+            `Current preference continuity visible: ${String(correction_apply_scaffold.current_visible_truth.current_preference_continuity_visible)}`,
+            `Current recent correction visible: ${String(correction_apply_scaffold.current_visible_truth.current_recent_correction_visible)}`,
+            `Current changed preference count: ${String(correction_apply_scaffold.current_visible_truth.current_review_strip_changed_preferences_count)}`,
+            `Current needs-decision count: ${String(correction_apply_scaffold.current_visible_truth.current_review_strip_needs_decision_count)}`,
+            ...correction_apply_scaffold.current_visible_truth.current_continuity_notes.map(
+              (note) => `Current continuity note: ${note}`
+            ),
+            ...(correction_apply_scaffold.applied_update_result
+              ? [
+                  `Applied correction id: ${correction_apply_scaffold.applied_update_result.correction_id}`,
+                  `Applied correction target: ${correction_apply_scaffold.applied_update_result.correction_target}`,
+                  `Applied correction summary: ${correction_apply_scaffold.applied_update_result.correction_summary}`,
+                  `Applied corrected value: ${correction_apply_scaffold.applied_update_result.corrected_value}`,
+                  `Writeback disposition: ${correction_apply_scaffold.applied_update_result.writeback_disposition}`,
+                  `Updated memory summary count: ${String(correction_apply_scaffold.applied_update_result.updated_memory_summary_count)}`,
+                  `Updated preference continuity visible: ${String(correction_apply_scaffold.applied_update_result.updated_preference_continuity_visible)}`,
+                  `Updated recent correction visible in session: ${String(correction_apply_scaffold.applied_update_result.updated_recent_correction_visible_in_session)}`,
+                  `Updated changed preference count: ${String(correction_apply_scaffold.applied_update_result.updated_review_strip_changed_preferences_count)}`,
+                  `Updated needs-decision count: ${String(correction_apply_scaffold.applied_update_result.updated_review_strip_needs_decision_count)}`,
+                  ...(correction_apply_scaffold.applied_update_result.updated_preference_summary
+                    ? [
+                        `Updated preference summary: ${correction_apply_scaffold.applied_update_result.updated_preference_summary}`,
+                      ]
+                    : []),
+                  ...(correction_apply_scaffold.applied_update_result.updated_recent_correction_summary
+                    ? [
+                        `Updated recent correction summary: ${correction_apply_scaffold.applied_update_result.updated_recent_correction_summary}`,
+                      ]
+                    : []),
+                  `Updated continuity anchor present: ${String(correction_apply_scaffold.applied_update_result.updated_anchor_present)}`,
+                  ...correction_apply_scaffold.applied_update_result.updated_continuity_notes.map(
+                    (note) => `Updated continuity note: ${note}`
+                  ),
+                ]
+              : []),
+            ...correction_apply_scaffold.unavailable_apply_surfaces.map(
+              (surface) =>
+                `Unavailable apply surface: ${surface.display_label} -> ${surface.reason}`
+            ),
+            ...correction_apply_scaffold.deferred_items.map(
+              (item) => `Deferred apply item: ${item}`
+            ),
+            ...correction_apply_scaffold.non_claims.map(
+              (claim) => `Non-claim: ${claim}`
+            ),
+          ]
+        : [
+            "Operator correction/apply scaffold is not assembled for this page.",
           ],
     },
     readiness_summary: {
@@ -790,6 +865,7 @@ export function renderSingleCellOperatorConsolePage(
     ...(input_draft_scaffold?.non_claims ?? []),
     ...(in_session_draft_state_scaffold?.non_claims ?? []),
     ...(session_draft_controls_scaffold?.non_claims ?? []),
+    ...(correction_apply_scaffold?.non_claims ?? []),
     ...(readiness_summary_scaffold?.non_claims ?? []),
     ...(request_package_scaffold?.non_claims ?? []),
     ...(request_review_submit_preview_scaffold?.non_claims ?? []),
@@ -811,6 +887,7 @@ export function renderSingleCellOperatorConsolePage(
     render_section(sections.input_drafts),
     render_section(sections.in_session_draft_state),
     render_section(sections.session_draft_controls),
+    render_section(sections.correction_apply),
     render_section(sections.readiness_summary),
     render_section(sections.request_package),
     render_section(sections.request_review_submit_preview),

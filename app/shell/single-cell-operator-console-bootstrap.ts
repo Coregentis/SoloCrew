@@ -42,6 +42,9 @@ import {
   assembleSingleCellOperatorSessionDraftControlsScaffold,
 } from "./single-cell-operator-session-draft-controls.ts";
 import {
+  assembleSingleCellOperatorCorrectionApplyScaffold,
+} from "./single-cell-operator-correction-apply.ts";
+import {
   assembleSingleCellOperatorRequestPackageScaffold,
 } from "./single-cell-operator-request-package.ts";
 import {
@@ -72,6 +75,7 @@ import {
 } from "./single-cell-shell-entry-adapter.ts";
 import {
   SINGLE_CELL_OPERATOR_CONSOLE_BOOTSTRAP_TRUTH_SOURCES,
+  type SingleCellOperatorConsoleBootstrapCorrectionApplyOptions,
   type SingleCellOperatorConsoleBootstrap,
 } from "./single-cell-operator-console-bootstrap-contract.ts";
 
@@ -104,6 +108,7 @@ export interface CreateSingleCellOperatorConsoleBootstrapOptions {
   template?: "dev_delivery_pack";
   continuity?: SingleCellOperatorConsoleBootstrapContinuityOptions;
   session_draft_state?: SingleCellOperatorInSessionDraftStateSeedValues;
+  correction_apply?: SingleCellOperatorConsoleBootstrapCorrectionApplyOptions;
 }
 
 function create_structural_seed_from_baseline_truth(
@@ -275,6 +280,15 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
       in_session_draft_state_scaffold,
       request_review_submit_preview_scaffold,
     });
+  const correction_apply_scaffold =
+    assembleSingleCellOperatorCorrectionApplyScaffold({
+      baseline_shell_session,
+      correction_review_interaction,
+      in_session_draft_state_scaffold,
+      request_package_scaffold,
+      request_review_submit_preview_scaffold,
+      request: options.correction_apply,
+    });
   const readiness_summary_scaffold =
     assembleSingleCellOperatorReadinessSummaryScaffold({
       baseline_shell_session,
@@ -296,6 +310,7 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
     input_draft_scaffold,
     in_session_draft_state_scaffold,
     session_draft_controls_scaffold,
+    correction_apply_scaffold,
     readiness_summary_scaffold,
     request_package_scaffold,
     request_review_submit_preview_scaffold,
@@ -313,6 +328,7 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
     ...input_draft_scaffold.deferred_items,
     ...in_session_draft_state_scaffold.deferred_items,
     ...session_draft_controls_scaffold.deferred_items,
+    ...correction_apply_scaffold.deferred_items,
     ...readiness_summary_scaffold.deferred_items,
     ...request_package_scaffold.deferred_items,
     ...request_review_submit_preview_scaffold.deferred_items,
@@ -331,6 +347,7 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
     ...input_draft_scaffold.projection_notes,
     ...in_session_draft_state_scaffold.projection_notes,
     ...session_draft_controls_scaffold.projection_notes,
+    ...correction_apply_scaffold.projection_notes,
     ...readiness_summary_scaffold.projection_notes,
     ...request_package_scaffold.projection_notes,
     ...request_review_submit_preview_scaffold.projection_notes,
@@ -369,6 +386,7 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
     input_draft_scaffold,
     in_session_draft_state_scaffold,
     session_draft_controls_scaffold,
+    correction_apply_scaffold,
     readiness_summary_scaffold,
     request_package_scaffold,
     request_review_submit_preview_scaffold,
