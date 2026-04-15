@@ -13,6 +13,9 @@ import type {
   SingleCellCorrectionReviewInteraction,
 } from "./single-cell-correction-review-interaction-contract.ts";
 import type {
+  SingleCellOperatorConsoleStateTransitionScaffold,
+} from "./single-cell-operator-console-state-transition-contract.ts";
+import type {
   SingleCellOperatorConsoleShell,
 } from "./single-cell-operator-console-shell-contract.ts";
 import type {
@@ -56,6 +59,7 @@ export interface SingleCellOperatorConsoleBootstrap {
   shell_entry_package: SingleCellShellEntryPackage;
   console_shell: SingleCellOperatorConsoleShell;
   correction_review_interaction: SingleCellCorrectionReviewInteraction;
+  state_transition_scaffold: SingleCellOperatorConsoleStateTransitionScaffold;
   page: SingleCellOperatorConsolePage;
   projection_notes: string[];
   deferred_items: string[];

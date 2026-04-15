@@ -5,6 +5,9 @@ import type {
   SingleCellCorrectionReviewInteraction,
 } from "../shell/single-cell-correction-review-interaction-contract.ts";
 import type {
+  SingleCellOperatorConsoleStateTransitionScaffold,
+} from "../shell/single-cell-operator-console-state-transition-contract.ts";
+import type {
   SingleCellOperatorConsoleShell,
 } from "../shell/single-cell-operator-console-shell-contract.ts";
 
@@ -22,6 +25,7 @@ export type SingleCellOperatorConsolePageSectionKey =
   | "objective_overview"
   | "work_item_execution_overview"
   | "correction_review"
+  | "state_transition"
   | "memory_continuity_overview"
   | "deferred_surfaces"
   | "truth_boundary";
@@ -55,6 +59,7 @@ export interface SingleCellOperatorConsolePage {
     objective_overview: SingleCellOperatorConsolePageSection;
     work_item_execution_overview: SingleCellOperatorConsolePageSection;
     correction_review: SingleCellOperatorConsolePageSection;
+    state_transition: SingleCellOperatorConsolePageSection;
     memory_continuity_overview: SingleCellOperatorConsolePageSection;
     deferred_surfaces: SingleCellOperatorConsolePageSection;
     truth_boundary: SingleCellOperatorConsolePageSection;
@@ -66,6 +71,7 @@ export interface SingleCellOperatorConsolePage {
 export interface RenderSingleCellOperatorConsolePageOptions {
   template_seed?: DevDeliveryPackTemplateSeed;
   correction_review_interaction?: SingleCellCorrectionReviewInteraction;
+  state_transition_scaffold?: SingleCellOperatorConsoleStateTransitionScaffold;
 }
 
 function escape_html(value: string): string {
@@ -101,6 +107,7 @@ export function renderSingleCellOperatorConsolePage(
   const template_seed = options.template_seed;
   const correction_review_interaction =
     options.correction_review_interaction;
+  const state_transition_scaffold = options.state_transition_scaffold;
   const sections = {
     header: {
       section_key: "header",
@@ -226,6 +233,35 @@ export function renderSingleCellOperatorConsolePage(
             "Correction/review interaction scaffold is not assembled for this page.",
           ],
     },
+    state_transition: {
+      section_key: "state_transition",
+      heading: "State Transition",
+      body_lines: state_transition_scaffold
+        ? [
+            `Transition boundary: ${state_transition_scaffold.execution_boundary}`,
+            `Current objective focus: ${state_transition_scaffold.current_state_seed.objective_focus_label}`,
+            `Current work-item focus: ${state_transition_scaffold.current_state_seed.work_item_focus_label}`,
+            `Current correction target scope: ${state_transition_scaffold.current_state_seed.correction_target_scope}`,
+            `Current review intent: ${state_transition_scaffold.current_state_seed.review_intent}`,
+            ...state_transition_scaffold.transition_options.map(
+              (option) =>
+                `Transition option: ${option.transition_kind} -> ${option.display_label} [${option.support_level}]`
+            ),
+            ...state_transition_scaffold.suggested_next_state_previews.map(
+              (preview) =>
+                `Next-state preview: ${preview.transition_kind} -> objective=${preview.objective_focus_label}; work-item=${preview.work_item_focus_label}; correction=${preview.correction_target_scope}; review=${preview.review_intent}`
+            ),
+            ...state_transition_scaffold.deferred_items.map(
+              (item) => `Deferred transition item: ${item}`
+            ),
+            ...state_transition_scaffold.non_claims.map(
+              (claim) => `Non-claim: ${claim}`
+            ),
+          ]
+        : [
+            "State transition scaffold is not assembled for this page.",
+          ],
+    },
     memory_continuity_overview: {
       section_key: "memory_continuity_overview",
       heading: "Memory / Continuity Overview",
@@ -288,6 +324,7 @@ export function renderSingleCellOperatorConsolePage(
     ...console_shell.truth_boundary.non_claims,
     ...(template_seed?.non_claims ?? []),
     ...(correction_review_interaction?.non_claims ?? []),
+    ...(state_transition_scaffold?.non_claims ?? []),
   ]);
   const html = [
     `<main data-route="${SINGLE_CELL_OPERATOR_CONSOLE_ROUTE}">`,
@@ -302,6 +339,7 @@ export function renderSingleCellOperatorConsolePage(
     render_section(sections.objective_overview),
     render_section(sections.work_item_execution_overview),
     render_section(sections.correction_review),
+    render_section(sections.state_transition),
     render_section(sections.memory_continuity_overview),
     render_section(sections.deferred_surfaces),
     render_section(sections.truth_boundary),
