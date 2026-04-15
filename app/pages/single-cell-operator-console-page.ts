@@ -2,6 +2,9 @@ import type {
   DevDeliveryPackTemplateSeed,
 } from "../../projection/contracts/dev-delivery-pack-template-contract.ts";
 import type {
+  SingleCellContinuityReloadPresentation,
+} from "../shell/single-cell-continuity-reload-presentation-contract.ts";
+import type {
   SingleCellCorrectionReviewInteraction,
 } from "../shell/single-cell-correction-review-interaction-contract.ts";
 import type {
@@ -26,6 +29,7 @@ export type SingleCellOperatorConsolePageSectionKey =
   | "work_item_execution_overview"
   | "correction_review"
   | "state_transition"
+  | "continuity_reload"
   | "memory_continuity_overview"
   | "deferred_surfaces"
   | "truth_boundary";
@@ -60,6 +64,7 @@ export interface SingleCellOperatorConsolePage {
     work_item_execution_overview: SingleCellOperatorConsolePageSection;
     correction_review: SingleCellOperatorConsolePageSection;
     state_transition: SingleCellOperatorConsolePageSection;
+    continuity_reload: SingleCellOperatorConsolePageSection;
     memory_continuity_overview: SingleCellOperatorConsolePageSection;
     deferred_surfaces: SingleCellOperatorConsolePageSection;
     truth_boundary: SingleCellOperatorConsolePageSection;
@@ -70,6 +75,7 @@ export interface SingleCellOperatorConsolePage {
 
 export interface RenderSingleCellOperatorConsolePageOptions {
   template_seed?: DevDeliveryPackTemplateSeed;
+  continuity_reload_presentation?: SingleCellContinuityReloadPresentation;
   correction_review_interaction?: SingleCellCorrectionReviewInteraction;
   state_transition_scaffold?: SingleCellOperatorConsoleStateTransitionScaffold;
 }
@@ -105,6 +111,8 @@ export function renderSingleCellOperatorConsolePage(
   options: RenderSingleCellOperatorConsolePageOptions = {}
 ): SingleCellOperatorConsolePage {
   const template_seed = options.template_seed;
+  const continuity_reload_presentation =
+    options.continuity_reload_presentation;
   const correction_review_interaction =
     options.correction_review_interaction;
   const state_transition_scaffold = options.state_transition_scaffold;
@@ -262,6 +270,63 @@ export function renderSingleCellOperatorConsolePage(
             "State transition scaffold is not assembled for this page.",
           ],
     },
+    continuity_reload: {
+      section_key: "continuity_reload",
+      heading: "Continuity / Reload",
+      body_lines: continuity_reload_presentation
+        ? [
+            `Bootstrap mode: ${continuity_reload_presentation.bootstrap_mode}`,
+            `Continuity mode: ${continuity_reload_presentation.continuity_mode}`,
+            `Previous reference available: ${String(
+              continuity_reload_presentation.persisted_identity_continuity.previous_reference_available
+            )}`,
+            `Project id stable: ${String(
+              continuity_reload_presentation.persisted_identity_continuity.project_id_stable
+            )}`,
+            `Crew id stable: ${String(
+              continuity_reload_presentation.persisted_identity_continuity.crew_id_stable
+            )}`,
+            `Objective id stable: ${String(
+              continuity_reload_presentation.persisted_identity_continuity.objective_id_stable
+            )}`,
+            `Work-item identity stable: ${String(
+              continuity_reload_presentation.persisted_work_objective_continuity.work_item_identity_stable
+            )}`,
+            `Preference continuity visible: ${String(
+              continuity_reload_presentation.persisted_work_objective_continuity.preference_continuity_visible
+            )}`,
+            `Objective anchor compare available: ${String(
+              continuity_reload_presentation.persisted_work_objective_continuity.objective_anchor_compare_available
+            )}`,
+            `Objective anchor present: ${String(
+              continuity_reload_presentation.persisted_work_objective_continuity.objective_anchor_present
+            )}`,
+            `Same-session runtime context: ${String(
+              continuity_reload_presentation.session_reload_distinction.same_session_runtime_context
+            )}`,
+            `Fresh runtime context: ${String(
+              continuity_reload_presentation.session_reload_distinction.fresh_runtime_context
+            )}`,
+            ...continuity_reload_presentation.persisted_identity_continuity.notes.map(
+              (note) => `Identity continuity note: ${note}`
+            ),
+            ...continuity_reload_presentation.persisted_work_objective_continuity.notes.map(
+              (note) => `Work continuity note: ${note}`
+            ),
+            ...continuity_reload_presentation.session_reload_distinction.notes.map(
+              (note) => `Reload distinction note: ${note}`
+            ),
+            ...continuity_reload_presentation.deferred_items.map(
+              (item) => `Deferred continuity item: ${item}`
+            ),
+            ...continuity_reload_presentation.non_claims.map(
+              (claim) => `Non-claim: ${claim}`
+            ),
+          ]
+        : [
+            "Continuity/reload presentation scaffold is not assembled for this page.",
+          ],
+    },
     memory_continuity_overview: {
       section_key: "memory_continuity_overview",
       heading: "Memory / Continuity Overview",
@@ -323,6 +388,7 @@ export function renderSingleCellOperatorConsolePage(
   const non_claims = unique_items([
     ...console_shell.truth_boundary.non_claims,
     ...(template_seed?.non_claims ?? []),
+    ...(continuity_reload_presentation?.non_claims ?? []),
     ...(correction_review_interaction?.non_claims ?? []),
     ...(state_transition_scaffold?.non_claims ?? []),
   ]);
@@ -340,6 +406,7 @@ export function renderSingleCellOperatorConsolePage(
     render_section(sections.work_item_execution_overview),
     render_section(sections.correction_review),
     render_section(sections.state_transition),
+    render_section(sections.continuity_reload),
     render_section(sections.memory_continuity_overview),
     render_section(sections.deferred_surfaces),
     render_section(sections.truth_boundary),

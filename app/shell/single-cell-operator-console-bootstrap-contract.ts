@@ -10,6 +10,11 @@ import type {
 import type { BaselineShellSession } from "./create-baseline-shell.ts";
 import type { RuntimeSessionMode } from "./create-runtime-session.ts";
 import type {
+  SingleCellContinuityReference,
+  SingleCellContinuityReloadPresentation,
+  SingleCellContinuityReloadPresentationState,
+} from "./single-cell-continuity-reload-presentation-contract.ts";
+import type {
   SingleCellCorrectionReviewInteraction,
 } from "./single-cell-correction-review-interaction-contract.ts";
 import type {
@@ -37,6 +42,11 @@ export type SingleCellOperatorConsoleBootstrapAuthorityBoundary =
 export type SingleCellOperatorConsoleBootstrapPhaseBoundary =
   "operator_console_bootstrap";
 
+export interface SingleCellOperatorConsoleBootstrapContinuityOptions {
+  presentation_state?: SingleCellContinuityReloadPresentationState;
+  reference?: SingleCellContinuityReference;
+}
+
 export interface SingleCellOperatorConsoleBootstrap {
   bootstrap_id: string;
   bootstrap_scope: "single_cell_only";
@@ -58,6 +68,7 @@ export interface SingleCellOperatorConsoleBootstrap {
   structural_assembly: SingleCellStructuralAssemblyPackage;
   shell_entry_package: SingleCellShellEntryPackage;
   console_shell: SingleCellOperatorConsoleShell;
+  continuity_reload_presentation: SingleCellContinuityReloadPresentation;
   correction_review_interaction: SingleCellCorrectionReviewInteraction;
   state_transition_scaffold: SingleCellOperatorConsoleStateTransitionScaffold;
   page: SingleCellOperatorConsolePage;

@@ -1,4 +1,11 @@
 import {
+  assembleSingleCellContinuityReloadPresentation,
+  type createSingleCellContinuityReference,
+} from "./single-cell-continuity-reload-presentation.ts";
+import type {
+  SingleCellOperatorConsoleBootstrapContinuityOptions,
+} from "./single-cell-operator-console-bootstrap-contract.ts";
+import {
   applyDevDeliveryPackTemplateSeed,
   assembleDevDeliveryPackTemplateSeed,
 } from "../../projection/assembly/dev-delivery-pack-template.ts";
@@ -25,6 +32,7 @@ import {
 } from "./single-cell-operator-console-state-transition.ts";
 import {
   createBaselineShell,
+  type BaselineShellSession,
   type CreateBaselineShellOptions,
 } from "./create-baseline-shell.ts";
 import {
@@ -62,8 +70,10 @@ export interface SingleCellOperatorConsoleBootstrapStructuralOverrides {
 
 export interface CreateSingleCellOperatorConsoleBootstrapOptions {
   baseline?: CreateBaselineShellOptions;
+  baseline_shell_session?: BaselineShellSession;
   structural?: SingleCellOperatorConsoleBootstrapStructuralOverrides;
   template?: "dev_delivery_pack";
+  continuity?: SingleCellOperatorConsoleBootstrapContinuityOptions;
 }
 
 function create_structural_seed_from_baseline_truth(
@@ -73,7 +83,8 @@ function create_structural_seed_from_baseline_truth(
   structural_input: InitializeSingleCellInput;
   template_seed?: DevDeliveryPackTemplateSeed;
 } {
-  const baseline_shell_session = createBaselineShell(options.baseline);
+  const baseline_shell_session =
+    options.baseline_shell_session ?? createBaselineShell(options.baseline);
   const { structural } = options;
   const { shell } = baseline_shell_session;
   const active_work_count = count_work_items(shell.work_items, "active");
@@ -134,11 +145,26 @@ function create_structural_seed_from_baseline_truth(
 export function bootstrapSingleCellOperatorConsolePage(
   options: CreateSingleCellOperatorConsoleBootstrapOptions = {}
 ): SingleCellOperatorConsoleBootstrap {
+  return composeSingleCellOperatorConsoleBootstrapFromBaselineShellSession(
+    options.baseline_shell_session ?? createBaselineShell(options.baseline),
+    options
+  );
+}
+
+export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSession(
+  baseline_shell_session: BaselineShellSession,
+  options: Omit<
+    CreateSingleCellOperatorConsoleBootstrapOptions,
+    "baseline" | "baseline_shell_session"
+  > = {}
+): SingleCellOperatorConsoleBootstrap {
   const {
-    baseline_shell_session,
     structural_input,
     template_seed,
-  } = create_structural_seed_from_baseline_truth(options);
+  } = create_structural_seed_from_baseline_truth({
+    ...options,
+    baseline_shell_session,
+  });
   const structural_assembly =
     initializeSingleCellStructuralAssembly(structural_input);
   const shell_composition =
@@ -147,6 +173,12 @@ export function bootstrapSingleCellOperatorConsolePage(
     adaptSingleCellShellEntry(shell_composition);
   const console_shell =
     composeSingleCellOperatorConsoleShell(shell_entry_package);
+  const continuity_reload_presentation =
+    assembleSingleCellContinuityReloadPresentation({
+      baseline_shell_session,
+      presentation_state: options.continuity?.presentation_state,
+      reference: options.continuity?.reference,
+    });
   const correction_review_interaction =
     assembleSingleCellCorrectionReviewInteraction({
       baseline_shell_session,
@@ -161,6 +193,7 @@ export function bootstrapSingleCellOperatorConsolePage(
     });
   const page = renderSingleCellOperatorConsolePage(console_shell, {
     template_seed,
+    continuity_reload_presentation,
     correction_review_interaction,
     state_transition_scaffold,
   });
@@ -168,6 +201,7 @@ export function bootstrapSingleCellOperatorConsolePage(
     ...structural_assembly.deferred_items,
     ...shell_entry_package.deferred_items,
     ...console_shell.deferred_items,
+    ...continuity_reload_presentation.deferred_items,
     ...correction_review_interaction.deferred_items,
     ...state_transition_scaffold.deferred_items,
     ...(template_seed?.deferred_surfaces ?? []),
@@ -176,6 +210,7 @@ export function bootstrapSingleCellOperatorConsolePage(
     ...structural_assembly.projection_notes,
     ...shell_entry_package.projection_notes,
     ...console_shell.projection_notes,
+    ...continuity_reload_presentation.projection_notes,
     ...correction_review_interaction.projection_notes,
     ...state_transition_scaffold.projection_notes,
     ...(template_seed?.projection_notes ?? []),
@@ -204,6 +239,7 @@ export function bootstrapSingleCellOperatorConsolePage(
     structural_assembly,
     shell_entry_package,
     console_shell,
+    continuity_reload_presentation,
     correction_review_interaction,
     state_transition_scaffold,
     page,
