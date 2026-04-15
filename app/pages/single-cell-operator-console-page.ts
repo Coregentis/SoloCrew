@@ -20,6 +20,9 @@ import type {
   SingleCellDeliveryAcceptanceScaffold,
 } from "../shell/single-cell-delivery-acceptance-contract.ts";
 import type {
+  SingleCellOperatorInputDraftScaffold,
+} from "../shell/single-cell-operator-input-draft-contract.ts";
+import type {
   SingleCellTaskFocusInteraction,
 } from "../shell/single-cell-task-focus-interaction-contract.ts";
 
@@ -38,6 +41,7 @@ export type SingleCellOperatorConsolePageSectionKey =
   | "objective_overview"
   | "task_focus"
   | "action_intents"
+  | "input_drafts"
   | "work_item_execution_overview"
   | "correction_review"
   | "state_transition"
@@ -76,6 +80,7 @@ export interface SingleCellOperatorConsolePage {
     objective_overview: SingleCellOperatorConsolePageSection;
     task_focus: SingleCellOperatorConsolePageSection;
     action_intents: SingleCellOperatorConsolePageSection;
+    input_drafts: SingleCellOperatorConsolePageSection;
     work_item_execution_overview: SingleCellOperatorConsolePageSection;
     correction_review: SingleCellOperatorConsolePageSection;
     state_transition: SingleCellOperatorConsolePageSection;
@@ -96,6 +101,7 @@ export interface RenderSingleCellOperatorConsolePageOptions {
   task_focus_interaction?: SingleCellTaskFocusInteraction;
   action_intent_scaffold?: SingleCellOperatorActionIntentScaffold;
   delivery_acceptance_scaffold?: SingleCellDeliveryAcceptanceScaffold;
+  input_draft_scaffold?: SingleCellOperatorInputDraftScaffold;
 }
 
 function escape_html(value: string): string {
@@ -137,6 +143,7 @@ export function renderSingleCellOperatorConsolePage(
   const task_focus_interaction = options.task_focus_interaction;
   const action_intent_scaffold = options.action_intent_scaffold;
   const delivery_acceptance_scaffold = options.delivery_acceptance_scaffold;
+  const input_draft_scaffold = options.input_draft_scaffold;
   const sections = {
     header: {
       section_key: "header",
@@ -299,6 +306,40 @@ export function renderSingleCellOperatorConsolePage(
           ]
         : [
             "Operator action-intent scaffold is not assembled for this page.",
+          ],
+    },
+    input_drafts: {
+      section_key: "input_drafts",
+      heading: "Input Drafts",
+      body_lines: input_draft_scaffold
+        ? [
+            `Draft boundary: ${input_draft_scaffold.execution_boundary}`,
+            `Current objective focus: ${input_draft_scaffold.current_draft_context.objective_focus_label}`,
+            `Current work-item focus: ${input_draft_scaffold.current_draft_context.work_item_focus_label}`,
+            `Current correction target scope: ${input_draft_scaffold.current_draft_context.correction_target_scope}`,
+            `Current review intent: ${input_draft_scaffold.current_draft_context.review_intent}`,
+            `Current acceptance status: ${input_draft_scaffold.current_draft_context.acceptance_status}`,
+            ...input_draft_scaffold.draftable_input_slots.map(
+              (slot) =>
+                `Draft slot: ${slot.draft_kind} -> ${slot.display_label} [${slot.support_level}] ${slot.draft_mode} target=${slot.target_label} via ${slot.target_surface}`
+            ),
+            ...input_draft_scaffold.action_intent_draft_options.map(
+              (option) =>
+                `Action-intent draft option: ${option.intent_kind} -> ${option.display_label} [${option.support_level}]`
+            ),
+            ...input_draft_scaffold.unavailable_input_surfaces.map(
+              (surface) =>
+                `Unavailable input surface: ${surface.display_label} -> ${surface.reason}`
+            ),
+            ...input_draft_scaffold.deferred_items.map(
+              (item) => `Deferred input item: ${item}`
+            ),
+            ...input_draft_scaffold.non_claims.map(
+              (claim) => `Non-claim: ${claim}`
+            ),
+          ]
+        : [
+            "Operator input-draft scaffold is not assembled for this page.",
           ],
     },
     work_item_execution_overview: {
@@ -519,6 +560,7 @@ export function renderSingleCellOperatorConsolePage(
     ...(task_focus_interaction?.non_claims ?? []),
     ...(action_intent_scaffold?.non_claims ?? []),
     ...(delivery_acceptance_scaffold?.non_claims ?? []),
+    ...(input_draft_scaffold?.non_claims ?? []),
   ]);
   const html = [
     `<main data-route="${SINGLE_CELL_OPERATOR_CONSOLE_ROUTE}">`,
@@ -534,6 +576,7 @@ export function renderSingleCellOperatorConsolePage(
     render_section(sections.objective_overview),
     render_section(sections.task_focus),
     render_section(sections.action_intents),
+    render_section(sections.input_drafts),
     render_section(sections.work_item_execution_overview),
     render_section(sections.correction_review),
     render_section(sections.state_transition),
