@@ -74,6 +74,9 @@ test("[app] single-cell operator console page bootstraps coherently from existin
       bootstrap.deferred_items.includes("fresh_reload_session_draft_restore")
     );
     assert.ok(
+      bootstrap.deferred_items.includes("one_click_request_preview_promotion")
+    );
+    assert.ok(
       bootstrap.page.non_claims.includes(
         "no_runtime_complete_product_state"
       )
@@ -86,6 +89,11 @@ test("[app] single-cell operator console page bootstraps coherently from existin
     assert.ok(
       bootstrap.page.non_claims.includes(
         "no_runtime_complete_session_draft_workflow"
+      )
+    );
+    assert.ok(
+      bootstrap.page.non_claims.includes(
+        "no_runtime_complete_session_draft_control_workflow"
       )
     );
 
@@ -102,6 +110,7 @@ test("[app] single-cell operator console page bootstraps coherently from existin
       bootstrap.page.sections.action_intents,
       bootstrap.page.sections.input_drafts,
       bootstrap.page.sections.in_session_draft_state,
+      bootstrap.page.sections.session_draft_controls,
       bootstrap.page.sections.request_package,
       bootstrap.page.sections.request_review_submit_preview,
       bootstrap.page.sections.work_item_execution_overview,

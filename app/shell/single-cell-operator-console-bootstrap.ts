@@ -39,6 +39,9 @@ import {
   assembleSingleCellOperatorInSessionDraftStateScaffold,
 } from "./single-cell-operator-in-session-draft-state.ts";
 import {
+  assembleSingleCellOperatorSessionDraftControlsScaffold,
+} from "./single-cell-operator-session-draft-controls.ts";
+import {
   assembleSingleCellOperatorRequestPackageScaffold,
 } from "./single-cell-operator-request-package.ts";
 import {
@@ -263,6 +266,12 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
       request_review_submit_preview_scaffold,
       seed_values: options.session_draft_state,
     });
+  const session_draft_controls_scaffold =
+    assembleSingleCellOperatorSessionDraftControlsScaffold({
+      baseline_shell_session,
+      in_session_draft_state_scaffold,
+      request_review_submit_preview_scaffold,
+    });
   const page = renderSingleCellOperatorConsolePage(console_shell, {
     template_seed,
     continuity_reload_presentation,
@@ -273,6 +282,7 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
     delivery_acceptance_scaffold,
     input_draft_scaffold,
     in_session_draft_state_scaffold,
+    session_draft_controls_scaffold,
     request_package_scaffold,
     request_review_submit_preview_scaffold,
   });
@@ -288,6 +298,7 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
     ...delivery_acceptance_scaffold.deferred_items,
     ...input_draft_scaffold.deferred_items,
     ...in_session_draft_state_scaffold.deferred_items,
+    ...session_draft_controls_scaffold.deferred_items,
     ...request_package_scaffold.deferred_items,
     ...request_review_submit_preview_scaffold.deferred_items,
     ...(template_seed?.deferred_surfaces ?? []),
@@ -304,6 +315,7 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
     ...delivery_acceptance_scaffold.projection_notes,
     ...input_draft_scaffold.projection_notes,
     ...in_session_draft_state_scaffold.projection_notes,
+    ...session_draft_controls_scaffold.projection_notes,
     ...request_package_scaffold.projection_notes,
     ...request_review_submit_preview_scaffold.projection_notes,
     ...(template_seed?.projection_notes ?? []),
@@ -340,6 +352,7 @@ export function composeSingleCellOperatorConsoleBootstrapFromBaselineShellSessio
     delivery_acceptance_scaffold,
     input_draft_scaffold,
     in_session_draft_state_scaffold,
+    session_draft_controls_scaffold,
     request_package_scaffold,
     request_review_submit_preview_scaffold,
     page,

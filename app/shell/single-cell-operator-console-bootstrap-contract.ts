@@ -20,6 +20,9 @@ import type {
   SingleCellOperatorInSessionDraftStateScaffold,
 } from "./single-cell-operator-in-session-draft-state-contract.ts";
 import type {
+  SingleCellOperatorSessionDraftControlsScaffold,
+} from "./single-cell-operator-session-draft-controls-contract.ts";
+import type {
   SingleCellOperatorRequestPackageScaffold,
 } from "./single-cell-operator-request-package-contract.ts";
 import type {
@@ -98,6 +101,8 @@ export interface SingleCellOperatorConsoleBootstrap {
   input_draft_scaffold: SingleCellOperatorInputDraftScaffold;
   in_session_draft_state_scaffold:
     SingleCellOperatorInSessionDraftStateScaffold;
+  session_draft_controls_scaffold:
+    SingleCellOperatorSessionDraftControlsScaffold;
   request_package_scaffold: SingleCellOperatorRequestPackageScaffold;
   request_review_submit_preview_scaffold:
     SingleCellOperatorRequestReviewSubmitPreviewScaffold;

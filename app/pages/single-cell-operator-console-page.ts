@@ -26,6 +26,9 @@ import type {
   SingleCellOperatorInSessionDraftStateScaffold,
 } from "../shell/single-cell-operator-in-session-draft-state-contract.ts";
 import type {
+  SingleCellOperatorSessionDraftControlsScaffold,
+} from "../shell/single-cell-operator-session-draft-controls-contract.ts";
+import type {
   SingleCellOperatorRequestPackageScaffold,
 } from "../shell/single-cell-operator-request-package-contract.ts";
 import type {
@@ -52,6 +55,7 @@ export type SingleCellOperatorConsolePageSectionKey =
   | "action_intents"
   | "input_drafts"
   | "in_session_draft_state"
+  | "session_draft_controls"
   | "request_package"
   | "request_review_submit_preview"
   | "work_item_execution_overview"
@@ -94,6 +98,7 @@ export interface SingleCellOperatorConsolePage {
     action_intents: SingleCellOperatorConsolePageSection;
     input_drafts: SingleCellOperatorConsolePageSection;
     in_session_draft_state: SingleCellOperatorConsolePageSection;
+    session_draft_controls: SingleCellOperatorConsolePageSection;
     request_package: SingleCellOperatorConsolePageSection;
     request_review_submit_preview: SingleCellOperatorConsolePageSection;
     work_item_execution_overview: SingleCellOperatorConsolePageSection;
@@ -119,6 +124,8 @@ export interface RenderSingleCellOperatorConsolePageOptions {
   input_draft_scaffold?: SingleCellOperatorInputDraftScaffold;
   in_session_draft_state_scaffold?:
     SingleCellOperatorInSessionDraftStateScaffold;
+  session_draft_controls_scaffold?:
+    SingleCellOperatorSessionDraftControlsScaffold;
   request_package_scaffold?: SingleCellOperatorRequestPackageScaffold;
   request_review_submit_preview_scaffold?:
     SingleCellOperatorRequestReviewSubmitPreviewScaffold;
@@ -166,6 +173,8 @@ export function renderSingleCellOperatorConsolePage(
   const input_draft_scaffold = options.input_draft_scaffold;
   const in_session_draft_state_scaffold =
     options.in_session_draft_state_scaffold;
+  const session_draft_controls_scaffold =
+    options.session_draft_controls_scaffold;
   const request_package_scaffold = options.request_package_scaffold;
   const request_review_submit_preview_scaffold =
     options.request_review_submit_preview_scaffold;
@@ -402,6 +411,41 @@ export function renderSingleCellOperatorConsolePage(
           ]
         : [
             "Operator in-session draft-state scaffold is not assembled for this page.",
+          ],
+    },
+    session_draft_controls: {
+      section_key: "session_draft_controls",
+      heading: "Session Draft Controls",
+      body_lines: session_draft_controls_scaffold
+        ? [
+            `Control boundary: ${session_draft_controls_scaffold.execution_boundary}`,
+            `Keep draft hint: ${session_draft_controls_scaffold.keep_draft_hint.availability_status} via ${session_draft_controls_scaffold.keep_draft_hint.source_surface}`,
+            `Clear draft hint: ${session_draft_controls_scaffold.clear_draft_hint.availability_status} via ${session_draft_controls_scaffold.clear_draft_hint.source_surface}`,
+            `Promote-to-request-preview hint: ${session_draft_controls_scaffold.promote_to_request_preview_hint.availability_status} via ${session_draft_controls_scaffold.promote_to_request_preview_hint.source_surface}`,
+            `Draft completeness hint: ${session_draft_controls_scaffold.draft_completeness_hint.draft_completeness_status}`,
+            `Draft emptiness hint: ${session_draft_controls_scaffold.draft_completeness_hint.draft_emptiness_state}`,
+            `Any draft value present: ${String(session_draft_controls_scaffold.draft_completeness_hint.any_draft_value_present)}`,
+            `Operator-authored draft present: ${String(session_draft_controls_scaffold.draft_completeness_hint.operator_authored_draft_present)}`,
+            `Request reviewability status: ${session_draft_controls_scaffold.draft_completeness_hint.request_reviewability_status}`,
+            `Request previewability status: ${session_draft_controls_scaffold.draft_completeness_hint.request_previewability_status}`,
+            `Future submit dependency count: ${String(session_draft_controls_scaffold.draft_completeness_hint.future_submit_dependency_count)}`,
+            ...session_draft_controls_scaffold.draft_completeness_hint.future_submit_dependencies.map(
+              (dependency) =>
+                `Control dependency: ${dependency}`
+            ),
+            ...session_draft_controls_scaffold.unavailable_control_surfaces.map(
+              (surface) =>
+                `Unavailable draft control surface: ${surface.display_label} -> ${surface.reason}`
+            ),
+            ...session_draft_controls_scaffold.deferred_items.map(
+              (item) => `Deferred draft control item: ${item}`
+            ),
+            ...session_draft_controls_scaffold.non_claims.map(
+              (claim) => `Non-claim: ${claim}`
+            ),
+          ]
+        : [
+            "Operator session-draft controls scaffold is not assembled for this page.",
           ],
     },
     request_package: {
@@ -708,6 +752,7 @@ export function renderSingleCellOperatorConsolePage(
     ...(delivery_acceptance_scaffold?.non_claims ?? []),
     ...(input_draft_scaffold?.non_claims ?? []),
     ...(in_session_draft_state_scaffold?.non_claims ?? []),
+    ...(session_draft_controls_scaffold?.non_claims ?? []),
     ...(request_package_scaffold?.non_claims ?? []),
     ...(request_review_submit_preview_scaffold?.non_claims ?? []),
   ]);
@@ -727,6 +772,7 @@ export function renderSingleCellOperatorConsolePage(
     render_section(sections.action_intents),
     render_section(sections.input_drafts),
     render_section(sections.in_session_draft_state),
+    render_section(sections.session_draft_controls),
     render_section(sections.request_package),
     render_section(sections.request_review_submit_preview),
     render_section(sections.work_item_execution_overview),
