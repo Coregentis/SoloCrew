@@ -32,6 +32,9 @@ import type {
   SingleCellOperatorRequestPackageScaffold,
 } from "../shell/single-cell-operator-request-package-contract.ts";
 import type {
+  SingleCellOperatorReadinessSummaryScaffold,
+} from "../shell/single-cell-operator-readiness-summary-contract.ts";
+import type {
   SingleCellOperatorRequestReviewSubmitPreviewScaffold,
 } from "../shell/single-cell-operator-request-review-submit-preview-contract.ts";
 import type {
@@ -56,6 +59,7 @@ export type SingleCellOperatorConsolePageSectionKey =
   | "input_drafts"
   | "in_session_draft_state"
   | "session_draft_controls"
+  | "readiness_summary"
   | "request_package"
   | "request_review_submit_preview"
   | "work_item_execution_overview"
@@ -99,6 +103,7 @@ export interface SingleCellOperatorConsolePage {
     input_drafts: SingleCellOperatorConsolePageSection;
     in_session_draft_state: SingleCellOperatorConsolePageSection;
     session_draft_controls: SingleCellOperatorConsolePageSection;
+    readiness_summary: SingleCellOperatorConsolePageSection;
     request_package: SingleCellOperatorConsolePageSection;
     request_review_submit_preview: SingleCellOperatorConsolePageSection;
     work_item_execution_overview: SingleCellOperatorConsolePageSection;
@@ -126,6 +131,7 @@ export interface RenderSingleCellOperatorConsolePageOptions {
     SingleCellOperatorInSessionDraftStateScaffold;
   session_draft_controls_scaffold?:
     SingleCellOperatorSessionDraftControlsScaffold;
+  readiness_summary_scaffold?: SingleCellOperatorReadinessSummaryScaffold;
   request_package_scaffold?: SingleCellOperatorRequestPackageScaffold;
   request_review_submit_preview_scaffold?:
     SingleCellOperatorRequestReviewSubmitPreviewScaffold;
@@ -175,6 +181,8 @@ export function renderSingleCellOperatorConsolePage(
     options.in_session_draft_state_scaffold;
   const session_draft_controls_scaffold =
     options.session_draft_controls_scaffold;
+  const readiness_summary_scaffold =
+    options.readiness_summary_scaffold;
   const request_package_scaffold = options.request_package_scaffold;
   const request_review_submit_preview_scaffold =
     options.request_review_submit_preview_scaffold;
@@ -446,6 +454,35 @@ export function renderSingleCellOperatorConsolePage(
           ]
         : [
             "Operator session-draft controls scaffold is not assembled for this page.",
+          ],
+    },
+    readiness_summary: {
+      section_key: "readiness_summary",
+      heading: "Readiness Summary",
+      body_lines: readiness_summary_scaffold
+        ? [
+            `Readiness boundary: ${readiness_summary_scaffold.execution_boundary}`,
+            `Overall readiness level: ${readiness_summary_scaffold.overall_readiness_level}`,
+            `Ready facet count: ${String(readiness_summary_scaffold.ready_facet_count)}`,
+            `Incomplete or blocked facet count: ${String(readiness_summary_scaffold.incomplete_or_blocked_facet_count)}`,
+            `Current focus readiness: ${readiness_summary_scaffold.current_focus_readiness.readiness_level} via ${readiness_summary_scaffold.current_focus_readiness.source_surface}`,
+            `Request-package readiness: ${readiness_summary_scaffold.request_package_readiness.readiness_level} via ${readiness_summary_scaffold.request_package_readiness.source_surface}`,
+            `Review/preview readiness: ${readiness_summary_scaffold.review_preview_readiness.readiness_level} via ${readiness_summary_scaffold.review_preview_readiness.source_surface}`,
+            `Delivery-acceptance readiness: ${readiness_summary_scaffold.delivery_acceptance_readiness.readiness_level} via ${readiness_summary_scaffold.delivery_acceptance_readiness.source_surface}`,
+            `In-session draft readiness: ${readiness_summary_scaffold.in_session_draft_readiness.readiness_level} via ${readiness_summary_scaffold.in_session_draft_readiness.source_surface}`,
+            ...readiness_summary_scaffold.deferred_or_unavailable_readiness_blockers.map(
+              (blocker) =>
+                `Readiness blocker: ${blocker.blocker_id} -> ${blocker.blocker_kind} (${blocker.display_label}) via ${blocker.source_surface}`
+            ),
+            ...readiness_summary_scaffold.deferred_items.map(
+              (item) => `Deferred readiness item: ${item}`
+            ),
+            ...readiness_summary_scaffold.non_claims.map(
+              (claim) => `Non-claim: ${claim}`
+            ),
+          ]
+        : [
+            "Operator readiness-summary scaffold is not assembled for this page.",
           ],
     },
     request_package: {
@@ -753,6 +790,7 @@ export function renderSingleCellOperatorConsolePage(
     ...(input_draft_scaffold?.non_claims ?? []),
     ...(in_session_draft_state_scaffold?.non_claims ?? []),
     ...(session_draft_controls_scaffold?.non_claims ?? []),
+    ...(readiness_summary_scaffold?.non_claims ?? []),
     ...(request_package_scaffold?.non_claims ?? []),
     ...(request_review_submit_preview_scaffold?.non_claims ?? []),
   ]);
@@ -773,6 +811,7 @@ export function renderSingleCellOperatorConsolePage(
     render_section(sections.input_drafts),
     render_section(sections.in_session_draft_state),
     render_section(sections.session_draft_controls),
+    render_section(sections.readiness_summary),
     render_section(sections.request_package),
     render_section(sections.request_review_submit_preview),
     render_section(sections.work_item_execution_overview),

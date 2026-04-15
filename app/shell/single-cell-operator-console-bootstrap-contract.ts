@@ -26,6 +26,9 @@ import type {
   SingleCellOperatorRequestPackageScaffold,
 } from "./single-cell-operator-request-package-contract.ts";
 import type {
+  SingleCellOperatorReadinessSummaryScaffold,
+} from "./single-cell-operator-readiness-summary-contract.ts";
+import type {
   SingleCellOperatorRequestReviewSubmitPreviewScaffold,
 } from "./single-cell-operator-request-review-submit-preview-contract.ts";
 import type { BaselineShellSession } from "./create-baseline-shell.ts";
@@ -103,6 +106,7 @@ export interface SingleCellOperatorConsoleBootstrap {
     SingleCellOperatorInSessionDraftStateScaffold;
   session_draft_controls_scaffold:
     SingleCellOperatorSessionDraftControlsScaffold;
+  readiness_summary_scaffold: SingleCellOperatorReadinessSummaryScaffold;
   request_package_scaffold: SingleCellOperatorRequestPackageScaffold;
   request_review_submit_preview_scaffold:
     SingleCellOperatorRequestReviewSubmitPreviewScaffold;
