@@ -19,6 +19,9 @@ import type {
 import type {
   SingleCellOperatorRequestPackageScaffold,
 } from "./single-cell-operator-request-package-contract.ts";
+import type {
+  SingleCellOperatorRequestReviewSubmitPreviewScaffold,
+} from "./single-cell-operator-request-review-submit-preview-contract.ts";
 import type { BaselineShellSession } from "./create-baseline-shell.ts";
 import type { RuntimeSessionMode } from "./create-runtime-session.ts";
 import type {
@@ -91,6 +94,8 @@ export interface SingleCellOperatorConsoleBootstrap {
   delivery_acceptance_scaffold: SingleCellDeliveryAcceptanceScaffold;
   input_draft_scaffold: SingleCellOperatorInputDraftScaffold;
   request_package_scaffold: SingleCellOperatorRequestPackageScaffold;
+  request_review_submit_preview_scaffold:
+    SingleCellOperatorRequestReviewSubmitPreviewScaffold;
   page: SingleCellOperatorConsolePage;
   projection_notes: string[];
   deferred_items: string[];

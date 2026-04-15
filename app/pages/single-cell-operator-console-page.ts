@@ -26,6 +26,9 @@ import type {
   SingleCellOperatorRequestPackageScaffold,
 } from "../shell/single-cell-operator-request-package-contract.ts";
 import type {
+  SingleCellOperatorRequestReviewSubmitPreviewScaffold,
+} from "../shell/single-cell-operator-request-review-submit-preview-contract.ts";
+import type {
   SingleCellTaskFocusInteraction,
 } from "../shell/single-cell-task-focus-interaction-contract.ts";
 
@@ -46,6 +49,7 @@ export type SingleCellOperatorConsolePageSectionKey =
   | "action_intents"
   | "input_drafts"
   | "request_package"
+  | "request_review_submit_preview"
   | "work_item_execution_overview"
   | "correction_review"
   | "state_transition"
@@ -86,6 +90,7 @@ export interface SingleCellOperatorConsolePage {
     action_intents: SingleCellOperatorConsolePageSection;
     input_drafts: SingleCellOperatorConsolePageSection;
     request_package: SingleCellOperatorConsolePageSection;
+    request_review_submit_preview: SingleCellOperatorConsolePageSection;
     work_item_execution_overview: SingleCellOperatorConsolePageSection;
     correction_review: SingleCellOperatorConsolePageSection;
     state_transition: SingleCellOperatorConsolePageSection;
@@ -108,6 +113,8 @@ export interface RenderSingleCellOperatorConsolePageOptions {
   delivery_acceptance_scaffold?: SingleCellDeliveryAcceptanceScaffold;
   input_draft_scaffold?: SingleCellOperatorInputDraftScaffold;
   request_package_scaffold?: SingleCellOperatorRequestPackageScaffold;
+  request_review_submit_preview_scaffold?:
+    SingleCellOperatorRequestReviewSubmitPreviewScaffold;
 }
 
 function escape_html(value: string): string {
@@ -151,6 +158,8 @@ export function renderSingleCellOperatorConsolePage(
   const delivery_acceptance_scaffold = options.delivery_acceptance_scaffold;
   const input_draft_scaffold = options.input_draft_scaffold;
   const request_package_scaffold = options.request_package_scaffold;
+  const request_review_submit_preview_scaffold =
+    options.request_review_submit_preview_scaffold;
   const sections = {
     header: {
       section_key: "header",
@@ -390,6 +399,49 @@ export function renderSingleCellOperatorConsolePage(
             "Operator request-package scaffold is not assembled for this page.",
           ],
     },
+    request_review_submit_preview: {
+      section_key: "request_review_submit_preview",
+      heading: "Request Review / Submit Preview",
+      body_lines: request_review_submit_preview_scaffold
+        ? [
+            `Preview boundary: ${request_review_submit_preview_scaffold.execution_boundary}`,
+            `Request package id: ${request_review_submit_preview_scaffold.current_request_package_summary.request_package_id}`,
+            `Reviewability status: ${request_review_submit_preview_scaffold.review_preview_state.reviewability_status}`,
+            `Previewability status: ${request_review_submit_preview_scaffold.review_preview_state.previewability_status}`,
+            `Incomplete request: ${String(request_review_submit_preview_scaffold.review_preview_state.incomplete_request)}`,
+            `Submit-preview status: ${request_review_submit_preview_scaffold.submit_preview_status}`,
+            `Packaged fields present: ${request_review_submit_preview_scaffold.current_request_package_summary.packaged_fields_present.join(", ")}`,
+            `Selected action intent kind: ${request_review_submit_preview_scaffold.current_request_package_summary.selected_action_intent_kind ?? "none"}`,
+            `Selected action intent confirmed: ${String(request_review_submit_preview_scaffold.current_request_package_summary.selected_action_intent_confirmed)}`,
+            `Acceptance status: ${request_review_submit_preview_scaffold.current_request_package_summary.acceptance_status}`,
+            `Populated drafts: ${String(request_review_submit_preview_scaffold.current_request_package_summary.populated_draft_count)} / ${String(request_review_submit_preview_scaffold.current_request_package_summary.packaged_draft_count)}`,
+            ...request_review_submit_preview_scaffold.completeness_signals.map(
+              (signal) =>
+                `Completeness signal: ${signal.signal_id} -> ${signal.signal_status} via ${signal.source_surface}`
+            ),
+            ...request_review_submit_preview_scaffold.missing_or_deferred_fields.map(
+              (field) =>
+                `Missing/deferred request field: ${field.field_id} -> ${field.field_status} (${field.display_label})`
+            ),
+            ...request_review_submit_preview_scaffold.future_submit_dependencies.map(
+              (dependency) =>
+                `Future submit dependency: ${dependency}`
+            ),
+            ...request_review_submit_preview_scaffold.unavailable_submit_surfaces.map(
+              (surface) =>
+                `Unavailable submit surface: ${surface.display_label} -> ${surface.reason}`
+            ),
+            ...request_review_submit_preview_scaffold.deferred_items.map(
+              (item) => `Deferred submit-preview item: ${item}`
+            ),
+            ...request_review_submit_preview_scaffold.non_claims.map(
+              (claim) => `Non-claim: ${claim}`
+            ),
+          ]
+        : [
+            "Operator request review / submit-preview scaffold is not assembled for this page.",
+          ],
+    },
     work_item_execution_overview: {
       section_key: "work_item_execution_overview",
       heading: "Work Item / Execution Overview",
@@ -610,6 +662,7 @@ export function renderSingleCellOperatorConsolePage(
     ...(delivery_acceptance_scaffold?.non_claims ?? []),
     ...(input_draft_scaffold?.non_claims ?? []),
     ...(request_package_scaffold?.non_claims ?? []),
+    ...(request_review_submit_preview_scaffold?.non_claims ?? []),
   ]);
   const html = [
     `<main data-route="${SINGLE_CELL_OPERATOR_CONSOLE_ROUTE}">`,
@@ -627,6 +680,7 @@ export function renderSingleCellOperatorConsolePage(
     render_section(sections.action_intents),
     render_section(sections.input_drafts),
     render_section(sections.request_package),
+    render_section(sections.request_review_submit_preview),
     render_section(sections.work_item_execution_overview),
     render_section(sections.correction_review),
     render_section(sections.state_transition),
