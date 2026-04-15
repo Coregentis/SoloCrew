@@ -23,6 +23,9 @@ import type {
   SingleCellOperatorInputDraftScaffold,
 } from "../shell/single-cell-operator-input-draft-contract.ts";
 import type {
+  SingleCellOperatorInSessionDraftStateScaffold,
+} from "../shell/single-cell-operator-in-session-draft-state-contract.ts";
+import type {
   SingleCellOperatorRequestPackageScaffold,
 } from "../shell/single-cell-operator-request-package-contract.ts";
 import type {
@@ -48,6 +51,7 @@ export type SingleCellOperatorConsolePageSectionKey =
   | "task_focus"
   | "action_intents"
   | "input_drafts"
+  | "in_session_draft_state"
   | "request_package"
   | "request_review_submit_preview"
   | "work_item_execution_overview"
@@ -89,6 +93,7 @@ export interface SingleCellOperatorConsolePage {
     task_focus: SingleCellOperatorConsolePageSection;
     action_intents: SingleCellOperatorConsolePageSection;
     input_drafts: SingleCellOperatorConsolePageSection;
+    in_session_draft_state: SingleCellOperatorConsolePageSection;
     request_package: SingleCellOperatorConsolePageSection;
     request_review_submit_preview: SingleCellOperatorConsolePageSection;
     work_item_execution_overview: SingleCellOperatorConsolePageSection;
@@ -112,6 +117,8 @@ export interface RenderSingleCellOperatorConsolePageOptions {
   action_intent_scaffold?: SingleCellOperatorActionIntentScaffold;
   delivery_acceptance_scaffold?: SingleCellDeliveryAcceptanceScaffold;
   input_draft_scaffold?: SingleCellOperatorInputDraftScaffold;
+  in_session_draft_state_scaffold?:
+    SingleCellOperatorInSessionDraftStateScaffold;
   request_package_scaffold?: SingleCellOperatorRequestPackageScaffold;
   request_review_submit_preview_scaffold?:
     SingleCellOperatorRequestReviewSubmitPreviewScaffold;
@@ -157,6 +164,8 @@ export function renderSingleCellOperatorConsolePage(
   const action_intent_scaffold = options.action_intent_scaffold;
   const delivery_acceptance_scaffold = options.delivery_acceptance_scaffold;
   const input_draft_scaffold = options.input_draft_scaffold;
+  const in_session_draft_state_scaffold =
+    options.in_session_draft_state_scaffold;
   const request_package_scaffold = options.request_package_scaffold;
   const request_review_submit_preview_scaffold =
     options.request_review_submit_preview_scaffold;
@@ -356,6 +365,43 @@ export function renderSingleCellOperatorConsolePage(
           ]
         : [
             "Operator input-draft scaffold is not assembled for this page.",
+          ],
+    },
+    in_session_draft_state: {
+      section_key: "in_session_draft_state",
+      heading: "In-Session Draft State",
+      body_lines: in_session_draft_state_scaffold
+        ? [
+            `Session-draft boundary: ${in_session_draft_state_scaffold.execution_boundary}`,
+            `Draft completeness status: ${in_session_draft_state_scaffold.draft_completeness_state.draft_completeness_status}`,
+            `Draft emptiness state: ${in_session_draft_state_scaffold.draft_completeness_state.draft_emptiness_state}`,
+            `Present draft values: ${String(in_session_draft_state_scaffold.draft_completeness_state.present_draft_value_count)}`,
+            `Empty draft values: ${String(in_session_draft_state_scaffold.draft_completeness_state.empty_draft_value_count)}`,
+            `Request reviewability status: ${in_session_draft_state_scaffold.draft_completeness_state.request_reviewability_status}`,
+            `Request previewability status: ${in_session_draft_state_scaffold.draft_completeness_state.request_previewability_status}`,
+            `Future submit dependency count: ${String(in_session_draft_state_scaffold.draft_completeness_state.future_submit_dependency_count)}`,
+            `Objective note draft value: ${in_session_draft_state_scaffold.current_session_draft_values.objective_note_draft_value.value_presence} via ${in_session_draft_state_scaffold.current_session_draft_values.objective_note_draft_value.value_source} value=${in_session_draft_state_scaffold.current_session_draft_values.objective_note_draft_value.current_value || "(empty)"}`,
+            `Work-item note draft value: ${in_session_draft_state_scaffold.current_session_draft_values.work_item_note_draft_value.value_presence} via ${in_session_draft_state_scaffold.current_session_draft_values.work_item_note_draft_value.value_source} value=${in_session_draft_state_scaffold.current_session_draft_values.work_item_note_draft_value.current_value || "(empty)"}`,
+            `Correction text draft value: ${in_session_draft_state_scaffold.current_session_draft_values.correction_text_draft_value.value_presence} via ${in_session_draft_state_scaffold.current_session_draft_values.correction_text_draft_value.value_source} value=${in_session_draft_state_scaffold.current_session_draft_values.correction_text_draft_value.current_value || "(empty)"}`,
+            `Review request draft value: ${in_session_draft_state_scaffold.current_session_draft_values.review_request_draft_value.value_presence} via ${in_session_draft_state_scaffold.current_session_draft_values.review_request_draft_value.value_source} value=${in_session_draft_state_scaffold.current_session_draft_values.review_request_draft_value.current_value || "(empty)"}`,
+            `Selected action intent draft value: ${in_session_draft_state_scaffold.current_session_draft_values.selected_action_intent_draft_value.value_presence} via ${in_session_draft_state_scaffold.current_session_draft_values.selected_action_intent_draft_value.value_source} value=${in_session_draft_state_scaffold.current_session_draft_values.selected_action_intent_draft_value.current_value ?? "none"}`,
+            ...in_session_draft_state_scaffold.draft_completeness_state.future_submit_dependencies.map(
+              (dependency) =>
+                `Current submit dependency: ${dependency}`
+            ),
+            ...in_session_draft_state_scaffold.unavailable_draft_surfaces.map(
+              (surface) =>
+                `Unavailable session draft surface: ${surface.display_label} -> ${surface.reason}`
+            ),
+            ...in_session_draft_state_scaffold.deferred_items.map(
+              (item) => `Deferred session draft item: ${item}`
+            ),
+            ...in_session_draft_state_scaffold.non_claims.map(
+              (claim) => `Non-claim: ${claim}`
+            ),
+          ]
+        : [
+            "Operator in-session draft-state scaffold is not assembled for this page.",
           ],
     },
     request_package: {
@@ -661,6 +707,7 @@ export function renderSingleCellOperatorConsolePage(
     ...(action_intent_scaffold?.non_claims ?? []),
     ...(delivery_acceptance_scaffold?.non_claims ?? []),
     ...(input_draft_scaffold?.non_claims ?? []),
+    ...(in_session_draft_state_scaffold?.non_claims ?? []),
     ...(request_package_scaffold?.non_claims ?? []),
     ...(request_review_submit_preview_scaffold?.non_claims ?? []),
   ]);
@@ -679,6 +726,7 @@ export function renderSingleCellOperatorConsolePage(
     render_section(sections.task_focus),
     render_section(sections.action_intents),
     render_section(sections.input_drafts),
+    render_section(sections.in_session_draft_state),
     render_section(sections.request_package),
     render_section(sections.request_review_submit_preview),
     render_section(sections.work_item_execution_overview),

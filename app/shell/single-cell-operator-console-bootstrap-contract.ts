@@ -17,6 +17,9 @@ import type {
   SingleCellOperatorInputDraftScaffold,
 } from "./single-cell-operator-input-draft-contract.ts";
 import type {
+  SingleCellOperatorInSessionDraftStateScaffold,
+} from "./single-cell-operator-in-session-draft-state-contract.ts";
+import type {
   SingleCellOperatorRequestPackageScaffold,
 } from "./single-cell-operator-request-package-contract.ts";
 import type {
@@ -93,6 +96,8 @@ export interface SingleCellOperatorConsoleBootstrap {
   action_intent_scaffold: SingleCellOperatorActionIntentScaffold;
   delivery_acceptance_scaffold: SingleCellDeliveryAcceptanceScaffold;
   input_draft_scaffold: SingleCellOperatorInputDraftScaffold;
+  in_session_draft_state_scaffold:
+    SingleCellOperatorInSessionDraftStateScaffold;
   request_package_scaffold: SingleCellOperatorRequestPackageScaffold;
   request_review_submit_preview_scaffold:
     SingleCellOperatorRequestReviewSubmitPreviewScaffold;

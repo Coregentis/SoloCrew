@@ -61,6 +61,7 @@ test("[app] single-cell operator console page renders from current shell adapter
   assert.ok(page.sections.task_focus);
   assert.ok(page.sections.action_intents);
   assert.ok(page.sections.input_drafts);
+  assert.ok(page.sections.in_session_draft_state);
   assert.ok(page.sections.request_package);
   assert.ok(page.sections.request_review_submit_preview);
   assert.ok(page.sections.work_item_execution_overview);
@@ -77,6 +78,7 @@ test("[app] single-cell operator console page renders from current shell adapter
   assert.match(page.html, /Task Focus/);
   assert.match(page.html, /Action Intents/);
   assert.match(page.html, /Input Drafts/);
+  assert.match(page.html, /In-Session Draft State/);
   assert.match(page.html, /Request Package/);
   assert.match(page.html, /Request Review \/ Submit Preview/);
   assert.match(page.html, /Work Item \/ Execution Overview/);
@@ -97,6 +99,7 @@ test("[app] single-cell operator console page renders from current shell adapter
     page.sections.task_focus,
     page.sections.action_intents,
     page.sections.input_drafts,
+    page.sections.in_session_draft_state,
     page.sections.request_package,
     page.sections.request_review_submit_preview,
     page.sections.work_item_execution_overview,
