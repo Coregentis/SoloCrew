@@ -20,7 +20,22 @@ This repository is:
 
 ## Current Release Status
 
-Current release status is `v0.1 sealed`.
+Current release status is `v0.2-structural-constitution sealed`.
+
+The sealed `v0.2` line extends the sealed `v0.1` baseline with:
+
+- post-`v0.1` structural constitution documents
+- structural object and management contract layers
+- single-cell structural assembly, console state, view-model, shell composition, and shell entry adapter scaffolds
+
+This sealed `v0.2` line does not claim:
+
+- a usable-product UI release
+- multi-cell portfolio or Secretary behavior
+- provider execution or channel integration
+- business-pack execution logic
+- a broad KPI cockpit
+- a runtime-complete product state
 
 The implementation line was established as `v0.1-baseline` and then closed with:
 
@@ -63,15 +78,17 @@ The sealed `v0.1` line does not claim:
 - `governance/contracts/`
   - runtime-consumption, DTO, and workflow contracts
 - `governance/baselines/`
-  - frozen SoloCrew projection baseline
+  - frozen SoloCrew projection and structural constitution baselines
+- `governance/audits/`
+  - structural inventory, deferred-surface, and acceptance-gate audit packs
 - `governance/releases/`
   - release notes and closure records for sealed product lines
 - `projection/`
   - projection contracts, objects, adapters, mappings, and flow assembly helpers
 - `app/`
-  - product shell boundary, runtime session entry, and page placeholders
+  - product shell boundary, runtime session entry, and bounded shell entry scaffolds
 - `tests/`
-  - executable projection and app shell truth checks for the sealed `v0.1` line
+  - executable projection and app shell truth checks for the sealed `v0.1` and `v0.2` lines
 
 ## Scope Discipline
 
