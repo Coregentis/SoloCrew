@@ -44,6 +44,32 @@ This sealed `v0.3` line does not claim:
 
 The sealed `v0.3` line is the first bounded single-cell usable release line for SoloCrew.
 
+## Next Planned Line
+
+The next planned line is `v0.4-multi-cell-foundation`.
+
+This repo has now frozen the `v0.4` governance scope as the missing intermediate line between sealed `v0.3-single-cell-usable` and future `v0.5-portfolio-secretary-beta`.
+
+That means `v0.4` is now defined as the line that will freeze:
+
+- lawful multi-cell coexistence
+- cell summary projection
+- the minimum management object family
+- product-layer versus later upstream runtime-blocker boundaries
+
+It does not mean `v0.4` is already implemented.
+It does not mean Secretary beta, portfolio orchestration, provider execution, or channel behavior now exist in this repo.
+
+## Version Semantics
+
+SoloCrew uses two different version labels for different purposes:
+
+- repo release lines such as `v0.1`, `v0.2`, `v0.3`, and now planned `v0.4`
+- the private workspace/package version in `package.json`
+
+The release line is the authoritative product-governance label for this repo.
+The current `package.json` value `0.1.0-baseline` remains a private workspace/tooling version and is not a claim that the repo release line is still only `v0.1`.
+
 Current structural foundation under that line remains the sealed `v0.2-structural-constitution`.
 
 The sealed `v0.2` line extends the sealed `v0.1` baseline with:
