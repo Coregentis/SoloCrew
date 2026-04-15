@@ -75,6 +75,7 @@ test("[app] single-cell operator console page bootstraps coherently from existin
       bootstrap.page.sections.delivery,
       bootstrap.page.sections.crew_overview,
       bootstrap.page.sections.objective_overview,
+      bootstrap.page.sections.task_focus,
       bootstrap.page.sections.work_item_execution_overview,
       bootstrap.page.sections.memory_continuity_overview,
       bootstrap.page.sections.deferred_surfaces,

@@ -13,6 +13,9 @@ import type {
 import type {
   SingleCellOperatorConsoleShell,
 } from "../shell/single-cell-operator-console-shell-contract.ts";
+import type {
+  SingleCellTaskFocusInteraction,
+} from "../shell/single-cell-task-focus-interaction-contract.ts";
 
 export const SINGLE_CELL_OPERATOR_CONSOLE_ROUTE = "/cell" as const;
 
@@ -26,6 +29,7 @@ export type SingleCellOperatorConsolePageSectionKey =
   | "delivery"
   | "crew_overview"
   | "objective_overview"
+  | "task_focus"
   | "work_item_execution_overview"
   | "correction_review"
   | "state_transition"
@@ -61,6 +65,7 @@ export interface SingleCellOperatorConsolePage {
     delivery: SingleCellOperatorConsolePageSection;
     crew_overview: SingleCellOperatorConsolePageSection;
     objective_overview: SingleCellOperatorConsolePageSection;
+    task_focus: SingleCellOperatorConsolePageSection;
     work_item_execution_overview: SingleCellOperatorConsolePageSection;
     correction_review: SingleCellOperatorConsolePageSection;
     state_transition: SingleCellOperatorConsolePageSection;
@@ -78,6 +83,7 @@ export interface RenderSingleCellOperatorConsolePageOptions {
   continuity_reload_presentation?: SingleCellContinuityReloadPresentation;
   correction_review_interaction?: SingleCellCorrectionReviewInteraction;
   state_transition_scaffold?: SingleCellOperatorConsoleStateTransitionScaffold;
+  task_focus_interaction?: SingleCellTaskFocusInteraction;
 }
 
 function escape_html(value: string): string {
@@ -116,6 +122,7 @@ export function renderSingleCellOperatorConsolePage(
   const correction_review_interaction =
     options.correction_review_interaction;
   const state_transition_scaffold = options.state_transition_scaffold;
+  const task_focus_interaction = options.task_focus_interaction;
   const sections = {
     header: {
       section_key: "header",
@@ -175,6 +182,38 @@ export function renderSingleCellOperatorConsolePage(
         `Blocked work count: ${String(console_shell.objective_overview.blocked_work_count)}`,
         `Near-term execution pressure: ${console_shell.objective_overview.near_term_execution_pressure}`,
       ],
+    },
+    task_focus: {
+      section_key: "task_focus",
+      heading: "Task Focus",
+      body_lines: task_focus_interaction
+        ? [
+            `Interaction boundary: ${task_focus_interaction.execution_boundary}`,
+            `Current objective focus: ${task_focus_interaction.current_objective_focus.objective_label}`,
+            `Current work-item focus: ${task_focus_interaction.current_work_item_focus.work_item_label}`,
+            `Current work-item status: ${task_focus_interaction.current_work_item_focus.work_item_status}`,
+            ...task_focus_interaction.available_focus_targets.map(
+              (target) =>
+                `Available focus target: ${target.target_kind} -> ${target.display_label} [${target.support_level}] current=${String(target.is_current)}${target.status_label ? ` status=${target.status_label}` : ""}`
+            ),
+            ...task_focus_interaction.focus_switch_intent_seeds.map(
+              (seed) =>
+                `Focus-switch intent: ${seed.target_kind} -> ${seed.display_label} [${seed.support_level}]`
+            ),
+            ...task_focus_interaction.next_focus_preview_seeds.map(
+              (preview) =>
+                `Next-focus preview: ${preview.target_kind} -> objective=${preview.objective_focus_label}; work-item=${preview.work_item_focus_label}`
+            ),
+            ...task_focus_interaction.deferred_items.map(
+              (item) => `Deferred focus item: ${item}`
+            ),
+            ...task_focus_interaction.non_claims.map(
+              (claim) => `Non-claim: ${claim}`
+            ),
+          ]
+        : [
+            "Task-focus interaction scaffold is not assembled for this page.",
+          ],
     },
     work_item_execution_overview: {
       section_key: "work_item_execution_overview",
@@ -391,6 +430,7 @@ export function renderSingleCellOperatorConsolePage(
     ...(continuity_reload_presentation?.non_claims ?? []),
     ...(correction_review_interaction?.non_claims ?? []),
     ...(state_transition_scaffold?.non_claims ?? []),
+    ...(task_focus_interaction?.non_claims ?? []),
   ]);
   const html = [
     `<main data-route="${SINGLE_CELL_OPERATOR_CONSOLE_ROUTE}">`,
@@ -403,6 +443,7 @@ export function renderSingleCellOperatorConsolePage(
     render_section(sections.delivery),
     render_section(sections.crew_overview),
     render_section(sections.objective_overview),
+    render_section(sections.task_focus),
     render_section(sections.work_item_execution_overview),
     render_section(sections.correction_review),
     render_section(sections.state_transition),

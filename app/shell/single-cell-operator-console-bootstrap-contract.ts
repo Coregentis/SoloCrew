@@ -24,6 +24,9 @@ import type {
   SingleCellOperatorConsoleShell,
 } from "./single-cell-operator-console-shell-contract.ts";
 import type {
+  SingleCellTaskFocusInteraction,
+} from "./single-cell-task-focus-interaction-contract.ts";
+import type {
   SingleCellShellEntryPackage,
 } from "./single-cell-shell-entry-contract.ts";
 
@@ -71,6 +74,7 @@ export interface SingleCellOperatorConsoleBootstrap {
   continuity_reload_presentation: SingleCellContinuityReloadPresentation;
   correction_review_interaction: SingleCellCorrectionReviewInteraction;
   state_transition_scaffold: SingleCellOperatorConsoleStateTransitionScaffold;
+  task_focus_interaction: SingleCellTaskFocusInteraction;
   page: SingleCellOperatorConsolePage;
   projection_notes: string[];
   deferred_items: string[];
