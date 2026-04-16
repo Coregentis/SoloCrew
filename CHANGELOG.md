@@ -2,6 +2,8 @@
 
 ## 2026-04-16
 
+- added a bounded `v0.5-portfolio-secretary-beta` pause-state governance pack covering pause meaning, lawful reopening rules, and a formal beta-lane pause record
+- kept that governance wave behaviorally unchanged and explicitly out of scope for Wave 5, new pages, direct-control semantics, runtime expansion, and protocol-law promotion
 - added a bounded `v0.5-portfolio-secretary-beta` audit, gate, and closure pack for the landed non-executing Wave 1 through Wave 4 beta lane
 - kept that gate wave audit-only and explicitly out of scope for new pages, direct-control behavior, runtime expansion, and protocol-law promotion
 - added the bounded `v0.5-portfolio-secretary-beta` Wave 4 revision / return loop consistency hardening pass across the existing portfolio shell, handoff staging, and handoff review packet surfaces

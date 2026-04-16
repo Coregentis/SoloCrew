@@ -127,8 +127,9 @@ Goal:
 
 Current status:
 
-- implementation-begun line
-- scope-frozen with Wave 1 shell, Wave 2 handoff staging, Wave 3 handoff review packet, and Wave 4 revision-return consistency present
+- implementation-begun line with Wave 1 shell, Wave 2 handoff staging, Wave 3 handoff review packet, and Wave 4 revision-return consistency present
+- accepted as a bounded non-executing beta lane
+- currently paused for feature expansion pending explicit reopening governance
 - still below handoff execution and direct-control semantics
 
 Mandatory baseline:

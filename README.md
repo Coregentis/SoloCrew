@@ -69,6 +69,9 @@ It does mean the repo now has explicit version-line closure, multi-cell boundary
 The current `v0.5` line is `v0.5-portfolio-secretary-beta`.
 
 This repo has now begun bounded `v0.5` implementation with Waves 1 through 4 only.
+That current Wave 1 through Wave 4 line is accepted as a bounded non-executing
+beta lane and is now paused for feature expansion pending explicit reopening
+governance.
 
 That means `v0.5` currently includes:
 
