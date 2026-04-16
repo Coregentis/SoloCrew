@@ -120,6 +120,18 @@ test("[projection] management-object inspection stays product-projected when der
     inspection_projection.inspection_units.map((unit) => unit.object_kind),
     ["management_directive", "delivery_return", "approval_request"]
   );
+  assert.equal(
+    inspection_projection.inspection_units[0]?.product_object_type,
+    "runtime-backed-management-directive-projection"
+  );
+  assert.equal(
+    inspection_projection.inspection_units[0]?.phase_boundary,
+    "runtime_adjacent_detail"
+  );
+  assert.equal(
+    inspection_projection.inspection_units[0]?.product_projection?.projection_object_type,
+    "runtime-backed-management-directive-projection"
+  );
   assert.ok(
     inspection_projection.inspection_units.every(
       (unit) => unit.inspection_status === "present_non_executable"
@@ -133,6 +145,11 @@ test("[projection] management-object inspection stays product-projected when der
   assert.ok(
     inspection_projection.non_claims.includes(
       "no_shared_object_identity_with_runtime_private_record"
+    )
+  );
+  assert.ok(
+    inspection_projection.projection_notes.includes(
+      "Runtime-backed directive inspection stays distinct from compile-phase management directive objects."
     )
   );
 

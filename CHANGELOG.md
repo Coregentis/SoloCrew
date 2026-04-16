@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-04-16
+
+- hardened the `v0.4-multi-cell-foundation` management-directive inspection boundary so runtime-backed directive projections no longer reuse compile-phase directive semantics
+- kept that hardening wave inspect-only and explicitly out of scope for Secretary behavior, dispatch/orchestration controls, provider execution, and any new `v0.5` behavior
+
 ## 2026-04-15
 
 - added a bounded `v0.4-multi-cell-foundation` continuity inspection surface over the existing runtime-backed detail path

@@ -5,12 +5,12 @@ import {
 import {
   createDeliveryReturn,
   createEscalationApprovalRequest,
-  createManagementDirective,
   type DeliveryReturnStatus,
 } from "../objects/management-interface.ts";
 import type {
   CellDetailProjection,
   CellDetailManagementObjectStatus,
+  RuntimeBackedManagementDirectiveProjection,
 } from "../contracts/cell-detail-projection-contract.ts";
 
 const CELL_DETAIL_NON_CLAIMS = [
@@ -63,25 +63,44 @@ function derive_recency_hint(
   return `Runtime summary record is absent; detail inspection falls back to bounded scope truth only.`;
 }
 
+function project_runtime_backed_management_directive(
+  input: RuntimePrivateCellSummaryAdapterInput
+): RuntimeBackedManagementDirectiveProjection | undefined {
+  if (!input.management_directive_record) {
+    return undefined;
+  }
+
+  return {
+    projection_id:
+      `${input.cell_runtime_scope.object_id}:detail-management-directive`,
+    projection_object_type: "runtime-backed-management-directive-projection",
+    authority_boundary: "product_projection_only",
+    phase_boundary: "runtime_adjacent_detail",
+    upstream_origin: "runtime_private_record_projection",
+    upstream_record_type: "management-directive-record",
+    upstream_record_id: input.management_directive_record.object_id,
+    executable_actions_available: false,
+    cell_id: input.cell_runtime_scope.object_id,
+    priority: input.management_directive_record.directive_priority,
+    delivery_target: input.management_directive_record.directive_summary,
+    approval_posture: input.management_directive_record.approval_posture,
+    constraint_emphasis: [
+      ...(input.management_directive_record.constraint_tags ?? []),
+    ],
+    projection_notes: [
+      "Runtime-backed management directive detail is a downstream inspection projection over a runtime-private record.",
+      "This projection does not reuse compile-phase directive identity.",
+      "No executable directive submission path is exposed here.",
+    ],
+  };
+}
+
 export function assembleCellDetailProjectionFromRuntimeInput(
   input: RuntimePrivateCellSummaryAdapterInput
 ): CellDetailProjection {
   const summary_projection = adaptRuntimePrivateCellSummaryToProjection(input);
-  const management_directive = input.management_directive_record
-    ? createManagementDirective({
-        projection_id: `${input.cell_runtime_scope.object_id}:detail-management-directive`,
-        management_directive_id: input.management_directive_record.object_id,
-        cell_id: input.cell_runtime_scope.object_id,
-        priority: input.management_directive_record.directive_priority,
-        delivery_target: input.management_directive_record.directive_summary,
-        approval_posture: input.management_directive_record.approval_posture,
-        constraint_emphasis: input.management_directive_record.constraint_tags,
-        projection_notes: [
-          "Management directive detail is a downstream inspection projection over a runtime-private record.",
-          "No executable directive submission path is exposed here.",
-        ],
-      })
-    : undefined;
+  const management_directive =
+    project_runtime_backed_management_directive(input);
   const delivery_return = input.delivery_return_record
     ? createDeliveryReturn({
         projection_id: `${input.cell_runtime_scope.object_id}:detail-delivery-return`,

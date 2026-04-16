@@ -7,8 +7,10 @@ import type {
 import type {
   DeliveryReturn,
   EscalationApprovalRequest,
-  ManagementDirective,
 } from "../objects/management-interface.ts";
+import type {
+  RuntimeBackedManagementDirectiveProjection,
+} from "./cell-detail-projection-contract.ts";
 
 export type ManagementObjectInspectionScope =
   "management_object_inspection";
@@ -24,7 +26,7 @@ export type ManagementObjectInspectionStatus =
   | "present_non_executable"
   | "absent_non_executable";
 export type ManagementObjectInspectionUnitPhaseBoundary =
-  | "compile_phase_only"
+  | "runtime_adjacent_detail"
   | "runtime_adjacent_summary"
   | "status_only_absent";
 
@@ -32,7 +34,7 @@ export interface ManagementObjectInspectionUnit {
   inspection_unit_id: string;
   object_kind: ManagementObjectInspectionUnitKind;
   product_object_type:
-    | "management-directive"
+    | "runtime-backed-management-directive-projection"
     | "delivery-return"
     | "escalation-approval-request";
   related_cell_id: string;
@@ -43,7 +45,7 @@ export interface ManagementObjectInspectionUnit {
   summary_value: string;
   recency_hint: string;
   product_projection?:
-    | ManagementDirective
+    | RuntimeBackedManagementDirectiveProjection
     | DeliveryReturn
     | EscalationApprovalRequest;
   upstream_refs: ProjectionUpstreamRef[];

@@ -157,6 +157,14 @@ test("[app] management-object inspection page exposes no executable actions", ()
 
   assert.equal(page.executable_management_actions_present, false);
   assert.equal(page.sections.inspection_units.length, 3);
+  assert.equal(
+    page.sections.inspection_units[0]?.product_object_type,
+    "runtime-backed-management-directive-projection"
+  );
+  assert.equal(
+    page.sections.inspection_units[0]?.phase_boundary,
+    "runtime_adjacent_detail"
+  );
   assert.ok(
     page.sections.inspection_units.every(
       (unit) => unit.executable_actions_available === false

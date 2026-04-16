@@ -69,7 +69,7 @@ function derive_status(
 
 function derive_phase_boundary(
   object_present: boolean,
-  present_phase_boundary: "compile_phase_only" | "runtime_adjacent_summary"
+  present_phase_boundary: "runtime_adjacent_detail" | "runtime_adjacent_summary"
 ): ManagementObjectInspectionUnitPhaseBoundary {
   return object_present ? present_phase_boundary : "status_only_absent";
 }
@@ -86,11 +86,11 @@ export function assembleManagementObjectInspectionProjection(
 
   const inspection_units: ManagementObjectInspectionUnit[] = [
     management_directive
-      ? {
+        ? {
           inspection_unit_id:
             `${detail_projection.cell_identity.cell_id}:management_directive:inspection-unit`,
           object_kind: "management_directive",
-          product_object_type: "management-directive",
+          product_object_type: "runtime-backed-management-directive-projection",
           related_cell_id: detail_projection.cell_identity.cell_id,
           inspection_status: derive_status(true),
           phase_boundary: derive_phase_boundary(
@@ -114,7 +114,7 @@ export function assembleManagementObjectInspectionProjection(
         }
       : derive_absent_unit(detail_projection, {
           object_kind: "management_directive",
-          product_object_type: "management-directive",
+          product_object_type: "runtime-backed-management-directive-projection",
           summary_label: "Directive summary",
           absent_note:
             "No upstream management-directive-record is currently projected into this detail surface.",
@@ -227,6 +227,7 @@ export function assembleManagementObjectInspectionProjection(
     ]),
     projection_notes: [
       "Management-object inspection is a dedicated downstream product projection over the existing cell-detail projection path.",
+      "Runtime-backed directive inspection stays distinct from compile-phase management directive objects.",
       "Inspection units remain read-only, non-executable, and explicitly below Secretary beta.",
     ],
   };

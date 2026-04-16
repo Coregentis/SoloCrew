@@ -157,6 +157,16 @@ test("[app] cell detail page exposes no executable management actions", () => {
     "present_non_executable"
   );
   assert.equal(
+    page.sections.management_object_family.management_directive
+      ?.projection_object_type,
+    "runtime-backed-management-directive-projection"
+  );
+  assert.equal(
+    page.sections.management_object_family.management_directive
+      ?.phase_boundary,
+    "runtime_adjacent_detail"
+  );
+  assert.equal(
     page.sections.management_object_family.delivery_return_status,
     "present_non_executable"
   );

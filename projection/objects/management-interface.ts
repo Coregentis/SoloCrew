@@ -81,6 +81,7 @@ export interface CreateManagementDirectiveInput {
 export function createManagementDirective(
   input: CreateManagementDirectiveInput
 ): ManagementDirective {
+  // Compile-only directives remain distinct from runtime-backed inspection projections.
   return {
     ...create_management_envelope({
       projection_id: input.projection_id,

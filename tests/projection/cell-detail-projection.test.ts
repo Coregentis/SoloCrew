@@ -117,6 +117,31 @@ test("[projection] cell detail projection stays product-projected when derived f
     "present_non_executable"
   );
   assert.equal(
+    detail_projection.management_object_family.management_directive
+      ?.projection_object_type,
+    "runtime-backed-management-directive-projection"
+  );
+  assert.equal(
+    detail_projection.management_object_family.management_directive
+      ?.phase_boundary,
+    "runtime_adjacent_detail"
+  );
+  assert.equal(
+    detail_projection.management_object_family.management_directive
+      ?.upstream_origin,
+    "runtime_private_record_projection"
+  );
+  assert.equal(
+    detail_projection.management_object_family.management_directive
+      ?.upstream_record_type,
+    "management-directive-record"
+  );
+  assert.equal(
+    detail_projection.management_object_family.management_directive
+      ?.executable_actions_available,
+    false
+  );
+  assert.equal(
     detail_projection.management_object_family.delivery_return_status,
     "present_non_executable"
   );
@@ -131,6 +156,14 @@ test("[projection] cell detail projection stays product-projected when derived f
   assert.ok(
     detail_projection.non_claims.includes(
       "no_shared_object_identity_with_runtime_private_record"
+    )
+  );
+  assert.ok(
+    detail_projection.management_object_family.management_directive?.projection_notes.some(
+      (note) =>
+        note.includes(
+          "does not reuse compile-phase directive identity"
+        )
     )
   );
 
