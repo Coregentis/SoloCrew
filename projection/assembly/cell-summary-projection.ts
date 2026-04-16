@@ -57,6 +57,7 @@ export function assembleCellSummaryProjection(
     upward_runtime_authority: "forbidden",
     upward_protocol_authority: "forbidden",
     multi_cell_foundation_scope: "read_inspect_only",
+    source_mode: "single_cell_shell_composition",
     summary_projection_is_runtime_law: false,
     secretary_behavior_available: false,
     provider_execution_available: false,
@@ -68,6 +69,7 @@ export function assembleCellSummaryProjection(
       ...memory_and_continuity.truth_sources,
       ...truth_boundary_view.truth_sources,
     ]),
+    upstream_refs: [],
     cell_summary_card: summary_card,
     objective_status_summary:
       `${summary_card.current_objective_headline} (${summary_card.active_work_count} active / ${summary_card.blocked_work_count} blocked)`,

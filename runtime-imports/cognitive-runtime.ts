@@ -53,6 +53,11 @@ export type {
   PreferenceProfileRecord,
 } from "../../Cognitive_OS/runtime/state/preference-store.ts";
 
+// runtime core truth
+export type {
+  RuntimeObjectRecord,
+} from "../../Cognitive_OS/runtime/core/runtime-types.ts";
+
 // learning
 export {
   InMemoryObjectiveAnchor,
@@ -106,6 +111,7 @@ export type {
 } from "../../Cognitive_OS/runtime/execution/execution-bridge.ts";
 
 export const COGNITIVE_RUNTIME_ALLOWED_SURFACES = [
+  "runtime/core/runtime-types.ts",
   "runtime/lifecycle/worker-state-machine.ts",
   "runtime/lifecycle/worker-lifecycle.ts",
   "runtime/state/state-store-port.ts",

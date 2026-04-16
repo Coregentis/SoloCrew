@@ -1,5 +1,8 @@
 import type { CellSummaryCard } from "../objects/management-interface.ts";
 import type {
+  ProjectionUpstreamRef,
+} from "./projection-object-types.ts";
+import type {
   SingleCellViewTruthSource,
 } from "./single-cell-view-model-contract.ts";
 
@@ -10,6 +13,12 @@ export type CellSummaryProjectionScope = "cell_summary_projection";
 export type CellSummaryProjectionReadiness =
   | "steady"
   | "attention_required";
+export type CellSummaryProjectionSourceMode =
+  | "single_cell_shell_composition"
+  | "upstream_runtime_private_records";
+export type CellSummaryProjectionTruthSource =
+  | SingleCellViewTruthSource
+  | "upstream_runtime_private_truth";
 
 export interface CellSummaryProjection {
   summary_projection_id: string;
@@ -19,13 +28,15 @@ export interface CellSummaryProjection {
   upward_runtime_authority: "forbidden";
   upward_protocol_authority: "forbidden";
   multi_cell_foundation_scope: "read_inspect_only";
+  source_mode: CellSummaryProjectionSourceMode;
   summary_projection_is_runtime_law: false;
   secretary_behavior_available: false;
   provider_execution_available: false;
   channel_entry_available: false;
   broad_kpi_cockpit_available: false;
   runtime_complete_orchestration_available: false;
-  truth_sources: SingleCellViewTruthSource[];
+  truth_sources: CellSummaryProjectionTruthSource[];
+  upstream_refs: ProjectionUpstreamRef[];
   cell_summary_card: CellSummaryCard;
   objective_status_summary: string;
   readiness_signal: CellSummaryProjectionReadiness;

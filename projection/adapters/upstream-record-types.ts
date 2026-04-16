@@ -4,6 +4,7 @@ import type {
   ObjectiveRecord,
   MemoryProfileRecord,
   PreferenceProfileRecord,
+  RuntimeObjectRecord,
 } from "../../runtime-imports/cognitive-runtime.ts";
 
 export type {
@@ -12,6 +13,82 @@ export type {
   MemoryProfileRecord,
   PreferenceProfileRecord,
 };
+
+export interface CellRuntimeScopeRecord extends RuntimeObjectRecord {
+  object_type: "cell-runtime-scope";
+  authority_class: "coregentis_private_runtime";
+  primary_layer: "organization_runtime_layer";
+  status: "forming" | "active" | "paused" | "archived";
+  project_id: string;
+  group_id?: string;
+  scope_name: string;
+  scope_summary?: string;
+  worker_ids?: string[];
+  objective_ids?: string[];
+  summary_record_id?: string;
+  scope_mode?: "single_operator_bounded" | "multi_scope_bounded";
+}
+
+export interface CellSummaryRuntimeRecord extends RuntimeObjectRecord {
+  object_type: "cell-summary-runtime-record";
+  authority_class: "coregentis_private_runtime";
+  primary_layer: "organization_runtime_layer";
+  status: "draft" | "current" | "stale" | "archived";
+  project_id: string;
+  cell_runtime_scope_id: string;
+  source_object_ids?: string[];
+  summary_headline: string;
+  summary_delivery_posture: "steady" | "attention" | "blocked";
+  active_work_item_count: number;
+  blocked_work_item_count: number;
+  continuity_hint: string;
+  summary_mode: "bounded_runtime_private";
+}
+
+export interface ManagementDirectiveRuntimeRecord extends RuntimeObjectRecord {
+  object_type: "management-directive-record";
+  authority_class: "coregentis_private_runtime";
+  primary_layer: "organization_runtime_layer";
+  status: "draft" | "active" | "superseded" | "closed";
+  project_id: string;
+  cell_runtime_scope_id: string;
+  target_objective_id?: string;
+  directive_summary: string;
+  directive_priority: "focus_now" | "stabilize" | "review_first";
+  approval_posture:
+    | "operator_required"
+    | "bounded_autonomy"
+    | "escalate_on_stop";
+  constraint_tags?: string[];
+}
+
+export interface DeliveryReturnRuntimeRecord extends RuntimeObjectRecord {
+  object_type: "delivery-return-record";
+  authority_class: "coregentis_private_runtime";
+  primary_layer: "organization_runtime_layer";
+  status: "in_progress" | "ready_for_review" | "blocked" | "returned" | "archived";
+  project_id: string;
+  cell_runtime_scope_id: string;
+  source_objective_id?: string;
+  completed_summary: string;
+  blocked_summary: string;
+  next_directive_needed: boolean;
+  requested_follow_up?: string;
+}
+
+export interface ApprovalRequestRuntimeRecord extends RuntimeObjectRecord {
+  object_type: "approval-request-record";
+  authority_class: "coregentis_private_runtime";
+  primary_layer: "organization_runtime_layer";
+  status: "pending" | "resolved" | "withdrawn" | "archived";
+  project_id: string;
+  cell_runtime_scope_id: string;
+  target_objective_id?: string;
+  request_kind: "approval" | "escalation";
+  request_summary: string;
+  requested_decision: string;
+  urgency: "normal" | "high" | "critical";
+}
 
 export interface AgentGroupRecord extends WorkforceStateRecord {
   object_type: "agent-group";
@@ -88,6 +165,36 @@ export function is_review_cycle_record(
   record: WorkforceStateRecord
 ): record is ReviewCycleRecord {
   return record.object_type === "review-cycle";
+}
+
+export function is_cell_runtime_scope_record(
+  record: RuntimeObjectRecord
+): record is CellRuntimeScopeRecord {
+  return record.object_type === "cell-runtime-scope";
+}
+
+export function is_cell_summary_runtime_record(
+  record: RuntimeObjectRecord
+): record is CellSummaryRuntimeRecord {
+  return record.object_type === "cell-summary-runtime-record";
+}
+
+export function is_management_directive_runtime_record(
+  record: RuntimeObjectRecord
+): record is ManagementDirectiveRuntimeRecord {
+  return record.object_type === "management-directive-record";
+}
+
+export function is_delivery_return_runtime_record(
+  record: RuntimeObjectRecord
+): record is DeliveryReturnRuntimeRecord {
+  return record.object_type === "delivery-return-record";
+}
+
+export function is_approval_request_runtime_record(
+  record: RuntimeObjectRecord
+): record is ApprovalRequestRuntimeRecord {
+  return record.object_type === "approval-request-record";
 }
 
 export function list_unique_strings(values: Array<string | undefined>): string[] {

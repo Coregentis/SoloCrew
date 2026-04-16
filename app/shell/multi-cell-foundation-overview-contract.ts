@@ -1,11 +1,31 @@
 import type {
   CellSummaryProjection,
 } from "../../projection/contracts/cell-summary-projection-contract.ts";
+import type {
+  ApprovalRequestRuntimeRecord,
+  CellRuntimeScopeRecord,
+  CellSummaryRuntimeRecord,
+  DeliveryReturnRuntimeRecord,
+  ManagementDirectiveRuntimeRecord,
+} from "../../projection/adapters/upstream-record-types.ts";
+
+export type MultiCellFoundationManagementObjectStatus =
+  | "contract_frozen_non_executable"
+  | "runtime_record_present_non_executable"
+  | "runtime_record_absent_non_executable";
 
 export interface MultiCellFoundationManagementObjectFamilyStatus {
-  management_directive: "contract_frozen_non_executable";
-  delivery_return: "contract_frozen_non_executable";
-  approval_request: "contract_frozen_non_executable";
+  management_directive: MultiCellFoundationManagementObjectStatus;
+  delivery_return: MultiCellFoundationManagementObjectStatus;
+  approval_request: MultiCellFoundationManagementObjectStatus;
+}
+
+export interface MultiCellFoundationRuntimeCellInput {
+  cell_runtime_scope: CellRuntimeScopeRecord;
+  cell_summary_runtime_record?: CellSummaryRuntimeRecord;
+  management_directive_record?: ManagementDirectiveRuntimeRecord;
+  delivery_return_record?: DeliveryReturnRuntimeRecord;
+  approval_request_record?: ApprovalRequestRuntimeRecord;
 }
 
 export interface MultiCellFoundationTruthBoundary {

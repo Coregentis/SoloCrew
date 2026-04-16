@@ -61,6 +61,7 @@ This repo now contains the first bounded `v0.4` implementation surface:
 
 - one read/inspect-oriented multi-cell foundation overview page
 - bounded per-cell summary projections derived from existing single-cell product truth
+- bounded downstream consumption of `Cognitive_OS` runtime-private workforce surfaces for multi-cell overview summaries
 
 It does not mean `v0.4` is fully implemented.
 It does not mean Secretary beta, portfolio orchestration, provider execution, or channel behavior now exist in this repo.

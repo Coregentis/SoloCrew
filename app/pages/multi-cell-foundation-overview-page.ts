@@ -51,6 +51,7 @@ function render_summary_card(summary: CellSummaryProjection): string {
   return [
     `<article data-cell-id="${escape_html(summary.cell_summary_card.cell_id)}">`,
     `<h3>${escape_html(summary.cell_summary_card.cell_name)}</h3>`,
+    `<p>Source mode: ${escape_html(summary.source_mode)}</p>`,
     `<p>Objective: ${escape_html(summary.cell_summary_card.current_objective_headline)}</p>`,
     `<p>Delivery posture: ${escape_html(summary.cell_summary_card.delivery_posture)}</p>`,
     `<p>Readiness: ${escape_html(summary.readiness_signal)}</p>`,
