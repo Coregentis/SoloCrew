@@ -2,6 +2,8 @@
 
 ## 2026-04-15
 
+- added a bounded `v0.4-multi-cell-foundation` continuity inspection surface over the existing runtime-backed detail path
+- kept that continuity wave inspect-only and explicitly out of scope for recovery workflow execution, dispatch/orchestration controls, provider execution, and runtime-complete truth ownership
 - added a bounded `v0.4-multi-cell-foundation` management-object inspection surface over the existing runtime-backed detail path
 - kept that management-object wave inspect-only and explicitly out of scope for approvals workflow execution, dispatch/orchestration controls, provider execution, and runtime-complete truth ownership
 - added a bounded `v0.4-multi-cell-foundation` cell-detail inspection surface over the existing runtime-backed summary path

@@ -1,0 +1,127 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+
+import {
+  renderContinuityInspectionPage,
+} from "../../app/pages/continuity-inspection-page.ts";
+import {
+  buildContinuityInspectionRoute,
+  composeContinuityInspectionViewShellFromRuntimeInput,
+} from "../../app/shell/continuity-inspection-view.ts";
+import {
+  SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
+} from "../../projection/contracts/structural-boundary.ts";
+
+function create_runtime_input() {
+  return {
+    cell_runtime_scope: {
+      object_id: "cell-scope-01",
+      object_type: "cell-runtime-scope" as const,
+      authority_class: "coregentis_private_runtime" as const,
+      primary_layer: "organization_runtime_layer" as const,
+      status: "active" as const,
+      project_id: "project-01",
+      scope_name: "Runtime Delivery Cell",
+      scope_summary: "Bounded runtime scope for delivery work.",
+      scope_mode: "multi_scope_bounded" as const,
+      temporal: {},
+      mutation: {},
+      lineage: {},
+      governance: {},
+    },
+    cell_summary_runtime_record: {
+      object_id: "cell-summary-01",
+      object_type: "cell-summary-runtime-record" as const,
+      authority_class: "coregentis_private_runtime" as const,
+      primary_layer: "organization_runtime_layer" as const,
+      status: "current" as const,
+      project_id: "project-01",
+      cell_runtime_scope_id: "cell-scope-01",
+      summary_headline: "Ship one bounded runtime-backed review.",
+      summary_delivery_posture: "attention" as const,
+      active_work_item_count: 2,
+      blocked_work_item_count: 1,
+      continuity_hint: "Continuity remains bounded to runtime-private summary truth.",
+      summary_mode: "bounded_runtime_private" as const,
+      temporal: {},
+      mutation: {},
+      lineage: {},
+      governance: {},
+    },
+  };
+}
+
+test("[app] continuity inspection page stays inspect-only and below secretary beta", () => {
+  const inspection_shell =
+    composeContinuityInspectionViewShellFromRuntimeInput(
+      create_runtime_input()
+    );
+  const page = renderContinuityInspectionPage(inspection_shell);
+
+  assert.equal(
+    page.route_path,
+    buildContinuityInspectionRoute("cell-scope-01")
+  );
+  assert.equal(page.page_kind, "continuity_inspection_page");
+  assert.equal(
+    page.page_scope,
+    "multi_cell_foundation_continuity_inspection_only"
+  );
+  assert.equal(
+    page.operator_surface,
+    "multi_cell_foundation_continuity_inspection"
+  );
+  assert.equal(page.actual_provider_actions_present, false);
+  assert.equal(page.actual_channel_entry_present, false);
+  assert.equal(page.portfolio_dispatch_behavior_available, false);
+  assert.equal(page.secretary_behavior_available, false);
+  assert.equal(page.broad_kpi_cockpit_available, false);
+  assert.equal(page.runtime_complete_orchestration_available, false);
+  assert.equal(page.executable_continuity_actions_present, false);
+
+  assert.match(page.html, /Continuity Inspection/);
+  assert.match(page.html, /Read mode: inspect_only/);
+  assert.match(page.html, /Continuity inspection remains read-only and non-executable/);
+  assert.match(page.html, /Continuity projection is runtime law: false/);
+
+  const boundary_targets = [
+    page,
+    page.sections.header,
+    page.sections.continuity_snapshot,
+    page.sections.bounded_knowledge,
+    page.sections.truth_boundary,
+    inspection_shell.continuity_inspection_projection,
+  ];
+
+  for (const target of boundary_targets) {
+    for (const field_name of SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS) {
+      assert.equal(field_name in target, false);
+    }
+  }
+});
+
+test("[app] continuity inspection page exposes no executable continuity actions", () => {
+  const inspection_shell =
+    composeContinuityInspectionViewShellFromRuntimeInput(
+      create_runtime_input()
+    );
+  const page = renderContinuityInspectionPage(inspection_shell);
+
+  assert.equal(page.executable_continuity_actions_present, false);
+  assert.equal(
+    page.sections.continuity_snapshot.continuity_visibility,
+    "runtime_backed_visible"
+  );
+  assert.equal(
+    page.sections.continuity_snapshot.blocked_signal,
+    "blocked_attention_visible"
+  );
+  assert.match(page.html, /Continuity state: blocked_visible/);
+  assert.match(page.html, /Known input: runtime_private_summary_record_presence/);
+  assert.match(page.html, /Unknown input: recovery_workflow_execution/);
+  assert.doesNotMatch(page.html, /<button\b/);
+  assert.doesNotMatch(page.html, /<form\b/);
+  assert.doesNotMatch(page.html, /restore now/i);
+  assert.doesNotMatch(page.html, /retry now/i);
+  assert.doesNotMatch(page.html, /dispatch action/i);
+});

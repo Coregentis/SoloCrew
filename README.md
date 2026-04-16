@@ -62,11 +62,12 @@ This repo now contains the first bounded `v0.4` implementation surface:
 - one read/inspect-oriented multi-cell foundation overview page
 - one bounded per-cell inspection page over the same downstream runtime-backed input path
 - one bounded management-object inspection page over the same downstream detail path
+- one bounded continuity inspection page over the same downstream detail path
 - bounded per-cell summary projections derived from existing single-cell product truth
 - bounded downstream consumption of `Cognitive_OS` runtime-private workforce surfaces for multi-cell overview summaries
 
 It does not mean `v0.4` is fully implemented.
-It does not mean Secretary beta, approval workflow execution, portfolio orchestration, provider execution, or channel behavior now exist in this repo.
+It does not mean Secretary beta, recovery workflow execution, approval workflow execution, portfolio orchestration, provider execution, or channel behavior now exist in this repo.
 
 ## Version Semantics
 
