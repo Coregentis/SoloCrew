@@ -18,6 +18,9 @@ The Secretary-to-cell handoff contract must allow the Secretary beta layer to pa
 - runtime-private truth into product law
 - product-layer semantics into protocol law
 
+The cell remains the bounded execution locus in product space.
+The Secretary beta layer does not directly operate the cell as a workflow engine.
+
 ## Lawful Handoff Content
 
 A lawful handoff may include bounded product-facing context such as:
@@ -33,9 +36,13 @@ A lawful handoff may include bounded product-facing context such as:
 
 The handoff is not:
 
+- approval execution
+- rejection execution
+- dispatch execution
 - direct runtime mutation authority
 - direct provider execution authority
 - direct channel authority
+- direct runtime control
 - protocol-law evidence of new envelope adoption
 - a collapse of Secretary and cell into one role
 
@@ -70,6 +77,9 @@ Every lawful Secretary-to-cell handoff in `v0.5` must preserve that:
 - the handoff does not itself become runtime law
 - the handoff does not itself become protocol law
 - the selected cell remains a distinct product surface
+- the handoff is not approval execution
+- the handoff is not dispatch execution
+- the handoff is not direct runtime control
 
 ## Deferred Beyond This Contract
 

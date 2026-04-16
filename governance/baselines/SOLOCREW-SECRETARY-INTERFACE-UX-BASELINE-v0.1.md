@@ -59,6 +59,28 @@ The first lawful Secretary beta UX may initiate only bounded product-level actio
 These are beta-level product initiations only.
 They are not direct execution rights.
 
+## Visible Controls vs Forbidden Controls
+
+Visible controls in `v0.5` may include only:
+
+- open portfolio
+- select cell
+- inspect status shelf
+- inspect queue or review shelf
+- inspect management objects
+- initiate bounded handoff
+- frame review or management posture
+
+Forbidden controls in `v0.5` explicitly include:
+
+- approve
+- reject
+- dispatch
+- execute
+- run provider
+- publish or send
+- direct runtime mutation
+
 ## What Still Requires Handoff
 
 The following must still require bounded downstream handoff rather than direct Secretary execution:
@@ -75,6 +97,9 @@ The following must still require bounded downstream handoff rather than direct S
 The first lawful Secretary beta UX must not imply:
 
 - full runtime-complete portfolio control
+- direct approve or reject execution
+- direct dispatch execution
+- direct execute control
 - direct provider execution
 - direct channel operation
 - enterprise team collaboration

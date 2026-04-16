@@ -133,10 +133,10 @@ Current status:
 
 Mandatory baseline:
 
-- `Management Directive` surface
+- `Management Directive` visibility and bounded handoff posture
 - `Cell Summary Card` surface
-- `Escalation / Approval Request` flow
-- `Delivery Return` flow
+- `Escalation / Approval Request` visibility and bounded handoff posture
+- `Delivery Return` visibility and bounded review posture
 - bounded portfolio and Secretary beta shape
 
 Explicitly deferred:

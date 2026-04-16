@@ -52,11 +52,38 @@ The goal of `v0.5-portfolio-secretary-beta` is to introduce the first bounded to
 The lawful `v0.5` beta shape is intentionally bounded:
 
 - the Secretary may see a portfolio-level product projection of multiple cells
-- the Secretary may initiate bounded management or review posture changes in product space
+- the Secretary may frame or stage bounded management and review posture in product space
 - the Secretary may hand off bounded context into a selected cell
 - the Secretary does not become runtime authority
 - the Secretary does not become protocol authority
 - the portfolio layer remains beta-level and bounded, not a full operating platform
+
+`v0.5` Secretary beta is handoff-first and posture-first, not direct control-first.
+
+## Allowed In `v0.5`
+
+The following are allowed in `v0.5-portfolio-secretary-beta`:
+
+- bounded portfolio-level visibility
+- bounded cell selection
+- bounded queue and review visibility
+- bounded management posture visibility
+- bounded review posture visibility
+- bounded Secretary-to-cell handoff initiation
+- bounded staging of management objects in product space
+
+## Forbidden In `v0.5`
+
+The following are not authorized by `v0.5-portfolio-secretary-beta`:
+
+- direct approve control
+- direct reject control
+- direct dispatch control
+- direct execute control
+- direct provider or channel execution
+- workflow-engine ownership
+- runtime authority ownership
+- protocol authority ownership
 
 ## Beyond v0.4
 
@@ -91,6 +118,10 @@ If future `v0.5` implementation needs stronger runtime guarantees than the curre
 - runtime authority ownership inside SoloCrew
 - protocol promotion
 - `v1.0` platform completion
+- direct approval execution
+- direct rejection execution
+- direct dispatch execution
+- direct execute behavior from the Secretary surface
 
 ## Cross-Repo Boundary Rule
 

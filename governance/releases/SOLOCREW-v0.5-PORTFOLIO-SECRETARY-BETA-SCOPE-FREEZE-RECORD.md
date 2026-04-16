@@ -31,6 +31,8 @@ So the next coherent step is to freeze what bounded Secretary and portfolio beta
 - bounded Secretary-to-cell handoff semantics
 - the first beta-level management interface beyond inspection-only surfaces
 
+`v0.5` remains handoff-first and posture-first, not direct-control-first.
+
 ## Accepted Deferred Boundaries
 
 The following remain explicitly deferred even after this freeze:
@@ -61,6 +63,9 @@ Any future `v0.5` implementation must not silently exceed this freeze by:
 
 - treating Secretary beta as runtime authority
 - treating portfolio beta as full operating-platform behavior
+- allowing direct approve or reject execution controls
+- allowing direct dispatch controls
+- allowing direct execute controls
 - collapsing product projections into runtime-private object identity
 - implying protocol promotion from downstream product use
 - smuggling `v1.0` semantics into beta-level work

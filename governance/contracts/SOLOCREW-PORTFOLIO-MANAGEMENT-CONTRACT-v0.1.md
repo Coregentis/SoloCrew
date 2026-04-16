@@ -13,7 +13,7 @@ The portfolio-management contract must support:
 - cell list and selection semantics
 - portfolio-level state summary semantics
 - bounded management object visibility
-- bounded queue, review, and approval posture semantics
+- bounded queue, review, and approval posture visibility and staging semantics
 
 ## Cell List And Selection Semantics
 
@@ -62,6 +62,10 @@ Portfolio management may carry bounded posture semantics such as:
 - blocked attention
 - ready for bounded handoff
 
+In `v0.5`, approval posture is visible or staged product meaning only.
+In `v0.5`, review posture is visible or staged product meaning only.
+Queue semantics are product-facing organization aids only.
+None of these imply executable authority.
 These are posture semantics, not workflow-engine semantics.
 
 ## Authority Boundary
@@ -73,12 +77,17 @@ Portfolio management in SoloCrew:
 - may not claim runtime authority ownership
 - may not claim protocol authority ownership
 
+The portfolio-management contract is non-executing and non-authoritative over runtime behavior.
+
 ## Deferred Beyond This Contract
 
 This contract does not include:
 
 - full dispatch engine behavior
 - approval workflow execution
+- direct approve or reject execution
+- direct dispatch execution
+- direct execute behavior
 - enterprise organization controls
 - multi-tenant runtime semantics
 - broad KPI cockpit behavior
