@@ -2,6 +2,8 @@
 
 ## 2026-04-16
 
+- added a bounded `v0.5-portfolio-secretary-beta` implementation planning pack covering wave sequence, upstream dependency mapping, test/gate planning, and directory task mapping
+- kept that planning wave docs-only and explicitly out of scope for implementation, runtime changes, and any widened `v0.5` behavior
 - tightened the `v0.5-portfolio-secretary-beta` Secretary control boundary so the freeze now reads as handoff-first and posture-first, not direct-control-first
 - kept that tightening wave docs-only and explicitly out of scope for implementation, new features, and any widened `v0.5` behavior
 - froze `v0.5-portfolio-secretary-beta` as the next planned SoloCrew line through a bounded scope, UX, contract, acceptance-gate, non-goal, and scope-freeze governance pack
