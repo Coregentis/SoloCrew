@@ -171,7 +171,7 @@ test("[projection] portfolio secretary shell stays top-level product projection 
   assert.equal(projection.provider_execution_available, false);
   assert.equal(projection.channel_entry_available, false);
   assert.equal(projection.workflow_engine_behavior_available, false);
-  assert.equal(projection.handoff_creation_available, false);
+  assert.equal(projection.handoff_creation_available, true);
   assert.equal(
     projection.selection.selection_mode,
     "bounded_navigation_only"
@@ -206,6 +206,14 @@ test("[projection] portfolio secretary shell stays top-level product projection 
   );
   assert.ok(
     projection.non_claims.includes("no_direct_dispatch_control")
+  );
+  assert.ok(
+    projection.deferred_items.includes("handoff_execution")
+  );
+  assert.ok(
+    projection.projection_notes.includes(
+      "Wave 2 adds bounded handoff staging visibility only; direct control and handoff execution remain deferred."
+    )
   );
 
   const boundary_targets = [

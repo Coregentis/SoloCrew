@@ -128,8 +128,8 @@ Goal:
 Current status:
 
 - implementation-begun line
-- scope-frozen and Wave 1 shell present
-- still below handoff creation and direct-control semantics
+- scope-frozen with Wave 1 shell and Wave 2 handoff staging present
+- still below handoff execution and direct-control semantics
 
 Mandatory baseline:
 

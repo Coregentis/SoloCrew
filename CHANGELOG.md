@@ -2,6 +2,8 @@
 
 ## 2026-04-16
 
+- added the bounded `v0.5-portfolio-secretary-beta` Wave 2 Secretary-to-cell handoff staging surface inside the existing portfolio shell context
+- kept that Wave 2 implementation staged-only and explicitly out of scope for direct approve, reject, dispatch, execute, provider, or channel behavior
 - added the first bounded `v0.5-portfolio-secretary-beta` Wave 1 Secretary / Portfolio shell above the current `v0.4` surface family
 - kept that Wave 1 implementation non-executing and explicitly out of scope for direct approve, reject, dispatch, execute, provider, or channel behavior
 - added a bounded `v0.5-portfolio-secretary-beta` implementation planning pack covering wave sequence, upstream dependency mapping, test/gate planning, and directory task mapping

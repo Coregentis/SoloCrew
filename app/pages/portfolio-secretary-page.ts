@@ -24,7 +24,7 @@ export interface PortfolioSecretaryPage {
   broad_kpi_cockpit_available: false;
   runtime_complete_orchestration_available: false;
   workflow_engine_behavior_available: false;
-  handoff_creation_available: false;
+  handoff_creation_available: true;
   sections: {
     header: {
       read_mode: "non_executing";
@@ -61,6 +61,7 @@ function render_navigation_link(
     `<p>Detail route: ${escape_html(link.detail_route)}</p>`,
     `<p>Management route: ${escape_html(link.management_route)}</p>`,
     `<p>Continuity route: ${escape_html(link.continuity_route)}</p>`,
+    `<p>Handoff route: ${escape_html(link.handoff_route)}</p>`,
     "</article>",
   ].join("");
 }
@@ -99,7 +100,7 @@ export function renderPortfolioSecretaryPage(
       sections.header.foundation_overview_route
     )}</p>`,
     "<p>Secretary beta is handoff-first and posture-first.</p>",
-    "<p>Shell-first beta only. Direct-control semantics remain unavailable.</p>",
+    "<p>Shell and staging beta only. Direct-control semantics remain unavailable.</p>",
     ...sections.header.projection_notes.map(
       (note) => `<p>Projection note: ${escape_html(note)}</p>`
     ),
@@ -123,6 +124,9 @@ export function renderPortfolioSecretaryPage(
           )}</p>`,
           `<p>Selected continuity route: ${escape_html(
             sections.navigation.selected_cell_routes.continuity_route
+          )}</p>`,
+          `<p>Selected handoff route: ${escape_html(
+            sections.navigation.selected_cell_routes.handoff_route
           )}</p>`,
         ]
       : []),
@@ -195,7 +199,7 @@ export function renderPortfolioSecretaryPage(
     broad_kpi_cockpit_available: false,
     runtime_complete_orchestration_available: false,
     workflow_engine_behavior_available: false,
-    handoff_creation_available: false,
+    handoff_creation_available: true,
     sections,
     html,
   };

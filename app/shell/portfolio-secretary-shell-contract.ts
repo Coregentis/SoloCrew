@@ -9,6 +9,7 @@ export interface PortfolioSecretaryNavigationLink {
   detail_route: string;
   management_route: string;
   continuity_route: string;
+  handoff_route: string;
 }
 
 export interface PortfolioSecretaryShell {
@@ -30,7 +31,7 @@ export interface PortfolioSecretaryShell {
   broad_kpi_cockpit_available: false;
   runtime_complete_orchestration_available: false;
   workflow_engine_behavior_available: false;
-  handoff_creation_available: false;
+  handoff_creation_available: true;
   portfolio_secretary_projection: PortfolioSecretaryShellProjection;
   navigation: {
     portfolio_route: "/portfolio";
@@ -41,6 +42,7 @@ export interface PortfolioSecretaryShell {
       detail_route: string;
       management_route: string;
       continuity_route: string;
+      handoff_route: string;
     };
   };
   truth_boundary: {

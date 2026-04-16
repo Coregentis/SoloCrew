@@ -2,12 +2,14 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
-  PORTFOLIO_SECRETARY_ROUTE,
-  composePortfolioSecretaryShellFromRuntimeInputs,
-} from "../../app/shell/portfolio-secretary-shell.ts";
+  composeMultiCellFoundationOverviewShellFromRuntimeInputs,
+} from "../../app/shell/multi-cell-foundation-overview.ts";
 import {
-  renderPortfolioSecretaryPage,
-} from "../../app/pages/portfolio-secretary-page.ts";
+  assemblePortfolioSecretaryShellProjection,
+} from "../../projection/assembly/portfolio-secretary-shell.ts";
+import {
+  assembleSecretaryHandoffStagingProjection,
+} from "../../projection/assembly/secretary-handoff-staging.ts";
 import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
 } from "../../projection/contracts/structural-boundary.ts";
@@ -142,81 +144,79 @@ function create_runtime_inputs() {
   ];
 }
 
-test("[app] portfolio secretary page stays top-level navigation only and below direct-control semantics", () => {
-  const portfolio_shell =
-    composePortfolioSecretaryShellFromRuntimeInputs(create_runtime_inputs());
-  const page = renderPortfolioSecretaryPage(portfolio_shell);
+test("[projection] secretary handoff staging stays product-projected and non-executing", () => {
+  const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
+    create_runtime_inputs()
+  );
+  const portfolio_projection = assemblePortfolioSecretaryShellProjection({
+    source_overview_shell_id: overview_shell.overview_shell_id,
+    cell_summary_units: overview_shell.cell_summary_units,
+    management_object_family_status:
+      overview_shell.management_object_family_status,
+    deferred_items: overview_shell.deferred_items,
+    non_claims: overview_shell.truth_boundary.non_claims,
+    projection_notes: overview_shell.projection_notes,
+  });
+  const projection = assembleSecretaryHandoffStagingProjection(
+    portfolio_projection,
+    "cell-scope-01"
+  );
 
-  assert.equal(page.route_path, PORTFOLIO_SECRETARY_ROUTE);
-  assert.equal(page.page_kind, "portfolio_secretary_page");
-  assert.equal(page.page_scope, "portfolio_secretary_beta_shell_only");
-  assert.equal(page.operator_surface, "portfolio_secretary_beta");
-  assert.equal(page.navigation_mode, "top_level_product_navigation_only");
-  assert.equal(page.secretary_behavior_available, true);
-  assert.equal(page.portfolio_dispatch_behavior_available, false);
-  assert.equal(page.direct_approve_control_available, false);
-  assert.equal(page.direct_reject_control_available, false);
-  assert.equal(page.direct_dispatch_control_available, false);
-  assert.equal(page.direct_execute_control_available, false);
-  assert.equal(page.actual_provider_actions_present, false);
-  assert.equal(page.actual_channel_entry_present, false);
-  assert.equal(page.workflow_engine_behavior_available, false);
-  assert.equal(page.handoff_creation_available, true);
-  assert.equal(page.sections.header.read_mode, "non_executing");
-  assert.equal(page.sections.navigation.foundation_overview_route, "/cells");
-  assert.equal(page.sections.navigation.cell_links.length, 2);
+  assert.equal(projection.projection_scope, "secretary_handoff_staging");
+  assert.equal(projection.authority_boundary, "product_projection_only");
+  assert.equal(projection.phase_boundary, "beta_handoff_staging");
   assert.equal(
-    page.sections.navigation.selected_cell_routes?.detail_route,
-    "/cells/cell-scope-01"
+    projection.source_mode,
+    "portfolio_secretary_shell_projection"
   );
+  assert.equal(projection.secretary_behavior_available, true);
+  assert.equal(projection.portfolio_dispatch_behavior_available, false);
+  assert.equal(projection.direct_approve_control_available, false);
+  assert.equal(projection.direct_reject_control_available, false);
+  assert.equal(projection.direct_dispatch_control_available, false);
+  assert.equal(projection.direct_execute_control_available, false);
+  assert.equal(projection.provider_execution_available, false);
+  assert.equal(projection.channel_entry_available, false);
+  assert.equal(projection.workflow_engine_behavior_available, false);
+  assert.equal(projection.runtime_complete_orchestration_available, false);
+  assert.equal(projection.handoff_creation_available, true);
+  assert.equal(projection.handoff_payload_kind, "product_staging_only");
+  assert.equal(projection.handoff_staging_is_runtime_law, false);
+  assert.equal(projection.staging_status, "ready_for_cell_review");
+  assert.equal(projection.target_selection.target_cell_id, "cell-scope-01");
   assert.equal(
-    page.sections.navigation.selected_cell_routes?.management_route,
-    "/cells/cell-scope-01/management"
+    projection.target_selection.target_source_mode,
+    "upstream_runtime_private_records"
   );
-  assert.equal(
-    page.sections.navigation.selected_cell_routes?.continuity_route,
-    "/cells/cell-scope-01/continuity"
+  assert.equal(projection.staging_states.length, 3);
+  assert.equal(projection.staging_states[2]?.stage, "ready_for_cell_review");
+  assert.equal(projection.staging_states[2]?.active, true);
+  assert.ok(projection.upstream_refs.length >= 2);
+  assert.ok(
+    projection.upstream_refs.some(
+      (ref) => ref.upstream_object_type === "management-directive-record"
+    )
   );
-  assert.equal(
-    page.sections.navigation.selected_cell_routes?.handoff_route,
-    "/portfolio/handoff/cell-scope-01"
+  assert.ok(
+    projection.truth_sources.includes("portfolio_secretary_shell_projection")
   );
-  assert.equal(page.sections.status_shelf.total_cells, 2);
-  assert.equal(page.sections.status_shelf.attention_required_cells, 2);
-  assert.equal(page.sections.status_shelf.steady_cells, 0);
-  assert.equal(page.sections.queue_shelf.queued_attention_cells, 2);
-  assert.equal(
-    page.sections.review_shelf.approval_request_visibility,
-    "runtime_record_present_non_executable"
+  assert.ok(
+    projection.non_claims.includes("no_handoff_execution")
   );
-  assert.equal(
-    page.sections.posture_shelf.secretary_posture,
-    "handoff_first_non_executing"
+  assert.ok(
+    projection.deferred_items.includes("direct_execute_control")
   );
-  assert.equal(page.sections.truth_boundary.shell_projection_is_runtime_law, false);
-
-  assert.match(page.html, /Portfolio Secretary Beta/);
-  assert.match(page.html, /Secretary beta is handoff-first and posture-first\./);
-  assert.match(page.html, /Shell and staging beta only\. Direct-control semantics remain unavailable\./);
-  assert.match(page.html, /Foundation overview route: \/cells/);
-  assert.match(page.html, /Detail route: \/cells\/cell-scope-01/);
-  assert.match(page.html, /Management route: \/cells\/cell-scope-01\/management/);
-  assert.match(page.html, /Continuity route: \/cells\/cell-scope-01\/continuity/);
-  assert.match(page.html, /Handoff route: \/portfolio\/handoff\/cell-scope-01/);
-  assert.doesNotMatch(page.html, /<button\b/);
-  assert.doesNotMatch(page.html, /<form\b/);
+  assert.ok(
+    projection.projection_notes.includes(
+      "Secretary handoff staging is a downstream product projection over the portfolio shell, not a runtime command object."
+    )
+  );
 
   const boundary_targets = [
-    page,
-    page.sections.header,
-    page.sections.view_separation,
-    page.sections.navigation,
-    page.sections.status_shelf,
-    page.sections.queue_shelf,
-    page.sections.review_shelf,
-    page.sections.posture_shelf,
-    page.sections.truth_boundary,
-    portfolio_shell.portfolio_secretary_projection,
+    projection,
+    projection.target_selection,
+    projection.management_and_review_posture,
+    ...projection.staging_states,
   ];
 
   for (const target of boundary_targets) {

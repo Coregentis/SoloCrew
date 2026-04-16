@@ -13,6 +13,9 @@ import {
 import {
   composeMultiCellFoundationOverviewShellFromRuntimeInputs,
 } from "./multi-cell-foundation-overview.ts";
+import {
+  buildSecretaryHandoffRoute,
+} from "./secretary-handoff-staging.ts";
 import type {
   MultiCellFoundationOverviewShell,
   MultiCellFoundationRuntimeCellInput,
@@ -38,6 +41,9 @@ function build_navigation_links(
     continuity_route: buildContinuityInspectionRoute(
       summary.cell_summary_card.cell_id
     ),
+    handoff_route: buildSecretaryHandoffRoute(
+      summary.cell_summary_card.cell_id
+    ),
   }));
 }
 
@@ -56,11 +62,12 @@ export function composePortfolioSecretaryShell(
     });
   const cell_links = build_navigation_links(overview_shell);
   const selected_cell_routes = cell_links[0]
-    ? {
-        detail_route: cell_links[0].detail_route,
-        management_route: cell_links[0].management_route,
-        continuity_route: cell_links[0].continuity_route,
-      }
+      ? {
+          detail_route: cell_links[0].detail_route,
+          management_route: cell_links[0].management_route,
+          continuity_route: cell_links[0].continuity_route,
+          handoff_route: cell_links[0].handoff_route,
+        }
     : undefined;
 
   return {
@@ -83,7 +90,7 @@ export function composePortfolioSecretaryShell(
     broad_kpi_cockpit_available: false,
     runtime_complete_orchestration_available: false,
     workflow_engine_behavior_available: false,
-    handoff_creation_available: false,
+    handoff_creation_available: true,
     portfolio_secretary_projection,
     navigation: {
       portfolio_route: PORTFOLIO_SECRETARY_ROUTE,
@@ -101,7 +108,8 @@ export function composePortfolioSecretaryShell(
     },
     projection_notes: [
       "Portfolio Secretary shell reuses the existing v0.4 multi-cell overview family underneath.",
-      "Wave 1 remains shell-first and adds navigation, selection, and posture shelves only.",
+      "Wave 1 shell remains the top-level navigation frame over the existing v0.4 surfaces.",
+      "Wave 2 adds bounded handoff staging routes only and keeps the portfolio shell non-executing.",
     ],
     deferred_items: [...portfolio_secretary_projection.deferred_items],
   };

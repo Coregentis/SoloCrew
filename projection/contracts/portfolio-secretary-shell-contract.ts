@@ -84,7 +84,7 @@ export interface PortfolioSecretaryShellProjection {
   channel_entry_available: false;
   workflow_engine_behavior_available: false;
   runtime_complete_orchestration_available: false;
-  handoff_creation_available: false;
+  handoff_creation_available: true;
   selection: {
     selection_mode: PortfolioSecretarySelectionMode;
     selected_cell_id?: string;

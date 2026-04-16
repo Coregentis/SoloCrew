@@ -68,7 +68,7 @@ It does mean the repo now has explicit version-line closure, multi-cell boundary
 
 The current `v0.5` line is `v0.5-portfolio-secretary-beta`.
 
-This repo has now begun bounded `v0.5` implementation with Wave 1 only.
+This repo has now begun bounded `v0.5` implementation with Waves 1 and 2 only.
 
 That means `v0.5` currently includes:
 
@@ -76,6 +76,7 @@ That means `v0.5` currently includes:
 - bounded Secretary view vs cell view separation
 - bounded portfolio-level navigation and selection over the existing `v0.4` cell surfaces
 - bounded status, queue, review, and posture shelves with non-executing framing
+- one bounded Secretary-to-cell handoff staging surface with target-cell selection, handoff framing, posture framing, and staged-only state labels
 
 That also means `v0.5` is the line that may later introduce:
 
@@ -84,8 +85,8 @@ That also means `v0.5` is the line that may later introduce:
 - bounded Secretary-to-cell coordination semantics
 - the first beta-level management interface beyond read-only inspection
 
-This first `v0.5` wave does not add direct approve, reject, dispatch, or execute behavior.
-It does not add handoff creation yet.
+These first `v0.5` waves do not add direct approve, reject, dispatch, or execute behavior.
+They do not add handoff execution, approval/rejection execution, provider/channel execution, runtime authority, or protocol promotion.
 It does not mean runtime authority, protocol promotion, provider execution, or full portfolio operating-platform behavior now exist here.
 
 ## Version Semantics

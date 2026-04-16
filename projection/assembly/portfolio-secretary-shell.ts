@@ -71,7 +71,7 @@ export function assemblePortfolioSecretaryShellProjection(
     channel_entry_available: false,
     workflow_engine_behavior_available: false,
     runtime_complete_orchestration_available: false,
-    handoff_creation_available: false,
+    handoff_creation_available: true,
     selection: {
       selection_mode: "bounded_navigation_only",
       selected_cell_id: selected_summary?.cell_summary_card.cell_id,
@@ -135,7 +135,7 @@ export function assemblePortfolioSecretaryShellProjection(
     ]),
     deferred_items: unique_items([
       ...input.deferred_items,
-      "handoff_creation",
+      "handoff_execution",
       "direct_control_semantics",
       "provider_execution",
       "channel_entry",
@@ -146,7 +146,8 @@ export function assemblePortfolioSecretaryShellProjection(
     ]),
     projection_notes: [
       "Portfolio Secretary shell projection wraps the existing v0.4 multi-cell foundation rather than replacing it.",
-      "Secretary beta remains shell-first, handoff-first, posture-first, and non-executing in this wave.",
+      "Secretary beta remains handoff-first, posture-first, and non-executing in this wave.",
+      "Wave 2 adds bounded handoff staging visibility only; direct control and handoff execution remain deferred.",
       ...input.projection_notes,
     ],
   };
