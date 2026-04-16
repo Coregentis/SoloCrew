@@ -64,21 +64,28 @@ It does not mean `v0.4` is fully implemented.
 It does not mean Secretary beta, recovery workflow execution, approval workflow execution, portfolio orchestration, provider execution, or channel behavior now exist in this repo.
 It does mean the repo now has explicit version-line closure, multi-cell boundary closure, and cross-repo non-promotion records for the current `v0.4` line.
 
-## Next Planned Line
+## Current v0.5 Line
 
-The next planned line is `v0.5-portfolio-secretary-beta`.
+The current `v0.5` line is `v0.5-portfolio-secretary-beta`.
 
-This repo has now frozen `v0.5` scope only.
-It has not implemented `v0.5`.
+This repo has now begun bounded `v0.5` implementation with Wave 1 only.
 
-That means `v0.5` is now defined as the line that may later introduce:
+That means `v0.5` currently includes:
+
+- one top-level portfolio / Secretary beta shell page
+- bounded Secretary view vs cell view separation
+- bounded portfolio-level navigation and selection over the existing `v0.4` cell surfaces
+- bounded status, queue, review, and posture shelves with non-executing framing
+
+That also means `v0.5` is the line that may later introduce:
 
 - a top-level portfolio / Secretary beta surface
 - bounded management of multiple cells as cells
 - bounded Secretary-to-cell coordination semantics
 - the first beta-level management interface beyond read-only inspection
 
-It does not mean Secretary beta behavior is already present in this repo.
+This first `v0.5` wave does not add direct approve, reject, dispatch, or execute behavior.
+It does not add handoff creation yet.
 It does not mean runtime authority, protocol promotion, provider execution, or full portfolio operating-platform behavior now exist here.
 
 ## Version Semantics

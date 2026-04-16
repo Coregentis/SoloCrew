@@ -127,9 +127,9 @@ Goal:
 
 Current status:
 
-- next planned line
-- scope-frozen only
-- not yet implemented
+- implementation-begun line
+- scope-frozen and Wave 1 shell present
+- still below handoff creation and direct-control semantics
 
 Mandatory baseline:
 

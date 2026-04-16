@@ -2,6 +2,8 @@
 
 ## 2026-04-16
 
+- added the first bounded `v0.5-portfolio-secretary-beta` Wave 1 Secretary / Portfolio shell above the current `v0.4` surface family
+- kept that Wave 1 implementation non-executing and explicitly out of scope for direct approve, reject, dispatch, execute, provider, or channel behavior
 - added a bounded `v0.5-portfolio-secretary-beta` implementation planning pack covering wave sequence, upstream dependency mapping, test/gate planning, and directory task mapping
 - kept that planning wave docs-only and explicitly out of scope for implementation, runtime changes, and any widened `v0.5` behavior
 - tightened the `v0.5-portfolio-secretary-beta` Secretary control boundary so the freeze now reads as handoff-first and posture-first, not direct-control-first
