@@ -2,6 +2,8 @@
 
 ## 2026-04-15
 
+- added a bounded `v0.4-multi-cell-foundation` cell-detail inspection surface over the existing runtime-backed summary path
+- kept that cell-detail wave read/inspect-only and explicitly out of scope for Secretary behavior, dispatch/orchestration controls, provider execution, and runtime-complete truth ownership
 - improved the bounded `v0.4-multi-cell-foundation` overview surface to consume upstream `Cognitive_OS` runtime-private workforce inputs while keeping rendered cells product-projected summary units
 - kept Secretary behavior, portfolio dispatch behavior, provider execution, channel entry, and runtime-complete orchestration explicitly absent in that downstream-consumption wave
 - implemented the first bounded `v0.4-multi-cell-foundation` code surface as a read/inspect-oriented multi-cell overview with bounded per-cell summary projections

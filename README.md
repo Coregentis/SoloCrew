@@ -60,6 +60,7 @@ That means `v0.4` is now defined as the line that will freeze:
 This repo now contains the first bounded `v0.4` implementation surface:
 
 - one read/inspect-oriented multi-cell foundation overview page
+- one bounded per-cell inspection page over the same downstream runtime-backed input path
 - bounded per-cell summary projections derived from existing single-cell product truth
 - bounded downstream consumption of `Cognitive_OS` runtime-private workforce surfaces for multi-cell overview summaries
 
