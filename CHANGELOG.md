@@ -2,6 +2,8 @@
 
 ## 2026-04-16
 
+- normalized the shared `v0.4-multi-cell-foundation` runtime-backed management projection taxonomy so cell-detail and management-object inspection consume the same downstream projection family
+- kept that hardening wave behaviorally unchanged and explicitly out of scope for new surfaces, new `v0.5` behavior, and runtime expansion
 - hardened the `v0.4-multi-cell-foundation` management-directive inspection boundary so runtime-backed directive projections no longer reuse compile-phase directive semantics
 - kept that hardening wave inspect-only and explicitly out of scope for Secretary behavior, dispatch/orchestration controls, provider execution, and any new `v0.5` behavior
 

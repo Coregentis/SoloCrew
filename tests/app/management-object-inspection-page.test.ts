@@ -11,6 +11,9 @@ import {
 import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
 } from "../../projection/contracts/structural-boundary.ts";
+import {
+  RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE,
+} from "../../projection/contracts/runtime-backed-management-projection-contract.ts";
 
 function create_runtime_input() {
   return {
@@ -159,7 +162,7 @@ test("[app] management-object inspection page exposes no executable actions", ()
   assert.equal(page.sections.inspection_units.length, 3);
   assert.equal(
     page.sections.inspection_units[0]?.product_object_type,
-    "runtime-backed-management-directive-projection"
+    RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE
   );
   assert.equal(
     page.sections.inspection_units[0]?.phase_boundary,

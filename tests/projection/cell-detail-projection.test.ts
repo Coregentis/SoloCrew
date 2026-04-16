@@ -7,6 +7,10 @@ import {
 import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
 } from "../../projection/contracts/structural-boundary.ts";
+import {
+  RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE,
+  RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_UPSTREAM_RECORD_TYPE,
+} from "../../projection/contracts/runtime-backed-management-projection-contract.ts";
 
 test("[projection] cell detail projection stays product-projected when derived from upstream runtime-backed inputs", () => {
   const detail_projection = assembleCellDetailProjectionFromRuntimeInput({
@@ -119,7 +123,7 @@ test("[projection] cell detail projection stays product-projected when derived f
   assert.equal(
     detail_projection.management_object_family.management_directive
       ?.projection_object_type,
-    "runtime-backed-management-directive-projection"
+    RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE
   );
   assert.equal(
     detail_projection.management_object_family.management_directive
@@ -134,7 +138,7 @@ test("[projection] cell detail projection stays product-projected when derived f
   assert.equal(
     detail_projection.management_object_family.management_directive
       ?.upstream_record_type,
-    "management-directive-record"
+    RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_UPSTREAM_RECORD_TYPE
   );
   assert.equal(
     detail_projection.management_object_family.management_directive

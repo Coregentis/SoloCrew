@@ -11,6 +11,9 @@ import {
 import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
 } from "../../projection/contracts/structural-boundary.ts";
+import {
+  RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE,
+} from "../../projection/contracts/runtime-backed-management-projection-contract.ts";
 
 function create_runtime_input() {
   return {
@@ -159,7 +162,7 @@ test("[app] cell detail page exposes no executable management actions", () => {
   assert.equal(
     page.sections.management_object_family.management_directive
       ?.projection_object_type,
-    "runtime-backed-management-directive-projection"
+    RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE
   );
   assert.equal(
     page.sections.management_object_family.management_directive

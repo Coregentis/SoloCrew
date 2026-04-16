@@ -11,6 +11,9 @@ import type {
 import type {
   ProjectionUpstreamRef,
 } from "../contracts/projection-object-types.ts";
+import {
+  RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE,
+} from "../contracts/runtime-backed-management-projection-contract.ts";
 
 const MANAGEMENT_OBJECT_INSPECTION_NON_CLAIMS = [
   "no_secretary_behavior_truth",
@@ -86,11 +89,12 @@ export function assembleManagementObjectInspectionProjection(
 
   const inspection_units: ManagementObjectInspectionUnit[] = [
     management_directive
-        ? {
+      ? {
           inspection_unit_id:
             `${detail_projection.cell_identity.cell_id}:management_directive:inspection-unit`,
           object_kind: "management_directive",
-          product_object_type: "runtime-backed-management-directive-projection",
+          product_object_type:
+            RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE,
           related_cell_id: detail_projection.cell_identity.cell_id,
           inspection_status: derive_status(true),
           phase_boundary: derive_phase_boundary(
@@ -114,7 +118,8 @@ export function assembleManagementObjectInspectionProjection(
         }
       : derive_absent_unit(detail_projection, {
           object_kind: "management_directive",
-          product_object_type: "runtime-backed-management-directive-projection",
+          product_object_type:
+            RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE,
           summary_label: "Directive summary",
           absent_note:
             "No upstream management-directive-record is currently projected into this detail surface.",
@@ -227,6 +232,7 @@ export function assembleManagementObjectInspectionProjection(
     ]),
     projection_notes: [
       "Management-object inspection is a dedicated downstream product projection over the existing cell-detail projection path.",
+      "Both inspection units and detail projections reuse the same shared runtime-backed management projection taxonomy.",
       "Runtime-backed directive inspection stays distinct from compile-phase management directive objects.",
       "Inspection units remain read-only, non-executable, and explicitly below Secretary beta.",
     ],

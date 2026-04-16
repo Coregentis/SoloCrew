@@ -10,6 +10,10 @@ import {
 import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
 } from "../../projection/contracts/structural-boundary.ts";
+import {
+  RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE,
+  RUNTIME_BACKED_MANAGEMENT_PROJECTION_OBJECT_TYPES,
+} from "../../projection/contracts/runtime-backed-management-projection-contract.ts";
 
 test("[projection] management-object inspection stays product-projected when derived from runtime-backed detail truth", () => {
   const detail_projection = assembleCellDetailProjectionFromRuntimeInput({
@@ -122,7 +126,7 @@ test("[projection] management-object inspection stays product-projected when der
   );
   assert.equal(
     inspection_projection.inspection_units[0]?.product_object_type,
-    "runtime-backed-management-directive-projection"
+    RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE
   );
   assert.equal(
     inspection_projection.inspection_units[0]?.phase_boundary,
@@ -130,7 +134,14 @@ test("[projection] management-object inspection stays product-projected when der
   );
   assert.equal(
     inspection_projection.inspection_units[0]?.product_projection?.projection_object_type,
-    "runtime-backed-management-directive-projection"
+    RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE
+  );
+  assert.ok(
+    inspection_projection.inspection_units.every((unit) =>
+      RUNTIME_BACKED_MANAGEMENT_PROJECTION_OBJECT_TYPES.includes(
+        unit.product_object_type
+      )
+    )
   );
   assert.ok(
     inspection_projection.inspection_units.every(
@@ -145,6 +156,11 @@ test("[projection] management-object inspection stays product-projected when der
   assert.ok(
     inspection_projection.non_claims.includes(
       "no_shared_object_identity_with_runtime_private_record"
+    )
+  );
+  assert.ok(
+    inspection_projection.projection_notes.includes(
+      "Both inspection units and detail projections reuse the same shared runtime-backed management projection taxonomy."
     )
   );
   assert.ok(

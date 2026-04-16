@@ -7,11 +7,12 @@ import type {
   ProjectionUpstreamRef,
 } from "./projection-object-types.ts";
 import type {
-  ManagementApprovalPosture,
-  ManagementPriority,
   DeliveryReturn,
   EscalationApprovalRequest,
 } from "../objects/management-interface.ts";
+import type {
+  RuntimeBackedManagementDirectiveProjection,
+} from "./runtime-backed-management-projection-contract.ts";
 
 export type CellDetailProjectionAuthorityBoundary =
   "product_projection_only";
@@ -20,23 +21,6 @@ export type CellDetailProjectionScope = "cell_detail_projection";
 export type CellDetailManagementObjectStatus =
   | "present_non_executable"
   | "absent_non_executable";
-
-export interface RuntimeBackedManagementDirectiveProjection {
-  projection_id: string;
-  projection_object_type: "runtime-backed-management-directive-projection";
-  authority_boundary: "product_projection_only";
-  phase_boundary: "runtime_adjacent_detail";
-  upstream_origin: "runtime_private_record_projection";
-  upstream_record_type: "management-directive-record";
-  upstream_record_id: string;
-  executable_actions_available: false;
-  cell_id: string;
-  priority: ManagementPriority;
-  delivery_target: string;
-  approval_posture: ManagementApprovalPosture;
-  constraint_emphasis: string[];
-  projection_notes: string[];
-}
 
 export interface CellDetailProjection {
   detail_projection_id: string;

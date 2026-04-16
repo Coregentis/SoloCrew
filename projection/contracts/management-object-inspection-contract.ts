@@ -5,12 +5,10 @@ import type {
   ProjectionUpstreamRef,
 } from "./projection-object-types.ts";
 import type {
-  DeliveryReturn,
-  EscalationApprovalRequest,
-} from "../objects/management-interface.ts";
-import type {
-  RuntimeBackedManagementDirectiveProjection,
-} from "./cell-detail-projection-contract.ts";
+  RuntimeBackedManagementProjection,
+  RuntimeBackedManagementProjectionObjectType,
+  RuntimeBackedManagementProjectionPhaseBoundary,
+} from "./runtime-backed-management-projection-contract.ts";
 
 export type ManagementObjectInspectionScope =
   "management_object_inspection";
@@ -26,17 +24,13 @@ export type ManagementObjectInspectionStatus =
   | "present_non_executable"
   | "absent_non_executable";
 export type ManagementObjectInspectionUnitPhaseBoundary =
-  | "runtime_adjacent_detail"
-  | "runtime_adjacent_summary"
+  | RuntimeBackedManagementProjectionPhaseBoundary
   | "status_only_absent";
 
 export interface ManagementObjectInspectionUnit {
   inspection_unit_id: string;
   object_kind: ManagementObjectInspectionUnitKind;
-  product_object_type:
-    | "runtime-backed-management-directive-projection"
-    | "delivery-return"
-    | "escalation-approval-request";
+  product_object_type: RuntimeBackedManagementProjectionObjectType;
   related_cell_id: string;
   inspection_status: ManagementObjectInspectionStatus;
   phase_boundary: ManagementObjectInspectionUnitPhaseBoundary;
@@ -44,10 +38,7 @@ export interface ManagementObjectInspectionUnit {
   summary_label: string;
   summary_value: string;
   recency_hint: string;
-  product_projection?:
-    | RuntimeBackedManagementDirectiveProjection
-    | DeliveryReturn
-    | EscalationApprovalRequest;
+  product_projection?: RuntimeBackedManagementProjection;
   upstream_refs: ProjectionUpstreamRef[];
   projection_notes: string[];
 }
