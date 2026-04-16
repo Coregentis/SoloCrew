@@ -8,6 +8,7 @@ Current page scope remains narrow:
 - one bounded top-level portfolio / Secretary beta shell page
 - one bounded Secretary-to-cell handoff staging page inside the same portfolio / Secretary beta lane
 - one bounded Secretary-to-cell handoff review-packet page inside the same portfolio / Secretary beta lane
+- one bounded revision / return consistency hardening pass across the same portfolio / Secretary shell, staging, and review-packet lane
 - one read/inspect-oriented multi-cell foundation overview page
 - one bounded per-cell inspection page over the multi-cell foundation input path
 - one bounded management-object inspection page over the same detail-derived path
@@ -16,6 +17,7 @@ Current page scope remains narrow:
 - bounded top-level portfolio navigation over existing `v0.4` cell surfaces
 - bounded Secretary-to-cell handoff staging over existing portfolio shell context
 - bounded Secretary-to-cell handoff review-packet framing over the same staged handoff context
+- bounded revision-return visibility over the same non-executing handoff lane
 - no direct approve, reject, dispatch, or execute controls
 - no provider or channel entry
 - no broad KPI cockpit

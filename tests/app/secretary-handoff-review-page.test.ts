@@ -186,6 +186,14 @@ test("[app] secretary handoff review page stays review-only and below direct-con
   assert.equal(page.handoff_creation_available, true);
   assert.equal(page.sections.target_selection.target_cell_id, "cell-scope-01");
   assert.equal(page.sections.packet_framing.packet_state, "returned_for_revision");
+  assert.match(
+    page.sections.packet_framing.packet_state_summary,
+    /returned_for_revision for Runtime Delivery Cell/
+  );
+  assert.match(
+    page.sections.packet_framing.revision_loop_summary,
+    /Revision visibility is active for Runtime Delivery Cell/
+  );
   assert.equal(
     page.sections.review_readiness.readiness_label,
     "revision_requested"
@@ -196,9 +204,11 @@ test("[app] secretary handoff review page stays review-only and below direct-con
   );
 
   assert.match(page.html, /Secretary Handoff Review Packet/);
-  assert.match(page.html, /Handoff review packet is product-level review framing only\./);
+  assert.match(page.html, /Handoff review packet is product-level review framing and revision-return visibility only\./);
   assert.match(page.html, /Packet state: returned_for_revision/);
   assert.match(page.html, /Readiness label: revision_requested/);
+  assert.match(page.html, /Packet state summary: The handoff packet is returned_for_revision for Runtime Delivery Cell and stays bounded to revision posture only\./);
+  assert.match(page.html, /Revision loop summary: Revision visibility is active for Runtime Delivery Cell, but return remains a product state and not a reject, dispatch, or execution command\./);
   assert.match(page.html, /Review packet route: \/portfolio\/handoff\/cell-scope-01\/review/);
   assert.doesNotMatch(page.html, /<button\b/);
   assert.doesNotMatch(page.html, /<form\b/);
@@ -233,6 +243,10 @@ test("[app] secretary handoff review page exposes no dispatch or execute control
 
   assert.equal(page.sections.target_selection.target_cell_id, "cell-scope-02");
   assert.equal(page.sections.packet_framing.packet_state, "ready_for_cell_review");
+  assert.match(
+    page.sections.packet_framing.packet_state_summary,
+    /ready_for_cell_review for Runtime Review Cell/
+  );
   assert.equal(page.sections.review_readiness.readiness_label, "cell_review_ready");
   assert.equal(page.direct_approve_control_available, false);
   assert.equal(page.direct_reject_control_available, false);

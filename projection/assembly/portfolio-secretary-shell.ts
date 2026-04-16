@@ -5,6 +5,9 @@ import type {
   PortfolioSecretaryManagementObjectStatus,
   PortfolioSecretaryShellProjection,
 } from "../contracts/portfolio-secretary-shell-contract.ts";
+import {
+  countSecretaryHandoffPacketStates,
+} from "./secretary-handoff-packet-state.ts";
 
 export interface PortfolioSecretaryShellAssemblyInput {
   source_overview_shell_id: string;
@@ -50,6 +53,9 @@ export function assemblePortfolioSecretaryShellProjection(
   );
   const steady_cells =
     input.cell_summary_units.length - attention_required_cells;
+  const packet_state_counts = countSecretaryHandoffPacketStates(
+    input.cell_summary_units
+  );
 
   return {
     portfolio_secretary_projection_id:
@@ -97,15 +103,23 @@ export function assemblePortfolioSecretaryShellProjection(
       total_cells: input.cell_summary_units.length,
       attention_required_cells,
       steady_cells,
+      packet_state_counts,
+      packet_state_summary:
+        `Packet states remain product-level posture only across ${packet_state_counts.staged} staged, ${packet_state_counts.ready_for_cell_review} ready_for_cell_review, and ${packet_state_counts.returned_for_revision} returned_for_revision cells.`,
       direct_controls_available: false,
     },
     queue_shelf: {
       shelf_scope: "bounded_queue_shelf",
       queue_visibility: "bounded_queue_posture_only",
       queued_attention_cells: attention_required_cells,
+      staged_packet_cells: packet_state_counts.staged,
+      ready_for_cell_review_cells: packet_state_counts.ready_for_cell_review,
+      returned_for_revision_cells: packet_state_counts.returned_for_revision,
+      packet_queue_summary:
+        `Queue visibility stays non-executing across ${packet_state_counts.ready_for_cell_review} review-ready packets and ${packet_state_counts.returned_for_revision} revision-return packets.`,
       direct_controls_available: false,
       shelf_note:
-        "Queue shelf is derived from bounded readiness posture only and remains non-executing.",
+        "Queue shelf is derived from bounded readiness and revision posture only and remains non-executing.",
     },
     review_shelf: {
       shelf_scope: "bounded_review_shelf",
@@ -114,9 +128,13 @@ export function assemblePortfolioSecretaryShellProjection(
         input.management_object_family_status.approval_request,
       delivery_return_visibility:
         input.management_object_family_status.delivery_return,
+      ready_for_cell_review_cells: packet_state_counts.ready_for_cell_review,
+      returned_for_revision_cells: packet_state_counts.returned_for_revision,
+      review_packet_summary:
+        `Review visibility stays packet-first and non-executing across ${packet_state_counts.ready_for_cell_review} ready_for_cell_review packets and ${packet_state_counts.returned_for_revision} returned_for_revision packets.`,
       direct_controls_available: false,
       shelf_note:
-        "Review shelf reflects bounded visibility, review-packet posture, and staging posture only.",
+        "Review shelf reflects bounded visibility, review-packet posture, staging posture, and revision-return posture only.",
     },
     posture_shelf: {
       shelf_scope: "bounded_posture_shelf",
@@ -126,7 +144,8 @@ export function assemblePortfolioSecretaryShellProjection(
         input.management_object_family_status.delivery_return,
       approval_request_visibility:
         input.management_object_family_status.approval_request,
-      secretary_posture: "handoff_first_review_packet_first_non_executing",
+      secretary_posture:
+        "handoff_first_review_packet_first_revision_loop_non_executing",
       direct_controls_available: false,
     },
     truth_sources: unique_items([
@@ -149,6 +168,7 @@ export function assemblePortfolioSecretaryShellProjection(
       "Secretary beta remains handoff-first, posture-first, review-packet-first, and non-executing in this wave.",
       "Wave 2 adds bounded handoff staging visibility only; direct control and handoff execution remain deferred.",
       "Wave 3 adds bounded handoff review-packet visibility only and keeps packet states product-projected and non-executing.",
+      "Wave 4 hardens revision/return loop consistency so portfolio shelves, staging, and review packet surfaces reuse the same non-executing packet-state semantics.",
       ...input.projection_notes,
     ],
   };

@@ -82,6 +82,7 @@ export function composeSecretaryHandoffReviewPacketShell(
     projection_notes: [
       "Secretary handoff review packet reuses the staged handoff lane rather than introducing a parallel review system.",
       "The review-packet shell stays handoff-first, posture-first, review-packet-first, and non-executing.",
+      "Wave 4 hardens revision-return visibility so review packets and staged handoff surfaces share one bounded non-executing loop vocabulary.",
     ],
     deferred_items: [...handoff_review_packet_projection.deferred_items],
   };

@@ -195,6 +195,14 @@ test("[projection] secretary handoff review packet stays review-only and product
     review_packet.review_readiness.readiness_label,
     "revision_requested"
   );
+  assert.match(
+    review_packet.packet_state_summary,
+    /returned_for_revision for Runtime Delivery Cell/
+  );
+  assert.match(
+    review_packet.revision_loop_summary,
+    /Revision visibility is active for Runtime Delivery Cell/
+  );
   assert.equal(
     review_packet.review_readiness.target_blocked_work_count,
     1
@@ -210,6 +218,11 @@ test("[projection] secretary handoff review packet stays review-only and product
   assert.ok(
     review_packet.projection_notes.includes(
       "Secretary handoff review packet is a downstream product projection over staged handoff truth, not a runtime review command."
+    )
+  );
+  assert.ok(
+    review_packet.projection_notes.includes(
+      "Wave 4 hardens revision/return loop consistency so packet summaries and returned-for-revision posture stay aligned with the staging lane."
     )
   );
 

@@ -6,6 +6,10 @@ import type {
   PortfolioSecretaryShellProjection,
   PortfolioSecretaryTruthSource,
 } from "./portfolio-secretary-shell-contract.ts";
+import type {
+  SecretaryHandoffPacketState,
+  SecretaryHandoffStageIndicator,
+} from "./secretary-handoff-packet-contract.ts";
 
 export type SecretaryHandoffStagingScope = "secretary_handoff_staging";
 export type SecretaryHandoffStagingAuthorityBoundary =
@@ -13,22 +17,10 @@ export type SecretaryHandoffStagingAuthorityBoundary =
 export type SecretaryHandoffStagingPhaseBoundary = "beta_handoff_staging";
 export type SecretaryHandoffStagingSourceMode =
   "portfolio_secretary_shell_projection";
-export type SecretaryHandoffPacketState =
-  | "draft"
-  | "staged"
-  | "ready_for_cell_review"
-  | "returned_for_revision";
 export type SecretaryHandoffStagingStatus = SecretaryHandoffPacketState;
 export type SecretaryHandoffStagingTruthSource =
   | PortfolioSecretaryTruthSource
   | "portfolio_secretary_shell_projection";
-
-export interface SecretaryHandoffStageIndicator {
-  stage: SecretaryHandoffPacketState;
-  label: string;
-  active: boolean;
-  note: string;
-}
 
 export interface SecretaryHandoffTargetSelection {
   selection_mode: "selected_cell_from_portfolio_shell";
@@ -82,6 +74,8 @@ export interface SecretaryHandoffStagingProjection {
   target_selection: SecretaryHandoffTargetSelection;
   handoff_summary: string;
   handoff_intent_framing: string;
+  packet_state_summary: string;
+  revision_loop_summary: string;
   management_and_review_posture: SecretaryHandoffManagementPosture;
   non_executing_notice: string;
   truth_sources: SecretaryHandoffStagingTruthSource[];

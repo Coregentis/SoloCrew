@@ -38,6 +38,8 @@ export interface SecretaryHandoffPage {
       packet_state: SecretaryHandoffStagingShell["handoff_staging_projection"]["staging_status"];
       handoff_summary: string;
       handoff_intent_framing: string;
+      packet_state_summary: string;
+      revision_loop_summary: string;
       management_posture_framing: string;
       review_posture_framing: string;
       non_executing_notice: string;
@@ -103,6 +105,8 @@ export function renderSecretaryHandoffPage(
       packet_state: staging_projection.staging_status,
       handoff_summary: staging_projection.handoff_summary,
       handoff_intent_framing: staging_projection.handoff_intent_framing,
+      packet_state_summary: staging_projection.packet_state_summary,
+      revision_loop_summary: staging_projection.revision_loop_summary,
       management_posture_framing:
         staging_projection.management_and_review_posture.management_posture_framing,
       review_posture_framing:
@@ -124,7 +128,7 @@ export function renderSecretaryHandoffPage(
     )}</p>`,
     `<p>Handoff route: ${escape_html(sections.header.handoff_route)}</p>`,
     `<p>Review packet route: ${escape_html(sections.header.review_packet_route)}</p>`,
-    "<p>Handoff staging is product-level staging and review-packet framing only.</p>",
+    "<p>Handoff staging is product-level staging, review-packet framing, and revision-return visibility only.</p>",
     "<p>No approve, reject, dispatch, execute, provider, or runtime mutation controls are present here.</p>",
     ...sections.header.projection_notes.map(
       (note) => `<p>Projection note: ${escape_html(note)}</p>`
@@ -159,6 +163,12 @@ export function renderSecretaryHandoffPage(
     `<p>Packet state: ${escape_html(sections.framing.packet_state)}</p>`,
     `<p>Summary: ${escape_html(sections.framing.handoff_summary)}</p>`,
     `<p>Intent framing: ${escape_html(sections.framing.handoff_intent_framing)}</p>`,
+    `<p>Packet state summary: ${escape_html(
+      sections.framing.packet_state_summary
+    )}</p>`,
+    `<p>Revision loop summary: ${escape_html(
+      sections.framing.revision_loop_summary
+    )}</p>`,
     `<p>Management posture framing: ${escape_html(
       sections.framing.management_posture_framing
     )}</p>`,

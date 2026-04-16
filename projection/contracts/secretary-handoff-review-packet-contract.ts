@@ -3,11 +3,13 @@ import type {
 } from "./projection-object-types.ts";
 import type {
   SecretaryHandoffManagementPosture,
-  SecretaryHandoffPacketState,
-  SecretaryHandoffStageIndicator,
   SecretaryHandoffStagingTruthSource,
   SecretaryHandoffTargetSelection,
 } from "./secretary-handoff-staging-contract.ts";
+import type {
+  SecretaryHandoffPacketState,
+  SecretaryHandoffStageIndicator,
+} from "./secretary-handoff-packet-contract.ts";
 
 export type SecretaryHandoffReviewPacketScope =
   "secretary_handoff_review_packet";
@@ -63,6 +65,8 @@ export interface SecretaryHandoffReviewPacketProjection {
   packet_summary: string;
   packet_rationale: string;
   packet_context_framing: string;
+  packet_state_summary: string;
+  revision_loop_summary: string;
   management_and_review_posture: SecretaryHandoffManagementPosture;
   review_readiness: SecretaryHandoffReviewReadiness;
   non_executing_notice: string;

@@ -188,26 +188,46 @@ test("[app] portfolio secretary page stays top-level navigation only and below d
   assert.equal(page.sections.status_shelf.total_cells, 2);
   assert.equal(page.sections.status_shelf.attention_required_cells, 2);
   assert.equal(page.sections.status_shelf.steady_cells, 0);
+  assert.equal(page.sections.status_shelf.packet_state_counts.draft, 0);
+  assert.equal(page.sections.status_shelf.packet_state_counts.staged, 0);
+  assert.equal(
+    page.sections.status_shelf.packet_state_counts.ready_for_cell_review,
+    1
+  );
+  assert.equal(
+    page.sections.status_shelf.packet_state_counts.returned_for_revision,
+    1
+  );
   assert.equal(page.sections.queue_shelf.queued_attention_cells, 2);
+  assert.equal(page.sections.queue_shelf.ready_for_cell_review_cells, 1);
+  assert.equal(page.sections.queue_shelf.returned_for_revision_cells, 1);
   assert.equal(
     page.sections.review_shelf.approval_request_visibility,
     "runtime_record_present_non_executable"
   );
+  assert.equal(page.sections.review_shelf.ready_for_cell_review_cells, 1);
+  assert.equal(page.sections.review_shelf.returned_for_revision_cells, 1);
   assert.equal(
     page.sections.posture_shelf.secretary_posture,
-    "handoff_first_review_packet_first_non_executing"
+    "handoff_first_review_packet_first_revision_loop_non_executing"
   );
   assert.equal(page.sections.truth_boundary.shell_projection_is_runtime_law, false);
 
   assert.match(page.html, /Portfolio Secretary Beta/);
   assert.match(page.html, /Secretary beta is handoff-first, posture-first, and review-packet-first\./);
-  assert.match(page.html, /Shell, staging, and review-packet beta only\. Direct-control semantics remain unavailable\./);
+  assert.match(page.html, /Secretary beta is also revision-loop-first and remains non-executing\./);
+  assert.match(page.html, /Shell, staging, review-packet, and revision-return consistency beta only\. Direct-control semantics remain unavailable\./);
   assert.match(page.html, /Foundation overview route: \/cells/);
   assert.match(page.html, /Detail route: \/cells\/cell-scope-01/);
   assert.match(page.html, /Management route: \/cells\/cell-scope-01\/management/);
   assert.match(page.html, /Continuity route: \/cells\/cell-scope-01\/continuity/);
   assert.match(page.html, /Handoff route: \/portfolio\/handoff\/cell-scope-01/);
   assert.match(page.html, /Review packet route: \/portfolio\/handoff\/cell-scope-01\/review/);
+  assert.match(page.html, /Ready-for-cell-review packet cells: 1/);
+  assert.match(page.html, /Returned-for-revision packet cells: 1/);
+  assert.match(page.html, /Packet state summary: .*returned_for_revision cells/);
+  assert.match(page.html, /Packet queue summary: .*revision-return packets/);
+  assert.match(page.html, /Review packet summary: .*returned_for_revision packets/);
   assert.doesNotMatch(page.html, /<button\b/);
   assert.doesNotMatch(page.html, /<form\b/);
 

@@ -5,6 +5,10 @@ import type {
 import type {
   SecretaryHandoffStagingProjection,
 } from "../contracts/secretary-handoff-staging-contract.ts";
+import {
+  buildSecretaryHandoffPacketStateSummary,
+  buildSecretaryHandoffRevisionLoopSummary,
+} from "./secretary-handoff-packet-state.ts";
 
 const SECRETARY_HANDOFF_REVIEW_PACKET_NON_CLAIMS = [
   "no_direct_approve_control",
@@ -125,6 +129,14 @@ export function assembleSecretaryHandoffReviewPacketProjection(
       staging_projection.handoff_intent_framing,
     packet_context_framing:
       `Context stays bounded to ${target_cell_name} readiness, continuity, and management posture without becoming runtime workflow authority.`,
+    packet_state_summary: buildSecretaryHandoffPacketStateSummary(
+      staging_projection.staging_status,
+      staging_projection.target_selection.target_cell_name
+    ),
+    revision_loop_summary: buildSecretaryHandoffRevisionLoopSummary(
+      staging_projection.staging_status,
+      staging_projection.target_selection.target_cell_name
+    ),
     management_and_review_posture: {
       ...staging_projection.management_and_review_posture,
     },
@@ -153,6 +165,7 @@ export function assembleSecretaryHandoffReviewPacketProjection(
       "Secretary handoff review packet is a downstream product projection over staged handoff truth, not a runtime review command.",
       "Packet states remain posture and review semantics only and do not become runtime commands or workflow edges.",
       "Review readiness visualization is bounded to product-level packet framing for downstream cell consumption.",
+      "Wave 4 hardens revision/return loop consistency so packet summaries and returned-for-revision posture stay aligned with the staging lane.",
       ...staging_projection.projection_notes,
     ],
   };

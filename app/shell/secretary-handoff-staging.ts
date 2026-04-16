@@ -108,6 +108,7 @@ export function composeSecretaryHandoffStagingShell(
     projection_notes: [
       "Secretary handoff staging reuses the existing portfolio shell rather than introducing a parallel Secretary model.",
       "The shell stays handoff-first, posture-first, review-packet-first, and non-executing over the current v0.4 surface family.",
+      "Wave 4 hardens revision-return visibility so returned-for-revision stays a shared product-loop state instead of a local staging-only interpretation.",
     ],
     deferred_items: [...handoff_staging_projection.deferred_items],
   };

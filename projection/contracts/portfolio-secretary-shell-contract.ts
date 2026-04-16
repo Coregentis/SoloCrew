@@ -2,6 +2,9 @@ import type {
   CellSummaryProjection,
   CellSummaryProjectionTruthSource,
 } from "./cell-summary-projection-contract.ts";
+import type {
+  SecretaryHandoffPacketStateCounts,
+} from "./secretary-handoff-packet-contract.ts";
 
 export type PortfolioSecretaryShellScope = "portfolio_secretary_beta_shell";
 export type PortfolioSecretaryShellAuthorityBoundary =
@@ -36,6 +39,8 @@ export interface PortfolioSecretaryStatusShelf {
   total_cells: number;
   attention_required_cells: number;
   steady_cells: number;
+  packet_state_counts: SecretaryHandoffPacketStateCounts;
+  packet_state_summary: string;
   direct_controls_available: false;
 }
 
@@ -43,6 +48,10 @@ export interface PortfolioSecretaryQueueShelf {
   shelf_scope: "bounded_queue_shelf";
   queue_visibility: PortfolioSecretaryQueueShelfVisibility;
   queued_attention_cells: number;
+  staged_packet_cells: number;
+  ready_for_cell_review_cells: number;
+  returned_for_revision_cells: number;
+  packet_queue_summary: string;
   direct_controls_available: false;
   shelf_note: string;
 }
@@ -52,6 +61,9 @@ export interface PortfolioSecretaryReviewShelf {
   review_visibility: PortfolioSecretaryReviewShelfVisibility;
   approval_request_visibility: PortfolioSecretaryManagementObjectStatus;
   delivery_return_visibility: PortfolioSecretaryManagementObjectStatus;
+  ready_for_cell_review_cells: number;
+  returned_for_revision_cells: number;
+  review_packet_summary: string;
   direct_controls_available: false;
   shelf_note: string;
 }
@@ -61,7 +73,8 @@ export interface PortfolioSecretaryPostureShelf {
   management_directive_visibility: PortfolioSecretaryManagementObjectStatus;
   delivery_return_visibility: PortfolioSecretaryManagementObjectStatus;
   approval_request_visibility: PortfolioSecretaryManagementObjectStatus;
-  secretary_posture: "handoff_first_review_packet_first_non_executing";
+  secretary_posture:
+    "handoff_first_review_packet_first_revision_loop_non_executing";
   direct_controls_available: false;
 }
 

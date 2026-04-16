@@ -192,6 +192,14 @@ test("[projection] secretary handoff staging stays product-projected and non-exe
   assert.equal(projection.staging_states.length, 4);
   assert.equal(projection.staging_states[3]?.stage, "returned_for_revision");
   assert.equal(projection.staging_states[3]?.active, true);
+  assert.match(
+    projection.packet_state_summary,
+    /returned_for_revision for Runtime Delivery Cell/
+  );
+  assert.match(
+    projection.revision_loop_summary,
+    /Revision visibility is active for Runtime Delivery Cell/
+  );
   assert.ok(projection.upstream_refs.length >= 2);
   assert.ok(
     projection.upstream_refs.some(
@@ -215,6 +223,11 @@ test("[projection] secretary handoff staging stays product-projected and non-exe
   assert.ok(
     projection.projection_notes.includes(
       "Shared handoff packet states remain posture semantics only and do not become runtime commands."
+    )
+  );
+  assert.ok(
+    projection.projection_notes.includes(
+      "Wave 4 hardens revision/return loop consistency across shell, staging, and review packet surfaces without introducing execution semantics."
     )
   );
 

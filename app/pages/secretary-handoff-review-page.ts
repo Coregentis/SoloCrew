@@ -42,6 +42,8 @@ export interface SecretaryHandoffReviewPage {
       packet_summary: string;
       packet_rationale: string;
       packet_context_framing: string;
+      packet_state_summary: string;
+      revision_loop_summary: string;
       management_posture_framing: string;
       review_posture_framing: string;
       non_executing_notice: string;
@@ -111,6 +113,8 @@ export function renderSecretaryHandoffReviewPage(
       packet_summary: review_packet_projection.packet_summary,
       packet_rationale: review_packet_projection.packet_rationale,
       packet_context_framing: review_packet_projection.packet_context_framing,
+      packet_state_summary: review_packet_projection.packet_state_summary,
+      revision_loop_summary: review_packet_projection.revision_loop_summary,
       management_posture_framing:
         review_packet_projection.management_and_review_posture.management_posture_framing,
       review_posture_framing:
@@ -134,7 +138,7 @@ export function renderSecretaryHandoffReviewPage(
     `<p>Review packet route: ${escape_html(
       sections.header.review_packet_route
     )}</p>`,
-    "<p>Handoff review packet is product-level review framing only.</p>",
+    "<p>Handoff review packet is product-level review framing and revision-return visibility only.</p>",
     "<p>No approve, reject, dispatch, execute, provider, or runtime mutation controls are present here.</p>",
     ...sections.header.projection_notes.map(
       (note) => `<p>Projection note: ${escape_html(note)}</p>`
@@ -175,6 +179,12 @@ export function renderSecretaryHandoffReviewPage(
     `<p>Packet rationale: ${escape_html(sections.packet_framing.packet_rationale)}</p>`,
     `<p>Packet context framing: ${escape_html(
       sections.packet_framing.packet_context_framing
+    )}</p>`,
+    `<p>Packet state summary: ${escape_html(
+      sections.packet_framing.packet_state_summary
+    )}</p>`,
+    `<p>Revision loop summary: ${escape_html(
+      sections.packet_framing.revision_loop_summary
     )}</p>`,
     `<p>Management posture framing: ${escape_html(
       sections.packet_framing.management_posture_framing

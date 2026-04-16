@@ -101,7 +101,8 @@ export function renderPortfolioSecretaryPage(
       sections.header.foundation_overview_route
     )}</p>`,
     "<p>Secretary beta is handoff-first, posture-first, and review-packet-first.</p>",
-    "<p>Shell, staging, and review-packet beta only. Direct-control semantics remain unavailable.</p>",
+    "<p>Secretary beta is also revision-loop-first and remains non-executing.</p>",
+    "<p>Shell, staging, review-packet, and revision-return consistency beta only. Direct-control semantics remain unavailable.</p>",
     ...sections.header.projection_notes.map(
       (note) => `<p>Projection note: ${escape_html(note)}</p>`
     ),
@@ -140,11 +141,24 @@ export function renderPortfolioSecretaryPage(
     `<p>Total cells: ${sections.status_shelf.total_cells}</p>`,
     `<p>Attention required cells: ${sections.status_shelf.attention_required_cells}</p>`,
     `<p>Steady cells: ${sections.status_shelf.steady_cells}</p>`,
+    `<p>Draft packet cells: ${sections.status_shelf.packet_state_counts.draft}</p>`,
+    `<p>Staged packet cells: ${sections.status_shelf.packet_state_counts.staged}</p>`,
+    `<p>Ready-for-cell-review packet cells: ${sections.status_shelf.packet_state_counts.ready_for_cell_review}</p>`,
+    `<p>Returned-for-revision packet cells: ${sections.status_shelf.packet_state_counts.returned_for_revision}</p>`,
+    `<p>Packet state summary: ${escape_html(
+      sections.status_shelf.packet_state_summary
+    )}</p>`,
     "</section>",
     "<section data-section=\"queue-shelf\">",
     "<h2>Queue Shelf</h2>",
     `<p>Queue visibility: ${escape_html(sections.queue_shelf.queue_visibility)}</p>`,
     `<p>Queued attention cells: ${sections.queue_shelf.queued_attention_cells}</p>`,
+    `<p>Staged packet cells: ${sections.queue_shelf.staged_packet_cells}</p>`,
+    `<p>Ready-for-cell-review packet cells: ${sections.queue_shelf.ready_for_cell_review_cells}</p>`,
+    `<p>Returned-for-revision packet cells: ${sections.queue_shelf.returned_for_revision_cells}</p>`,
+    `<p>Packet queue summary: ${escape_html(
+      sections.queue_shelf.packet_queue_summary
+    )}</p>`,
     `<p>Queue note: ${escape_html(sections.queue_shelf.shelf_note)}</p>`,
     "</section>",
     "<section data-section=\"review-shelf\">",
@@ -155,6 +169,11 @@ export function renderPortfolioSecretaryPage(
     )}</p>`,
     `<p>Delivery return visibility: ${escape_html(
       sections.review_shelf.delivery_return_visibility
+    )}</p>`,
+    `<p>Ready-for-cell-review packet cells: ${sections.review_shelf.ready_for_cell_review_cells}</p>`,
+    `<p>Returned-for-revision packet cells: ${sections.review_shelf.returned_for_revision_cells}</p>`,
+    `<p>Review packet summary: ${escape_html(
+      sections.review_shelf.review_packet_summary
     )}</p>`,
     `<p>Review note: ${escape_html(sections.review_shelf.shelf_note)}</p>`,
     "</section>",

@@ -128,7 +128,7 @@ Goal:
 Current status:
 
 - implementation-begun line
-- scope-frozen with Wave 1 shell, Wave 2 handoff staging, and Wave 3 handoff review packet present
+- scope-frozen with Wave 1 shell, Wave 2 handoff staging, Wave 3 handoff review packet, and Wave 4 revision-return consistency present
 - still below handoff execution and direct-control semantics
 
 Mandatory baseline:
@@ -137,6 +137,7 @@ Mandatory baseline:
 - `Cell Summary Card` surface
 - `Escalation / Approval Request` visibility and bounded handoff posture
 - `Delivery Return` visibility and bounded review posture
+- bounded review-packet and revision-return loop consistency in product space only
 - bounded portfolio and Secretary beta shape
 
 Explicitly deferred:

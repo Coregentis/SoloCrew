@@ -179,6 +179,14 @@ test("[app] secretary handoff page stays staged-only and below direct-control se
   assert.equal(page.sections.target_selection.target_cell_id, "cell-scope-01");
   assert.equal(page.sections.target_selection.target_blocked_work_count, 1);
   assert.equal(page.sections.staging_states.length, 4);
+  assert.match(
+    page.sections.framing.packet_state_summary,
+    /returned_for_revision for Runtime Delivery Cell/
+  );
+  assert.match(
+    page.sections.framing.revision_loop_summary,
+    /Revision visibility is active for Runtime Delivery Cell/
+  );
   assert.equal(page.sections.navigation.cell_links.length, 2);
   assert.equal(
     page.sections.navigation.selected_cell_routes?.handoff_route,
@@ -190,11 +198,13 @@ test("[app] secretary handoff page stays staged-only and below direct-control se
   );
 
   assert.match(page.html, /Secretary Handoff Staging/);
-  assert.match(page.html, /Handoff staging is product-level staging and review-packet framing only\./);
+  assert.match(page.html, /Handoff staging is product-level staging, review-packet framing, and revision-return visibility only\./);
   assert.match(page.html, /No approve, reject, dispatch, execute, provider, or runtime mutation controls are present here\./);
   assert.match(page.html, /Target cell id: cell-scope-01/);
   assert.match(page.html, /Target readiness: attention_required/);
   assert.match(page.html, /Packet state: returned_for_revision/);
+  assert.match(page.html, /Packet state summary: The handoff packet is returned_for_revision for Runtime Delivery Cell and stays bounded to revision posture only\./);
+  assert.match(page.html, /Revision loop summary: Revision visibility is active for Runtime Delivery Cell, but return remains a product state and not a reject, dispatch, or execution command\./);
   assert.match(page.html, /Review packet route: \/portfolio\/handoff\/cell-scope-01\/review/);
   assert.match(page.html, /Selected handoff route: \/portfolio\/handoff\/cell-scope-01/);
   assert.doesNotMatch(page.html, /<button\b/);
@@ -229,6 +239,10 @@ test("[app] secretary handoff page exposes no dispatch or execute controls", () 
   assert.equal(page.sections.target_selection.target_cell_id, "cell-scope-02");
   assert.equal(page.sections.target_selection.target_readiness_signal, "attention_required");
   assert.equal(page.sections.framing.packet_state, "ready_for_cell_review");
+  assert.match(
+    page.sections.framing.packet_state_summary,
+    /ready_for_cell_review for Runtime Review Cell/
+  );
   assert.equal(page.sections.navigation.cell_links[1]?.selected, true);
   assert.equal(page.direct_approve_control_available, false);
   assert.equal(page.direct_reject_control_available, false);

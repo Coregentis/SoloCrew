@@ -183,19 +183,46 @@ test("[projection] portfolio secretary shell stays top-level product projection 
   assert.equal(projection.status_shelf.total_cells, 2);
   assert.equal(projection.status_shelf.attention_required_cells, 2);
   assert.equal(projection.status_shelf.steady_cells, 0);
+  assert.equal(projection.status_shelf.packet_state_counts.draft, 0);
+  assert.equal(projection.status_shelf.packet_state_counts.staged, 0);
+  assert.equal(
+    projection.status_shelf.packet_state_counts.ready_for_cell_review,
+    1
+  );
+  assert.equal(
+    projection.status_shelf.packet_state_counts.returned_for_revision,
+    1
+  );
+  assert.match(
+    projection.status_shelf.packet_state_summary,
+    /returned_for_revision cells/
+  );
   assert.equal(
     projection.queue_shelf.queue_visibility,
     "bounded_queue_posture_only"
   );
   assert.equal(projection.queue_shelf.queued_attention_cells, 2);
+  assert.equal(projection.queue_shelf.staged_packet_cells, 0);
+  assert.equal(projection.queue_shelf.ready_for_cell_review_cells, 1);
+  assert.equal(projection.queue_shelf.returned_for_revision_cells, 1);
+  assert.match(
+    projection.queue_shelf.packet_queue_summary,
+    /review-ready packets and 1 revision-return packets/
+  );
   assert.equal(projection.review_shelf.direct_controls_available, false);
   assert.equal(
     projection.review_shelf.approval_request_visibility,
     "runtime_record_present_non_executable"
   );
+  assert.equal(projection.review_shelf.ready_for_cell_review_cells, 1);
+  assert.equal(projection.review_shelf.returned_for_revision_cells, 1);
+  assert.match(
+    projection.review_shelf.review_packet_summary,
+    /ready_for_cell_review packets and 1 returned_for_revision packets/
+  );
   assert.equal(
     projection.posture_shelf.secretary_posture,
-    "handoff_first_review_packet_first_non_executing"
+    "handoff_first_review_packet_first_revision_loop_non_executing"
   );
   assert.equal(
     projection.summary_projections[0]?.source_mode,
@@ -218,6 +245,11 @@ test("[projection] portfolio secretary shell stays top-level product projection 
   assert.ok(
     projection.projection_notes.includes(
       "Wave 3 adds bounded handoff review-packet visibility only and keeps packet states product-projected and non-executing."
+    )
+  );
+  assert.ok(
+    projection.projection_notes.includes(
+      "Wave 4 hardens revision/return loop consistency so portfolio shelves, staging, and review packet surfaces reuse the same non-executing packet-state semantics."
     )
   );
 

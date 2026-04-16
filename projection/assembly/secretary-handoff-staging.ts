@@ -2,11 +2,15 @@ import type {
   PortfolioSecretaryShellProjection,
 } from "../contracts/portfolio-secretary-shell-contract.ts";
 import type {
-  SecretaryHandoffPacketState,
-  SecretaryHandoffStageIndicator,
   SecretaryHandoffStagingProjection,
   SecretaryHandoffStagingStatus,
 } from "../contracts/secretary-handoff-staging-contract.ts";
+import {
+  buildSecretaryHandoffPacketStateSummary,
+  buildSecretaryHandoffRevisionLoopSummary,
+  buildSecretaryHandoffStageIndicators,
+  deriveSecretaryHandoffPacketState,
+} from "./secretary-handoff-packet-state.ts";
 
 const SECRETARY_HANDOFF_STAGING_NON_CLAIMS = [
   "no_direct_approve_control",
@@ -47,60 +51,6 @@ function select_summary_projection(
   ) ?? portfolio_projection.summary_projections[0];
 }
 
-function determine_staging_status(
-  selected_summary:
-    | PortfolioSecretaryShellProjection["summary_projections"][number]
-    | undefined
-): SecretaryHandoffStagingStatus {
-  if (!selected_summary) {
-    return "draft";
-  }
-
-  if (
-    selected_summary.cell_summary_card.blocked_work_count > 0 ||
-    selected_summary.cell_summary_card.delivery_posture === "blocked"
-  ) {
-    return "returned_for_revision";
-  }
-
-  if (selected_summary.readiness_signal === "attention_required") {
-    return "ready_for_cell_review";
-  }
-
-  return "staged";
-}
-
-function build_stage_indicators(
-  staging_status: SecretaryHandoffPacketState
-): SecretaryHandoffStageIndicator[] {
-  return [
-    {
-      stage: "draft",
-      label: "draft",
-      active: staging_status === "draft",
-      note: "Draft frames handoff intent in product space only.",
-    },
-    {
-      stage: "staged",
-      label: "staged",
-      active: staging_status === "staged",
-      note: "Staged means the handoff package is visible but still non-executing.",
-    },
-    {
-      stage: "ready_for_cell_review",
-      label: "ready_for_cell_review",
-      active: staging_status === "ready_for_cell_review",
-      note: "Ready-for-cell-review signals bounded readiness for downstream cell review, not dispatch or execution.",
-    },
-    {
-      stage: "returned_for_revision",
-      label: "returned_for_revision",
-      active: staging_status === "returned_for_revision",
-      note: "Returned-for-revision signals bounded revision posture only and does not become a workflow command.",
-    },
-  ];
-}
-
 export function assembleSecretaryHandoffStagingProjection(
   portfolio_projection: PortfolioSecretaryShellProjection,
   target_cell_id?: string
@@ -109,9 +59,8 @@ export function assembleSecretaryHandoffStagingProjection(
     portfolio_projection,
     target_cell_id
   );
-  const staging_status = determine_staging_status(
-    selected_summary
-  );
+  const staging_status: SecretaryHandoffStagingStatus =
+    deriveSecretaryHandoffPacketState(selected_summary);
   const target_cell_name = selected_summary?.cell_summary_card.cell_name;
   const target_cell_id_value = selected_summary?.cell_summary_card.cell_id;
 
@@ -141,7 +90,7 @@ export function assembleSecretaryHandoffStagingProjection(
     handoff_payload_kind: "product_staging_only",
     handoff_staging_is_runtime_law: false,
     staging_status,
-    staging_states: build_stage_indicators(staging_status),
+    staging_states: buildSecretaryHandoffStageIndicators(staging_status),
     target_selection: {
       selection_mode: "selected_cell_from_portfolio_shell",
       target_cell_id: target_cell_id_value,
@@ -165,6 +114,14 @@ export function assembleSecretaryHandoffStagingProjection(
     handoff_intent_framing: target_cell_name
       ? `Package bounded next-step context for ${target_cell_name} as staged handoff and review-packet posture only, without approving, dispatching, or executing anything.`
       : "No target cell is selected yet, so handoff framing remains draft-only.",
+    packet_state_summary: buildSecretaryHandoffPacketStateSummary(
+      staging_status,
+      target_cell_name
+    ),
+    revision_loop_summary: buildSecretaryHandoffRevisionLoopSummary(
+      staging_status,
+      target_cell_name
+    ),
     management_and_review_posture: {
       management_directive_visibility:
         portfolio_projection.posture_shelf.management_directive_visibility,
@@ -178,7 +135,7 @@ export function assembleSecretaryHandoffStagingProjection(
         "Review posture may be framed as a packet-ready downstream handoff surface, but no approval, rejection, or dispatch execution is authorized here.",
     },
     non_executing_notice:
-      "Secretary handoff staging remains review-packet-first, non-executing, non-dispatching, and non-authoritative over runtime behavior.",
+      "Secretary handoff staging remains review-packet-first, revision-loop-aware, non-executing, non-dispatching, and non-authoritative over runtime behavior.",
     truth_sources: unique_items([
       "portfolio_secretary_shell_projection",
       ...portfolio_projection.truth_sources,
@@ -203,6 +160,7 @@ export function assembleSecretaryHandoffStagingProjection(
       "Secretary handoff staging is a downstream product projection over the portfolio shell, not a runtime command object.",
       "The staging surface frames target, intent, and posture only; execution semantics remain outside this wave.",
       "Shared handoff packet states remain posture semantics only and do not become runtime commands.",
+      "Wave 4 hardens revision/return loop consistency across shell, staging, and review packet surfaces without introducing execution semantics.",
       "Runtime-private workforce truth remains upstream and is consumed only through existing product projection layers.",
       ...portfolio_projection.projection_notes,
     ],

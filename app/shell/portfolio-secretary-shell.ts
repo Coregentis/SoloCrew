@@ -118,6 +118,7 @@ export function composePortfolioSecretaryShell(
       "Wave 1 shell remains the top-level navigation frame over the existing v0.4 surfaces.",
       "Wave 2 adds bounded handoff staging routes only and keeps the portfolio shell non-executing.",
       "Wave 3 adds bounded handoff review-packet routes only and keeps packet states product-projected and non-executing.",
+      "Wave 4 hardens revision-return loop consistency across the existing portfolio shell, staging, and review packet surfaces without adding direct control.",
     ],
     deferred_items: [...portfolio_secretary_projection.deferred_items],
   };
