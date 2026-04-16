@@ -13,16 +13,18 @@ export type SecretaryHandoffStagingAuthorityBoundary =
 export type SecretaryHandoffStagingPhaseBoundary = "beta_handoff_staging";
 export type SecretaryHandoffStagingSourceMode =
   "portfolio_secretary_shell_projection";
-export type SecretaryHandoffStagingStatus =
+export type SecretaryHandoffPacketState =
   | "draft"
   | "staged"
-  | "ready_for_cell_review";
+  | "ready_for_cell_review"
+  | "returned_for_revision";
+export type SecretaryHandoffStagingStatus = SecretaryHandoffPacketState;
 export type SecretaryHandoffStagingTruthSource =
   | PortfolioSecretaryTruthSource
   | "portfolio_secretary_shell_projection";
 
 export interface SecretaryHandoffStageIndicator {
-  stage: SecretaryHandoffStagingStatus;
+  stage: SecretaryHandoffPacketState;
   label: string;
   active: boolean;
   note: string;
@@ -37,6 +39,12 @@ export interface SecretaryHandoffTargetSelection {
     PortfolioSecretaryShellProjection["summary_projections"][number]["readiness_signal"];
   target_source_mode?:
     PortfolioSecretaryShellProjection["summary_projections"][number]["source_mode"];
+  target_delivery_posture?:
+    PortfolioSecretaryShellProjection["summary_projections"][number]["cell_summary_card"]["delivery_posture"];
+  target_active_work_count?: number;
+  target_blocked_work_count?: number;
+  target_objective_status_summary?: string;
+  target_continuity_hint?: string;
 }
 
 export interface SecretaryHandoffManagementPosture {

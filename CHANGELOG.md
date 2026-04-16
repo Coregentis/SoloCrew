@@ -2,6 +2,8 @@
 
 ## 2026-04-16
 
+- added the bounded `v0.5-portfolio-secretary-beta` Wave 3 handoff review packet / posture consistency surface over the existing staged handoff lane
+- kept that Wave 3 implementation review-only and explicitly out of scope for direct approve, reject, dispatch, execute, provider, or channel behavior
 - added the bounded `v0.5-portfolio-secretary-beta` Wave 2 Secretary-to-cell handoff staging surface inside the existing portfolio shell context
 - kept that Wave 2 implementation staged-only and explicitly out of scope for direct approve, reject, dispatch, execute, provider, or channel behavior
 - added the first bounded `v0.5-portfolio-secretary-beta` Wave 1 Secretary / Portfolio shell above the current `v0.4` surface family

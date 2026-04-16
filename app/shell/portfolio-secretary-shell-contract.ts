@@ -10,6 +10,7 @@ export interface PortfolioSecretaryNavigationLink {
   management_route: string;
   continuity_route: string;
   handoff_route: string;
+  review_packet_route: string;
 }
 
 export interface PortfolioSecretaryShell {
@@ -43,6 +44,7 @@ export interface PortfolioSecretaryShell {
       management_route: string;
       continuity_route: string;
       handoff_route: string;
+      review_packet_route: string;
     };
   };
   truth_boundary: {

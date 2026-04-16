@@ -8,6 +8,12 @@ import {
   assemblePortfolioSecretaryShellProjection,
 } from "../../projection/assembly/portfolio-secretary-shell.ts";
 import {
+  assembleSecretaryHandoffStagingProjection,
+} from "../../projection/assembly/secretary-handoff-staging.ts";
+import {
+  assembleSecretaryHandoffReviewPacketProjection,
+} from "../../projection/assembly/secretary-handoff-review-packet.ts";
+import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
 } from "../../projection/contracts/structural-boundary.ts";
 
@@ -141,11 +147,11 @@ function create_runtime_inputs() {
   ];
 }
 
-test("[projection] portfolio secretary shell stays top-level product projection and non-executing", () => {
+test("[projection] secretary handoff review packet stays review-only and product-projected", () => {
   const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
     create_runtime_inputs()
   );
-  const projection = assemblePortfolioSecretaryShellProjection({
+  const portfolio_projection = assemblePortfolioSecretaryShellProjection({
     source_overview_shell_id: overview_shell.overview_shell_id,
     cell_summary_units: overview_shell.cell_summary_units,
     management_object_family_status:
@@ -154,82 +160,65 @@ test("[projection] portfolio secretary shell stays top-level product projection 
     non_claims: overview_shell.truth_boundary.non_claims,
     projection_notes: overview_shell.projection_notes,
   });
+  const staging_projection = assembleSecretaryHandoffStagingProjection(
+    portfolio_projection,
+    "cell-scope-01"
+  );
+  const review_packet =
+    assembleSecretaryHandoffReviewPacketProjection(staging_projection);
 
   assert.equal(
-    projection.projection_scope,
-    "portfolio_secretary_beta_shell"
+    review_packet.projection_scope,
+    "secretary_handoff_review_packet"
   );
-  assert.equal(projection.authority_boundary, "product_projection_only");
-  assert.equal(projection.phase_boundary, "beta_shell_navigation");
-  assert.equal(projection.source_mode, "multi_cell_foundation_overview_shell");
-  assert.equal(projection.secretary_behavior_available, true);
-  assert.equal(projection.portfolio_dispatch_behavior_available, false);
-  assert.equal(projection.direct_approve_control_available, false);
-  assert.equal(projection.direct_reject_control_available, false);
-  assert.equal(projection.direct_dispatch_control_available, false);
-  assert.equal(projection.direct_execute_control_available, false);
-  assert.equal(projection.provider_execution_available, false);
-  assert.equal(projection.channel_entry_available, false);
-  assert.equal(projection.workflow_engine_behavior_available, false);
-  assert.equal(projection.handoff_creation_available, true);
+  assert.equal(review_packet.authority_boundary, "product_projection_only");
+  assert.equal(review_packet.phase_boundary, "beta_review_packet");
   assert.equal(
-    projection.selection.selection_mode,
-    "bounded_navigation_only"
+    review_packet.source_mode,
+    "secretary_handoff_staging_projection"
   );
-  assert.equal(projection.view_separation.secretary_view_distinct_from_cell_view, true);
-  assert.equal(projection.navigation_units.length, 2);
-  assert.equal(projection.navigation_units[0]?.selected, true);
-  assert.equal(projection.navigation_units[1]?.selected, false);
-  assert.equal(projection.status_shelf.total_cells, 2);
-  assert.equal(projection.status_shelf.attention_required_cells, 2);
-  assert.equal(projection.status_shelf.steady_cells, 0);
+  assert.equal(review_packet.secretary_behavior_available, true);
+  assert.equal(review_packet.portfolio_dispatch_behavior_available, false);
+  assert.equal(review_packet.direct_approve_control_available, false);
+  assert.equal(review_packet.direct_reject_control_available, false);
+  assert.equal(review_packet.direct_dispatch_control_available, false);
+  assert.equal(review_packet.direct_execute_control_available, false);
+  assert.equal(review_packet.provider_execution_available, false);
+  assert.equal(review_packet.channel_entry_available, false);
+  assert.equal(review_packet.workflow_engine_behavior_available, false);
+  assert.equal(review_packet.runtime_complete_orchestration_available, false);
+  assert.equal(review_packet.review_packet_kind, "product_review_packet_only");
+  assert.equal(review_packet.review_packet_is_runtime_law, false);
+  assert.equal(review_packet.packet_state, "returned_for_revision");
+  assert.equal(review_packet.packet_states.length, 4);
   assert.equal(
-    projection.queue_shelf.queue_visibility,
-    "bounded_queue_posture_only"
-  );
-  assert.equal(projection.queue_shelf.queued_attention_cells, 2);
-  assert.equal(projection.review_shelf.direct_controls_available, false);
-  assert.equal(
-    projection.review_shelf.approval_request_visibility,
-    "runtime_record_present_non_executable"
+    review_packet.review_readiness.readiness_label,
+    "revision_requested"
   );
   assert.equal(
-    projection.posture_shelf.secretary_posture,
-    "handoff_first_review_packet_first_non_executing"
-  );
-  assert.equal(
-    projection.summary_projections[0]?.source_mode,
-    "upstream_runtime_private_records"
+    review_packet.review_readiness.target_blocked_work_count,
+    1
   );
   assert.ok(
-    projection.truth_sources.includes("multi_cell_foundation_projection")
+    review_packet.truth_sources.includes("secretary_handoff_staging_projection")
   );
   assert.ok(
-    projection.non_claims.includes("no_direct_dispatch_control")
-  );
-  assert.ok(
-    projection.deferred_items.includes("handoff_execution")
-  );
-  assert.ok(
-    projection.projection_notes.includes(
-      "Wave 2 adds bounded handoff staging visibility only; direct control and handoff execution remain deferred."
+    review_packet.non_claims.includes(
+      "packet_states_are_posture_only_not_runtime_commands"
     )
   );
   assert.ok(
-    projection.projection_notes.includes(
-      "Wave 3 adds bounded handoff review-packet visibility only and keeps packet states product-projected and non-executing."
+    review_packet.projection_notes.includes(
+      "Secretary handoff review packet is a downstream product projection over staged handoff truth, not a runtime review command."
     )
   );
 
   const boundary_targets = [
-    projection,
-    projection.selection,
-    projection.view_separation,
-    projection.status_shelf,
-    projection.queue_shelf,
-    projection.review_shelf,
-    projection.posture_shelf,
-    ...projection.summary_projections,
+    review_packet,
+    review_packet.target_selection,
+    review_packet.management_and_review_posture,
+    review_packet.review_readiness,
+    ...review_packet.packet_states,
   ];
 
   for (const target of boundary_targets) {

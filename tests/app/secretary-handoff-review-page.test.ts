@@ -2,11 +2,18 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
-  composeMultiCellFoundationOverviewShellFromRuntimeInputs,
-} from "../../app/shell/multi-cell-foundation-overview.ts";
+  renderSecretaryHandoffReviewPage,
+} from "../../app/pages/secretary-handoff-review-page.ts";
 import {
-  assemblePortfolioSecretaryShellProjection,
-} from "../../projection/assembly/portfolio-secretary-shell.ts";
+  composePortfolioSecretaryShellFromRuntimeInputs,
+} from "../../app/shell/portfolio-secretary-shell.ts";
+import {
+  composeSecretaryHandoffReviewPacketShell,
+  buildSecretaryHandoffReviewPacketRoute,
+} from "../../app/shell/secretary-handoff-review-packet.ts";
+import {
+  composeSecretaryHandoffStagingShell,
+} from "../../app/shell/secretary-handoff-staging.ts";
 import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
 } from "../../projection/contracts/structural-boundary.ts";
@@ -141,95 +148,69 @@ function create_runtime_inputs() {
   ];
 }
 
-test("[projection] portfolio secretary shell stays top-level product projection and non-executing", () => {
-  const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
-    create_runtime_inputs()
+test("[app] secretary handoff review page stays review-only and below direct-control semantics", () => {
+  const portfolio_shell =
+    composePortfolioSecretaryShellFromRuntimeInputs(create_runtime_inputs());
+  const staging_shell = composeSecretaryHandoffStagingShell(
+    portfolio_shell,
+    "cell-scope-01"
   );
-  const projection = assemblePortfolioSecretaryShellProjection({
-    source_overview_shell_id: overview_shell.overview_shell_id,
-    cell_summary_units: overview_shell.cell_summary_units,
-    management_object_family_status:
-      overview_shell.management_object_family_status,
-    deferred_items: overview_shell.deferred_items,
-    non_claims: overview_shell.truth_boundary.non_claims,
-    projection_notes: overview_shell.projection_notes,
-  });
+  const review_shell =
+    composeSecretaryHandoffReviewPacketShell(staging_shell);
+  const page = renderSecretaryHandoffReviewPage(review_shell);
 
   assert.equal(
-    projection.projection_scope,
-    "portfolio_secretary_beta_shell"
+    page.route_path,
+    buildSecretaryHandoffReviewPacketRoute("cell-scope-01")
   );
-  assert.equal(projection.authority_boundary, "product_projection_only");
-  assert.equal(projection.phase_boundary, "beta_shell_navigation");
-  assert.equal(projection.source_mode, "multi_cell_foundation_overview_shell");
-  assert.equal(projection.secretary_behavior_available, true);
-  assert.equal(projection.portfolio_dispatch_behavior_available, false);
-  assert.equal(projection.direct_approve_control_available, false);
-  assert.equal(projection.direct_reject_control_available, false);
-  assert.equal(projection.direct_dispatch_control_available, false);
-  assert.equal(projection.direct_execute_control_available, false);
-  assert.equal(projection.provider_execution_available, false);
-  assert.equal(projection.channel_entry_available, false);
-  assert.equal(projection.workflow_engine_behavior_available, false);
-  assert.equal(projection.handoff_creation_available, true);
+  assert.equal(page.page_kind, "secretary_handoff_review_page");
   assert.equal(
-    projection.selection.selection_mode,
-    "bounded_navigation_only"
-  );
-  assert.equal(projection.view_separation.secretary_view_distinct_from_cell_view, true);
-  assert.equal(projection.navigation_units.length, 2);
-  assert.equal(projection.navigation_units[0]?.selected, true);
-  assert.equal(projection.navigation_units[1]?.selected, false);
-  assert.equal(projection.status_shelf.total_cells, 2);
-  assert.equal(projection.status_shelf.attention_required_cells, 2);
-  assert.equal(projection.status_shelf.steady_cells, 0);
-  assert.equal(
-    projection.queue_shelf.queue_visibility,
-    "bounded_queue_posture_only"
-  );
-  assert.equal(projection.queue_shelf.queued_attention_cells, 2);
-  assert.equal(projection.review_shelf.direct_controls_available, false);
-  assert.equal(
-    projection.review_shelf.approval_request_visibility,
-    "runtime_record_present_non_executable"
+    page.page_scope,
+    "portfolio_secretary_handoff_review_packet_only"
   );
   assert.equal(
-    projection.posture_shelf.secretary_posture,
-    "handoff_first_review_packet_first_non_executing"
+    page.operator_surface,
+    "portfolio_secretary_handoff_review_packet"
+  );
+  assert.equal(page.navigation_mode, "review_packet_only_non_executing");
+  assert.equal(page.secretary_behavior_available, true);
+  assert.equal(page.portfolio_dispatch_behavior_available, false);
+  assert.equal(page.direct_approve_control_available, false);
+  assert.equal(page.direct_reject_control_available, false);
+  assert.equal(page.direct_dispatch_control_available, false);
+  assert.equal(page.direct_execute_control_available, false);
+  assert.equal(page.actual_provider_actions_present, false);
+  assert.equal(page.actual_channel_entry_present, false);
+  assert.equal(page.workflow_engine_behavior_available, false);
+  assert.equal(page.runtime_complete_orchestration_available, false);
+  assert.equal(page.handoff_creation_available, true);
+  assert.equal(page.sections.target_selection.target_cell_id, "cell-scope-01");
+  assert.equal(page.sections.packet_framing.packet_state, "returned_for_revision");
+  assert.equal(
+    page.sections.review_readiness.readiness_label,
+    "revision_requested"
   );
   assert.equal(
-    projection.summary_projections[0]?.source_mode,
-    "upstream_runtime_private_records"
+    page.sections.navigation.selected_cell_routes?.review_packet_route,
+    "/portfolio/handoff/cell-scope-01/review"
   );
-  assert.ok(
-    projection.truth_sources.includes("multi_cell_foundation_projection")
-  );
-  assert.ok(
-    projection.non_claims.includes("no_direct_dispatch_control")
-  );
-  assert.ok(
-    projection.deferred_items.includes("handoff_execution")
-  );
-  assert.ok(
-    projection.projection_notes.includes(
-      "Wave 2 adds bounded handoff staging visibility only; direct control and handoff execution remain deferred."
-    )
-  );
-  assert.ok(
-    projection.projection_notes.includes(
-      "Wave 3 adds bounded handoff review-packet visibility only and keeps packet states product-projected and non-executing."
-    )
-  );
+
+  assert.match(page.html, /Secretary Handoff Review Packet/);
+  assert.match(page.html, /Handoff review packet is product-level review framing only\./);
+  assert.match(page.html, /Packet state: returned_for_revision/);
+  assert.match(page.html, /Readiness label: revision_requested/);
+  assert.match(page.html, /Review packet route: \/portfolio\/handoff\/cell-scope-01\/review/);
+  assert.doesNotMatch(page.html, /<button\b/);
+  assert.doesNotMatch(page.html, /<form\b/);
 
   const boundary_targets = [
-    projection,
-    projection.selection,
-    projection.view_separation,
-    projection.status_shelf,
-    projection.queue_shelf,
-    projection.review_shelf,
-    projection.posture_shelf,
-    ...projection.summary_projections,
+    page,
+    page.sections.header,
+    page.sections.target_selection,
+    page.sections.review_readiness,
+    page.sections.packet_framing,
+    page.sections.truth_boundary,
+    review_shell.handoff_review_packet_projection,
   ];
 
   for (const target of boundary_targets) {
@@ -237,4 +218,33 @@ test("[projection] portfolio secretary shell stays top-level product projection 
       assert.equal(field_name in target, false);
     }
   }
+});
+
+test("[app] secretary handoff review page exposes no dispatch or execute controls", () => {
+  const portfolio_shell =
+    composePortfolioSecretaryShellFromRuntimeInputs(create_runtime_inputs());
+  const staging_shell = composeSecretaryHandoffStagingShell(
+    portfolio_shell,
+    "cell-scope-02"
+  );
+  const review_shell =
+    composeSecretaryHandoffReviewPacketShell(staging_shell);
+  const page = renderSecretaryHandoffReviewPage(review_shell);
+
+  assert.equal(page.sections.target_selection.target_cell_id, "cell-scope-02");
+  assert.equal(page.sections.packet_framing.packet_state, "ready_for_cell_review");
+  assert.equal(page.sections.review_readiness.readiness_label, "cell_review_ready");
+  assert.equal(page.direct_approve_control_available, false);
+  assert.equal(page.direct_reject_control_available, false);
+  assert.equal(page.direct_dispatch_control_available, false);
+  assert.equal(page.direct_execute_control_available, false);
+  assert.ok(
+    page.sections.truth_boundary.non_claims.includes(
+      "packet_states_are_posture_only_not_runtime_commands"
+    )
+  );
+  assert.doesNotMatch(page.html, /<button\b/);
+  assert.doesNotMatch(page.html, /<form\b/);
+  assert.doesNotMatch(page.html, /dispatch button/i);
+  assert.doesNotMatch(page.html, /run provider/i);
 });

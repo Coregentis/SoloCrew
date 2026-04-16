@@ -116,7 +116,7 @@ export function assemblePortfolioSecretaryShellProjection(
         input.management_object_family_status.delivery_return,
       direct_controls_available: false,
       shelf_note:
-        "Review shelf reflects bounded visibility and staging posture only.",
+        "Review shelf reflects bounded visibility, review-packet posture, and staging posture only.",
     },
     posture_shelf: {
       shelf_scope: "bounded_posture_shelf",
@@ -126,7 +126,7 @@ export function assemblePortfolioSecretaryShellProjection(
         input.management_object_family_status.delivery_return,
       approval_request_visibility:
         input.management_object_family_status.approval_request,
-      secretary_posture: "handoff_first_non_executing",
+      secretary_posture: "handoff_first_review_packet_first_non_executing",
       direct_controls_available: false,
     },
     truth_sources: unique_items([
@@ -146,8 +146,9 @@ export function assemblePortfolioSecretaryShellProjection(
     ]),
     projection_notes: [
       "Portfolio Secretary shell projection wraps the existing v0.4 multi-cell foundation rather than replacing it.",
-      "Secretary beta remains handoff-first, posture-first, and non-executing in this wave.",
+      "Secretary beta remains handoff-first, posture-first, review-packet-first, and non-executing in this wave.",
       "Wave 2 adds bounded handoff staging visibility only; direct control and handoff execution remain deferred.",
+      "Wave 3 adds bounded handoff review-packet visibility only and keeps packet states product-projected and non-executing.",
       ...input.projection_notes,
     ],
   };

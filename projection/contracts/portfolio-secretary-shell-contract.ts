@@ -61,7 +61,7 @@ export interface PortfolioSecretaryPostureShelf {
   management_directive_visibility: PortfolioSecretaryManagementObjectStatus;
   delivery_return_visibility: PortfolioSecretaryManagementObjectStatus;
   approval_request_visibility: PortfolioSecretaryManagementObjectStatus;
-  secretary_posture: "handoff_first_non_executing";
+  secretary_posture: "handoff_first_review_packet_first_non_executing";
   direct_controls_available: false;
 }
 

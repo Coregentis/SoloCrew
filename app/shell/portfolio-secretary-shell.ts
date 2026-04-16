@@ -16,6 +16,9 @@ import {
 import {
   buildSecretaryHandoffRoute,
 } from "./secretary-handoff-staging.ts";
+import {
+  buildSecretaryHandoffReviewPacketRoute,
+} from "./secretary-handoff-review-packet.ts";
 import type {
   MultiCellFoundationOverviewShell,
   MultiCellFoundationRuntimeCellInput,
@@ -44,6 +47,9 @@ function build_navigation_links(
     handoff_route: buildSecretaryHandoffRoute(
       summary.cell_summary_card.cell_id
     ),
+    review_packet_route: buildSecretaryHandoffReviewPacketRoute(
+      summary.cell_summary_card.cell_id
+    ),
   }));
 }
 
@@ -67,6 +73,7 @@ export function composePortfolioSecretaryShell(
           management_route: cell_links[0].management_route,
           continuity_route: cell_links[0].continuity_route,
           handoff_route: cell_links[0].handoff_route,
+          review_packet_route: cell_links[0].review_packet_route,
         }
     : undefined;
 
@@ -110,6 +117,7 @@ export function composePortfolioSecretaryShell(
       "Portfolio Secretary shell reuses the existing v0.4 multi-cell overview family underneath.",
       "Wave 1 shell remains the top-level navigation frame over the existing v0.4 surfaces.",
       "Wave 2 adds bounded handoff staging routes only and keeps the portfolio shell non-executing.",
+      "Wave 3 adds bounded handoff review-packet routes only and keeps packet states product-projected and non-executing.",
     ],
     deferred_items: [...portfolio_secretary_projection.deferred_items],
   };

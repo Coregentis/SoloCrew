@@ -128,7 +128,7 @@ Goal:
 Current status:
 
 - implementation-begun line
-- scope-frozen with Wave 1 shell and Wave 2 handoff staging present
+- scope-frozen with Wave 1 shell, Wave 2 handoff staging, and Wave 3 handoff review packet present
 - still below handoff execution and direct-control semantics
 
 Mandatory baseline:

@@ -181,6 +181,10 @@ test("[app] portfolio secretary page stays top-level navigation only and below d
     page.sections.navigation.selected_cell_routes?.handoff_route,
     "/portfolio/handoff/cell-scope-01"
   );
+  assert.equal(
+    page.sections.navigation.selected_cell_routes?.review_packet_route,
+    "/portfolio/handoff/cell-scope-01/review"
+  );
   assert.equal(page.sections.status_shelf.total_cells, 2);
   assert.equal(page.sections.status_shelf.attention_required_cells, 2);
   assert.equal(page.sections.status_shelf.steady_cells, 0);
@@ -191,18 +195,19 @@ test("[app] portfolio secretary page stays top-level navigation only and below d
   );
   assert.equal(
     page.sections.posture_shelf.secretary_posture,
-    "handoff_first_non_executing"
+    "handoff_first_review_packet_first_non_executing"
   );
   assert.equal(page.sections.truth_boundary.shell_projection_is_runtime_law, false);
 
   assert.match(page.html, /Portfolio Secretary Beta/);
-  assert.match(page.html, /Secretary beta is handoff-first and posture-first\./);
-  assert.match(page.html, /Shell and staging beta only\. Direct-control semantics remain unavailable\./);
+  assert.match(page.html, /Secretary beta is handoff-first, posture-first, and review-packet-first\./);
+  assert.match(page.html, /Shell, staging, and review-packet beta only\. Direct-control semantics remain unavailable\./);
   assert.match(page.html, /Foundation overview route: \/cells/);
   assert.match(page.html, /Detail route: \/cells\/cell-scope-01/);
   assert.match(page.html, /Management route: \/cells\/cell-scope-01\/management/);
   assert.match(page.html, /Continuity route: \/cells\/cell-scope-01\/continuity/);
   assert.match(page.html, /Handoff route: \/portfolio\/handoff\/cell-scope-01/);
+  assert.match(page.html, /Review packet route: \/portfolio\/handoff\/cell-scope-01\/review/);
   assert.doesNotMatch(page.html, /<button\b/);
   assert.doesNotMatch(page.html, /<form\b/);
 

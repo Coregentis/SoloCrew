@@ -182,15 +182,16 @@ test("[projection] secretary handoff staging stays product-projected and non-exe
   assert.equal(projection.handoff_creation_available, true);
   assert.equal(projection.handoff_payload_kind, "product_staging_only");
   assert.equal(projection.handoff_staging_is_runtime_law, false);
-  assert.equal(projection.staging_status, "ready_for_cell_review");
+  assert.equal(projection.staging_status, "returned_for_revision");
   assert.equal(projection.target_selection.target_cell_id, "cell-scope-01");
   assert.equal(
     projection.target_selection.target_source_mode,
     "upstream_runtime_private_records"
   );
-  assert.equal(projection.staging_states.length, 3);
-  assert.equal(projection.staging_states[2]?.stage, "ready_for_cell_review");
-  assert.equal(projection.staging_states[2]?.active, true);
+  assert.equal(projection.target_selection.target_blocked_work_count, 1);
+  assert.equal(projection.staging_states.length, 4);
+  assert.equal(projection.staging_states[3]?.stage, "returned_for_revision");
+  assert.equal(projection.staging_states[3]?.active, true);
   assert.ok(projection.upstream_refs.length >= 2);
   assert.ok(
     projection.upstream_refs.some(
@@ -209,6 +210,11 @@ test("[projection] secretary handoff staging stays product-projected and non-exe
   assert.ok(
     projection.projection_notes.includes(
       "Secretary handoff staging is a downstream product projection over the portfolio shell, not a runtime command object."
+    )
+  );
+  assert.ok(
+    projection.projection_notes.includes(
+      "Shared handoff packet states remain posture semantics only and do not become runtime commands."
     )
   );
 

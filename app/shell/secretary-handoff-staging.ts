@@ -1,6 +1,9 @@
 import {
   assembleSecretaryHandoffStagingProjection,
 } from "../../projection/assembly/secretary-handoff-staging.ts";
+import {
+  buildSecretaryHandoffReviewPacketRoute,
+} from "./secretary-handoff-review-packet.ts";
 import type {
   PortfolioSecretaryShell,
 } from "./portfolio-secretary-shell-contract.ts";
@@ -81,6 +84,8 @@ export function composeSecretaryHandoffStagingShell(
       portfolio_route: portfolio_shell.navigation.portfolio_route,
       foundation_overview_route: portfolio_shell.navigation.foundation_overview_route,
       handoff_route: buildSecretaryHandoffRoute(resolved_target_cell_id),
+      review_packet_route:
+        buildSecretaryHandoffReviewPacketRoute(resolved_target_cell_id),
       read_mode: "staging_only_non_executing",
       cell_links,
       selected_cell_routes: selected_cell_link
@@ -89,6 +94,7 @@ export function composeSecretaryHandoffStagingShell(
             management_route: selected_cell_link.management_route,
             continuity_route: selected_cell_link.continuity_route,
             handoff_route: selected_cell_link.handoff_route,
+            review_packet_route: selected_cell_link.review_packet_route,
           }
         : undefined,
     },
@@ -101,7 +107,7 @@ export function composeSecretaryHandoffStagingShell(
     },
     projection_notes: [
       "Secretary handoff staging reuses the existing portfolio shell rather than introducing a parallel Secretary model.",
-      "The shell stays handoff-first, posture-first, and non-executing over the current v0.4 surface family.",
+      "The shell stays handoff-first, posture-first, review-packet-first, and non-executing over the current v0.4 surface family.",
     ],
     deferred_items: [...handoff_staging_projection.deferred_items],
   };

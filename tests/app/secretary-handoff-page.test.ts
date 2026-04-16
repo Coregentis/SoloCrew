@@ -177,19 +177,25 @@ test("[app] secretary handoff page stays staged-only and below direct-control se
   assert.equal(page.runtime_complete_orchestration_available, false);
   assert.equal(page.handoff_creation_available, true);
   assert.equal(page.sections.target_selection.target_cell_id, "cell-scope-01");
-  assert.equal(page.sections.staging_states.length, 3);
+  assert.equal(page.sections.target_selection.target_blocked_work_count, 1);
+  assert.equal(page.sections.staging_states.length, 4);
   assert.equal(page.sections.navigation.cell_links.length, 2);
   assert.equal(
     page.sections.navigation.selected_cell_routes?.handoff_route,
     "/portfolio/handoff/cell-scope-01"
   );
+  assert.equal(
+    page.sections.navigation.selected_cell_routes?.review_packet_route,
+    "/portfolio/handoff/cell-scope-01/review"
+  );
 
   assert.match(page.html, /Secretary Handoff Staging/);
-  assert.match(page.html, /Handoff staging is product-level staging only\./);
+  assert.match(page.html, /Handoff staging is product-level staging and review-packet framing only\./);
   assert.match(page.html, /No approve, reject, dispatch, execute, provider, or runtime mutation controls are present here\./);
   assert.match(page.html, /Target cell id: cell-scope-01/);
   assert.match(page.html, /Target readiness: attention_required/);
-  assert.match(page.html, /ready_for_cell_review/);
+  assert.match(page.html, /Packet state: returned_for_revision/);
+  assert.match(page.html, /Review packet route: \/portfolio\/handoff\/cell-scope-01\/review/);
   assert.match(page.html, /Selected handoff route: \/portfolio\/handoff\/cell-scope-01/);
   assert.doesNotMatch(page.html, /<button\b/);
   assert.doesNotMatch(page.html, /<form\b/);
@@ -222,6 +228,7 @@ test("[app] secretary handoff page exposes no dispatch or execute controls", () 
 
   assert.equal(page.sections.target_selection.target_cell_id, "cell-scope-02");
   assert.equal(page.sections.target_selection.target_readiness_signal, "attention_required");
+  assert.equal(page.sections.framing.packet_state, "ready_for_cell_review");
   assert.equal(page.sections.navigation.cell_links[1]?.selected, true);
   assert.equal(page.direct_approve_control_available, false);
   assert.equal(page.direct_reject_control_available, false);

@@ -62,6 +62,7 @@ function render_navigation_link(
     `<p>Management route: ${escape_html(link.management_route)}</p>`,
     `<p>Continuity route: ${escape_html(link.continuity_route)}</p>`,
     `<p>Handoff route: ${escape_html(link.handoff_route)}</p>`,
+    `<p>Review packet route: ${escape_html(link.review_packet_route)}</p>`,
     "</article>",
   ].join("");
 }
@@ -99,8 +100,8 @@ export function renderPortfolioSecretaryPage(
     `<p>Foundation overview route: ${escape_html(
       sections.header.foundation_overview_route
     )}</p>`,
-    "<p>Secretary beta is handoff-first and posture-first.</p>",
-    "<p>Shell and staging beta only. Direct-control semantics remain unavailable.</p>",
+    "<p>Secretary beta is handoff-first, posture-first, and review-packet-first.</p>",
+    "<p>Shell, staging, and review-packet beta only. Direct-control semantics remain unavailable.</p>",
     ...sections.header.projection_notes.map(
       (note) => `<p>Projection note: ${escape_html(note)}</p>`
     ),
@@ -127,6 +128,9 @@ export function renderPortfolioSecretaryPage(
           )}</p>`,
           `<p>Selected handoff route: ${escape_html(
             sections.navigation.selected_cell_routes.handoff_route
+          )}</p>`,
+          `<p>Selected review packet route: ${escape_html(
+            sections.navigation.selected_cell_routes.review_packet_route
           )}</p>`,
         ]
       : []),
