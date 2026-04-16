@@ -96,6 +96,11 @@ Mandatory baseline:
   - what stays product-projected in SoloCrew
   - what later becomes a `Cognitive_OS` blocker intake candidate
 - version-semantics clarity between repo release lines and private workspace/package version
+- formal closure artifacts that record:
+  - `v0.1` through `v0.4` version-line meaning
+  - present-tense multi-cell boundary meaning
+  - cross-repo consumption and non-promotion boundaries
+  - current `v0.4` closure-in-progress judgment
 
 Explicitly deferred:
 
@@ -165,3 +170,6 @@ In this repo:
 
 So the introduction of `v0.4-multi-cell-foundation` changes the roadmap and governance truth.
 It does not by itself require changing the private package version or claiming a publishable package release.
+
+`v0.4` now also carries a formal closure record and boundary-clarification pack.
+That closure pack does not widen the line into `v0.5`.

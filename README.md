@@ -49,6 +49,7 @@ The sealed `v0.3` line is the first bounded single-cell usable release line for 
 The next planned line is `v0.4-multi-cell-foundation`.
 
 This repo has now frozen the `v0.4` governance scope as the missing intermediate line between sealed `v0.3-single-cell-usable` and future `v0.5-portfolio-secretary-beta`.
+This repo now also records `v0.4` as a governed closure-in-progress line rather than a loose chain of bounded additions.
 
 That means `v0.4` is now defined as the line that will freeze:
 
@@ -69,6 +70,7 @@ This repo now contains multiple bounded `v0.4` implementation surfaces:
 
 It does not mean `v0.4` is fully implemented.
 It does not mean Secretary beta, recovery workflow execution, approval workflow execution, portfolio orchestration, provider execution, or channel behavior now exist in this repo.
+It does mean the repo now has explicit version-line closure, multi-cell boundary closure, and cross-repo non-promotion records for the current `v0.4` line.
 
 ## Version Semantics
 

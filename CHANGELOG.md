@@ -2,6 +2,8 @@
 
 ## 2026-04-16
 
+- added a bounded `v0.1` to `v0.4` version-line closure pack, multi-cell boundary closure pack, cross-repo consumption/non-promotion closure pack, and a formal `v0.4` multi-cell foundation closure record
+- kept that closure wave governance-only and explicitly out of scope for new product surfaces, runtime behavior, Secretary semantics, dispatch/orchestration semantics, and protocol-law promotion
 - normalized the shared `v0.4-multi-cell-foundation` runtime-backed management projection taxonomy so cell-detail and management-object inspection consume the same downstream projection family
 - kept that hardening wave behaviorally unchanged and explicitly out of scope for new surfaces, new `v0.5` behavior, and runtime expansion
 - hardened the `v0.4-multi-cell-foundation` management-directive inspection boundary so runtime-backed directive projections no longer reuse compile-phase directive semantics
