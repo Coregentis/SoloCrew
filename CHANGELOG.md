@@ -2,6 +2,8 @@
 
 ## 2026-04-16
 
+- froze `v0.5-portfolio-secretary-beta` as the next planned SoloCrew line through a bounded scope, UX, contract, acceptance-gate, non-goal, and scope-freeze governance pack
+- kept that `v0.5` wave governance-only and explicitly out of scope for new product surfaces, runtime behavior, and protocol-law promotion
 - fixed a bounded cross-repo runtime-private contract drift with `Cognitive_OS` by aligning SoloCrew management-family inputs to shared `objective_id` and `management_record_kind`
 - kept that fix wave behaviorally unchanged and explicitly out of scope for new features, new surfaces, runtime expansion, and protocol-law promotion
 - added a bounded `v0.1` to `v0.4` version-line closure pack, multi-cell boundary closure pack, cross-repo consumption/non-promotion closure pack, and a formal `v0.4` multi-cell foundation closure record

@@ -44,21 +44,13 @@ This sealed `v0.3` line does not claim:
 
 The sealed `v0.3` line is the first bounded single-cell usable release line for SoloCrew.
 
-## Next Planned Line
+## Current Governed Foundation Line
 
-The next planned line is `v0.4-multi-cell-foundation`.
+The current governed foundation line beyond sealed `v0.3` is `v0.4-multi-cell-foundation`.
 
-This repo has now frozen the `v0.4` governance scope as the missing intermediate line between sealed `v0.3-single-cell-usable` and future `v0.5-portfolio-secretary-beta`.
-This repo now also records `v0.4` as a governed closure-in-progress line rather than a loose chain of bounded additions.
+This repo now records `v0.4` as a governed multi-cell foundation line rather than a loose chain of bounded additions.
 
-That means `v0.4` is now defined as the line that will freeze:
-
-- lawful multi-cell coexistence
-- cell summary projection
-- the minimum management object family
-- product-layer versus later upstream runtime-blocker boundaries
-
-This repo now contains multiple bounded `v0.4` implementation surfaces:
+This repo contains multiple bounded `v0.4` implementation surfaces:
 
 - one read/inspect-oriented multi-cell foundation overview page
 - one bounded per-cell inspection page over the same downstream runtime-backed input path
@@ -71,6 +63,23 @@ This repo now contains multiple bounded `v0.4` implementation surfaces:
 It does not mean `v0.4` is fully implemented.
 It does not mean Secretary beta, recovery workflow execution, approval workflow execution, portfolio orchestration, provider execution, or channel behavior now exist in this repo.
 It does mean the repo now has explicit version-line closure, multi-cell boundary closure, and cross-repo non-promotion records for the current `v0.4` line.
+
+## Next Planned Line
+
+The next planned line is `v0.5-portfolio-secretary-beta`.
+
+This repo has now frozen `v0.5` scope only.
+It has not implemented `v0.5`.
+
+That means `v0.5` is now defined as the line that may later introduce:
+
+- a top-level portfolio / Secretary beta surface
+- bounded management of multiple cells as cells
+- bounded Secretary-to-cell coordination semantics
+- the first beta-level management interface beyond read-only inspection
+
+It does not mean Secretary beta behavior is already present in this repo.
+It does not mean runtime authority, protocol promotion, provider execution, or full portfolio operating-platform behavior now exist here.
 
 ## Version Semantics
 

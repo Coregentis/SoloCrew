@@ -84,6 +84,12 @@ Goal:
 
 - freeze the lawful multi-cell foundation between sealed `v0.3` and future `v0.5-portfolio-secretary-beta`
 
+Current status:
+
+- closed / closure-governed foundation line
+- bounded implementation surfaces present
+- still below Secretary beta
+
 Mandatory baseline:
 
 - lawful coexistence of multiple `Cell`s at product level
@@ -118,6 +124,12 @@ Explicitly deferred:
 Goal:
 
 - add a bounded Secretary and portfolio beta over the already frozen `v0.4` multi-cell foundation
+
+Current status:
+
+- next planned line
+- scope-frozen only
+- not yet implemented
 
 Mandatory baseline:
 
