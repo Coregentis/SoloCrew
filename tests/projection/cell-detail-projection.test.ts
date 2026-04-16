@@ -56,6 +56,8 @@ test("[projection] cell detail projection stays product-projected when derived f
       status: "active",
       project_id: "project-01",
       cell_runtime_scope_id: "cell-scope-01",
+      objective_id: "objective-01",
+      management_record_kind: "directive",
       directive_summary: "Keep review work bounded and operator-visible.",
       directive_priority: "review_first",
       approval_posture: "operator_required",
@@ -73,6 +75,8 @@ test("[projection] cell detail projection stays product-projected when derived f
       status: "blocked",
       project_id: "project-01",
       cell_runtime_scope_id: "cell-scope-01",
+      objective_id: "objective-01",
+      management_record_kind: "delivery_return",
       completed_summary: "One work item completed.",
       blocked_summary: "One work item blocked.",
       next_directive_needed: true,
@@ -90,6 +94,8 @@ test("[projection] cell detail projection stays product-projected when derived f
       status: "pending",
       project_id: "project-01",
       cell_runtime_scope_id: "cell-scope-01",
+      objective_id: "objective-01",
+      management_record_kind: "approval_request",
       request_kind: "approval",
       request_summary: "Operator review needed before resuming.",
       requested_decision: "Approve next bounded step.",
@@ -152,6 +158,11 @@ test("[projection] cell detail projection stays product-projected when derived f
   assert.equal(
     detail_projection.management_object_family.approval_request_status,
     "present_non_executable"
+  );
+  assert.equal(
+    detail_projection.management_object_family.approval_request
+      ?.affected_objective_id,
+    "objective-01"
   );
   assert.equal(detail_projection.upstream_refs.length, 5);
   assert.ok(

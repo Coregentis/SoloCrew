@@ -106,7 +106,7 @@ export function assembleCellDetailProjectionFromRuntimeInput(
         cell_id: input.cell_runtime_scope.object_id,
         request_kind: input.approval_request_record.request_kind,
         reason: input.approval_request_record.request_summary,
-        affected_objective_id: input.approval_request_record.target_objective_id,
+        affected_objective_id: input.approval_request_record.objective_id,
         requested_decision: input.approval_request_record.requested_decision,
         urgency: input.approval_request_record.urgency,
         projection_notes: [

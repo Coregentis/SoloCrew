@@ -59,6 +59,8 @@ test("[projection] management-object inspection stays product-projected when der
       status: "active",
       project_id: "project-01",
       cell_runtime_scope_id: "cell-scope-01",
+      objective_id: "objective-01",
+      management_record_kind: "directive",
       directive_summary: "Keep delivery visible and bounded.",
       directive_priority: "focus_now",
       approval_posture: "operator_required",
@@ -75,6 +77,8 @@ test("[projection] management-object inspection stays product-projected when der
       status: "ready_for_review",
       project_id: "project-01",
       cell_runtime_scope_id: "cell-scope-01",
+      objective_id: "objective-01",
+      management_record_kind: "delivery_return",
       completed_summary: "Review package assembled.",
       blocked_summary: "One follow-up item remains.",
       next_directive_needed: false,
@@ -91,6 +95,8 @@ test("[projection] management-object inspection stays product-projected when der
       status: "pending",
       project_id: "project-01",
       cell_runtime_scope_id: "cell-scope-01",
+      objective_id: "objective-01",
+      management_record_kind: "approval_request",
       request_kind: "approval",
       request_summary: "Operator review requested.",
       requested_decision: "Approve bounded release.",
@@ -135,6 +141,11 @@ test("[projection] management-object inspection stays product-projected when der
   assert.equal(
     inspection_projection.inspection_units[0]?.product_projection?.projection_object_type,
     RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE
+  );
+  assert.equal(
+    inspection_projection.inspection_units[2]?.product_projection
+      ?.affected_objective_id,
+    "objective-01"
   );
   assert.ok(
     inspection_projection.inspection_units.every((unit) =>

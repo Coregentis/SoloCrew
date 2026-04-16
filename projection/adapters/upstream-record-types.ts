@@ -52,7 +52,8 @@ export interface ManagementDirectiveRuntimeRecord extends RuntimeObjectRecord {
   status: "draft" | "active" | "superseded" | "closed";
   project_id: string;
   cell_runtime_scope_id: string;
-  target_objective_id?: string;
+  objective_id?: string;
+  management_record_kind: "directive";
   directive_summary: string;
   directive_priority: "focus_now" | "stabilize" | "review_first";
   approval_posture:
@@ -69,7 +70,8 @@ export interface DeliveryReturnRuntimeRecord extends RuntimeObjectRecord {
   status: "in_progress" | "ready_for_review" | "blocked" | "returned" | "archived";
   project_id: string;
   cell_runtime_scope_id: string;
-  source_objective_id?: string;
+  objective_id?: string;
+  management_record_kind: "delivery_return";
   completed_summary: string;
   blocked_summary: string;
   next_directive_needed: boolean;
@@ -83,7 +85,8 @@ export interface ApprovalRequestRuntimeRecord extends RuntimeObjectRecord {
   status: "pending" | "resolved" | "withdrawn" | "archived";
   project_id: string;
   cell_runtime_scope_id: string;
-  target_objective_id?: string;
+  objective_id?: string;
+  management_record_kind: "approval_request";
   request_kind: "approval" | "escalation";
   request_summary: string;
   requested_decision: string;

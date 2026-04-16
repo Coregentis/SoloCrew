@@ -59,6 +59,8 @@ function create_runtime_input() {
       status: "active" as const,
       project_id: "project-01",
       cell_runtime_scope_id: "cell-scope-01",
+      objective_id: "objective-01",
+      management_record_kind: "directive" as const,
       directive_summary: "Keep delivery visible and bounded.",
       directive_priority: "focus_now" as const,
       approval_posture: "operator_required" as const,
@@ -75,6 +77,8 @@ function create_runtime_input() {
       status: "ready_for_review" as const,
       project_id: "project-01",
       cell_runtime_scope_id: "cell-scope-01",
+      objective_id: "objective-01",
+      management_record_kind: "delivery_return" as const,
       completed_summary: "Review package assembled.",
       blocked_summary: "One follow-up item remains.",
       next_directive_needed: false,
@@ -91,6 +95,8 @@ function create_runtime_input() {
       status: "pending" as const,
       project_id: "project-01",
       cell_runtime_scope_id: "cell-scope-01",
+      objective_id: "objective-01",
+      management_record_kind: "approval_request" as const,
       request_kind: "approval" as const,
       request_summary: "Operator review requested.",
       requested_decision: "Approve bounded release.",
@@ -176,6 +182,11 @@ test("[app] cell detail page exposes no executable management actions", () => {
   assert.equal(
     page.sections.management_object_family.approval_request_status,
     "present_non_executable"
+  );
+  assert.equal(
+    page.sections.management_object_family.approval_request
+      ?.affected_objective_id,
+    "objective-01"
   );
 
   assert.match(page.html, /Directive summary: Keep delivery visible and bounded\./);
