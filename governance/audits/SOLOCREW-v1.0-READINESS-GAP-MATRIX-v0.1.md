@@ -16,9 +16,10 @@ It does not authorize implementation by itself.
 
 ## Repo-Truth Baseline
 
-This matrix was prepared against `main` aligned with `origin/main` at:
+This matrix was refreshed against `main` aligned with `origin/main` after the
+landed Q1 mount-model coherence pass at:
 
-- `892c18244b9896082ce9aa97577021921c85db3a`
+- `126b6778c3bc316410e78cc08435c2c49baf5a47`
 
 It was grounded in current repo truth across:
 
@@ -44,7 +45,7 @@ It was grounded in current repo truth across:
 | Bounded portfolio / Secretary layer | SoloCrew already has an implemented `v0.5` Wave 1 through Wave 5 lane covering portfolio shell, handoff staging, handoff review packet, revision/return consistency, and rationale/evidence visibility. | `PRESENT` | The bounded portfolio / Secretary beta layer exists as downstream, explanatory, non-executing product truth. |
 | Rationale / evidence visibility | Wave 5 added shared rationale, evidence, provenance, and omission-aware narration across the current `v0.5` lane. | `PRESENT` | The explanatory visibility layer now exists and is closure-refresh ready. |
 | Handoff / review packet lane | Waves 2 through 4 already introduced staged handoff, review packet, and revision-return consistency across the current `v0.5` lane. | `PRESENT` | The lane exists as product posture and review framing, not as execution authority. |
-| Lawful business-pack / metrics-pack mount model | The repo has `business-pack-mount`, `metrics-pack-mount`, and `memory-evidence-anchor` structural objects plus initializer support and a bounded dev-delivery template seed. The current objects still read as optional mounts with `deferred_mount` or `unmounted` truth. | `PARTIAL` | Structural mount truth exists, but a platform-grade mount model does not. Current repo truth does not yet provide the coherent downstream product behavior or delivery-level framing implied by the `v1.0` baseline. |
+| Lawful business-pack / metrics-pack mount model | The repo now has explicit `pack-mount-model` contract and assembly truth over `business-pack-mount` and `metrics-pack-mount`, with shared `mounted` / `unmounted` posture semantics, structural availability, and a fixed non-executing boundary. | `PRESENT` | The earlier mount-model ambiguity is now materially reduced. The repo now has one coherent downstream product mount model without widening into pack execution behavior. |
 | Management / organization / execution / memory-evidence planes coherence | The repo has a frozen architecture-planes baseline and multiple bounded surfaces in each area, including single-cell execution, structural organization truth, multi-cell/Secretary management surfaces, and bounded continuity/evidence surfaces. | `PARTIAL` | The planes exist, but they do not yet read as one coherent solo-operator platform. Current truth is still version-lane-specific and bounded rather than platform-grade and delivery-integrated. |
 | Upstream boundary discipline | SoloCrew already has pause/reopening governance, cross-repo non-promotion records, a passed Wave 5 audit, and current upstream confirmation that packet states remain downstream posture only. | `PRESENT` | The repo already preserves `MPLP -> Cognitive_OS -> SoloCrew` authority order and does not currently claim upstream or protocol authority. |
 | Platform-grade cohesion for formal `v1.0` delivery | Current repo truth still reads as a stack of sealed bounded lines plus one reopened explanatory beta lane. It does not yet read as one coherent `v1.0-solo-operator-platform` delivery line. | `MISSING` | This is the main readiness gap. The repo has strong bounded pieces, but not yet the lawful integrated platform-grade layer that would justify formal `v1.0` delivery. |
@@ -59,7 +60,7 @@ It is because the repo still lacks the coherent delivery-grade bridge between:
 
 - the existing single-cell operating core
 - the current bounded portfolio / Secretary layer
-- the structural pack-mount layer
+- the now-coherent structural pack-mount layer
 - the architecture planes that must read as one lawful platform
 
 ## Smallest Truthful Read
@@ -74,18 +75,18 @@ The truthful current read is:
 
 ## Biggest Current Blocker
 
-The single biggest blocker between current `v0.5` truth and `v1.0` is:
+The single biggest blocker between current `v0.5` truth and `v1.0` is now:
 
-- the absence of a lawful platform-grade business-pack / metrics-pack mount
-  model that connects current structural mount truth to coherent delivery-level
-  product meaning
+- the absence of cross-plane platform coherence across management,
+  organization, execution, and memory/evidence surfaces
 
-That blocker is larger than any one missing explanatory surface because it sits
-in the middle of the `v1.0` baseline:
+That blocker now sits above the mount-model layer because:
 
-- it is explicitly named in the roadmap
-- it is only partial in current code
-- it is a precondition for stronger cross-plane platform coherence
+- Q1 materially reduced the previous mount-model ambiguity
+- the next missing delivery-grade bridge is platform coherence, not mount
+  vocabulary
+- the roadmap already names that cross-plane coherence as a mandatory `v1.0`
+  baseline
 
 ## Readiness Judgment
 

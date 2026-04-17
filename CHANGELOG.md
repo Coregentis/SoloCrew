@@ -2,6 +2,9 @@
 
 ## 2026-04-17
 
+- added a bounded Q1 mount-model audit, gate, and closure pack after the landed lawful business-pack / metrics-pack mount model coherence pass
+- refreshed `v1.0` readiness and queue wording so the mount-model blocker is treated as materially reduced and the next top blocker shifts to cross-plane platform coherence
+- kept that closure-refresh wave governance-only and explicitly out of scope for Q2 code, execution behavior, runtime-authority claims, protocol-authority claims, and any `v1.0` delivery claim
 - hardened the lawful business-pack / metrics-pack mount model coherence for `v1.0` readiness by normalizing optional-mount posture as structural-only and non-executing product truth
 - kept that structural coherence wave explicitly out of scope for direct-control semantics, pack execution behavior, provider/channel behavior, runtime-authority claims, and protocol-authority claims
 - added a bounded `v1.0-solo-operator-platform` readiness gap matrix, pre-delivery scope baseline, implementation queue, and readiness planning record over the current reopened `v0.5` lane

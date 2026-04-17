@@ -19,11 +19,20 @@ The queue must remain:
 - downstream of current `Cognitive_OS` truth
 - below MPLP promotion pressure
 
+## Current Queue State
+
+Current queue state after the landed Q1 mount-model coherence pass is:
+
+- `Q1. Mount Model Coherence Pass` is now landed, accepted, and closed on
+  `main`
+- the next correct queued item is now
+  `Q2. Cross-Plane Platform Coherence Pass`
+
 ## Ordered Queue
 
 | Queue item | Objective | Why it matters to `v1.0` | Class | Key blockers or dependencies | New reopening or gate required before implementation |
 | --- | --- | --- | --- | --- | --- |
-| `Q1. Mount Model Coherence Pass` | Turn existing `business-pack-mount` and `metrics-pack-mount` structural truth into one lawful downstream product mount model with explicit non-executing semantics. | The roadmap names a lawful business-pack and metrics-pack mount model as a mandatory `v1.0` baseline, and current repo truth only provides partial structural mount coverage. | `structural` | Depends on current structural constitution truth, current single-cell initializer truth, and preserving non-executing boundaries. | `YES` |
+| `Q1. Mount Model Coherence Pass` | Turn existing `business-pack-mount` and `metrics-pack-mount` structural truth into one lawful downstream product mount model with explicit non-executing semantics. | The roadmap names a lawful business-pack and metrics-pack mount model as a mandatory `v1.0` baseline, and Q1 closes that model gap in bounded downstream form. | `structural` | Already landed through the separately gated Q1 pass. | `NO` |
 | `Q2. Cross-Plane Platform Coherence Pass` | Align management, organization, execution, and memory/evidence surfaces so they read as one solo-operator platform instead of separate bounded lines. | `v1.0` requires coherent platform structure, not only strong isolated lanes. | `structural`, `explanatory` | Depends on current architecture-plane baseline and benefits from Q1 clarifying where pack mounts belong in the platform story. | `YES` |
 | `Q3. Platform Summary And Delivery-Readiness Layer` | Build a bounded top-level platform summary/readiness layer that truthfully explains current operator state, mount posture, plane posture, and omissions without adding execution authority. | `v1.0` needs a delivery-grade product read, not only a beta-lane read. | `explanatory` | Depends on Q1 and Q2, because the top-level platform summary should reflect a coherent mount model and coherent planes rather than pre-coherence fragments. | `YES` |
 | `Q4. Runtime-Dependent Downstream Truth Hardening` | Harden downstream product interpretation only where current `Cognitive_OS` Phase 4 truth already supports stronger confirm/trace/evidence-linked visibility without inventing upstream workflow law. | Reduces ambiguity and strengthens delivery truth while preserving authority boundaries. | `runtime-dependent`, `explanatory` | Depends on current `Cognitive_OS` closure staying stable and on explicit adjacent regression if stronger upstream consumption is introduced. | `YES` |
@@ -95,13 +104,13 @@ Must not become:
 
 ## Smallest Lawful Next Development Class
 
-The smallest lawful next development class after this planning wave is:
+The smallest lawful next development class after current Q1 closure is:
 
-- one bounded structural coherence wave focused first on the lawful
-  business-pack / metrics-pack mount model
+- `Q2. Cross-Plane Platform Coherence Pass`
 
-That is the smallest next class because it addresses the sharpest partial area
-named in the roadmap without widening the repo into direct-control behavior.
+That is now the smallest next class because the mount-model blocker has been
+materially reduced and the top remaining readiness gap now sits at the
+cross-plane platform-coherence layer.
 
 ## Queue Judgment
 
