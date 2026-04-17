@@ -69,7 +69,30 @@ test("[app] single-cell operator console shell keeps deferred surfaces visible a
   assert.equal(console_shell.broad_kpi_cockpit_available, false);
 
   assert.ok(
+    console_shell.platform_delivery_readiness_overview.present_capability_summaries.some(
+      (summary) => summary.startsWith("single_cell_operating_core:")
+    )
+  );
+  assert.ok(
+    console_shell.platform_delivery_readiness_overview.deferred_capability_summaries.some(
+      (summary) =>
+        summary.startsWith(
+          "runtime_dependent_downstream_truth_hardening:"
+        )
+    )
+  );
+  assert.ok(
+    console_shell.platform_delivery_readiness_overview.non_claims.includes(
+      "no_execution_cockpit_upgrade"
+    )
+  );
+  assert.ok(
     console_shell.deferred_items.includes("interactive-cockpit")
+  );
+  assert.ok(
+    console_shell.platform_delivery_readiness_overview.deferred_items.includes(
+      "runtime_dependent_downstream_truth_hardening"
+    )
   );
   assert.ok(
     console_shell.deferred_items.includes("live-data-fetching")

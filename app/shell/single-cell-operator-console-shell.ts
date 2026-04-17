@@ -137,6 +137,41 @@ export function composeSingleCellOperatorConsoleShell(
         view_model.platform_coherence_view.memory_evidence_plane.posture_summary,
       non_claims: [...view_model.platform_coherence_view.non_claims],
     },
+    platform_delivery_readiness_overview: {
+      truth_sources: [
+        ...view_model.platform_delivery_readiness_view.truth_sources,
+      ],
+      platform_posture:
+        view_model.platform_delivery_readiness_view.platform_posture,
+      delivery_readiness_status:
+        view_model.platform_delivery_readiness_view.delivery_readiness_status,
+      formal_delivery_ready_now:
+        view_model.platform_delivery_readiness_view.formal_delivery_ready_now,
+      current_readiness_blocker:
+        view_model.platform_delivery_readiness_view.current_readiness_blocker,
+      current_blocker_summary:
+        view_model.platform_delivery_readiness_view.current_blocker_summary,
+      summary_text:
+        view_model.platform_delivery_readiness_view.summary_text,
+      omission_summary:
+        view_model.platform_delivery_readiness_view.omission_summary,
+      present_capability_summaries:
+        view_model.platform_delivery_readiness_view.present_capabilities.map(
+          (capability) =>
+            `${capability.capability_key}: ${capability.summary}`
+        ),
+      deferred_capability_summaries:
+        view_model.platform_delivery_readiness_view.deferred_capabilities.map(
+          (capability) =>
+            `${capability.capability_key}: ${capability.summary}`
+        ),
+      deferred_items: [
+        ...view_model.platform_delivery_readiness_view.deferred_items,
+      ],
+      non_claims: [
+        ...view_model.platform_delivery_readiness_view.non_claims,
+      ],
+    },
     deferred_surfaces: {
       truth_sources: [...view_model.deferred_surface_view.truth_sources],
       deferred_items: [...deferred_items],
@@ -163,6 +198,7 @@ export function composeSingleCellOperatorConsoleShell(
       non_claims: unique_items([
         ...view_model.truth_boundary_view.non_claims,
         ...view_model.platform_coherence_view.non_claims,
+        ...view_model.platform_delivery_readiness_view.non_claims,
         ...entry_package.entry_truth_boundary_seed.non_claims,
         ...OPERATOR_CONSOLE_NON_CLAIMS,
       ]),
@@ -176,6 +212,7 @@ export function composeSingleCellOperatorConsoleShell(
       "Single-cell operator console shell is operator-facing only.",
       "Operator console shell does not imply page rendering, provider execution, or multi-cell behavior.",
       "Cross-plane platform coherence stays explanatory only and does not collapse management, organization, execution, or memory/evidence planes into execution authority.",
+      "Platform delivery-readiness overview stays explanatory only and does not upgrade planning legibility into execution or delivery authority.",
     ],
     deferred_items: [...deferred_items],
   };

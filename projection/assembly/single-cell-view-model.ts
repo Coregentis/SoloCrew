@@ -277,6 +277,56 @@ export function assembleSingleCellViewModel(
         ...console_state.platform_coherence_state.non_claims,
       ],
     },
+    platform_delivery_readiness_view: {
+      section_key: "platform_delivery_readiness_view",
+      truth_sources: [
+        "persisted_structural_truth",
+        "seeded_summary_truth",
+        "repo_baseline_truth",
+        "deferred_unavailable_surface",
+        "non_claim",
+      ],
+      platform_posture:
+        console_state.platform_delivery_readiness_state.platform_posture,
+      delivery_readiness_status:
+        console_state.platform_delivery_readiness_state.delivery_readiness_status,
+      formal_delivery_ready_now:
+        console_state.platform_delivery_readiness_state.formal_delivery_ready_now,
+      current_readiness_blocker:
+        console_state.platform_delivery_readiness_state.current_readiness_blocker,
+      current_blocker_summary:
+        console_state.platform_delivery_readiness_state.current_blocker_summary,
+      summary_text:
+        console_state.platform_delivery_readiness_state.summary_text,
+      omission_summary:
+        console_state.platform_delivery_readiness_state.omission_summary,
+      present_capabilities:
+        console_state.platform_delivery_readiness_state.present_capabilities.map(
+          (capability) => ({
+            capability_key: capability.capability_key,
+            capability_status: capability.capability_status,
+            summary: capability.summary,
+            supporting_signals: [...capability.supporting_signals],
+            non_claims: [...capability.non_claims],
+          })
+        ),
+      deferred_capabilities:
+        console_state.platform_delivery_readiness_state.deferred_capabilities.map(
+          (capability) => ({
+            capability_key: capability.capability_key,
+            capability_status: capability.capability_status,
+            summary: capability.summary,
+            supporting_signals: [...capability.supporting_signals],
+            non_claims: [...capability.non_claims],
+          })
+        ),
+      deferred_items: [
+        ...console_state.platform_delivery_readiness_state.deferred_items,
+      ],
+      non_claims: [
+        ...console_state.platform_delivery_readiness_state.non_claims,
+      ],
+    },
     deferred_surface_view: {
       section_key: "deferred_surface_view",
       truth_sources: ["deferred_unavailable_surface"],

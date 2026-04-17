@@ -21,14 +21,17 @@ The queue must remain:
 
 ## Current Queue State
 
-Current queue state after the landed Q2 cross-plane platform coherence pass is:
+Current queue state after the landed Q3 platform summary and delivery-readiness
+layer pass is:
 
 - `Q1. Mount Model Coherence Pass` is now landed, accepted, and closed on
   `main`
 - `Q2. Cross-Plane Platform Coherence Pass` is now landed, accepted, and closed
   on `main`
+- `Q3. Platform Summary And Delivery-Readiness Layer` is now landed, accepted,
+  and closed on `main`
 - the next correct queued item is now
-  `Q3. Platform Summary And Delivery-Readiness Layer`
+  `Q4. Runtime-Dependent Downstream Truth Hardening`
 
 ## Ordered Queue
 
@@ -36,7 +39,7 @@ Current queue state after the landed Q2 cross-plane platform coherence pass is:
 | --- | --- | --- | --- | --- | --- |
 | `Q1. Mount Model Coherence Pass` | Turn existing `business-pack-mount` and `metrics-pack-mount` structural truth into one lawful downstream product mount model with explicit non-executing semantics. | The roadmap names a lawful business-pack and metrics-pack mount model as a mandatory `v1.0` baseline, and Q1 closes that model gap in bounded downstream form. | `structural` | Already landed through the separately gated Q1 pass. | `NO` |
 | `Q2. Cross-Plane Platform Coherence Pass` | Align management, organization, execution, and memory/evidence surfaces so they read as one solo-operator platform instead of separate bounded lines. | `v1.0` requires coherent platform structure, not only strong isolated lanes. | `structural`, `explanatory` | Landed through the separately gated Q2 pass and now acts as the bounded plane-alignment baseline for later platform-read shaping. | `NO` |
-| `Q3. Platform Summary And Delivery-Readiness Layer` | Build a bounded top-level platform summary/readiness layer that truthfully explains current operator state, mount posture, plane posture, and omissions without adding execution authority. | `v1.0` needs a delivery-grade product read, not only a beta-lane read. | `explanatory` | Depends on Q1 and Q2, because the top-level platform summary should reflect a coherent mount model and coherent planes rather than pre-coherence fragments. | `YES` |
+| `Q3. Platform Summary And Delivery-Readiness Layer` | Build a bounded top-level platform summary/readiness layer that truthfully explains current operator state, mount posture, plane posture, and omissions without adding execution authority. | `v1.0` needs a delivery-grade product read, not only a beta-lane read. | `explanatory` | Landed through the separately gated Q3 pass and now acts as the bounded top-level platform-read baseline for later readiness work. | `NO` |
 | `Q4. Runtime-Dependent Downstream Truth Hardening` | Harden downstream product interpretation only where current `Cognitive_OS` Phase 4 truth already supports stronger confirm/trace/evidence-linked visibility without inventing upstream workflow law. | Reduces ambiguity and strengthens delivery truth while preserving authority boundaries. | `runtime-dependent`, `explanatory` | Depends on current `Cognitive_OS` closure staying stable and on explicit adjacent regression if stronger upstream consumption is introduced. | `YES` |
 | `Q5. v1.0 Delivery Gate And Closure Pack` | Audit the post-queue state against the formal `v1.0-solo-operator-platform` baseline and decide whether formal delivery can be claimed. | `v1.0` should be a governed delivery line, not a naming convenience. | `governance-dependent` | Depends on the earlier queue items landing coherently and on cross-repo authority checks staying green. | `YES` |
 
@@ -106,13 +109,14 @@ Must not become:
 
 ## Smallest Lawful Next Development Class
 
-The smallest lawful next development class after current Q2 closure is:
+The smallest lawful next development class after current Q3 closure is:
 
-- `Q3. Platform Summary And Delivery-Readiness Layer`
+- `Q4. Runtime-Dependent Downstream Truth Hardening`
 
-That is now the smallest next class because Q2 materially reduced the
-cross-plane coherence blocker and the top remaining readiness gap now sits at
-the delivery-grade platform-summary/readiness layer.
+That is now the smallest next class because Q3 materially reduced the previous
+top blocker around platform-summary/readiness shaping and the next remaining
+gap now sits at runtime-dependent downstream truth hardening that still needs
+its own gate.
 
 ## Queue Judgment
 
@@ -122,5 +126,5 @@ The correct path from current `v0.5` to eventual `v1.0` is:
 - mount-model-first
 - plane-coherence second
 - platform-summary and readiness shaping third
-- any stronger runtime-dependent hardening only where upstream truth supports it
+- runtime-dependent hardening fourth only where upstream truth supports it
 - formal `v1.0` gate last

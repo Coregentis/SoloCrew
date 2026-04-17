@@ -6,6 +6,9 @@ import {
 import {
   assembleCrossPlanePlatformCoherenceState,
 } from "./platform-coherence.ts";
+import {
+  assemblePlatformDeliveryReadinessState,
+} from "./platform-delivery-readiness.ts";
 
 const CONSOLE_NON_CLAIMS = [
   "no_event_timeline_truth",
@@ -44,6 +47,13 @@ export function assembleSingleCellConsoleState(
     optional_mount_state,
     continuity_note,
   });
+  const platform_delivery_readiness_state =
+    assemblePlatformDeliveryReadinessState({
+      assembly,
+      optional_mount_state,
+      platform_coherence_state,
+      continuity_note,
+    });
 
   return {
     console_state_id: `${assembly.assembly_id}-console-state`,
@@ -73,6 +83,7 @@ export function assembleSingleCellConsoleState(
         "memory_and_evidence_state",
         "continuity_truth_state",
         "platform_coherence_state",
+        "platform_delivery_readiness_state",
       ],
       deferred_unavailable_surfaces: [...deferred_surfaces],
       non_claims: [...CONSOLE_NON_CLAIMS],
@@ -200,6 +211,7 @@ export function assembleSingleCellConsoleState(
       non_claims: [...CONSOLE_NON_CLAIMS],
     },
     platform_coherence_state,
+    platform_delivery_readiness_state,
     deferred_surfaces: [...deferred_surfaces],
   };
 }

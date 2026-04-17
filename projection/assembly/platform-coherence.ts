@@ -184,14 +184,13 @@ export function assembleCrossPlanePlatformCoherenceState(input: {
     deferred_cross_plane_items: unique_items([
       ...assembly.deferred_items,
       "broad_kpi_cockpit",
-      "platform_delivery_readiness_surface",
       "direct_control_semantics",
       "runtime_complete_product_state",
     ]),
     cross_plane_summary:
       "Current platform coherence aligns management, organization, execution-adjacent, and memory/evidence product truths into one bounded solo-operator baseline without collapsing them into execution authority.",
     omission_summary:
-      "Cross-plane coherence remains bounded: broad KPI cockpit, platform delivery-readiness surface, direct control semantics, runtime-complete product state, and protocol-facing execution law remain deferred.",
+      "Cross-plane coherence remains bounded: broad KPI cockpit, direct control semantics, runtime-complete product state, and protocol-facing execution law remain deferred.",
     non_claims: [...CROSS_PLANE_NON_CLAIMS],
   };
 }

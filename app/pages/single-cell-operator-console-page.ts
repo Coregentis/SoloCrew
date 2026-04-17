@@ -71,6 +71,7 @@ export type SingleCellOperatorConsolePageSectionKey =
   | "state_transition"
   | "continuity_reload"
   | "memory_continuity_overview"
+  | "platform_delivery_readiness_overview"
   | "platform_coherence_overview"
   | "deferred_surfaces"
   | "truth_boundary";
@@ -117,6 +118,7 @@ export interface SingleCellOperatorConsolePage {
     state_transition: SingleCellOperatorConsolePageSection;
     continuity_reload: SingleCellOperatorConsolePageSection;
     memory_continuity_overview: SingleCellOperatorConsolePageSection;
+    platform_delivery_readiness_overview: SingleCellOperatorConsolePageSection;
     platform_coherence_overview: SingleCellOperatorConsolePageSection;
     deferred_surfaces: SingleCellOperatorConsolePageSection;
     truth_boundary: SingleCellOperatorConsolePageSection;
@@ -810,6 +812,31 @@ export function renderSingleCellOperatorConsolePage(
         ),
       ],
     },
+    platform_delivery_readiness_overview: {
+      section_key: "platform_delivery_readiness_overview",
+      heading: "Platform Summary / Delivery Readiness",
+      body_lines: [
+        `Platform posture: ${console_shell.platform_delivery_readiness_overview.platform_posture}`,
+        `Delivery readiness status: ${console_shell.platform_delivery_readiness_overview.delivery_readiness_status}`,
+        `Formal delivery ready now: ${String(console_shell.platform_delivery_readiness_overview.formal_delivery_ready_now)}`,
+        `Current readiness blocker: ${console_shell.platform_delivery_readiness_overview.current_readiness_blocker}`,
+        `Current blocker summary: ${console_shell.platform_delivery_readiness_overview.current_blocker_summary}`,
+        `Summary: ${console_shell.platform_delivery_readiness_overview.summary_text}`,
+        `Omission summary: ${console_shell.platform_delivery_readiness_overview.omission_summary}`,
+        ...console_shell.platform_delivery_readiness_overview.present_capability_summaries.map(
+          (summary) => `Present capability: ${summary}`
+        ),
+        ...console_shell.platform_delivery_readiness_overview.deferred_capability_summaries.map(
+          (summary) => `Deferred capability: ${summary}`
+        ),
+        ...console_shell.platform_delivery_readiness_overview.deferred_items.map(
+          (item) => `Deferred readiness item: ${item}`
+        ),
+        ...console_shell.platform_delivery_readiness_overview.non_claims.map(
+          (claim) => `Non-claim: ${claim}`
+        ),
+      ],
+    },
     platform_coherence_overview: {
       section_key: "platform_coherence_overview",
       heading: "Platform Coherence Overview",
@@ -878,6 +905,7 @@ export function renderSingleCellOperatorConsolePage(
   const non_claims = unique_items([
     ...console_shell.truth_boundary.non_claims,
     ...console_shell.platform_coherence_overview.non_claims,
+    ...console_shell.platform_delivery_readiness_overview.non_claims,
     ...(template_seed?.non_claims ?? []),
     ...(continuity_reload_presentation?.non_claims ?? []),
     ...(correction_review_interaction?.non_claims ?? []),
@@ -919,6 +947,7 @@ export function renderSingleCellOperatorConsolePage(
     render_section(sections.state_transition),
     render_section(sections.continuity_reload),
     render_section(sections.memory_continuity_overview),
+    render_section(sections.platform_delivery_readiness_overview),
     render_section(sections.platform_coherence_overview),
     render_section(sections.deferred_surfaces),
     render_section(sections.truth_boundary),

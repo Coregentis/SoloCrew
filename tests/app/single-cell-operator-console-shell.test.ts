@@ -60,6 +60,8 @@ test("[app] single-cell operator console shell assembles coherently from shell e
   assert.ok(console_shell.objective_overview);
   assert.ok(console_shell.work_item_execution_overview);
   assert.ok(console_shell.memory_continuity_overview);
+  assert.ok(console_shell.platform_coherence_overview);
+  assert.ok(console_shell.platform_delivery_readiness_overview);
   assert.ok(console_shell.deferred_surfaces);
   assert.ok(console_shell.truth_boundary);
 
@@ -79,6 +81,14 @@ test("[app] single-cell operator console shell assembles coherently from shell e
   assert.equal(
     console_shell.memory_continuity_overview.continuity_status,
     "bounded_and_honest"
+  );
+  assert.equal(
+    console_shell.platform_delivery_readiness_overview.delivery_readiness_status,
+    "planning_ready_not_delivery_ready"
+  );
+  assert.equal(
+    console_shell.platform_delivery_readiness_overview.formal_delivery_ready_now,
+    false
   );
 
   assert.ok(console_shell.deferred_items.includes("provider_execution"));
@@ -102,6 +112,8 @@ test("[app] single-cell operator console shell assembles coherently from shell e
     console_shell.objective_overview,
     console_shell.work_item_execution_overview,
     console_shell.memory_continuity_overview,
+    console_shell.platform_coherence_overview,
+    console_shell.platform_delivery_readiness_overview,
     console_shell.deferred_surfaces,
     console_shell.truth_boundary,
   ];

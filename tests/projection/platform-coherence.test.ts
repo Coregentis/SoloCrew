@@ -74,11 +74,6 @@ test("[projection] cross-plane platform coherence stays product-projected and no
     false
   );
   assert.ok(
-    coherence_state.deferred_cross_plane_items.includes(
-      "platform_delivery_readiness_surface"
-    )
-  );
-  assert.ok(
     coherence_state.deferred_cross_plane_items.includes("provider_execution")
   );
   assert.ok(
@@ -91,5 +86,9 @@ test("[projection] cross-plane platform coherence stays product-projected and no
   assert.match(
     coherence_state.omission_summary,
     /direct control semantics/
+  );
+  assert.doesNotMatch(
+    coherence_state.omission_summary,
+    /platform delivery-readiness surface/
   );
 });

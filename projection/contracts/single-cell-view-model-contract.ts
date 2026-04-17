@@ -9,12 +9,19 @@ import type {
   SoloCrewPlatformPlaneKey,
   SoloCrewPlatformReadinessPosture,
 } from "./platform-coherence-contract.ts";
+import type {
+  SoloCrewPlatformDeliveryReadinessBlocker,
+  SoloCrewPlatformDeliveryReadinessCapabilityKey,
+  SoloCrewPlatformDeliveryReadinessCapabilityStatus,
+  SoloCrewPlatformDeliveryReadinessStatus,
+} from "./platform-delivery-readiness-contract.ts";
 
 export type SingleCellViewModelPhaseBoundary = "ui_adjacent_projection";
 export type SingleCellViewModelAuthorityBoundary = "product_projection_only";
 export type SingleCellViewTruthSource =
   | "persisted_structural_truth"
   | "seeded_summary_truth"
+  | "repo_baseline_truth"
   | "deferred_unavailable_surface"
   | "non_claim";
 
@@ -136,6 +143,32 @@ export interface SingleCellPlatformCoherenceView {
   non_claims: string[];
 }
 
+export interface SingleCellPlatformDeliveryReadinessCapabilityView {
+  capability_key: SoloCrewPlatformDeliveryReadinessCapabilityKey;
+  capability_status: SoloCrewPlatformDeliveryReadinessCapabilityStatus;
+  summary: string;
+  supporting_signals: string[];
+  non_claims: string[];
+}
+
+export interface SingleCellPlatformDeliveryReadinessView {
+  section_key: "platform_delivery_readiness_view";
+  truth_sources: SingleCellViewTruthSource[];
+  platform_posture: SoloCrewPlatformReadinessPosture;
+  delivery_readiness_status: SoloCrewPlatformDeliveryReadinessStatus;
+  formal_delivery_ready_now: false;
+  current_readiness_blocker: SoloCrewPlatformDeliveryReadinessBlocker;
+  current_blocker_summary: string;
+  summary_text: string;
+  omission_summary: string;
+  present_capabilities:
+    SingleCellPlatformDeliveryReadinessCapabilityView[];
+  deferred_capabilities:
+    SingleCellPlatformDeliveryReadinessCapabilityView[];
+  deferred_items: string[];
+  non_claims: string[];
+}
+
 export interface SingleCellViewModel {
   view_model_id: string;
   view_scope: SingleCellAssemblyScope;
@@ -154,6 +187,7 @@ export interface SingleCellViewModel {
   workstream_or_workitem_overview_view: SingleCellWorkstreamOverviewView;
   memory_and_continuity_view: SingleCellMemoryAndContinuityView;
   platform_coherence_view: SingleCellPlatformCoherenceView;
+  platform_delivery_readiness_view: SingleCellPlatformDeliveryReadinessView;
   deferred_surface_view: SingleCellDeferredSurfaceView;
   truth_boundary_view: SingleCellTruthBoundaryView;
 }

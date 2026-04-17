@@ -69,6 +69,7 @@ test("[app] single-cell operator console page renders from current shell adapter
   assert.ok(page.sections.request_review_submit_preview);
   assert.ok(page.sections.work_item_execution_overview);
   assert.ok(page.sections.memory_continuity_overview);
+  assert.ok(page.sections.platform_delivery_readiness_overview);
   assert.ok(page.sections.platform_coherence_overview);
   assert.ok(page.sections.deferred_surfaces);
   assert.ok(page.sections.truth_boundary);
@@ -90,11 +91,19 @@ test("[app] single-cell operator console page renders from current shell adapter
   assert.match(page.html, /Request Review \/ Submit Preview/);
   assert.match(page.html, /Work Item \/ Execution Overview/);
   assert.match(page.html, /Memory \/ Continuity Overview/);
+  assert.match(page.html, /Platform Summary \/ Delivery Readiness/);
   assert.match(page.html, /Platform Coherence Overview/);
   assert.match(page.html, /Deferred Surfaces/);
   assert.match(page.html, /Truth Boundary/);
   assert.match(page.html, /Prepare one bounded operator console page\./);
-  assert.match(page.html, /Platform readiness posture: bounded_platform_baseline_only/);
+  assert.match(page.html, /Platform posture: bounded_platform_baseline_only/);
+  assert.match(page.html, /Delivery readiness status: planning_ready_not_delivery_ready/);
+  assert.match(page.html, /Formal delivery ready now: false/);
+  assert.match(page.html, /Current readiness blocker: runtime_dependent_downstream_truth_hardening/);
+  assert.match(page.html, /Present capability: single_cell_operating_core:/);
+  assert.match(page.html, /Deferred capability: formal_v1_delivery_gate:/);
+  assert.match(page.html, /Deferred readiness item: formal_v1_delivery_gate/);
+  assert.match(page.html, /Non-claim: no_readiness_triggered_actions/);
   assert.match(page.html, /Present planes: management_plane, organization_plane, execution_plane, memory_evidence_plane/);
   assert.match(page.html, /Non-claim: no_cross_plane_execution_ownership/);
   assert.match(page.html, /Deferred item: provider_execution/);
@@ -118,6 +127,7 @@ test("[app] single-cell operator console page renders from current shell adapter
     page.sections.request_review_submit_preview,
     page.sections.work_item_execution_overview,
     page.sections.memory_continuity_overview,
+    page.sections.platform_delivery_readiness_overview,
     page.sections.platform_coherence_overview,
     page.sections.deferred_surfaces,
     page.sections.truth_boundary,

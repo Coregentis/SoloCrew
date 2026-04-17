@@ -93,13 +93,31 @@ test("[projection] single-cell view-model keeps deferred surfaces explicit and a
     )
   );
   assert.ok(
-    view_model.platform_coherence_view.deferred_cross_plane_items.includes(
-      "platform_delivery_readiness_surface"
+    view_model.platform_coherence_view.non_claims.includes(
+      "no_plane_collapse_into_workflow_engine"
+    )
+  );
+  assert.equal(
+    view_model.platform_delivery_readiness_view.delivery_readiness_status,
+    "planning_ready_not_delivery_ready"
+  );
+  assert.equal(
+    view_model.platform_delivery_readiness_view.formal_delivery_ready_now,
+    false
+  );
+  assert.ok(
+    view_model.platform_delivery_readiness_view.truth_sources.includes(
+      "repo_baseline_truth"
     )
   );
   assert.ok(
-    view_model.platform_coherence_view.non_claims.includes(
-      "no_plane_collapse_into_workflow_engine"
+    view_model.platform_delivery_readiness_view.non_claims.includes(
+      "no_readiness_triggered_actions"
+    )
+  );
+  assert.ok(
+    view_model.platform_delivery_readiness_view.deferred_items.includes(
+      "formal_v1_delivery_gate"
     )
   );
 

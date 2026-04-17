@@ -8,6 +8,10 @@ import type {
   SoloCrewPlatformPlaneKey,
   SoloCrewPlatformReadinessPosture,
 } from "../../projection/contracts/platform-coherence-contract.ts";
+import type {
+  SoloCrewPlatformDeliveryReadinessBlocker,
+  SoloCrewPlatformDeliveryReadinessStatus,
+} from "../../projection/contracts/platform-delivery-readiness-contract.ts";
 
 export type SingleCellOperatorConsoleShellPhaseBoundary =
   "operator_console_shell";
@@ -81,6 +85,21 @@ export interface SingleCellOperatorConsolePlatformCoherenceSection {
   non_claims: string[];
 }
 
+export interface SingleCellOperatorConsolePlatformDeliveryReadinessSection {
+  truth_sources: SingleCellViewTruthSource[];
+  platform_posture: SoloCrewPlatformReadinessPosture;
+  delivery_readiness_status: SoloCrewPlatformDeliveryReadinessStatus;
+  formal_delivery_ready_now: false;
+  current_readiness_blocker: SoloCrewPlatformDeliveryReadinessBlocker;
+  current_blocker_summary: string;
+  summary_text: string;
+  omission_summary: string;
+  present_capability_summaries: string[];
+  deferred_capability_summaries: string[];
+  deferred_items: string[];
+  non_claims: string[];
+}
+
 export interface SingleCellOperatorConsoleDeferredSurfacesSection {
   truth_sources: SingleCellViewTruthSource[];
   deferred_items: string[];
@@ -126,6 +145,8 @@ export interface SingleCellOperatorConsoleShell {
     SingleCellOperatorConsoleMemoryContinuitySection;
   platform_coherence_overview:
     SingleCellOperatorConsolePlatformCoherenceSection;
+  platform_delivery_readiness_overview:
+    SingleCellOperatorConsolePlatformDeliveryReadinessSection;
   deferred_surfaces: SingleCellOperatorConsoleDeferredSurfacesSection;
   truth_boundary: SingleCellOperatorConsoleTruthBoundarySection;
   projection_notes: string[];

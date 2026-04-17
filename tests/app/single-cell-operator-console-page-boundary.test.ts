@@ -42,6 +42,9 @@ test("[app] single-cell operator console page keeps deferred and truth-boundary 
   assert.match(page.html, /Blocked work count: 1/);
   assert.match(page.html, /Business pack mount: growth-pack/);
   assert.match(page.html, /Metrics pack mount: delivery-metrics/);
+  assert.match(page.html, /Platform Summary \/ Delivery Readiness/);
+  assert.match(page.html, /Current readiness blocker: runtime_dependent_downstream_truth_hardening/);
+  assert.match(page.html, /Non-claim: no_execution_cockpit_upgrade/);
   assert.match(page.html, /Platform Coherence Overview/);
   assert.match(page.html, /Cross-plane summary: Current platform coherence aligns management, organization, execution-adjacent, and memory\/evidence product truths into one bounded solo-operator baseline without collapsing them into execution authority\./);
   assert.match(page.html, /Non-claim: no_cross_plane_execution_ownership/);
@@ -56,6 +59,9 @@ test("[app] single-cell operator console page keeps deferred and truth-boundary 
   assert.equal(page.broad_kpi_cockpit_available, false);
   assert.equal(page.runtime_complete_product_state_available, false);
 
+  assert.ok(
+    page.non_claims.includes("no_readiness_triggered_actions")
+  );
   assert.ok(
     page.non_claims.includes("no_actual_ui_page_implementation")
   );

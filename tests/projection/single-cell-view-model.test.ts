@@ -45,6 +45,8 @@ test("[projection] single-cell view-model assembles all required UI-adjacent sec
   assert.ok(view_model.objective_overview_view);
   assert.ok(view_model.workstream_or_workitem_overview_view);
   assert.ok(view_model.memory_and_continuity_view);
+  assert.ok(view_model.platform_coherence_view);
+  assert.ok(view_model.platform_delivery_readiness_view);
   assert.ok(view_model.deferred_surface_view);
   assert.ok(view_model.truth_boundary_view);
 
@@ -61,6 +63,24 @@ test("[projection] single-cell view-model assembles all required UI-adjacent sec
   assert.equal(
     view_model.memory_and_continuity_view.continuity_status,
     "bounded_and_honest"
+  );
+  assert.equal(
+    view_model.platform_delivery_readiness_view.delivery_readiness_status,
+    "planning_ready_not_delivery_ready"
+  );
+  assert.equal(
+    view_model.platform_delivery_readiness_view.formal_delivery_ready_now,
+    false
+  );
+  assert.equal(
+    view_model.platform_delivery_readiness_view.current_readiness_blocker,
+    "runtime_dependent_downstream_truth_hardening"
+  );
+  assert.ok(
+    view_model.platform_delivery_readiness_view.present_capabilities.some(
+      (capability) =>
+        capability.capability_key === "single_cell_operating_core"
+    )
   );
 
   assert.ok(
