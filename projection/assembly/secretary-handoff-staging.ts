@@ -11,6 +11,9 @@ import {
   buildSecretaryHandoffStageIndicators,
   deriveSecretaryHandoffPacketState,
 } from "./secretary-handoff-packet-state.ts";
+import {
+  assembleSecretaryHandoffRationaleEvidence,
+} from "./secretary-handoff-rationale.ts";
 
 const SECRETARY_HANDOFF_STAGING_NON_CLAIMS = [
   "no_direct_approve_control",
@@ -134,6 +137,33 @@ export function assembleSecretaryHandoffStagingProjection(
       review_posture_framing:
         "Review posture may be framed as a packet-ready downstream handoff surface, but no approval, rejection, or dispatch execution is authorized here.",
     },
+    rationale_evidence: assembleSecretaryHandoffRationaleEvidence({
+      scope: "secretary_handoff_staging_rationale",
+      packet_state: staging_status,
+      target_cell_name,
+      target_readiness_signal: selected_summary?.readiness_signal,
+      target_delivery_posture:
+        selected_summary?.cell_summary_card.delivery_posture,
+      target_active_work_count:
+        selected_summary?.cell_summary_card.active_work_count,
+      target_blocked_work_count:
+        selected_summary?.cell_summary_card.blocked_work_count,
+      target_objective_status_summary:
+        selected_summary?.objective_status_summary,
+      truth_sources: unique_items([
+        "portfolio_secretary_shell_projection",
+        ...portfolio_projection.truth_sources,
+      ]),
+      upstream_refs: selected_summary ? [...selected_summary.upstream_refs] : [],
+      rationale_summary: target_cell_name
+        ? `The handoff exists to give ${target_cell_name} a bounded product-facing rationale and evidence frame before any downstream cell review occurs.`
+        : "The handoff remains draft because no bounded target cell rationale can be framed yet.",
+      evidence_summary: target_cell_name
+        ? `Evidence is bounded to ${target_cell_name} readiness, delivery posture, work counts, and visible management posture already projected into SoloCrew.`
+        : "Evidence remains omitted until a target cell is selected from the portfolio shell.",
+      provenance_summary:
+        "Provenance remains downstream: runtime-private records stay upstream in Cognitive_OS while SoloCrew stages explanatory handoff framing and omission-aware notes only.",
+    }),
     non_executing_notice:
       "Secretary handoff staging remains review-packet-first, revision-loop-aware, non-executing, non-dispatching, and non-authoritative over runtime behavior.",
     truth_sources: unique_items([
@@ -161,6 +191,7 @@ export function assembleSecretaryHandoffStagingProjection(
       "The staging surface frames target, intent, and posture only; execution semantics remain outside this wave.",
       "Shared handoff packet states remain posture semantics only and do not become runtime commands.",
       "Wave 4 hardens revision/return loop consistency across shell, staging, and review packet surfaces without introducing execution semantics.",
+      "Wave 5 hardens rationale, evidence, provenance, and omission visibility without promoting packet posture into runtime workflow truth.",
       "Runtime-private workforce truth remains upstream and is consumed only through existing product projection layers.",
       ...portfolio_projection.projection_notes,
     ],

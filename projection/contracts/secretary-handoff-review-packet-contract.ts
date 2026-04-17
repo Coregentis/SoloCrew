@@ -10,6 +10,9 @@ import type {
   SecretaryHandoffPacketState,
   SecretaryHandoffStageIndicator,
 } from "./secretary-handoff-packet-contract.ts";
+import type {
+  SecretaryHandoffRationaleEvidenceProjection,
+} from "./secretary-handoff-rationale-contract.ts";
 
 export type SecretaryHandoffReviewPacketScope =
   "secretary_handoff_review_packet";
@@ -69,6 +72,7 @@ export interface SecretaryHandoffReviewPacketProjection {
   revision_loop_summary: string;
   management_and_review_posture: SecretaryHandoffManagementPosture;
   review_readiness: SecretaryHandoffReviewReadiness;
+  rationale_evidence: SecretaryHandoffRationaleEvidenceProjection;
   non_executing_notice: string;
   truth_sources: SecretaryHandoffReviewPacketTruthSource[];
   upstream_refs: ProjectionUpstreamRef[];

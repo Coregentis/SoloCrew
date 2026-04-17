@@ -7,7 +7,11 @@ import type {
 } from "../contracts/portfolio-secretary-shell-contract.ts";
 import {
   countSecretaryHandoffPacketStates,
+  deriveSecretaryHandoffPacketState,
 } from "./secretary-handoff-packet-state.ts";
+import {
+  assemblePortfolioSecretaryRationaleEvidence,
+} from "./secretary-handoff-rationale.ts";
 
 export interface PortfolioSecretaryShellAssemblyInput {
   source_overview_shell_id: string;
@@ -56,6 +60,24 @@ export function assemblePortfolioSecretaryShellProjection(
   const packet_state_counts = countSecretaryHandoffPacketStates(
     input.cell_summary_units
   );
+  const selected_packet_state = selected_summary
+    ? deriveSecretaryHandoffPacketState(selected_summary)
+    : undefined;
+  const aggregated_upstream_refs = unique_items(
+    input.cell_summary_units.flatMap((summary) =>
+      summary.upstream_refs.map(
+        (ref) => `${ref.upstream_object_type}:${ref.upstream_object_id ?? ""}`
+      )
+    )
+  ).map((key) => {
+    const [upstream_object_type, upstream_object_id] = key.split(":");
+
+    return {
+      source_repo: "Cognitive_OS" as const,
+      upstream_object_type,
+      ...(upstream_object_id ? { upstream_object_id } : {}),
+    };
+  });
 
   return {
     portfolio_secretary_projection_id:
@@ -148,6 +170,21 @@ export function assemblePortfolioSecretaryShellProjection(
         "handoff_first_review_packet_first_revision_loop_non_executing",
       direct_controls_available: false,
     },
+    rationale_evidence: assemblePortfolioSecretaryRationaleEvidence({
+      total_cells: input.cell_summary_units.length,
+      attention_required_cells,
+      ready_for_cell_review_cells:
+        packet_state_counts.ready_for_cell_review,
+      returned_for_revision_cells:
+        packet_state_counts.returned_for_revision,
+      selected_cell_name: selected_summary?.cell_summary_card.cell_name,
+      selected_packet_state,
+      truth_sources: unique_items([
+        "multi_cell_foundation_projection",
+        ...input.cell_summary_units.flatMap((summary) => summary.truth_sources),
+      ]),
+      upstream_refs: aggregated_upstream_refs,
+    }),
     truth_sources: unique_items([
       "multi_cell_foundation_projection",
       ...input.cell_summary_units.flatMap((summary) => summary.truth_sources),
@@ -169,6 +206,7 @@ export function assemblePortfolioSecretaryShellProjection(
       "Wave 2 adds bounded handoff staging visibility only; direct control and handoff execution remain deferred.",
       "Wave 3 adds bounded handoff review-packet visibility only and keeps packet states product-projected and non-executing.",
       "Wave 4 hardens revision/return loop consistency so portfolio shelves, staging, and review packet surfaces reuse the same non-executing packet-state semantics.",
+      "Wave 5 adds rationale and evidence visibility hardening only and keeps explanation downstream, omission-aware, and non-executing.",
       ...input.projection_notes,
     ],
   };

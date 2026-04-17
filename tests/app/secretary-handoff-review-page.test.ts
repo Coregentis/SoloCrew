@@ -199,6 +199,10 @@ test("[app] secretary handoff review page stays review-only and below direct-con
     "revision_requested"
   );
   assert.equal(
+    page.sections.rationale_evidence.rationale_scope,
+    "secretary_handoff_review_packet_rationale"
+  );
+  assert.equal(
     page.sections.navigation.selected_cell_routes?.review_packet_route,
     "/portfolio/handoff/cell-scope-01/review"
   );
@@ -209,6 +213,10 @@ test("[app] secretary handoff review page stays review-only and below direct-con
   assert.match(page.html, /Readiness label: revision_requested/);
   assert.match(page.html, /Packet state summary: The handoff packet is returned_for_revision for Runtime Delivery Cell and stays bounded to revision posture only\./);
   assert.match(page.html, /Revision loop summary: Revision visibility is active for Runtime Delivery Cell, but return remains a product state and not a reject, dispatch, or execution command\./);
+  assert.match(page.html, /Rationale summary: The review packet exists to explain why Runtime Delivery Cell is seeing this bounded handoff posture, what evidence is visible, and what remains omitted or upstream-owned\./);
+  assert.match(page.html, /Evidence summary: Evidence is bounded to Runtime Delivery Cell review readiness, target delivery posture, work counts, and runtime-derived references already adapted into the current packet\./);
+  assert.match(page.html, /Provenance summary: Provenance remains downstream and non-authoritative: SoloCrew renders a review packet over adapted upstream inputs without claiming runtime workflow ownership or protocol completeness\./);
+  assert.match(page.html, /Omission note: Review packet framing explains bounded review posture only and does not become approval, rejection, or dispatch workflow authority\./);
   assert.match(page.html, /Review packet route: \/portfolio\/handoff\/cell-scope-01\/review/);
   assert.doesNotMatch(page.html, /<button\b/);
   assert.doesNotMatch(page.html, /<form\b/);
@@ -219,6 +227,7 @@ test("[app] secretary handoff review page stays review-only and below direct-con
     page.sections.target_selection,
     page.sections.review_readiness,
     page.sections.packet_framing,
+    page.sections.rationale_evidence,
     page.sections.truth_boundary,
     review_shell.handoff_review_packet_projection,
   ];

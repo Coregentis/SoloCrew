@@ -225,6 +225,28 @@ test("[projection] portfolio secretary shell stays top-level product projection 
     "handoff_first_review_packet_first_revision_loop_non_executing"
   );
   assert.equal(
+    projection.rationale_evidence.rationale_scope,
+    "portfolio_secretary_lane_rationale"
+  );
+  assert.equal(projection.rationale_evidence.control_mode, "non_executing");
+  assert.equal(
+    projection.rationale_evidence.runtime_authority_claimed,
+    false
+  );
+  assert.equal(
+    projection.rationale_evidence.protocol_authority_claimed,
+    false
+  );
+  assert.match(
+    projection.rationale_evidence.evidence_summary,
+    /Evidence remains bounded to 2 visible cell summary projections/
+  );
+  assert.ok(
+    projection.rationale_evidence.omission_notes.includes(
+      "Packet states remain SoloCrew product posture only and are not upstream workflow-truth objects."
+    )
+  );
+  assert.equal(
     projection.summary_projections[0]?.source_mode,
     "upstream_runtime_private_records"
   );
@@ -252,6 +274,11 @@ test("[projection] portfolio secretary shell stays top-level product projection 
       "Wave 4 hardens revision/return loop consistency so portfolio shelves, staging, and review packet surfaces reuse the same non-executing packet-state semantics."
     )
   );
+  assert.ok(
+    projection.projection_notes.includes(
+      "Wave 5 adds rationale and evidence visibility hardening only and keeps explanation downstream, omission-aware, and non-executing."
+    )
+  );
 
   const boundary_targets = [
     projection,
@@ -261,6 +288,7 @@ test("[projection] portfolio secretary shell stays top-level product projection 
     projection.queue_shelf,
     projection.review_shelf,
     projection.posture_shelf,
+    projection.rationale_evidence,
     ...projection.summary_projections,
   ];
 

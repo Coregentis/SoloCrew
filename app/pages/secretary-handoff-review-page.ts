@@ -48,6 +48,8 @@ export interface SecretaryHandoffReviewPage {
       review_posture_framing: string;
       non_executing_notice: string;
     };
+    rationale_evidence:
+      SecretaryHandoffReviewPacketShell["handoff_review_packet_projection"]["rationale_evidence"];
     navigation: SecretaryHandoffReviewPacketShell["navigation"];
     truth_boundary: SecretaryHandoffReviewPacketShell["truth_boundary"];
   };
@@ -121,6 +123,7 @@ export function renderSecretaryHandoffReviewPage(
         review_packet_projection.management_and_review_posture.review_posture_framing,
       non_executing_notice: review_packet_projection.non_executing_notice,
     },
+    rationale_evidence: review_packet_projection.rationale_evidence,
     navigation: review_packet_shell.navigation,
     truth_boundary: review_packet_shell.truth_boundary,
   };
@@ -193,6 +196,30 @@ export function renderSecretaryHandoffReviewPage(
       sections.packet_framing.review_posture_framing
     )}</p>`,
     `<p>Notice: ${escape_html(sections.packet_framing.non_executing_notice)}</p>`,
+    "</section>",
+    "<section data-section=\"rationale-evidence\">",
+    "<h2>Rationale and Evidence</h2>",
+    `<p>Rationale summary: ${escape_html(
+      sections.rationale_evidence.rationale_summary
+    )}</p>`,
+    `<p>State reason: ${escape_html(
+      sections.rationale_evidence.state_reason_summary
+    )}</p>`,
+    `<p>Evidence summary: ${escape_html(
+      sections.rationale_evidence.evidence_summary
+    )}</p>`,
+    `<p>Provenance summary: ${escape_html(
+      sections.rationale_evidence.provenance_summary
+    )}</p>`,
+    ...sections.rationale_evidence.known_facts.map(
+      (fact) => `<p>Known fact: ${escape_html(fact)}</p>`
+    ),
+    ...sections.rationale_evidence.omission_notes.map(
+      (note) => `<p>Omission note: ${escape_html(note)}</p>`
+    ),
+    ...sections.rationale_evidence.source_hints.map(
+      (hint) => `<p>Source hint: ${escape_html(hint)}</p>`
+    ),
     "</section>",
     "<section data-section=\"navigation\">",
     "<h2>Portfolio Context</h2>",

@@ -38,6 +38,8 @@ export interface PortfolioSecretaryPage {
     queue_shelf: PortfolioSecretaryShell["portfolio_secretary_projection"]["queue_shelf"];
     review_shelf: PortfolioSecretaryShell["portfolio_secretary_projection"]["review_shelf"];
     posture_shelf: PortfolioSecretaryShell["portfolio_secretary_projection"]["posture_shelf"];
+    rationale_evidence:
+      PortfolioSecretaryShell["portfolio_secretary_projection"]["rationale_evidence"];
     truth_boundary: PortfolioSecretaryShell["truth_boundary"];
   };
   html: string;
@@ -88,6 +90,8 @@ export function renderPortfolioSecretaryPage(
     review_shelf: portfolio_shell.portfolio_secretary_projection.review_shelf,
     posture_shelf:
       portfolio_shell.portfolio_secretary_projection.posture_shelf,
+    rationale_evidence:
+      portfolio_shell.portfolio_secretary_projection.rationale_evidence,
     truth_boundary: portfolio_shell.truth_boundary,
   };
 
@@ -191,6 +195,30 @@ export function renderPortfolioSecretaryPage(
     `<p>Secretary posture: ${escape_html(
       sections.posture_shelf.secretary_posture
     )}</p>`,
+    "</section>",
+    "<section data-section=\"rationale-evidence\">",
+    "<h2>Rationale and Evidence</h2>",
+    `<p>Rationale summary: ${escape_html(
+      sections.rationale_evidence.rationale_summary
+    )}</p>`,
+    `<p>State reason: ${escape_html(
+      sections.rationale_evidence.state_reason_summary
+    )}</p>`,
+    `<p>Evidence summary: ${escape_html(
+      sections.rationale_evidence.evidence_summary
+    )}</p>`,
+    `<p>Provenance summary: ${escape_html(
+      sections.rationale_evidence.provenance_summary
+    )}</p>`,
+    ...sections.rationale_evidence.known_facts.map(
+      (fact) => `<p>Known fact: ${escape_html(fact)}</p>`
+    ),
+    ...sections.rationale_evidence.omission_notes.map(
+      (note) => `<p>Omission note: ${escape_html(note)}</p>`
+    ),
+    ...sections.rationale_evidence.source_hints.map(
+      (hint) => `<p>Source hint: ${escape_html(hint)}</p>`
+    ),
     "</section>",
     "<section data-section=\"truth-boundary\">",
     "<h2>Truth Boundary</h2>",

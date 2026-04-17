@@ -68,12 +68,11 @@ It does mean the repo now has explicit version-line closure, multi-cell boundary
 
 The current `v0.5` line is `v0.5-portfolio-secretary-beta`.
 
-This repo has now begun bounded `v0.5` implementation with Waves 1 through 4 only.
-That current Wave 1 through Wave 4 line is accepted as a bounded non-executing
-beta lane.
+This repo has now begun bounded `v0.5` implementation with Waves 1 through 5.
+That current Wave 1 through Wave 5 line is accepted as a bounded non-executing
+beta lane with rationale and evidence visibility hardening now present.
 It was previously paused for feature expansion and has now been reopened only
-with explicit limits for one next bounded candidate wave.
-That reopening does not mean Wave 5 is implemented.
+with explicit limits for one bounded downstream explanatory wave.
 
 That means `v0.5` currently includes:
 
@@ -84,6 +83,7 @@ That means `v0.5` currently includes:
 - one bounded Secretary-to-cell handoff staging surface with target-cell selection, handoff framing, posture framing, and staged-only state labels
 - one bounded Secretary-to-cell handoff review packet surface with review-readiness framing, packet-state visualization, and non-executing packet posture
 - one bounded revision / return consistency hardening pass that keeps portfolio shelves, handoff staging, and handoff review packets aligned around shared non-executing packet states
+- one bounded rationale / evidence / provenance visibility hardening pass that explains why a handoff exists, what evidence is visible, and what remains omitted without introducing direct control
 
 That also means `v0.5` is the line that may later introduce:
 
@@ -96,12 +96,7 @@ These first `v0.5` waves do not add direct approve, reject, dispatch, or execute
 They do not add handoff execution, approval/rejection execution, provider/channel execution, runtime authority, or protocol promotion.
 It does not mean runtime authority, protocol promotion, provider execution, or full portfolio operating-platform behavior now exist here.
 
-The current approved next-wave direction is:
-
-- bounded rationale and evidence visibility hardening over the existing
-  non-executing Secretary beta lane
-
-That approved reopening remains:
+The current reopened lane remains:
 
 - downstream
 - product-projected

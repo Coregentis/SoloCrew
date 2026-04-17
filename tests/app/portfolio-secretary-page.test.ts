@@ -211,6 +211,10 @@ test("[app] portfolio secretary page stays top-level navigation only and below d
     page.sections.posture_shelf.secretary_posture,
     "handoff_first_review_packet_first_revision_loop_non_executing"
   );
+  assert.equal(
+    page.sections.rationale_evidence.rationale_scope,
+    "portfolio_secretary_lane_rationale"
+  );
   assert.equal(page.sections.truth_boundary.shell_projection_is_runtime_law, false);
 
   assert.match(page.html, /Portfolio Secretary Beta/);
@@ -228,6 +232,11 @@ test("[app] portfolio secretary page stays top-level navigation only and below d
   assert.match(page.html, /Packet state summary: .*returned_for_revision cells/);
   assert.match(page.html, /Packet queue summary: .*revision-return packets/);
   assert.match(page.html, /Review packet summary: .*returned_for_revision packets/);
+  assert.match(page.html, /Rationale summary: The portfolio Secretary lane explains why bounded attention, review, and revision posture exists across cells without turning posture into control authority\./);
+  assert.match(page.html, /Evidence summary: Evidence remains bounded to 2 visible cell summary projections/);
+  assert.match(page.html, /Provenance summary: Provenance remains downstream/);
+  assert.match(page.html, /Known fact: Selected packet state: returned_for_revision/);
+  assert.match(page.html, /Omission note: Packet states remain SoloCrew product posture only and are not upstream workflow-truth objects\./);
   assert.doesNotMatch(page.html, /<button\b/);
   assert.doesNotMatch(page.html, /<form\b/);
 
@@ -240,6 +249,7 @@ test("[app] portfolio secretary page stays top-level navigation only and below d
     page.sections.queue_shelf,
     page.sections.review_shelf,
     page.sections.posture_shelf,
+    page.sections.rationale_evidence,
     page.sections.truth_boundary,
     portfolio_shell.portfolio_secretary_projection,
   ];

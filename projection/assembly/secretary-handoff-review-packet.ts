@@ -9,6 +9,9 @@ import {
   buildSecretaryHandoffPacketStateSummary,
   buildSecretaryHandoffRevisionLoopSummary,
 } from "./secretary-handoff-packet-state.ts";
+import {
+  assembleSecretaryHandoffRationaleEvidence,
+} from "./secretary-handoff-rationale.ts";
 
 const SECRETARY_HANDOFF_REVIEW_PACKET_NON_CLAIMS = [
   "no_direct_approve_control",
@@ -141,6 +144,33 @@ export function assembleSecretaryHandoffReviewPacketProjection(
       ...staging_projection.management_and_review_posture,
     },
     review_readiness: derive_review_readiness(staging_projection),
+    rationale_evidence: assembleSecretaryHandoffRationaleEvidence({
+      scope: "secretary_handoff_review_packet_rationale",
+      packet_state: staging_projection.staging_status,
+      target_cell_name:
+        staging_projection.target_selection.target_cell_name,
+      target_readiness_signal:
+        staging_projection.target_selection.target_readiness_signal,
+      target_delivery_posture:
+        staging_projection.target_selection.target_delivery_posture,
+      target_active_work_count:
+        staging_projection.target_selection.target_active_work_count,
+      target_blocked_work_count:
+        staging_projection.target_selection.target_blocked_work_count,
+      target_objective_status_summary:
+        staging_projection.target_selection.target_objective_status_summary,
+      truth_sources: unique_items([
+        "secretary_handoff_staging_projection",
+        ...staging_projection.truth_sources,
+      ]),
+      upstream_refs: [...staging_projection.upstream_refs],
+      rationale_summary:
+        `The review packet exists to explain why ${target_cell_name} is seeing this bounded handoff posture, what evidence is visible, and what remains omitted or upstream-owned.`,
+      evidence_summary:
+        `Evidence is bounded to ${target_cell_name} review readiness, target delivery posture, work counts, and runtime-derived references already adapted into the current packet.`,
+      provenance_summary:
+        "Provenance remains downstream and non-authoritative: SoloCrew renders a review packet over adapted upstream inputs without claiming runtime workflow ownership or protocol completeness.",
+    }),
     non_executing_notice:
       "Secretary handoff review packet remains review-only, handoff-only, non-dispatching, and non-authoritative over runtime behavior.",
     truth_sources: unique_items([
@@ -166,6 +196,7 @@ export function assembleSecretaryHandoffReviewPacketProjection(
       "Packet states remain posture and review semantics only and do not become runtime commands or workflow edges.",
       "Review readiness visualization is bounded to product-level packet framing for downstream cell consumption.",
       "Wave 4 hardens revision/return loop consistency so packet summaries and returned-for-revision posture stay aligned with the staging lane.",
+      "Wave 5 hardens rationale, evidence, provenance, and omission-aware narration without introducing direct-control semantics.",
       ...staging_projection.projection_notes,
     ],
   };

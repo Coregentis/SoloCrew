@@ -5,6 +5,9 @@ import type {
 import type {
   SecretaryHandoffPacketStateCounts,
 } from "./secretary-handoff-packet-contract.ts";
+import type {
+  SecretaryHandoffRationaleEvidenceProjection,
+} from "./secretary-handoff-rationale-contract.ts";
 
 export type PortfolioSecretaryShellScope = "portfolio_secretary_beta_shell";
 export type PortfolioSecretaryShellAuthorityBoundary =
@@ -115,6 +118,7 @@ export interface PortfolioSecretaryShellProjection {
   queue_shelf: PortfolioSecretaryQueueShelf;
   review_shelf: PortfolioSecretaryReviewShelf;
   posture_shelf: PortfolioSecretaryPostureShelf;
+  rationale_evidence: SecretaryHandoffRationaleEvidenceProjection;
   truth_sources: PortfolioSecretaryTruthSource[];
   deferred_items: string[];
   non_claims: string[];

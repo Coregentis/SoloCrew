@@ -187,6 +187,10 @@ test("[app] secretary handoff page stays staged-only and below direct-control se
     page.sections.framing.revision_loop_summary,
     /Revision visibility is active for Runtime Delivery Cell/
   );
+  assert.equal(
+    page.sections.rationale_evidence.rationale_scope,
+    "secretary_handoff_staging_rationale"
+  );
   assert.equal(page.sections.navigation.cell_links.length, 2);
   assert.equal(
     page.sections.navigation.selected_cell_routes?.handoff_route,
@@ -205,6 +209,11 @@ test("[app] secretary handoff page stays staged-only and below direct-control se
   assert.match(page.html, /Packet state: returned_for_revision/);
   assert.match(page.html, /Packet state summary: The handoff packet is returned_for_revision for Runtime Delivery Cell and stays bounded to revision posture only\./);
   assert.match(page.html, /Revision loop summary: Revision visibility is active for Runtime Delivery Cell, but return remains a product state and not a reject, dispatch, or execution command\./);
+  assert.match(page.html, /Rationale summary: The handoff exists to give Runtime Delivery Cell a bounded product-facing rationale and evidence frame before any downstream cell review occurs\./);
+  assert.match(page.html, /State reason: The packet is returned_for_revision because Runtime Delivery Cell currently needs bounded revision visibility, not rejection, dispatch, or execution authority\./);
+  assert.match(page.html, /Evidence summary: Evidence is bounded to Runtime Delivery Cell readiness, delivery posture, work counts, and visible management posture already projected into SoloCrew\./);
+  assert.match(page.html, /Provenance summary: Provenance remains downstream: runtime-private records stay upstream in Cognitive_OS while SoloCrew stages explanatory handoff framing and omission-aware notes only\./);
+  assert.match(page.html, /Omission note: Handoff staging explains bounded intent and evidence only; it does not submit, send, or execute the handoff\./);
   assert.match(page.html, /Review packet route: \/portfolio\/handoff\/cell-scope-01\/review/);
   assert.match(page.html, /Selected handoff route: \/portfolio\/handoff\/cell-scope-01/);
   assert.doesNotMatch(page.html, /<button\b/);
@@ -216,6 +225,7 @@ test("[app] secretary handoff page stays staged-only and below direct-control se
     page.sections.target_selection,
     page.sections.staging_states[0],
     page.sections.framing,
+    page.sections.rationale_evidence,
     page.sections.truth_boundary,
     staging_shell.handoff_staging_projection,
   ];

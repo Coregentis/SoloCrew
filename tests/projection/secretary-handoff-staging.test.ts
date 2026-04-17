@@ -215,6 +215,24 @@ test("[projection] secretary handoff staging stays product-projected and non-exe
   assert.ok(
     projection.deferred_items.includes("direct_execute_control")
   );
+  assert.equal(
+    projection.rationale_evidence.rationale_scope,
+    "secretary_handoff_staging_rationale"
+  );
+  assert.equal(
+    projection.rationale_evidence.packet_state,
+    "returned_for_revision"
+  );
+  assert.equal(projection.rationale_evidence.control_mode, "non_executing");
+  assert.match(
+    projection.rationale_evidence.state_reason_summary,
+    /returned_for_revision because Runtime Delivery Cell currently needs bounded revision visibility/
+  );
+  assert.ok(
+    projection.rationale_evidence.omission_notes.includes(
+      "Handoff staging explains bounded intent and evidence only; it does not submit, send, or execute the handoff."
+    )
+  );
   assert.ok(
     projection.projection_notes.includes(
       "Secretary handoff staging is a downstream product projection over the portfolio shell, not a runtime command object."
@@ -230,11 +248,17 @@ test("[projection] secretary handoff staging stays product-projected and non-exe
       "Wave 4 hardens revision/return loop consistency across shell, staging, and review packet surfaces without introducing execution semantics."
     )
   );
+  assert.ok(
+    projection.projection_notes.includes(
+      "Wave 5 hardens rationale, evidence, provenance, and omission visibility without promoting packet posture into runtime workflow truth."
+    )
+  );
 
   const boundary_targets = [
     projection,
     projection.target_selection,
     projection.management_and_review_posture,
+    projection.rationale_evidence,
     ...projection.staging_states,
   ];
 

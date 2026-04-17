@@ -2,6 +2,8 @@
 
 ## 2026-04-16
 
+- added the bounded `v0.5-portfolio-secretary-beta` Wave 5 rationale and evidence visibility hardening pass across the existing portfolio shell, handoff staging, and handoff review packet surfaces
+- kept that Wave 5 implementation explanatory-only and explicitly out of scope for direct approve, reject, dispatch, execute, provider, or channel behavior
 - approved bounded reopening for the paused `v0.5-portfolio-secretary-beta` line after `Cognitive_OS` Phase 4 was formally sealed on remote `main`
 - limited that reopening to one named Wave 5 candidate focused on rationale and evidence visibility hardening only
 - kept that reopening wave governance-only and explicitly out of scope for direct approve, reject, dispatch, execute, provider/channel behavior, workflow-engine semantics, runtime-authority drift, and protocol-law promotion

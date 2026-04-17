@@ -207,6 +207,24 @@ test("[projection] secretary handoff review packet stays review-only and product
     review_packet.review_readiness.target_blocked_work_count,
     1
   );
+  assert.equal(
+    review_packet.rationale_evidence.rationale_scope,
+    "secretary_handoff_review_packet_rationale"
+  );
+  assert.equal(
+    review_packet.rationale_evidence.packet_state,
+    "returned_for_revision"
+  );
+  assert.equal(review_packet.rationale_evidence.control_mode, "non_executing");
+  assert.match(
+    review_packet.rationale_evidence.provenance_summary,
+    /Provenance remains downstream and non-authoritative/
+  );
+  assert.ok(
+    review_packet.rationale_evidence.omission_notes.includes(
+      "Review packet framing explains bounded review posture only and does not become approval, rejection, or dispatch workflow authority."
+    )
+  );
   assert.ok(
     review_packet.truth_sources.includes("secretary_handoff_staging_projection")
   );
@@ -225,12 +243,18 @@ test("[projection] secretary handoff review packet stays review-only and product
       "Wave 4 hardens revision/return loop consistency so packet summaries and returned-for-revision posture stay aligned with the staging lane."
     )
   );
+  assert.ok(
+    review_packet.projection_notes.includes(
+      "Wave 5 hardens rationale, evidence, provenance, and omission-aware narration without introducing direct-control semantics."
+    )
+  );
 
   const boundary_targets = [
     review_packet,
     review_packet.target_selection,
     review_packet.management_and_review_posture,
     review_packet.review_readiness,
+    review_packet.rationale_evidence,
     ...review_packet.packet_states,
   ];
 

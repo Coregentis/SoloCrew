@@ -127,10 +127,9 @@ Goal:
 
 Current status:
 
-- implementation-begun line with Wave 1 shell, Wave 2 handoff staging, Wave 3 handoff review packet, and Wave 4 revision-return consistency present
+- implementation-begun line with Wave 1 shell, Wave 2 handoff staging, Wave 3 handoff review packet, Wave 4 revision-return consistency, and Wave 5 rationale/evidence visibility hardening present
 - accepted as a bounded non-executing beta lane
-- reopening now approved only with limits for one bounded Wave 5 candidate
-- Wave 5 remains unimplemented
+- reopened only for one bounded downstream explanatory wave, now implemented
 - still below handoff execution and direct-control semantics
 
 Mandatory baseline:
@@ -140,6 +139,7 @@ Mandatory baseline:
 - `Escalation / Approval Request` visibility and bounded handoff posture
 - `Delivery Return` visibility and bounded review posture
 - bounded review-packet and revision-return loop consistency in product space only
+- bounded rationale, evidence, provenance, and omission-aware narration in product space only
 - bounded portfolio and Secretary beta shape
 
 Explicitly deferred:
@@ -148,10 +148,6 @@ Explicitly deferred:
 - full autonomous portfolio optimization
 - generalized pack marketplace
 - protocol promotion of product objects without separate candidate handling
-
-Current approved next-wave candidate:
-
-- `v0.5 Wave 5 - rationale and evidence visibility hardening`
 
 ### `v1.0-solo-operator-platform`
 
