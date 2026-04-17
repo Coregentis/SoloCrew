@@ -10,6 +10,9 @@ import type {
 import type {
   SoloCrewPackMountModelState,
 } from "./pack-mount-model-contract.ts";
+import type {
+  SoloCrewCrossPlanePlatformCoherenceState,
+} from "./platform-coherence-contract.ts";
 
 export type SingleCellConsolePhaseBoundary = "runtime_adjacent_summary";
 export type SingleCellConsoleAuthorityBoundary = "product_projection_only";
@@ -137,5 +140,6 @@ export interface SingleCellConsoleState {
   memory_and_evidence_state: SingleCellMemoryAndEvidenceState;
   optional_mount_state: SingleCellOptionalMountState;
   continuity_truth_state: SingleCellContinuityTruthState;
+  platform_coherence_state: SoloCrewCrossPlanePlatformCoherenceState;
   deferred_surfaces: string[];
 }

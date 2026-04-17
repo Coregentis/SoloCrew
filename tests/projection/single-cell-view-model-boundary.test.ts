@@ -75,6 +75,33 @@ test("[projection] single-cell view-model keeps deferred surfaces explicit and a
     view_model.deferred_surface_view.metrics_pack_mount_postures[0],
     "deferred_unmounted_structural_mount"
   );
+  assert.equal(
+    view_model.platform_coherence_view.section_key,
+    "platform_coherence_view"
+  );
+  assert.equal(
+    view_model.platform_coherence_view.platform_readiness_posture,
+    "bounded_platform_baseline_only"
+  );
+  assert.equal(
+    view_model.platform_coherence_view.execution_plane.execution_boundary,
+    "non_executing"
+  );
+  assert.ok(
+    view_model.platform_coherence_view.present_plane_keys.includes(
+      "management_plane"
+    )
+  );
+  assert.ok(
+    view_model.platform_coherence_view.deferred_cross_plane_items.includes(
+      "platform_delivery_readiness_surface"
+    )
+  );
+  assert.ok(
+    view_model.platform_coherence_view.non_claims.includes(
+      "no_plane_collapse_into_workflow_engine"
+    )
+  );
 
   assert.ok(
     view_model.truth_boundary_view.persisted_structural_truth_sections.includes(

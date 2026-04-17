@@ -68,6 +68,24 @@ test("[projection] single-cell console state keeps optional mounts deferred and 
     console_state.optional_mount_state.execution_boundary,
     "non_executing_mount_only"
   );
+  assert.equal(
+    console_state.platform_coherence_state.execution_boundary,
+    "non_executing"
+  );
+  assert.equal(
+    console_state.platform_coherence_state.present_plane_keys.length,
+    4
+  );
+  assert.ok(
+    console_state.platform_coherence_state.deferred_cross_plane_items.includes(
+      "platform_delivery_readiness_surface"
+    )
+  );
+  assert.ok(
+    console_state.platform_coherence_state.non_claims.includes(
+      "no_cross_plane_execution_ownership"
+    )
+  );
 
   assert.equal(
     console_state.continuity_truth_state.seeded_summary_truth.runtime_summary_claim,
@@ -106,6 +124,11 @@ test("[projection] single-cell console state keeps optional mounts deferred and 
   assert.ok(
     console_state.truth_boundary_state.seeded_summary_truth_sections.includes(
       "continuity_truth_state"
+    )
+  );
+  assert.ok(
+    console_state.truth_boundary_state.seeded_summary_truth_sections.includes(
+      "platform_coherence_state"
     )
   );
 });

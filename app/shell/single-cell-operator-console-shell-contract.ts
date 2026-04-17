@@ -4,6 +4,10 @@ import type {
 import type {
   SingleCellViewTruthSource,
 } from "../../projection/contracts/single-cell-view-model-contract.ts";
+import type {
+  SoloCrewPlatformPlaneKey,
+  SoloCrewPlatformReadinessPosture,
+} from "../../projection/contracts/platform-coherence-contract.ts";
 
 export type SingleCellOperatorConsoleShellPhaseBoundary =
   "operator_console_shell";
@@ -63,6 +67,20 @@ export interface SingleCellOperatorConsoleMemoryContinuitySection {
   known_absences: string[];
 }
 
+export interface SingleCellOperatorConsolePlatformCoherenceSection {
+  truth_sources: SingleCellViewTruthSource[];
+  platform_readiness_posture: SoloCrewPlatformReadinessPosture;
+  cross_plane_summary: string;
+  omission_summary: string;
+  present_plane_keys: SoloCrewPlatformPlaneKey[];
+  deferred_cross_plane_items: string[];
+  management_plane_summary: string;
+  organization_plane_summary: string;
+  execution_plane_summary: string;
+  memory_evidence_plane_summary: string;
+  non_claims: string[];
+}
+
 export interface SingleCellOperatorConsoleDeferredSurfacesSection {
   truth_sources: SingleCellViewTruthSource[];
   deferred_items: string[];
@@ -106,6 +124,8 @@ export interface SingleCellOperatorConsoleShell {
     SingleCellOperatorConsoleWorkItemExecutionSection;
   memory_continuity_overview:
     SingleCellOperatorConsoleMemoryContinuitySection;
+  platform_coherence_overview:
+    SingleCellOperatorConsolePlatformCoherenceSection;
   deferred_surfaces: SingleCellOperatorConsoleDeferredSurfacesSection;
   truth_boundary: SingleCellOperatorConsoleTruthBoundarySection;
   projection_notes: string[];

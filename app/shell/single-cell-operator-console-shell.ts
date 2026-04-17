@@ -111,6 +111,32 @@ export function composeSingleCellOperatorConsoleShell(
         ...view_model.memory_and_continuity_view.known_absences,
       ],
     },
+    platform_coherence_overview: {
+      truth_sources: [
+        ...view_model.platform_coherence_view.truth_sources,
+      ],
+      platform_readiness_posture:
+        view_model.platform_coherence_view.platform_readiness_posture,
+      cross_plane_summary:
+        view_model.platform_coherence_view.cross_plane_summary,
+      omission_summary:
+        view_model.platform_coherence_view.omission_summary,
+      present_plane_keys: [
+        ...view_model.platform_coherence_view.present_plane_keys,
+      ],
+      deferred_cross_plane_items: [
+        ...view_model.platform_coherence_view.deferred_cross_plane_items,
+      ],
+      management_plane_summary:
+        view_model.platform_coherence_view.management_plane.posture_summary,
+      organization_plane_summary:
+        view_model.platform_coherence_view.organization_plane.posture_summary,
+      execution_plane_summary:
+        view_model.platform_coherence_view.execution_plane.posture_summary,
+      memory_evidence_plane_summary:
+        view_model.platform_coherence_view.memory_evidence_plane.posture_summary,
+      non_claims: [...view_model.platform_coherence_view.non_claims],
+    },
     deferred_surfaces: {
       truth_sources: [...view_model.deferred_surface_view.truth_sources],
       deferred_items: [...deferred_items],
@@ -136,6 +162,7 @@ export function composeSingleCellOperatorConsoleShell(
       deferred_items: [...deferred_items],
       non_claims: unique_items([
         ...view_model.truth_boundary_view.non_claims,
+        ...view_model.platform_coherence_view.non_claims,
         ...entry_package.entry_truth_boundary_seed.non_claims,
         ...OPERATOR_CONSOLE_NON_CLAIMS,
       ]),
@@ -148,6 +175,7 @@ export function composeSingleCellOperatorConsoleShell(
       ...entry_package.projection_notes,
       "Single-cell operator console shell is operator-facing only.",
       "Operator console shell does not imply page rendering, provider execution, or multi-cell behavior.",
+      "Cross-plane platform coherence stays explanatory only and does not collapse management, organization, execution, or memory/evidence planes into execution authority.",
     ],
     deferred_items: [...deferred_items],
   };

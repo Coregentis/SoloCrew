@@ -71,6 +71,7 @@ export type SingleCellOperatorConsolePageSectionKey =
   | "state_transition"
   | "continuity_reload"
   | "memory_continuity_overview"
+  | "platform_coherence_overview"
   | "deferred_surfaces"
   | "truth_boundary";
 
@@ -116,6 +117,7 @@ export interface SingleCellOperatorConsolePage {
     state_transition: SingleCellOperatorConsolePageSection;
     continuity_reload: SingleCellOperatorConsolePageSection;
     memory_continuity_overview: SingleCellOperatorConsolePageSection;
+    platform_coherence_overview: SingleCellOperatorConsolePageSection;
     deferred_surfaces: SingleCellOperatorConsolePageSection;
     truth_boundary: SingleCellOperatorConsolePageSection;
   };
@@ -808,6 +810,26 @@ export function renderSingleCellOperatorConsolePage(
         ),
       ],
     },
+    platform_coherence_overview: {
+      section_key: "platform_coherence_overview",
+      heading: "Platform Coherence Overview",
+      body_lines: [
+        `Platform readiness posture: ${console_shell.platform_coherence_overview.platform_readiness_posture}`,
+        `Cross-plane summary: ${console_shell.platform_coherence_overview.cross_plane_summary}`,
+        `Omission summary: ${console_shell.platform_coherence_overview.omission_summary}`,
+        `Present planes: ${console_shell.platform_coherence_overview.present_plane_keys.join(", ")}`,
+        `Management plane: ${console_shell.platform_coherence_overview.management_plane_summary}`,
+        `Organization plane: ${console_shell.platform_coherence_overview.organization_plane_summary}`,
+        `Execution plane: ${console_shell.platform_coherence_overview.execution_plane_summary}`,
+        `Memory/evidence plane: ${console_shell.platform_coherence_overview.memory_evidence_plane_summary}`,
+        ...console_shell.platform_coherence_overview.deferred_cross_plane_items.map(
+          (item) => `Deferred cross-plane item: ${item}`
+        ),
+        ...console_shell.platform_coherence_overview.non_claims.map(
+          (claim) => `Non-claim: ${claim}`
+        ),
+      ],
+    },
     deferred_surfaces: {
       section_key: "deferred_surfaces",
       heading: "Deferred Surfaces",
@@ -855,6 +877,7 @@ export function renderSingleCellOperatorConsolePage(
 
   const non_claims = unique_items([
     ...console_shell.truth_boundary.non_claims,
+    ...console_shell.platform_coherence_overview.non_claims,
     ...(template_seed?.non_claims ?? []),
     ...(continuity_reload_presentation?.non_claims ?? []),
     ...(correction_review_interaction?.non_claims ?? []),
@@ -896,6 +919,7 @@ export function renderSingleCellOperatorConsolePage(
     render_section(sections.state_transition),
     render_section(sections.continuity_reload),
     render_section(sections.memory_continuity_overview),
+    render_section(sections.platform_coherence_overview),
     render_section(sections.deferred_surfaces),
     render_section(sections.truth_boundary),
     `</main>`,

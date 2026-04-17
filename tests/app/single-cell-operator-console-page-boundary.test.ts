@@ -42,6 +42,9 @@ test("[app] single-cell operator console page keeps deferred and truth-boundary 
   assert.match(page.html, /Blocked work count: 1/);
   assert.match(page.html, /Business pack mount: growth-pack/);
   assert.match(page.html, /Metrics pack mount: delivery-metrics/);
+  assert.match(page.html, /Platform Coherence Overview/);
+  assert.match(page.html, /Cross-plane summary: Current platform coherence aligns management, organization, execution-adjacent, and memory\/evidence product truths into one bounded solo-operator baseline without collapsing them into execution authority\./);
+  assert.match(page.html, /Non-claim: no_cross_plane_execution_ownership/);
   assert.match(page.html, /Non-claim: no_multi_cell_portfolio_truth/);
   assert.match(page.html, /Non-claim: no_secretary_behavior_truth/);
   assert.match(page.html, /Non-claim: no_broad_kpi_projection/);
@@ -64,5 +67,8 @@ test("[app] single-cell operator console page keeps deferred and truth-boundary 
   );
   assert.ok(
     page.non_claims.includes("no_broad_kpi_projection")
+  );
+  assert.ok(
+    page.non_claims.includes("no_plane_collapse_into_workflow_engine")
   );
 });

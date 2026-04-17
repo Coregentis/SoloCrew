@@ -4,6 +4,11 @@ import type {
   SoloCrewPackMountPosture,
   SoloCrewPackMountStructuralAvailability,
 } from "./pack-mount-model-contract.ts";
+import type {
+  SoloCrewPlatformCoherenceExecutionBoundary,
+  SoloCrewPlatformPlaneKey,
+  SoloCrewPlatformReadinessPosture,
+} from "./platform-coherence-contract.ts";
 
 export type SingleCellViewModelPhaseBoundary = "ui_adjacent_projection";
 export type SingleCellViewModelAuthorityBoundary = "product_projection_only";
@@ -104,6 +109,33 @@ export interface SingleCellTruthBoundaryView {
   secretary_behavior_available: false;
 }
 
+export interface SingleCellPlatformCoherencePlaneView {
+  plane_key: SoloCrewPlatformPlaneKey;
+  truth_sources: SingleCellViewTruthSource[];
+  plane_presence: "present";
+  boundary_status: "bounded_product_projection";
+  execution_boundary: SoloCrewPlatformCoherenceExecutionBoundary;
+  posture_summary: string;
+  available_truths: string[];
+  deferred_truths: string[];
+  non_claims: string[];
+}
+
+export interface SingleCellPlatformCoherenceView {
+  section_key: "platform_coherence_view";
+  truth_sources: SingleCellViewTruthSource[];
+  platform_readiness_posture: SoloCrewPlatformReadinessPosture;
+  cross_plane_summary: string;
+  omission_summary: string;
+  present_plane_keys: SoloCrewPlatformPlaneKey[];
+  deferred_cross_plane_items: string[];
+  management_plane: SingleCellPlatformCoherencePlaneView;
+  organization_plane: SingleCellPlatformCoherencePlaneView;
+  execution_plane: SingleCellPlatformCoherencePlaneView;
+  memory_evidence_plane: SingleCellPlatformCoherencePlaneView;
+  non_claims: string[];
+}
+
 export interface SingleCellViewModel {
   view_model_id: string;
   view_scope: SingleCellAssemblyScope;
@@ -121,6 +153,7 @@ export interface SingleCellViewModel {
   objective_overview_view: SingleCellObjectiveOverviewView;
   workstream_or_workitem_overview_view: SingleCellWorkstreamOverviewView;
   memory_and_continuity_view: SingleCellMemoryAndContinuityView;
+  platform_coherence_view: SingleCellPlatformCoherenceView;
   deferred_surface_view: SingleCellDeferredSurfaceView;
   truth_boundary_view: SingleCellTruthBoundaryView;
 }

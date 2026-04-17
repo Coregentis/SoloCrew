@@ -146,6 +146,137 @@ export function assembleSingleCellViewModel(
         ...console_state.memory_and_evidence_state.known_absences,
       ],
     },
+    platform_coherence_view: {
+      section_key: "platform_coherence_view",
+      truth_sources: [
+        "persisted_structural_truth",
+        "seeded_summary_truth",
+        "deferred_unavailable_surface",
+        "non_claim",
+      ],
+      platform_readiness_posture:
+        console_state.platform_coherence_state.platform_readiness_posture,
+      cross_plane_summary:
+        console_state.platform_coherence_state.cross_plane_summary,
+      omission_summary:
+        console_state.platform_coherence_state.omission_summary,
+      present_plane_keys: [
+        ...console_state.platform_coherence_state.present_plane_keys,
+      ],
+      deferred_cross_plane_items: [
+        ...console_state.platform_coherence_state.deferred_cross_plane_items,
+      ],
+      management_plane: {
+        plane_key:
+          console_state.platform_coherence_state.management_plane.plane_key,
+        truth_sources: [
+          "persisted_structural_truth",
+          "seeded_summary_truth",
+          "deferred_unavailable_surface",
+          "non_claim",
+        ],
+        plane_presence:
+          console_state.platform_coherence_state.management_plane.plane_presence,
+        boundary_status:
+          console_state.platform_coherence_state.management_plane.boundary_status,
+        execution_boundary:
+          console_state.platform_coherence_state.management_plane.execution_boundary,
+        posture_summary:
+          console_state.platform_coherence_state.management_plane.posture_summary,
+        available_truths: [
+          ...console_state.platform_coherence_state.management_plane.available_truths,
+        ],
+        deferred_truths: [
+          ...console_state.platform_coherence_state.management_plane.deferred_truths,
+        ],
+        non_claims: [
+          ...console_state.platform_coherence_state.management_plane.non_claims,
+        ],
+      },
+      organization_plane: {
+        plane_key:
+          console_state.platform_coherence_state.organization_plane.plane_key,
+        truth_sources: [
+          "persisted_structural_truth",
+          "deferred_unavailable_surface",
+          "non_claim",
+        ],
+        plane_presence:
+          console_state.platform_coherence_state.organization_plane.plane_presence,
+        boundary_status:
+          console_state.platform_coherence_state.organization_plane.boundary_status,
+        execution_boundary:
+          console_state.platform_coherence_state.organization_plane.execution_boundary,
+        posture_summary:
+          console_state.platform_coherence_state.organization_plane.posture_summary,
+        available_truths: [
+          ...console_state.platform_coherence_state.organization_plane.available_truths,
+        ],
+        deferred_truths: [
+          ...console_state.platform_coherence_state.organization_plane.deferred_truths,
+        ],
+        non_claims: [
+          ...console_state.platform_coherence_state.organization_plane.non_claims,
+        ],
+      },
+      execution_plane: {
+        plane_key:
+          console_state.platform_coherence_state.execution_plane.plane_key,
+        truth_sources: [
+          "persisted_structural_truth",
+          "seeded_summary_truth",
+          "deferred_unavailable_surface",
+          "non_claim",
+        ],
+        plane_presence:
+          console_state.platform_coherence_state.execution_plane.plane_presence,
+        boundary_status:
+          console_state.platform_coherence_state.execution_plane.boundary_status,
+        execution_boundary:
+          console_state.platform_coherence_state.execution_plane.execution_boundary,
+        posture_summary:
+          console_state.platform_coherence_state.execution_plane.posture_summary,
+        available_truths: [
+          ...console_state.platform_coherence_state.execution_plane.available_truths,
+        ],
+        deferred_truths: [
+          ...console_state.platform_coherence_state.execution_plane.deferred_truths,
+        ],
+        non_claims: [
+          ...console_state.platform_coherence_state.execution_plane.non_claims,
+        ],
+      },
+      memory_evidence_plane: {
+        plane_key:
+          console_state.platform_coherence_state.memory_evidence_plane.plane_key,
+        truth_sources: [
+          "persisted_structural_truth",
+          "seeded_summary_truth",
+          "deferred_unavailable_surface",
+          "non_claim",
+        ],
+        plane_presence:
+          console_state.platform_coherence_state.memory_evidence_plane.plane_presence,
+        boundary_status:
+          console_state.platform_coherence_state.memory_evidence_plane.boundary_status,
+        execution_boundary:
+          console_state.platform_coherence_state.memory_evidence_plane.execution_boundary,
+        posture_summary:
+          console_state.platform_coherence_state.memory_evidence_plane.posture_summary,
+        available_truths: [
+          ...console_state.platform_coherence_state.memory_evidence_plane.available_truths,
+        ],
+        deferred_truths: [
+          ...console_state.platform_coherence_state.memory_evidence_plane.deferred_truths,
+        ],
+        non_claims: [
+          ...console_state.platform_coherence_state.memory_evidence_plane.non_claims,
+        ],
+      },
+      non_claims: [
+        ...console_state.platform_coherence_state.non_claims,
+      ],
+    },
     deferred_surface_view: {
       section_key: "deferred_surface_view",
       truth_sources: ["deferred_unavailable_surface"],

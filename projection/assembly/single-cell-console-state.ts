@@ -3,6 +3,9 @@ import type { SingleCellConsoleState } from "../contracts/single-cell-console-st
 import {
   assemblePackMountModelState,
 } from "./pack-mount-model.ts";
+import {
+  assembleCrossPlanePlatformCoherenceState,
+} from "./platform-coherence.ts";
 
 const CONSOLE_NON_CLAIMS = [
   "no_event_timeline_truth",
@@ -32,6 +35,15 @@ export function assembleSingleCellConsoleState(
     ...assembly.deferred_items,
     "secretary_behavior",
   ]);
+  const optional_mount_state = assemblePackMountModelState({
+    business_pack_mounts: constitution_state.business_pack_mounts,
+    metrics_pack_mounts: constitution_state.metrics_pack_mounts,
+  });
+  const platform_coherence_state = assembleCrossPlanePlatformCoherenceState({
+    assembly,
+    optional_mount_state,
+    continuity_note,
+  });
 
   return {
     console_state_id: `${assembly.assembly_id}-console-state`,
@@ -60,6 +72,7 @@ export function assembleSingleCellConsoleState(
         "objective_state",
         "memory_and_evidence_state",
         "continuity_truth_state",
+        "platform_coherence_state",
       ],
       deferred_unavailable_surfaces: [...deferred_surfaces],
       non_claims: [...CONSOLE_NON_CLAIMS],
@@ -167,10 +180,7 @@ export function assembleSingleCellConsoleState(
         ...assembly.compile_input_seed.memory_evidence_state.known_absences,
       ],
     },
-    optional_mount_state: assemblePackMountModelState({
-      business_pack_mounts: constitution_state.business_pack_mounts,
-      metrics_pack_mounts: constitution_state.metrics_pack_mounts,
-    }),
+    optional_mount_state,
     continuity_truth_state: {
       persisted_structural_truth: {
         anchor_ref_id:
@@ -189,6 +199,7 @@ export function assembleSingleCellConsoleState(
       },
       non_claims: [...CONSOLE_NON_CLAIMS],
     },
+    platform_coherence_state,
     deferred_surfaces: [...deferred_surfaces],
   };
 }

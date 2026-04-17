@@ -42,6 +42,7 @@ test("[projection] single-cell console state assembles all required sections wit
   assert.ok(console_state.memory_and_evidence_state);
   assert.ok(console_state.optional_mount_state);
   assert.ok(console_state.continuity_truth_state);
+  assert.ok(console_state.platform_coherence_state);
 
   assert.equal(
     console_state.cell_identity_state.persisted_structural_truth.cell_id,
@@ -62,6 +63,30 @@ test("[projection] single-cell console state assembles all required sections wit
   assert.equal(
     console_state.continuity_truth_state.persisted_structural_truth.continuity_status,
     "bounded_and_honest"
+  );
+  assert.equal(
+    console_state.platform_coherence_state.platform_readiness_posture,
+    "bounded_platform_baseline_only"
+  );
+  assert.equal(
+    console_state.platform_coherence_state.execution_boundary,
+    "non_executing"
+  );
+  assert.equal(
+    console_state.platform_coherence_state.present_plane_keys.length,
+    4
+  );
+  assert.equal(
+    console_state.platform_coherence_state.organization_plane.optional_mounts_present,
+    false
+  );
+  assert.equal(
+    console_state.platform_coherence_state.execution_plane.work_item_timeline_available,
+    false
+  );
+  assert.equal(
+    console_state.platform_coherence_state.memory_evidence_plane.full_evidence_graph_available,
+    false
   );
 
   assert.equal(
@@ -92,6 +117,11 @@ test("[projection] single-cell console state assembles all required sections wit
       "no_broad_kpi_projection"
     )
   );
+  assert.ok(
+    console_state.truth_boundary_state.seeded_summary_truth_sections.includes(
+      "platform_coherence_state"
+    )
+  );
 
   const boundary_targets = [
     console_state,
@@ -103,6 +133,11 @@ test("[projection] single-cell console state assembles all required sections wit
     console_state.memory_and_evidence_state,
     console_state.optional_mount_state,
     console_state.continuity_truth_state,
+    console_state.platform_coherence_state,
+    console_state.platform_coherence_state.management_plane,
+    console_state.platform_coherence_state.organization_plane,
+    console_state.platform_coherence_state.execution_plane,
+    console_state.platform_coherence_state.memory_evidence_plane,
   ];
 
   for (const target of boundary_targets) {
