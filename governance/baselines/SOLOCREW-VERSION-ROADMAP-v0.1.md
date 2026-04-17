@@ -129,7 +129,8 @@ Current status:
 
 - implementation-begun line with Wave 1 shell, Wave 2 handoff staging, Wave 3 handoff review packet, and Wave 4 revision-return consistency present
 - accepted as a bounded non-executing beta lane
-- currently paused for feature expansion pending explicit reopening governance
+- reopening now approved only with limits for one bounded Wave 5 candidate
+- Wave 5 remains unimplemented
 - still below handoff execution and direct-control semantics
 
 Mandatory baseline:
@@ -147,6 +148,10 @@ Explicitly deferred:
 - full autonomous portfolio optimization
 - generalized pack marketplace
 - protocol promotion of product objects without separate candidate handling
+
+Current approved next-wave candidate:
+
+- `v0.5 Wave 5 - rationale and evidence visibility hardening`
 
 ### `v1.0-solo-operator-platform`
 

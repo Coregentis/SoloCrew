@@ -70,8 +70,10 @@ The current `v0.5` line is `v0.5-portfolio-secretary-beta`.
 
 This repo has now begun bounded `v0.5` implementation with Waves 1 through 4 only.
 That current Wave 1 through Wave 4 line is accepted as a bounded non-executing
-beta lane and is now paused for feature expansion pending explicit reopening
-governance.
+beta lane.
+It was previously paused for feature expansion and has now been reopened only
+with explicit limits for one next bounded candidate wave.
+That reopening does not mean Wave 5 is implemented.
 
 That means `v0.5` currently includes:
 
@@ -93,6 +95,18 @@ That also means `v0.5` is the line that may later introduce:
 These first `v0.5` waves do not add direct approve, reject, dispatch, or execute behavior.
 They do not add handoff execution, approval/rejection execution, provider/channel execution, runtime authority, or protocol promotion.
 It does not mean runtime authority, protocol promotion, provider execution, or full portfolio operating-platform behavior now exist here.
+
+The current approved next-wave direction is:
+
+- bounded rationale and evidence visibility hardening over the existing
+  non-executing Secretary beta lane
+
+That approved reopening remains:
+
+- downstream
+- product-projected
+- non-executing
+- below direct-control semantics
 
 ## Version Semantics
 

@@ -2,6 +2,9 @@
 
 ## 2026-04-16
 
+- approved bounded reopening for the paused `v0.5-portfolio-secretary-beta` line after `Cognitive_OS` Phase 4 was formally sealed on remote `main`
+- limited that reopening to one named Wave 5 candidate focused on rationale and evidence visibility hardening only
+- kept that reopening wave governance-only and explicitly out of scope for direct approve, reject, dispatch, execute, provider/channel behavior, workflow-engine semantics, runtime-authority drift, and protocol-law promotion
 - added a bounded `v0.5-portfolio-secretary-beta` pause-state governance pack covering pause meaning, lawful reopening rules, and a formal beta-lane pause record
 - kept that governance wave behaviorally unchanged and explicitly out of scope for Wave 5, new pages, direct-control semantics, runtime expansion, and protocol-law promotion
 - added a bounded `v0.5-portfolio-secretary-beta` audit, gate, and closure pack for the landed non-executing Wave 1 through Wave 4 beta lane
