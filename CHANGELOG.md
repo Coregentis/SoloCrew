@@ -2,6 +2,9 @@
 
 ## 2026-04-17
 
+- added a bounded Q2 platform-coherence audit, gates, and closure pack after the landed cross-plane platform coherence pass
+- refreshed `v1.0` readiness and queue wording so cross-plane coherence is treated as materially reduced and the next top blocker shifts to the platform summary and delivery-readiness layer
+- kept that closure-refresh wave governance-only and explicitly out of scope for Q3 code, execution behavior, runtime-authority claims, protocol-authority claims, and any `v1.0` delivery claim
 - hardened bounded cross-plane platform coherence across management, organization, execution-adjacent, and memory/evidence product planes for `v1.0` readiness
 - kept that Q2 coherence wave structural and explanatory only, with no direct-control semantics, execution behavior, runtime-authority claims, or protocol-authority claims
 - added a bounded Q1 mount-model audit, gate, and closure pack after the landed lawful business-pack / metrics-pack mount model coherence pass
