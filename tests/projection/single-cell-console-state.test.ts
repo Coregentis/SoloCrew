@@ -69,6 +69,15 @@ test("[projection] single-cell console state assembles all required sections wit
     false
   );
   assert.equal(console_state.optional_mount_state.all_mounts_deferred, true);
+  assert.equal(console_state.optional_mount_state.any_mounted_mounts, false);
+  assert.equal(
+    console_state.optional_mount_state.structural_availability,
+    "bounded_structural_availability"
+  );
+  assert.equal(
+    console_state.optional_mount_state.execution_boundary,
+    "non_executing_mount_only"
+  );
   assert.ok(
     console_state.deferred_surfaces.includes("provider_execution")
   );

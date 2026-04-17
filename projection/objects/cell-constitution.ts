@@ -2,6 +2,10 @@ import {
   SOLOCREW_STRUCTURAL_CONTRACT_VERSION,
   type StructuralContractEnvelope,
 } from "../contracts/structural-object-types.ts";
+import type {
+  SoloCrewPackMountScope,
+  SoloCrewPackMountStatus,
+} from "../contracts/pack-mount-model-contract.ts";
 
 export type DeliveryReviewPosture =
   | "operator_review"
@@ -32,8 +36,8 @@ export type MemoryContinuitySource =
   | "preference_state"
   | "review_continuity_note";
 
-export type PackMountScope = "cell" | "portfolio";
-export type PackMountStatus = "unmounted" | "reserved";
+export type PackMountScope = SoloCrewPackMountScope;
+export type PackMountStatus = SoloCrewPackMountStatus;
 
 interface StructuralEnvelopeInput<TObjectType extends string> {
   projection_id: string;
@@ -67,6 +71,17 @@ function create_product_structural_envelope<
       ? [...input.projection_notes]
       : undefined,
   };
+}
+
+function with_pack_mount_projection_notes(
+  mount_label: "Business Pack Mount" | "Metrics Pack Mount",
+  projection_notes?: string[]
+): string[] {
+  return [
+    `${mount_label} remains structural-only and non-executing.`,
+    `${mount_label} posture does not imply provider execution, pack execution, or protocol authority.`,
+    ...(projection_notes ?? []),
+  ];
 }
 
 export interface CellCharter
@@ -455,7 +470,10 @@ export function createBusinessPackMount(
       object_type: "business-pack-mount",
       implementation_status: "deferred_mount",
       phase_boundary: "optional_mount",
-      projection_notes: input.projection_notes,
+      projection_notes: with_pack_mount_projection_notes(
+        "Business Pack Mount",
+        input.projection_notes
+      ),
     }),
     business_pack_mount_id: input.business_pack_mount_id,
     cell_id: input.cell_id,
@@ -493,7 +511,10 @@ export function createMetricsPackMount(
       object_type: "metrics-pack-mount",
       implementation_status: "deferred_mount",
       phase_boundary: "optional_mount",
-      projection_notes: input.projection_notes,
+      projection_notes: with_pack_mount_projection_notes(
+        "Metrics Pack Mount",
+        input.projection_notes
+      ),
     }),
     metrics_pack_mount_id: input.metrics_pack_mount_id,
     cell_id: input.cell_id,

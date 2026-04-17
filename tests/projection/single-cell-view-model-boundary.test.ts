@@ -55,6 +55,26 @@ test("[projection] single-cell view-model keeps deferred surfaces explicit and a
     view_model.deferred_surface_view.all_mounts_deferred,
     true
   );
+  assert.equal(
+    view_model.deferred_surface_view.any_mounted_mounts,
+    false
+  );
+  assert.equal(
+    view_model.deferred_surface_view.structural_availability,
+    "bounded_structural_availability"
+  );
+  assert.equal(
+    view_model.deferred_surface_view.execution_boundary,
+    "non_executing_mount_only"
+  );
+  assert.equal(
+    view_model.deferred_surface_view.business_pack_mount_postures[0],
+    "deferred_unmounted_structural_mount"
+  );
+  assert.equal(
+    view_model.deferred_surface_view.metrics_pack_mount_postures[0],
+    "deferred_unmounted_structural_mount"
+  );
 
   assert.ok(
     view_model.truth_boundary_view.persisted_structural_truth_sections.includes(

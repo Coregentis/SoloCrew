@@ -96,7 +96,7 @@ test("[projection] structural constitution skeleton preserves boundaries and opt
       cell_id: "cell-01",
       mount_key: "growth-pack",
       mount_scope: "cell",
-      mount_status: "reserved",
+      mount_status: "mounted",
     }),
     createMetricsPackMount({
       projection_id: "metrics-pack-mount-proj",
@@ -123,6 +123,8 @@ test("[projection] structural constitution skeleton preserves boundaries and opt
 
   assert.equal(objects[8]?.implementation_status, "deferred_mount");
   assert.equal(objects[8]?.phase_boundary, "optional_mount");
+  assert.equal(objects[8]?.mount_status, "mounted");
   assert.equal(objects[9]?.implementation_status, "deferred_mount");
   assert.equal(objects[9]?.phase_boundary, "optional_mount");
+  assert.equal(objects[9]?.mount_status, "unmounted");
 });

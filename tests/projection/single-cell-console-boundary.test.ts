@@ -51,6 +51,23 @@ test("[projection] single-cell console state keeps optional mounts deferred and 
     console_state.optional_mount_state.metrics_pack_mounts[0]?.implementation_status,
     "deferred_mount"
   );
+  assert.equal(
+    console_state.optional_mount_state.business_pack_mounts[0]?.posture_summary,
+    "deferred_unmounted_structural_mount"
+  );
+  assert.equal(
+    console_state.optional_mount_state.metrics_pack_mounts[0]?.posture_summary,
+    "deferred_unmounted_structural_mount"
+  );
+  assert.equal(console_state.optional_mount_state.any_mounted_mounts, false);
+  assert.equal(
+    console_state.optional_mount_state.structural_availability,
+    "bounded_structural_availability"
+  );
+  assert.equal(
+    console_state.optional_mount_state.execution_boundary,
+    "non_executing_mount_only"
+  );
 
   assert.equal(
     console_state.continuity_truth_state.seeded_summary_truth.runtime_summary_claim,

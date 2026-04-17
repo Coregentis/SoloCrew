@@ -2,6 +2,8 @@
 
 ## 2026-04-17
 
+- hardened the lawful business-pack / metrics-pack mount model coherence for `v1.0` readiness by normalizing optional-mount posture as structural-only and non-executing product truth
+- kept that structural coherence wave explicitly out of scope for direct-control semantics, pack execution behavior, provider/channel behavior, runtime-authority claims, and protocol-authority claims
 - added a bounded `v1.0-solo-operator-platform` readiness gap matrix, pre-delivery scope baseline, implementation queue, and readiness planning record over the current reopened `v0.5` lane
 - kept that planning wave governance-only and explicitly out of scope for Wave 6 implementation, direct-control semantics, runtime-authority claims, protocol-authority claims, and silent upgrade of `v0.5` into `v1.0`
 - added a bounded `v0.5-portfolio-secretary-beta` Wave 5 audit, gates, and closure-refresh pack for the landed rationale and evidence visibility hardening line

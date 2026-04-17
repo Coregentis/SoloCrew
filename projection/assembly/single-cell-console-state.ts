@@ -1,5 +1,8 @@
 import type { SingleCellStructuralAssemblyPackage } from "../contracts/single-cell-assembly-contract.ts";
 import type { SingleCellConsoleState } from "../contracts/single-cell-console-state-contract.ts";
+import {
+  assemblePackMountModelState,
+} from "./pack-mount-model.ts";
 
 const CONSOLE_NON_CLAIMS = [
   "no_event_timeline_truth",
@@ -164,31 +167,10 @@ export function assembleSingleCellConsoleState(
         ...assembly.compile_input_seed.memory_evidence_state.known_absences,
       ],
     },
-    optional_mount_state: {
-      business_pack_mounts: constitution_state.business_pack_mounts.map(
-        (mount) => ({
-          mount_key: mount.mount_key,
-          mount_scope: mount.mount_scope,
-          mount_status: mount.mount_status,
-          implementation_status: mount.implementation_status,
-        })
-      ),
-      metrics_pack_mounts: constitution_state.metrics_pack_mounts.map(
-        (mount) => ({
-          mount_key: mount.mount_key,
-          mount_scope: mount.mount_scope,
-          mount_status: mount.mount_status,
-          implementation_status: mount.implementation_status,
-        })
-      ),
-      optional_mounts_present:
-        constitution_state.business_pack_mounts.length > 0 ||
-        constitution_state.metrics_pack_mounts.length > 0,
-      all_mounts_deferred: [
-        ...constitution_state.business_pack_mounts,
-        ...constitution_state.metrics_pack_mounts,
-      ].every((mount) => mount.implementation_status === "deferred_mount"),
-    },
+    optional_mount_state: assemblePackMountModelState({
+      business_pack_mounts: constitution_state.business_pack_mounts,
+      metrics_pack_mounts: constitution_state.metrics_pack_mounts,
+    }),
     continuity_truth_state: {
       persisted_structural_truth: {
         anchor_ref_id:

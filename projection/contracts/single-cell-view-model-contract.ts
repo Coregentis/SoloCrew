@@ -1,4 +1,9 @@
 import type { SingleCellAssemblyScope } from "./single-cell-assembly-contract.ts";
+import type {
+  SoloCrewPackMountExecutionBoundary,
+  SoloCrewPackMountPosture,
+  SoloCrewPackMountStructuralAvailability,
+} from "./pack-mount-model-contract.ts";
 
 export type SingleCellViewModelPhaseBoundary = "ui_adjacent_projection";
 export type SingleCellViewModelAuthorityBoundary = "product_projection_only";
@@ -80,6 +85,11 @@ export interface SingleCellDeferredSurfaceView {
   business_pack_mount_keys: string[];
   metrics_pack_mount_keys: string[];
   all_mounts_deferred: boolean;
+  any_mounted_mounts: boolean;
+  structural_availability: SoloCrewPackMountStructuralAvailability;
+  execution_boundary: SoloCrewPackMountExecutionBoundary;
+  business_pack_mount_postures: SoloCrewPackMountPosture[];
+  metrics_pack_mount_postures: SoloCrewPackMountPosture[];
 }
 
 export interface SingleCellTruthBoundaryView {

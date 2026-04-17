@@ -162,6 +162,20 @@ export function assembleSingleCellViewModel(
         ),
       all_mounts_deferred:
         console_state.optional_mount_state.all_mounts_deferred,
+      any_mounted_mounts:
+        console_state.optional_mount_state.any_mounted_mounts,
+      structural_availability:
+        console_state.optional_mount_state.structural_availability,
+      execution_boundary:
+        console_state.optional_mount_state.execution_boundary,
+      business_pack_mount_postures:
+        console_state.optional_mount_state.business_pack_mounts.map(
+          (mount) => mount.posture_summary
+        ),
+      metrics_pack_mount_postures:
+        console_state.optional_mount_state.metrics_pack_mounts.map(
+          (mount) => mount.posture_summary
+        ),
     },
     truth_boundary_view: {
       section_key: "truth_boundary_view",

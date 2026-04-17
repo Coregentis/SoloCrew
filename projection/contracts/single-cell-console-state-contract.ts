@@ -7,6 +7,9 @@ import type {
   SingleCellAssemblyScope,
   SingleCellSummaryClaim,
 } from "./single-cell-assembly-contract.ts";
+import type {
+  SoloCrewPackMountModelState,
+} from "./pack-mount-model-contract.ts";
 
 export type SingleCellConsolePhaseBoundary = "runtime_adjacent_summary";
 export type SingleCellConsoleAuthorityBoundary = "product_projection_only";
@@ -98,22 +101,8 @@ export interface SingleCellMemoryAndEvidenceState {
   known_absences: string[];
 }
 
-export interface SingleCellOptionalMountState {
-  business_pack_mounts: Array<{
-    mount_key: string;
-    mount_scope: string;
-    mount_status: string;
-    implementation_status: "deferred_mount";
-  }>;
-  metrics_pack_mounts: Array<{
-    mount_key: string;
-    mount_scope: string;
-    mount_status: string;
-    implementation_status: "deferred_mount";
-  }>;
-  optional_mounts_present: boolean;
-  all_mounts_deferred: boolean;
-}
+export interface SingleCellOptionalMountState
+  extends SoloCrewPackMountModelState {}
 
 export interface SingleCellContinuityTruthState {
   persisted_structural_truth: {
