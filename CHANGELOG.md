@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-04-17
+
+- added a bounded `v0.5-portfolio-secretary-beta` Wave 5 audit, gates, and closure-refresh pack for the landed rationale and evidence visibility hardening line
+- kept that closure-refresh wave governance-only and explicitly out of scope for Wave 6, new feature behavior, direct-control semantics, runtime expansion, and protocol-law promotion
+
 ## 2026-04-16
 
 - added the bounded `v0.5-portfolio-secretary-beta` Wave 5 rationale and evidence visibility hardening pass across the existing portfolio shell, handoff staging, and handoff review packet surfaces
