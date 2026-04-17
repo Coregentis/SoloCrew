@@ -11,6 +11,9 @@ import {
   assemblePackMountModelState,
 } from "../../projection/assembly/pack-mount-model.ts";
 import {
+  assembleRuntimeDependentDownstreamTruthState,
+} from "../../projection/assembly/runtime-dependent-downstream-truth.ts";
+import {
   initializeSingleCellStructuralAssembly,
 } from "../../projection/assembly/single-cell-initializer.ts";
 
@@ -42,10 +45,18 @@ test("[projection] platform delivery readiness stays product-projected and non-e
     continuity_note:
       assembly.initial_cell_summary_seed.cell_summary_card.continuity_note,
   });
+  const runtime_dependent_downstream_truth_state =
+    assembleRuntimeDependentDownstreamTruthState({
+      assembly,
+      platform_coherence_state,
+      continuity_note:
+        assembly.initial_cell_summary_seed.cell_summary_card.continuity_note,
+    });
   const delivery_readiness_state = assemblePlatformDeliveryReadinessState({
     assembly,
     optional_mount_state,
     platform_coherence_state,
+    runtime_dependent_downstream_truth_state,
     continuity_note:
       assembly.initial_cell_summary_seed.cell_summary_card.continuity_note,
   });
@@ -73,7 +84,7 @@ test("[projection] platform delivery readiness stays product-projected and non-e
   assert.equal(delivery_readiness_state.formal_delivery_ready_now, false);
   assert.equal(
     delivery_readiness_state.current_readiness_blocker,
-    "runtime_dependent_downstream_truth_hardening"
+    "formal_v1_delivery_gate"
   );
   assert.ok(
     delivery_readiness_state.present_capabilities.some(
@@ -84,7 +95,7 @@ test("[projection] platform delivery readiness stays product-projected and non-e
   assert.ok(
     delivery_readiness_state.present_capabilities.some(
       (capability) =>
-        capability.capability_key === "bounded_explanatory_beta_lane"
+        capability.capability_key === "runtime_dependent_downstream_truth_hardening"
     )
   );
   assert.ok(
@@ -95,7 +106,7 @@ test("[projection] platform delivery readiness stays product-projected and non-e
   );
   assert.ok(
     delivery_readiness_state.deferred_items.includes(
-      "runtime_dependent_downstream_truth_hardening"
+      "formal_v1_delivery_gate"
     )
   );
   assert.ok(
@@ -105,15 +116,15 @@ test("[projection] platform delivery readiness stays product-projected and non-e
   );
   assert.ok(
     delivery_readiness_state.non_claims.includes(
-      "no_formal_v1_delivery_claim"
+      "no_local_workflow_law_invention"
     )
   );
   assert.match(
     delivery_readiness_state.summary_text,
-    /bounded pre-delivery read/
+    /confirm\/trace\/evidence interpretation/
   );
   assert.match(
     delivery_readiness_state.omission_summary,
-    /runtime-dependent downstream truth hardening/
+    /formal v1.0 delivery gate/
   );
 });

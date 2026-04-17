@@ -60,6 +60,7 @@ test("[app] single-cell operator console shell assembles coherently from shell e
   assert.ok(console_shell.objective_overview);
   assert.ok(console_shell.work_item_execution_overview);
   assert.ok(console_shell.memory_continuity_overview);
+  assert.ok(console_shell.runtime_dependent_downstream_truth_overview);
   assert.ok(console_shell.platform_coherence_overview);
   assert.ok(console_shell.platform_delivery_readiness_overview);
   assert.ok(console_shell.deferred_surfaces);
@@ -90,6 +91,18 @@ test("[app] single-cell operator console shell assembles coherently from shell e
     console_shell.platform_delivery_readiness_overview.formal_delivery_ready_now,
     false
   );
+  assert.equal(
+    console_shell.platform_delivery_readiness_overview.current_readiness_blocker,
+    "formal_v1_delivery_gate"
+  );
+  assert.equal(
+    console_shell.runtime_dependent_downstream_truth_overview.truth_status,
+    "bounded_upstream_supported_interpretation"
+  );
+  assert.equal(
+    console_shell.runtime_dependent_downstream_truth_overview.upstream_workflow_truth_status,
+    "not_adopted_upstream"
+  );
 
   assert.ok(console_shell.deferred_items.includes("provider_execution"));
   assert.ok(console_shell.deferred_items.includes("full-page-routing"));
@@ -103,6 +116,11 @@ test("[app] single-cell operator console shell assembles coherently from shell e
       "no_runtime_complete_product_state"
     )
   );
+  assert.ok(
+    console_shell.runtime_dependent_downstream_truth_overview.non_claims.includes(
+      "no_trace_as_execution_authorization"
+    )
+  );
 
   const boundary_targets = [
     console_shell,
@@ -112,6 +130,7 @@ test("[app] single-cell operator console shell assembles coherently from shell e
     console_shell.objective_overview,
     console_shell.work_item_execution_overview,
     console_shell.memory_continuity_overview,
+    console_shell.runtime_dependent_downstream_truth_overview,
     console_shell.platform_coherence_overview,
     console_shell.platform_delivery_readiness_overview,
     console_shell.deferred_surfaces,

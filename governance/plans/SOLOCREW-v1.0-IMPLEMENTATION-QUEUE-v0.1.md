@@ -22,7 +22,8 @@ The queue must remain:
 ## Current Queue State
 
 Current queue state after the landed Q3 platform summary and delivery-readiness
-layer pass is:
+layer pass and the landed Q4 runtime-dependent downstream truth hardening pass
+is:
 
 - `Q1. Mount Model Coherence Pass` is now landed, accepted, and closed on
   `main`
@@ -30,8 +31,10 @@ layer pass is:
   on `main`
 - `Q3. Platform Summary And Delivery-Readiness Layer` is now landed, accepted,
   and closed on `main`
-- the next correct queued item is now
-  `Q4. Runtime-Dependent Downstream Truth Hardening`
+- `Q4. Runtime-Dependent Downstream Truth Hardening` is now landed as the
+  bounded confirm/trace/evidence-linked downstream interpretation layer on
+  `main`
+- the next correct queued item is now `Q5. v1.0 Delivery Gate And Closure Pack`
 
 ## Ordered Queue
 
@@ -40,7 +43,7 @@ layer pass is:
 | `Q1. Mount Model Coherence Pass` | Turn existing `business-pack-mount` and `metrics-pack-mount` structural truth into one lawful downstream product mount model with explicit non-executing semantics. | The roadmap names a lawful business-pack and metrics-pack mount model as a mandatory `v1.0` baseline, and Q1 closes that model gap in bounded downstream form. | `structural` | Already landed through the separately gated Q1 pass. | `NO` |
 | `Q2. Cross-Plane Platform Coherence Pass` | Align management, organization, execution, and memory/evidence surfaces so they read as one solo-operator platform instead of separate bounded lines. | `v1.0` requires coherent platform structure, not only strong isolated lanes. | `structural`, `explanatory` | Landed through the separately gated Q2 pass and now acts as the bounded plane-alignment baseline for later platform-read shaping. | `NO` |
 | `Q3. Platform Summary And Delivery-Readiness Layer` | Build a bounded top-level platform summary/readiness layer that truthfully explains current operator state, mount posture, plane posture, and omissions without adding execution authority. | `v1.0` needs a delivery-grade product read, not only a beta-lane read. | `explanatory` | Landed through the separately gated Q3 pass and now acts as the bounded top-level platform-read baseline for later readiness work. | `NO` |
-| `Q4. Runtime-Dependent Downstream Truth Hardening` | Harden downstream product interpretation only where current `Cognitive_OS` Phase 4 truth already supports stronger confirm/trace/evidence-linked visibility without inventing upstream workflow law. | Reduces ambiguity and strengthens delivery truth while preserving authority boundaries. | `runtime-dependent`, `explanatory` | Depends on current `Cognitive_OS` closure staying stable and on explicit adjacent regression if stronger upstream consumption is introduced. | `YES` |
+| `Q4. Runtime-Dependent Downstream Truth Hardening` | Harden downstream product interpretation only where current `Cognitive_OS` Phase 4 truth already supports stronger confirm/trace/evidence-linked visibility without inventing upstream workflow law. | Reduces ambiguity and strengthens delivery truth while preserving authority boundaries. | `runtime-dependent`, `explanatory` | Landed through the separately gated Q4 pass and now acts as the bounded downstream confirm/trace/evidence interpretation baseline for final delivery judgment. | `NO` |
 | `Q5. v1.0 Delivery Gate And Closure Pack` | Audit the post-queue state against the formal `v1.0-solo-operator-platform` baseline and decide whether formal delivery can be claimed. | `v1.0` should be a governed delivery line, not a naming convenience. | `governance-dependent` | Depends on the earlier queue items landing coherently and on cross-repo authority checks staying green. | `YES` |
 
 ## Implementation Notes By Queue Item
@@ -88,8 +91,9 @@ Must not become:
 
 Smallest truthful read:
 
-- this item is optional until current upstream truth can support it lawfully
-- it must remain downstream interpretation, not upstream invention
+- this item is now landed in bounded form
+- it remains downstream interpretation over current upstream Confirm/Trace
+  posture, not upstream invention
 
 Must not become:
 
@@ -109,14 +113,13 @@ Must not become:
 
 ## Smallest Lawful Next Development Class
 
-The smallest lawful next development class after current Q3 closure is:
+The smallest lawful next development class after current Q4 line is:
 
-- `Q4. Runtime-Dependent Downstream Truth Hardening`
+- `Q5. v1.0 Delivery Gate And Closure Pack`
 
-That is now the smallest next class because Q3 materially reduced the previous
-top blocker around platform-summary/readiness shaping and the next remaining
-gap now sits at runtime-dependent downstream truth hardening that still needs
-its own gate.
+That is now the smallest next class because Q4 materially reduced the previous
+runtime-dependent downstream truth blocker and the next remaining gap now sits
+at the final governed delivery gate.
 
 ## Queue Judgment
 

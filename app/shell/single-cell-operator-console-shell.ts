@@ -111,6 +111,50 @@ export function composeSingleCellOperatorConsoleShell(
         ...view_model.memory_and_continuity_view.known_absences,
       ],
     },
+    runtime_dependent_downstream_truth_overview: {
+      truth_sources: [
+        ...view_model.runtime_dependent_downstream_truth_view.truth_sources,
+      ],
+      truth_status:
+        view_model.runtime_dependent_downstream_truth_view.truth_status,
+      confirm_visibility_status:
+        view_model.runtime_dependent_downstream_truth_view.confirm_visibility_status,
+      trace_visibility_status:
+        view_model.runtime_dependent_downstream_truth_view.trace_visibility_status,
+      evidence_visibility_status:
+        view_model.runtime_dependent_downstream_truth_view.evidence_visibility_status,
+      context_export_status:
+        view_model.runtime_dependent_downstream_truth_view.context_export_status,
+      plan_export_status:
+        view_model.runtime_dependent_downstream_truth_view.plan_export_status,
+      upstream_workflow_truth_status:
+        view_model.runtime_dependent_downstream_truth_view.upstream_workflow_truth_status,
+      summary_text:
+        view_model.runtime_dependent_downstream_truth_view.summary_text,
+      confirm_linked_summary:
+        view_model.runtime_dependent_downstream_truth_view.confirm_linked_summary,
+      trace_linked_summary:
+        view_model.runtime_dependent_downstream_truth_view.trace_linked_summary,
+      evidence_linked_summary:
+        view_model.runtime_dependent_downstream_truth_view.evidence_linked_summary,
+      delivery_interpretation_summary:
+        view_model.runtime_dependent_downstream_truth_view.delivery_interpretation_summary,
+      supported_upstream_truths: [
+        ...view_model.runtime_dependent_downstream_truth_view.supported_upstream_truths,
+      ],
+      bounded_truths: [
+        ...view_model.runtime_dependent_downstream_truth_view.bounded_truths,
+      ],
+      unavailable_truths: [
+        ...view_model.runtime_dependent_downstream_truth_view.unavailable_truths,
+      ],
+      omission_notes: [
+        ...view_model.runtime_dependent_downstream_truth_view.omission_notes,
+      ],
+      non_claims: [
+        ...view_model.runtime_dependent_downstream_truth_view.non_claims,
+      ],
+    },
     platform_coherence_overview: {
       truth_sources: [
         ...view_model.platform_coherence_view.truth_sources,
@@ -197,6 +241,7 @@ export function composeSingleCellOperatorConsoleShell(
       deferred_items: [...deferred_items],
       non_claims: unique_items([
         ...view_model.truth_boundary_view.non_claims,
+        ...view_model.runtime_dependent_downstream_truth_view.non_claims,
         ...view_model.platform_coherence_view.non_claims,
         ...view_model.platform_delivery_readiness_view.non_claims,
         ...entry_package.entry_truth_boundary_seed.non_claims,
@@ -212,6 +257,7 @@ export function composeSingleCellOperatorConsoleShell(
       "Single-cell operator console shell is operator-facing only.",
       "Operator console shell does not imply page rendering, provider execution, or multi-cell behavior.",
       "Cross-plane platform coherence stays explanatory only and does not collapse management, organization, execution, or memory/evidence planes into execution authority.",
+      "Runtime-dependent downstream truth overview stays confirm/trace/evidence-linked only and does not convert upstream bounded truth into local workflow law.",
       "Platform delivery-readiness overview stays explanatory only and does not upgrade planning legibility into execution or delivery authority.",
     ],
     deferred_items: [...deferred_items],

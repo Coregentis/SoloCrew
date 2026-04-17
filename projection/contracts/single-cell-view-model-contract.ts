@@ -15,6 +15,13 @@ import type {
   SoloCrewPlatformDeliveryReadinessCapabilityStatus,
   SoloCrewPlatformDeliveryReadinessStatus,
 } from "./platform-delivery-readiness-contract.ts";
+import type {
+  SoloCrewRuntimeDependentDownstreamTruthStatus,
+  SoloCrewRuntimeDependentEvidenceStatus,
+  SoloCrewRuntimeDependentUnavailableTruthStatus,
+  SoloCrewRuntimeDependentUpstreamWorkflowTruthStatus,
+  SoloCrewRuntimeDependentVisibilityStatus,
+} from "./runtime-dependent-downstream-truth-contract.ts";
 
 export type SingleCellViewModelPhaseBoundary = "ui_adjacent_projection";
 export type SingleCellViewModelAuthorityBoundary = "product_projection_only";
@@ -169,6 +176,31 @@ export interface SingleCellPlatformDeliveryReadinessView {
   non_claims: string[];
 }
 
+export interface SingleCellRuntimeDependentDownstreamTruthView {
+  section_key: "runtime_dependent_downstream_truth_view";
+  truth_sources: SingleCellViewTruthSource[];
+  truth_status: SoloCrewRuntimeDependentDownstreamTruthStatus;
+  confirm_visibility_status: SoloCrewRuntimeDependentVisibilityStatus;
+  trace_visibility_status: SoloCrewRuntimeDependentVisibilityStatus;
+  evidence_visibility_status: SoloCrewRuntimeDependentEvidenceStatus;
+  context_export_status:
+    SoloCrewRuntimeDependentUnavailableTruthStatus;
+  plan_export_status:
+    SoloCrewRuntimeDependentUnavailableTruthStatus;
+  upstream_workflow_truth_status:
+    SoloCrewRuntimeDependentUpstreamWorkflowTruthStatus;
+  summary_text: string;
+  confirm_linked_summary: string;
+  trace_linked_summary: string;
+  evidence_linked_summary: string;
+  delivery_interpretation_summary: string;
+  supported_upstream_truths: string[];
+  bounded_truths: string[];
+  unavailable_truths: string[];
+  omission_notes: string[];
+  non_claims: string[];
+}
+
 export interface SingleCellViewModel {
   view_model_id: string;
   view_scope: SingleCellAssemblyScope;
@@ -187,6 +219,8 @@ export interface SingleCellViewModel {
   workstream_or_workitem_overview_view: SingleCellWorkstreamOverviewView;
   memory_and_continuity_view: SingleCellMemoryAndContinuityView;
   platform_coherence_view: SingleCellPlatformCoherenceView;
+  runtime_dependent_downstream_truth_view:
+    SingleCellRuntimeDependentDownstreamTruthView;
   platform_delivery_readiness_view: SingleCellPlatformDeliveryReadinessView;
   deferred_surface_view: SingleCellDeferredSurfaceView;
   truth_boundary_view: SingleCellTruthBoundaryView;

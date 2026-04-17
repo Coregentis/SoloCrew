@@ -43,6 +43,7 @@ test("[projection] single-cell console state assembles all required sections wit
   assert.ok(console_state.optional_mount_state);
   assert.ok(console_state.continuity_truth_state);
   assert.ok(console_state.platform_coherence_state);
+  assert.ok(console_state.runtime_dependent_downstream_truth_state);
   assert.ok(console_state.platform_delivery_readiness_state);
 
   assert.equal(
@@ -83,7 +84,15 @@ test("[projection] single-cell console state assembles all required sections wit
   );
   assert.equal(
     console_state.platform_delivery_readiness_state.current_readiness_blocker,
-    "runtime_dependent_downstream_truth_hardening"
+    "formal_v1_delivery_gate"
+  );
+  assert.equal(
+    console_state.runtime_dependent_downstream_truth_state.truth_status,
+    "bounded_upstream_supported_interpretation"
+  );
+  assert.equal(
+    console_state.runtime_dependent_downstream_truth_state.upstream_workflow_truth_status,
+    "not_adopted_upstream"
   );
   assert.equal(
     console_state.platform_coherence_state.present_plane_keys.length,
@@ -141,9 +150,14 @@ test("[projection] single-cell console state assembles all required sections wit
     )
   );
   assert.ok(
+    console_state.truth_boundary_state.seeded_summary_truth_sections.includes(
+      "runtime_dependent_downstream_truth_state"
+    )
+  );
+  assert.ok(
     console_state.platform_delivery_readiness_state.present_capabilities.some(
       (capability) =>
-        capability.capability_key === "cross_plane_platform_coherence"
+        capability.capability_key === "runtime_dependent_downstream_truth_hardening"
     )
   );
   assert.ok(
@@ -163,6 +177,7 @@ test("[projection] single-cell console state assembles all required sections wit
     console_state.optional_mount_state,
     console_state.continuity_truth_state,
     console_state.platform_coherence_state,
+    console_state.runtime_dependent_downstream_truth_state,
     console_state.platform_delivery_readiness_state,
     console_state.platform_coherence_state.management_plane,
     console_state.platform_coherence_state.organization_plane,

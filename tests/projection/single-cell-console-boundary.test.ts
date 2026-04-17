@@ -86,6 +86,14 @@ test("[projection] single-cell console state keeps optional mounts deferred and 
     "planning_ready_not_delivery_ready"
   );
   assert.equal(
+    console_state.runtime_dependent_downstream_truth_state.confirm_visibility_status,
+    "supported_in_current_upstream_truth"
+  );
+  assert.equal(
+    console_state.runtime_dependent_downstream_truth_state.context_export_status,
+    "explicitly_unavailable_in_current_upstream_truth"
+  );
+  assert.equal(
     console_state.platform_delivery_readiness_state.formal_delivery_ready_now,
     false
   );
@@ -96,7 +104,12 @@ test("[projection] single-cell console state keeps optional mounts deferred and 
   );
   assert.ok(
     console_state.platform_delivery_readiness_state.deferred_items.includes(
-      "runtime_dependent_downstream_truth_hardening"
+      "formal_v1_delivery_gate"
+    )
+  );
+  assert.ok(
+    console_state.runtime_dependent_downstream_truth_state.non_claims.includes(
+      "no_context_plan_backfill"
     )
   );
 
@@ -142,6 +155,11 @@ test("[projection] single-cell console state keeps optional mounts deferred and 
   assert.ok(
     console_state.truth_boundary_state.seeded_summary_truth_sections.includes(
       "platform_coherence_state"
+    )
+  );
+  assert.ok(
+    console_state.truth_boundary_state.seeded_summary_truth_sections.includes(
+      "runtime_dependent_downstream_truth_state"
     )
   );
   assert.ok(

@@ -12,6 +12,13 @@ import type {
   SoloCrewPlatformDeliveryReadinessBlocker,
   SoloCrewPlatformDeliveryReadinessStatus,
 } from "../../projection/contracts/platform-delivery-readiness-contract.ts";
+import type {
+  SoloCrewRuntimeDependentDownstreamTruthStatus,
+  SoloCrewRuntimeDependentEvidenceStatus,
+  SoloCrewRuntimeDependentUnavailableTruthStatus,
+  SoloCrewRuntimeDependentUpstreamWorkflowTruthStatus,
+  SoloCrewRuntimeDependentVisibilityStatus,
+} from "../../projection/contracts/runtime-dependent-downstream-truth-contract.ts";
 
 export type SingleCellOperatorConsoleShellPhaseBoundary =
   "operator_console_shell";
@@ -100,6 +107,30 @@ export interface SingleCellOperatorConsolePlatformDeliveryReadinessSection {
   non_claims: string[];
 }
 
+export interface SingleCellOperatorConsoleRuntimeDependentDownstreamTruthSection {
+  truth_sources: SingleCellViewTruthSource[];
+  truth_status: SoloCrewRuntimeDependentDownstreamTruthStatus;
+  confirm_visibility_status: SoloCrewRuntimeDependentVisibilityStatus;
+  trace_visibility_status: SoloCrewRuntimeDependentVisibilityStatus;
+  evidence_visibility_status: SoloCrewRuntimeDependentEvidenceStatus;
+  context_export_status:
+    SoloCrewRuntimeDependentUnavailableTruthStatus;
+  plan_export_status:
+    SoloCrewRuntimeDependentUnavailableTruthStatus;
+  upstream_workflow_truth_status:
+    SoloCrewRuntimeDependentUpstreamWorkflowTruthStatus;
+  summary_text: string;
+  confirm_linked_summary: string;
+  trace_linked_summary: string;
+  evidence_linked_summary: string;
+  delivery_interpretation_summary: string;
+  supported_upstream_truths: string[];
+  bounded_truths: string[];
+  unavailable_truths: string[];
+  omission_notes: string[];
+  non_claims: string[];
+}
+
 export interface SingleCellOperatorConsoleDeferredSurfacesSection {
   truth_sources: SingleCellViewTruthSource[];
   deferred_items: string[];
@@ -143,6 +174,8 @@ export interface SingleCellOperatorConsoleShell {
     SingleCellOperatorConsoleWorkItemExecutionSection;
   memory_continuity_overview:
     SingleCellOperatorConsoleMemoryContinuitySection;
+  runtime_dependent_downstream_truth_overview:
+    SingleCellOperatorConsoleRuntimeDependentDownstreamTruthSection;
   platform_coherence_overview:
     SingleCellOperatorConsolePlatformCoherenceSection;
   platform_delivery_readiness_overview:

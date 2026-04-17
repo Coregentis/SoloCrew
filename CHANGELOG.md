@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-04-18
+
+- hardened bounded runtime-dependent downstream truth over current `Cognitive_OS` confirm, trace, and omission-aware export posture without adding direct-control or execution behavior
+- kept that Q4 wave explanatory-only and explicitly out of scope for runtime-authority claims, protocol-authority claims, local workflow-law invention, Context/Plan backfill, and any `v1.0` delivery claim
+
 ## 2026-04-17
 
 - added a bounded Q3 readiness-layer audit, gates, and closure pack after the landed platform summary and delivery-readiness layer pass

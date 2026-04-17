@@ -84,6 +84,14 @@ test("[projection] single-cell view-model keeps deferred surfaces explicit and a
     "bounded_platform_baseline_only"
   );
   assert.equal(
+    view_model.runtime_dependent_downstream_truth_view.section_key,
+    "runtime_dependent_downstream_truth_view"
+  );
+  assert.equal(
+    view_model.runtime_dependent_downstream_truth_view.upstream_workflow_truth_status,
+    "not_adopted_upstream"
+  );
+  assert.equal(
     view_model.platform_coherence_view.execution_plane.execution_boundary,
     "non_executing"
   );
@@ -105,6 +113,10 @@ test("[projection] single-cell view-model keeps deferred surfaces explicit and a
     view_model.platform_delivery_readiness_view.formal_delivery_ready_now,
     false
   );
+  assert.equal(
+    view_model.platform_delivery_readiness_view.current_readiness_blocker,
+    "formal_v1_delivery_gate"
+  );
   assert.ok(
     view_model.platform_delivery_readiness_view.truth_sources.includes(
       "repo_baseline_truth"
@@ -118,6 +130,11 @@ test("[projection] single-cell view-model keeps deferred surfaces explicit and a
   assert.ok(
     view_model.platform_delivery_readiness_view.deferred_items.includes(
       "formal_v1_delivery_gate"
+    )
+  );
+  assert.ok(
+    view_model.runtime_dependent_downstream_truth_view.omission_notes.some(
+      (note) => note.includes("Context or Plan")
     )
   );
 

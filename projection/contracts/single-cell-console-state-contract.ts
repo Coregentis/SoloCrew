@@ -16,6 +16,9 @@ import type {
 import type {
   SoloCrewPlatformDeliveryReadinessState,
 } from "./platform-delivery-readiness-contract.ts";
+import type {
+  SoloCrewRuntimeDependentDownstreamTruthState,
+} from "./runtime-dependent-downstream-truth-contract.ts";
 
 export type SingleCellConsolePhaseBoundary = "runtime_adjacent_summary";
 export type SingleCellConsoleAuthorityBoundary = "product_projection_only";
@@ -144,6 +147,8 @@ export interface SingleCellConsoleState {
   optional_mount_state: SingleCellOptionalMountState;
   continuity_truth_state: SingleCellContinuityTruthState;
   platform_coherence_state: SoloCrewCrossPlanePlatformCoherenceState;
+  runtime_dependent_downstream_truth_state:
+    SoloCrewRuntimeDependentDownstreamTruthState;
   platform_delivery_readiness_state: SoloCrewPlatformDeliveryReadinessState;
   deferred_surfaces: string[];
 }

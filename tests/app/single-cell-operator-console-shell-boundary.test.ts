@@ -74,7 +74,7 @@ test("[app] single-cell operator console shell keeps deferred surfaces visible a
     )
   );
   assert.ok(
-    console_shell.platform_delivery_readiness_overview.deferred_capability_summaries.some(
+    console_shell.platform_delivery_readiness_overview.present_capability_summaries.some(
       (summary) =>
         summary.startsWith(
           "runtime_dependent_downstream_truth_hardening:"
@@ -91,8 +91,17 @@ test("[app] single-cell operator console shell keeps deferred surfaces visible a
   );
   assert.ok(
     console_shell.platform_delivery_readiness_overview.deferred_items.includes(
-      "runtime_dependent_downstream_truth_hardening"
+      "formal_v1_delivery_gate"
     )
+  );
+  assert.ok(
+    console_shell.runtime_dependent_downstream_truth_overview.non_claims.includes(
+      "no_local_workflow_law_invention"
+    )
+  );
+  assert.equal(
+    console_shell.platform_delivery_readiness_overview.current_readiness_blocker,
+    "formal_v1_delivery_gate"
   );
   assert.ok(
     console_shell.deferred_items.includes("live-data-fetching")

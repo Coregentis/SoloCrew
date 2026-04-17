@@ -43,7 +43,11 @@ test("[app] single-cell operator console page keeps deferred and truth-boundary 
   assert.match(page.html, /Business pack mount: growth-pack/);
   assert.match(page.html, /Metrics pack mount: delivery-metrics/);
   assert.match(page.html, /Platform Summary \/ Delivery Readiness/);
-  assert.match(page.html, /Current readiness blocker: runtime_dependent_downstream_truth_hardening/);
+  assert.match(page.html, /Current readiness blocker: formal_v1_delivery_gate/);
+  assert.match(page.html, /Runtime-Dependent Downstream Truth/);
+  assert.match(page.html, /Trace visibility status: supported_in_current_upstream_truth/);
+  assert.match(page.html, /Context export status: explicitly_unavailable_in_current_upstream_truth/);
+  assert.match(page.html, /Non-claim: no_confirm_as_delivery_authorization/);
   assert.match(page.html, /Non-claim: no_execution_cockpit_upgrade/);
   assert.match(page.html, /Platform Coherence Overview/);
   assert.match(page.html, /Cross-plane summary: Current platform coherence aligns management, organization, execution-adjacent, and memory\/evidence product truths into one bounded solo-operator baseline without collapsing them into execution authority\./);
@@ -61,6 +65,9 @@ test("[app] single-cell operator console page keeps deferred and truth-boundary 
 
   assert.ok(
     page.non_claims.includes("no_readiness_triggered_actions")
+  );
+  assert.ok(
+    page.non_claims.includes("no_local_workflow_law_invention")
   );
   assert.ok(
     page.non_claims.includes("no_actual_ui_page_implementation")

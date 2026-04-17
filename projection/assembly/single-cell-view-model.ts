@@ -277,6 +277,55 @@ export function assembleSingleCellViewModel(
         ...console_state.platform_coherence_state.non_claims,
       ],
     },
+    runtime_dependent_downstream_truth_view: {
+      section_key: "runtime_dependent_downstream_truth_view",
+      truth_sources: [
+        "persisted_structural_truth",
+        "seeded_summary_truth",
+        "repo_baseline_truth",
+        "deferred_unavailable_surface",
+        "non_claim",
+      ],
+      truth_status:
+        console_state.runtime_dependent_downstream_truth_state.truth_status,
+      confirm_visibility_status:
+        console_state.runtime_dependent_downstream_truth_state.confirm_visibility_status,
+      trace_visibility_status:
+        console_state.runtime_dependent_downstream_truth_state.trace_visibility_status,
+      evidence_visibility_status:
+        console_state.runtime_dependent_downstream_truth_state.evidence_visibility_status,
+      context_export_status:
+        console_state.runtime_dependent_downstream_truth_state.context_export_status,
+      plan_export_status:
+        console_state.runtime_dependent_downstream_truth_state.plan_export_status,
+      upstream_workflow_truth_status:
+        console_state.runtime_dependent_downstream_truth_state.upstream_workflow_truth_status,
+      summary_text:
+        console_state.runtime_dependent_downstream_truth_state.summary_text,
+      confirm_linked_summary:
+        console_state.runtime_dependent_downstream_truth_state.confirm_linked_summary,
+      trace_linked_summary:
+        console_state.runtime_dependent_downstream_truth_state.trace_linked_summary,
+      evidence_linked_summary:
+        console_state.runtime_dependent_downstream_truth_state.evidence_linked_summary,
+      delivery_interpretation_summary:
+        console_state.runtime_dependent_downstream_truth_state.delivery_interpretation_summary,
+      supported_upstream_truths: [
+        ...console_state.runtime_dependent_downstream_truth_state.supported_upstream_truths,
+      ],
+      bounded_truths: [
+        ...console_state.runtime_dependent_downstream_truth_state.bounded_truths,
+      ],
+      unavailable_truths: [
+        ...console_state.runtime_dependent_downstream_truth_state.unavailable_truths,
+      ],
+      omission_notes: [
+        ...console_state.runtime_dependent_downstream_truth_state.omission_notes,
+      ],
+      non_claims: [
+        ...console_state.runtime_dependent_downstream_truth_state.non_claims,
+      ],
+    },
     platform_delivery_readiness_view: {
       section_key: "platform_delivery_readiness_view",
       truth_sources: [

@@ -7,6 +7,9 @@ import {
   assembleCrossPlanePlatformCoherenceState,
 } from "./platform-coherence.ts";
 import {
+  assembleRuntimeDependentDownstreamTruthState,
+} from "./runtime-dependent-downstream-truth.ts";
+import {
   assemblePlatformDeliveryReadinessState,
 } from "./platform-delivery-readiness.ts";
 
@@ -47,11 +50,18 @@ export function assembleSingleCellConsoleState(
     optional_mount_state,
     continuity_note,
   });
+  const runtime_dependent_downstream_truth_state =
+    assembleRuntimeDependentDownstreamTruthState({
+      assembly,
+      platform_coherence_state,
+      continuity_note,
+    });
   const platform_delivery_readiness_state =
     assemblePlatformDeliveryReadinessState({
       assembly,
       optional_mount_state,
       platform_coherence_state,
+      runtime_dependent_downstream_truth_state,
       continuity_note,
     });
 
@@ -83,6 +93,7 @@ export function assembleSingleCellConsoleState(
         "memory_and_evidence_state",
         "continuity_truth_state",
         "platform_coherence_state",
+        "runtime_dependent_downstream_truth_state",
         "platform_delivery_readiness_state",
       ],
       deferred_unavailable_surfaces: [...deferred_surfaces],
@@ -211,6 +222,7 @@ export function assembleSingleCellConsoleState(
       non_claims: [...CONSOLE_NON_CLAIMS],
     },
     platform_coherence_state,
+    runtime_dependent_downstream_truth_state,
     platform_delivery_readiness_state,
     deferred_surfaces: [...deferred_surfaces],
   };

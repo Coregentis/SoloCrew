@@ -71,6 +71,7 @@ export type SingleCellOperatorConsolePageSectionKey =
   | "state_transition"
   | "continuity_reload"
   | "memory_continuity_overview"
+  | "runtime_dependent_downstream_truth_overview"
   | "platform_delivery_readiness_overview"
   | "platform_coherence_overview"
   | "deferred_surfaces"
@@ -118,6 +119,8 @@ export interface SingleCellOperatorConsolePage {
     state_transition: SingleCellOperatorConsolePageSection;
     continuity_reload: SingleCellOperatorConsolePageSection;
     memory_continuity_overview: SingleCellOperatorConsolePageSection;
+    runtime_dependent_downstream_truth_overview:
+      SingleCellOperatorConsolePageSection;
     platform_delivery_readiness_overview: SingleCellOperatorConsolePageSection;
     platform_coherence_overview: SingleCellOperatorConsolePageSection;
     deferred_surfaces: SingleCellOperatorConsolePageSection;
@@ -812,6 +815,39 @@ export function renderSingleCellOperatorConsolePage(
         ),
       ],
     },
+    runtime_dependent_downstream_truth_overview: {
+      section_key: "runtime_dependent_downstream_truth_overview",
+      heading: "Runtime-Dependent Downstream Truth",
+      body_lines: [
+        `Truth status: ${console_shell.runtime_dependent_downstream_truth_overview.truth_status}`,
+        `Confirm visibility status: ${console_shell.runtime_dependent_downstream_truth_overview.confirm_visibility_status}`,
+        `Trace visibility status: ${console_shell.runtime_dependent_downstream_truth_overview.trace_visibility_status}`,
+        `Evidence visibility status: ${console_shell.runtime_dependent_downstream_truth_overview.evidence_visibility_status}`,
+        `Context export status: ${console_shell.runtime_dependent_downstream_truth_overview.context_export_status}`,
+        `Plan export status: ${console_shell.runtime_dependent_downstream_truth_overview.plan_export_status}`,
+        `Upstream workflow truth status: ${console_shell.runtime_dependent_downstream_truth_overview.upstream_workflow_truth_status}`,
+        `Summary: ${console_shell.runtime_dependent_downstream_truth_overview.summary_text}`,
+        `Confirm-linked summary: ${console_shell.runtime_dependent_downstream_truth_overview.confirm_linked_summary}`,
+        `Trace-linked summary: ${console_shell.runtime_dependent_downstream_truth_overview.trace_linked_summary}`,
+        `Evidence-linked summary: ${console_shell.runtime_dependent_downstream_truth_overview.evidence_linked_summary}`,
+        `Delivery interpretation: ${console_shell.runtime_dependent_downstream_truth_overview.delivery_interpretation_summary}`,
+        ...console_shell.runtime_dependent_downstream_truth_overview.supported_upstream_truths.map(
+          (item) => `Supported upstream truth: ${item}`
+        ),
+        ...console_shell.runtime_dependent_downstream_truth_overview.bounded_truths.map(
+          (item) => `Bounded truth: ${item}`
+        ),
+        ...console_shell.runtime_dependent_downstream_truth_overview.unavailable_truths.map(
+          (item) => `Unavailable truth: ${item}`
+        ),
+        ...console_shell.runtime_dependent_downstream_truth_overview.omission_notes.map(
+          (item) => `Omission note: ${item}`
+        ),
+        ...console_shell.runtime_dependent_downstream_truth_overview.non_claims.map(
+          (claim) => `Non-claim: ${claim}`
+        ),
+      ],
+    },
     platform_delivery_readiness_overview: {
       section_key: "platform_delivery_readiness_overview",
       heading: "Platform Summary / Delivery Readiness",
@@ -904,6 +940,7 @@ export function renderSingleCellOperatorConsolePage(
 
   const non_claims = unique_items([
     ...console_shell.truth_boundary.non_claims,
+    ...console_shell.runtime_dependent_downstream_truth_overview.non_claims,
     ...console_shell.platform_coherence_overview.non_claims,
     ...console_shell.platform_delivery_readiness_overview.non_claims,
     ...(template_seed?.non_claims ?? []),
@@ -947,6 +984,7 @@ export function renderSingleCellOperatorConsolePage(
     render_section(sections.state_transition),
     render_section(sections.continuity_reload),
     render_section(sections.memory_continuity_overview),
+    render_section(sections.runtime_dependent_downstream_truth_overview),
     render_section(sections.platform_delivery_readiness_overview),
     render_section(sections.platform_coherence_overview),
     render_section(sections.deferred_surfaces),

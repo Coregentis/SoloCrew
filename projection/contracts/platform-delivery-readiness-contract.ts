@@ -14,7 +14,8 @@ export type SoloCrewPlatformDeliveryReadinessExecutionBoundary =
 export type SoloCrewPlatformDeliveryReadinessStatus =
   "planning_ready_not_delivery_ready";
 export type SoloCrewPlatformDeliveryReadinessBlocker =
-  "runtime_dependent_downstream_truth_hardening";
+  | "runtime_dependent_downstream_truth_hardening"
+  | "formal_v1_delivery_gate";
 export type SoloCrewPlatformDeliveryReadinessCapabilityStatus =
   | "present_in_bounded_form"
   | "deferred_for_later_gate";
