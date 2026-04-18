@@ -2,6 +2,9 @@
 
 ## 2026-04-18
 
+- ran the bounded Q5 `v1.0` delivery gate and closure pack over the closed Q1 through Q4 line and recorded the formal delivery judgment for `v1.0-solo-operator-platform`
+- confirmed that the final delivery claim remains explicitly out of scope for direct-control semantics, delivery authorization semantics, provider/channel behavior, runtime-authority claims, protocol-authority claims, and silent execution-cockpit drift
+- refreshed the readiness matrix, implementation queue, and README so repo-truth now records the `v1.0` delivery judgment rather than leaving Q5 as a planning-only blocker
 - added a bounded Q4 downstream-truth audit, gates, and closure pack after the landed runtime-dependent downstream truth hardening pass
 - confirmed that Q4 stayed downstream-only, product-projected, omission-aware, and explicitly out of scope for direct-control semantics, delivery authorization, runtime-authority claims, protocol-authority claims, and local workflow-law invention
 - kept the readiness and queue read unchanged because Q4 had already truthfully shifted the next top blocker to the formal `v1.0` delivery gate and closure pack

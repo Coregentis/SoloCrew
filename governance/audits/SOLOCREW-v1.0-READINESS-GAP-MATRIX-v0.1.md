@@ -17,7 +17,7 @@ It does not authorize implementation by itself.
 ## Repo-Truth Baseline
 
 This matrix was refreshed against `main` aligned with `origin/main` after the
-landed Q4 runtime-dependent downstream truth hardening pass.
+landed Q5 `v1.0` delivery gate and closure pack.
 
 It was grounded in current repo truth across:
 
@@ -47,23 +47,20 @@ It was grounded in current repo truth across:
 | Management / organization / execution / memory-evidence planes coherence | The repo now has an explicit `platform-coherence` contract and assembly, wired through single-cell console state, view-model, shell, and page layers, so the four product planes now read as one bounded platform baseline. | `PRESENT` | Q2 materially reduced the earlier cross-plane coherence gap by adding one lawful product-projected and non-executing coherence layer without widening into runtime or protocol authority. |
 | Runtime-dependent downstream truth hardening | The repo now has an explicit `runtime-dependent-downstream-truth` contract and assembly that deepens confirm-linked, trace-linked, and evidence-linked delivery interpretation only where current `Cognitive_OS Phase 4` truth already lawfully supports it, while keeping Context/Plan omission and upstream non-adoption explicit. | `PRESENT` | Q4 materially reduced the previous blocker by turning runtime-dependent downstream truth hardening into one bounded downstream interpretation layer instead of leaving it as a planning-only gap. |
 | Upstream boundary discipline | SoloCrew already has pause/reopening governance, cross-repo non-promotion records, a passed Wave 5 audit, and current upstream confirmation that packet states remain downstream posture only. | `PRESENT` | The repo already preserves `MPLP -> Cognitive_OS -> SoloCrew` authority order and does not currently claim upstream or protocol authority. |
-| Platform-grade cohesion for formal `v1.0` delivery | Current repo truth now includes a bounded platform summary and delivery-readiness layer above the single-cell core, pack mounts, cross-plane coherence, bounded explanatory beta lane, memory/evidence continuity posture, and runtime-dependent downstream truth hardening. It still does not yet close the final formal delivery gate. | `PARTIAL` | Q4 materially reduced the previous runtime-dependent blocker. The repo now has the lawful downstream confirm/trace/evidence hardening layer it was missing, but still does not yet justify formal `v1.0` delivery. |
+| Platform-grade cohesion for formal `v1.0` delivery | Current repo truth now includes a bounded platform summary and delivery-readiness layer above the single-cell core, pack mounts, cross-plane coherence, bounded explanatory beta lane, memory/evidence continuity posture, and runtime-dependent downstream truth hardening, and Q5 has now recorded the final governed delivery judgment over that stack. | `PRESENT` | The previous Q4 blocker was not a missing implementation layer. It was the absence of the final governed delivery-gate judgment. Q5 closes that remaining governance gap and confirms the current bounded stack is sufficient for lawful formal delivery. |
 | Direct-control and execution semantics inside near-term product planning | Current `v0.5` truth remains explicitly below direct approve, reject, dispatch, execute, provider/channel, workflow-engine, runtime-authority, and protocol-authority behavior. | `INTENTIONALLY_DEFERRED` | These behaviors must remain outside near-term planning unless separately re-governed. They are not required to close the current readiness-planning gap and would currently create authority-collapse risk. |
 
 ## Readiness Interpretation
 
-Current SoloCrew is not yet formal-delivery-ready for `v1.0`.
+Current SoloCrew is now formal-delivery-ready for `v1.0`.
 
-That judgment is not because the repo lacks a usable bounded core.
-It is because the repo still lacks the remaining delivery-grade bridge between:
+That judgment is lawful because:
 
-- the existing single-cell operating core
-- the current bounded portfolio / Secretary layer
-- the now-coherent structural pack-mount layer
-- the now-coherent architecture planes
-- the now-landed bounded platform summary/readiness layer above them
-- the now-landed runtime-dependent downstream truth hardening above that layer
-- and the remaining formal delivery gate beyond that hardened read
+- the roadmap-level mandatory baseline is now present in bounded form
+- Q1 through Q4 are all landed and closure-governed on `main`
+- cross-repo authority order remains intact
+- the remaining semantic-over-read risk is governed by non-claims and delivery
+  gates rather than by a missing implementation layer
 
 ## Smallest Truthful Read
 
@@ -76,31 +73,37 @@ The truthful current read is:
 - `Q2` sealed cross-plane platform coherence
 - `Q3` now provides a bounded platform summary and delivery-readiness read
 - `Q4` now provides bounded runtime-dependent downstream truth hardening
-- `v1.0` still requires additional structural and delivery-coherence work before
-  it can be claimed
+- `Q5` now provides the final governed delivery-gate judgment over that bounded
+  platform stack
+- `v1.0` may now be claimed without widening the repo into execution or
+  authority collapse
 
-## Biggest Current Blocker
+## Delivery-Gate Result
 
-The single biggest blocker between current repo truth and `v1.0` is now:
+No further material blocker remains inside the current `v1.0` baseline.
+
+The previous top blocker was:
 
 - the absence of the final formal `v1.0` delivery gate and closure decision
-  over the now-hardened downstream platform read
 
-That blocker now sits above the mount-model layer because:
+Q5 closes that blocker as governance truth.
 
-- Q1 materially reduced the previous mount-model ambiguity
-- Q2 materially reduced the previous cross-plane coherence gap
-- Q3 materially reduced the previous platform-summary/readiness blocker
-- Q4 materially reduced the previous runtime-dependent downstream truth blocker
-- the next missing bridge is now the final formal delivery gate rather than the
-  platform-read shaping or runtime-dependent hardening beneath it
+The highest remaining concern is now only:
+
+- semantic over-read risk if future work treats bounded downstream truth as if
+  it were execution authority or delivery authorization
+
+That concern is real, but it is already governed by the current non-claims and
+does not block formal delivery.
 
 ## Readiness Judgment
 
-`FORMAL_DELIVERY_READY_NOW: NO`
+`FORMAL_DELIVERY_READY_NOW: YES`
 
-Current SoloCrew should therefore continue to treat `v1.0` as:
+Current SoloCrew should therefore treat `v1.0` as:
 
-- the formal delivery line
-- not yet landed
-- requiring ordered pre-delivery work instead of ad hoc post-`v0.5` expansion
+- the formal delivered line
+- closed in bounded form
+- still below direct-control, runtime-authority, and protocol-authority claims
+- the baseline from which any later post-`v1.0` work must be separately
+  governed

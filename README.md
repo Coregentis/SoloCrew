@@ -20,9 +20,32 @@ This repository is:
 
 ## Current Release Status
 
-Current release status is `v0.3-single-cell-usable sealed`.
+Current release status is `v1.0-solo-operator-platform delivered and closed`.
 
-The sealed `v0.3` line extends the sealed `v0.2` and `v0.1` baselines with:
+That formal delivery judgment means the repo now has the mandatory `v1.0`
+baseline in bounded form:
+
+- a stable single-cell operating core
+- a bounded portfolio / Secretary layer
+- a lawful business-pack / metrics-pack mount model
+- coherent management, organization, execution-adjacent, and
+  memory/evidence planes
+- explicit upstream boundary discipline preserved
+- a bounded platform summary / delivery-readiness layer
+- bounded runtime-dependent downstream truth hardening over current upstream
+  confirm / trace / omission-aware truth
+
+That delivery judgment does **not** mean:
+
+- direct approve, reject, dispatch, or execute behavior now exists here
+- provider or channel execution now exists here
+- SoloCrew owns runtime authority
+- SoloCrew owns protocol authority
+- bounded downstream truth has become delivery authorization
+
+The sealed `v0.3` line remains the first bounded single-cell usable release
+line inside that delivered platform baseline, and it extends the sealed `v0.2`
+and `v0.1` baselines with:
 
 - one actual bounded single-cell operator console page
 - one actual bounded single-cell bootstrap path
@@ -42,7 +65,8 @@ This sealed `v0.3` line does not claim:
 - runtime-complete workflow state
 - runtime-complete product state
 
-The sealed `v0.3` line is the first bounded single-cell usable release line for SoloCrew.
+The sealed `v0.3` line is the first bounded single-cell usable release line for
+SoloCrew.
 
 ## Current Governed Foundation Line
 
@@ -107,7 +131,8 @@ The current reopened lane remains:
 
 SoloCrew uses two different version labels for different purposes:
 
-- repo release lines such as `v0.1`, `v0.2`, `v0.3`, and now planned `v0.4`
+- repo release lines such as `v0.1`, `v0.2`, `v0.3`, `v0.4`, `v0.5`, and now
+  `v1.0`
 - the private workspace/package version in `package.json`
 
 The release line is the authoritative product-governance label for this repo.

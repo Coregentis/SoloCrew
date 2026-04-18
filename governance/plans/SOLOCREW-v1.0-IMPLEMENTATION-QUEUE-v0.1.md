@@ -2,8 +2,8 @@
 
 ## Purpose
 
-This queue translates the current readiness gap into an ordered implementation
-path from the current bounded `v0.5` state toward eventual
+This queue translates the current readiness gap into the ordered implementation
+path that carried SoloCrew from the bounded `v0.5` state through
 `v1.0-solo-operator-platform` delivery.
 
 It is a planning sequence only.
@@ -21,8 +21,7 @@ The queue must remain:
 
 ## Current Queue State
 
-Current queue state after the landed Q3 platform summary and delivery-readiness
-layer pass and the landed Q4 runtime-dependent downstream truth hardening pass
+Current queue state after the landed Q5 `v1.0` delivery gate and closure pack
 is:
 
 - `Q1. Mount Model Coherence Pass` is now landed, accepted, and closed on
@@ -34,7 +33,10 @@ is:
 - `Q4. Runtime-Dependent Downstream Truth Hardening` is now landed as the
   bounded confirm/trace/evidence-linked downstream interpretation layer on
   `main`
-- the next correct queued item is now `Q5. v1.0 Delivery Gate And Closure Pack`
+- `Q5. v1.0 Delivery Gate And Closure Pack` is now landed, accepted, and
+  closed on `main`
+- no further implementation wave is required to lawfully claim the current
+  `v1.0-solo-operator-platform` line
 
 ## Ordered Queue
 
@@ -44,7 +46,7 @@ is:
 | `Q2. Cross-Plane Platform Coherence Pass` | Align management, organization, execution, and memory/evidence surfaces so they read as one solo-operator platform instead of separate bounded lines. | `v1.0` requires coherent platform structure, not only strong isolated lanes. | `structural`, `explanatory` | Landed through the separately gated Q2 pass and now acts as the bounded plane-alignment baseline for later platform-read shaping. | `NO` |
 | `Q3. Platform Summary And Delivery-Readiness Layer` | Build a bounded top-level platform summary/readiness layer that truthfully explains current operator state, mount posture, plane posture, and omissions without adding execution authority. | `v1.0` needs a delivery-grade product read, not only a beta-lane read. | `explanatory` | Landed through the separately gated Q3 pass and now acts as the bounded top-level platform-read baseline for later readiness work. | `NO` |
 | `Q4. Runtime-Dependent Downstream Truth Hardening` | Harden downstream product interpretation only where current `Cognitive_OS` Phase 4 truth already supports stronger confirm/trace/evidence-linked visibility without inventing upstream workflow law. | Reduces ambiguity and strengthens delivery truth while preserving authority boundaries. | `runtime-dependent`, `explanatory` | Landed through the separately gated Q4 pass and now acts as the bounded downstream confirm/trace/evidence interpretation baseline for final delivery judgment. | `NO` |
-| `Q5. v1.0 Delivery Gate And Closure Pack` | Audit the post-queue state against the formal `v1.0-solo-operator-platform` baseline and decide whether formal delivery can be claimed. | `v1.0` should be a governed delivery line, not a naming convenience. | `governance-dependent` | Depends on the earlier queue items landing coherently and on cross-repo authority checks staying green. | `YES` |
+| `Q5. v1.0 Delivery Gate And Closure Pack` | Audit the post-queue state against the formal `v1.0-solo-operator-platform` baseline and decide whether formal delivery can be claimed. | `v1.0` should be a governed delivery line, not a naming convenience. | `governance-dependent` | Q5 is now landed and confirms the earlier queue items were sufficient for formal bounded delivery. | `NO` |
 
 ## Implementation Notes By Queue Item
 
@@ -106,6 +108,7 @@ Smallest truthful read:
 
 - `v1.0` should only be claimed after the repo can honestly read as a coherent
   solo-operator platform
+- that final claim is now closure-governed on `main`
 
 Must not become:
 
@@ -113,17 +116,18 @@ Must not become:
 
 ## Smallest Lawful Next Development Class
 
-The smallest lawful next development class after current Q4 line is:
+There is no further implementation wave required inside the current
+`v1.0-solo-operator-platform` line.
 
-- `Q5. v1.0 Delivery Gate And Closure Pack`
+Any future work after current Q5 closure would need to be:
 
-That is now the smallest next class because Q4 materially reduced the previous
-runtime-dependent downstream truth blocker and the next remaining gap now sits
-at the final governed delivery gate.
+- post-`v1.0`
+- separately governed
+- explicitly checked again against cross-repo authority boundaries
 
 ## Queue Judgment
 
-The correct path from current `v0.5` to eventual `v1.0` is:
+The correct path from current `v0.5` to `v1.0` is now complete:
 
 - planning-first
 - mount-model-first
@@ -131,3 +135,10 @@ The correct path from current `v0.5` to eventual `v1.0` is:
 - platform-summary and readiness shaping third
 - runtime-dependent hardening fourth only where upstream truth supports it
 - formal `v1.0` gate last
+
+The correct post-Q5 continuation rule is:
+
+- do not reopen the delivered `v1.0` line silently
+- do not treat current delivery as authorization for direct-control or
+  execution-bearing expansion
+- govern any future work as a separate post-`v1.0` line
