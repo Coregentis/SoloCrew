@@ -271,3 +271,103 @@ test("[app] secretary handoff review page exposes no dispatch or execute control
   assert.doesNotMatch(page.html, /dispatch button/i);
   assert.doesNotMatch(page.html, /run provider/i);
 });
+
+test("[app] secretary handoff review page hardens founder-request evidence and stale display semantics", () => {
+  const portfolio_shell =
+    composePortfolioSecretaryShellFromRuntimeInputs(create_runtime_inputs());
+  const staging_shell = composeSecretaryHandoffStagingShell(
+    portfolio_shell,
+    "cell-scope-01"
+  );
+  const review_shell =
+    composeSecretaryHandoffReviewPacketShell(staging_shell);
+
+  review_shell.handoff_review_packet_projection.founder_request_exception_enrichment =
+    {
+      enrichment_scope: "founder_request_exception_packet_summary",
+      request_ref: "founder-request-01",
+      request_label: "Founder request delta summary",
+      derived_exception_posture: "stale_context",
+      review_return_posture: "review_needed",
+      review_return_summary:
+        "Review remains required because the bounded summary is stale and partially omitted.",
+      marker_status: "stale",
+      bounded_action_recommendation: {
+        recommendation_kind: "bounded_action_recommendation",
+        recommendation_summary:
+          "Prepare a bounded revision summary for later operator review.",
+        non_executing: true,
+      },
+      evidence_summary: {
+        evidence_summary_label:
+          "Evidence summary remains bounded to contract-safe review packet support.",
+        evidence_status: "insufficient_evidence",
+        evidence_refs: [
+          {
+            evidence_ref: "trace-ref-01",
+            evidence_kind: "trace_evidence_summary",
+          },
+        ],
+      },
+      learning_suggestion_summary: {
+        suggestion_posture: "suggestion_only",
+        suggestion_summary:
+          "Suggestion only: capture the stale-handling pattern for later review.",
+        marker_status: "omitted_by_contract",
+      },
+      status_markers: [
+        "omitted_by_contract",
+        "insufficient_evidence",
+        "stale",
+      ],
+      family_status_summaries: [
+        {
+          family: "continuity_projection_summary",
+          availability: "stale",
+          summary_label: "continuity stale",
+        },
+        {
+          family: "confirm_trace_decision_projection_summary",
+          availability: "insufficient_evidence",
+          summary_label: "evidence insufficient",
+        },
+      ],
+    };
+
+  const page = renderSecretaryHandoffReviewPage(review_shell);
+  const display = page.sections.founder_request_exception_display;
+
+  assert.ok(display);
+  assert.equal(display.request_ref, "founder-request-01");
+  assert.equal(display.derived_exception_posture, "stale_context");
+  assert.equal(display.marker_status_summary, "stale visible");
+  assert.equal(display.evidence_status_summary, "insufficiency visible");
+  assert.deepEqual(display.status_marker_summaries, [
+    "omission visible",
+    "insufficiency visible",
+    "stale visible",
+  ]);
+  assert.equal(
+    display.learning_suggestion_display?.suggestion_posture_notice,
+    "suggestion_only"
+  );
+  assert.equal(
+    display.bounded_recommendation_display?.non_executing,
+    true
+  );
+  assert.doesNotMatch(
+    display.bounded_recommendation_display?.recommendation_notice ?? "",
+    /approve|reject|dispatch|execute|provider|channel/
+  );
+  assert.match(page.html, /Founder Request Exception Display/);
+  assert.match(page.html, /Evidence summary only: Evidence summary remains bounded to contract-safe review packet support\./);
+  assert.match(page.html, /Evidence display posture: insufficiency visible/);
+  assert.match(page.html, /Display marker: omission visible/);
+  assert.match(page.html, /Display marker: stale visible/);
+  assert.match(page.html, /Learning suggestion only: Suggestion only: capture the stale-handling pattern for later review\./);
+  assert.match(page.html, /Learning posture notice: suggestion_only/);
+  assert.match(page.html, /Bounded recommendation summary: Prepare a bounded revision summary for later operator review\./);
+  assert.match(page.html, /Recommendation non_executing: true/);
+  assert.match(page.html, /Evidence remains summary-only here and does not become a raw trace dump or raw runtime detail\./);
+  assert.doesNotMatch(page.html, /trace-ref-01/);
+});

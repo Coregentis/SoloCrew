@@ -50,6 +50,38 @@ export interface SecretaryHandoffReviewPage {
     };
     rationale_evidence:
       SecretaryHandoffReviewPacketShell["handoff_review_packet_projection"]["rationale_evidence"];
+    founder_request_exception_display?: {
+      request_ref: string;
+      request_label: string;
+      derived_exception_posture:
+        NonNullable<
+          SecretaryHandoffReviewPacketShell["handoff_review_packet_projection"]["founder_request_exception_enrichment"]
+        >["derived_exception_posture"];
+      review_return_posture:
+        NonNullable<
+          SecretaryHandoffReviewPacketShell["handoff_review_packet_projection"]["founder_request_exception_enrichment"]
+        >["review_return_posture"];
+      review_return_summary: string;
+      marker_status_summary: string;
+      evidence_summary_label: string;
+      evidence_status_summary: string;
+      status_marker_summaries: string[];
+      family_status_summaries: {
+        family: string;
+        availability_summary: string;
+        summary_label: string;
+      }[];
+      learning_suggestion_display?: {
+        suggestion_summary: string;
+        marker_status_summary: string;
+        suggestion_posture_notice: "suggestion_only";
+      };
+      bounded_recommendation_display?: {
+        recommendation_summary: string;
+        recommendation_notice: string;
+        non_executing: true;
+      };
+    };
     navigation: SecretaryHandoffReviewPacketShell["navigation"];
     truth_boundary: SecretaryHandoffReviewPacketShell["truth_boundary"];
   };
@@ -62,6 +94,25 @@ function escape_html(value: string): string {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
+}
+
+function summarize_marker_status(marker_status: string): string {
+  switch (marker_status) {
+    case "available":
+      return "summary available";
+    case "omitted_by_contract":
+      return "omission visible";
+    case "not_available_upstream":
+      return "upstream not available";
+    case "insufficient_evidence":
+      return "insufficiency visible";
+    case "stale":
+      return "stale visible";
+    case "not_applicable":
+      return "not applicable";
+    default:
+      return marker_status;
+  }
 }
 
 function render_packet_state(
@@ -94,6 +145,8 @@ export function renderSecretaryHandoffReviewPage(
 ): SecretaryHandoffReviewPage {
   const review_packet_projection =
     review_packet_shell.handoff_review_packet_projection;
+  const founder_request_exception_enrichment =
+    review_packet_projection.founder_request_exception_enrichment;
   const sections = {
     header: {
       read_mode: review_packet_shell.navigation.read_mode,
@@ -124,6 +177,62 @@ export function renderSecretaryHandoffReviewPage(
       non_executing_notice: review_packet_projection.non_executing_notice,
     },
     rationale_evidence: review_packet_projection.rationale_evidence,
+    founder_request_exception_display: founder_request_exception_enrichment
+      ? {
+          request_ref: founder_request_exception_enrichment.request_ref,
+          request_label: founder_request_exception_enrichment.request_label,
+          derived_exception_posture:
+            founder_request_exception_enrichment.derived_exception_posture,
+          review_return_posture:
+            founder_request_exception_enrichment.review_return_posture,
+          review_return_summary:
+            founder_request_exception_enrichment.review_return_summary,
+          marker_status_summary: summarize_marker_status(
+            founder_request_exception_enrichment.marker_status
+          ),
+          evidence_summary_label:
+            founder_request_exception_enrichment.evidence_summary.evidence_summary_label,
+          evidence_status_summary: summarize_marker_status(
+            founder_request_exception_enrichment.evidence_summary.evidence_status
+          ),
+          status_marker_summaries:
+            founder_request_exception_enrichment.status_markers.map(
+              summarize_marker_status
+            ),
+          family_status_summaries:
+            founder_request_exception_enrichment.family_status_summaries.map(
+              (family_status) => ({
+                family: family_status.family,
+                availability_summary: summarize_marker_status(
+                  family_status.availability
+                ),
+                summary_label: family_status.summary_label,
+              })
+            ),
+          learning_suggestion_display:
+            founder_request_exception_enrichment.learning_suggestion_summary
+              ? {
+                  suggestion_summary:
+                    founder_request_exception_enrichment.learning_suggestion_summary.suggestion_summary,
+                  marker_status_summary: summarize_marker_status(
+                    founder_request_exception_enrichment.learning_suggestion_summary.marker_status
+                  ),
+                  suggestion_posture_notice: "suggestion_only",
+                }
+              : undefined,
+          bounded_recommendation_display:
+            founder_request_exception_enrichment.bounded_action_recommendation
+              ? {
+                  recommendation_summary:
+                    founder_request_exception_enrichment.bounded_action_recommendation.recommendation_summary,
+                  recommendation_notice:
+                    "Non-executing recommendation only. This summary does not create action authority.",
+                  non_executing:
+                    founder_request_exception_enrichment.bounded_action_recommendation.non_executing,
+                }
+              : undefined,
+        }
+      : undefined,
     navigation: review_packet_shell.navigation,
     truth_boundary: review_packet_shell.truth_boundary,
   };
@@ -220,6 +329,83 @@ export function renderSecretaryHandoffReviewPage(
     ...sections.rationale_evidence.source_hints.map(
       (hint) => `<p>Source hint: ${escape_html(hint)}</p>`
     ),
+    ...(sections.founder_request_exception_display
+      ? [
+          "<section data-section=\"founder-request-exception-display\">",
+          "<h2>Founder Request Exception Display</h2>",
+          `<p>Request ref: ${escape_html(
+            sections.founder_request_exception_display.request_ref
+          )}</p>`,
+          `<p>Request label: ${escape_html(
+            sections.founder_request_exception_display.request_label
+          )}</p>`,
+          `<p>Exception posture: ${escape_html(
+            sections.founder_request_exception_display.derived_exception_posture
+          )}</p>`,
+          `<p>Review or return posture: ${escape_html(
+            sections.founder_request_exception_display.review_return_posture
+          )}</p>`,
+          `<p>Review or return summary: ${escape_html(
+            sections.founder_request_exception_display.review_return_summary
+          )}</p>`,
+          `<p>Marker status: ${escape_html(
+            sections.founder_request_exception_display.marker_status_summary
+          )}</p>`,
+          `<p>Evidence summary only: ${escape_html(
+            sections.founder_request_exception_display.evidence_summary_label
+          )}</p>`,
+          `<p>Evidence display posture: ${escape_html(
+            sections.founder_request_exception_display.evidence_status_summary
+          )}</p>`,
+          "<p>Evidence remains summary-only here and does not become a raw trace dump or raw runtime detail.</p>",
+          ...sections.founder_request_exception_display.status_marker_summaries.map(
+            (marker_summary) =>
+              `<p>Display marker: ${escape_html(marker_summary)}</p>`
+          ),
+          ...sections.founder_request_exception_display.family_status_summaries.map(
+            (family_status) =>
+              `<p>Family status: ${escape_html(
+                family_status.family
+              )} -> ${escape_html(
+                family_status.availability_summary
+              )} (${escape_html(family_status.summary_label)})</p>`
+          ),
+          ...(sections.founder_request_exception_display.learning_suggestion_display
+            ? [
+                `<p>Learning suggestion only: ${escape_html(
+                  sections.founder_request_exception_display
+                    .learning_suggestion_display.suggestion_summary
+                )}</p>`,
+                `<p>Learning display posture: ${escape_html(
+                  sections.founder_request_exception_display
+                    .learning_suggestion_display.marker_status_summary
+                )}</p>`,
+                `<p>Learning posture notice: ${escape_html(
+                  sections.founder_request_exception_display
+                    .learning_suggestion_display.suggestion_posture_notice
+                )}</p>`,
+              ]
+            : []),
+          ...(sections.founder_request_exception_display
+            .bounded_recommendation_display
+            ? [
+                `<p>Bounded recommendation summary: ${escape_html(
+                  sections.founder_request_exception_display
+                    .bounded_recommendation_display.recommendation_summary
+                )}</p>`,
+                `<p>Recommendation notice: ${escape_html(
+                  sections.founder_request_exception_display
+                    .bounded_recommendation_display.recommendation_notice
+                )}</p>`,
+                `<p>Recommendation non_executing: ${
+                  sections.founder_request_exception_display
+                    .bounded_recommendation_display.non_executing
+                }</p>`,
+              ]
+            : []),
+          "</section>",
+        ]
+      : []),
     "</section>",
     "<section data-section=\"navigation\">",
     "<h2>Portfolio Context</h2>",

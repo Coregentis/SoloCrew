@@ -267,3 +267,82 @@ test("[app] secretary handoff page exposes no dispatch or execute controls", () 
   assert.doesNotMatch(page.html, /run provider/i);
   assert.doesNotMatch(page.html, /publish\/send/i);
 });
+
+test("[app] secretary handoff page hardens compact evidence and stale preview semantics", () => {
+  const portfolio_shell =
+    composePortfolioSecretaryShellFromRuntimeInputs(create_runtime_inputs());
+  const staging_shell = composeSecretaryHandoffStagingShell(
+    portfolio_shell,
+    "cell-scope-01"
+  );
+
+  staging_shell.handoff_staging_projection.founder_request_exception_preview = {
+    preview_scope: "founder_request_exception_staging_preview",
+    request_ref: "founder-request-02",
+    request_label: "Founder request compact preview",
+    derived_exception_posture: "blocked_by_contract",
+    review_return_posture: "return_for_revision",
+    review_return_summary:
+      "Compact staging preview shows stale and omitted posture without full review-packet detail.",
+    marker_status: "omitted_by_contract",
+    evidence_posture_summary: {
+      evidence_summary_label:
+        "Evidence summary stays compact and bounded at staging level.",
+      evidence_status: "stale",
+    },
+    learning_suggestion_hint: {
+      suggestion_posture: "suggestion_only",
+      suggestion_summary:
+        "Suggestion only: revisit the stale continuity summary before deeper review.",
+      marker_status: "insufficient_evidence",
+    },
+    status_markers: [
+      "omitted_by_contract",
+      "insufficient_evidence",
+      "stale",
+    ],
+    family_status_summaries: [
+      {
+        family: "continuity_projection_summary",
+        availability: "stale",
+        summary_label: "continuity stale",
+      },
+      {
+        family: "learning_suggestion_projection_summary",
+        availability: "insufficient_evidence",
+        summary_label: "learning insufficient",
+      },
+    ],
+  };
+
+  const page = renderSecretaryHandoffPage(staging_shell);
+  const preview = page.sections.founder_request_exception_preview;
+
+  assert.ok(preview);
+  assert.equal(preview.request_ref, "founder-request-02");
+  assert.equal(preview.derived_exception_posture, "blocked_by_contract");
+  assert.equal(preview.marker_status_summary, "omission visible");
+  assert.equal(preview.evidence_status_summary, "stale visible");
+  assert.deepEqual(preview.status_marker_summaries, [
+    "omission visible",
+    "insufficiency visible",
+    "stale visible",
+  ]);
+  assert.equal(
+    preview.learning_suggestion_hint?.suggestion_posture_notice,
+    "suggestion_only"
+  );
+  assert.doesNotMatch(
+    preview.learning_suggestion_hint?.suggestion_summary ?? "",
+    /approve|reject|dispatch|execute|provider|channel/
+  );
+  assert.match(page.html, /Founder Request Exception Preview/);
+  assert.match(page.html, /Evidence summary only: Evidence summary stays compact and bounded at staging level\./);
+  assert.match(page.html, /Evidence display posture: stale visible/);
+  assert.match(page.html, /Display marker: omission visible/);
+  assert.match(page.html, /Display marker: insufficiency visible/);
+  assert.match(page.html, /Learning suggestion only: Suggestion only: revisit the stale continuity summary before deeper review\./);
+  assert.match(page.html, /Learning posture notice: suggestion_only/);
+  assert.match(page.html, /Staging keeps evidence compact, omission-aware, insufficiency-aware, and stale-aware without exposing a raw trace dump or raw runtime detail\./);
+  assert.doesNotMatch(page.html, /Bounded recommendation summary/);
+});

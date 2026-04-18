@@ -46,6 +46,33 @@ export interface SecretaryHandoffPage {
     };
     rationale_evidence:
       SecretaryHandoffStagingShell["handoff_staging_projection"]["rationale_evidence"];
+    founder_request_exception_preview?: {
+      request_ref: string;
+      request_label: string;
+      derived_exception_posture:
+        NonNullable<
+          SecretaryHandoffStagingShell["handoff_staging_projection"]["founder_request_exception_preview"]
+        >["derived_exception_posture"];
+      review_return_posture:
+        NonNullable<
+          SecretaryHandoffStagingShell["handoff_staging_projection"]["founder_request_exception_preview"]
+        >["review_return_posture"];
+      review_return_summary: string;
+      marker_status_summary: string;
+      evidence_posture_summary: string;
+      evidence_status_summary: string;
+      status_marker_summaries: string[];
+      family_status_summaries: {
+        family: string;
+        availability_summary: string;
+        summary_label: string;
+      }[];
+      learning_suggestion_hint?: {
+        suggestion_summary: string;
+        marker_status_summary: string;
+        suggestion_posture_notice: "suggestion_only";
+      };
+    };
     navigation: SecretaryHandoffStagingShell["navigation"];
     truth_boundary: SecretaryHandoffStagingShell["truth_boundary"];
   };
@@ -58,6 +85,25 @@ function escape_html(value: string): string {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
+}
+
+function summarize_marker_status(marker_status: string): string {
+  switch (marker_status) {
+    case "available":
+      return "summary available";
+    case "omitted_by_contract":
+      return "omission visible";
+    case "not_available_upstream":
+      return "upstream not available";
+    case "insufficient_evidence":
+      return "insufficiency visible";
+    case "stale":
+      return "stale visible";
+    case "not_applicable":
+      return "not applicable";
+    default:
+      return marker_status;
+  }
 }
 
 function render_stage(
@@ -89,6 +135,8 @@ export function renderSecretaryHandoffPage(
   staging_shell: SecretaryHandoffStagingShell
 ): SecretaryHandoffPage {
   const staging_projection = staging_shell.handoff_staging_projection;
+  const founder_request_exception_preview =
+    staging_projection.founder_request_exception_preview;
   const sections = {
     header: {
       read_mode: staging_shell.navigation.read_mode,
@@ -116,6 +164,51 @@ export function renderSecretaryHandoffPage(
       non_executing_notice: staging_projection.non_executing_notice,
     },
     rationale_evidence: staging_projection.rationale_evidence,
+    founder_request_exception_preview: founder_request_exception_preview
+      ? {
+          request_ref: founder_request_exception_preview.request_ref,
+          request_label: founder_request_exception_preview.request_label,
+          derived_exception_posture:
+            founder_request_exception_preview.derived_exception_posture,
+          review_return_posture:
+            founder_request_exception_preview.review_return_posture,
+          review_return_summary:
+            founder_request_exception_preview.review_return_summary,
+          marker_status_summary: summarize_marker_status(
+            founder_request_exception_preview.marker_status
+          ),
+          evidence_posture_summary:
+            founder_request_exception_preview.evidence_posture_summary.evidence_summary_label,
+          evidence_status_summary: summarize_marker_status(
+            founder_request_exception_preview.evidence_posture_summary.evidence_status
+          ),
+          status_marker_summaries:
+            founder_request_exception_preview.status_markers.map(
+              summarize_marker_status
+            ),
+          family_status_summaries:
+            founder_request_exception_preview.family_status_summaries.map(
+              (family_status) => ({
+                family: family_status.family,
+                availability_summary: summarize_marker_status(
+                  family_status.availability
+                ),
+                summary_label: family_status.summary_label,
+              })
+            ),
+          learning_suggestion_hint:
+            founder_request_exception_preview.learning_suggestion_hint
+              ? {
+                  suggestion_summary:
+                    founder_request_exception_preview.learning_suggestion_hint.suggestion_summary,
+                  marker_status_summary: summarize_marker_status(
+                    founder_request_exception_preview.learning_suggestion_hint.marker_status
+                  ),
+                  suggestion_posture_notice: "suggestion_only",
+                }
+              : undefined,
+        }
+      : undefined,
     navigation: staging_shell.navigation,
     truth_boundary: staging_shell.truth_boundary,
   };
@@ -203,6 +296,66 @@ export function renderSecretaryHandoffPage(
     ...sections.rationale_evidence.source_hints.map(
       (hint) => `<p>Source hint: ${escape_html(hint)}</p>`
     ),
+    ...(sections.founder_request_exception_preview
+      ? [
+          "<section data-section=\"founder-request-exception-preview\">",
+          "<h2>Founder Request Exception Preview</h2>",
+          `<p>Request ref: ${escape_html(
+            sections.founder_request_exception_preview.request_ref
+          )}</p>`,
+          `<p>Request label: ${escape_html(
+            sections.founder_request_exception_preview.request_label
+          )}</p>`,
+          `<p>Exception posture: ${escape_html(
+            sections.founder_request_exception_preview.derived_exception_posture
+          )}</p>`,
+          `<p>Review or return posture: ${escape_html(
+            sections.founder_request_exception_preview.review_return_posture
+          )}</p>`,
+          `<p>Review or return summary: ${escape_html(
+            sections.founder_request_exception_preview.review_return_summary
+          )}</p>`,
+          `<p>Marker status: ${escape_html(
+            sections.founder_request_exception_preview.marker_status_summary
+          )}</p>`,
+          `<p>Evidence summary only: ${escape_html(
+            sections.founder_request_exception_preview.evidence_posture_summary
+          )}</p>`,
+          `<p>Evidence display posture: ${escape_html(
+            sections.founder_request_exception_preview.evidence_status_summary
+          )}</p>`,
+          "<p>Staging keeps evidence compact, omission-aware, insufficiency-aware, and stale-aware without exposing a raw trace dump or raw runtime detail.</p>",
+          ...sections.founder_request_exception_preview.status_marker_summaries.map(
+            (marker_summary) =>
+              `<p>Display marker: ${escape_html(marker_summary)}</p>`
+          ),
+          ...sections.founder_request_exception_preview.family_status_summaries.map(
+            (family_status) =>
+              `<p>Family status: ${escape_html(
+                family_status.family
+              )} -> ${escape_html(
+                family_status.availability_summary
+              )} (${escape_html(family_status.summary_label)})</p>`
+          ),
+          ...(sections.founder_request_exception_preview.learning_suggestion_hint
+            ? [
+                `<p>Learning suggestion only: ${escape_html(
+                  sections.founder_request_exception_preview
+                    .learning_suggestion_hint.suggestion_summary
+                )}</p>`,
+                `<p>Learning display posture: ${escape_html(
+                  sections.founder_request_exception_preview
+                    .learning_suggestion_hint.marker_status_summary
+                )}</p>`,
+                `<p>Learning posture notice: ${escape_html(
+                  sections.founder_request_exception_preview
+                    .learning_suggestion_hint.suggestion_posture_notice
+                )}</p>`,
+              ]
+            : []),
+          "</section>",
+        ]
+      : []),
     "</section>",
     "<section data-section=\"navigation\">",
     "<h2>Portfolio Context</h2>",
