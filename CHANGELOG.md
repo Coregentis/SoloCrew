@@ -2,6 +2,7 @@
 
 ## 2026-04-18
 
+- enriched the secretary handoff staging assembly with optional founder-request exception preview summaries so bounded exception posture preview, omission/insufficiency/stale markers, evidence posture, suggestion-only learning hints, and six-family status rollups can flow through the existing staging lane without app/page changes, UI changes, direct-control behavior, or provider/channel execution
 - enriched the secretary handoff review packet assembly with optional founder-request exception packet summaries so bounded exception posture, omission/insufficiency/stale markers, non-executing bounded action recommendation, evidence summary, and suggestion-only learning summary can flow through the existing review-packet lane without app/page changes, UI changes, direct-control behavior, or provider/channel execution
 - added the founder-request handoff packet enrichment plan, freezing reuse of staging, review packet, rationale, packet-state, and portfolio Secretary surfaces plus future assembly-wave boundaries without any assembly changes in this wave, UI changes, direct-control behavior, or provider/channel execution
 - extracted the founder-request exception posture derivation into a pure contract utility, freezing posture priority, marker handling, adapter reuse, and standalone derivation tests without changing app/pages, assembly, or UI

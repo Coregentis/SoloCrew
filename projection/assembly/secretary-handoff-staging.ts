@@ -2,9 +2,16 @@ import type {
   PortfolioSecretaryShellProjection,
 } from "../contracts/portfolio-secretary-shell-contract.ts";
 import type {
+  SecretaryHandoffFounderRequestExceptionPreview,
+  SecretaryHandoffFounderRequestStagingFamilyStatusSummary,
   SecretaryHandoffStagingProjection,
   SecretaryHandoffStagingStatus,
 } from "../contracts/secretary-handoff-staging-contract.ts";
+import {
+  FOUNDER_REQUEST_EXCEPTION_PACKET_SUMMARY_FAMILIES,
+  is_founder_request_exception_packet_contract,
+  type FounderRequestExceptionPacketContract,
+} from "../contracts/founder-request-exception-packet-contract.ts";
 import {
   buildSecretaryHandoffPacketStateSummary,
   buildSecretaryHandoffRevisionLoopSummary,
@@ -33,6 +40,60 @@ function unique_items(values: readonly string[]): string[] {
   return [...new Set(values)];
 }
 
+function build_founder_request_family_status_summaries(
+  founder_request_packet: FounderRequestExceptionPacketContract
+): SecretaryHandoffFounderRequestStagingFamilyStatusSummary[] {
+  return FOUNDER_REQUEST_EXCEPTION_PACKET_SUMMARY_FAMILIES.map((family) => ({
+    family,
+    availability:
+      founder_request_packet.projection_summaries[family].availability,
+    summary_label:
+      founder_request_packet.projection_summaries[family].summary_label,
+  }));
+}
+
+function build_founder_request_exception_preview(
+  founder_request_packet: FounderRequestExceptionPacketContract
+): SecretaryHandoffFounderRequestExceptionPreview {
+  return {
+    preview_scope: "founder_request_exception_staging_preview",
+    request_ref: founder_request_packet.request_identity.request_ref,
+    request_label: founder_request_packet.request_identity.request_label,
+    derived_exception_posture:
+      founder_request_packet.derived_exception_posture,
+    review_return_posture:
+      founder_request_packet.review_return_posture.posture,
+    review_return_summary:
+      founder_request_packet.review_return_posture.posture_summary,
+    marker_status:
+      founder_request_packet.review_return_posture.marker_status,
+    evidence_posture_summary: {
+      evidence_summary_label:
+        founder_request_packet.evidence_summary.evidence_summary_label,
+      evidence_status:
+        founder_request_packet.evidence_summary.evidence_status,
+    },
+    learning_suggestion_hint:
+      founder_request_packet.learning_suggestion_summary === undefined
+        ? undefined
+        : {
+            suggestion_posture:
+              founder_request_packet.learning_suggestion_summary
+                .suggestion_posture,
+            suggestion_summary:
+              founder_request_packet.learning_suggestion_summary
+                .suggestion_summary,
+            marker_status:
+              founder_request_packet.learning_suggestion_summary.marker_status,
+          },
+    status_markers: [...founder_request_packet.status_markers],
+    family_status_summaries:
+      build_founder_request_family_status_summaries(
+        founder_request_packet
+      ),
+  };
+}
+
 function select_summary_projection(
   portfolio_projection: PortfolioSecretaryShellProjection,
   target_cell_id?: string
@@ -56,8 +117,18 @@ function select_summary_projection(
 
 export function assembleSecretaryHandoffStagingProjection(
   portfolio_projection: PortfolioSecretaryShellProjection,
-  target_cell_id?: string
+  target_cell_id?: string,
+  founder_request_packet?: FounderRequestExceptionPacketContract
 ): SecretaryHandoffStagingProjection {
+  if (
+    founder_request_packet !== undefined &&
+    !is_founder_request_exception_packet_contract(founder_request_packet)
+  ) {
+    throw new Error(
+      "Founder-request staging enrichment requires a contract-safe founder-request exception packet."
+    );
+  }
+
   const selected_summary = select_summary_projection(
     portfolio_projection,
     target_cell_id
@@ -66,6 +137,10 @@ export function assembleSecretaryHandoffStagingProjection(
     deriveSecretaryHandoffPacketState(selected_summary);
   const target_cell_name = selected_summary?.cell_summary_card.cell_name;
   const target_cell_id_value = selected_summary?.cell_summary_card.cell_id;
+  const founder_request_exception_preview =
+    founder_request_packet === undefined
+      ? undefined
+      : build_founder_request_exception_preview(founder_request_packet);
 
   return {
     secretary_handoff_staging_id: `${
@@ -164,6 +239,7 @@ export function assembleSecretaryHandoffStagingProjection(
       provenance_summary:
         "Provenance remains downstream: runtime-private records stay upstream in Cognitive_OS while SoloCrew stages explanatory handoff framing and omission-aware notes only.",
     }),
+    founder_request_exception_preview,
     non_executing_notice:
       "Secretary handoff staging remains review-packet-first, revision-loop-aware, non-executing, non-dispatching, and non-authoritative over runtime behavior.",
     truth_sources: unique_items([
@@ -192,6 +268,12 @@ export function assembleSecretaryHandoffStagingProjection(
       "Shared handoff packet states remain posture semantics only and do not become runtime commands.",
       "Wave 4 hardens revision/return loop consistency across shell, staging, and review packet surfaces without introducing execution semantics.",
       "Wave 5 hardens rationale, evidence, provenance, and omission visibility without promoting packet posture into runtime workflow truth.",
+      ...(founder_request_exception_preview === undefined
+        ? []
+        : [
+            "Founder-request staging enrichment stays compact, summary-only, bounded exception posture preview only, and non-executing inside the staging lane.",
+            "Founder-request staging preview preserves omission, insufficiency, stale, evidence, and learning posture without duplicating the full review packet enrichment.",
+          ]),
       "Runtime-private workforce truth remains upstream and is consumed only through existing product projection layers.",
       ...portfolio_projection.projection_notes,
     ],

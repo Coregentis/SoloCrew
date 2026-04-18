@@ -11,6 +11,9 @@ import {
   assembleSecretaryHandoffStagingProjection,
 } from "../../projection/assembly/secretary-handoff-staging.ts";
 import {
+  adapt_founder_request_exception_packet,
+} from "../../projection/adapters/founder-request-exception-packet-adapter.ts";
+import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
 } from "../../projection/contracts/structural-boundary.ts";
 
@@ -267,4 +270,151 @@ test("[projection] secretary handoff staging stays product-projected and non-exe
       assert.equal(field_name in target, false);
     }
   }
+});
+
+test("[projection] secretary handoff staging can carry compact founder-request exception posture preview without widening control semantics", () => {
+  const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
+    create_runtime_inputs()
+  );
+  const portfolio_projection = assemblePortfolioSecretaryShellProjection({
+    source_overview_shell_id: overview_shell.overview_shell_id,
+    cell_summary_units: overview_shell.cell_summary_units,
+    management_object_family_status:
+      overview_shell.management_object_family_status,
+    deferred_items: overview_shell.deferred_items,
+    non_claims: overview_shell.truth_boundary.non_claims,
+    projection_notes: overview_shell.projection_notes,
+  });
+  const founder_packet_result = adapt_founder_request_exception_packet({
+    request_ref: "founder-request-02",
+    request_label: "Preview the bounded revision posture before review packet assembly.",
+    projection_summaries: {
+      continuity_projection_summary: {
+        availability: "available",
+        summary_label: "Continuation remains visible for the selected lane.",
+      },
+      semantic_relation_projection_summary: {
+        availability: "omitted_by_contract",
+        summary_label: "Relation details stay omitted in this staging preview.",
+      },
+      drift_impact_projection_summary: {
+        availability: "stale",
+        summary_label: "Impact preview is stale and needs refresh later.",
+      },
+      activation_projection_summary: {
+        availability: "available",
+        summary_label: "Activation posture remains observe-only.",
+        activation_posture: "observe_only",
+      },
+      confirm_trace_decision_projection_summary: {
+        availability: "insufficient_evidence",
+        summary_label: "Confirm trace remains evidence-thin at staging time.",
+      },
+      learning_suggestion_projection_summary: {
+        availability: "available",
+        summary_label: "Learning hint remains available for staging preview.",
+        suggestion_summary_label:
+          "Capture the revision-return pattern as a suggestion-only note.",
+      },
+    },
+    evidence_summary_text:
+      "Evidence remains compact and bounded across omission, insufficiency, and stale posture.",
+    learning_suggestion_text:
+      "Keep the learning note suggestion-only while the staging packet remains non-executing.",
+  });
+
+  assert.equal(founder_packet_result.ok, true);
+
+  if (!founder_packet_result.ok) {
+    assert.fail("Expected a contract-safe founder request packet.");
+  }
+
+  const projection = assembleSecretaryHandoffStagingProjection(
+    portfolio_projection,
+    "cell-scope-01",
+    founder_packet_result.packet
+  );
+
+  assert.equal(
+    projection.founder_request_exception_preview?.preview_scope,
+    "founder_request_exception_staging_preview"
+  );
+  assert.equal(
+    projection.founder_request_exception_preview?.request_ref,
+    "founder-request-02"
+  );
+  assert.equal(
+    projection.founder_request_exception_preview?.request_label,
+    "Preview the bounded revision posture before review packet assembly."
+  );
+  assert.equal(
+    projection.founder_request_exception_preview?.derived_exception_posture,
+    "stale_context"
+  );
+  assert.equal(
+    projection.founder_request_exception_preview?.review_return_posture,
+    "stale_context"
+  );
+  assert.equal(
+    projection.founder_request_exception_preview?.evidence_posture_summary.evidence_summary_label,
+    "Evidence remains compact and bounded across omission, insufficiency, and stale posture."
+  );
+  assert.equal(
+    projection.founder_request_exception_preview?.evidence_posture_summary.evidence_status,
+    "stale"
+  );
+  assert.equal(
+    "evidence_refs" in
+      (projection.founder_request_exception_preview?.evidence_posture_summary ??
+        {}),
+    false
+  );
+  assert.equal(
+    projection.founder_request_exception_preview?.learning_suggestion_hint?.suggestion_posture,
+    "suggestion_only"
+  );
+  assert.ok(
+    projection.founder_request_exception_preview?.status_markers.includes(
+      "omitted_by_contract"
+    )
+  );
+  assert.ok(
+    projection.founder_request_exception_preview?.status_markers.includes(
+      "insufficient_evidence"
+    )
+  );
+  assert.ok(
+    projection.founder_request_exception_preview?.status_markers.includes(
+      "stale"
+    )
+  );
+  assert.deepEqual(
+    projection.founder_request_exception_preview?.family_status_summaries.map(
+      (summary) => summary.family
+    ),
+    [
+      "continuity_projection_summary",
+      "semantic_relation_projection_summary",
+      "drift_impact_projection_summary",
+      "activation_projection_summary",
+      "confirm_trace_decision_projection_summary",
+      "learning_suggestion_projection_summary",
+    ]
+  );
+  assert.ok(
+    projection.projection_notes.includes(
+      "Founder-request staging enrichment stays compact, summary-only, bounded exception posture preview only, and non-executing inside the staging lane."
+    )
+  );
+  assert.ok(
+    projection.projection_notes.includes(
+      "Founder-request staging preview preserves omission, insufficiency, stale, evidence, and learning posture without duplicating the full review packet enrichment."
+    )
+  );
+  assert.equal(projection.direct_approve_control_available, false);
+  assert.equal(projection.direct_reject_control_available, false);
+  assert.equal(projection.direct_dispatch_control_available, false);
+  assert.equal(projection.direct_execute_control_available, false);
+  assert.equal(projection.provider_execution_available, false);
+  assert.equal(projection.channel_entry_available, false);
 });

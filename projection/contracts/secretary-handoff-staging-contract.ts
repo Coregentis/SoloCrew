@@ -2,6 +2,11 @@ import type {
   ProjectionUpstreamRef,
 } from "./projection-object-types.ts";
 import type {
+  FounderRequestExceptionPacketSummaryFamily,
+  FounderRequestExceptionPosture,
+  FounderRequestProjectionSummaryAvailability,
+} from "./founder-request-exception-packet-contract.ts";
+import type {
   PortfolioSecretaryManagementObjectStatus,
   PortfolioSecretaryShellProjection,
   PortfolioSecretaryTruthSource,
@@ -50,6 +55,37 @@ export interface SecretaryHandoffManagementPosture {
   review_posture_framing: string;
 }
 
+export interface SecretaryHandoffFounderRequestStagingFamilyStatusSummary {
+  family: FounderRequestExceptionPacketSummaryFamily;
+  availability: FounderRequestProjectionSummaryAvailability;
+  summary_label: string;
+}
+
+export interface SecretaryHandoffFounderRequestEvidencePostureSummary {
+  evidence_summary_label: string;
+  evidence_status: FounderRequestProjectionSummaryAvailability;
+}
+
+export interface SecretaryHandoffFounderRequestLearningSuggestionHint {
+  suggestion_posture: "suggestion_only";
+  suggestion_summary: string;
+  marker_status: FounderRequestProjectionSummaryAvailability;
+}
+
+export interface SecretaryHandoffFounderRequestExceptionPreview {
+  preview_scope: "founder_request_exception_staging_preview";
+  request_ref: string;
+  request_label: string;
+  derived_exception_posture: FounderRequestExceptionPosture;
+  review_return_posture: FounderRequestExceptionPosture;
+  review_return_summary: string;
+  marker_status: FounderRequestProjectionSummaryAvailability;
+  evidence_posture_summary: SecretaryHandoffFounderRequestEvidencePostureSummary;
+  learning_suggestion_hint?: SecretaryHandoffFounderRequestLearningSuggestionHint;
+  status_markers: FounderRequestProjectionSummaryAvailability[];
+  family_status_summaries: SecretaryHandoffFounderRequestStagingFamilyStatusSummary[];
+}
+
 export interface SecretaryHandoffStagingProjection {
   secretary_handoff_staging_id: string;
   source_portfolio_secretary_projection_id: string;
@@ -81,6 +117,7 @@ export interface SecretaryHandoffStagingProjection {
   revision_loop_summary: string;
   management_and_review_posture: SecretaryHandoffManagementPosture;
   rationale_evidence: SecretaryHandoffRationaleEvidenceProjection;
+  founder_request_exception_preview?: SecretaryHandoffFounderRequestExceptionPreview;
   non_executing_notice: string;
   truth_sources: SecretaryHandoffStagingTruthSource[];
   upstream_refs: ProjectionUpstreamRef[];
