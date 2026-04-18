@@ -2,6 +2,7 @@
 
 ## 2026-04-18
 
+- added the evidence / stale display hardening plan, freezing how future pages may show evidence summary, omission, insufficiency, stale posture, suggestion-only learning, non-executing recommendation, and bounded exception posture without app/page changes, UI changes, raw trace dumps, direct-control semantics, or provider/channel execution
 - added the founder-request handoff assembly enrichment closure audit, freezing contract, adapter, posture derivation, review packet enrichment, staging enrichment, regression evidence, remaining gaps, and next-wave readiness without new behavior, app/page changes, UI changes, direct-control semantics, or provider/channel execution
 - enriched the secretary handoff staging assembly with optional founder-request exception preview summaries so bounded exception posture preview, omission/insufficiency/stale markers, evidence posture, suggestion-only learning hints, and six-family status rollups can flow through the existing staging lane without app/page changes, UI changes, direct-control behavior, or provider/channel execution
 - enriched the secretary handoff review packet assembly with optional founder-request exception packet summaries so bounded exception posture, omission/insufficiency/stale markers, non-executing bounded action recommendation, evidence summary, and suggestion-only learning summary can flow through the existing review-packet lane without app/page changes, UI changes, direct-control behavior, or provider/channel execution
