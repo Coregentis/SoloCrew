@@ -14,6 +14,9 @@ import {
   assembleSecretaryHandoffReviewPacketProjection,
 } from "../../projection/assembly/secretary-handoff-review-packet.ts";
 import {
+  adapt_founder_request_exception_packet,
+} from "../../projection/adapters/founder-request-exception-packet-adapter.ts";
+import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
 } from "../../projection/contracts/structural-boundary.ts";
 
@@ -263,4 +266,160 @@ test("[projection] secretary handoff review packet stays review-only and product
       assert.equal(field_name in target, false);
     }
   }
+});
+
+test("[projection] secretary handoff review packet can carry founder-request exception posture enrichment without widening control semantics", () => {
+  const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
+    create_runtime_inputs()
+  );
+  const portfolio_projection = assemblePortfolioSecretaryShellProjection({
+    source_overview_shell_id: overview_shell.overview_shell_id,
+    cell_summary_units: overview_shell.cell_summary_units,
+    management_object_family_status:
+      overview_shell.management_object_family_status,
+    deferred_items: overview_shell.deferred_items,
+    non_claims: overview_shell.truth_boundary.non_claims,
+    projection_notes: overview_shell.projection_notes,
+  });
+  const staging_projection = assembleSecretaryHandoffStagingProjection(
+    portfolio_projection,
+    "cell-scope-01"
+  );
+  const founder_packet_result = adapt_founder_request_exception_packet({
+    request_ref: "founder-request-01",
+    request_label: "Clarify the returned handoff packet before next review.",
+    projection_summaries: {
+      continuity_projection_summary: {
+        availability: "available",
+        summary_label: "Continuation anchor remains visible.",
+        continuation_label: "Resume from the current review lane.",
+      },
+      semantic_relation_projection_summary: {
+        availability: "insufficient_evidence",
+        summary_label: "Affected relation set remains incomplete.",
+      },
+      drift_impact_projection_summary: {
+        availability: "stale",
+        summary_label: "Drift summary needs refresh before deeper reuse.",
+        impact_summary_label: "Current impact read is stale but still bounded.",
+      },
+      activation_projection_summary: {
+        availability: "available",
+        summary_label: "Activation posture remains observe-only.",
+        activation_posture: "observe_only",
+      },
+      confirm_trace_decision_projection_summary: {
+        availability: "omitted_by_contract",
+        summary_label: "Confirm trace stays omitted in this bounded packet.",
+      },
+      learning_suggestion_projection_summary: {
+        availability: "available",
+        summary_label: "Learning suggestion remains bounded.",
+        suggestion_summary_label:
+          "Capture the revision-return pattern for later review only.",
+      },
+    },
+    bounded_action_recommendation_text:
+      "Prepare a bounded revision note for the next review pass.",
+    evidence_summary_text:
+      "Evidence remains summary-only across continuity, impact, and review posture.",
+    learning_suggestion_text:
+      "Keep the learning note suggestion-only while the packet stays non-executing.",
+  });
+
+  assert.equal(founder_packet_result.ok, true);
+
+  if (!founder_packet_result.ok) {
+    assert.fail("Expected a contract-safe founder request packet.");
+  }
+
+  const review_packet = assembleSecretaryHandoffReviewPacketProjection(
+    staging_projection,
+    founder_packet_result.packet
+  );
+
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.enrichment_scope,
+    "founder_request_exception_packet_summary"
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.request_ref,
+    "founder-request-01"
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.request_label,
+    "Clarify the returned handoff packet before next review."
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.derived_exception_posture,
+    "stale_context"
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.review_return_posture,
+    "stale_context"
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.bounded_action_recommendation?.recommendation_kind,
+    "bounded_action_recommendation"
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.bounded_action_recommendation?.non_executing,
+    true
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.learning_suggestion_summary?.suggestion_posture,
+    "suggestion_only"
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.evidence_summary.evidence_summary_label,
+    "Evidence remains summary-only across continuity, impact, and review posture."
+  );
+  assert.ok(
+    review_packet.founder_request_exception_enrichment?.status_markers.includes(
+      "stale"
+    )
+  );
+  assert.ok(
+    review_packet.founder_request_exception_enrichment?.status_markers.includes(
+      "insufficient_evidence"
+    )
+  );
+  assert.ok(
+    review_packet.founder_request_exception_enrichment?.status_markers.includes(
+      "omitted_by_contract"
+    )
+  );
+  assert.deepEqual(
+    review_packet.founder_request_exception_enrichment?.family_status_summaries.map(
+      (summary) => summary.family
+    ),
+    [
+      "continuity_projection_summary",
+      "semantic_relation_projection_summary",
+      "drift_impact_projection_summary",
+      "activation_projection_summary",
+      "confirm_trace_decision_projection_summary",
+      "learning_suggestion_projection_summary",
+    ]
+  );
+  assert.match(
+    review_packet.founder_request_exception_enrichment?.review_return_summary ?? "",
+    /stale/i
+  );
+  assert.ok(
+    review_packet.projection_notes.includes(
+      "Founder-request exception packet enrichment stays contract-safe, summary-only, bounded exception posture only, and non-executing inside the review packet lane."
+    )
+  );
+  assert.ok(
+    review_packet.projection_notes.includes(
+      "Founder-request evidence remains summary-level only, with omission, insufficiency, and stale markers preserved rather than hidden."
+    )
+  );
+  assert.equal(review_packet.direct_approve_control_available, false);
+  assert.equal(review_packet.direct_reject_control_available, false);
+  assert.equal(review_packet.direct_dispatch_control_available, false);
+  assert.equal(review_packet.direct_execute_control_available, false);
+  assert.equal(review_packet.provider_execution_available, false);
+  assert.equal(review_packet.channel_entry_available, false);
 });

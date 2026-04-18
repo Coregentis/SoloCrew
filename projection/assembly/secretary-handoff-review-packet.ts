@@ -1,7 +1,14 @@
 import type {
+  SecretaryHandoffFounderRequestExceptionEnrichment,
+  SecretaryHandoffFounderRequestFamilyStatusSummary,
   SecretaryHandoffReviewPacketProjection,
   SecretaryHandoffReviewReadiness,
 } from "../contracts/secretary-handoff-review-packet-contract.ts";
+import {
+  FOUNDER_REQUEST_EXCEPTION_PACKET_SUMMARY_FAMILIES,
+  is_founder_request_exception_packet_contract,
+  type FounderRequestExceptionPacketContract,
+} from "../contracts/founder-request-exception-packet-contract.ts";
 import type {
   SecretaryHandoffStagingProjection,
 } from "../contracts/secretary-handoff-staging-contract.ts";
@@ -29,6 +36,53 @@ const SECRETARY_HANDOFF_REVIEW_PACKET_NON_CLAIMS = [
 
 function unique_items(values: readonly string[]): string[] {
   return [...new Set(values)];
+}
+
+function build_founder_request_family_status_summaries(
+  founder_request_packet: FounderRequestExceptionPacketContract
+): SecretaryHandoffFounderRequestFamilyStatusSummary[] {
+  return FOUNDER_REQUEST_EXCEPTION_PACKET_SUMMARY_FAMILIES.map((family) => ({
+    family,
+    availability:
+      founder_request_packet.projection_summaries[family].availability,
+    summary_label:
+      founder_request_packet.projection_summaries[family].summary_label,
+  }));
+}
+
+function build_founder_request_exception_enrichment(
+  founder_request_packet: FounderRequestExceptionPacketContract
+): SecretaryHandoffFounderRequestExceptionEnrichment {
+  return {
+    enrichment_scope: "founder_request_exception_packet_summary",
+    request_ref: founder_request_packet.request_identity.request_ref,
+    request_label: founder_request_packet.request_identity.request_label,
+    derived_exception_posture:
+      founder_request_packet.derived_exception_posture,
+    review_return_posture:
+      founder_request_packet.review_return_posture.posture,
+    review_return_summary:
+      founder_request_packet.review_return_posture.posture_summary,
+    marker_status:
+      founder_request_packet.review_return_posture.marker_status,
+    bounded_action_recommendation:
+      founder_request_packet.bounded_action_recommendation,
+    evidence_summary: {
+      evidence_summary_label:
+        founder_request_packet.evidence_summary.evidence_summary_label,
+      evidence_status:
+        founder_request_packet.evidence_summary.evidence_status,
+      evidence_refs:
+        founder_request_packet.evidence_summary.evidence_refs,
+    },
+    learning_suggestion_summary:
+      founder_request_packet.learning_suggestion_summary,
+    status_markers: [...founder_request_packet.status_markers],
+    family_status_summaries:
+      build_founder_request_family_status_summaries(
+        founder_request_packet
+      ),
+  };
 }
 
 function derive_review_readiness(
@@ -91,10 +145,24 @@ function derive_review_readiness(
 }
 
 export function assembleSecretaryHandoffReviewPacketProjection(
-  staging_projection: SecretaryHandoffStagingProjection
+  staging_projection: SecretaryHandoffStagingProjection,
+  founder_request_packet?: FounderRequestExceptionPacketContract
 ): SecretaryHandoffReviewPacketProjection {
+  if (
+    founder_request_packet !== undefined &&
+    !is_founder_request_exception_packet_contract(founder_request_packet)
+  ) {
+    throw new Error(
+      "Founder-request review packet enrichment requires a contract-safe founder-request exception packet."
+    );
+  }
+
   const target_cell_name =
     staging_projection.target_selection.target_cell_name ?? "selected cell";
+  const founder_request_exception_enrichment =
+    founder_request_packet === undefined
+      ? undefined
+      : build_founder_request_exception_enrichment(founder_request_packet);
 
   return {
     secretary_handoff_review_packet_id:
@@ -171,6 +239,7 @@ export function assembleSecretaryHandoffReviewPacketProjection(
       provenance_summary:
         "Provenance remains downstream and non-authoritative: SoloCrew renders a review packet over adapted upstream inputs without claiming runtime workflow ownership or protocol completeness.",
     }),
+    founder_request_exception_enrichment,
     non_executing_notice:
       "Secretary handoff review packet remains review-only, handoff-only, non-dispatching, and non-authoritative over runtime behavior.",
     truth_sources: unique_items([
@@ -197,6 +266,12 @@ export function assembleSecretaryHandoffReviewPacketProjection(
       "Review readiness visualization is bounded to product-level packet framing for downstream cell consumption.",
       "Wave 4 hardens revision/return loop consistency so packet summaries and returned-for-revision posture stay aligned with the staging lane.",
       "Wave 5 hardens rationale, evidence, provenance, and omission-aware narration without introducing direct-control semantics.",
+      ...(founder_request_exception_enrichment === undefined
+        ? []
+        : [
+            "Founder-request exception packet enrichment stays contract-safe, summary-only, bounded exception posture only, and non-executing inside the review packet lane.",
+            "Founder-request evidence remains summary-level only, with omission, insufficiency, and stale markers preserved rather than hidden.",
+          ]),
       ...staging_projection.projection_notes,
     ],
   };

@@ -2,6 +2,14 @@ import type {
   ProjectionUpstreamRef,
 } from "./projection-object-types.ts";
 import type {
+  FounderRequestBoundedActionRecommendation,
+  FounderRequestExceptionPacketSummaryFamily,
+  FounderRequestExceptionPosture,
+  FounderRequestLearningSuggestionSummaryClass,
+  FounderRequestProjectionEvidenceRef,
+  FounderRequestProjectionSummaryAvailability,
+} from "./founder-request-exception-packet-contract.ts";
+import type {
   SecretaryHandoffManagementPosture,
   SecretaryHandoffStagingTruthSource,
   SecretaryHandoffTargetSelection,
@@ -39,6 +47,33 @@ export interface SecretaryHandoffReviewReadiness {
   target_blocked_work_count?: number;
 }
 
+export interface SecretaryHandoffFounderRequestFamilyStatusSummary {
+  family: FounderRequestExceptionPacketSummaryFamily;
+  availability: FounderRequestProjectionSummaryAvailability;
+  summary_label: string;
+}
+
+export interface SecretaryHandoffFounderRequestEvidenceSummary {
+  evidence_summary_label: string;
+  evidence_status: FounderRequestProjectionSummaryAvailability;
+  evidence_refs?: FounderRequestProjectionEvidenceRef[];
+}
+
+export interface SecretaryHandoffFounderRequestExceptionEnrichment {
+  enrichment_scope: "founder_request_exception_packet_summary";
+  request_ref: string;
+  request_label: string;
+  derived_exception_posture: FounderRequestExceptionPosture;
+  review_return_posture: FounderRequestExceptionPosture;
+  review_return_summary: string;
+  marker_status: FounderRequestProjectionSummaryAvailability;
+  bounded_action_recommendation?: FounderRequestBoundedActionRecommendation;
+  evidence_summary: SecretaryHandoffFounderRequestEvidenceSummary;
+  learning_suggestion_summary?: FounderRequestLearningSuggestionSummaryClass;
+  status_markers: FounderRequestProjectionSummaryAvailability[];
+  family_status_summaries: SecretaryHandoffFounderRequestFamilyStatusSummary[];
+}
+
 export interface SecretaryHandoffReviewPacketProjection {
   secretary_handoff_review_packet_id: string;
   source_handoff_staging_id: string;
@@ -73,6 +108,7 @@ export interface SecretaryHandoffReviewPacketProjection {
   management_and_review_posture: SecretaryHandoffManagementPosture;
   review_readiness: SecretaryHandoffReviewReadiness;
   rationale_evidence: SecretaryHandoffRationaleEvidenceProjection;
+  founder_request_exception_enrichment?: SecretaryHandoffFounderRequestExceptionEnrichment;
   non_executing_notice: string;
   truth_sources: SecretaryHandoffReviewPacketTruthSource[];
   upstream_refs: ProjectionUpstreamRef[];
