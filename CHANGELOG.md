@@ -2,6 +2,9 @@
 
 ## 2026-04-18
 
+- added a bounded Q4 downstream-truth audit, gates, and closure pack after the landed runtime-dependent downstream truth hardening pass
+- confirmed that Q4 stayed downstream-only, product-projected, omission-aware, and explicitly out of scope for direct-control semantics, delivery authorization, runtime-authority claims, protocol-authority claims, and local workflow-law invention
+- kept the readiness and queue read unchanged because Q4 had already truthfully shifted the next top blocker to the formal `v1.0` delivery gate and closure pack
 - hardened bounded runtime-dependent downstream truth over current `Cognitive_OS` confirm, trace, and omission-aware export posture without adding direct-control or execution behavior
 - kept that Q4 wave explanatory-only and explicitly out of scope for runtime-authority claims, protocol-authority claims, local workflow-law invention, Context/Plan backfill, and any `v1.0` delivery claim
 
