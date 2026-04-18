@@ -2,6 +2,7 @@
 
 ## 2026-04-18
 
+- added the first bounded business-loop selection audit for SoloCrew, selecting the Founder request -> Delta intent -> Secretary handoff packet -> Review/return posture -> bounded action recommendation -> evidence summary -> learning suggestion loop for implementation planning only without DTOs, UI, direct-control behavior, provider/channel execution, runtime authority, or protocol authority
 - added the first SoloCrew exception state-machine semantic baseline, freezing bounded exception postures, allowed/forbidden transitions, evidence/omission/stale handling, and future test duties without introducing code, DTOs, UI, direct-control behavior, provider/channel execution, runtime authority, or protocol authority
 - added the first CGOS exception projection contract draft for SoloCrew, freezing bounded input families, omission/insufficiency semantics, evidence posture, forbidden labels, and future test requirements without introducing DTOs, UI, direct-control behavior, provider/channel execution, runtime authority, or protocol authority
 - added an exception-plane preparation audit and a CGOS projection consumption boundary for SoloCrew, freezing contract-drafting readiness only and keeping the repo explicitly below implementation, direct-control semantics, provider/channel execution, runtime authority, and protocol authority
