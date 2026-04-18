@@ -22,6 +22,10 @@ This repository is:
 
 Current release status is `v1.0-solo-operator-platform delivered and closed`.
 
+For the formal boundary between current repo/platform `v1.0` and later
+Operational V1.0 closure, see
+`governance/baselines/SOLOCREW-REPO-V1-VS-OPERATIONAL-V1-BOUNDARY-v0.1.md`.
+
 That formal delivery judgment means the repo now has the mandatory `v1.0`
 baseline in bounded form:
 
