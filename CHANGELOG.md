@@ -2,6 +2,7 @@
 
 ## 2026-04-18
 
+- added the first CGOS exception projection contract draft for SoloCrew, freezing bounded input families, omission/insufficiency semantics, evidence posture, forbidden labels, and future test requirements without introducing DTOs, UI, direct-control behavior, provider/channel execution, runtime authority, or protocol authority
 - added an exception-plane preparation audit and a CGOS projection consumption boundary for SoloCrew, freezing contract-drafting readiness only and keeping the repo explicitly below implementation, direct-control semantics, provider/channel execution, runtime authority, and protocol authority
 - ran the bounded Q5 `v1.0` delivery gate and closure pack over the closed Q1 through Q4 line and recorded the formal delivery judgment for `v1.0-solo-operator-platform`
 - confirmed that the final delivery claim remains explicitly out of scope for direct-control semantics, delivery authorization semantics, provider/channel behavior, runtime-authority claims, protocol-authority claims, and silent execution-cockpit drift
