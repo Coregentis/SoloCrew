@@ -2,6 +2,7 @@
 
 ## 2026-04-18
 
+- extracted the founder-request exception posture derivation into a pure contract utility, freezing posture priority, marker handling, adapter reuse, and standalone derivation tests without changing app/pages, assembly, or UI
 - added the founder-request exception packet projection adapter over bounded summaries, freezing explicit six-family adaptation, omission/insufficiency/stale defaulting, fail-closed forbidden-boundary checks, non-executing bounded action recommendation posture, and suggestion-only learning output without changing assembly logic, app/pages, or UI
 - added the founder-request exception packet contract skeleton and type guards, freezing six projection summary families, omission/insufficiency/stale vocabulary, bounded exception posture vocabulary, forbidden raw-field exclusion, and non-executing bounded action recommendation checks without changing adapters, assembly logic, app/pages, or UI
 - added the founder-request exception packet loop implementation plan, freezing directory scope, asset reuse, contract-derived input mapping, test gates, forbidden dependencies, minimum implementation waves, and first-wave DoD without introducing DTO code, UI, direct-control behavior, provider/channel execution, runtime authority, or protocol authority

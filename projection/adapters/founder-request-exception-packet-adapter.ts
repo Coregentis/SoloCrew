@@ -19,6 +19,11 @@ import {
   type FounderRequestProjectionSummarySet,
   type FounderRequestSemanticRelationProjectionSummary,
 } from "../contracts/founder-request-exception-packet-contract.ts";
+import {
+  derive_founder_request_exception_marker_status,
+  derive_founder_request_exception_posture,
+  order_founder_request_projection_markers,
+} from "../contracts/founder-request-exception-posture-derivation.ts";
 
 function is_record(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -38,15 +43,6 @@ function tokenize_value(value: string): string[] {
     .split(/[^a-z0-9_]+/u)
     .filter((token) => token.length > 0);
 }
-
-const ORDERED_AVAILABILITY_VALUES: FounderRequestProjectionSummaryAvailability[] = [
-  "available",
-  "omitted_by_contract",
-  "not_available_upstream",
-  "insufficient_evidence",
-  "stale",
-  "not_applicable",
-];
 
 const FORBIDDEN_RAW_FIELD_KEYS = new Set(
   [
@@ -220,42 +216,6 @@ function has_forbidden_recommendation_tokens(value: unknown): boolean {
   return tokenize_value(value).some((token) =>
     FORBIDDEN_RECOMMENDATION_TOKENS.has(token)
   );
-}
-
-function ordered_unique_markers(
-  markers: FounderRequestProjectionSummaryAvailability[]
-): FounderRequestProjectionSummaryAvailability[] {
-  const marker_set = new Set(markers);
-
-  return ORDERED_AVAILABILITY_VALUES.filter((marker) => marker_set.has(marker));
-}
-
-function pick_marker_status(
-  markers: FounderRequestProjectionSummaryAvailability[]
-): FounderRequestProjectionSummaryAvailability {
-  const ordered_markers = ordered_unique_markers(markers);
-
-  if (ordered_markers.includes("stale")) {
-    return "stale";
-  }
-
-  if (ordered_markers.includes("insufficient_evidence")) {
-    return "insufficient_evidence";
-  }
-
-  if (ordered_markers.includes("omitted_by_contract")) {
-    return "omitted_by_contract";
-  }
-
-  if (ordered_markers.includes("not_available_upstream")) {
-    return "not_available_upstream";
-  }
-
-  if (ordered_markers.includes("not_applicable")) {
-    return "not_applicable";
-  }
-
-  return "available";
 }
 
 function default_availability(
@@ -542,72 +502,7 @@ function collect_status_markers(
     }
   }
 
-  return ordered_unique_markers(markers);
-}
-
-function derive_exception_posture(
-  projection_summaries: FounderRequestProjectionSummarySet,
-  input_hint: unknown,
-  marker_status: FounderRequestProjectionSummaryAvailability
-): FounderRequestExceptionPosture {
-  if (is_founder_request_exception_posture(input_hint)) {
-    return input_hint;
-  }
-
-  if (marker_status === "stale") {
-    return "stale_context";
-  }
-
-  if (marker_status === "insufficient_evidence") {
-    return "evidence_insufficient";
-  }
-
-  if (projection_summaries.activation_projection_summary.activation_posture === "blocked") {
-    return "activation_blocked";
-  }
-
-  if (
-    projection_summaries.activation_projection_summary.activation_posture ===
-    "escalation_gate"
-  ) {
-    return "escalation_required";
-  }
-
-  if (
-    projection_summaries.confirm_trace_decision_projection_summary.confirm_posture ===
-    "required"
-  ) {
-    return "confirm_required";
-  }
-
-  if (
-    marker_status === "omitted_by_contract" ||
-    marker_status === "not_available_upstream"
-  ) {
-    return "blocked_by_contract";
-  }
-
-  if (
-    projection_summaries.drift_impact_projection_summary.has_conflict_signal === true ||
-    projection_summaries.drift_impact_projection_summary.impact_summary_label !==
-      undefined ||
-    projection_summaries.drift_impact_projection_summary.drift_kind_label !==
-      undefined
-  ) {
-    return "impact_detected";
-  }
-
-  if (
-    projection_summaries.semantic_relation_projection_summary.availability ===
-      "available" ||
-    projection_summaries.continuity_projection_summary.availability === "available" ||
-    projection_summaries.learning_suggestion_projection_summary.availability ===
-      "available"
-  ) {
-    return "review_needed";
-  }
-
-  return "monitor";
+  return order_founder_request_projection_markers(markers);
 }
 
 function default_review_summary(
@@ -771,14 +666,16 @@ export function adapt_founder_request_exception_packet(
     projection_summaries,
     valid_input.status_markers
   );
-  const marker_status = pick_marker_status(status_markers);
+  const marker_status =
+    derive_founder_request_exception_marker_status(status_markers);
   const evidence_refs = collect_projection_evidence_refs(projection_summaries);
-  const derived_exception_posture = derive_exception_posture(
+  const derived_exception_posture = derive_founder_request_exception_posture({
     projection_summaries,
-    valid_input.derived_exception_posture_hint ??
+    posture_hint:
+      valid_input.derived_exception_posture_hint ??
       valid_input.review_return_posture_hint,
-    marker_status
-  );
+    status_markers,
+  });
   const bounded_action_recommendation = create_bounded_action_recommendation(
     valid_input.bounded_action_recommendation_text,
     derived_exception_posture,
