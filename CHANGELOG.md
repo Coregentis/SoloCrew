@@ -2,6 +2,7 @@
 
 ## 2026-04-18
 
+- added the portfolio aggregate posture plan, freezing bounded aggregate posture vocabulary, safe aggregation inputs, priority rules, rollback conditions, and future portfolio-shell implementation gates without app/page changes, UI changes, founder queue semantics, direct-control behavior, or provider/channel execution
 - added the evidence / stale display hardening closure audit, freezing review-page and staging-page display truth, regression evidence, forbidden boundaries, remaining gaps, and next-wave readiness without new behavior, app/page changes, UI changes, direct-control semantics, or provider/channel execution
 - hardened secretary handoff review and staging page-facing display semantics so evidence summary, omission, insufficiency, stale posture, suggestion-only learning, and non-executing recommendation remain visibly bounded without raw trace/runtime detail, direct-control semantics, or provider/channel execution
 - added the evidence / stale display hardening plan, freezing how future pages may show evidence summary, omission, insufficiency, stale posture, suggestion-only learning, non-executing recommendation, and bounded exception posture without app/page changes, UI changes, raw trace dumps, direct-control semantics, or provider/channel execution
