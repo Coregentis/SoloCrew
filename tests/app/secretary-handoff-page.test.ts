@@ -296,6 +296,27 @@ test("[app] secretary handoff page hardens compact evidence and stale preview se
         "Suggestion only: revisit the stale continuity summary before deeper review.",
       marker_status: "insufficient_evidence",
     },
+    state_evaluation_exposure: {
+      exposure_scope: "staging_state_exposure",
+      evaluation_id: "staging-eval-01",
+      initial_state: "state_observed",
+      transition_event: "raise_review",
+      transition_accepted: false,
+      final_state: "state_review_needed",
+      blocked_reason: "review posture still depends on stale continuity context.",
+      terminal: false,
+      non_executing: true,
+      source_posture: "review_needed",
+      source_markers: [
+        "omitted_by_contract",
+        "insufficient_evidence",
+        "stale",
+      ],
+      notes: [
+        "Compact staging note one.",
+        "Compact staging note two.",
+      ],
+    },
     status_markers: [
       "omitted_by_contract",
       "insufficient_evidence",
@@ -332,6 +353,17 @@ test("[app] secretary handoff page hardens compact evidence and stale preview se
     preview.learning_suggestion_hint?.suggestion_posture_notice,
     "suggestion_only"
   );
+  assert.ok(preview.state_evaluation_summary);
+  assert.equal(
+    preview.state_evaluation_summary?.transition_accepted,
+    false
+  );
+  assert.equal(preview.state_evaluation_summary?.non_executing, true);
+  assert.deepEqual(preview.state_evaluation_summary?.source_markers, [
+    "omitted_by_contract",
+    "insufficient_evidence",
+    "stale",
+  ]);
   assert.doesNotMatch(
     preview.learning_suggestion_hint?.suggestion_summary ?? "",
     /approve|reject|dispatch|execute|provider|channel/
@@ -343,6 +375,18 @@ test("[app] secretary handoff page hardens compact evidence and stale preview se
   assert.match(page.html, /Display marker: insufficiency visible/);
   assert.match(page.html, /Learning suggestion only: Suggestion only: revisit the stale continuity summary before deeper review\./);
   assert.match(page.html, /Learning posture notice: suggestion_only/);
+  assert.match(page.html, /Compact State Preview/);
+  assert.match(page.html, /State evaluation id: staging-eval-01/);
+  assert.match(page.html, /State evaluation accepted: blocked state transition/);
+  assert.match(page.html, /Blocked state transition: review posture still depends on stale continuity context\./);
+  assert.match(page.html, /State line terminal: state line remains open/);
+  assert.match(page.html, /Non-executing: true/);
+  assert.match(page.html, /Source posture: review_needed/);
+  assert.match(page.html, /Source markers: omission visible, insufficiency visible, stale visible/);
+  assert.match(page.html, /Bounded notes: Compact staging note one\. \| Compact staging note two\./);
+  assert.match(page.html, /Compact state preview keeps state evaluation truth below approval meaning and below execution complete meaning\./);
   assert.match(page.html, /Staging keeps evidence compact, omission-aware, insufficiency-aware, and stale-aware without exposing a raw trace dump or raw runtime detail\./);
+  assert.doesNotMatch(page.html, /Requested next state:/);
+  assert.doesNotMatch(page.html, /Reducer target state:/);
   assert.doesNotMatch(page.html, /Bounded recommendation summary/);
 });

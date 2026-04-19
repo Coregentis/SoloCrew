@@ -76,6 +76,21 @@ export interface SecretaryHandoffReviewPage {
         marker_status_summary: string;
         suggestion_posture_notice: "suggestion_only";
       };
+      state_evaluation_summary?: {
+        evaluation_id: string;
+        initial_state: string;
+        transition_event: string;
+        requested_next_state: string;
+        reducer_target_state: string;
+        transition_accepted: boolean;
+        final_state: string;
+        blocked_reason?: string;
+        terminal: boolean;
+        non_executing: true;
+        source_posture: string;
+        source_markers: string[];
+        notes: string[];
+      };
       bounded_recommendation_display?: {
         recommendation_summary: string;
         recommendation_notice: string;
@@ -138,6 +153,18 @@ function render_navigation_link(
     `<p>Review packet route: ${escape_html(link.review_packet_route)}</p>`,
     "</article>",
   ].join("");
+}
+
+function summarize_state_evaluation_acceptance(
+  transition_accepted: boolean
+): string {
+  return transition_accepted
+    ? "state evaluation accepted"
+    : "blocked state transition";
+}
+
+function summarize_terminal_boundary(terminal: boolean): string {
+  return terminal ? "state line terminal" : "state line remains open";
 }
 
 export function renderSecretaryHandoffReviewPage(
@@ -218,6 +245,39 @@ export function renderSecretaryHandoffReviewPage(
                     founder_request_exception_enrichment.learning_suggestion_summary.marker_status
                   ),
                   suggestion_posture_notice: "suggestion_only",
+                }
+              : undefined,
+          state_evaluation_summary:
+            founder_request_exception_enrichment.state_evaluation_exposure
+              ? {
+                  evaluation_id:
+                    founder_request_exception_enrichment.state_evaluation_exposure.evaluation_id,
+                  initial_state:
+                    founder_request_exception_enrichment.state_evaluation_exposure.initial_state,
+                  transition_event:
+                    founder_request_exception_enrichment.state_evaluation_exposure.transition_event,
+                  requested_next_state:
+                    founder_request_exception_enrichment.state_evaluation_exposure.requested_next_state,
+                  reducer_target_state:
+                    founder_request_exception_enrichment.state_evaluation_exposure.reducer_target_state,
+                  transition_accepted:
+                    founder_request_exception_enrichment.state_evaluation_exposure.transition_accepted,
+                  final_state:
+                    founder_request_exception_enrichment.state_evaluation_exposure.final_state,
+                  blocked_reason:
+                    founder_request_exception_enrichment.state_evaluation_exposure.blocked_reason,
+                  terminal:
+                    founder_request_exception_enrichment.state_evaluation_exposure.terminal,
+                  non_executing:
+                    founder_request_exception_enrichment.state_evaluation_exposure.non_executing,
+                  source_posture:
+                    founder_request_exception_enrichment.state_evaluation_exposure.source_posture,
+                  source_markers: [
+                    ...founder_request_exception_enrichment.state_evaluation_exposure.source_markers,
+                  ],
+                  notes: [
+                    ...founder_request_exception_enrichment.state_evaluation_exposure.notes,
+                  ],
                 }
               : undefined,
           bounded_recommendation_display:
@@ -384,6 +444,74 @@ export function renderSecretaryHandoffReviewPage(
                   sections.founder_request_exception_display
                     .learning_suggestion_display.suggestion_posture_notice
                 )}</p>`,
+              ]
+            : []),
+          ...(sections.founder_request_exception_display.state_evaluation_summary
+            ? [
+                "<h3>Detailed State Explanation</h3>",
+                `<p>State evaluation id: ${escape_html(
+                  sections.founder_request_exception_display
+                    .state_evaluation_summary.evaluation_id
+                )}</p>`,
+                `<p>Initial state: ${escape_html(
+                  sections.founder_request_exception_display
+                    .state_evaluation_summary.initial_state
+                )}</p>`,
+                `<p>Transition event: ${escape_html(
+                  sections.founder_request_exception_display
+                    .state_evaluation_summary.transition_event
+                )}</p>`,
+                `<p>Requested next state: ${escape_html(
+                  sections.founder_request_exception_display
+                    .state_evaluation_summary.requested_next_state
+                )}</p>`,
+                `<p>Reducer target state: ${escape_html(
+                  sections.founder_request_exception_display
+                    .state_evaluation_summary.reducer_target_state
+                )}</p>`,
+                `<p>State evaluation accepted: ${escape_html(
+                  summarize_state_evaluation_acceptance(
+                    sections.founder_request_exception_display
+                      .state_evaluation_summary.transition_accepted
+                  )
+                )}</p>`,
+                `<p>Final state: ${escape_html(
+                  sections.founder_request_exception_display
+                    .state_evaluation_summary.final_state
+                )}</p>`,
+                `<p>Blocked state transition: ${escape_html(
+                  sections.founder_request_exception_display
+                    .state_evaluation_summary.blocked_reason ??
+                    "none visible"
+                )}</p>`,
+                `<p>State line terminal: ${escape_html(
+                  summarize_terminal_boundary(
+                    sections.founder_request_exception_display
+                      .state_evaluation_summary.terminal
+                  )
+                )}</p>`,
+                `<p>Non-executing: ${
+                  sections.founder_request_exception_display
+                    .state_evaluation_summary.non_executing
+                }</p>`,
+                `<p>Source posture: ${escape_html(
+                  sections.founder_request_exception_display
+                    .state_evaluation_summary.source_posture
+                )}</p>`,
+                `<p>Source markers: ${escape_html(
+                  sections.founder_request_exception_display
+                    .state_evaluation_summary.source_markers
+                    .map(summarize_marker_status)
+                    .join(", ")
+                )}</p>`,
+                `<p>Bounded notes: ${escape_html(
+                  sections.founder_request_exception_display
+                    .state_evaluation_summary.notes.join(" | ")
+                )}</p>`,
+                "<p>State evaluation accepted remains reducer-backed state truth and not approval.</p>",
+                "<p>Blocked state transition remains state-transition reasoning and not a task failure verdict.</p>",
+                "<p>State line terminal remains bounded terminality and not execution complete.</p>",
+                "<p>Evidence summary remains summary-only and not proof.</p>",
               ]
             : []),
           ...(sections.founder_request_exception_display

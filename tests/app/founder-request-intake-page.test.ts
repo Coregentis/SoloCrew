@@ -9,6 +9,9 @@ import {
 import {
   renderFounderRequestIntakePage,
 } from "../../app/pages/founder-request-intake-page.ts";
+import type {
+  FounderRequestStateEvaluationExposure,
+} from "../../projection/contracts/founder-request-exception-packet-contract.ts";
 
 function join_parts(...parts: string[]): string {
   return parts.join("");
@@ -113,6 +116,63 @@ test("[app] founder request intake page exposes a bounded intake entry and stays
   );
   assert.doesNotMatch(page.html, /<button\b/);
   assert.doesNotMatch(page.html, /<form\b/);
+});
+
+test("[app] founder request intake page can render bounded evaluation summary when present", () => {
+  const intake_shell =
+    composeFounderRequestIntakeShell(create_founder_request_intake());
+  const state_evaluation_summary: FounderRequestStateEvaluationExposure = {
+    exposure_scope: "packet_state_exposure",
+    evaluation_id: "intake-eval-01",
+    initial_state: "state_observed",
+    transition_event: "raise_review",
+    requested_next_state: "state_review_needed",
+    reducer_target_state: "state_review_needed",
+    transition_accepted: true,
+    final_state: "state_review_needed",
+    terminal: false,
+    non_executing: true,
+    source_posture: "review_needed",
+    source_markers: ["available", "stale"],
+    notes: [
+      "Review posture is visible.",
+      "Stale handling remains bounded.",
+    ],
+  };
+  const page = renderFounderRequestIntakePage(
+    intake_shell,
+    state_evaluation_summary
+  );
+
+  assert.ok(page.sections.state_evaluation_summary);
+  assert.equal(
+    page.sections.state_evaluation_summary?.evaluation_id,
+    "intake-eval-01"
+  );
+  assert.equal(
+    page.sections.state_evaluation_summary?.transition_accepted,
+    true
+  );
+  assert.equal(
+    page.sections.state_evaluation_summary?.non_executing,
+    true
+  );
+  assert.deepEqual(
+    page.sections.state_evaluation_summary?.source_markers,
+    ["available", "stale"]
+  );
+  assert.match(page.html, /State Evaluation Summary/);
+  assert.match(page.html, /State evaluation id: intake-eval-01/);
+  assert.match(page.html, /State evaluation accepted: state evaluation accepted/);
+  assert.match(page.html, /Blocked state transition: none visible/);
+  assert.match(page.html, /State line terminal: state line remains open/);
+  assert.match(page.html, /Non-executing: true/);
+  assert.match(page.html, /Source posture: review_needed/);
+  assert.match(page.html, /Source markers: summary available, stale visible/);
+  assert.match(page.html, /Bounded notes: Review posture is visible\. \| Stale handling remains bounded\./);
+  assert.match(page.html, /State evaluation accepted remains reducer-backed state truth and not approval\./);
+  assert.match(page.html, /State line terminal remains bounded terminality and not execution complete\./);
+  assert.match(page.html, /does not imply packet construction happened\./);
 });
 
 test("[app] founder request intake shell and page keep forbidden labels out of the bounded intake surface", () => {

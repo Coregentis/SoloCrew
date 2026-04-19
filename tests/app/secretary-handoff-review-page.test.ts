@@ -315,6 +315,30 @@ test("[app] secretary handoff review page hardens founder-request evidence and s
           "Suggestion only: capture the stale-handling pattern for later review.",
         marker_status: "omitted_by_contract",
       },
+      state_evaluation_exposure: {
+        exposure_scope: "review_packet_state_exposure",
+        evaluation_id: "review-eval-01",
+        initial_state: "state_observed",
+        transition_event: "raise_review",
+        requested_next_state: "state_review_needed",
+        reducer_target_state: "state_review_needed",
+        transition_accepted: false,
+        final_state: "state_review_needed",
+        blocked_reason:
+          "review posture remains blocked until stale context is clarified.",
+        terminal: true,
+        non_executing: true,
+        source_posture: "stale_context",
+        source_markers: [
+          "omitted_by_contract",
+          "insufficient_evidence",
+          "stale",
+        ],
+        notes: [
+          "Detailed review note one.",
+          "Detailed review note two.",
+        ],
+      },
       status_markers: [
         "omitted_by_contract",
         "insufficient_evidence",
@@ -355,6 +379,18 @@ test("[app] secretary handoff review page hardens founder-request evidence and s
     display.bounded_recommendation_display?.non_executing,
     true
   );
+  assert.ok(display.state_evaluation_summary);
+  assert.equal(
+    display.state_evaluation_summary?.transition_accepted,
+    false
+  );
+  assert.equal(display.state_evaluation_summary?.terminal, true);
+  assert.equal(display.state_evaluation_summary?.non_executing, true);
+  assert.deepEqual(display.state_evaluation_summary?.source_markers, [
+    "omitted_by_contract",
+    "insufficient_evidence",
+    "stale",
+  ]);
   assert.doesNotMatch(
     display.bounded_recommendation_display?.recommendation_notice ?? "",
     /approve|reject|dispatch|execute|provider|channel/
@@ -366,6 +402,21 @@ test("[app] secretary handoff review page hardens founder-request evidence and s
   assert.match(page.html, /Display marker: stale visible/);
   assert.match(page.html, /Learning suggestion only: Suggestion only: capture the stale-handling pattern for later review\./);
   assert.match(page.html, /Learning posture notice: suggestion_only/);
+  assert.match(page.html, /Detailed State Explanation/);
+  assert.match(page.html, /State evaluation id: review-eval-01/);
+  assert.match(page.html, /Requested next state: state_review_needed/);
+  assert.match(page.html, /Reducer target state: state_review_needed/);
+  assert.match(page.html, /State evaluation accepted: blocked state transition/);
+  assert.match(page.html, /Blocked state transition: review posture remains blocked until stale context is clarified\./);
+  assert.match(page.html, /State line terminal: state line terminal/);
+  assert.match(page.html, /Non-executing: true/);
+  assert.match(page.html, /Source posture: stale_context/);
+  assert.match(page.html, /Source markers: omission visible, insufficiency visible, stale visible/);
+  assert.match(page.html, /Bounded notes: Detailed review note one\. \| Detailed review note two\./);
+  assert.match(page.html, /State evaluation accepted remains reducer-backed state truth and not approval\./);
+  assert.match(page.html, /Blocked state transition remains state-transition reasoning and not a task failure verdict\./);
+  assert.match(page.html, /State line terminal remains bounded terminality and not execution complete\./);
+  assert.match(page.html, /Evidence summary remains summary-only and not proof\./);
   assert.match(page.html, /Bounded recommendation summary: Prepare a bounded revision summary for later operator review\./);
   assert.match(page.html, /Recommendation non_executing: true/);
   assert.match(page.html, /Evidence remains summary-only here and does not become a raw trace dump or raw runtime detail\./);

@@ -4,6 +4,24 @@ import type {
 import {
   FOUNDER_REQUEST_INTAKE_ROUTE,
 } from "../shell/founder-request-intake.ts";
+import type {
+  FounderRequestStateEvaluationExposure,
+} from "../../projection/contracts/founder-request-exception-packet-contract.ts";
+
+type FounderRequestIntakeStateEvaluationSummary = Pick<
+  FounderRequestStateEvaluationExposure,
+  | "evaluation_id"
+  | "initial_state"
+  | "transition_event"
+  | "transition_accepted"
+  | "final_state"
+  | "blocked_reason"
+  | "terminal"
+  | "non_executing"
+  | "source_posture"
+  | "source_markers"
+  | "notes"
+>;
 
 export interface FounderRequestIntakePage {
   route_path: string;
@@ -42,6 +60,7 @@ export interface FounderRequestIntakePage {
       risk_hint?: string;
       evidence_hint?: string;
     };
+    state_evaluation_summary?: FounderRequestIntakeStateEvaluationSummary;
     truth_boundary: FounderRequestIntakeShell["truth_boundary"];
   };
   html: string;
@@ -59,8 +78,40 @@ function render_optional_field(label: string, value?: string): string[] {
   return value ? [`<p>${escape_html(label)}: ${escape_html(value)}</p>`] : [];
 }
 
+function summarize_marker_status(marker_status: string): string {
+  switch (marker_status) {
+    case "available":
+      return "summary available";
+    case "omitted_by_contract":
+      return "omission visible";
+    case "not_available_upstream":
+      return "upstream not available";
+    case "insufficient_evidence":
+      return "insufficiency visible";
+    case "stale":
+      return "stale visible";
+    case "not_applicable":
+      return "not applicable";
+    default:
+      return marker_status;
+  }
+}
+
+function summarize_state_evaluation_acceptance(
+  transition_accepted: boolean
+): string {
+  return transition_accepted
+    ? "state evaluation accepted"
+    : "blocked state transition";
+}
+
+function summarize_terminal_boundary(terminal: boolean): string {
+  return terminal ? "state line terminal" : "state line remains open";
+}
+
 export function renderFounderRequestIntakePage(
-  intake_shell: FounderRequestIntakeShell
+  intake_shell: FounderRequestIntakeShell,
+  state_evaluation_summary?: FounderRequestIntakeStateEvaluationSummary
 ): FounderRequestIntakePage {
   const sections = {
     header: {
@@ -97,6 +148,13 @@ export function renderFounderRequestIntakePage(
       risk_hint: intake_shell.current_request_intake.risk_hint,
       evidence_hint: intake_shell.current_request_intake.evidence_hint,
     },
+    state_evaluation_summary: state_evaluation_summary
+      ? {
+          ...state_evaluation_summary,
+          source_markers: [...state_evaluation_summary.source_markers],
+          notes: [...state_evaluation_summary.notes],
+        }
+      : undefined,
     truth_boundary: intake_shell.truth_boundary,
   };
 
@@ -157,6 +215,56 @@ export function renderFounderRequestIntakePage(
       sections.request_content.evidence_hint
     ),
     "</section>",
+    ...(sections.state_evaluation_summary
+      ? [
+          "<section data-section=\"state-evaluation-summary\">",
+          "<h2>State Evaluation Summary</h2>",
+          `<p>State evaluation id: ${escape_html(
+            sections.state_evaluation_summary.evaluation_id
+          )}</p>`,
+          `<p>Initial state: ${escape_html(
+            sections.state_evaluation_summary.initial_state
+          )}</p>`,
+          `<p>Transition event: ${escape_html(
+            sections.state_evaluation_summary.transition_event
+          )}</p>`,
+          `<p>State evaluation accepted: ${escape_html(
+            summarize_state_evaluation_acceptance(
+              sections.state_evaluation_summary.transition_accepted
+            )
+          )}</p>`,
+          `<p>Final state: ${escape_html(
+            sections.state_evaluation_summary.final_state
+          )}</p>`,
+          `<p>Blocked state transition: ${escape_html(
+            sections.state_evaluation_summary.blocked_reason ??
+              "none visible"
+          )}</p>`,
+          `<p>State line terminal: ${escape_html(
+            summarize_terminal_boundary(
+              sections.state_evaluation_summary.terminal
+            )
+          )}</p>`,
+          `<p>Non-executing: ${
+            sections.state_evaluation_summary.non_executing
+          }</p>`,
+          `<p>Source posture: ${escape_html(
+            sections.state_evaluation_summary.source_posture
+          )}</p>`,
+          `<p>Source markers: ${escape_html(
+            sections.state_evaluation_summary.source_markers
+              .map(summarize_marker_status)
+              .join(", ")
+          )}</p>`,
+          `<p>Bounded notes: ${escape_html(
+            sections.state_evaluation_summary.notes.join(" | ")
+          )}</p>`,
+          "<p>State evaluation accepted remains reducer-backed state truth and not approval.</p>",
+          "<p>State line terminal remains bounded terminality and not execution complete.</p>",
+          "<p>This summary remains non-executing and does not imply packet construction happened.</p>",
+          "</section>",
+        ]
+      : []),
     "<section data-section=\"truth-boundary\">",
     "<h2>Truth Boundary</h2>",
     `<p>Product intake only: ${sections.truth_boundary.product_intake_only}</p>`,
