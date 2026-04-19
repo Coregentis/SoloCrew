@@ -2,6 +2,7 @@
 
 ## 2026-04-18
 
+- added the founder-request packet-level state derivation utility, freezing deterministic packet-to-state rules, transition-intent derivation, reducer-compatible non-executing output, and bounded priority handling without reducer changes, adapter changes, assembly changes, app/page changes, or provider/channel execution
 - added the packet-level state derivation plan, freezing bounded packet-to-state rules, transition-intent derivation rules, derivation priority, safe input boundaries, implementation DoD, and future test gates without reducer changes, adapter changes, assembly changes, app/page changes, or provider/channel execution
 - added the founder-request exception pure transition reducer, freezing deterministic event-to-target mapping, accepted/blocked result shape, forbidden/terminal transition handling, and reducer tests without adapter changes, assembly changes, app/page changes, founder queue semantics, or provider/channel execution
 - added the founder-request exception state-machine contract and type guards, freezing bounded state vocabulary, transition event vocabulary, allowed transition matrix, forbidden transition guards, and negative boundary tests without reducer code, adapter changes, assembly changes, app/page changes, or provider/channel execution
