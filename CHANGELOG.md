@@ -2,6 +2,7 @@
 
 ## 2026-04-20
 
+- added the Operational V1 RC closure audit, freezing RC gate closure status, evidence-pack closure, disclosed-gap closure, narrative and stop-condition closure, and next-wave release-boundary-final-check readiness without code changes, app/page changes, UI changes, release seal, or Operational V1 completion claims
 - added the Operational V1 RC readiness audit, freezing per-gate RC verification, validation command results, evidence-pack completeness, disclosed-gap disclosure status, narrative constraint checks, stop-condition assessment, and next-wave RC-closure-audit readiness without code changes, app/page changes, UI changes, release seal, or Operational V1 completion claims
 - added the Operational V1 RC plan, freezing RC candidate scope, gate checklist, validation command set, evidence-pack requirements, allowed disclosed gaps, narrative constraints, stop conditions, and next-wave RC-readiness-audit sequencing without code changes, app/page changes, UI changes, release seal, or Operational V1 completion claims
 - added the Operational V1 RC criteria draft, freezing RC entry gates, allowed disclosed gaps, non-negotiable blockers, evidence requirements, release-narrative constraints, stop conditions, and next-wave RC-planning readiness without code changes, app/page changes, UI changes, or Operational V1 completion claims
