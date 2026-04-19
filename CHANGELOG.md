@@ -2,6 +2,7 @@
 
 ## 2026-04-20
 
+- added the Operational V1 RC criteria draft, freezing RC entry gates, allowed disclosed gaps, non-negotiable blockers, evidence requirements, release-narrative constraints, stop conditions, and next-wave RC-planning readiness without code changes, app/page changes, UI changes, or Operational V1 completion claims
 - added the app/page state rendering closure audit, freezing founder intake, staging, and review page rendering scope, safe state wording, compact-vs-detailed boundaries, regression evidence, remaining gaps, and next-wave RC-criteria readiness without app/page behavior changes, UI changes, or Operational V1 completion claims
 - rendered bounded reducer-backed state truth on founder intake, handoff staging, and handoff review pages using existing exposure fields only, preserving non-executing/evidence-summary wording, compact-vs-detailed page boundaries, and safe interpretations below approval, execution, queue, and provider/channel semantics
 - added the app/page state rendering plan, freezing safe page-level rendering scope for reducer-backed state truth, evidence/stale/insufficiency semantics, compact-vs-detailed intake/staging/review boundaries, wording constraints, and implementation test gates without app/page changes, UI changes, RC planning, or Operational V1 completion claims
