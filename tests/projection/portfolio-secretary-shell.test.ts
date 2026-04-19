@@ -6,6 +6,8 @@ import {
 } from "../../app/shell/multi-cell-foundation-overview.ts";
 import {
   assemblePortfolioSecretaryShellProjection,
+  summarizeReviewPacketFounderRequestExceptionForPortfolioAggregate,
+  summarizeStagingFounderRequestExceptionForPortfolioAggregate,
 } from "../../projection/assembly/portfolio-secretary-shell.ts";
 import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
@@ -141,6 +143,56 @@ function create_runtime_inputs() {
   ];
 }
 
+function create_review_packet_exception_enrichment(overrides = {}) {
+  return {
+    enrichment_scope: "founder_request_exception_packet_summary" as const,
+    request_ref: "founder-request-review-01",
+    request_label: "Founder review packet summary",
+    derived_exception_posture: "review_needed" as const,
+    review_return_posture: "review_needed" as const,
+    review_return_summary: "Review visibility remains bounded.",
+    marker_status: "available" as const,
+    evidence_summary: {
+      evidence_summary_label: "Evidence summary remains bounded.",
+      evidence_status: "available" as const,
+    },
+    status_markers: ["available" as const],
+    family_status_summaries: [
+      {
+        family: "continuity_projection_summary" as const,
+        availability: "available" as const,
+        summary_label: "continuity available",
+      },
+    ],
+    ...overrides,
+  };
+}
+
+function create_staging_exception_preview(overrides = {}) {
+  return {
+    preview_scope: "founder_request_exception_staging_preview" as const,
+    request_ref: "founder-request-staging-01",
+    request_label: "Founder staging preview summary",
+    derived_exception_posture: "monitor" as const,
+    review_return_posture: "monitor" as const,
+    review_return_summary: "Preview remains bounded.",
+    marker_status: "available" as const,
+    evidence_posture_summary: {
+      evidence_summary_label: "Compact evidence summary remains bounded.",
+      evidence_status: "available" as const,
+    },
+    status_markers: ["available" as const],
+    family_status_summaries: [
+      {
+        family: "continuity_projection_summary" as const,
+        availability: "available" as const,
+        summary_label: "continuity available",
+      },
+    ],
+    ...overrides,
+  };
+}
+
 test("[projection] portfolio secretary shell stays top-level product projection and non-executing", () => {
   const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
     create_runtime_inputs()
@@ -225,6 +277,10 @@ test("[projection] portfolio secretary shell stays top-level product projection 
     "handoff_first_review_packet_first_revision_loop_non_executing"
   );
   assert.equal(
+    projection.posture_shelf.founder_request_aggregate_posture,
+    undefined
+  );
+  assert.equal(
     projection.rationale_evidence.rationale_scope,
     "portfolio_secretary_lane_rationale"
   );
@@ -297,4 +353,250 @@ test("[projection] portfolio secretary shell stays top-level product projection 
       assert.equal(field_name in target, false);
     }
   }
+});
+
+test("[projection] portfolio aggregate posture derives review-needed from bounded review packet summary", () => {
+  const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
+    create_runtime_inputs()
+  );
+  const projection = assemblePortfolioSecretaryShellProjection({
+    source_overview_shell_id: overview_shell.overview_shell_id,
+    cell_summary_units: overview_shell.cell_summary_units,
+    management_object_family_status:
+      overview_shell.management_object_family_status,
+    deferred_items: overview_shell.deferred_items,
+    non_claims: overview_shell.truth_boundary.non_claims,
+    projection_notes: overview_shell.projection_notes,
+    founder_request_exception_summaries: [
+      summarizeReviewPacketFounderRequestExceptionForPortfolioAggregate(
+        create_review_packet_exception_enrichment()
+      ),
+    ],
+  });
+
+  assert.equal(
+    projection.posture_shelf.founder_request_aggregate_posture
+      ?.aggregate_posture,
+    "portfolio_review_needed"
+  );
+  assert.equal(
+    projection.posture_shelf.founder_request_aggregate_posture
+      ?.non_executing,
+    true
+  );
+  assert.equal(
+    projection.posture_shelf.founder_request_aggregate_posture
+      ?.summary_only,
+    true
+  );
+  assert.match(
+    projection.posture_shelf.founder_request_aggregate_posture
+      ?.aggregate_summary ?? "",
+    /portfolio_review_needed/
+  );
+});
+
+test("[projection] portfolio aggregate posture derives evidence-insufficient from bounded summary markers", () => {
+  const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
+    create_runtime_inputs()
+  );
+  const projection = assemblePortfolioSecretaryShellProjection({
+    source_overview_shell_id: overview_shell.overview_shell_id,
+    cell_summary_units: overview_shell.cell_summary_units,
+    management_object_family_status:
+      overview_shell.management_object_family_status,
+    deferred_items: overview_shell.deferred_items,
+    non_claims: overview_shell.truth_boundary.non_claims,
+    projection_notes: overview_shell.projection_notes,
+    founder_request_exception_summaries: [
+      summarizeReviewPacketFounderRequestExceptionForPortfolioAggregate(
+        create_review_packet_exception_enrichment({
+          derived_exception_posture: "monitor",
+          review_return_posture: "monitor",
+          marker_status: "insufficient_evidence",
+          evidence_summary: {
+            evidence_summary_label: "Evidence stays thin.",
+            evidence_status: "insufficient_evidence",
+          },
+          status_markers: ["insufficient_evidence"],
+        })
+      ),
+    ],
+  });
+
+  assert.equal(
+    projection.posture_shelf.founder_request_aggregate_posture
+      ?.aggregate_posture,
+    "portfolio_evidence_insufficient"
+  );
+  assert.ok(
+    projection.posture_shelf.founder_request_aggregate_posture?.status_markers.includes(
+      "insufficient_evidence"
+    )
+  );
+});
+
+test("[projection] portfolio aggregate posture derives stale-context from bounded preview markers", () => {
+  const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
+    create_runtime_inputs()
+  );
+  const projection = assemblePortfolioSecretaryShellProjection({
+    source_overview_shell_id: overview_shell.overview_shell_id,
+    cell_summary_units: overview_shell.cell_summary_units,
+    management_object_family_status:
+      overview_shell.management_object_family_status,
+    deferred_items: overview_shell.deferred_items,
+    non_claims: overview_shell.truth_boundary.non_claims,
+    projection_notes: overview_shell.projection_notes,
+    founder_request_exception_summaries: [
+      summarizeStagingFounderRequestExceptionForPortfolioAggregate(
+        create_staging_exception_preview({
+          derived_exception_posture: "stale_context",
+          review_return_posture: "monitor",
+          marker_status: "stale",
+          evidence_posture_summary: {
+            evidence_summary_label: "Compact evidence is stale.",
+            evidence_status: "stale",
+          },
+          status_markers: ["stale"],
+        })
+      ),
+    ],
+  });
+
+  assert.equal(
+    projection.posture_shelf.founder_request_aggregate_posture
+      ?.aggregate_posture,
+    "portfolio_stale_context"
+  );
+  assert.ok(
+    projection.posture_shelf.founder_request_aggregate_posture?.status_markers.includes(
+      "stale"
+    )
+  );
+});
+
+test("[projection] portfolio aggregate posture derives contract-blocked when blocked posture dominates", () => {
+  const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
+    create_runtime_inputs()
+  );
+  const projection = assemblePortfolioSecretaryShellProjection({
+    source_overview_shell_id: overview_shell.overview_shell_id,
+    cell_summary_units: overview_shell.cell_summary_units,
+    management_object_family_status:
+      overview_shell.management_object_family_status,
+    deferred_items: overview_shell.deferred_items,
+    non_claims: overview_shell.truth_boundary.non_claims,
+    projection_notes: overview_shell.projection_notes,
+    founder_request_exception_summaries: [
+      summarizeReviewPacketFounderRequestExceptionForPortfolioAggregate(
+        create_review_packet_exception_enrichment({
+          derived_exception_posture: "blocked_by_contract",
+          review_return_posture: "review_needed",
+          marker_status: "omitted_by_contract",
+          evidence_summary: {
+            evidence_summary_label: "Evidence remains omitted by contract.",
+            evidence_status: "omitted_by_contract",
+          },
+          status_markers: ["omitted_by_contract"],
+        })
+      ),
+    ],
+  });
+
+  assert.equal(
+    projection.posture_shelf.founder_request_aggregate_posture
+      ?.aggregate_posture,
+    "portfolio_contract_blocked"
+  );
+});
+
+test("[projection] portfolio aggregate posture uses deterministic mixed priority ordering", () => {
+  const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
+    create_runtime_inputs()
+  );
+  const projection = assemblePortfolioSecretaryShellProjection({
+    source_overview_shell_id: overview_shell.overview_shell_id,
+    cell_summary_units: overview_shell.cell_summary_units,
+    management_object_family_status:
+      overview_shell.management_object_family_status,
+    deferred_items: overview_shell.deferred_items,
+    non_claims: overview_shell.truth_boundary.non_claims,
+    projection_notes: overview_shell.projection_notes,
+    founder_request_exception_summaries: [
+      summarizeStagingFounderRequestExceptionForPortfolioAggregate(
+        create_staging_exception_preview({
+          derived_exception_posture: "review_needed",
+          review_return_posture: "review_needed",
+        })
+      ),
+      summarizeReviewPacketFounderRequestExceptionForPortfolioAggregate(
+        create_review_packet_exception_enrichment({
+          derived_exception_posture: "stale_context",
+          review_return_posture: "return_for_revision",
+          marker_status: "stale",
+          evidence_summary: {
+            evidence_summary_label: "Evidence is stale.",
+            evidence_status: "stale",
+          },
+          status_markers: ["stale"],
+        })
+      ),
+      summarizeReviewPacketFounderRequestExceptionForPortfolioAggregate(
+        create_review_packet_exception_enrichment({
+          request_ref: "founder-request-review-02",
+          request_label: "Founder escalation summary",
+          derived_exception_posture: "escalation_required",
+          review_return_posture: "review_needed",
+        })
+      ),
+    ],
+  });
+
+  assert.equal(
+    projection.posture_shelf.founder_request_aggregate_posture
+      ?.aggregate_posture,
+    "portfolio_escalation_required"
+  );
+});
+
+test("[projection] portfolio aggregate posture becomes clear only when no stronger posture exists", () => {
+  const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
+    create_runtime_inputs()
+  );
+  const projection = assemblePortfolioSecretaryShellProjection({
+    source_overview_shell_id: overview_shell.overview_shell_id,
+    cell_summary_units: overview_shell.cell_summary_units,
+    management_object_family_status:
+      overview_shell.management_object_family_status,
+    deferred_items: overview_shell.deferred_items,
+    non_claims: overview_shell.truth_boundary.non_claims,
+    projection_notes: overview_shell.projection_notes,
+    founder_request_exception_summaries: [
+      summarizeStagingFounderRequestExceptionForPortfolioAggregate(
+        create_staging_exception_preview({
+          derived_exception_posture: "no_exception",
+          review_return_posture: "no_exception",
+          marker_status: "available",
+          evidence_posture_summary: {
+            evidence_summary_label: "Compact evidence remains available.",
+            evidence_status: "available",
+          },
+          status_markers: ["available"],
+        })
+      ),
+    ],
+  });
+
+  assert.equal(
+    projection.posture_shelf.founder_request_aggregate_posture
+      ?.aggregate_posture,
+    "portfolio_clear"
+  );
+  assert.doesNotMatch(
+    JSON.stringify(
+      projection.posture_shelf.founder_request_aggregate_posture
+    ),
+    /approve|reject|dispatch|execute|provider|channel|policy_mutated|protocol_certified/
+  );
 });

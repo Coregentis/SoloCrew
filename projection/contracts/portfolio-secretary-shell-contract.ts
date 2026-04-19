@@ -3,6 +3,11 @@ import type {
   CellSummaryProjectionTruthSource,
 } from "./cell-summary-projection-contract.ts";
 import type {
+  FounderRequestExceptionPacketSummaryFamily,
+  FounderRequestExceptionPosture,
+  FounderRequestProjectionSummaryAvailability,
+} from "./founder-request-exception-packet-contract.ts";
+import type {
   SecretaryHandoffPacketStateCounts,
 } from "./secretary-handoff-packet-contract.ts";
 import type {
@@ -20,6 +25,21 @@ export type PortfolioSecretaryQueueShelfVisibility =
   "bounded_queue_posture_only";
 export type PortfolioSecretaryReviewShelfVisibility =
   "bounded_review_posture_only";
+export const PORTFOLIO_FOUNDER_REQUEST_AGGREGATE_POSTURE_VALUES = [
+  "portfolio_clear",
+  "portfolio_monitor",
+  "portfolio_review_needed",
+  "portfolio_evidence_insufficient",
+  "portfolio_stale_context",
+  "portfolio_impact_detected",
+  "portfolio_activation_blocked",
+  "portfolio_confirm_required",
+  "portfolio_escalation_required",
+  "portfolio_revision_needed",
+  "portfolio_contract_blocked",
+] as const;
+export type PortfolioFounderRequestAggregatePosture =
+  (typeof PORTFOLIO_FOUNDER_REQUEST_AGGREGATE_POSTURE_VALUES)[number];
 export type PortfolioSecretaryManagementObjectStatus =
   | "contract_frozen_non_executable"
   | "runtime_record_present_non_executable"
@@ -27,6 +47,9 @@ export type PortfolioSecretaryManagementObjectStatus =
 export type PortfolioSecretaryTruthSource =
   | CellSummaryProjectionTruthSource
   | "multi_cell_foundation_projection";
+export type PortfolioFounderRequestAggregateSourceScope =
+  | "review_packet_exception_summary"
+  | "staging_exception_preview_summary";
 
 export interface PortfolioSecretaryNavigationUnit {
   cell_id: string;
@@ -71,6 +94,41 @@ export interface PortfolioSecretaryReviewShelf {
   shelf_note: string;
 }
 
+export interface PortfolioFounderRequestAggregateFamilyStatusSummary {
+  family: FounderRequestExceptionPacketSummaryFamily;
+  availability: FounderRequestProjectionSummaryAvailability;
+  summary_label: string;
+}
+
+export interface PortfolioFounderRequestAggregateSourceSummary {
+  source_summary_scope: PortfolioFounderRequestAggregateSourceScope;
+  request_ref: string;
+  request_label: string;
+  derived_exception_posture: FounderRequestExceptionPosture;
+  review_return_posture: FounderRequestExceptionPosture;
+  marker_status: FounderRequestProjectionSummaryAvailability;
+  evidence_status: FounderRequestProjectionSummaryAvailability;
+  learning_signal_visible: boolean;
+  status_markers: FounderRequestProjectionSummaryAvailability[];
+  family_status_summaries: PortfolioFounderRequestAggregateFamilyStatusSummary[];
+}
+
+export interface PortfolioFounderRequestAggregatePostureSummary {
+  summary_scope: "founder_request_exception_portfolio_aggregate";
+  aggregate_posture: PortfolioFounderRequestAggregatePosture;
+  aggregate_summary: string;
+  source_summary_count: number;
+  review_packet_summary_count: number;
+  staging_preview_summary_count: number;
+  learning_signal_count: number;
+  status_markers: FounderRequestProjectionSummaryAvailability[];
+  non_executing: true;
+  summary_only: true;
+  omission_aware: true;
+  insufficiency_aware: true;
+  stale_aware: true;
+}
+
 export interface PortfolioSecretaryPostureShelf {
   shelf_scope: "bounded_posture_shelf";
   management_directive_visibility: PortfolioSecretaryManagementObjectStatus;
@@ -79,6 +137,7 @@ export interface PortfolioSecretaryPostureShelf {
   secretary_posture:
     "handoff_first_review_packet_first_revision_loop_non_executing";
   direct_controls_available: false;
+  founder_request_aggregate_posture?: PortfolioFounderRequestAggregatePostureSummary;
 }
 
 export interface PortfolioSecretaryShellProjection {
