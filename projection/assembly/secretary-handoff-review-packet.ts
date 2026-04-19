@@ -1,6 +1,7 @@
 import type {
   SecretaryHandoffFounderRequestExceptionEnrichment,
   SecretaryHandoffFounderRequestFamilyStatusSummary,
+  SecretaryHandoffFounderRequestReviewStateEvaluationExposure,
   SecretaryHandoffReviewPacketProjection,
   SecretaryHandoffReviewReadiness,
 } from "../contracts/secretary-handoff-review-packet-contract.ts";
@@ -9,6 +10,9 @@ import {
   is_founder_request_exception_packet_contract,
   type FounderRequestExceptionPacketContract,
 } from "../contracts/founder-request-exception-packet-contract.ts";
+import type {
+  FounderRequestExceptionStateEvaluationResult,
+} from "../contracts/founder-request-exception-state-evaluation.ts";
 import type {
   SecretaryHandoffStagingProjection,
 } from "../contracts/secretary-handoff-staging-contract.ts";
@@ -51,7 +55,8 @@ function build_founder_request_family_status_summaries(
 }
 
 function build_founder_request_exception_enrichment(
-  founder_request_packet: FounderRequestExceptionPacketContract
+  founder_request_packet: FounderRequestExceptionPacketContract,
+  founder_request_state_evaluation?: FounderRequestExceptionStateEvaluationResult
 ): SecretaryHandoffFounderRequestExceptionEnrichment {
   return {
     enrichment_scope: "founder_request_exception_packet_summary",
@@ -77,11 +82,46 @@ function build_founder_request_exception_enrichment(
     },
     learning_suggestion_summary:
       founder_request_packet.learning_suggestion_summary,
+    state_evaluation_exposure:
+      founder_request_state_evaluation === undefined
+        ? founder_request_packet.state_evaluation_exposure === undefined
+          ? undefined
+          : {
+              exposure_scope: "review_packet_state_exposure",
+              ...founder_request_packet.state_evaluation_exposure,
+            }
+        : build_founder_request_review_state_evaluation_exposure(
+            founder_request_state_evaluation
+          ),
     status_markers: [...founder_request_packet.status_markers],
     family_status_summaries:
       build_founder_request_family_status_summaries(
         founder_request_packet
       ),
+  };
+}
+
+function build_founder_request_review_state_evaluation_exposure(
+  founder_request_state_evaluation: FounderRequestExceptionStateEvaluationResult
+): SecretaryHandoffFounderRequestReviewStateEvaluationExposure {
+  return {
+    exposure_scope: "review_packet_state_exposure",
+    evaluation_id: founder_request_state_evaluation.evaluation_id,
+    initial_state: founder_request_state_evaluation.initial_state,
+    transition_event: founder_request_state_evaluation.transition_event,
+    requested_next_state:
+      founder_request_state_evaluation.requested_next_state,
+    reducer_target_state:
+      founder_request_state_evaluation.reducer_target_state,
+    transition_accepted:
+      founder_request_state_evaluation.transition_accepted,
+    final_state: founder_request_state_evaluation.final_state,
+    blocked_reason: founder_request_state_evaluation.blocked_reason,
+    terminal: founder_request_state_evaluation.terminal,
+    non_executing: true,
+    source_posture: founder_request_state_evaluation.source_posture,
+    source_markers: [...founder_request_state_evaluation.source_markers],
+    notes: [...founder_request_state_evaluation.notes],
   };
 }
 
@@ -146,7 +186,8 @@ function derive_review_readiness(
 
 export function assembleSecretaryHandoffReviewPacketProjection(
   staging_projection: SecretaryHandoffStagingProjection,
-  founder_request_packet?: FounderRequestExceptionPacketContract
+  founder_request_packet?: FounderRequestExceptionPacketContract,
+  founder_request_state_evaluation?: FounderRequestExceptionStateEvaluationResult
 ): SecretaryHandoffReviewPacketProjection {
   if (
     founder_request_packet !== undefined &&
@@ -162,7 +203,10 @@ export function assembleSecretaryHandoffReviewPacketProjection(
   const founder_request_exception_enrichment =
     founder_request_packet === undefined
       ? undefined
-      : build_founder_request_exception_enrichment(founder_request_packet);
+      : build_founder_request_exception_enrichment(
+          founder_request_packet,
+          founder_request_state_evaluation
+        );
 
   return {
     secretary_handoff_review_packet_id:

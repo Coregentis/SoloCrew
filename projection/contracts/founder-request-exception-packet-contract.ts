@@ -1,3 +1,8 @@
+import type {
+  FounderRequestExceptionState,
+  FounderRequestExceptionTransitionEvent,
+} from "./founder-request-exception-state-machine-contract.ts";
+
 function is_record(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -162,6 +167,23 @@ export interface FounderRequestLearningSuggestionSummaryClass {
   evidence_refs?: FounderRequestProjectionEvidenceRef[];
 }
 
+export interface FounderRequestStateEvaluationExposure {
+  exposure_scope: "packet_state_exposure";
+  evaluation_id: string;
+  initial_state: FounderRequestExceptionState;
+  transition_event: FounderRequestExceptionTransitionEvent;
+  requested_next_state: FounderRequestExceptionState;
+  reducer_target_state: FounderRequestExceptionState;
+  transition_accepted: boolean;
+  final_state: FounderRequestExceptionState;
+  blocked_reason?: string;
+  terminal: boolean;
+  non_executing: true;
+  source_posture: string;
+  source_markers: FounderRequestProjectionSummaryAvailability[];
+  notes: string[];
+}
+
 export interface FounderRequestExceptionPacketContract {
   contract_scope: "founder_request_exception_packet";
   authority_boundary: "product_projection_only";
@@ -173,6 +195,7 @@ export interface FounderRequestExceptionPacketContract {
   bounded_action_recommendation?: FounderRequestBoundedActionRecommendation;
   evidence_summary: FounderRequestEvidenceSummaryClass;
   learning_suggestion_summary?: FounderRequestLearningSuggestionSummaryClass;
+  state_evaluation_exposure?: FounderRequestStateEvaluationExposure;
   status_markers: FounderRequestProjectionSummaryAvailability[];
 }
 
@@ -217,6 +240,15 @@ const FORBIDDEN_RECOMMENDATION_TOKENS = new Set(
     join_parts("exe", "cute"),
     join_parts("pro", "vider"),
     join_parts("chan", "nel"),
+  ]
+);
+
+const FORBIDDEN_STATE_EVALUATION_TOKENS = new Set(
+  [
+    join_parts("queue", "_item"),
+    join_parts("com", "mand"),
+    join_parts("completed", "_by", "_execution"),
+    join_parts("delivery", "_status"),
   ]
 );
 
@@ -284,6 +316,26 @@ function has_forbidden_recommendation_tokens(value: unknown): boolean {
   return tokenize_value(value).some((token) =>
     FORBIDDEN_RECOMMENDATION_TOKENS.has(token)
   );
+}
+
+function has_forbidden_state_evaluation_tokens(value: unknown): boolean {
+  if (typeof value === "string") {
+    return tokenize_value(value).some((token) =>
+      FORBIDDEN_STATE_EVALUATION_TOKENS.has(token)
+    );
+  }
+
+  if (Array.isArray(value)) {
+    return value.some((item) => has_forbidden_state_evaluation_tokens(item));
+  }
+
+  if (is_record(value)) {
+    return Object.values(value).some((item) =>
+      has_forbidden_state_evaluation_tokens(item)
+    );
+  }
+
+  return false;
 }
 
 function is_founder_request_projection_evidence_ref(
@@ -524,6 +576,35 @@ function is_founder_request_learning_suggestion_summary_class(
   );
 }
 
+export function is_founder_request_state_evaluation_exposure(
+  value: unknown
+): value is FounderRequestStateEvaluationExposure {
+  return (
+    is_record(value) &&
+    value.exposure_scope === "packet_state_exposure" &&
+    typeof value.evaluation_id === "string" &&
+    typeof value.initial_state === "string" &&
+    typeof value.transition_event === "string" &&
+    typeof value.requested_next_state === "string" &&
+    typeof value.reducer_target_state === "string" &&
+    typeof value.transition_accepted === "boolean" &&
+    typeof value.final_state === "string" &&
+    (value.blocked_reason === undefined ||
+      typeof value.blocked_reason === "string") &&
+    typeof value.terminal === "boolean" &&
+    value.non_executing === true &&
+    typeof value.source_posture === "string" &&
+    Array.isArray(value.source_markers) &&
+    value.source_markers.every((item) =>
+      is_founder_request_projection_summary_availability(item)
+    ) &&
+    is_string_array(value.notes) &&
+    !has_forbidden_runtime_like_keys(value) &&
+    !has_forbidden_label_tokens(value) &&
+    !has_forbidden_state_evaluation_tokens(value)
+  );
+}
+
 export function is_founder_request_exception_packet_contract(
   value: unknown
 ): value is FounderRequestExceptionPacketContract {
@@ -544,6 +625,10 @@ export function is_founder_request_exception_packet_contract(
     (value.learning_suggestion_summary === undefined ||
       is_founder_request_learning_suggestion_summary_class(
         value.learning_suggestion_summary
+      )) &&
+    (value.state_evaluation_exposure === undefined ||
+      is_founder_request_state_evaluation_exposure(
+        value.state_evaluation_exposure
       )) &&
     Array.isArray(value.status_markers) &&
     value.status_markers.every((item) =>

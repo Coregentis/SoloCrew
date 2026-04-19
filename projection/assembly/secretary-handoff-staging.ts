@@ -2,6 +2,7 @@ import type {
   PortfolioSecretaryShellProjection,
 } from "../contracts/portfolio-secretary-shell-contract.ts";
 import type {
+  SecretaryHandoffFounderRequestStagingStateEvaluationExposure,
   SecretaryHandoffFounderRequestExceptionPreview,
   SecretaryHandoffFounderRequestStagingFamilyStatusSummary,
   SecretaryHandoffStagingProjection,
@@ -12,6 +13,9 @@ import {
   is_founder_request_exception_packet_contract,
   type FounderRequestExceptionPacketContract,
 } from "../contracts/founder-request-exception-packet-contract.ts";
+import type {
+  FounderRequestExceptionStateEvaluationResult,
+} from "../contracts/founder-request-exception-state-evaluation.ts";
 import {
   buildSecretaryHandoffPacketStateSummary,
   buildSecretaryHandoffRevisionLoopSummary,
@@ -53,7 +57,8 @@ function build_founder_request_family_status_summaries(
 }
 
 function build_founder_request_exception_preview(
-  founder_request_packet: FounderRequestExceptionPacketContract
+  founder_request_packet: FounderRequestExceptionPacketContract,
+  founder_request_state_evaluation?: FounderRequestExceptionStateEvaluationResult
 ): SecretaryHandoffFounderRequestExceptionPreview {
   return {
     preview_scope: "founder_request_exception_staging_preview",
@@ -86,11 +91,55 @@ function build_founder_request_exception_preview(
             marker_status:
               founder_request_packet.learning_suggestion_summary.marker_status,
           },
+    state_evaluation_exposure:
+      founder_request_state_evaluation === undefined
+        ? founder_request_packet.state_evaluation_exposure === undefined
+          ? undefined
+          : build_founder_request_staging_state_evaluation_exposure(
+              founder_request_packet.state_evaluation_exposure
+            )
+        : build_founder_request_staging_state_evaluation_exposure(
+            founder_request_state_evaluation
+          ),
     status_markers: [...founder_request_packet.status_markers],
     family_status_summaries:
       build_founder_request_family_status_summaries(
         founder_request_packet
       ),
+  };
+}
+
+function build_founder_request_staging_state_evaluation_exposure(
+  founder_request_state_evaluation:
+    | FounderRequestExceptionStateEvaluationResult
+    | {
+        evaluation_id: string;
+        initial_state: FounderRequestExceptionStateEvaluationResult["initial_state"];
+        transition_event: FounderRequestExceptionStateEvaluationResult["transition_event"];
+        transition_accepted: boolean;
+        final_state: FounderRequestExceptionStateEvaluationResult["final_state"];
+        blocked_reason?: string;
+        terminal: boolean;
+        non_executing: true;
+        source_posture: string;
+        source_markers: FounderRequestProjectionSummaryAvailability[];
+        notes: string[];
+      }
+): SecretaryHandoffFounderRequestStagingStateEvaluationExposure {
+  return {
+    exposure_scope: "staging_state_exposure",
+    evaluation_id: founder_request_state_evaluation.evaluation_id,
+    initial_state: founder_request_state_evaluation.initial_state,
+    transition_event: founder_request_state_evaluation.transition_event,
+    transition_accepted:
+      founder_request_state_evaluation.transition_accepted,
+    final_state: founder_request_state_evaluation.final_state,
+    blocked_reason: founder_request_state_evaluation.blocked_reason,
+    terminal: founder_request_state_evaluation.terminal,
+    non_executing: true,
+    source_posture: founder_request_state_evaluation.source_posture,
+    source_markers: founder_request_state_evaluation.source_markers.slice(0, 3),
+    notes: founder_request_state_evaluation.notes.slice(0, 2),
   };
 }
 
@@ -118,7 +167,8 @@ function select_summary_projection(
 export function assembleSecretaryHandoffStagingProjection(
   portfolio_projection: PortfolioSecretaryShellProjection,
   target_cell_id?: string,
-  founder_request_packet?: FounderRequestExceptionPacketContract
+  founder_request_packet?: FounderRequestExceptionPacketContract,
+  founder_request_state_evaluation?: FounderRequestExceptionStateEvaluationResult
 ): SecretaryHandoffStagingProjection {
   if (
     founder_request_packet !== undefined &&
@@ -140,7 +190,10 @@ export function assembleSecretaryHandoffStagingProjection(
   const founder_request_exception_preview =
     founder_request_packet === undefined
       ? undefined
-      : build_founder_request_exception_preview(founder_request_packet);
+      : build_founder_request_exception_preview(
+          founder_request_packet,
+          founder_request_state_evaluation
+        );
 
   return {
     secretary_handoff_staging_id: `${

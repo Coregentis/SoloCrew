@@ -8,6 +8,7 @@ import {
   is_founder_request_exception_posture,
   is_founder_request_projection_summary_availability,
   is_founder_request_projection_summary_set,
+  is_founder_request_state_evaluation_exposure,
 } from "../../projection/contracts/founder-request-exception-packet-contract.ts";
 
 function create_valid_summary_set() {
@@ -120,6 +121,23 @@ function create_valid_contract() {
       suggestion_summary: "suggestion_only learning hint remains bounded.",
       marker_status: "not_applicable" as const,
     },
+    state_evaluation_exposure: {
+      exposure_scope: "packet_state_exposure" as const,
+      evaluation_id: "eval-founder-request-01",
+      initial_state: "state_review_needed" as const,
+      transition_event: "raise_review" as const,
+      requested_next_state: "state_review_needed" as const,
+      reducer_target_state: "state_review_needed" as const,
+      transition_accepted: true,
+      final_state: "state_review_needed" as const,
+      terminal: false,
+      non_executing: true as const,
+      source_posture: "review_needed",
+      source_markers: ["available", "stale"] as const,
+      notes: [
+        "Reducer-backed state evaluation remains bounded and summary-safe.",
+      ],
+    },
     status_markers: [
       "available",
       "omitted_by_contract",
@@ -135,6 +153,13 @@ test("[projection contract] founder-request exception packet skeleton accepts al
 
   assert.equal(is_founder_request_projection_summary_set(summary_set), true);
   assert.equal(is_founder_request_exception_packet_contract(contract), true);
+});
+
+test("[projection contract] packet exposure accepts bounded state evaluation fields", () => {
+  const exposure = create_valid_contract().state_evaluation_exposure;
+
+  assert.notEqual(exposure, undefined);
+  assert.equal(is_founder_request_state_evaluation_exposure(exposure), true);
 });
 
 test("[projection contract] omission and stale vocabulary stays inside the frozen contract set", () => {
@@ -230,6 +255,22 @@ test("[projection contract] blocks external delivery markers in bounded packet t
       ...create_valid_contract().evidence_summary,
       // forbidden-label negative fixture
       evidence_summary_label: "provider_sent",
+    },
+  };
+
+  assert.equal(
+    is_founder_request_exception_packet_contract(invalid_contract),
+    false
+  );
+});
+
+test("[projection contract] packet exposure blocks queue command delivery wording", () => {
+  const invalid_contract = {
+    ...create_valid_contract(),
+    state_evaluation_exposure: {
+      ...create_valid_contract().state_evaluation_exposure,
+      // forbidden-label negative fixture
+      notes: ["queue_item command completed_by_execution delivery_status"],
     },
   };
 

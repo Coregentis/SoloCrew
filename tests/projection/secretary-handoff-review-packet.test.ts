@@ -17,6 +17,12 @@ import {
   adapt_founder_request_exception_packet,
 } from "../../projection/adapters/founder-request-exception-packet-adapter.ts";
 import {
+  derive_founder_request_exception_packet_state,
+} from "../../projection/contracts/founder-request-exception-packet-state-derivation.ts";
+import {
+  evaluate_founder_request_exception_state,
+} from "../../projection/contracts/founder-request-exception-state-evaluation.ts";
+import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
 } from "../../projection/contracts/structural-boundary.ts";
 
@@ -422,4 +428,218 @@ test("[projection] secretary handoff review packet can carry founder-request exc
   assert.equal(review_packet.direct_execute_control_available, false);
   assert.equal(review_packet.provider_execution_available, false);
   assert.equal(review_packet.channel_entry_available, false);
+});
+
+test("[projection] secretary handoff review packet can carry reducer-backed state evaluation exposure without widening control semantics", () => {
+  const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
+    create_runtime_inputs()
+  );
+  const portfolio_projection = assemblePortfolioSecretaryShellProjection({
+    source_overview_shell_id: overview_shell.overview_shell_id,
+    cell_summary_units: overview_shell.cell_summary_units,
+    management_object_family_status:
+      overview_shell.management_object_family_status,
+    deferred_items: overview_shell.deferred_items,
+    non_claims: overview_shell.truth_boundary.non_claims,
+    projection_notes: overview_shell.projection_notes,
+  });
+  const staging_projection = assembleSecretaryHandoffStagingProjection(
+    portfolio_projection,
+    "cell-scope-01"
+  );
+  const founder_packet_result = adapt_founder_request_exception_packet({
+    request_ref: "founder-request-review-state-01",
+    request_label: "Carry reducer-backed state exposure into review packet only.",
+    projection_summaries: {
+      continuity_projection_summary: {
+        availability: "available",
+        summary_label: "Continuation remains available for bounded review.",
+      },
+      semantic_relation_projection_summary: {
+        availability: "available",
+        summary_label: "Relation summary remains available for review framing.",
+      },
+      drift_impact_projection_summary: {
+        availability: "available",
+        summary_label: "Impact summary remains available for review framing.",
+      },
+      activation_projection_summary: {
+        availability: "available",
+        summary_label: "Activation summary remains observe-only.",
+        activation_posture: "observe_only",
+      },
+      confirm_trace_decision_projection_summary: {
+        availability: "available",
+        summary_label: "Confirm trace remains available in bounded review.",
+      },
+      learning_suggestion_projection_summary: {
+        availability: "available",
+        summary_label: "Learning summary remains suggestion-only.",
+        suggestion_summary_label:
+          "Keep the learning note suggestion-only in the review lane.",
+      },
+    },
+    evidence_summary_text:
+      "Evidence remains summary-safe while reducer-backed review posture is visible.",
+  });
+
+  assert.equal(founder_packet_result.ok, true);
+
+  if (!founder_packet_result.ok) {
+    assert.fail("Expected a contract-safe founder request packet.");
+  }
+
+  const founder_request_state_evaluation =
+    evaluate_founder_request_exception_state({
+      evaluation_id: "eval-review-exposure-01",
+      derivation_result: derive_founder_request_exception_packet_state({
+        packet: founder_packet_result.packet,
+      }),
+    });
+
+  const review_packet = assembleSecretaryHandoffReviewPacketProjection(
+    staging_projection,
+    founder_packet_result.packet,
+    founder_request_state_evaluation
+  );
+
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.state_evaluation_exposure?.exposure_scope,
+    "review_packet_state_exposure"
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.state_evaluation_exposure?.evaluation_id,
+    "eval-review-exposure-01"
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.state_evaluation_exposure?.transition_accepted,
+    true
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.state_evaluation_exposure?.final_state,
+    "state_review_needed"
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.state_evaluation_exposure?.blocked_reason,
+    undefined
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.state_evaluation_exposure?.terminal,
+    false
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.state_evaluation_exposure?.non_executing,
+    true
+  );
+  assert.match(
+    review_packet.founder_request_exception_enrichment?.state_evaluation_exposure?.notes.join(" ") ?? "",
+    /derivation traceability/u
+  );
+  assert.doesNotMatch(
+    JSON.stringify(
+      review_packet.founder_request_exception_enrichment?.state_evaluation_exposure
+    ),
+    /approval|approve|dispatch|execute|provider|channel/u
+  );
+});
+
+test("[projection] secretary handoff review packet keeps terminal state exposure below completion semantics", () => {
+  const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
+    create_runtime_inputs()
+  );
+  const portfolio_projection = assemblePortfolioSecretaryShellProjection({
+    source_overview_shell_id: overview_shell.overview_shell_id,
+    cell_summary_units: overview_shell.cell_summary_units,
+    management_object_family_status:
+      overview_shell.management_object_family_status,
+    deferred_items: overview_shell.deferred_items,
+    non_claims: overview_shell.truth_boundary.non_claims,
+    projection_notes: overview_shell.projection_notes,
+  });
+  const staging_projection = assembleSecretaryHandoffStagingProjection(
+    portfolio_projection,
+    "cell-scope-01"
+  );
+  const founder_packet_result = adapt_founder_request_exception_packet({
+    request_ref: "founder-request-review-state-02",
+    request_label: "Keep terminal state evaluation below completion semantics.",
+    projection_summaries: {
+      continuity_projection_summary: {
+        availability: "available",
+        summary_label: "Continuation remains visible.",
+      },
+      semantic_relation_projection_summary: {
+        availability: "available",
+        summary_label: "Relation summary remains visible.",
+      },
+      drift_impact_projection_summary: {
+        availability: "available",
+        summary_label: "Impact summary remains visible.",
+      },
+      activation_projection_summary: {
+        availability: "available",
+        summary_label: "Activation posture remains observe-only.",
+        activation_posture: "observe_only",
+      },
+      confirm_trace_decision_projection_summary: {
+        availability: "available",
+        summary_label: "Confirm trace remains visible.",
+      },
+      learning_suggestion_projection_summary: {
+        availability: "available",
+        summary_label: "Learning summary remains visible.",
+        suggestion_summary_label:
+          "Keep the learning note suggestion-only for terminal visibility.",
+      },
+    },
+  });
+
+  assert.equal(founder_packet_result.ok, true);
+
+  if (!founder_packet_result.ok) {
+    assert.fail("Expected a contract-safe founder request packet.");
+  }
+
+  const founder_request_state_evaluation =
+    evaluate_founder_request_exception_state({
+      evaluation_id: "eval-review-terminal-01",
+      derivation_result: derive_founder_request_exception_packet_state({
+        packet: founder_packet_result.packet,
+        requested_closure_without_execution: true,
+      }),
+      current_state: "state_closed_without_execution",
+    });
+
+  const review_packet = assembleSecretaryHandoffReviewPacketProjection(
+    staging_projection,
+    founder_packet_result.packet,
+    founder_request_state_evaluation
+  );
+
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.state_evaluation_exposure?.terminal,
+    true
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.state_evaluation_exposure?.transition_accepted,
+    false
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.state_evaluation_exposure?.blocked_reason,
+    "terminal_state"
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.state_evaluation_exposure?.final_state,
+    "state_closed_without_execution"
+  );
+  assert.equal(
+    review_packet.founder_request_exception_enrichment?.state_evaluation_exposure?.non_executing,
+    true
+  );
+  assert.doesNotMatch(
+    JSON.stringify(
+      review_packet.founder_request_exception_enrichment?.state_evaluation_exposure
+    ),
+    /execution complete|completed by execution/u
+  );
 });

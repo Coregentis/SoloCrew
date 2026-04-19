@@ -14,6 +14,12 @@ import {
   adapt_founder_request_exception_packet,
 } from "../../projection/adapters/founder-request-exception-packet-adapter.ts";
 import {
+  derive_founder_request_exception_packet_state,
+} from "../../projection/contracts/founder-request-exception-packet-state-derivation.ts";
+import {
+  evaluate_founder_request_exception_state,
+} from "../../projection/contracts/founder-request-exception-state-evaluation.ts";
+import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
 } from "../../projection/contracts/structural-boundary.ts";
 
@@ -417,4 +423,216 @@ test("[projection] secretary handoff staging can carry compact founder-request e
   assert.equal(projection.direct_execute_control_available, false);
   assert.equal(projection.provider_execution_available, false);
   assert.equal(projection.channel_entry_available, false);
+});
+
+test("[projection] secretary handoff staging can carry compact reducer-backed state exposure without duplicating full review detail", () => {
+  const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
+    create_runtime_inputs()
+  );
+  const portfolio_projection = assemblePortfolioSecretaryShellProjection({
+    source_overview_shell_id: overview_shell.overview_shell_id,
+    cell_summary_units: overview_shell.cell_summary_units,
+    management_object_family_status:
+      overview_shell.management_object_family_status,
+    deferred_items: overview_shell.deferred_items,
+    non_claims: overview_shell.truth_boundary.non_claims,
+    projection_notes: overview_shell.projection_notes,
+  });
+  const founder_packet_result = adapt_founder_request_exception_packet({
+    request_ref: "founder-request-staging-state-01",
+    request_label: "Keep staging state exposure compact and non-executing.",
+    projection_summaries: {
+      continuity_projection_summary: {
+        availability: "available",
+        summary_label: "Continuation remains visible in staging preview.",
+      },
+      semantic_relation_projection_summary: {
+        availability: "available",
+        summary_label: "Relation summary remains visible in staging preview.",
+      },
+      drift_impact_projection_summary: {
+        availability: "available",
+        summary_label: "Impact summary remains visible in staging preview.",
+      },
+      activation_projection_summary: {
+        availability: "available",
+        summary_label: "Activation posture remains observe-only.",
+        activation_posture: "observe_only",
+      },
+      confirm_trace_decision_projection_summary: {
+        availability: "available",
+        summary_label: "Confirm trace remains visible in staging preview.",
+      },
+      learning_suggestion_projection_summary: {
+        availability: "available",
+        summary_label: "Learning hint remains visible in staging preview.",
+        suggestion_summary_label:
+          "Keep the learning note suggestion-only while staging remains compact.",
+      },
+    },
+    evidence_summary_text:
+      "Evidence remains compact and summary-safe while staging preview stays bounded.",
+  });
+
+  assert.equal(founder_packet_result.ok, true);
+
+  if (!founder_packet_result.ok) {
+    assert.fail("Expected a contract-safe founder request packet.");
+  }
+
+  const founder_request_state_evaluation =
+    evaluate_founder_request_exception_state({
+      evaluation_id: "eval-staging-exposure-01",
+      derivation_result: derive_founder_request_exception_packet_state({
+        packet: founder_packet_result.packet,
+      }),
+    });
+
+  const projection = assembleSecretaryHandoffStagingProjection(
+    portfolio_projection,
+    "cell-scope-01",
+    founder_packet_result.packet,
+    founder_request_state_evaluation
+  );
+
+  assert.equal(
+    projection.founder_request_exception_preview?.state_evaluation_exposure?.exposure_scope,
+    "staging_state_exposure"
+  );
+  assert.equal(
+    projection.founder_request_exception_preview?.state_evaluation_exposure?.evaluation_id,
+    "eval-staging-exposure-01"
+  );
+  assert.equal(
+    projection.founder_request_exception_preview?.state_evaluation_exposure?.transition_accepted,
+    true
+  );
+  assert.equal(
+    projection.founder_request_exception_preview?.state_evaluation_exposure?.final_state,
+    "state_review_needed"
+  );
+  assert.equal(
+    projection.founder_request_exception_preview?.state_evaluation_exposure?.non_executing,
+    true
+  );
+  assert.equal(
+    "requested_next_state" in
+      (projection.founder_request_exception_preview?.state_evaluation_exposure ??
+        {}),
+    false
+  );
+  assert.equal(
+    "reducer_target_state" in
+      (projection.founder_request_exception_preview?.state_evaluation_exposure ??
+        {}),
+    false
+  );
+  assert.ok(
+    (projection.founder_request_exception_preview?.state_evaluation_exposure?.notes
+      .length ?? 0) <= 2
+  );
+  assert.ok(
+    (projection.founder_request_exception_preview?.state_evaluation_exposure?.source_markers
+      .length ?? 0) <= 3
+  );
+  assert.doesNotMatch(
+    JSON.stringify(
+      projection.founder_request_exception_preview?.state_evaluation_exposure
+    ),
+    /approve|dispatch|execute|provider|channel/u
+  );
+});
+
+test("[projection] secretary handoff staging keeps terminal state exposure below completion semantics", () => {
+  const overview_shell = composeMultiCellFoundationOverviewShellFromRuntimeInputs(
+    create_runtime_inputs()
+  );
+  const portfolio_projection = assemblePortfolioSecretaryShellProjection({
+    source_overview_shell_id: overview_shell.overview_shell_id,
+    cell_summary_units: overview_shell.cell_summary_units,
+    management_object_family_status:
+      overview_shell.management_object_family_status,
+    deferred_items: overview_shell.deferred_items,
+    non_claims: overview_shell.truth_boundary.non_claims,
+    projection_notes: overview_shell.projection_notes,
+  });
+  const founder_packet_result = adapt_founder_request_exception_packet({
+    request_ref: "founder-request-staging-state-02",
+    request_label: "Keep terminal staging exposure below completion semantics.",
+    projection_summaries: {
+      continuity_projection_summary: {
+        availability: "available",
+        summary_label: "Continuation remains visible.",
+      },
+      semantic_relation_projection_summary: {
+        availability: "available",
+        summary_label: "Relation summary remains visible.",
+      },
+      drift_impact_projection_summary: {
+        availability: "available",
+        summary_label: "Impact summary remains visible.",
+      },
+      activation_projection_summary: {
+        availability: "available",
+        summary_label: "Activation posture remains observe-only.",
+        activation_posture: "observe_only",
+      },
+      confirm_trace_decision_projection_summary: {
+        availability: "available",
+        summary_label: "Confirm trace remains visible.",
+      },
+      learning_suggestion_projection_summary: {
+        availability: "available",
+        summary_label: "Learning hint remains visible.",
+        suggestion_summary_label:
+          "Keep the learning note suggestion-only for compact staging visibility.",
+      },
+    },
+  });
+
+  assert.equal(founder_packet_result.ok, true);
+
+  if (!founder_packet_result.ok) {
+    assert.fail("Expected a contract-safe founder request packet.");
+  }
+
+  const founder_request_state_evaluation =
+    evaluate_founder_request_exception_state({
+      evaluation_id: "eval-staging-terminal-01",
+      derivation_result: derive_founder_request_exception_packet_state({
+        packet: founder_packet_result.packet,
+        requested_closure_without_execution: true,
+      }),
+      current_state: "state_closed_without_execution",
+    });
+
+  const projection = assembleSecretaryHandoffStagingProjection(
+    portfolio_projection,
+    "cell-scope-01",
+    founder_packet_result.packet,
+    founder_request_state_evaluation
+  );
+
+  assert.equal(
+    projection.founder_request_exception_preview?.state_evaluation_exposure?.terminal,
+    true
+  );
+  assert.equal(
+    projection.founder_request_exception_preview?.state_evaluation_exposure?.transition_accepted,
+    false
+  );
+  assert.equal(
+    projection.founder_request_exception_preview?.state_evaluation_exposure?.blocked_reason,
+    "terminal_state"
+  );
+  assert.equal(
+    projection.founder_request_exception_preview?.state_evaluation_exposure?.non_executing,
+    true
+  );
+  assert.doesNotMatch(
+    JSON.stringify(
+      projection.founder_request_exception_preview?.state_evaluation_exposure
+    ),
+    /execution complete|completed by execution/u
+  );
 });

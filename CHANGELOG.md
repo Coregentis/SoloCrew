@@ -2,6 +2,7 @@
 
 ## 2026-04-18
 
+- exposed bounded reducer-backed state evaluation fields across founder-request packet, handoff review packet, and handoff staging lanes so evaluation truth stays reducer-backed, derivation-traceable, non-executing, summary-safe, and below queue, approval, execution, or provider/channel semantics without app/page changes
 - added the packet/review/staging state exposure plan, freezing allowed reducer-backed evaluation fields, lane-specific safe interpretations, forbidden labels, future exposure test gates, and first-wave DoD without adapter changes, assembly changes, app/page changes, or provider/channel execution
 - added the reducer integration closure audit, freezing reducer-backed state-evaluation scope, input/output boundaries, accepted/blocked/forbidden/terminal truth, non-executing summary-safe output, regression evidence, and next-wave readiness without reducer changes, derivation changes, adapter changes, assembly changes, app/page changes, or provider/channel execution
 - added the reducer-backed state evaluation utility, freezing pure derivation-plus-reducer composition, accepted/blocked/terminal evaluation output, derivation trace preservation, non-executing summary-safe integration behavior, and regression tests without reducer changes, derivation changes, adapter changes, assembly changes, app/page changes, or provider/channel execution

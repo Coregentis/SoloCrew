@@ -5,6 +5,7 @@ import type {
   FounderRequestExceptionPacketSummaryFamily,
   FounderRequestExceptionPosture,
   FounderRequestProjectionSummaryAvailability,
+  FounderRequestStateEvaluationExposure,
 } from "./founder-request-exception-packet-contract.ts";
 import type {
   PortfolioSecretaryManagementObjectStatus,
@@ -72,6 +73,24 @@ export interface SecretaryHandoffFounderRequestLearningSuggestionHint {
   marker_status: FounderRequestProjectionSummaryAvailability;
 }
 
+export interface SecretaryHandoffFounderRequestStagingStateEvaluationExposure
+  extends Pick<
+    FounderRequestStateEvaluationExposure,
+    | "evaluation_id"
+    | "initial_state"
+    | "transition_event"
+    | "transition_accepted"
+    | "final_state"
+    | "blocked_reason"
+    | "terminal"
+    | "non_executing"
+    | "source_posture"
+    | "source_markers"
+    | "notes"
+  > {
+  exposure_scope: "staging_state_exposure";
+}
+
 export interface SecretaryHandoffFounderRequestExceptionPreview {
   preview_scope: "founder_request_exception_staging_preview";
   request_ref: string;
@@ -82,6 +101,7 @@ export interface SecretaryHandoffFounderRequestExceptionPreview {
   marker_status: FounderRequestProjectionSummaryAvailability;
   evidence_posture_summary: SecretaryHandoffFounderRequestEvidencePostureSummary;
   learning_suggestion_hint?: SecretaryHandoffFounderRequestLearningSuggestionHint;
+  state_evaluation_exposure?: SecretaryHandoffFounderRequestStagingStateEvaluationExposure;
   status_markers: FounderRequestProjectionSummaryAvailability[];
   family_status_summaries: SecretaryHandoffFounderRequestStagingFamilyStatusSummary[];
 }

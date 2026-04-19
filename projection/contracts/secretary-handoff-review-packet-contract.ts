@@ -8,6 +8,7 @@ import type {
   FounderRequestLearningSuggestionSummaryClass,
   FounderRequestProjectionEvidenceRef,
   FounderRequestProjectionSummaryAvailability,
+  FounderRequestStateEvaluationExposure,
 } from "./founder-request-exception-packet-contract.ts";
 import type {
   SecretaryHandoffManagementPosture,
@@ -59,6 +60,11 @@ export interface SecretaryHandoffFounderRequestEvidenceSummary {
   evidence_refs?: FounderRequestProjectionEvidenceRef[];
 }
 
+export interface SecretaryHandoffFounderRequestReviewStateEvaluationExposure
+  extends Omit<FounderRequestStateEvaluationExposure, "exposure_scope"> {
+  exposure_scope: "review_packet_state_exposure";
+}
+
 export interface SecretaryHandoffFounderRequestExceptionEnrichment {
   enrichment_scope: "founder_request_exception_packet_summary";
   request_ref: string;
@@ -70,6 +76,7 @@ export interface SecretaryHandoffFounderRequestExceptionEnrichment {
   bounded_action_recommendation?: FounderRequestBoundedActionRecommendation;
   evidence_summary: SecretaryHandoffFounderRequestEvidenceSummary;
   learning_suggestion_summary?: FounderRequestLearningSuggestionSummaryClass;
+  state_evaluation_exposure?: SecretaryHandoffFounderRequestReviewStateEvaluationExposure;
   status_markers: FounderRequestProjectionSummaryAvailability[];
   family_status_summaries: SecretaryHandoffFounderRequestFamilyStatusSummary[];
 }
