@@ -2,6 +2,7 @@
 
 ## 2026-04-18
 
+- added the founder-request exception state-machine contract and type guards, freezing bounded state vocabulary, transition event vocabulary, allowed transition matrix, forbidden transition guards, and negative boundary tests without reducer code, adapter changes, assembly changes, app/page changes, or provider/channel execution
 - added the exception state-machine implementation plan, freezing bounded founder-request state vocabulary, allowed/forbidden transition families, safe input boundaries, future code-wave sequence, test gates, and first-wave contract/type-guard DoD without state-machine code, app/page changes, founder queue semantics, or provider/channel execution
 - added the portfolio aggregate closure audit, freezing bounded aggregate contract/assembly status, input boundaries, deterministic priority order, regression evidence, remaining gaps, and next-wave readiness without app/page changes, UI changes, direct-control semantics, or provider/channel execution
 - added bounded portfolio aggregate posture in the portfolio Secretary shell assembly so display-safe founder-request summaries can roll up into non-executing, summary-only, omission-aware, insufficiency-aware, and stale-aware aggregate posture without app/page changes, founder queue semantics, or provider/channel execution
