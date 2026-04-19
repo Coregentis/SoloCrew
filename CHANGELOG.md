@@ -2,6 +2,7 @@
 
 ## 2026-04-19
 
+- added the founder-facing request intake plan, freezing the first founder-visible intake blocker, candidate surface comparison, bounded input model, non-executing output boundary, implementation test gates, and stop conditions without app/page changes, UI changes, RC planning, or Operational V1 completion claims
 - added the Operational V1 gap remediation plan, freezing RC blockers, disclosure-required gaps, post-RC enhancements, remediation wave order, founder-view targets, and next-wave intake-planning readiness without implementation, RC planning, or Operational V1 completion claims
 - added the Operational V1 readiness audit, freezing readiness evidence, founder-view usefulness, blocker vs non-blocker judgment, release-boundary discipline, and disclosed gaps over the closed founder-request business loop without code changes, app/page changes, or Operational V1 completion claims
 - added the founder-request end-to-end business-loop closure audit, freezing the first-pass non-executing loop from projection boundary through packet, posture, review/staging, display, aggregate, state-machine, derivation, evaluation, and exposure readiness without reducer changes, derivation changes, state-evaluation logic changes, app/page changes, or provider/channel execution
