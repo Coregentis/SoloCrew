@@ -2,6 +2,7 @@
 
 ## 2026-04-18
 
+- added the reducer-backed state evaluation utility, freezing pure derivation-plus-reducer composition, accepted/blocked/terminal evaluation output, derivation trace preservation, non-executing summary-safe integration behavior, and regression tests without reducer changes, derivation changes, adapter changes, assembly changes, app/page changes, or provider/channel execution
 - added the reducer integration plan, freezing reducer-backed bounded state-evaluation output, allowed integration inputs, non-executing integration rules, future implementation test gates, and first-wave DoD without reducer changes, derivation changes, adapter changes, assembly changes, app/page changes, or provider/channel execution
 - added the packet-level state derivation closure audit, freezing derivation utility scope, initial-state and transition-intent mappings, priority ordering, reducer-compatible non-executing output truth, regression evidence, and next-wave readiness without reducer changes, adapter changes, assembly changes, app/page changes, or provider/channel execution
 - added the founder-request packet-level state derivation utility, freezing deterministic packet-to-state rules, transition-intent derivation, reducer-compatible non-executing output, and bounded priority handling without reducer changes, adapter changes, assembly changes, app/page changes, or provider/channel execution
