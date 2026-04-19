@@ -2,6 +2,7 @@
 
 ## 2026-04-19
 
+- added the founder-facing request intake shell/page, freezing a minimal bounded intake entry with `founder_request_id`, request label/text, optional hints, created-at chronology, and explicit non-executing boundary without queue, command, provider/channel, reducer, or handoff semantic expansion
 - added the founder-facing request intake plan, freezing the first founder-visible intake blocker, candidate surface comparison, bounded input model, non-executing output boundary, implementation test gates, and stop conditions without app/page changes, UI changes, RC planning, or Operational V1 completion claims
 - added the Operational V1 gap remediation plan, freezing RC blockers, disclosure-required gaps, post-RC enhancements, remediation wave order, founder-view targets, and next-wave intake-planning readiness without implementation, RC planning, or Operational V1 completion claims
 - added the Operational V1 readiness audit, freezing readiness evidence, founder-view usefulness, blocker vs non-blocker judgment, release-boundary discipline, and disclosed gaps over the closed founder-request business loop without code changes, app/page changes, or Operational V1 completion claims
