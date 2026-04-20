@@ -317,3 +317,21 @@ Why:
 - the evidence pack and validation references are now gathered in one place
 - the next smallest truthful step is to decide the tag pattern and draft the
   release note language without claiming the external release already exists
+
+## L. Release-Pack Alignment
+
+This seal record is now aligned with:
+
+- `governance/releases/SOLOCREW-OPERATIONAL-V1-TAG-DECISION-v0.1.md`
+- `governance/releases/SOLOCREW-OPERATIONAL-V1-RELEASE-NOTES-DRAFT-v0.1.md`
+- `governance/releases/SOLOCREW-OPERATIONAL-V1-DISCLOSURE-PACK-v0.1.md`
+
+Alignment rules:
+
+- tag decision is not tag creation
+- release note draft is not GitHub release
+- disclosure pack wording must be preserved before any tag or release
+  authorization
+- `sealed_commit` remains intentionally pending until tag/release
+  authorization or later seal-confirmation flow resolves it
+- no external release artifact exists yet
