@@ -1,6 +1,6 @@
 # SoloCrew V1.1 RC Evidence Manifest v0.1
 
-`SOLOCREW-V1.1-RC-EVIDENCE-MANIFEST-v0.1`
+`doc_id: SOLOCREW-V1.1-RC-EVIDENCE-MANIFEST-v0.1`
 
 ## A. Evidence Categories
 
@@ -12,7 +12,7 @@
 | hardening evidence | `governance/audits/SOLOCREW-V1.1-INTAKE-TO-PACKET-HARDENING-AUDIT-v0.1.md` | `READY` | negative fixture and request-side raw-key hardening are recorded |
 | app/page integration evidence | `governance/audits/SOLOCREW-V1.1-APP-PAGE-INTEGRATION-IMPLEMENTATION-AUDIT-v0.1.md` | `READY` | current app/page integration is implemented and audited |
 | closure evidence | `governance/audits/SOLOCREW-V1.1-END-TO-END-USABLE-FOUNDER-LOOP-CLOSURE-AUDIT-v0.1.md` | `READY` | loop closure decision is frozen |
-| capability inventory evidence | `governance/audits/SOLOCREW-V1.1-CAPABILITY-INVENTORY-v0.1.md` | `READY` | implemented / non-capability scope is frozen |
+| capability inventory evidence | `governance/audits/SOLOCREW-V1.1-CAPABILITY-INVENTORY-v0.1.md` | `READY` | implemented/non-capability scope is frozen |
 | boundary/risk evidence | `governance/audits/SOLOCREW-V1.1-BOUNDARY-AND-RISK-REVIEW-v0.1.md` | `READY` | RC guardrails are frozen |
 | test evidence | targeted tests and `npm test` | `READY` | targeted and full regression commands are green |
 | forbidden grep evidence | forbidden boundary grep outputs in current wave | `READY` | findings remain negative-boundary / explicit exclusion only |
@@ -26,7 +26,7 @@
 - `app/pages/secretary-handoff-page.ts`
 - `app/pages/secretary-handoff-review-page.ts`
 - targeted app/projection test files
-- V1.1 governance plans, audits, and gates
+- V1.1 governance plans, audits, gates, and release-prep artifacts
 
 ## C. Tests
 

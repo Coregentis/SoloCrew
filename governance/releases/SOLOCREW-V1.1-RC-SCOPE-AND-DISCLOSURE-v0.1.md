@@ -1,6 +1,6 @@
 # SoloCrew V1.1 RC Scope and Disclosure v0.1
 
-`SOLOCREW-V1.1-RC-SCOPE-AND-DISCLOSURE-v0.1`
+`doc_id: SOLOCREW-V1.1-RC-SCOPE-AND-DISCLOSURE-v0.1`
 
 ## A. Included Scope
 

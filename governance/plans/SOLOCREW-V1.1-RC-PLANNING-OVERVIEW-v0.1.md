@@ -1,6 +1,6 @@
 # SoloCrew V1.1 RC Planning Overview v0.1
 
-`SOLOCREW-V1.1-RC-PLANNING-OVERVIEW-v0.1`
+`doc_id: SOLOCREW-V1.1-RC-PLANNING-OVERVIEW-v0.1`
 
 ## A. Purpose
 
@@ -20,12 +20,9 @@ It is:
 
 ## B. RC Candidate Identity
 
-- candidate_line:
-  - `SoloCrew V1.1`
-- candidate_type:
-  - `release-candidate-planning`
-- candidate_scope:
-  - `bounded non-executing usable founder loop`
+- `candidate_line: SoloCrew V1.1`
+- `candidate_type: release-candidate-planning`
+- `candidate_scope: bounded non-executing usable founder loop`
 
 ## C. RC Planning Inputs
 
@@ -46,6 +43,11 @@ It is:
 - RC validation plan
 - RC forbidden claim gate
 - RC tag/release decision draft
+- RC release notes draft
+- RC seal preparation plan
+- RC validation execution checklist
+- RC seal authorization gate draft
+- governance readability audit
 - RC planning audit
 
 ## E. Decision

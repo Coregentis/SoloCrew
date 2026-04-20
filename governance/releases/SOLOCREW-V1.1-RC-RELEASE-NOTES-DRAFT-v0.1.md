@@ -1,0 +1,60 @@
+# SoloCrew V1.1 RC Release Notes Draft v0.1
+
+`doc_id: SOLOCREW-V1.1-RC-RELEASE-NOTES-DRAFT-v0.1`
+
+## A. Purpose
+
+This document is a release-candidate notes draft only.
+
+It is:
+
+- not final release notes
+- not release seal
+- no tag created
+- no GitHub release created
+
+## B. RC Summary
+
+SoloCrew V1.1 RC candidate is a bounded, non-executing founder
+request-to-packet review loop.
+
+## C. Included Capabilities
+
+- founder request intake remains available
+- projection-safe packet candidate generation
+- review/staging flow result
+- page model generation
+- founder intake page packet candidate visibility
+- handoff page staging visibility
+- review page review visibility
+- evidence/stale/insufficient posture visibility
+- non-executing recommendation visibility
+- blocked-by-contract fallback visibility
+- boundary summary visibility
+- interpretation guards visibility
+- raw-key rejection
+- forbidden-label rejection
+- project mismatch rejection
+- full app/projection regression tests
+
+## D. Explicit Non-Capabilities
+
+- no provider/channel execution
+- no approve/reject/dispatch/execute
+- no founder queue
+- no external action execution
+- no autonomous company operation
+- no protocol certification
+- no live external workflow
+- no evidence-as-proof
+- no terminal-as-execution-complete
+- no transition-accepted-as-approval
+
+## E. Validation Summary Placeholder
+
+Validation execution must occur in a later seal-preparation or seal
+authorization wave.
+
+## F. Decision
+
+`SOLOCREW_V1_1_RC_RELEASE_NOTES_DRAFT_READY`

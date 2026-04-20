@@ -1,8 +1,11 @@
 # SoloCrew V1.1 RC Forbidden Claim Gate v0.1
 
-`SOLOCREW-V1.1-RC-FORBIDDEN-CLAIM-GATE-v0.1`
+`doc_id: SOLOCREW-V1.1-RC-FORBIDDEN-CLAIM-GATE-v0.1`
 
 ## A. Forbidden Positive Claims
+
+The following claims are forbidden in any RC-facing governance or release
+material:
 
 - provider/channel execution available
 - approve/reject/dispatch/execute behavior available
@@ -17,12 +20,15 @@
 
 ## B. Allowed Negative Boundary Statements
 
+Examples of allowed wording:
+
 - provider/channel execution is not included
 - approve/reject/dispatch/execute is not included
 - founder queue is not included
 - evidence summary is not proof
 - terminal does not mean execution complete
 - transition accepted does not mean approval
+- blocked actions are displayed as negative boundary only
 
 ## C. Gate Decision
 

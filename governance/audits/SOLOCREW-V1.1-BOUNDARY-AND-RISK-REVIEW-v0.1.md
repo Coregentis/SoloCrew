@@ -4,23 +4,25 @@
 
 ## A. Purpose
 
-This review records V1.1 boundary risks before release-candidate planning.
+This review records the key V1.1 boundary risks that must stay explicit before
+any future release-candidate notes, seal preparation, or seal authorization
+wave.
 
 ## B. Risk Table
 
 | Risk | Current mitigation | Residual risk | Release-candidate implication |
 |---|---|---|---|
-| approval wording risk | interpretation guards and page copy explicitly deny approval semantics | low | release notes must keep `review-ready` below approval |
+| approval wording risk | interpretation guards and page copy explicitly deny approval semantics | low | RC notes must keep `review-ready` clearly below approval |
 | execution-complete wording risk | terminal guard and page copy explicitly deny execution completion | low | RC wording must preserve terminal != execution complete |
-| evidence-as-proof risk | evidence summary wording stays summary-only in plans, code, and tests | low | RC wording must avoid proof/certification language |
-| blocked_actions as enabled-controls risk | blocked actions render as negative boundary only and tests assert that | low | RC review should preserve blocked-actions framing |
-| raw runtime dependency risk | no direct runtime-private import, no Cognitive_OS runtime import grep matches | low | RC planning must keep adapter/page model product-side only |
-| provider/channel overclaim risk | boundaries and tests explicitly deny provider/channel execution | low | RC planning must carry the same disclosure |
-| founder queue overclaim risk | boundaries and tests explicitly deny founder queue semantics | low | RC planning must keep queue absent |
-| summary-as-proof claim risk | summary-as-proof claim remains explicitly blocked in plans and pages | low | release narrative must repeat this guardrail |
-| direct Cognitive_OS import risk | import-boundary grep remains clean | low | RC review must keep import-boundary grep active |
-| page copy drift risk | app tests assert boundary copy on intake, handoff, and review pages | medium | RC planning should freeze required copy phrases |
-| test fixture overclaim risk | hardening audit and explicit fixtures reduce false coverage claims | low | RC review should continue quoting actual fixture coverage only |
+| evidence-as-proof risk | evidence summary wording stays summary-only in plans, code, pages, and tests | low | RC notes must avoid proof/certification language |
+| blocked_actions as enabled-controls risk | blocked actions render as negative boundary only and tests assert that | low | seal-prep review must preserve blocked-actions framing |
+| raw runtime dependency risk | no direct runtime-private import and no Cognitive_OS runtime import grep matches | low | release documentation must keep product-side consumption truth |
+| provider/channel overclaim risk | boundaries and tests explicitly deny provider/channel execution | low | RC notes and seal-prep docs must repeat the same disclosure |
+| founder queue overclaim risk | boundaries and tests explicitly deny founder queue semantics | low | queue absence must remain explicit in all RC materials |
+| summary-as-proof claim risk | summary-as-proof claim remains explicitly blocked in plans and pages | low | future release narrative must repeat this guardrail |
+| direct Cognitive_OS import risk | import-boundary grep remains clean and product-side helper stays local | low | seal authorization should keep import-boundary grep active |
+| page copy drift risk | app tests assert boundary copy on intake, handoff, and review pages | medium | release notes and seal-prep docs should freeze required copy phrases |
+| test fixture overclaim risk | hardening audit and explicit fixtures reduce false coverage claims | low | RC and seal waves should quote actual fixture coverage only |
 
 ## C. Required Release-Candidate Guardrails
 

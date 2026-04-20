@@ -9,17 +9,17 @@
 | 1 | E2E founder loop closure audit exists | `PASS` |
 | 2 | Capability inventory exists | `PASS` |
 | 3 | Boundary & risk review exists | `PASS` |
-| 4 | projection adapter/flow tests pass | `PASS` |
-| 5 | app/page tests pass | `PASS` |
-| 6 | full npm test passes | `PASS` |
-| 7 | forbidden boundary grep passes | `PASS` |
-| 8 | no provider/channel execution | `PASS` |
-| 9 | no approve/reject/dispatch/execute | `PASS` |
-| 10 | no founder queue | `PASS` |
-| 11 | no direct runtime-private dependency | `PASS` |
-| 12 | no summary-as-proof claim | `PASS` |
-| 13 | no app copy overclaim | `PASS` |
-| 14 | no upstream changes required | `PASS` |
+| 4 | Projection adapter/flow tests pass | `PASS` |
+| 5 | App/page tests pass | `PASS` |
+| 6 | Full npm test passes | `PASS` |
+| 7 | Forbidden boundary grep passes | `PASS` |
+| 8 | No provider/channel execution | `PASS` |
+| 9 | No approve/reject/dispatch/execute | `PASS` |
+| 10 | No founder queue | `PASS` |
+| 11 | No direct runtime-private dependency | `PASS` |
+| 12 | No summary-as-proof claim | `PASS` |
+| 13 | No app copy overclaim | `PASS` |
+| 14 | No upstream changes required | `PASS` |
 
 ## B. Decision
 
