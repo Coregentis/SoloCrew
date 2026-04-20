@@ -47,6 +47,20 @@ That delivery judgment does **not** mean:
 - SoloCrew owns protocol authority
 - bounded downstream truth has become delivery authorization
 
+## Current V1.1 Line
+
+Operational V1 is sealed at tag
+`solocrew-operational-v1-rc-seal-20260420` on commit
+`2dea8c96052c28cacdc89c80bb30ea35c6e62468`.
+SoloCrew V1.1 is now opened as the current usable founder-loop improvement
+line above that sealed boundary.
+
+SoloCrew V1.1 improves the founder request intake-to-packet-to-review loop. It
+does not include provider/channel execution, approve/reject/dispatch/execute
+behavior, founder queue execution, external business action execution,
+autonomous company operation, protocol certification, or closed live founder
+scenario validation.
+
 The sealed `v0.3` line remains the first bounded single-cell usable release
 line inside that delivered platform baseline, and it extends the sealed `v0.2`
 and `v0.1` baselines with:
@@ -92,9 +106,9 @@ It does not mean `v0.4` is fully implemented.
 It does not mean Secretary beta, recovery workflow execution, approval workflow execution, portfolio orchestration, provider execution, or channel behavior now exist in this repo.
 It does mean the repo now has explicit version-line closure, multi-cell boundary closure, and cross-repo non-promotion records for the current `v0.4` line.
 
-## Current v0.5 Line
+## Historical v0.5 Line
 
-The current `v0.5` line is `v0.5-portfolio-secretary-beta`.
+The historical `v0.5` line is `v0.5-portfolio-secretary-beta`.
 
 This repo has now begun bounded `v0.5` implementation with Waves 1 through 5.
 That current Wave 1 through Wave 5 line is accepted as a bounded non-executing

@@ -2,6 +2,8 @@
 
 ## 2026-04-20
 
+- SoloCrew V1.1 opened as the usable founder-loop improvement line after the Operational V1 RC seal. V1.1 focuses on intake-to-packet-to-review usability and remains non-executing.
+- added the SoloCrew V1.1 opening governance pack with a scope baseline, reuse-first gap audit, founder-loop flow contract, first usable scenario pack, and open gate baseline traced to the sealed Operational V1 tag and commit
 - added the Operational V1 seal completion pack, freezing tag authorization audit, final release notes, final seal record finalization, final closure record, and annotated-tag creation boundary without provider/channel execution, approve/reject/dispatch/execute behavior, founder queue, or autonomous company operation
 - added the Operational V1 release-pack drafting set, freezing tag decision, release notes draft, disclosure pack, and seal-record alignment without Git tag creation, GitHub release creation, external release seal, or Operational V1 completion claim
 - added the Operational V1 seal record draft, freezing bounded seal-candidate identity, scope, excluded scope, evidence-pack references, validation references, forbidden-claim scan summary, release-boundary confirmation, and next-wave tag-decision boundary without Git tag creation, GitHub release creation, provider/channel execution, or external Operational V1 release claims
