@@ -2,6 +2,9 @@
 
 `doc_id: SOLOCREW-V1.1-BOUNDARY-AND-RISK-REVIEW-v0.1`
 
+`readability_status: audit_ready_multiline_markdown`
+`readability_gate: scripts/governance/check-v1-1-governance-readability.mjs`
+
 ## A. Purpose
 
 This review records the key V1.1 boundary risks that must stay explicit before

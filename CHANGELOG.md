@@ -3,7 +3,8 @@
 ## 2026-04-20
 
 - repaired V1.1 RC governance readability using a reusable readability gate and
-  rewrote closure/RC/seal-prep artifacts into audit-ready multi-line Markdown;
+  rewrote closure/RC/seal-prep artifacts into audit-ready multi-line Markdown.
+  The reusable gate is `scripts/governance/check-v1-1-governance-readability.mjs`;
   no app/projection source change, no capability change, no provider/channel
   execution, no approve/reject/dispatch/execute, no founder queue, no tag, no
   GitHub release, and no release/seal claim

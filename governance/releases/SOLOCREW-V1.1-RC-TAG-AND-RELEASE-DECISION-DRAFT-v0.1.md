@@ -2,6 +2,9 @@
 
 `doc_id: SOLOCREW-V1.1-RC-TAG-AND-RELEASE-DECISION-DRAFT-v0.1`
 
+`readability_status: audit_ready_multiline_markdown`
+`readability_gate: scripts/governance/check-v1-1-governance-readability.mjs`
+
 ## A. Purpose
 
 This document prepares a future tag/release decision, but does not create a

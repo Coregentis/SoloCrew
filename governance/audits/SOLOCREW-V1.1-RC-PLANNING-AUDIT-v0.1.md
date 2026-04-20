@@ -2,6 +2,9 @@
 
 `doc_id: SOLOCREW-V1.1-RC-PLANNING-AUDIT-v0.1`
 
+`readability_status: audit_ready_multiline_markdown`
+`readability_gate: scripts/governance/check-v1-1-governance-readability.mjs`
+
 ## A. Purpose
 
 This audit checks whether the V1.1 RC planning pack is complete, readable, and

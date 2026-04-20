@@ -2,6 +2,10 @@ import { readFileSync } from "node:fs";
 
 const CHANGELOG_PATH = "CHANGELOG.md";
 
+const readabilityStatus = "readability_status: audit_ready_multiline_markdown";
+const readabilityGateRef =
+  "readability_gate: scripts/governance/check-v1-1-governance-readability.mjs";
+
 const checks = [
   {
     path: "governance/audits/SOLOCREW-V1.1-END-TO-END-USABLE-FOUNDER-LOOP-CLOSURE-AUDIT-v0.1.md",
@@ -143,6 +147,14 @@ for (const check of checks) {
     if (!text.includes(decision)) {
       failures.push(`FAIL ${check.path}: missing required decision "${decision}"`);
     }
+  }
+
+  if (!text.includes(readabilityStatus)) {
+    failures.push(`FAIL ${check.path}: missing readability status marker`);
+  }
+
+  if (!text.includes(readabilityGateRef)) {
+    failures.push(`FAIL ${check.path}: missing readability gate reference`);
   }
 }
 
