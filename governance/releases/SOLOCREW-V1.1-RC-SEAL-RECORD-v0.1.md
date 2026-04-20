@@ -25,8 +25,9 @@ This is:
 ## C. Sealed Commit
 
 - `pre-seal HEAD: 99aac3f7b9e45d010c93ae62b22537e575e904a5`
-- `seal_commit: PENDING_THIS_COMMIT`
-- `tag_target_commit: PENDING_TAG_CREATION`
+- `seal_commit: e48e5b33bb53a025961cb0e3af0bbf7e4fab5539`
+- `tag_target_commit: e48e5b33bb53a025961cb0e3af0bbf7e4fab5539`
+- `github_release_verified: https://github.com/Coregentis/SoloCrew/releases/tag/solocrew-v1.1-rc-non-executing-founder-loop-20260420`
 
 ## D. Validation Evidence
 
