@@ -2,6 +2,12 @@
 
 ## 2026-04-20
 
+- executed SoloCrew V1.1 RC seal/release wave by creating RC seal record,
+  release execution record, GitHub release notes, tag plan execution, and
+  validation-backed RC release evidence; no app/projection source change, no
+  Cognitive_OS/MPLP change, no provider/channel execution, no
+  approve/reject/dispatch/execute, no founder queue, and no protocol
+  certification
 - executed V1.1 RC validation and seal authorization checks, adding validation
   execution record, forbidden-claim verification, release notes final review,
   seal authorization decision, tag/release execution plan, and authorization
