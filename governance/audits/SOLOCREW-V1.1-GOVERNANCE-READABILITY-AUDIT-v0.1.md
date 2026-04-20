@@ -1,45 +1,32 @@
 # SoloCrew V1.1 Governance Readability Audit v0.1
 
 `doc_id: SOLOCREW-V1.1-GOVERNANCE-READABILITY-AUDIT-v0.1`
-
-`readability_status: audit_ready_multiline_markdown`
+`generated_by: scripts/governance/write-v1-1-rc-readable-docs.mjs`
 `readability_gate: scripts/governance/check-v1-1-governance-readability.mjs`
 
 ## A. Purpose
 
-This audit records that previous V1.1 closure, RC, and seal-prep governance
-documents needed a reusable readability gate to keep raw Markdown human-auditable.
+This audit records that V1.1 closure, RC, and seal-prep governance
+documents now have a reusable readability gate to keep raw Markdown
+human-auditable.
 
 ## B. Issue Found
 
 - prior RC planning commit existed
 - semantic decisions were mostly present
-- remote raw Markdown was still reported as compressed into very few long lines
+- remote raw Markdown was reported as compressed into very few long lines
 - previous line-count/readability reporting conflicted with remote raw truth
 - this required an automated readability gate instead of human assertion alone
 
 ## C. Correction Applied
 
-This wave rewrote the critical V1.1 governance/release documents and added the
-new readability script:
+This wave rewrote the critical V1.1 governance/release documents and added
+the new readability script:
 
-- `CHANGELOG.md`
-- `governance/audits/SOLOCREW-V1.1-END-TO-END-USABLE-FOUNDER-LOOP-CLOSURE-AUDIT-v0.1.md`
-- `governance/audits/SOLOCREW-V1.1-CAPABILITY-INVENTORY-v0.1.md`
-- `governance/audits/SOLOCREW-V1.1-BOUNDARY-AND-RISK-REVIEW-v0.1.md`
-- `governance/audits/SOLOCREW-V1.1-RC-PLANNING-AUDIT-v0.1.md`
-- `governance/gates/SOLOCREW-V1.1-RC-READINESS-GATE-v0.1.md`
-- `governance/gates/SOLOCREW-V1.1-RC-FORBIDDEN-CLAIM-GATE-v0.1.md`
-- `governance/gates/SOLOCREW-V1.1-RC-SEAL-AUTHORIZATION-GATE-v0.1.md`
-- `governance/plans/SOLOCREW-V1.1-RC-PLANNING-OVERVIEW-v0.1.md`
-- `governance/releases/SOLOCREW-V1.1-RC-SCOPE-AND-DISCLOSURE-v0.1.md`
-- `governance/releases/SOLOCREW-V1.1-RC-EVIDENCE-MANIFEST-v0.1.md`
-- `governance/releases/SOLOCREW-V1.1-RC-VALIDATION-PLAN-v0.1.md`
-- `governance/releases/SOLOCREW-V1.1-RC-TAG-AND-RELEASE-DECISION-DRAFT-v0.1.md`
-- `governance/releases/SOLOCREW-V1.1-RC-RELEASE-NOTES-DRAFT-v0.1.md`
-- `governance/releases/SOLOCREW-V1.1-RC-SEAL-PREPARATION-PLAN-v0.1.md`
-- `governance/releases/SOLOCREW-V1.1-RC-VALIDATION-EXECUTION-CHECKLIST-v0.1.md`
-- `scripts/governance/check-v1-1-governance-readability.mjs`
+- CHANGELOG.md
+- all critical V1.1 closure / RC / seal-prep governance docs
+- scripts/governance/check-v1-1-governance-readability.mjs
+- scripts/governance/write-v1-1-rc-readable-docs.mjs
 
 ## D. Readability Gate
 
@@ -54,6 +41,7 @@ The readability gate enforces:
 - required table headers by file
 - required decision strings by file
 - no compressed critical docs
+- minimum line count and max-line checks for both the gate and generator scripts
 
 ## E. Decision
 

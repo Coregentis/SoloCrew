@@ -1,12 +1,10 @@
 import { readFileSync } from "node:fs";
 
 const CHANGELOG_PATH = "CHANGELOG.md";
+const GATE_PATH = "scripts/governance/check-v1-1-governance-readability.mjs";
+const GENERATOR_PATH = "scripts/governance/write-v1-1-rc-readable-docs.mjs";
 
-const readabilityStatus = "readability_status: audit_ready_multiline_markdown";
-const readabilityGateRef =
-  "readability_gate: scripts/governance/check-v1-1-governance-readability.mjs";
-
-const checks = [
+const DOC_RULES = [
   {
     path: "governance/audits/SOLOCREW-V1.1-END-TO-END-USABLE-FOUNDER-LOOP-CLOSURE-AUDIT-v0.1.md",
     minLines: 20,
@@ -110,77 +108,135 @@ const checks = [
   },
 ];
 
-const changelogNeedle =
-  "repaired V1.1 RC governance readability using a reusable readability gate";
+const SCRIPT_RULES = [
+  {
+    path: GATE_PATH,
+    minLines: 80,
+    maxLineLength: 240,
+  },
+  {
+    path: GENERATOR_PATH,
+    minLines: 120,
+    maxLineLength: 240,
+  },
+];
 
-const failures = [];
+const CHANGELOG_NEEDLE =
+  "repaired V1.1 RC governance readability using a reusable readability gate";
 
 function readLines(path) {
   const text = readFileSync(path, "utf8");
-  return { text, lines: text.split(/\r?\n/) };
+  return {
+    text,
+    lines: text.split(/\r?\n/),
+  };
 }
 
-for (const check of checks) {
-  const { text, lines } = readLines(check.path);
-
-  if (lines.length < check.minLines) {
-    failures.push(
-      `FAIL ${check.path}: line count ${lines.length} is below minimum ${check.minLines}`,
-    );
-  }
+function collectLineFailures(path, lines, maxLineLength) {
+  const failures = [];
 
   lines.forEach((line, index) => {
-    if (line.length > 600) {
+    if (line.length > maxLineLength) {
       failures.push(
-        `FAIL ${check.path}: line ${index + 1} length ${line.length} exceeds maximum 600`,
+        `FAIL ${path}: line ${index + 1} length ${line.length} exceeds maximum ${maxLineLength}`,
       );
     }
   });
 
-  for (const header of check.headers) {
-    if (!text.includes(header)) {
-      failures.push(`FAIL ${check.path}: missing required header "${header}"`);
+  return failures;
+}
+
+function checkMarkdownDocuments() {
+  const failures = [];
+
+  for (const rule of DOC_RULES) {
+    const { text, lines } = readLines(rule.path);
+
+    if (lines.length < rule.minLines) {
+      failures.push(
+        `FAIL ${rule.path}: line count ${lines.length} is below minimum ${rule.minLines}`,
+      );
+    }
+
+    failures.push(...collectLineFailures(rule.path, lines, 600));
+
+    for (const header of rule.headers) {
+      if (!text.includes(header)) {
+        failures.push(`FAIL ${rule.path}: missing required header "${header}"`);
+      }
+    }
+
+    for (const decision of rule.decisions) {
+      if (!text.includes(decision)) {
+        failures.push(`FAIL ${rule.path}: missing required decision "${decision}"`);
+      }
     }
   }
 
-  for (const decision of check.decisions) {
-    if (!text.includes(decision)) {
-      failures.push(`FAIL ${check.path}: missing required decision "${decision}"`);
+  return failures;
+}
+
+function checkScripts() {
+  const failures = [];
+
+  for (const rule of SCRIPT_RULES) {
+    const { lines } = readLines(rule.path);
+
+    if (lines.length < rule.minLines) {
+      failures.push(
+        `FAIL ${rule.path}: line count ${lines.length} is below minimum ${rule.minLines}`,
+      );
     }
+
+    failures.push(...collectLineFailures(rule.path, lines, rule.maxLineLength));
   }
 
-  if (!text.includes(readabilityStatus)) {
-    failures.push(`FAIL ${check.path}: missing readability status marker`);
+  return failures;
+}
+
+function checkChangelog() {
+  const failures = [];
+  const { text, lines } = readLines(CHANGELOG_PATH);
+
+  const targetIndex = lines.findIndex((line) => line.includes(CHANGELOG_NEEDLE));
+
+  if (targetIndex === -1) {
+    failures.push(
+      `FAIL ${CHANGELOG_PATH}: missing readability repair entry containing "${CHANGELOG_NEEDLE}"`,
+    );
+    return failures;
   }
 
-  if (!text.includes(readabilityGateRef)) {
-    failures.push(`FAIL ${check.path}: missing readability gate reference`);
+  if (lines[targetIndex].length > 700) {
+    failures.push(
+      `FAIL ${CHANGELOG_PATH}: readability repair entry line length ${lines[targetIndex].length} exceeds maximum 700`,
+    );
   }
-}
 
-const { text: changelogText, lines: changelogLines } = readLines(CHANGELOG_PATH);
-
-const topEntryIndex = changelogLines.findIndex((line) => line.includes(changelogNeedle));
-
-if (topEntryIndex === -1) {
-  failures.push(
-    `FAIL ${CHANGELOG_PATH}: missing top V1.1 readability/RC entry containing "${changelogNeedle}"`,
-  );
-} else if (changelogLines[topEntryIndex].length > 700) {
-  failures.push(
-    `FAIL ${CHANGELOG_PATH}: top V1.1 readability entry line length ${changelogLines[topEntryIndex].length} exceeds maximum 700`,
-  );
-}
-
-if (!changelogText.includes(changelogNeedle)) {
-  failures.push(`FAIL ${CHANGELOG_PATH}: readability repair entry text not found`);
-}
-
-if (failures.length > 0) {
-  for (const failure of failures) {
-    console.error(failure);
+  if (!text.includes("GitHub release")) {
+    failures.push(
+      `FAIL ${CHANGELOG_PATH}: readability repair entry must keep GitHub release boundary visible`,
+    );
   }
-  process.exit(1);
+
+  return failures;
 }
 
-console.log("V1.1 governance readability check passed");
+function main() {
+  const failures = [
+    ...checkMarkdownDocuments(),
+    ...checkScripts(),
+    ...checkChangelog(),
+  ];
+
+  if (failures.length > 0) {
+    for (const failure of failures) {
+      console.error(failure);
+    }
+    process.exit(1);
+  }
+
+  console.log("V1.1 governance readability check passed");
+}
+
+main();

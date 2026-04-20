@@ -1,14 +1,13 @@
 # SoloCrew V1.1 RC Tag and Release Decision Draft v0.1
 
 `doc_id: SOLOCREW-V1.1-RC-TAG-AND-RELEASE-DECISION-DRAFT-v0.1`
-
-`readability_status: audit_ready_multiline_markdown`
+`generated_by: scripts/governance/write-v1-1-rc-readable-docs.mjs`
 `readability_gate: scripts/governance/check-v1-1-governance-readability.mjs`
 
 ## A. Purpose
 
-This document prepares a future tag/release decision, but does not create a
-tag or release now.
+This document prepares a future tag/release decision, but does not create
+a tag or release now.
 
 ## B. Candidate Tag Pattern
 

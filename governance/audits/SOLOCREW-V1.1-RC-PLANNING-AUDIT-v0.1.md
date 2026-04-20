@@ -1,14 +1,13 @@
 # SoloCrew V1.1 RC Planning Audit v0.1
 
 `doc_id: SOLOCREW-V1.1-RC-PLANNING-AUDIT-v0.1`
-
-`readability_status: audit_ready_multiline_markdown`
+`generated_by: scripts/governance/write-v1-1-rc-readable-docs.mjs`
 `readability_gate: scripts/governance/check-v1-1-governance-readability.mjs`
 
 ## A. Purpose
 
-This audit checks whether the V1.1 RC planning pack is complete, readable, and
-still explicitly below any actual release, tag, or seal step.
+This audit checks whether the V1.1 RC planning pack is complete,
+readable, and still explicitly below any actual release, tag, or seal step.
 
 ## B. Planning Matrix
 

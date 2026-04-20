@@ -1,15 +1,14 @@
 # SoloCrew V1.1 Boundary and Risk Review v0.1
 
 `doc_id: SOLOCREW-V1.1-BOUNDARY-AND-RISK-REVIEW-v0.1`
-
-`readability_status: audit_ready_multiline_markdown`
+`generated_by: scripts/governance/write-v1-1-rc-readable-docs.mjs`
 `readability_gate: scripts/governance/check-v1-1-governance-readability.mjs`
 
 ## A. Purpose
 
-This review records the key V1.1 boundary risks that must stay explicit before
-any future release-candidate notes, seal preparation, or seal authorization
-wave.
+This review records the key V1.1 boundary risks that must stay explicit
+before any future release-candidate notes, seal preparation, or seal
+authorization wave.
 
 ## B. Risk Table
 

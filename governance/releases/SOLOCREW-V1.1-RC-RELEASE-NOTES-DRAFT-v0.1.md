@@ -1,8 +1,7 @@
 # SoloCrew V1.1 RC Release Notes Draft v0.1
 
 `doc_id: SOLOCREW-V1.1-RC-RELEASE-NOTES-DRAFT-v0.1`
-
-`readability_status: audit_ready_multiline_markdown`
+`generated_by: scripts/governance/write-v1-1-rc-readable-docs.mjs`
 `readability_gate: scripts/governance/check-v1-1-governance-readability.mjs`
 
 ## A. Purpose
@@ -10,7 +9,6 @@
 This document is a release-candidate notes draft only.
 
 It is:
-
 - not final release notes
 - not release seal
 - no tag created

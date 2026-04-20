@@ -1,8 +1,7 @@
 # SoloCrew V1.1 RC Validation Plan v0.1
 
 `doc_id: SOLOCREW-V1.1-RC-VALIDATION-PLAN-v0.1`
-
-`readability_status: audit_ready_multiline_markdown`
+`generated_by: scripts/governance/write-v1-1-rc-readable-docs.mjs`
 `readability_gate: scripts/governance/check-v1-1-governance-readability.mjs`
 
 ## A. Purpose
