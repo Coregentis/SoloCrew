@@ -38,7 +38,7 @@ an external release seal has already happened.
 - seal_date:
   - `2026-04-20`
 - seal_status:
-  - `SEAL_RECORD_DRAFTED_PENDING_TAG_OR_RELEASE_DECISION`
+  - `SEAL_RECORD_FINALIZED_FOR_TAGGED_OPERATIONAL_V1_RC_SEAL`
 - seal_line:
   - `Operational V1`
 - seal_type:
@@ -282,12 +282,12 @@ The following boundaries remain held:
 
 ## I. Final Decision
 
-`SEAL_RECORD_DRAFTED_READY_FOR_TAG_DECISION`
+`SEAL_RECORD_FINALIZED_READY_FOR_TAGGED_REFERENCE`
 
-This decision means the bounded seal record is now drafted and the next
-governance step may decide the tag pattern and release-note drafting path.
-It does not mean a tag exists, a GitHub release exists, or an external release
-seal already happened.
+This decision means the bounded seal record is now finalized for the tagged RC
+reference path.
+It still does not mean provider/channel execution, GitHub release creation, or
+execution-bearing completion exists.
 
 ## J. Tag / Release Instruction Boundary
 
@@ -335,3 +335,16 @@ Alignment rules:
 - `sealed_commit` remains intentionally pending until tag/release
   authorization or later seal-confirmation flow resolves it
 - no external release artifact exists yet
+
+## M. Final Tag Reference
+
+- recommended tag:
+  - `solocrew-operational-v1-rc-seal-20260420`
+- tag status:
+  - `TO_BE_CREATED_AFTER_FINAL_COMMIT_VALIDATION`
+- target policy:
+  - tag must point to the final seal completion commit
+- GitHub release status:
+  - `NOT_CREATED_IN_THIS_WAVE`
+- final release note reference:
+  - `governance/releases/SOLOCREW-OPERATIONAL-V1-RELEASE-NOTES-v0.1.md`
