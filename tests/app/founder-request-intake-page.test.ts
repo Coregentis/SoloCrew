@@ -7,6 +7,9 @@ import {
   FOUNDER_REQUEST_INTAKE_ROUTE,
 } from "../../app/shell/founder-request-intake.ts";
 import {
+  createV11IntakeToPacketPageModel,
+} from "../../app/shell/create-v1-1-intake-to-packet-page-model.ts";
+import {
   renderFounderRequestIntakePage,
 } from "../../app/pages/founder-request-intake-page.ts";
 import type {
@@ -30,6 +33,58 @@ function create_founder_request_intake() {
     evidence_hint: "handoff review and staging surfaces already carry bounded evidence posture",
     created_at: "2026-04-19T12:00:00Z",
     non_executing: true as const,
+  };
+}
+
+function create_v11_projection_summary() {
+  return {
+    projection_summary_id: "projection-summary-01",
+    project_id: "project-01",
+    state_exposure: {
+      projection_id: "projection-state-01",
+      project_id: "project-01",
+      source_runtime_ref: "runtime-ref-01",
+      state_summary: {
+        initial_state: "state_observed",
+        transition_event: "raise_review",
+        requested_next_state: "state_review_needed",
+        evaluated_next_state: "state_review_needed",
+        transition_accepted: true,
+        final_state: "state_review_needed",
+        terminal: false,
+      },
+      non_executing: true as const,
+    },
+    evidence_posture: {
+      evidence_summary_id: "evidence-summary-01",
+      project_id: "project-01",
+      evidence_available: true,
+      evidence_refs: ["evidence-ref-01"],
+      evidence_summary:
+        "Bounded evidence summary remains available for review and staging.",
+      stale: false,
+      insufficient: false,
+    },
+    recommendation: {
+      recommendation_id: "recommendation-01",
+      project_id: "project-01",
+      recommendation_summary:
+        "Prepare the next review step without executing any external action.",
+      recommended_next_posture: "review_needed",
+      allowed_next_step: "bounded_review_step",
+      blocked_actions: [
+        "approve",
+        "reject",
+        "dispatch",
+        "execute",
+        "provider_channel_send",
+      ],
+      non_executing: true as const,
+      requires_later_authorization: true as const,
+    },
+    source_refs: ["source-ref-01"],
+    non_executing: true as const,
+    runtime_private_fields_omitted: true as const,
   };
 }
 
@@ -244,4 +299,30 @@ test("[app] founder request intake source stays inside local app lanes only", ()
       `founder request intake source must not include forbidden token ${token}`
     );
   }
+});
+
+test("[app] founder request intake page exposes packet candidate planning status", () => {
+  const request = {
+    ...create_founder_request_intake(),
+    project_id: "project-01",
+  };
+  const intake_shell = composeFounderRequestIntakeShell(request);
+  const page_model = createV11IntakeToPacketPageModel({
+    request,
+    projection_summary: create_v11_projection_summary(),
+  });
+  const page = renderFounderRequestIntakePage(intake_shell, undefined, page_model);
+
+  assert.ok(page.sections.v11_packet_candidate);
+  assert.equal(page.sections.v11_packet_candidate?.review_posture, "review_needed");
+  assert.equal(page.sections.v11_packet_candidate?.staging_posture, "packet_candidate");
+  assert.equal(page.sections.v11_packet_candidate?.review_ready, true);
+  assert.match(page.html, /V1\.1 Packet Candidate Planning/);
+  assert.match(page.html, /Packet candidate label: packet candidate review-ready/);
+  assert.match(page.html, /Evidence posture: evidence summary: Bounded evidence summary remains available for review and staging\./);
+  assert.match(page.html, /Recommendation summary: non-executing recommendation:/);
+  assert.match(page.html, /Transition accepted is approval: false/);
+  assert.match(page.html, /Evidence summary is proof: false/);
+  assert.match(page.html, /Review posture remains bounded product planning status and not approval\./);
+  assert.doesNotMatch(page.html, /approval granted/i);
 });

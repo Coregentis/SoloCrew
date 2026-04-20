@@ -2,6 +2,7 @@
 
 ## 2026-04-20
 
+- implemented V1.1 app/page integration for intake-to-packet flow; added a page model helper; updated founder intake, handoff, and review pages; added app tests; no provider/channel execution; no approve/reject/dispatch/execute; no founder queue; no direct runtime-private dependency; no summary-as-proof claim
 - added the V1.1 app/page integration scope, page data mapping plan, app/page implementation plan, app/page test plan, and app/page integration gate with no app/page implementation, no provider/channel execution, no approve/reject/dispatch/execute, no founder queue, and no direct runtime-private dependency
 - hardened V1.1 intake-to-packet adapter and flow after implementation review; added request-side raw-key rejection; expanded negative fixture coverage for all raw keys, forbidden positive labels, and direct action labels; preserved blocked_actions as negative boundary list; no app/page change; no provider/channel execution; no approve/reject/dispatch/execute; no founder queue; no Cognitive_OS/MPLP change
 - implemented V1.1 intake-to-packet adapter and flow, mapping founder request plus projection-safe summary envelope to packet candidate / review-staging flow while preserving evidence/stale/insufficient posture and non-executing recommendation, rejecting raw runtime-like keys, forbidden execution labels, and project mismatch, with no provider/channel execution, approve/reject/dispatch/execute, founder queue, or direct runtime-private dependency

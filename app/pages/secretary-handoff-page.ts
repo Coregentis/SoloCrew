@@ -1,6 +1,9 @@
 import type {
   SecretaryHandoffStagingShell,
 } from "../shell/secretary-handoff-staging-contract.ts";
+import type {
+  V11IntakeToPacketPageModel,
+} from "../shell/create-v1-1-intake-to-packet-page-model.ts";
 
 export interface SecretaryHandoffPage {
   route_path: string;
@@ -46,6 +49,7 @@ export interface SecretaryHandoffPage {
     };
     rationale_evidence:
       SecretaryHandoffStagingShell["handoff_staging_projection"]["rationale_evidence"];
+    v11_packet_candidate?: V11IntakeToPacketPageModel;
     founder_request_exception_preview?: {
       request_ref: string;
       request_label: string;
@@ -157,7 +161,8 @@ function summarize_terminal_boundary(terminal: boolean): string {
 }
 
 export function renderSecretaryHandoffPage(
-  staging_shell: SecretaryHandoffStagingShell
+  staging_shell: SecretaryHandoffStagingShell,
+  v11_packet_candidate?: V11IntakeToPacketPageModel
 ): SecretaryHandoffPage {
   const staging_projection = staging_shell.handoff_staging_projection;
   const founder_request_exception_preview =
@@ -189,6 +194,12 @@ export function renderSecretaryHandoffPage(
       non_executing_notice: staging_projection.non_executing_notice,
     },
     rationale_evidence: staging_projection.rationale_evidence,
+    v11_packet_candidate: v11_packet_candidate
+      ? {
+          ...v11_packet_candidate,
+          boundary_summary: [...v11_packet_candidate.boundary_summary],
+        }
+      : undefined,
     founder_request_exception_preview: founder_request_exception_preview
       ? {
           request_ref: founder_request_exception_preview.request_ref,
@@ -327,6 +338,42 @@ export function renderSecretaryHandoffPage(
     )}</p>`,
     `<p>Notice: ${escape_html(sections.framing.non_executing_notice)}</p>`,
     "</section>",
+    ...(sections.v11_packet_candidate
+      ? [
+          "<section data-section=\"v1-1-packet-candidate\">",
+          "<h2>V1.1 Packet Candidate Staging</h2>",
+          `<p>Packet candidate id: ${escape_html(
+            sections.v11_packet_candidate.packet_candidate_id
+          )}</p>`,
+          `<p>Review posture: ${escape_html(
+            sections.v11_packet_candidate.review_posture
+          )}</p>`,
+          `<p>Staging posture: ${escape_html(
+            sections.v11_packet_candidate.staging_posture
+          )}</p>`,
+          `<p>Packet candidate label: ${escape_html(
+            sections.v11_packet_candidate.packet_posture_label
+          )}</p>`,
+          `<p>Evidence posture: ${escape_html(
+            sections.v11_packet_candidate.evidence_posture_label
+          )}</p>`,
+          `<p>Recommendation summary: ${escape_html(
+            sections.v11_packet_candidate.recommendation_label
+          )}</p>`,
+          ...(sections.v11_packet_candidate.blocked_reason
+            ? [
+                `<p>Blocked by contract reason: ${escape_html(
+                  sections.v11_packet_candidate.blocked_reason
+                )}</p>`,
+              ]
+            : []),
+          ...sections.v11_packet_candidate.boundary_summary.map(
+            (line) => `<p>Boundary summary: ${escape_html(line)}</p>`
+          ),
+          "<p>Staging remains non-executing and does not become dispatch-ready.</p>",
+          "</section>",
+        ]
+      : []),
     "<section data-section=\"rationale-evidence\">",
     "<h2>Rationale and Evidence</h2>",
     `<p>Rationale summary: ${escape_html(

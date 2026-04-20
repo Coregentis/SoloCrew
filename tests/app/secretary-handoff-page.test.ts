@@ -12,6 +12,9 @@ import {
   composeSecretaryHandoffStagingShell,
 } from "../../app/shell/secretary-handoff-staging.ts";
 import {
+  createV11IntakeToPacketPageModel,
+} from "../../app/shell/create-v1-1-intake-to-packet-page-model.ts";
+import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
 } from "../../projection/contracts/structural-boundary.ts";
 
@@ -143,6 +146,75 @@ function create_runtime_inputs() {
       },
     },
   ];
+}
+
+function create_v11_request() {
+  return {
+    project_id: "project-01",
+    founder_request_id: "founder-request-01",
+    request_label: "Product update planning request",
+    request_text:
+      "Help me turn the upcoming product update into a review-ready packet before we do anything externally.",
+    request_intent_hint: "product_update_planning",
+    requested_context_summary: "Keep this bounded to review and staging only.",
+    risk_hint: "avoid external action",
+    evidence_hint: "use only summary-safe evidence",
+    created_at: "2026-04-20T00:00:00.000Z",
+    non_executing: true as const,
+  };
+}
+
+function create_v11_projection_summary(overrides = {}) {
+  return {
+    projection_summary_id: "projection-summary-01",
+    project_id: "project-01",
+    state_exposure: {
+      projection_id: "projection-state-01",
+      project_id: "project-01",
+      source_runtime_ref: "runtime-ref-01",
+      state_summary: {
+        initial_state: "state_observed",
+        transition_event: "raise_review",
+        requested_next_state: "state_review_needed",
+        evaluated_next_state: "state_review_needed",
+        transition_accepted: true,
+        final_state: "state_review_needed",
+        terminal: false,
+      },
+      non_executing: true as const,
+    },
+    evidence_posture: {
+      evidence_summary_id: "evidence-summary-01",
+      project_id: "project-01",
+      evidence_available: true,
+      evidence_refs: ["evidence-ref-01"],
+      evidence_summary:
+        "Bounded evidence summary remains available for review and staging.",
+      stale: false,
+      insufficient: false,
+    },
+    recommendation: {
+      recommendation_id: "recommendation-01",
+      project_id: "project-01",
+      recommendation_summary:
+        "Prepare the next review step without executing any external action.",
+      recommended_next_posture: "review_needed",
+      allowed_next_step: "bounded_review_step",
+      blocked_actions: [
+        "approve",
+        "reject",
+        "dispatch",
+        "execute",
+        "provider_channel_send",
+      ],
+      non_executing: true as const,
+      requires_later_authorization: true as const,
+    },
+    source_refs: ["source-ref-01"],
+    non_executing: true as const,
+    runtime_private_fields_omitted: true as const,
+    ...overrides,
+  };
 }
 
 test("[app] secretary handoff page stays staged-only and below direct-control semantics", () => {
@@ -389,4 +461,32 @@ test("[app] secretary handoff page hardens compact evidence and stale preview se
   assert.doesNotMatch(page.html, /Requested next state:/);
   assert.doesNotMatch(page.html, /Reducer target state:/);
   assert.doesNotMatch(page.html, /Bounded recommendation summary/);
+});
+
+test("[app] secretary handoff page displays V1.1 staging posture without dispatch semantics", () => {
+  const portfolio_shell =
+    composePortfolioSecretaryShellFromRuntimeInputs(create_runtime_inputs());
+  const staging_shell = composeSecretaryHandoffStagingShell(
+    portfolio_shell,
+    "cell-scope-01"
+  );
+  const page_model = createV11IntakeToPacketPageModel({
+    request: create_v11_request(),
+    projection_summary: create_v11_projection_summary({
+      evidence_posture: {
+        ...create_v11_projection_summary().evidence_posture,
+        stale: true,
+      },
+    }),
+  });
+  const page = renderSecretaryHandoffPage(staging_shell, page_model);
+
+  assert.ok(page.sections.v11_packet_candidate);
+  assert.equal(page.sections.v11_packet_candidate?.staging_posture, "stale_context");
+  assert.match(page.html, /V1\.1 Packet Candidate Staging/);
+  assert.match(page.html, /Staging posture: stale_context/);
+  assert.match(page.html, /Evidence posture: stale context:/);
+  assert.match(page.html, /Boundary summary: No provider\/channel execution\./);
+  assert.match(page.html, /Staging remains non-executing and does not become dispatch-ready\./);
+  assert.doesNotMatch(page.html, /dispatch-ready button/i);
 });

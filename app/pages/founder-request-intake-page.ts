@@ -5,6 +5,9 @@ import {
   FOUNDER_REQUEST_INTAKE_ROUTE,
 } from "../shell/founder-request-intake.ts";
 import type {
+  V11IntakeToPacketPageModel,
+} from "../shell/create-v1-1-intake-to-packet-page-model.ts";
+import type {
   FounderRequestStateEvaluationExposure,
 } from "../../projection/contracts/founder-request-exception-packet-contract.ts";
 
@@ -60,6 +63,7 @@ export interface FounderRequestIntakePage {
       risk_hint?: string;
       evidence_hint?: string;
     };
+    v11_packet_candidate?: V11IntakeToPacketPageModel;
     state_evaluation_summary?: FounderRequestIntakeStateEvaluationSummary;
     truth_boundary: FounderRequestIntakeShell["truth_boundary"];
   };
@@ -111,7 +115,8 @@ function summarize_terminal_boundary(terminal: boolean): string {
 
 export function renderFounderRequestIntakePage(
   intake_shell: FounderRequestIntakeShell,
-  state_evaluation_summary?: FounderRequestIntakeStateEvaluationSummary
+  state_evaluation_summary?: FounderRequestIntakeStateEvaluationSummary,
+  v11_packet_candidate?: V11IntakeToPacketPageModel
 ): FounderRequestIntakePage {
   const sections = {
     header: {
@@ -148,6 +153,12 @@ export function renderFounderRequestIntakePage(
       risk_hint: intake_shell.current_request_intake.risk_hint,
       evidence_hint: intake_shell.current_request_intake.evidence_hint,
     },
+    v11_packet_candidate: v11_packet_candidate
+      ? {
+          ...v11_packet_candidate,
+          boundary_summary: [...v11_packet_candidate.boundary_summary],
+        }
+      : undefined,
     state_evaluation_summary: state_evaluation_summary
       ? {
           ...state_evaluation_summary,
@@ -215,6 +226,55 @@ export function renderFounderRequestIntakePage(
       sections.request_content.evidence_hint
     ),
     "</section>",
+    ...(sections.v11_packet_candidate
+      ? [
+          "<section data-section=\"v1-1-packet-candidate\">",
+          "<h2>V1.1 Packet Candidate Planning</h2>",
+          `<p>Flow id: ${escape_html(
+            sections.v11_packet_candidate.flow_id
+          )}</p>`,
+          `<p>Packet candidate id: ${escape_html(
+            sections.v11_packet_candidate.packet_candidate_id
+          )}</p>`,
+          `<p>Review posture: ${escape_html(
+            sections.v11_packet_candidate.review_posture
+          )}</p>`,
+          `<p>Staging posture: ${escape_html(
+            sections.v11_packet_candidate.staging_posture
+          )}</p>`,
+          `<p>Review ready: ${sections.v11_packet_candidate.review_ready}</p>`,
+          `<p>Return for revision: ${sections.v11_packet_candidate.return_for_revision}</p>`,
+          `<p>Blocked by contract: ${sections.v11_packet_candidate.blocked_by_contract}</p>`,
+          `<p>Packet candidate label: ${escape_html(
+            sections.v11_packet_candidate.packet_posture_label
+          )}</p>`,
+          `<p>Evidence posture: ${escape_html(
+            sections.v11_packet_candidate.evidence_posture_label
+          )}</p>`,
+          `<p>Recommendation summary: ${escape_html(
+            sections.v11_packet_candidate.recommendation_label
+          )}</p>`,
+          ...(sections.v11_packet_candidate.blocked_reason
+            ? [
+                `<p>Blocked by contract reason: ${escape_html(
+                  sections.v11_packet_candidate.blocked_reason
+                )}</p>`,
+              ]
+            : []),
+          ...sections.v11_packet_candidate.boundary_summary.map(
+            (line) => `<p>Boundary summary: ${escape_html(line)}</p>`
+          ),
+          `<p>Transition accepted is approval: ${sections.v11_packet_candidate.interpretation_guards.transition_accepted_is_approval}</p>`,
+          `<p>Terminal is execution complete: ${sections.v11_packet_candidate.interpretation_guards.terminal_is_execution_complete}</p>`,
+          `<p>Evidence summary is proof: ${sections.v11_packet_candidate.interpretation_guards.evidence_summary_is_proof}</p>`,
+          `<p>Recommendation is execution: ${sections.v11_packet_candidate.interpretation_guards.recommendation_is_execution}</p>`,
+          `<p>Non-executing: ${sections.v11_packet_candidate.non_executing}</p>`,
+          "<p>Review posture remains bounded product planning status and not approval.</p>",
+          "<p>Evidence summary remains summary-only and not proof or certification.</p>",
+          "<p>Blocked by contract remains a boundary failure and not a dispatch-ready state.</p>",
+          "</section>",
+        ]
+      : []),
     ...(sections.state_evaluation_summary
       ? [
           "<section data-section=\"state-evaluation-summary\">",
