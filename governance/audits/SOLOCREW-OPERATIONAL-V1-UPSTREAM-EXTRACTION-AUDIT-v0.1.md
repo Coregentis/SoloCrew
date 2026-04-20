@@ -79,10 +79,18 @@ The neutralized concepts that may be handed upstream are:
 These candidates require cross-repo backflow handling before any V1.1
 implementation wave uses them as assumed upstream truth.
 
+Upstream repositories record only neutral downstream-projection or
+evidence-derived candidates. SoloCrew product names and product version names
+remain product-layer evidence and are not promoted into Cognitive_OS runtime
+law or MPLP protocol law.
+
 ## F. V1.1 Gate Implication
 
 - V1.1 implementation must not proceed until the `Cognitive_OS` candidate map
-  and MPLP mapping note are committed and pushed.
+  (`CGOS-DOWNSTREAM-PROJECTION-PATTERN-CANDIDATE-MAP-v0.1`) and MPLP mapping
+  candidate note
+  (`MPLP-DOWNSTREAM-EVIDENCE-LIFECYCLE-GOVERNANCE-CANDIDATE-NOTE-v0.1`) are
+  committed and pushed.
 - Existing V1.1 governance opening is allowed as planning only.
 - Existing V1.1 governance opening is not implementation authority.
 

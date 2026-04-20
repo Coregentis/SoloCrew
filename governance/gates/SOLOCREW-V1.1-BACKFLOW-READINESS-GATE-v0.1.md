@@ -15,9 +15,9 @@ This gate does not authorize implementation in this wave.
 | --- | --- | --- |
 | 1 | Operational V1 sealed tag exists and target SHA is verified | `PASS` |
 | 2 | upstream extraction audit exists | `PASS` |
-| 3 | `Cognitive_OS` pattern candidate map exists | `PASS_AFTER_THIS_PACK` |
-| 4 | MPLP mapping candidate note exists | `PASS_AFTER_THIS_PACK` |
-| 5 | tri-repo SOP compliance record exists | `PASS_AFTER_THIS_PACK` |
+| 3 | `Cognitive_OS` downstream projection pattern candidate map exists | `PASS_AFTER_THIS_PACK` |
+| 4 | MPLP downstream evidence lifecycle governance candidate note exists | `PASS_AFTER_THIS_PACK` |
+| 5 | tri-repo downstream backflow compliance record exists | `PASS_AFTER_THIS_PACK` |
 | 6 | V1.1 implementation remains non-executing | `PASS` |
 | 7 | no provider/channel execution | `PASS` |
 | 8 | no approve/reject/dispatch/execute | `PASS` |
@@ -37,6 +37,11 @@ backflow artifacts can now land together across:
 
 This gate authorizes planning only.
 It does not authorize V1.1 implementation.
+
+Upstream repositories record only neutral downstream-projection or
+evidence-derived candidates. SoloCrew product names and product version names
+remain product-layer evidence and are not promoted into Cognitive_OS runtime
+law or MPLP protocol law.
 
 ## Gate Interpretation
 
