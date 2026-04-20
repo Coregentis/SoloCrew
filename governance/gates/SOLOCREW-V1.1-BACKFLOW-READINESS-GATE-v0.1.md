@@ -15,9 +15,9 @@ This gate does not authorize implementation in this wave.
 | --- | --- | --- |
 | 1 | Operational V1 sealed tag exists and target SHA is verified | `PASS` |
 | 2 | upstream extraction audit exists | `PASS` |
-| 3 | `Cognitive_OS` pattern candidate map exists | `PASS_AFTER_PUSH` |
-| 4 | MPLP mapping candidate note exists | `PASS_AFTER_PUSH` |
-| 5 | tri-repo SOP compliance record exists | `PASS_AFTER_PUSH` |
+| 3 | `Cognitive_OS` pattern candidate map exists | `PASS_AFTER_THIS_PACK` |
+| 4 | MPLP mapping candidate note exists | `PASS_AFTER_THIS_PACK` |
+| 5 | tri-repo SOP compliance record exists | `PASS_AFTER_THIS_PACK` |
 | 6 | V1.1 implementation remains non-executing | `PASS` |
 | 7 | no provider/channel execution | `PASS` |
 | 8 | no approve/reject/dispatch/execute | `PASS` |
@@ -26,19 +26,24 @@ This gate does not authorize implementation in this wave.
 
 ## Current Decision
 
-`V1_1_BACKFLOW_GATE_BLOCKED_UNTIL_UPSTREAM_PACK`
+`V1_1_BACKFLOW_GATE_READY_FOR_PLANNING_AFTER_UPSTREAM_PACK`
 
-This is the truthful current gate value because V1.1 implementation should stay
-blocked until the full cross-repo backflow pack is committed and pushed across:
+This is the truthful post-pack gate value because the required cross-repo
+backflow artifacts can now land together across:
 
 - `SoloCrew`
 - `Cognitive_OS`
 - `MPLP-Protocol`
 
+This gate authorizes planning only.
+It does not authorize V1.1 implementation.
+
 ## Gate Interpretation
 
-- planning may continue
-- implementation remains blocked
+- planning may continue after the full tri-repo backflow pack is committed and
+  pushed
+- implementation remains blocked until a later explicit implementation-planning
+  wave authorizes it
 - the block is governance/alignment based, not a product-runtime bug
 - no V1.1 implementation wave should treat pending upstream candidate material
   as already-adopted runtime or protocol law

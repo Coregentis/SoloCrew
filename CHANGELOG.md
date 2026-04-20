@@ -2,7 +2,7 @@
 
 ## 2026-04-20
 
-- added the Operational V1 upstream extraction audit and V1.1 backflow readiness gate, freezing which sealed capabilities stay product-only, which become Cognitive_OS or MPLP candidate material, and why V1.1 implementation remains blocked until the full tri-repo backflow pack is committed and pushed without any implementation change
+- added the Operational V1 upstream extraction audit and V1.1 backflow readiness gate, freezing which sealed capabilities stay product-only, which become Cognitive_OS or MPLP candidate material, and why V1.1 may proceed to planning only after the full tri-repo backflow pack lands while implementation remains separately blocked without any implementation change
 - SoloCrew V1.1 opened as the usable founder-loop improvement line after the Operational V1 RC seal. V1.1 focuses on intake-to-packet-to-review usability and remains non-executing.
 - added the SoloCrew V1.1 opening governance pack with a scope baseline, reuse-first gap audit, founder-loop flow contract, first usable scenario pack, and open gate baseline traced to the sealed Operational V1 tag and commit
 - added the Operational V1 seal completion pack, freezing tag authorization audit, final release notes, final seal record finalization, final closure record, and annotated-tag creation boundary without provider/channel execution, approve/reject/dispatch/execute behavior, founder queue, or autonomous company operation

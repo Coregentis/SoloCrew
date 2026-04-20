@@ -23,11 +23,12 @@ It is:
   - `solocrew-operational-v1-rc-seal-20260420`
 - sealed commit:
   - `2dea8c96052c28cacdc89c80bb30ea35c6e62468`
-- current main:
-  - `d6c544fe123606832f3dbd32e29e83a413a1fcfe`
+- current main at backflow-pack input:
+  - `98cbebab27b258bfdb1163ce19c9ddbeb24668c0`
 - note:
-  - current `main` contains the V1.1 governance opening pack only and does not
-    introduce implementation drift over the sealed Operational V1 product truth
+  - current `main` contains governance-only Operational V1 backflow framing and
+    V1.1 planning material only; it does not introduce implementation drift over
+    the sealed Operational V1 product truth
 
 ## C. Capability Classification Table
 
@@ -81,7 +82,7 @@ implementation wave uses them as assumed upstream truth.
 ## F. V1.1 Gate Implication
 
 - V1.1 implementation must not proceed until the `Cognitive_OS` candidate map
-  and MPLP mapping note exist.
+  and MPLP mapping note are committed and pushed.
 - Existing V1.1 governance opening is allowed as planning only.
 - Existing V1.1 governance opening is not implementation authority.
 
