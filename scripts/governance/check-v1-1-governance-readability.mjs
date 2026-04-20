@@ -171,6 +171,10 @@ function checkMarkdownDocuments() {
         failures.push(`FAIL ${rule.path}: missing required decision "${decision}"`);
       }
     }
+
+    if (!text.includes("## Readability Maintenance")) {
+      failures.push(`FAIL ${rule.path}: missing "## Readability Maintenance" section`);
+    }
   }
 
   return failures;
