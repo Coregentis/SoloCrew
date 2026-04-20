@@ -2,6 +2,7 @@
 
 ## 2026-04-20
 
+- added the V1.1 intake-to-packet product scope, projection consumption plan, implementation plan, scenario and fixture plan, test plan, and planning readiness gate without implementation, provider/channel execution, approve/reject/dispatch/execute behavior, founder queue, or direct runtime-private dependency
 - added the Operational V1 upstream extraction audit and V1.1 backflow readiness gate, freezing which sealed capabilities stay product-only, which become Cognitive_OS or MPLP candidate material, and why V1.1 may proceed to planning only after the full tri-repo backflow pack lands while implementation remains separately blocked without any implementation change
 - clarified that upstream repositories record only neutral downstream-projection or evidence-derived candidates, while SoloCrew product names and product version names remain product-layer evidence and are not promoted into Cognitive_OS runtime law or MPLP protocol law
 - SoloCrew V1.1 opened as the usable founder-loop improvement line after the Operational V1 RC seal. V1.1 focuses on intake-to-packet-to-review usability and remains non-executing.
