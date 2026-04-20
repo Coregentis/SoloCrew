@@ -1,6 +1,6 @@
 # SoloCrew V1.1 End-to-End Usable Founder Loop Closure Audit v0.1
 
-`SOLOCREW-V1.1-END-TO-END-USABLE-FOUNDER-LOOP-CLOSURE-AUDIT-v0.1`
+`doc_id: SOLOCREW-V1.1-END-TO-END-USABLE-FOUNDER-LOOP-CLOSURE-AUDIT-v0.1`
 
 ## A. Purpose
 
@@ -35,7 +35,7 @@ founder request input
 ## C. Closure Matrix
 
 | Stage | Source artifact | Status | Evidence | Boundary notes |
-| --- | --- | --- | --- | --- |
+|---|---|---|---|---|
 | product scope | `governance/plans/SOLOCREW-V1.1-INTAKE-TO-PACKET-PRODUCT-SCOPE-v0.1.md` | `PASS` | V1.1 loop goal, wow moment, exclusions, and product boundary are frozen | non-executing founder loop only |
 | projection consumption plan | `governance/plans/SOLOCREW-V1.1-PROJECTION-CONSUMPTION-PLAN-v0.1.md` | `PASS` | allowed summary surfaces and forbidden interpretations are frozen | no raw runtime-private dependency |
 | implementation plan | `governance/plans/SOLOCREW-V1.1-INTAKE-TO-PACKET-IMPLEMENTATION-PLAN-v0.1.md` | `PASS` | future adapter/flow shape and forbidden behavior are frozen | no provider/channel, no queue |

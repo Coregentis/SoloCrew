@@ -1,6 +1,6 @@
 # SoloCrew V1.1 Boundary and Risk Review v0.1
 
-`SOLOCREW-V1.1-BOUNDARY-AND-RISK-REVIEW-v0.1`
+`doc_id: SOLOCREW-V1.1-BOUNDARY-AND-RISK-REVIEW-v0.1`
 
 ## A. Purpose
 
@@ -8,8 +8,8 @@ This review records V1.1 boundary risks before release-candidate planning.
 
 ## B. Risk Table
 
-| risk | current mitigation | residual risk | release-candidate implication |
-| --- | --- | --- | --- |
+| Risk | Current mitigation | Residual risk | Release-candidate implication |
+|---|---|---|---|
 | approval wording risk | interpretation guards and page copy explicitly deny approval semantics | low | release notes must keep `review-ready` below approval |
 | execution-complete wording risk | terminal guard and page copy explicitly deny execution completion | low | RC wording must preserve terminal != execution complete |
 | evidence-as-proof risk | evidence summary wording stays summary-only in plans, code, and tests | low | RC wording must avoid proof/certification language |

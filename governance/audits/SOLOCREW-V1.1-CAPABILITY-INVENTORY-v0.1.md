@@ -1,6 +1,6 @@
 # SoloCrew V1.1 Capability Inventory v0.1
 
-`SOLOCREW-V1.1-CAPABILITY-INVENTORY-v0.1`
+`doc_id: SOLOCREW-V1.1-CAPABILITY-INVENTORY-v0.1`
 
 ## A. Purpose
 
@@ -8,8 +8,8 @@ This document inventories what V1.1 now actually provides.
 
 ## B. Capability Table
 
-| capability | implemented? | source files | tests | user-visible? | execution boundary |
-| --- | --- | --- | --- | --- | --- |
+| Capability | Implemented? | Source files | Tests | User-visible? | Execution boundary |
+|---|---|---|---|---|---|
 | founder request intake remains available | `YES` | `app/shell/founder-request-intake-contract.ts`, `app/shell/founder-request-intake.ts`, `app/pages/founder-request-intake-page.ts` | `tests/app/founder-request-intake-page.test.ts` | `YES` | non-executing |
 | projection-safe packet candidate generation | `YES` | `projection/adapters/founder-request-intake-to-packet-adapter.ts` | `tests/projection/founder-request-intake-to-packet-adapter.test.ts` | `INDIRECT` | non-executing |
 | review/staging flow result | `YES` | `projection/assembly/founder-request-intake-to-packet-flow.ts` | `tests/projection/founder-request-intake-to-packet-flow.test.ts` | `INDIRECT` | non-executing |

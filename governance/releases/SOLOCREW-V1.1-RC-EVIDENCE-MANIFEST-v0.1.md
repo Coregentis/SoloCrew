@@ -1,0 +1,47 @@
+# SoloCrew V1.1 RC Evidence Manifest v0.1
+
+`SOLOCREW-V1.1-RC-EVIDENCE-MANIFEST-v0.1`
+
+## A. Evidence Categories
+
+| Evidence category | Source artifact | Status | Notes |
+|---|---|---|---|
+| planning evidence | V1.1 planning chain under `governance/plans/` and `governance/gates/` | `READY` | planning baseline and implementation scope are frozen |
+| projection adapter evidence | `projection/adapters/founder-request-intake-to-packet-adapter.ts` | `READY` | packet candidate generation and boundary guards exist |
+| projection flow evidence | `projection/assembly/founder-request-intake-to-packet-flow.ts` | `READY` | deterministic flow result and blocked fallback exist |
+| hardening evidence | `governance/audits/SOLOCREW-V1.1-INTAKE-TO-PACKET-HARDENING-AUDIT-v0.1.md` | `READY` | negative fixture and request-side raw-key hardening are recorded |
+| app/page integration evidence | `governance/audits/SOLOCREW-V1.1-APP-PAGE-INTEGRATION-IMPLEMENTATION-AUDIT-v0.1.md` | `READY` | current app/page integration is implemented and audited |
+| closure evidence | `governance/audits/SOLOCREW-V1.1-END-TO-END-USABLE-FOUNDER-LOOP-CLOSURE-AUDIT-v0.1.md` | `READY` | loop closure decision is frozen |
+| capability inventory evidence | `governance/audits/SOLOCREW-V1.1-CAPABILITY-INVENTORY-v0.1.md` | `READY` | implemented / non-capability scope is frozen |
+| boundary/risk evidence | `governance/audits/SOLOCREW-V1.1-BOUNDARY-AND-RISK-REVIEW-v0.1.md` | `READY` | RC guardrails are frozen |
+| test evidence | targeted tests and `npm test` | `READY` | targeted and full regression commands are green |
+| forbidden grep evidence | forbidden boundary grep outputs in current wave | `READY` | findings remain negative-boundary / explicit exclusion only |
+
+## B. Source Files
+
+- `projection/adapters/founder-request-intake-to-packet-adapter.ts`
+- `projection/assembly/founder-request-intake-to-packet-flow.ts`
+- `app/shell/create-v1-1-intake-to-packet-page-model.ts`
+- `app/pages/founder-request-intake-page.ts`
+- `app/pages/secretary-handoff-page.ts`
+- `app/pages/secretary-handoff-review-page.ts`
+- targeted app/projection test files
+- V1.1 governance plans, audits, and gates
+
+## C. Tests
+
+- `node --experimental-strip-types --test tests/projection/founder-request-intake-to-packet-adapter.test.ts`
+- `node --experimental-strip-types --test tests/projection/founder-request-intake-to-packet-flow.test.ts`
+- `node --experimental-strip-types --test tests/app/create-v1-1-intake-to-packet-page-model.test.ts`
+- `node --experimental-strip-types --test tests/app/founder-request-intake-page.test.ts`
+- `node --experimental-strip-types --test tests/app/secretary-handoff-page.test.ts`
+- `node --experimental-strip-types --test tests/app/secretary-handoff-review-page.test.ts`
+- `npm test`
+
+Expected pass state:
+
+- all commands must pass before any future RC seal/tag wave
+
+## D. Decision
+
+`SOLOCREW_V1_1_RC_EVIDENCE_MANIFEST_READY`
