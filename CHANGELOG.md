@@ -2,7 +2,11 @@
 
 ## 2026-04-20
 
-- rewrote V1.1 closure and RC planning governance documents into audit-ready multi-line Markdown and added RC release notes draft, seal preparation plan, validation execution checklist, seal authorization gate draft, and governance readability audit; no app/projection source change, no capability change, no provider/channel execution, no approve/reject/dispatch/execute, no founder queue, no tag, no GitHub release, and no release/seal claim
+- repaired V1.1 RC governance readability using a reusable readability gate and
+  rewrote closure/RC/seal-prep artifacts into audit-ready multi-line Markdown;
+  no app/projection source change, no capability change, no provider/channel
+  execution, no approve/reject/dispatch/execute, no founder queue, no tag, no
+  GitHub release, and no release/seal claim
 - corrected V1.1 closure governance formatting and opened V1.1 RC planning pack with scope/disclosure, evidence manifest, validation plan, forbidden-claim gate, tag/release decision draft, and RC planning audit; no app/projection source change, no capability change, no provider/channel execution, no approve/reject/dispatch/execute, no founder queue, no release/seal claim, and no tag/release creation
 - added the V1.1 end-to-end usable founder loop closure audit, V1.1 capability inventory, boundary/risk review, and RC readiness gate draft, confirming non-executing founder loop closure with no provider/channel execution, no approve/reject/dispatch/execute, no founder queue, no direct runtime-private dependency, and no summary-as-proof claim
 - implemented V1.1 app/page integration for intake-to-packet flow; added a page model helper; updated founder intake, handoff, and review pages; added app tests; no provider/channel execution; no approve/reject/dispatch/execute; no founder queue; no direct runtime-private dependency; no summary-as-proof claim

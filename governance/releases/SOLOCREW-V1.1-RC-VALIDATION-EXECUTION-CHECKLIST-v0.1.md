@@ -18,7 +18,7 @@ before any seal authorization or tag/release step.
 | `node --experimental-strip-types --test tests/app/secretary-handoff-page.test.ts` | `YES` | handoff page tests pass | `NO` |
 | `node --experimental-strip-types --test tests/app/secretary-handoff-review-page.test.ts` | `YES` | review page tests pass | `NO` |
 | `npm test` | `YES` | full regression suite passes | `NO` |
-| `git diff --check` | `YES` | no whitespace or patch formatting issues | `NO` |
+| `git diff --check` | `YES` | no whitespace or patch-format issues | `NO` |
 | forbidden overclaim grep | `YES` | positive overclaim does not appear | `NO` |
 | decision grep | `YES` | required governance decisions remain present | `NO` |
 | source-change check | `YES` | no unexpected app/projection changes in a seal-prep-only wave | `NO` |

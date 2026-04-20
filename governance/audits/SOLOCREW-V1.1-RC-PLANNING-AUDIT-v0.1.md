@@ -5,7 +5,7 @@
 ## A. Purpose
 
 This audit checks whether the V1.1 RC planning pack is complete, readable, and
-still below any actual release, tag, or seal step.
+still explicitly below any actual release, tag, or seal step.
 
 ## B. Planning Matrix
 
@@ -19,7 +19,7 @@ still below any actual release, tag, or seal step.
 | RC forbidden claim gate | `PASS` | `governance/gates/SOLOCREW-V1.1-RC-FORBIDDEN-CLAIM-GATE-v0.1.md` | forbidden and allowed wording frozen |
 | RC tag/release decision draft | `PASS` | `governance/releases/SOLOCREW-V1.1-RC-TAG-AND-RELEASE-DECISION-DRAFT-v0.1.md` | no tag/release created |
 | RC release notes draft | `PASS` | `governance/releases/SOLOCREW-V1.1-RC-RELEASE-NOTES-DRAFT-v0.1.md` | draft only, not final notes |
-| RC seal preparation plan | `PASS` | `governance/releases/SOLOCREW-V1.1-RC-SEAL-PREPARATION-PLAN-v0.1.md` | later seal wave inputs and prohibitions frozen |
+| RC seal preparation plan | `PASS` | `governance/releases/SOLOCREW-V1.1-RC-SEAL-PREPARATION-PLAN-v0.1.md` | later seal-wave inputs and prohibitions frozen |
 | RC validation execution checklist | `PASS` | `governance/releases/SOLOCREW-V1.1-RC-VALIDATION-EXECUTION-CHECKLIST-v0.1.md` | later execution evidence requirements frozen |
 | RC seal authorization gate draft | `PASS` | `governance/gates/SOLOCREW-V1.1-RC-SEAL-AUTHORIZATION-GATE-v0.1.md` | authorization preconditions frozen |
 | governance readability audit | `PASS` | `governance/audits/SOLOCREW-V1.1-GOVERNANCE-READABILITY-AUDIT-v0.1.md` | readability regression controls added |
