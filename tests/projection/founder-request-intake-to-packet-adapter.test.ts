@@ -3,6 +3,7 @@ import test from "node:test";
 
 import {
   adaptFounderRequestIntakeToPacketCandidate,
+  FOUNDER_REQUEST_INTAKE_TO_PACKET_FORBIDDEN_RAW_KEYS,
   type FounderRequestIntakeProjectScopedObject,
   type SoloCrewProjectionSummaryEnvelope,
 } from "../../projection/adapters/founder-request-intake-to-packet-adapter.ts";
@@ -80,6 +81,23 @@ function create_projection_summary(
     ...overrides,
   };
 }
+
+const FORBIDDEN_POSITIVE_LABELS = [
+  "approved",
+  "rejected",
+  "dispatched",
+  "executed",
+  "provider_sent",
+  "channel_published",
+] as const;
+
+const FORBIDDEN_DIRECT_ACTION_LABELS = [
+  "approve",
+  "reject",
+  "dispatch",
+  "execute",
+  "provider_channel_send",
+] as const;
 
 test("[projection] founder request maps to packet candidate", () => {
   const result = adaptFounderRequestIntakeToPacketCandidate({
@@ -184,29 +202,161 @@ test("[projection] non-executing recommendation remains non-executing", () => {
   ]);
 });
 
-test("[projection] forbidden execution labels are rejected as positive/action labels", () => {
+test("[projection] blocked_actions may carry the canonical negative boundary list", () => {
+  const result = adaptFounderRequestIntakeToPacketCandidate({
+    request: create_request(),
+    projection_summary: create_projection_summary({
+      recommendation: {
+        ...create_projection_summary().recommendation!,
+        blocked_actions: [
+          "approve",
+          "reject",
+          "dispatch",
+          "execute",
+          "provider_channel_send",
+        ],
+      },
+    }),
+  });
+
+  assert.deepEqual(result.recommendation.blocked_actions, [
+    "approve",
+    "dispatch",
+    "execute",
+    "provider_channel_send",
+    "reject",
+  ]);
+  assert.equal(result.recommendation.non_executing, true);
+});
+
+test("[projection] full projection_summary raw runtime-like key fixtures are rejected", () => {
+  for (const raw_key of FOUNDER_REQUEST_INTAKE_TO_PACKET_FORBIDDEN_RAW_KEYS) {
+    assert.throws(() =>
+      adaptFounderRequestIntakeToPacketCandidate({
+        request: create_request(),
+        projection_summary: {
+          ...create_projection_summary(),
+          [raw_key]: "forbidden",
+        } as SoloCrewProjectionSummaryEnvelope,
+      })
+    );
+  }
+});
+
+test("[projection] full request raw runtime-like key fixtures are rejected", () => {
+  for (const raw_key of FOUNDER_REQUEST_INTAKE_TO_PACKET_FORBIDDEN_RAW_KEYS) {
+    assert.throws(() =>
+      adaptFounderRequestIntakeToPacketCandidate({
+        request: {
+          ...create_request(),
+          [raw_key]: "forbidden",
+        } as FounderRequestIntakeProjectScopedObject,
+        projection_summary: create_projection_summary(),
+      })
+    );
+  }
+});
+
+test("[projection] nested request raw runtime-like key fixtures are rejected", () => {
+  const invalid_request = {
+    ...create_request(),
+    some_nested: {
+      raw_psg: "forbidden",
+    },
+  } as FounderRequestIntakeProjectScopedObject;
+
   assert.throws(() =>
     adaptFounderRequestIntakeToPacketCandidate({
-      request: create_request(),
-      projection_summary: create_projection_summary({
-        recommendation: {
-          ...create_projection_summary().recommendation!,
-          allowed_next_step: "approve",
-        },
-      }),
-    })
+      request: invalid_request,
+      projection_summary: create_projection_summary(),
+    }),
+    /forbidden raw runtime-like key at request\.some_nested\.raw_psg/
   );
 });
 
-test("[projection] raw runtime-like keys are rejected", () => {
-  assert.throws(() =>
-    adaptFounderRequestIntakeToPacketCandidate({
-      request: create_request(),
-      projection_summary: {
-        ...create_projection_summary(),
-        raw_vsl: "forbidden",
-      } as SoloCrewProjectionSummaryEnvelope,
-    })
+test("[projection] full forbidden positive label fixtures are rejected", () => {
+  for (const forbidden_label of FORBIDDEN_POSITIVE_LABELS) {
+    assert.throws(() =>
+      adaptFounderRequestIntakeToPacketCandidate({
+        request: create_request({
+          request_label: forbidden_label,
+        }),
+        projection_summary: create_projection_summary(),
+      })
+    );
+  }
+});
+
+test("[projection] full direct action label fixtures are rejected outside blocked_actions", () => {
+  for (const forbidden_label of FORBIDDEN_DIRECT_ACTION_LABELS) {
+    assert.throws(() =>
+      adaptFounderRequestIntakeToPacketCandidate({
+        request: create_request(),
+        projection_summary: create_projection_summary({
+          recommendation: {
+            ...create_projection_summary().recommendation!,
+            allowed_next_step: forbidden_label,
+          },
+        }),
+      })
+    );
+  }
+});
+
+test("[projection] deterministic error string includes offending request raw key", () => {
+  assert.throws(
+    () =>
+      adaptFounderRequestIntakeToPacketCandidate({
+        request: {
+          ...create_request(),
+          raw_vsl: "forbidden",
+        } as FounderRequestIntakeProjectScopedObject,
+        projection_summary: create_projection_summary(),
+      }),
+    /forbidden raw runtime-like key at request\.raw_vsl/
+  );
+});
+
+test("[projection] deterministic error string includes offending projection raw key", () => {
+  assert.throws(
+    () =>
+      adaptFounderRequestIntakeToPacketCandidate({
+        request: create_request(),
+        projection_summary: {
+          ...create_projection_summary(),
+          raw_trace: "forbidden",
+        } as SoloCrewProjectionSummaryEnvelope,
+      }),
+    /forbidden raw runtime-like key at projection_summary\.raw_trace/
+  );
+});
+
+test("[projection] deterministic error string includes offending positive forbidden label", () => {
+  assert.throws(
+    () =>
+      adaptFounderRequestIntakeToPacketCandidate({
+        request: create_request({
+          request_label: "approved",
+        }),
+        projection_summary: create_projection_summary(),
+      }),
+    /forbidden execution label at request\.request_label: approved/
+  );
+});
+
+test("[projection] deterministic error string includes offending direct action label", () => {
+  assert.throws(
+    () =>
+      adaptFounderRequestIntakeToPacketCandidate({
+        request: create_request(),
+        projection_summary: create_projection_summary({
+          recommendation: {
+            ...create_projection_summary().recommendation!,
+            allowed_next_step: "dispatch",
+          },
+        }),
+      }),
+    /forbidden action label at projection_summary\.recommendation\.allowed_next_step: dispatch/
   );
 });
 

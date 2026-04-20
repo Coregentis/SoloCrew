@@ -2,6 +2,7 @@
 
 ## 2026-04-20
 
+- hardened V1.1 intake-to-packet adapter and flow after implementation review; added request-side raw-key rejection; expanded negative fixture coverage for all raw keys, forbidden positive labels, and direct action labels; preserved blocked_actions as negative boundary list; no app/page change; no provider/channel execution; no approve/reject/dispatch/execute; no founder queue; no Cognitive_OS/MPLP change
 - implemented V1.1 intake-to-packet adapter and flow, mapping founder request plus projection-safe summary envelope to packet candidate / review-staging flow while preserving evidence/stale/insufficient posture and non-executing recommendation, rejecting raw runtime-like keys, forbidden execution labels, and project mismatch, with no provider/channel execution, approve/reject/dispatch/execute, founder queue, or direct runtime-private dependency
 - added the V1.1 intake-to-packet product scope, projection consumption plan, implementation plan, scenario and fixture plan, test plan, and planning readiness gate without implementation, provider/channel execution, approve/reject/dispatch/execute behavior, founder queue, or direct runtime-private dependency
 - added the Operational V1 upstream extraction audit and V1.1 backflow readiness gate, freezing which sealed capabilities stay product-only, which become Cognitive_OS or MPLP candidate material, and why V1.1 may proceed to planning only after the full tri-repo backflow pack lands while implementation remains separately blocked without any implementation change

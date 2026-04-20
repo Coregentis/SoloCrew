@@ -290,6 +290,11 @@ function collect_nested_project_mismatch_errors(
 function validate_founder_request_input(
   request: FounderRequestIntakeProjectScopedObject
 ): void {
+  const errors = [
+    ...collect_forbidden_raw_key_errors(request, "request"),
+    ...collect_forbidden_label_errors(request, "request"),
+  ];
+
   assert_non_empty_string(request.project_id, "request.project_id");
   assert_non_empty_string(request.founder_request_id, "request.founder_request_id");
   assert_non_empty_string(request.request_label, "request.request_label");
@@ -297,7 +302,11 @@ function validate_founder_request_input(
   assert_non_empty_string(request.created_at, "request.created_at");
 
   if (request.non_executing !== true) {
-    throw new Error("request.non_executing must be true");
+    errors.push("request.non_executing must be true");
+  }
+
+  if (errors.length > 0) {
+    throw new Error([...new Set(errors)].sort().join("; "));
   }
 }
 

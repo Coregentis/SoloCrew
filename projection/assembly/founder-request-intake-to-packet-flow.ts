@@ -71,10 +71,8 @@ function create_blocked_packet_candidate(args: {
       stale: args.projection_summary.evidence_posture?.stale ?? false,
       insufficient:
         args.projection_summary.evidence_posture?.insufficient ?? false,
-      evidence_summary:
-        args.projection_summary.evidence_posture?.evidence_summary ?? args.reason,
-      omission_reason:
-        args.projection_summary.evidence_posture?.omission_reason ?? args.reason,
+      evidence_summary: args.reason,
+      omission_reason: args.reason,
     },
     state_interpretation: {
       transition_accepted_is_approval: false,
@@ -82,8 +80,7 @@ function create_blocked_packet_candidate(args: {
       blocked_reason_is_rejection: false,
     },
     recommendation: {
-      summary:
-        args.projection_summary.recommendation?.recommendation_summary ?? args.reason,
+      summary: args.reason,
       non_executing: true,
       blocked_actions:
         args.projection_summary.recommendation?.blocked_actions ?? [

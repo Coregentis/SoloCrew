@@ -145,3 +145,94 @@ test("[projection] flow returns blocked_by_contract for contract violation", () 
   assert.equal(result.packet_candidate.review_posture, "blocked_by_contract");
   assert.equal(result.packet_candidate.staging_posture, "blocked_by_contract");
 });
+
+test("[projection] flow returns blocked_by_contract when request has raw runtime-like key", () => {
+  const result = buildFounderRequestIntakeToPacketFlow({
+    request: {
+      ...create_request(),
+      raw_vsl: "forbidden",
+    } as FounderRequestIntakeProjectScopedObject,
+    projection_summary: create_projection_summary(),
+  });
+
+  assert.equal(result.blocked_by_contract, true);
+  assert.equal(result.packet_candidate.staging_posture, "blocked_by_contract");
+  assert.match(
+    result.packet_candidate.evidence_posture.evidence_summary,
+    /forbidden raw runtime-like key at request\.raw_vsl/
+  );
+});
+
+test("[projection] flow returns blocked_by_contract when projection summary has raw runtime-like key", () => {
+  const result = buildFounderRequestIntakeToPacketFlow({
+    request: create_request(),
+    projection_summary: {
+      ...create_projection_summary(),
+      raw_psg: "forbidden",
+    } as SoloCrewProjectionSummaryEnvelope,
+  });
+
+  assert.equal(result.blocked_by_contract, true);
+  assert.equal(result.packet_candidate.staging_posture, "blocked_by_contract");
+  assert.match(
+    result.packet_candidate.evidence_posture.evidence_summary,
+    /forbidden raw runtime-like key at projection_summary\.raw_psg/
+  );
+});
+
+test("[projection] flow returns blocked_by_contract when positive forbidden label appears", () => {
+  const result = buildFounderRequestIntakeToPacketFlow({
+    request: create_request({
+      request_label: "approved",
+    }),
+    projection_summary: create_projection_summary(),
+  });
+
+  assert.equal(result.blocked_by_contract, true);
+  assert.equal(result.packet_candidate.review_posture, "blocked_by_contract");
+  assert.match(
+    result.packet_candidate.recommendation.summary,
+    /forbidden execution label at request\.request_label: approved/
+  );
+});
+
+test("[projection] flow still allows canonical blocked_actions as negative boundary", () => {
+  const result = buildFounderRequestIntakeToPacketFlow({
+    request: create_request(),
+    projection_summary: create_projection_summary({
+      recommendation: {
+        ...create_projection_summary().recommendation!,
+        blocked_actions: [
+          "approve",
+          "reject",
+          "dispatch",
+          "execute",
+          "provider_channel_send",
+        ],
+      },
+    }),
+  });
+
+  assert.equal(result.blocked_by_contract, false);
+  assert.deepEqual(result.packet_candidate.recommendation.blocked_actions, [
+    "approve",
+    "dispatch",
+    "execute",
+    "provider_channel_send",
+    "reject",
+  ]);
+});
+
+test("[projection] flow visible boundary summary keeps non-executing limits explicit", () => {
+  const result = buildFounderRequestIntakeToPacketFlow({
+    request: create_request(),
+    projection_summary: create_projection_summary(),
+  });
+
+  assert.deepEqual(result.visible_summary.boundary_summary, [
+    "No provider/channel execution.",
+    "No approve/reject/dispatch/execute behavior.",
+    "No founder queue behavior.",
+    "No raw runtime-private dependency.",
+  ]);
+});
