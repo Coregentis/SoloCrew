@@ -2,6 +2,12 @@
 
 ## 2026-04-21
 
+- executed SoloCrew V1.2 RC validation and seal authorization checks, adding
+  validation execution record, forbidden-claim verification, release notes
+  final review, seal authorization decision, tag/release execution plan, and
+  authorization audit; no Cognitive_OS/MPLP change, no provider/channel
+  execution, no approve/reject/dispatch/execute, no founder queue, no V1.2
+  tag, no GitHub Release, and no seal record
 - opened SoloCrew V1.2 RC planning with scope/disclosure, evidence manifest,
   validation plan, forbidden-claim gate, release notes draft, seal preparation
   plan, readiness gate, and RC planning audit; no Cognitive_OS/MPLP change,
