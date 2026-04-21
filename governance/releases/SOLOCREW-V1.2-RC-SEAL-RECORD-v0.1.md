@@ -26,8 +26,9 @@ This is:
 ## C. Sealed Commit
 
 - `pre_seal_authorization_commit: ce3eae96d5802eb0158b791b35756568f0e779a1`
-- `seal_commit: PENDING_THIS_WAVE`
-- `tag_target_commit: PENDING_THIS_WAVE`
+- `seal_commit: 51706f14bcc4de1e4827332173bf02166ac35468`
+- `tag_target_commit: 51706f14bcc4de1e4827332173bf02166ac35468`
+- `github_release_verified: https://github.com/Coregentis/SoloCrew/releases/tag/solocrew-v1.2-rc-packet-revision-loop-20260421`
 
 ## D. Validation Evidence
 
