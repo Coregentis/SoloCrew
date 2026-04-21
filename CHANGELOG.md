@@ -2,6 +2,10 @@
 
 ## 2026-04-20
 
+- completed SoloCrew V1.1 post-RC product hardening with user walkthrough,
+  known limitations, hardening plan, smoke validation checklist, README
+  alignment, and boundary-copy verification; no new tag, no new GitHub
+  Release, no Cognitive_OS/MPLP change, and no new capability claim
 - completed SoloCrew V1.1 post-RC verification with release surface audit,
   boundary drift audit, tri-repo no-upstream-change note, and next-step gate;
   no app/projection source change, no Cognitive_OS/MPLP change, no new tag, no

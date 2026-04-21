@@ -61,6 +61,28 @@ behavior, founder queue execution, external business action execution,
 autonomous company operation, protocol certification, or closed live founder
 scenario validation.
 
+V1.1 RC is a bounded, non-executing founder request-to-packet review loop.
+
+Current RC references:
+
+- release tag: `solocrew-v1.1-rc-non-executing-founder-loop-20260420`
+- seal record:
+  `governance/releases/SOLOCREW-V1.1-RC-SEAL-RECORD-v0.1.md`
+- post-RC verification record:
+  `governance/releases/SOLOCREW-V1.1-POST-RC-VERIFICATION-RECORD-v0.1.md`
+- user walkthrough:
+  `governance/guides/SOLOCREW-V1.1-RC-USER-WALKTHROUGH-v0.1.md`
+- known limitations:
+  `governance/guides/SOLOCREW-V1.1-RC-KNOWN-LIMITATIONS-v0.1.md`
+
+The V1.1 RC line explicitly excludes:
+
+- provider/channel execution
+- approve/reject/dispatch/execute
+- founder queue
+- autonomous company operation
+- protocol certification
+
 The sealed `v0.3` line remains the first bounded single-cell usable release
 line inside that delivered platform baseline, and it extends the sealed `v0.2`
 and `v0.1` baselines with:
