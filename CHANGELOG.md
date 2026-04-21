@@ -2,6 +2,10 @@
 
 ## 2026-04-20
 
+- completed SoloCrew V1.1 post-RC verification with release surface audit,
+  boundary drift audit, tri-repo no-upstream-change note, and next-step gate;
+  no app/projection source change, no Cognitive_OS/MPLP change, no new tag, no
+  new GitHub Release, and no new capability claim
 - executed SoloCrew V1.1 RC seal/release wave by creating RC seal record,
   release execution record, GitHub release notes, tag plan execution, and
   validation-backed RC release evidence; no app/projection source change, no
