@@ -2,6 +2,11 @@
 
 ## 2026-04-21
 
+- opened SoloCrew V1.2 RC planning with scope/disclosure, evidence manifest,
+  validation plan, forbidden-claim gate, release notes draft, seal preparation
+  plan, readiness gate, and RC planning audit; no Cognitive_OS/MPLP change,
+  no provider/channel execution, no approve/reject/dispatch/execute, no
+  founder queue, no new release/tag, and no protocol certification claim
 - hardened SoloCrew V1.2 packet revision loop with additional adapter edge
   cases, deterministic blocked fallback behavior, page-model copy boundary
   checks, safe evidence reference handling, hardening audit, hardening gate,
