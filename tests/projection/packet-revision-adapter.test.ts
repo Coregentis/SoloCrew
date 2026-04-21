@@ -83,6 +83,35 @@ test("[projection] maps resulting projection reference to revised packet candida
   assert.equal(result.revised_packet_candidate_id, "projection-summary-02");
 });
 
+test("[projection] rejects empty bounded id and summary fields deterministically", () => {
+  const cases = [
+    ["project_id", { project_id: "" }],
+    ["previous_packet_candidate_id", { previous_packet_candidate_id: "" }],
+    ["revision_id", { revision_id: "" }],
+    ["previous_projection_summary_id", { previous_projection_summary_id: "" }],
+    ["revision_input_summary", { revision_input_summary: "" }],
+  ] as const;
+
+  for (const [field_name, override] of cases) {
+    assert.throws(
+      () => createPacketRevisionCandidate(create_input(override)),
+      new RegExp(`input\\.${field_name} must remain a non-empty bounded field\\.`)
+    );
+  }
+});
+
+test("[projection] rejects empty resulting projection summary id when provided", () => {
+  assert.throws(
+    () =>
+      createPacketRevisionCandidate(
+        create_input({
+          resulting_projection_summary_id: "",
+        })
+      ),
+    /input\.resulting_projection_summary_id must remain a non-empty bounded field\./
+  );
+});
+
 test("[projection] handles insufficient evidence with needs_clarification posture", () => {
   const result = createPacketRevisionCandidate(
     create_input({
@@ -148,9 +177,54 @@ test("[projection] rejects runtime-private leakage", () => {
     () =>
       createPacketRevisionCandidate({
         ...create_input(),
-        raw_vsl: "forbidden",
+        runtime_private_payload: "forbidden",
       } as CreatePacketRevisionCandidateInput),
     /forbidden raw runtime-like key/
+  );
+});
+
+test("[projection] rejects safe evidence refs when not array", () => {
+  assert.throws(
+    () =>
+      createPacketRevisionCandidate(
+        create_input({
+          evidence_insufficiency: {
+            ...create_input().evidence_insufficiency!,
+            safe_evidence_refs: "ref-01" as unknown as string[],
+          },
+        })
+      ),
+    /evidence_insufficiency\.safe_evidence_refs must be an array/
+  );
+});
+
+test("[projection] rejects safe evidence refs with non-string value", () => {
+  assert.throws(
+    () =>
+      createPacketRevisionCandidate(
+        create_input({
+          evidence_insufficiency: {
+            ...create_input().evidence_insufficiency!,
+            safe_evidence_refs: ["ref-01", 7 as unknown as string],
+          },
+        })
+      ),
+    /evidence_insufficiency\.safe_evidence_refs\[1\] must be a string/
+  );
+});
+
+test("[projection] rejects safe evidence refs with empty string", () => {
+  assert.throws(
+    () =>
+      createPacketRevisionCandidate(
+        create_input({
+          evidence_insufficiency: {
+            ...create_input().evidence_insufficiency!,
+            safe_evidence_refs: ["ref-01", "  "],
+          },
+        })
+      ),
+    /evidence_insufficiency\.safe_evidence_refs\[1\] must remain a non-empty bounded field\./
   );
 });
 
@@ -182,6 +256,83 @@ test("[projection] rejects proof/certification wording", () => {
         })
       ),
     /forbidden proof\/certification wording/
+  );
+});
+
+test("[projection] rejects approve reject dispatch and execute positive labels", () => {
+  for (const label of ["approve", "reject", "dispatch", "execute"] as const) {
+    assert.throws(
+      () =>
+        createPacketRevisionCandidate(
+          create_input({
+            revision_input_summary: label,
+          })
+        ),
+      new RegExp(`forbidden action label at input\\.revision_input_summary: ${label}`)
+    );
+  }
+});
+
+test("[projection] rejects founder queue positive wording", () => {
+  assert.throws(
+    () =>
+      createPacketRevisionCandidate(
+        create_input({
+          evidence_insufficiency: {
+            ...create_input().evidence_insufficiency!,
+            omission_reason: "Move this into the founder queue after revision.",
+          },
+        })
+      ),
+    /forbidden founder queue wording/
+  );
+});
+
+test("[projection] preserves sorted unique safe evidence refs", () => {
+  const result = createPacketRevisionCandidate(
+    create_input({
+      evidence_insufficiency: {
+        ...create_input().evidence_insufficiency!,
+        safe_evidence_refs: ["ref-02", "ref-01", "ref-02", " ref-03 "],
+      },
+    })
+  );
+
+  assert.deepEqual(result.evidence_gap?.safe_evidence_refs, [
+    "ref-01",
+    "ref-02",
+    "ref-03",
+  ]);
+});
+
+test("[projection] evidence insufficiency project mismatch fails deterministically", () => {
+  function capture_error(): Error {
+    try {
+      createPacketRevisionCandidate(
+        create_input({
+          evidence_insufficiency: {
+            ...create_input().evidence_insufficiency!,
+            project_id: "project-02",
+          },
+        })
+      );
+    } catch (error) {
+      return error as Error;
+    }
+
+    throw new Error("expected project mismatch error");
+  }
+
+  const first_error = capture_error();
+  const second_error = capture_error();
+
+  assert.equal(
+    first_error.message,
+    second_error.message
+  );
+  assert.match(
+    first_error.message,
+    /evidence_insufficiency\.project_id must match input\.project_id/
   );
 });
 

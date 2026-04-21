@@ -93,6 +93,7 @@ This implementation surface does not introduce provider/channel execution,
 approve/reject/dispatch/execute behavior, founder queue, autonomous company
 operation, protocol certification, evidence-as-proof, execution-ready
 semantics, or a new release/tag.
+Hardening keeps blocked fallbacks deterministic and safe evidence refs bounded.
 
 The sealed `v0.3` line remains the first bounded single-cell usable release
 line inside that delivered platform baseline, and it extends the sealed `v0.2`

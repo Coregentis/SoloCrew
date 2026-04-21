@@ -33,6 +33,9 @@ export type PacketRevisionStatus =
 
 export const PACKET_REVISION_BOUNDARY_LINES = [
   "Review-only packet revision candidate.",
+  "Return for revision is not rejection.",
+  "Ready for review is not execution-ready.",
+  "Revised packet is not execution.",
   "No provider/channel execution.",
   "No approve/reject/dispatch/execute behavior.",
   "No founder queue behavior.",

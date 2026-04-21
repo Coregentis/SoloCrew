@@ -12,14 +12,20 @@ import {
 function unique_strings(values: unknown[] = []): string[] {
   return [...new Set(
     values.filter(
-      (value): value is string => typeof value === "string" && value.length > 0
+      (value): value is string =>
+        typeof value === "string" && value.trim().length > 0
     )
+      .map((value) => value.trim())
   )].sort();
 }
 
-function assert_non_empty_string(value: string, field_name: string): void {
+function add_non_empty_string_error(
+  value: string,
+  field_name: string,
+  target: string[]
+): void {
   if (value.trim().length === 0) {
-    throw new Error(`${field_name} must remain a non-empty bounded field.`);
+    target.push(`${field_name} must remain a non-empty bounded field.`);
   }
 }
 
@@ -33,6 +39,10 @@ export const PACKET_REVISION_FORBIDDEN_RAW_KEYS = [
   "runtime_store",
   "runtime_private_object",
   "raw_cognitive_os_runtime_internals",
+  "runtime_private_fields",
+  "runtime_private_payload",
+  "raw_runtime_private_payload",
+  "runtime_private_trace",
 ] as const;
 
 const PACKET_REVISION_ALLOWED_REASONS = [
@@ -86,6 +96,30 @@ const FORBIDDEN_STRING_PHRASES = [
   {
     phrase: "proof/certification",
     message: "forbidden proof/certification wording",
+  },
+  {
+    phrase: "approved revision",
+    message: "forbidden execution wording",
+  },
+  {
+    phrase: "approval granted",
+    message: "forbidden execution wording",
+  },
+  {
+    phrase: "execution completed",
+    message: "forbidden execution wording",
+  },
+  {
+    phrase: "execution ready",
+    message: "forbidden execution wording",
+  },
+  {
+    phrase: "dispatch-ready",
+    message: "forbidden execution wording",
+  },
+  {
+    phrase: "dispatch ready",
+    message: "forbidden execution wording",
   },
   {
     phrase: "founder queue",
@@ -213,13 +247,15 @@ function validate_evidence_insufficiency(
     ),
   ];
 
-  assert_non_empty_string(
+  add_non_empty_string_error(
     evidence_insufficiency.detail_id,
-    "input.evidence_insufficiency.detail_id"
+    "input.evidence_insufficiency.detail_id",
+    errors
   );
-  assert_non_empty_string(
+  add_non_empty_string_error(
     evidence_insufficiency.project_id,
-    "input.evidence_insufficiency.project_id"
+    "input.evidence_insufficiency.project_id",
+    errors
   );
 
   if (evidence_insufficiency.project_id !== project_id) {
@@ -249,24 +285,29 @@ function validate_evidence_insufficiency(
     );
   }
 
-  if (!Array.isArray(evidence_insufficiency.safe_evidence_refs ?? [])) {
+  if (
+    evidence_insufficiency.safe_evidence_refs !== undefined &&
+    !Array.isArray(evidence_insufficiency.safe_evidence_refs)
+  ) {
     errors.push("evidence_insufficiency.safe_evidence_refs must be an array");
   }
 
-  (evidence_insufficiency.safe_evidence_refs ?? []).forEach((value, index) => {
-    if (typeof value !== "string") {
-      errors.push(
-        `evidence_insufficiency.safe_evidence_refs[${index}] must be a string`
-      );
-      return;
-    }
+  if (Array.isArray(evidence_insufficiency.safe_evidence_refs)) {
+    evidence_insufficiency.safe_evidence_refs.forEach((value, index) => {
+      if (typeof value !== "string") {
+        errors.push(
+          `evidence_insufficiency.safe_evidence_refs[${index}] must be a string`
+        );
+        return;
+      }
 
-    if (value.trim().length === 0) {
-      errors.push(
-        `evidence_insufficiency.safe_evidence_refs[${index}] must remain a non-empty bounded field.`
-      );
-    }
-  });
+      if (value.trim().length === 0) {
+        errors.push(
+          `evidence_insufficiency.safe_evidence_refs[${index}] must remain a non-empty bounded field.`
+        );
+      }
+    });
+  }
 
   if (evidence_insufficiency.non_executing !== true) {
     errors.push("evidence_insufficiency.non_executing must be true");
@@ -358,19 +399,22 @@ export function createPacketRevisionCandidate(
     ...collect_forbidden_string_errors(input, "input"),
   ];
 
-  assert_non_empty_string(input.project_id, "input.project_id");
-  assert_non_empty_string(
+  add_non_empty_string_error(input.project_id, "input.project_id", errors);
+  add_non_empty_string_error(
     input.previous_packet_candidate_id,
-    "input.previous_packet_candidate_id"
+    "input.previous_packet_candidate_id",
+    errors
   );
-  assert_non_empty_string(input.revision_id, "input.revision_id");
-  assert_non_empty_string(
+  add_non_empty_string_error(input.revision_id, "input.revision_id", errors);
+  add_non_empty_string_error(
     input.previous_projection_summary_id,
-    "input.previous_projection_summary_id"
+    "input.previous_projection_summary_id",
+    errors
   );
-  assert_non_empty_string(
+  add_non_empty_string_error(
     input.revision_input_summary,
-    "input.revision_input_summary"
+    "input.revision_input_summary",
+    errors
   );
 
   if (
@@ -410,6 +454,8 @@ export function createPacketRevisionCandidate(
 
   const safe_clarification_prompt =
     input.evidence_insufficiency?.safe_clarification_prompt?.trim() || undefined;
+  const resulting_projection_summary_id =
+    input.resulting_projection_summary_id?.trim() || undefined;
   const evidence_gap = input.evidence_insufficiency
     ? {
         gap_id: input.evidence_insufficiency.detail_id,
@@ -430,7 +476,7 @@ export function createPacketRevisionCandidate(
 
   const revision_status = derive_revision_status({
     revision_reason: input.revision_reason,
-    resulting_projection_summary_id: input.resulting_projection_summary_id,
+    resulting_projection_summary_id,
     evidence_gap,
     safe_clarification_prompt,
   });
@@ -439,7 +485,7 @@ export function createPacketRevisionCandidate(
     revision_candidate_id: input.revision_id,
     project_id: input.project_id,
     previous_packet_candidate_id: input.previous_packet_candidate_id,
-    revised_packet_candidate_id: input.resulting_projection_summary_id,
+    revised_packet_candidate_id: resulting_projection_summary_id,
     revision_reason: input.revision_reason,
     revision_input_summary: input.revision_input_summary.trim(),
     evidence_gap,

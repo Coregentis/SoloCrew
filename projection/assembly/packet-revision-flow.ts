@@ -134,6 +134,6 @@ export function createPacketRevisionFlowResult(
     revision_candidate,
     review_posture,
     staging_posture,
-    boundary_summary: PACKET_REVISION_BOUNDARY_SUMMARY,
+    boundary_summary: revision_candidate.boundary_summary,
   };
 }

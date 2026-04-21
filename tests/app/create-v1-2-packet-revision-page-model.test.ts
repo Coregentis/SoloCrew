@@ -82,6 +82,14 @@ test("[app] page model shows safe clarification prompt without provider/channel 
   );
 });
 
+test("[app] safe clarification prompt remains copy only", () => {
+  const model = create_model();
+
+  assert.equal(model.safe_clarification_prompt?.includes("provider/channel"), false);
+  assert.equal(model.review_posture, "review_only");
+  assert.equal(model.staging_posture, "not_sent");
+});
+
 test("[app] page model shows interpretation guards", () => {
   const model = create_model();
 
@@ -111,4 +119,19 @@ test("[app] page model keeps copy free of approval rejection execution proof and
   assert.doesNotMatch(copy_surface, /proof failure/i);
   assert.doesNotMatch(copy_surface, /dispatch-ready/i);
   assert.doesNotMatch(copy_surface, /dispatch blocked/i);
+});
+
+test("[app] blocked-by-contract page model stays review-only and not dispatchable by boundary copy", () => {
+  const model = create_model({
+    evidence_insufficiency: {
+      ...create_revision_input().evidence_insufficiency!,
+      safe_clarification_prompt:
+        "Route this through provider/channel execution once review finishes.",
+    },
+  });
+
+  assert.equal(model.review_posture, "blocked_by_contract");
+  assert.equal(model.staging_posture, "blocked_by_contract");
+  assert.match(model.boundary_summary, /review-only/i);
+  assert.match(model.boundary_summary, /not dispatchable/i);
 });

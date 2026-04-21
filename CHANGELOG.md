@@ -2,6 +2,12 @@
 
 ## 2026-04-21
 
+- hardened SoloCrew V1.2 packet revision loop with additional adapter edge
+  cases, deterministic blocked fallback behavior, page-model copy boundary
+  checks, safe evidence reference handling, hardening audit, hardening gate,
+  and expanded tests; no Cognitive_OS/MPLP change, no provider/channel
+  execution, no approve/reject/dispatch/execute, no founder queue, no new
+  release/tag, and no new capability overclaim
 - implemented SoloCrew V1.2 packet revision loop with product-side packet
   revision contracts, adapter, flow assembly, page model helper, and targeted
   tests; no Cognitive_OS/MPLP change, no provider/channel execution, no

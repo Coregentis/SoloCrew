@@ -29,7 +29,7 @@ export type V12PacketRevisionPageModel = {
 
 function format_revision_reason_label(reason: string): string {
   if (reason === "contract_blocked") {
-    return "contract blocked";
+    return "blocked by contract";
   }
 
   if (reason === "operator_clarification") {
@@ -37,6 +37,18 @@ function format_revision_reason_label(reason: string): string {
   }
 
   return reason.replaceAll("_", " ");
+}
+
+function format_boundary_summary(result: PacketRevisionFlowResult): string {
+  if (result.review_posture === "blocked_by_contract") {
+    return `${result.boundary_summary} Blocked by contract remains review-only and not dispatchable.`;
+  }
+
+  if (result.review_posture === "return_for_revision") {
+    return `${result.boundary_summary} Return for revision remains review-only and not dispatchable.`;
+  }
+
+  return `${result.boundary_summary} Ready for review remains review-only and not sent.`;
 }
 
 export function createV12PacketRevisionPageModel(
@@ -56,7 +68,7 @@ export function createV12PacketRevisionPageModel(
     revision_status: result.revision_candidate.revision_status,
     review_posture: result.review_posture,
     staging_posture: result.staging_posture,
-    boundary_summary: result.boundary_summary,
+    boundary_summary: format_boundary_summary(result),
     interpretation_guards: {
       revision_is_approval: false,
       return_for_revision_is_rejection: false,

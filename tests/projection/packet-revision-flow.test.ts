@@ -139,3 +139,74 @@ test("[projection] project mismatch is blocked", () => {
     /flow\.project_id must match revision_input\.project_id/
   );
 });
+
+test("[projection] previous packet mismatch becomes blocked-by-contract fallback", () => {
+  const result = createPacketRevisionFlowResult({
+    project_id: "project-01",
+    previous_packet_candidate_id: "packet-candidate-02",
+    revision_input: create_revision_input(),
+  });
+
+  assert.equal(result.review_posture, "blocked_by_contract");
+  assert.equal(result.staging_posture, "blocked_by_contract");
+  assert.match(
+    result.revision_candidate.evidence_gap?.user_visible_summary ?? "",
+    /flow\.previous_packet_candidate_id must match revision_input\.previous_packet_candidate_id/
+  );
+});
+
+test("[projection] same invalid input creates same blocked fallback id", () => {
+  const first_result = createPacketRevisionFlowResult({
+    project_id: "project-02",
+    previous_packet_candidate_id: "packet-candidate-01",
+    revision_input: create_revision_input(),
+  });
+  const second_result = createPacketRevisionFlowResult({
+    project_id: "project-02",
+    previous_packet_candidate_id: "packet-candidate-01",
+    revision_input: create_revision_input(),
+  });
+
+  assert.equal(
+    first_result.revision_candidate.revision_candidate_id,
+    second_result.revision_candidate.revision_candidate_id
+  );
+  assert.equal(
+    first_result.revision_candidate.evidence_gap?.gap_id,
+    second_result.revision_candidate.evidence_gap?.gap_id
+  );
+});
+
+test("[projection] blocked fallback remains non-executing and below rejection semantics", () => {
+  const result = createPacketRevisionFlowResult({
+    project_id: "project-01",
+    previous_packet_candidate_id: "packet-candidate-01",
+    revision_input: {
+      ...create_revision_input(),
+      evidence_insufficiency: {
+        ...create_revision_input().evidence_insufficiency!,
+        safe_clarification_prompt:
+          "Route this through provider/channel execution once review finishes.",
+      },
+    },
+  });
+
+  assert.equal(result.revision_candidate.non_executing, true);
+  assert.equal(result.revision_candidate.review_only, true);
+  assert.equal(
+    result.revision_candidate.interpretation_guards.return_for_revision_is_rejection,
+    false
+  );
+});
+
+test("[projection] ready-for-review does not imply execution-ready", () => {
+  const result = createPacketRevisionFlowResult({
+    project_id: "project-01",
+    previous_packet_candidate_id: "packet-candidate-01",
+    revision_input: create_revision_input(),
+  });
+
+  assert.equal(result.review_posture, "review_only");
+  assert.equal(result.revision_candidate.interpretation_guards.revised_packet_is_execution, false);
+  assert.doesNotMatch(result.boundary_summary, /execution ready/i);
+});
