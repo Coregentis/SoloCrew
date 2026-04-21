@@ -83,19 +83,39 @@ The V1.1 RC line explicitly excludes:
 - autonomous company operation
 - protocol certification
 
-## V1.2 Implementation Status
+## Current V1.2 RC Line
 
-SoloCrew V1.2 now has a bounded implementation surface for the packet revision
-loop through product-side packet revision contracts, a packet revision adapter,
-flow assembly, and a page model helper.
+SoloCrew V1.2 RC is a bounded, non-executing packet revision loop for revising
+packet candidates after evidence insufficiency, stale context, operator
+clarification, or contract-blocked states.
 
-This implementation surface does not introduce provider/channel execution,
-approve/reject/dispatch/execute behavior, founder queue, autonomous company
-operation, protocol certification, evidence-as-proof, execution-ready
-semantics, or a new release/tag.
-Hardening keeps blocked fallbacks deterministic and safe evidence refs bounded.
-V1.2 RC planning is now open, and no V1.2 tag or GitHub Release has been
-created in this wave.
+Current V1.2 RC references:
+
+- release tag: `solocrew-v1.2-rc-packet-revision-loop-20260421`
+- GitHub release notes file:
+  `governance/releases/SOLOCREW-V1.2-RC-GITHUB-RELEASE-NOTES-v0.1.md`
+- seal record:
+  `governance/releases/SOLOCREW-V1.2-RC-SEAL-RECORD-v0.1.md`
+- post-RC verification record:
+  `governance/releases/SOLOCREW-V1.2-POST-RC-VERIFICATION-RECORD-v0.1.md`
+- user walkthrough:
+  `governance/guides/SOLOCREW-V1.2-RC-USER-WALKTHROUGH-v0.1.md`
+- known limitations:
+  `governance/guides/SOLOCREW-V1.2-RC-KNOWN-LIMITATIONS-v0.1.md`
+- demo scenario guide:
+  `governance/guides/SOLOCREW-V1.2-RC-DEMO-SCENARIO-GUIDE-v0.1.md`
+
+The V1.2 RC line explicitly excludes:
+
+- provider/channel execution
+- approve/reject/dispatch/execute
+- founder queue
+- autonomous company operation
+- protocol certification
+- GA/stable release claim
+
+V1.2 RC remains review-only and not sent. Safe clarification prompts remain
+copy-only and do not become provider/channel send.
 
 The sealed `v0.3` line remains the first bounded single-cell usable release
 line inside that delivered platform baseline, and it extends the sealed `v0.2`
