@@ -2,6 +2,12 @@
 
 ## 2026-04-20
 
+- added SoloCrew V1.2 projection revision consumption planning, including
+  consumption mapping, packet revision flow plan, adapter/projection assembly
+  plan, page model and UX copy plan, test plan, boundary audit, and readiness
+  gate; no implementation, no Cognitive_OS/MPLP change, no
+  provider/channel execution, no approve/reject/dispatch/execute, no founder
+  queue, and no new release/tag
 - opened SoloCrew V1.2 planning with product scope draft, scenario pack, wow
   moment definition, Cognitive_OS upstream abstraction needs, MPLP candidate
   mapping note, and planning gate; no implementation, no Cognitive_OS/MPLP
