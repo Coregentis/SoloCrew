@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-04-21
+
+- implemented SoloCrew V1.2 packet revision loop with product-side packet
+  revision contracts, adapter, flow assembly, page model helper, and targeted
+  tests; no Cognitive_OS/MPLP change, no provider/channel execution, no
+  approve/reject/dispatch/execute, no founder queue, no new release/tag, and
+  no new protocol certification claim
+
 ## 2026-04-20
 
 - added SoloCrew V1.2 projection revision implementation planning, including

@@ -83,16 +83,16 @@ The V1.1 RC line explicitly excludes:
 - autonomous company operation
 - protocol certification
 
-## V1.2 Planning Status
+## V1.2 Implementation Status
 
-SoloCrew V1.2 planning is currently focused on packet revision consumption
-planning. The intended direction is to map upstream-neutral projection revision
-and evidence insufficiency surfaces into a bounded, non-executing packet
-revision loop.
+SoloCrew V1.2 now has a bounded implementation surface for the packet revision
+loop through product-side packet revision contracts, a packet revision adapter,
+flow assembly, and a page model helper.
 
-No V1.2 implementation, provider/channel execution,
-approve/reject/dispatch/execute behavior, founder queue, or new release/tag is
-introduced by this planning step.
+This implementation surface does not introduce provider/channel execution,
+approve/reject/dispatch/execute behavior, founder queue, autonomous company
+operation, protocol certification, evidence-as-proof, execution-ready
+semantics, or a new release/tag.
 
 The sealed `v0.3` line remains the first bounded single-cell usable release
 line inside that delivered platform baseline, and it extends the sealed `v0.2`
