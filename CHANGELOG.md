@@ -2,6 +2,10 @@
 
 ## 2026-04-21
 
+- recorded SoloCrew V1.2 post-release backflow source evidence, including RC
+  release facts and candidate upstream review signals, without changing
+  Cognitive_OS runtime law, MPLP protocol law, schemas, or upstream binding
+  semantics
 - completed SoloCrew V1.2 post-RC product hardening with user walkthrough,
   known limitations, smoke validation checklist, demo scenario guide, product
   hardening plan, README alignment, hardening audit, and hardening gate; no
