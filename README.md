@@ -119,11 +119,10 @@ copy-only and do not become provider/channel send.
 
 ## Current V1.3 Line
 
-SoloCrew V1.2 RC is released, verified, and product-hardened.
-SoloCrew V1.3 improves lifecycle clarity for the bounded packet revision
-surface. It makes intake, packet candidate, evidence gap, revision candidate,
-and review posture easier to understand.
-It remains non-executing and does not introduce provider/channel execution,
+SoloCrew V1.3 RC — Lifecycle Clarity has been released as a GitHub
+prerelease. It improves bounded packet lifecycle clarity while remaining
+non-executing.
+It does not introduce provider/channel execution,
 approve/reject/dispatch/execute, or founder queue behavior.
 The canonical V1.3 baseline remains
 `governance/baselines/SOLOCREW-V1.3-PLANNING-BASELINE-v0.1.md`.

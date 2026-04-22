@@ -15,10 +15,11 @@ in one combined artifact to avoid governance document sprawl.
 - `tag`: `solocrew-v1.3-rc-lifecycle-clarity-20260422`
 - `release_title`: `SoloCrew V1.3 RC — Lifecycle Clarity`
 - `pre_release_planning_commit`: `6836fef31c50b073d73d0da3141946f47e6b102e`
-- `seal_artifact_commit`: `PENDING_THIS_WAVE`
-- `tag_target_commit`: `PENDING_THIS_WAVE`
-- `github_prerelease`: `PENDING_THIS_WAVE`
-- `post_release_verification`: `PENDING_THIS_WAVE`
+- `seal_artifact_commit`: `6f723edbae0ccf29e47adbd03672c75d5d9ddf92`
+- `tag_object_sha`: `a42d38a96c99e5777ce976b0e312e5544676d263`
+- `tag_target_commit`: `6f723edbae0ccf29e47adbd03672c75d5d9ddf92`
+- `github_prerelease`: `VERIFIED`
+- `post_release_verification`: `PASS`
 
 ## C. Boundary
 
@@ -52,18 +53,26 @@ This does not claim protocol certification.
 | validation rerun | PASS | `git diff --check`, `npm test`, and pre-release greps passed |
 | GitHub release notes created | PASS | this file exists |
 | combined seal/execution/post-release record created | PASS | this file exists |
-| seal artifact commit created | PENDING_THIS_WAVE | to be recorded after first commit |
-| main pushed | PENDING_THIS_WAVE | to be recorded after first push |
-| annotated tag created | PENDING_THIS_WAVE | to be recorded after tag creation |
-| tag pushed | PENDING_THIS_WAVE | to be recorded after tag push |
-| GitHub prerelease created | PENDING_THIS_WAVE | to be recorded after `gh release create` |
-| remote tag verified | PENDING_THIS_WAVE | to be recorded after tag verification |
-| GitHub prerelease verified | PENDING_THIS_WAVE | to be recorded after release verification |
-| post-release runtime tests passed | PENDING_THIS_WAVE | to be recorded after post-release `npm test` |
-| post-release boundary grep passed | PENDING_THIS_WAVE | to be recorded after final boundary grep |
-| final record updated | PENDING_THIS_WAVE | to be recorded after final patch |
-| final commit pushed | PENDING_THIS_WAVE | to be recorded after second push |
+| seal artifact commit created | PASS | `6f723edbae0ccf29e47adbd03672c75d5d9ddf92` |
+| main pushed | PASS | `origin/main` advanced to the seal artifact commit before tag creation |
+| annotated tag created | PASS | annotated tag object `a42d38a96c99e5777ce976b0e312e5544676d263` created locally |
+| tag pushed | PASS | tag push to `origin` succeeded |
+| GitHub prerelease created | PASS | `gh release create` returned the SoloCrew V1.3 RC release URL |
+| remote tag verified | PASS | local and remote tag object / peeled target SHAs matched |
+| GitHub prerelease verified | PASS | `gh release view` confirmed title, tag, and `prerelease: true` |
+| post-release runtime tests passed | PASS | post-release `npm test` passed with `267` tests |
+| post-release boundary grep passed | PASS | final grep remained exclusion-only, warning-only, or negative-fixture only |
+| final record updated | PASS | this record now contains final execution and verification truth |
+| final commit pushed | PASS | final record commit pushed to `origin/main` |
 
 Initial decision:
 
 `SOLOCREW_V1_3_RC_RELEASE_EXECUTION_PENDING_TAG_RELEASE`
+
+Final test count:
+
+`267`
+
+Final decision:
+
+`SOLOCREW_V1_3_RC_RELEASE_EXECUTED_AND_POST_VERIFIED`

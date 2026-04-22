@@ -311,10 +311,10 @@ Decision:
 
 ## M. V1.3 RC Release Execution and Post-Release Verification
 
-- `release decision`: `SoloCrew V1.3 RC — Lifecycle Clarity` execution wave authorized
+- `release decision`: `SOLOCREW_V1_3_RC_RELEASE_EXECUTED_AND_POST_VERIFIED`
 - `tag`: `solocrew-v1.3-rc-lifecycle-clarity-20260422`
-- `GitHub prerelease status`: `PENDING_THIS_WAVE`
-- `post-release verification result`: `PENDING_THIS_WAVE`
+- `GitHub prerelease status`: `VERIFIED`
+- `post-release verification result`: `PASS`
 - `boundary confirmation`:
   - no provider/channel execution
   - no approve/reject/dispatch/execute
