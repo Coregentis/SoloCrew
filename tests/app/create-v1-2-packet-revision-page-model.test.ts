@@ -61,6 +61,19 @@ test("[app] page model shows previous and revised packet references", () => {
 
   assert.equal(model.previous_packet_candidate_id, "packet-candidate-01");
   assert.equal(model.revised_packet_candidate_id, "projection-summary-02");
+  assert.match(model.revision_relationship_label, /packet-candidate-01/);
+  assert.match(model.revision_relationship_label, /projection-summary-02/);
+});
+
+test("[app] page model shows lifecycle clarity fields", () => {
+  const model = create_model();
+
+  assert.equal(model.lifecycle_stage, "review_posture");
+  assert.match(model.lifecycle_label, /review-only posture/i);
+  assert.match(model.packet_lifecycle_summary, /revised packet candidate/i);
+  assert.equal(model.review_posture_label, "review-only posture");
+  assert.equal(model.staging_posture_label, "not-sent staging posture");
+  assert.match(model.non_executing_posture, /non-executing/i);
 });
 
 test("[app] page model shows evidence gap summary", () => {
@@ -88,6 +101,7 @@ test("[app] safe clarification prompt remains copy only", () => {
   assert.equal(model.safe_clarification_prompt?.includes("provider/channel"), false);
   assert.equal(model.review_posture, "review_only");
   assert.equal(model.staging_posture, "not_sent");
+  assert.match(model.non_executing_posture, /not sent/i);
 });
 
 test("[app] page model shows interpretation guards", () => {
@@ -132,6 +146,10 @@ test("[app] blocked-by-contract page model stays review-only and not dispatchabl
 
   assert.equal(model.review_posture, "blocked_by_contract");
   assert.equal(model.staging_posture, "blocked_by_contract");
+  assert.equal(model.review_posture_label, "blocked-by-contract posture");
+  assert.equal(model.staging_posture_label, "blocked-by-contract staging posture");
+  assert.match(model.packet_lifecycle_summary, /contract blocked/i);
+  assert.match(model.non_executing_posture, /blocked by contract/i);
   assert.match(model.boundary_summary, /review-only/i);
-  assert.match(model.boundary_summary, /not dispatchable/i);
+  assert.match(model.boundary_summary, /non-executing/i);
 });

@@ -182,3 +182,12 @@ Selected slice: `V1.3 lifecycle clarity slice`
 ### J7. Embedded Implementation Planning Decision
 
 `SOLOCREW_V1_3_IMPLEMENTATION_PLANNING_READY`
+
+## K. Implementation Status
+
+- The V1.3 lifecycle clarity slice is now implemented on current `main`.
+- The implementation improves lifecycle labels, evidence gap visibility,
+  revision relationship display, and review-only posture over the existing
+  bounded packet revision surface.
+- The implementation remains bounded and non-executing, with no new
+  Cognitive_OS or MPLP dependency.

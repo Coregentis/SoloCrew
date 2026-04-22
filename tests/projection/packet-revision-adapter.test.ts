@@ -56,6 +56,23 @@ test("[projection] maps evidence insufficiency to evidence gap", () => {
   assert.equal(result.evidence_gap?.project_id, "project-01");
   assert.equal(result.evidence_gap?.gap_category, "other");
   assert.equal(result.evidence_gap?.not_proof, true);
+  assert.equal(
+    result.evidence_gap_summary,
+    result.evidence_gap?.user_visible_summary
+  );
+});
+
+test("[projection] derives lifecycle clarity fields for review-ready packet revision", () => {
+  const result = createPacketRevisionCandidate(create_input());
+
+  assert.equal(result.lifecycle_stage, "review_posture");
+  assert.match(result.lifecycle_label, /review-only posture/i);
+  assert.equal(result.review_posture, "review_only");
+  assert.match(result.revision_relationship.relationship_label, /packet-candidate-01/);
+  assert.match(result.revision_relationship.relationship_label, /projection-summary-02/);
+  assert.match(result.non_executing_posture, /review-only/i);
+  assert.match(result.non_executing_posture, /not sent/i);
+  assert.match(result.non_executing_posture, /non-executing/i);
 });
 
 test("[projection] maps safe clarification prompt to copy only", () => {
@@ -127,6 +144,10 @@ test("[projection] handles insufficient evidence with needs_clarification postur
 
   assert.equal(result.revision_status, "needs_clarification");
   assert.equal(result.evidence_gap?.insufficient, true);
+  assert.equal(result.lifecycle_stage, "evidence_gap");
+  assert.match(result.lifecycle_label, /evidence gap/i);
+  assert.equal(result.review_posture, "return_for_revision");
+  assert.match(result.non_executing_posture, /not dispatchable/i);
 });
 
 test("[projection] handles stale context as return_for_revision", () => {
@@ -170,6 +191,11 @@ test("[projection] handles contract blocked", () => {
   );
 
   assert.equal(result.revision_status, "blocked_by_contract");
+  assert.equal(result.lifecycle_stage, "contract_blocked");
+  assert.equal(result.review_posture, "blocked_by_contract");
+  assert.match(result.revision_relationship.relationship_label, /visible anchor/i);
+  assert.match(result.non_executing_posture, /blocked by contract/i);
+  assert.match(result.non_executing_posture, /non-executing/i);
 });
 
 test("[projection] rejects runtime-private leakage", () => {

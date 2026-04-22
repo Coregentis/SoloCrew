@@ -2,7 +2,10 @@ import type {
   PacketEvidenceGap,
   PacketEvidenceGapCategory,
   PacketRevisionCandidate,
+  PacketRevisionLifecycleStage,
+  PacketRevisionRelationship,
   PacketRevisionReason,
+  PacketRevisionReviewPosture,
   PacketRevisionStatus,
 } from "../contracts/packet-revision-contract.ts";
 import {
@@ -391,6 +394,133 @@ function derive_revision_status(args: {
   return "revision_candidate_created";
 }
 
+function derive_review_posture(
+  revision_status: PacketRevisionStatus
+): PacketRevisionReviewPosture {
+  if (revision_status === "blocked_by_contract") {
+    return "blocked_by_contract";
+  }
+
+  if (
+    revision_status === "needs_clarification" ||
+    revision_status === "return_for_revision"
+  ) {
+    return "return_for_revision";
+  }
+
+  return "review_only";
+}
+
+function derive_lifecycle_stage(args: {
+  revision_status: PacketRevisionStatus;
+  review_posture: PacketRevisionReviewPosture;
+}): PacketRevisionLifecycleStage {
+  if (args.revision_status === "blocked_by_contract") {
+    return "contract_blocked";
+  }
+
+  if (args.revision_status === "needs_clarification") {
+    return "evidence_gap";
+  }
+
+  if (args.revision_status === "revision_candidate_created") {
+    return "revision_candidate";
+  }
+
+  if (args.review_posture === "return_for_revision") {
+    return "review_posture";
+  }
+
+  return "review_posture";
+}
+
+function derive_lifecycle_label(args: {
+  revision_status: PacketRevisionStatus;
+  review_posture: PacketRevisionReviewPosture;
+  resulting_projection_summary_id?: string;
+}): string {
+  if (args.revision_status === "blocked_by_contract") {
+    return "contract blocked before review posture";
+  }
+
+  if (args.revision_status === "needs_clarification") {
+    return "evidence gap visible before review posture";
+  }
+
+  if (args.revision_status === "return_for_revision") {
+    return "return-for-revision review posture";
+  }
+
+  if (args.revision_status === "revision_candidate_created") {
+    return "revision candidate prepared for review-only posture";
+  }
+
+  if (args.resulting_projection_summary_id) {
+    return "review-only posture with revised packet candidate";
+  }
+
+  if (args.review_posture === "review_only") {
+    return "review-only posture with bounded revision candidate";
+  }
+
+  return "review-only packet lifecycle posture";
+}
+
+function derive_revision_relationship(args: {
+  previous_packet_candidate_id: string;
+  revised_packet_candidate_id?: string;
+  review_posture: PacketRevisionReviewPosture;
+}): PacketRevisionRelationship {
+  if (args.revised_packet_candidate_id) {
+    return {
+      previous_packet_candidate_id: args.previous_packet_candidate_id,
+      revised_packet_candidate_id: args.revised_packet_candidate_id,
+      relationship_label:
+        `Packet candidate ${args.previous_packet_candidate_id} is revised into ` +
+        `${args.revised_packet_candidate_id} for bounded review-only posture.`,
+    };
+  }
+
+  if (args.review_posture === "blocked_by_contract") {
+    return {
+      previous_packet_candidate_id: args.previous_packet_candidate_id,
+      relationship_label:
+        `Packet candidate ${args.previous_packet_candidate_id} remains the visible ` +
+        "anchor because the revision is blocked before a revised packet candidate is available.",
+    };
+  }
+
+  if (args.review_posture === "return_for_revision") {
+    return {
+      previous_packet_candidate_id: args.previous_packet_candidate_id,
+      relationship_label:
+        `Packet candidate ${args.previous_packet_candidate_id} remains the visible ` +
+        "anchor while the lifecycle stays in bounded revision posture.",
+    };
+  }
+
+  return {
+    previous_packet_candidate_id: args.previous_packet_candidate_id,
+    relationship_label:
+      `Packet candidate ${args.previous_packet_candidate_id} remains the visible ` +
+      "anchor while a bounded revision candidate is prepared for review.",
+  };
+}
+
+function derive_non_executing_posture(
+  review_posture: PacketRevisionReviewPosture
+): string {
+  if (review_posture === "blocked_by_contract") {
+    return "Review-only, blocked by contract, and non-executing.";
+  }
+
+  if (review_posture === "return_for_revision") {
+    return "Review-only, not dispatchable, and non-executing.";
+  }
+
+  return "Review-only, not sent, and non-executing.";
+}
+
 export function createPacketRevisionCandidate(
   input: CreatePacketRevisionCandidateInput
 ): PacketRevisionCandidate {
@@ -480,6 +610,23 @@ export function createPacketRevisionCandidate(
     evidence_gap,
     safe_clarification_prompt,
   });
+  const review_posture = derive_review_posture(revision_status);
+  const lifecycle_stage = derive_lifecycle_stage({
+    revision_status,
+    review_posture,
+  });
+  const lifecycle_label = derive_lifecycle_label({
+    revision_status,
+    review_posture,
+    resulting_projection_summary_id,
+  });
+  const evidence_gap_summary = evidence_gap?.user_visible_summary;
+  const revision_relationship = derive_revision_relationship({
+    previous_packet_candidate_id: input.previous_packet_candidate_id,
+    revised_packet_candidate_id: resulting_projection_summary_id,
+    review_posture,
+  });
+  const non_executing_posture = derive_non_executing_posture(review_posture);
 
   return {
     revision_candidate_id: input.revision_id,
@@ -491,6 +638,12 @@ export function createPacketRevisionCandidate(
     evidence_gap,
     safe_clarification_prompt,
     revision_status,
+    lifecycle_stage,
+    lifecycle_label,
+    evidence_gap_summary,
+    revision_relationship,
+    review_posture,
+    non_executing_posture,
     review_only: true,
     non_executing: true,
     boundary_summary: PACKET_REVISION_BOUNDARY_SUMMARY,

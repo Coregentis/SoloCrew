@@ -2,6 +2,12 @@
 
 ## 2026-04-22
 
+- implemented SoloCrew V1.3 lifecycle clarity slice for the bounded packet
+  revision surface, improving lifecycle labels, evidence gap visibility,
+  revision relationship display, and review-only posture; no
+  Cognitive_OS/MPLP change, no provider/channel execution, no
+  approve/reject/dispatch/execute, no founder queue, no tag, no GitHub
+  Release, and no seal record
 - refined SoloCrew V1.3 planning baseline with implementation slice,
   file-level task map, test plan, DoR/DoD, and embedded implementation
   planning decision; no app/projection implementation, no Cognitive_OS/MPLP

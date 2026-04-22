@@ -51,6 +51,11 @@ test("[projection] creates review-only flow result", () => {
   assert.equal(result.review_posture, "review_only");
   assert.equal(result.staging_posture, "not_sent");
   assert.equal(result.revision_candidate.revision_status, "ready_for_review");
+  assert.equal(result.lifecycle_stage, "review_posture");
+  assert.match(result.lifecycle_label, /review-only posture/i);
+  assert.equal(result.review_posture_label, "review-only posture");
+  assert.equal(result.staging_posture_label, "not-sent staging posture");
+  assert.match(result.packet_lifecycle_summary, /revised packet candidate/i);
 });
 
 test("[projection] return-for-revision posture does not imply rejection", () => {
@@ -69,6 +74,9 @@ test("[projection] return-for-revision posture does not imply rejection", () => 
 
   assert.equal(result.review_posture, "return_for_revision");
   assert.equal(result.revision_candidate.interpretation_guards.return_for_revision_is_rejection, false);
+  assert.equal(result.review_posture_label, "return-for-revision posture");
+  assert.equal(result.staging_posture_label, "not-dispatchable staging posture");
+  assert.match(result.packet_lifecycle_summary, /evidence gap/i);
 });
 
 test("[projection] revised packet is not execution", () => {
@@ -120,6 +128,10 @@ test("[projection] invalid revision envelope becomes blocked-by-contract fallbac
   assert.equal(result.review_posture, "blocked_by_contract");
   assert.equal(result.staging_posture, "blocked_by_contract");
   assert.equal(result.revision_candidate.revision_status, "blocked_by_contract");
+  assert.equal(result.lifecycle_stage, "contract_blocked");
+  assert.equal(result.review_posture_label, "blocked-by-contract posture");
+  assert.equal(result.staging_posture_label, "blocked-by-contract staging posture");
+  assert.match(result.packet_lifecycle_summary, /contract blocked/i);
   assert.match(
     result.revision_candidate.evidence_gap?.user_visible_summary ?? "",
     /forbidden provider\/channel wording/
@@ -209,4 +221,6 @@ test("[projection] ready-for-review does not imply execution-ready", () => {
   assert.equal(result.review_posture, "review_only");
   assert.equal(result.revision_candidate.interpretation_guards.revised_packet_is_execution, false);
   assert.doesNotMatch(result.boundary_summary, /execution ready/i);
+  assert.match(result.non_executing_posture, /non-executing/i);
+  assert.match(result.revision_relationship.relationship_label, /packet-candidate-01/);
 });

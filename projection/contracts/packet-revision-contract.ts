@@ -31,6 +31,28 @@ export type PacketRevisionStatus =
   | "return_for_revision"
   | "blocked_by_contract";
 
+export type PacketRevisionLifecycleStage =
+  | "evidence_gap"
+  | "revision_candidate"
+  | "review_posture"
+  | "contract_blocked";
+
+export type PacketRevisionReviewPosture =
+  | "review_only"
+  | "return_for_revision"
+  | "blocked_by_contract";
+
+export type PacketRevisionStagingPosture =
+  | "not_sent"
+  | "not_dispatchable"
+  | "blocked_by_contract";
+
+export type PacketRevisionRelationship = {
+  previous_packet_candidate_id: string;
+  revised_packet_candidate_id?: string;
+  relationship_label: string;
+};
+
 export const PACKET_REVISION_BOUNDARY_LINES = [
   "Review-only packet revision candidate.",
   "Return for revision is not rejection.",
@@ -56,6 +78,12 @@ export type PacketRevisionCandidate = {
   evidence_gap?: PacketEvidenceGap;
   safe_clarification_prompt?: string;
   revision_status: PacketRevisionStatus;
+  lifecycle_stage: PacketRevisionLifecycleStage;
+  lifecycle_label: string;
+  evidence_gap_summary?: string;
+  revision_relationship: PacketRevisionRelationship;
+  review_posture: PacketRevisionReviewPosture;
+  non_executing_posture: string;
   review_only: true;
   non_executing: true;
   boundary_summary: string;
