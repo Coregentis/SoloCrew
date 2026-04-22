@@ -29,3 +29,16 @@ Describe safe demo scenarios for V1.2 RC.
 ## D. Decision
 
 `SOLOCREW_V1_2_RC_DEMO_SCENARIO_GUIDE_READY`
+
+## E. V1.3 RC Demo Path
+
+Show lifecycle clarity fields:
+
+- `lifecycle_stage`
+- `lifecycle_label`
+- `evidence_gap_summary`
+- `revision_relationship`
+- `review_posture`
+- `non_executing_posture`
+
+Keep the demo review-only and non-executing.

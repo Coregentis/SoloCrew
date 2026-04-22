@@ -124,8 +124,19 @@ prerelease. It improves bounded packet lifecycle clarity while remaining
 non-executing.
 It does not introduce provider/channel execution,
 approve/reject/dispatch/execute, or founder queue behavior.
-The canonical V1.3 baseline remains
-`governance/baselines/SOLOCREW-V1.3-PLANNING-BASELINE-v0.1.md`.
+
+Current V1.3 RC references:
+
+- GitHub prerelease notes:
+  `governance/releases/SOLOCREW-V1.3-RC-GITHUB-RELEASE-NOTES-v0.1.md`
+- combined seal / execution / post-release record:
+  `governance/releases/SOLOCREW-V1.3-RC-SEAL-EXECUTION-POST-RELEASE-RECORD-v0.1.md`
+- planning baseline:
+  `governance/baselines/SOLOCREW-V1.3-PLANNING-BASELINE-v0.1.md`
+- demo scenario guide:
+  `governance/guides/SOLOCREW-V1.2-RC-DEMO-SCENARIO-GUIDE-v0.1.md`
+- known limitations:
+  `governance/guides/SOLOCREW-V1.2-RC-KNOWN-LIMITATIONS-v0.1.md`
 
 The sealed `v0.3` line remains the first bounded single-cell usable release
 line inside that delivered platform baseline, and it extends the sealed `v0.2`

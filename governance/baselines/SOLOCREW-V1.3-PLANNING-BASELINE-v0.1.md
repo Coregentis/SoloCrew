@@ -324,3 +324,18 @@ Decision:
   - no MPLP change
   - no protocol certification
   - no GA/stable release claim
+
+## N. V1.3 Post-Release Product Hardening
+
+- release surface reviewed
+- README aligned
+- walkthrough aligned
+- known limitations aligned
+- demo guide aligned
+- optional page model copy status: no additional source hardening required in this wave
+- tests passed
+- boundary preserved
+
+Decision:
+
+`SOLOCREW_V1_3_POST_RELEASE_PRODUCT_HARDENING_PASS`

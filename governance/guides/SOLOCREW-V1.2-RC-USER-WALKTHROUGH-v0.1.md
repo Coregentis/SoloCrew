@@ -56,3 +56,15 @@ existing packet candidate
 ## E. Decision
 
 `SOLOCREW_V1_2_RC_USER_WALKTHROUGH_READY`
+
+## F. V1.3 RC Addendum
+
+V1.3 RC lifecycle clarity path:
+
+intake
+-> packet candidate
+-> evidence gap
+-> revision candidate
+-> review posture
+
+This remains review-only and non-executing.

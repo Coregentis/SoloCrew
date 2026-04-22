@@ -2,6 +2,12 @@
 
 ## 2026-04-22
 
+- completed SoloCrew V1.3 post-release product hardening by aligning README,
+  existing walkthrough, known limitations, demo scenario guide, and V1.3
+  baseline with the released lifecycle-clarity RC; release surface
+  re-verified; no new governance document, no Cognitive_OS/MPLP change, no
+  provider/channel execution, no approve/reject/dispatch/execute, no founder
+  queue, no GA/stable release claim, and no protocol certification claim
 - executed SoloCrew V1.3 RC release and post-release verification as a
   combined high-ROI wave, creating GitHub release notes and a combined
   seal/execution/post-release record; RC tag and GitHub prerelease created;

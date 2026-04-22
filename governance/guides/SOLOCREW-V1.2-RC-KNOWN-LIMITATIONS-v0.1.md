@@ -32,3 +32,12 @@ These limitations are intentional RC boundaries, not defects.
 ## D. Decision
 
 `SOLOCREW_V1_2_RC_KNOWN_LIMITATIONS_READY`
+
+## E. V1.3 RC Addendum
+
+V1.3 improves lifecycle clarity only.
+It does not add provider/channel execution.
+It does not add approve/reject/dispatch/execute.
+It does not add founder queue.
+It does not add autonomous company operation.
+It does not change Cognitive_OS or MPLP.
