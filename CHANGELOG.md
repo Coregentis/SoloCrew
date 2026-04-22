@@ -2,6 +2,12 @@
 
 ## 2026-04-22
 
+- refined SoloCrew V1.3 planning baseline with implementation slice,
+  file-level task map, test plan, DoR/DoD, and embedded implementation
+  planning decision; no app/projection implementation, no Cognitive_OS/MPLP
+  change, no provider/channel execution, no approve/reject/dispatch/execute,
+  no founder queue, no new governance document, no tag, no GitHub Release,
+  and no seal record
 - opened SoloCrew V1.3 planning baseline with documentation budget control,
   V1.2 baseline summary, V1.3 product direction, scope/non-scope, Cognitive_OS
   dependency assessment, and embedded readiness gate; no app/projection
