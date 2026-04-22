@@ -142,10 +142,8 @@ Current V1.3 RC references:
 
 SoloCrew V1.4 planning is open after the V1.3 RC lifecycle clarity release
 and post-release hardening.
-SoloCrew V1.4 RC release planning is open for the bounded continuity
-page-model slice. The proposed RC remains review-only and non-executing, with
-no provider/channel execution, approve/reject/dispatch/execute, or founder
-queue behavior.
+SoloCrew V1.4 RC — Continuity Page Model has been released as a GitHub
+prerelease. It remains review-only and non-executing.
 Current V1.4 planning baseline:
 `governance/baselines/SOLOCREW-V1.4-PLANNING-BASELINE-v0.1.md`.
 

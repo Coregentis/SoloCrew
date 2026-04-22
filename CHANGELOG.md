@@ -2,6 +2,12 @@
 
 ## 2026-04-22
 
+- executed SoloCrew V1.4 RC release and post-release verification as a
+  combined high-ROI wave, creating a combined seal/execution/post-release
+  record, publishing the RC tag and GitHub prerelease, and re-verifying tests
+  and boundaries; no Cognitive_OS/MPLP change, no runtime-private import, no
+  provider/channel execution, no approve/reject/dispatch/execute, no founder
+  queue, no GA/stable release claim, and no protocol certification claim
 - prepared SoloCrew V1.4 RC release planning and execution readiness for the
   bounded continuity page-model slice, adding proposed tag/release identity,
   release notes draft, readiness matrix, and release scope/non-scope

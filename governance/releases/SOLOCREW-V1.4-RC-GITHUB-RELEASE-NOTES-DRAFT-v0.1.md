@@ -43,6 +43,6 @@ This release remains review-only and non-executing.
 - Boundary grep passed.
 - Implementation verification passed.
 
-## Proposed Tag
+## Tag
 
 solocrew-v1.4-rc-continuity-page-model-20260422
