@@ -68,3 +68,16 @@ intake
 -> review posture
 
 This remains review-only and non-executing.
+
+## G. V1.4 RC Addendum
+
+V1.4 RC continuity page-model path:
+
+packet revision view
+-> continuity summary
+-> lifecycle history summary
+-> pending review visibility
+-> review-only posture
+
+Pending review visibility is not a queue, not an approval surface, not a
+dispatch unit, and not an execution task.

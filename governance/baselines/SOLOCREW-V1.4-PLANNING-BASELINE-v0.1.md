@@ -427,3 +427,18 @@ Decision:
 - `github_prerelease_status`: `CREATED`
 - `post_release_verification_result`: `PASS`
 - `boundary_confirmation`: bounded RC only; no provider/channel execution, no approve/reject/dispatch/execute, no founder queue, no queue implementation, no autonomous company operation, no runtime-private import, no protocol certification, and no GA/stable claim
+
+## O. V1.4 Post-Release Product Hardening
+
+- release surface reviewed
+- README aligned
+- walkthrough aligned
+- known limitations aligned
+- demo guide aligned
+- optional page-model copy reviewed; no source correction was required
+- tests passed
+- boundary preserved
+
+Decision:
+
+`SOLOCREW_V1_4_POST_RELEASE_PRODUCT_HARDENING_PASS`

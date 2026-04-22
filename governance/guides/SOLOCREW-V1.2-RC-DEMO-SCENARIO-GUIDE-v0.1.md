@@ -42,3 +42,20 @@ Show lifecycle clarity fields:
 - `non_executing_posture`
 
 Keep the demo review-only and non-executing.
+
+## F. V1.4 RC Demo Path
+
+Show continuity page-model fields:
+
+- `continuity_summary`
+- `continuity_lifecycle_label`
+- `continuity_history_summary`
+- `pending_review_visibility`
+- `pending_review_count`
+- `pending_review_items_summary`
+- `continuity_review_posture`
+- `continuity_non_executing_posture`
+- `continuity_safe_evidence_refs`
+- `runtime_private_fields_omitted`
+
+Keep the demo review-only and non-executing.

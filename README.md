@@ -143,7 +143,28 @@ Current V1.3 RC references:
 SoloCrew V1.4 planning is open after the V1.3 RC lifecycle clarity release
 and post-release hardening.
 SoloCrew V1.4 RC — Continuity Page Model has been released as a GitHub
-prerelease. It remains review-only and non-executing.
+prerelease. It adds bounded continuity summary and pending review visibility
+to the page model.
+It remains review-only and non-executing.
+It does not include provider/channel execution,
+approve/reject/dispatch/execute, or founder queue behavior.
+It is not a stable / GA release.
+
+Current V1.4 RC references:
+
+- GitHub prerelease notes:
+  `governance/releases/SOLOCREW-V1.4-RC-GITHUB-RELEASE-NOTES-DRAFT-v0.1.md`
+- combined seal / execution / post-release record:
+  `governance/releases/SOLOCREW-V1.4-RC-SEAL-EXECUTION-POST-RELEASE-RECORD-v0.1.md`
+- planning baseline:
+  `governance/baselines/SOLOCREW-V1.4-PLANNING-BASELINE-v0.1.md`
+- user walkthrough:
+  `governance/guides/SOLOCREW-V1.2-RC-USER-WALKTHROUGH-v0.1.md`
+- known limitations:
+  `governance/guides/SOLOCREW-V1.2-RC-KNOWN-LIMITATIONS-v0.1.md`
+- demo scenario guide:
+  `governance/guides/SOLOCREW-V1.2-RC-DEMO-SCENARIO-GUIDE-v0.1.md`
+
 Current V1.4 planning baseline:
 `governance/baselines/SOLOCREW-V1.4-PLANNING-BASELINE-v0.1.md`.
 

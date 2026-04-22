@@ -41,3 +41,14 @@ It does not add approve/reject/dispatch/execute.
 It does not add founder queue.
 It does not add autonomous company operation.
 It does not change Cognitive_OS or MPLP.
+
+## F. V1.4 RC Addendum
+
+V1.4 improves page-model continuity visibility only.
+It does not add provider/channel execution.
+It does not add approve/reject/dispatch/execute.
+It does not add founder queue.
+It does not add queue implementation.
+It does not add autonomous company operation.
+It does not change Cognitive_OS or MPLP.
+It is not a GA/stable release.
