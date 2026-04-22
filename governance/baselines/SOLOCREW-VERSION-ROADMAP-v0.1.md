@@ -199,5 +199,5 @@ That closure pack does not widen the line into `v0.5`.
 - V1.4 continuity page-model was released as a bounded GitHub prerelease RC,
   post-verified, and post-release hardened.
 - V1.5 planning is now open.
-- The current leading V1.5 direction is V1.4 stable-readiness, not new
-  feature expansion.
+- The current leading V1.5 direction is V1.4 stable release planning and
+  readiness closure before feature expansion.

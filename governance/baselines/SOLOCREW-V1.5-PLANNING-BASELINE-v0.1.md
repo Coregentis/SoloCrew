@@ -86,6 +86,8 @@ instead of opening a broader feature wave first.
 
 V1.4 stable-readiness baseline has been opened as the selected V1.5
 direction.
+V1.4 stable release planning has been opened under the V1.5 stable-readiness
+line.
 
 ## I. V1.5 Scope / Non-Scope
 

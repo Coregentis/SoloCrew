@@ -2,6 +2,13 @@
 
 ## 2026-04-22
 
+- prepared SoloCrew V1.4 stable release planning and execution readiness
+  under the V1.5 stable-readiness line, adding stable release scope,
+  proposed stable tag/release identity, stable release notes draft,
+  stable/GA naming controls, onboarding/demo gap treatment, and execution
+  readiness matrix; no implementation, no Cognitive_OS/MPLP change, no
+  provider/channel execution, no approve/reject/dispatch/execute, no founder
+  queue, no tag, no GitHub Release, and no seal record
 - opened SoloCrew V1.4 stable-readiness baseline under the V1.5 planning
   line, consolidating stable evidence matrix, blocker assessment, stable
   release prerequisites, Cognitive_OS dependency assessment, MPLP posture,

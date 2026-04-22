@@ -132,3 +132,109 @@ Required conclusion:
 | delivery ROI respected | scope, evidence, blockers, prerequisites, and tri-repo posture landed together | PASS |
 | no implementation in this wave | planning-only update | PASS |
 | no tag/release/seal | no new release artifact created in this wave | PASS |
+
+## L. V1.4 Stable Release Planning and Execution Readiness
+
+### L1. Planning Purpose
+
+This section prepares SoloCrew V1.4 for a later explicit user-authorized
+stable release execution wave. It does not create a stable tag, GitHub
+Release, seal record, GA claim, provider/channel execution,
+approve/reject/dispatch/execute, or founder queue behavior.
+
+### L2. Stable Release Type Decision
+
+| Option | Meaning | Decision | Reason |
+|---|---|---|---|
+| V1.4 stable | Stable release for bounded continuity page-model surface | SELECTED_FOR_PLANNING | stable-readiness passed, but stable execution still requires explicit authorization |
+| V1.4 GA | General availability claim | REJECTED | current scope is stable release, not GA |
+| V1.5 feature expansion | next feature line | DEFERRED | stable release planning must close first |
+
+Decision:
+
+`SOLOCREW_V1_4_STABLE_RELEASE_TYPE_SELECTED_FOR_PLANNING`
+
+### L3. Proposed Stable Tag / Release Identity
+
+- `tag`: `solocrew-v1.4-stable-continuity-page-model-20260422`
+- `release_title`: `SoloCrew V1.4 Stable — Continuity Page Model`
+- `release_type`: `GitHub release`
+- `prerelease`: `false`
+
+This is proposed only. No stable tag or GitHub Release is created in this
+wave.
+This is a stable release planning identity, not a GA claim.
+
+### L4. Stable Release Scope
+
+- bounded continuity summary page-model integration
+- pending review visibility below queue semantics
+- continuity lifecycle label
+- continuity history summary
+- pending review count and summaries
+- continuity review posture
+- continuity non-executing posture
+- safe evidence refs
+- `runtime_private_fields_omitted` boundary marker
+- README / walkthrough / known limitations / demo guide aligned
+- stable-readiness evidence matrix passed
+- 287-test suite passing
+
+### L5. Stable Release Non-Scope
+
+- no provider/channel execution
+- no approve/reject/dispatch/execute
+- no founder queue
+- no queue implementation
+- no autonomous company operation
+- no Cognitive_OS change
+- no MPLP change
+- no runtime-private import
+- no protocol certification
+- no GA claim
+
+### L6. Stable / GA Naming Risk Control
+
+| Naming risk | Control | Status |
+|---|---|---|
+| stable mistaken as GA | use `Stable` only for this bounded non-executing V1.4 surface and explicitly avoid `GA` | PASS |
+| stable mistaken as execution-capable | stable notes and baseline keep review-only / non-executing wording explicit | PASS |
+| stable mistaken as queue-capable | stable docs explicitly state pending review remains below queue semantics | PASS |
+| stable mistaken as provider/channel capable | stable docs explicitly state no provider/channel execution | PASS |
+| stable mistaken as protocol-certified | stable docs explicitly state no protocol certification | PASS |
+
+### L7. Onboarding / Demo Partial-Gap Treatment
+
+| Gap | Current status | Stable planning treatment |
+|---|---|---|
+| user-facing onboarding gap | partial | keep stable scope explicit and optionally schedule later post-release onboarding follow-up |
+| demo path gap | partial | keep stable release notes explicit about bounded scope and preserve current demo path without widening claims |
+| known limitations clarity | aligned | preserve current limitations as part of stable planning evidence |
+| walkthrough clarity | aligned | preserve current walkthrough as sufficient for stable planning evidence |
+
+Expected conclusion:
+
+Partial onboarding/demo gaps do not block stable planning because V1.4
+post-release hardening aligned README, walkthrough, known limitations, and
+demo guide. Stable execution should keep release notes explicit about bounded
+scope and may optionally include later product-hardening follow-up.
+
+### L8. Stable Execution Readiness Matrix
+
+| Requirement | Required evidence | Status |
+|---|---|---|
+| repo clean and local/remote aligned | `git status --short` clean and local/remote HEAD match | PASS |
+| V1.4 RC release surface verified | RC tag and GitHub prerelease verified on remote truth | PASS |
+| stable-readiness passed | baseline decision `SOLOCREW_V1_4_STABLE_READINESS_PASS` recorded | PASS |
+| `npm test` passes | full suite passes at 287 tests | PASS |
+| focused page-model and continuity adapter tests pass | focused `npm test -- ...` commands complete successfully | PASS |
+| boundary grep passes | boundary grep remains exclusion-only, stable-planning-only, warning-only, or negative-fixture only | PASS |
+| no existing stable V1.4 tag | `git tag --list "solocrew-v1.4-stable*"` returns no tag | PASS |
+| no existing stable V1.4 GitHub Release | `gh release view solocrew-v1.4-stable-continuity-page-model-20260422` returns release not found | PASS |
+| stable release notes draft created | stable GitHub release notes draft exists in `governance/releases` | PASS |
+| README / CHANGELOG / roadmap aligned | all three surfaces describe current stable-planning truth | PASS |
+| explicit user authorization required for stable execution | stable execution remains blocked until a later explicit authorization wave | PASS |
+
+Decision:
+
+`SOLOCREW_V1_4_STABLE_RELEASE_EXECUTION_READINESS_PASS`
