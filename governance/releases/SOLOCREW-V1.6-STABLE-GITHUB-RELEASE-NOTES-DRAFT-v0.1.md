@@ -2,8 +2,8 @@
 
 ## Summary
 
-SoloCrew V1.6 Stable promotes the downstream-only Session Continuity / Local
-History UX scaffold from RC readiness to stable-release readiness.
+SoloCrew V1.6 Stable releases the downstream-only Session Continuity / Local
+History UX scaffold as a bounded stable GitHub release.
 
 This stable release remains display-only, review-only, and non-executing. It
 is not a GA claim.
@@ -46,6 +46,6 @@ is not a GA claim.
 - No direct Cognitive_OS source import.
 - V1.6 RC post-release verification passed.
 
-## Proposed Tag
+## Tag
 
 solocrew-v1.6-stable-session-continuity-ux-20260422

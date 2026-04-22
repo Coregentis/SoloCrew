@@ -467,3 +467,18 @@ Decision:
 `SOLOCREW_V1_6_STABLE_READINESS_PASS`
 
 `SOLOCREW_V1_6_STABLE_RELEASE_EXECUTION_READINESS_PASS`
+
+## O. V1.6 Stable Release Execution and Post-Release Verification
+
+- `release_decision`: `SOLOCREW_V1_6_STABLE_RELEASE_EXECUTED_AND_POST_VERIFIED`
+- `stable_tag`: `solocrew-v1.6-stable-session-continuity-ux-20260422`
+- `GitHub_stable_release_status`: released as a bounded GitHub release in
+  this wave
+- `post_release_verification_result`: `PASS` with `313` tests and boundary
+  grep preserved
+- `boundary_confirmation`: bounded stable only; display-only, review-only,
+  non-executing, no durable multi-session persistence, no action-preparation,
+  no provider/channel execution, no approve/reject/dispatch/execute, no
+  founder queue, no queue implementation, no runtime-private import, no
+  protocol certification, and no GA claim
+- `existing_V1_6_RC_preserved`: V1.6 RC tag and prerelease remain preserved

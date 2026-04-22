@@ -177,19 +177,17 @@ That V1.5 line is now closed and is not the next feature-line.
 Current V1.5 planning baseline:
 `governance/baselines/SOLOCREW-V1.5-PLANNING-BASELINE-v0.1.md`.
 
-## Current V1.6 Planning Line
+## Current V1.6 Stable Line
 
 SoloCrew V1.6 planning is open as a feature-line for Session Continuity /
 Local History Usable UX after the V1.4 Stable release and V1.5 release-line
 closure.
-SoloCrew V1.6 RC — Session Continuity UX has been released as a GitHub
-prerelease. It remains display-only, review-only, and non-executing.
+SoloCrew V1.6 Stable — Session Continuity UX has been released as a bounded
+GitHub release. It remains display-only, review-only, and non-executing and
+is not a GA claim.
 It does not add durable multi-session persistence, action-preparation,
 execution, approval, dispatch, provider/channel send, or founder queue
 behavior.
-SoloCrew V1.6 stable-readiness and stable release planning are complete for
-the downstream-only Session Continuity / Local History UX scaffold. Stable
-execution still requires explicit authorization.
 Current V1.6 planning baseline:
 `governance/baselines/SOLOCREW-V1.6-PLANNING-BASELINE-v0.1.md`.
 

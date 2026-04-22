@@ -202,11 +202,10 @@ That closure pack does not widen the line into `v0.5`.
 - V1.4 stable is now closed as the bounded continuity page-model release
   line.
 - V1.5 stable-readiness / release-line closure is complete and now closed.
-- V1.6 RC has been released and post-verified for the downstream-only Session
-  Continuity / Local History UX scaffold.
-- V1.6 stable-readiness and stable release planning are complete.
-- The next V1.6 wave is stable release execution + post-release verification
-  for the bounded display-only UX surface.
+- V1.6 Stable — Session Continuity UX has been released as a bounded stable
+  line after RC release, post-verification, and stable-readiness closure.
+- V1.7 remains the next feature-line candidate for bounded
+  action-preparation planning.
 - Future V1.7 = Bounded Action-Preparation.
 - Future V1.8 = Human-Confirmed Execution Boundary.
 - Future V1.9 = Execution RC Hardening.
