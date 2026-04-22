@@ -2,6 +2,12 @@
 
 ## 2026-04-22
 
+- opened SoloCrew V1.4 stable-readiness baseline under the V1.5 planning
+  line, consolidating stable evidence matrix, blocker assessment, stable
+  release prerequisites, Cognitive_OS dependency assessment, MPLP posture,
+  and embedded readiness gate; no implementation, no Cognitive_OS/MPLP
+  change, no provider/channel execution, no approve/reject/dispatch/execute,
+  no founder queue, no tag, no GitHub Release, and no seal record
 - opened SoloCrew V1.5 planning baseline with high-ROI release-line strategy
   and upstream dependency assessment, evaluating V1.4 stable-readiness, V1.5
   product options, Cognitive_OS dependency posture, MPLP

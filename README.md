@@ -172,8 +172,9 @@ Current V1.4 planning baseline:
 
 SoloCrew V1.5 planning is open after the V1.4 RC continuity page-model
 release, post-release verification, and product hardening.
-V1.5 is evaluating whether the next line should be V1.4 stable-readiness,
-downstream feature expansion, or a new Cognitive_OS dependency path.
+SoloCrew V1.4 stable-readiness is now being assessed under the V1.5 planning
+line. This does not make V1.4 stable yet; it prepares the evidence basis for
+a later explicit stable release decision.
 Current V1.5 planning baseline:
 `governance/baselines/SOLOCREW-V1.5-PLANNING-BASELINE-v0.1.md`.
 

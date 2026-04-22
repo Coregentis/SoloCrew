@@ -84,6 +84,9 @@ record closure, and post-release hardening, so the next decision should be
 whether the bounded V1.4 surface is ready for later stable-readiness planning
 instead of opening a broader feature wave first.
 
+V1.4 stable-readiness baseline has been opened as the selected V1.5
+direction.
+
 ## I. V1.5 Scope / Non-Scope
 
 ### Scope
