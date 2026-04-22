@@ -308,3 +308,19 @@ This is proposed only. No tag or GitHub Release is created in this wave.
 Decision:
 
 `SOLOCREW_V1_3_RELEASE_PLANNING_READY`
+
+## M. V1.3 RC Release Execution and Post-Release Verification
+
+- `release decision`: `SoloCrew V1.3 RC — Lifecycle Clarity` execution wave authorized
+- `tag`: `solocrew-v1.3-rc-lifecycle-clarity-20260422`
+- `GitHub prerelease status`: `PENDING_THIS_WAVE`
+- `post-release verification result`: `PENDING_THIS_WAVE`
+- `boundary confirmation`:
+  - no provider/channel execution
+  - no approve/reject/dispatch/execute
+  - no founder queue
+  - no autonomous company operation
+  - no Cognitive_OS change
+  - no MPLP change
+  - no protocol certification
+  - no GA/stable release claim

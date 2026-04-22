@@ -2,6 +2,12 @@
 
 ## 2026-04-22
 
+- executed SoloCrew V1.3 RC release and post-release verification as a
+  combined high-ROI wave, creating GitHub release notes and a combined
+  seal/execution/post-release record; RC tag and GitHub prerelease created;
+  lifecycle clarity surface verified; no Cognitive_OS/MPLP change, no
+  provider/channel execution, no approve/reject/dispatch/execute, no founder
+  queue, no GA/stable release claim, and no protocol certification claim
 - prepared SoloCrew V1.3 release planning inside the existing V1.3 baseline,
   selecting a bounded lifecycle-clarity RC line and proposed tag/release
   identity; no new governance document, no app/projection change, no
