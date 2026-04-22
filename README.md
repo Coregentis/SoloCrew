@@ -142,8 +142,9 @@ Current V1.3 RC references:
 
 SoloCrew V1.4 planning is open after the V1.3 RC lifecycle clarity release
 and post-release hardening.
-The V1.4 direction is being evaluated for whether it remains downstream-only
-or requires Cognitive_OS dependency planning.
+V1.4 consumption planning now includes a downstream-safe lifecycle continuity
+scaffold. It consumes only projection-safe continuity summaries and does not
+access Cognitive_OS runtime-private internals.
 Current V1.4 planning baseline:
 `governance/baselines/SOLOCREW-V1.4-PLANNING-BASELINE-v0.1.md`.
 

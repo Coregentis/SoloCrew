@@ -106,3 +106,56 @@ because it needs upstream runtime and projection planning.
 Decision enum:
 
 `SOLOCREW_V1_4_PLANNING_BLOCKED_PENDING_COGNITIVE_OS`
+
+## I. V1.4 Downstream Consumption Planning and Scaffold
+
+### I1. Consumption Objective
+
+V1.4 will consume Cognitive_OS neutral durable lifecycle continuity
+projections as downstream-safe summaries for session continuity, local
+lifecycle history, pending review visibility below queue semantics, and
+continuity snapshots. This does not grant access to runtime-private internals
+and does not introduce execution, approval, dispatch, provider/channel send,
+or founder queue behavior.
+
+### I2. Upstream Surface Mapping
+
+| Cognitive_OS neutral surface | SoloCrew downstream value | Consumption boundary |
+|---|---|---|
+| `RuntimeLifecycleContinuityProjection` | session continuity and local lifecycle history display | projection-safe summary only |
+| `RuntimePendingReviewProjection` | pending review visibility below queue semantics | not a queue, dispatch unit, approval, or execution task |
+| `RuntimeContinuitySnapshotProjection` | continuity snapshot display/export | no raw runtime-private state |
+| `RuntimeLifecycleHistoryEntry` | lifecycle history row | read-only lifecycle context |
+| `RuntimePendingReviewItemSummary` | review item summary | visibility only |
+| `safe_evidence_refs` | evidence reference display | references only, not proof/certification |
+| `runtime_private_fields_omitted` | boundary marker | must be true |
+
+### I3. Local Scaffold Decision
+
+| Local scaffold | Purpose | Boundary |
+|---|---|---|
+| `projection/contracts/lifecycle-continuity-consumption-contract.ts` | local downstream-safe view types | no runtime-private fields |
+| `projection/adapters/lifecycle-continuity-consumption-adapter.ts` | adapt projection-safe input into SoloCrew views | reject raw/private/execution/queue fields |
+| `tests/projection/lifecycle-continuity-consumption-adapter.test.ts` | verify safe consumption and boundary rejection | no execution/approval/queue semantics |
+
+### I4. DoR / DoD
+
+#### DoR
+
+- upstream neutral scaffold exists
+- V1.4 baseline selects upstream dependency path
+- local consumption boundary defined
+- no runtime-private import
+- no execution/queue/approval semantics
+
+#### DoD
+
+- local contract scaffold exists
+- adapter scaffold validates safe fields
+- tests reject runtime-private / execution / queue fields
+- README / CHANGELOG updated
+- `npm test` passes
+
+### I5. Decision
+
+`SOLOCREW_V1_4_CONSUMPTION_PLANNING_AND_SCAFFOLD_READY`

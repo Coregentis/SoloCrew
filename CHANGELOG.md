@@ -2,6 +2,12 @@
 
 ## 2026-04-22
 
+- added SoloCrew V1.4 downstream-safe lifecycle continuity consumption
+  scaffold, including local contract types, adapter scaffold, tests, and V1.4
+  baseline mapping to Cognitive_OS neutral continuity surfaces; no
+  Cognitive_OS/MPLP change, no runtime-private import, no
+  provider/channel execution, no approve/reject/dispatch/execute, no founder
+  queue, no tag, no GitHub Release, and no seal record
 - opened SoloCrew V1.4 planning baseline with high-ROI upstream dependency
   assessment, evaluating V1.4 product options, Cognitive_OS dependency
   posture, MPLP mapping posture, selected direction, and embedded readiness
