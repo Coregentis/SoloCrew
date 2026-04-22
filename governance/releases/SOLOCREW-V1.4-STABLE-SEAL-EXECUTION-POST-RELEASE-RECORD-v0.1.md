@@ -13,10 +13,14 @@ verification in one combined artifact to avoid governance document sprawl.
 - `tag`: `solocrew-v1.4-stable-continuity-page-model-20260422`
 - `release_title`: `SoloCrew V1.4 Stable — Continuity Page Model`
 - `pre_release_readiness_commit`: `b96c3948ba24724e3759b2d756553c28c9f46d60`
-- `stable_seal_artifact_commit`: `PENDING_THIS_WAVE`
-- `tag_target_commit`: `PENDING_THIS_WAVE`
-- `github_stable_release`: `PENDING_THIS_WAVE`
-- `post_release_verification`: `PENDING_THIS_WAVE`
+- `stable_seal_artifact_commit`: `9ba20eeb9859c3385ccbeb9e79c64682f6fa4f68`
+- `tag_target_commit`: `9ba20eeb9859c3385ccbeb9e79c64682f6fa4f68`
+- `stable_tag_object_sha`: `c15aaf426ddf123b44737362b1ebef2bf816b6d8`
+- `stable_tag_target_commit`: `9ba20eeb9859c3385ccbeb9e79c64682f6fa4f68`
+- `github_stable_release`: `VERIFIED`
+- `existing_rc_prerelease`: `PRESERVED`
+- `post_release_verification`: `PASS`
+- `final_test_count`: `287`
 
 ## C. Boundary
 
@@ -55,19 +59,25 @@ Existing V1.4 RC tag/release is preserved.
 | validation rerun | `PASS` | full test suite and focused reruns passed pre-release |
 | stable release notes draft reviewed | `PASS` | existing stable release notes draft confirmed usable for GitHub stable release notes |
 | combined stable seal/execution/post-release record created | `PASS` | this artifact created before first stable release commit |
-| stable seal artifact commit created | `PENDING_THIS_WAVE` | to be recorded after first stable release artifact commit |
-| main pushed | `PENDING_THIS_WAVE` | to be recorded after pushing the stable seal artifact commit |
-| annotated stable tag created | `PENDING_THIS_WAVE` | to be recorded after local annotated tag creation |
-| stable tag pushed | `PENDING_THIS_WAVE` | to be recorded after remote tag push |
-| GitHub stable release created | `PENDING_THIS_WAVE` | to be recorded after `gh release create` |
-| remote stable tag verified | `PENDING_THIS_WAVE` | to be recorded after local and remote tag verification |
-| GitHub stable release verified | `PENDING_THIS_WAVE` | to be recorded after `gh release view` verification |
-| existing RC release preserved | `PENDING_THIS_WAVE` | to be re-verified after stable release creation |
-| post-release test rerun | `PENDING_THIS_WAVE` | to be recorded after post-release `npm test` rerun |
-| post-release boundary grep | `PENDING_THIS_WAVE` | to be recorded after final boundary verification |
-| final stable record updated | `PENDING_THIS_WAVE` | to be recorded after final field closure |
-| final commit pushed | `PENDING_THIS_WAVE` | to be recorded after post-release record finalization commit |
+| stable seal artifact commit created | `PASS` | `9ba20eeb9859c3385ccbeb9e79c64682f6fa4f68` |
+| main pushed | `PASS` | stable seal artifact commit pushed to `origin/main` |
+| annotated stable tag created | `PASS` | local annotated tag object `c15aaf426ddf123b44737362b1ebef2bf816b6d8` created |
+| stable tag pushed | `PASS` | remote tag `solocrew-v1.4-stable-continuity-page-model-20260422` created |
+| GitHub stable release created | `PASS` | `gh release create` succeeded without `--prerelease` |
+| remote stable tag verified | `PASS` | remote tag object and peeled target match expected values |
+| GitHub stable release verified | `PASS` | `gh release view` confirmed title, tag, and `prerelease: false` |
+| existing RC release preserved | `PASS` | existing RC tag and prerelease remained available after stable release creation |
+| post-release test rerun | `PASS` | post-release `npm test` passed with 287 tests |
+| post-release boundary grep | `PASS` | matches remained exclusion-only, stable-boundary, warning, or negative-fixture only |
+| final stable record updated | `PASS` | combined record finalized with stable execution and post-release verification results |
+| final commit pushed | `PASS` | this final record commit is pushed to `origin/main` in this wave |
 
 Initial decision:
 
 `SOLOCREW_V1_4_STABLE_RELEASE_EXECUTION_PENDING_TAG_RELEASE`
+
+Final decision after full post-release verification:
+
+`SOLOCREW_V1_4_STABLE_RELEASE_EXECUTED_AND_POST_VERIFIED`
+
+- `final_decision`: `SOLOCREW_V1_4_STABLE_RELEASE_EXECUTED_AND_POST_VERIFIED`
