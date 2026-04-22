@@ -320,3 +320,16 @@ This is proposed only. No tag or GitHub Release is created in this wave.
 Decision:
 
 `SOLOCREW_V1_6_RC_RELEASE_EXECUTION_READINESS_PASS`
+
+## M. V1.6 RC Release Execution and Post-Release Verification
+
+- `release_decision`: `SOLOCREW_V1_6_RC_RELEASE_EXECUTED_AND_POST_VERIFIED`
+- `tag`: `solocrew-v1.6-rc-session-continuity-ux-20260422`
+- `GitHub_prerelease_status`: released as a GitHub prerelease in this wave
+- `post_release_verification_result`: `PASS` with `313` tests and boundary
+  grep preserved
+- `boundary_confirmation`: bounded RC only; display-only, review-only,
+  non-executing, no durable multi-session persistence, no action-preparation,
+  no provider/channel execution, no approve/reject/dispatch/execute, no
+  founder queue, no queue implementation, no runtime-private import, no
+  protocol certification, and no stable/GA claim

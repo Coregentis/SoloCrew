@@ -2,6 +2,13 @@
 
 ## 2026-04-22
 
+- executed SoloCrew V1.6 RC release and post-release verification as a
+  combined high-ROI wave, creating a combined seal/execution/post-release
+  record, publishing the RC tag and GitHub prerelease, and re-verifying tests
+  and boundaries; no Cognitive_OS/MPLP change, no runtime-private import, no
+  durable multi-session persistence, no action-preparation, no
+  provider/channel execution, no approve/reject/dispatch/execute, no founder
+  queue, no stable/GA release claim, and no protocol certification claim
 - verified SoloCrew V1.6 downstream-only Session Continuity / Local History
   UX scaffold and prepared RC release readiness, including implementation
   verification, boundary verification, proposed RC tag/release identity,

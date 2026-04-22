@@ -182,15 +182,11 @@ Current V1.5 planning baseline:
 SoloCrew V1.6 planning is open as a feature-line for Session Continuity /
 Local History Usable UX after the V1.4 Stable release and V1.5 release-line
 closure.
-SoloCrew V1.6 now includes a downstream-only Session Continuity / Local
-History UX scaffold. It provides display-only local history, review trail,
-and continuity replay views over existing safe continuity summaries.
+SoloCrew V1.6 RC — Session Continuity UX has been released as a GitHub
+prerelease. It remains display-only, review-only, and non-executing.
 It does not add durable multi-session persistence, action-preparation,
 execution, approval, dispatch, provider/channel send, or founder queue
 behavior.
-SoloCrew V1.6 implementation verification and RC release readiness are
-complete for this downstream-only UX scaffold. RC execution still requires
-explicit authorization.
 Current V1.6 planning baseline:
 `governance/baselines/SOLOCREW-V1.6-PLANNING-BASELINE-v0.1.md`.
 
