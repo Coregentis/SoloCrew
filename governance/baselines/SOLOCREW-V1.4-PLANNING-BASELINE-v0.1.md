@@ -159,3 +159,93 @@ or founder queue behavior.
 ### I5. Decision
 
 `SOLOCREW_V1_4_CONSUMPTION_PLANNING_AND_SCAFFOLD_READY`
+
+## J. V1.4 Consumption Verification and Implementation Planning
+
+### J1. Verification Result
+
+| Surface | Expected boundary | Verification result |
+|---|---|---|
+| `lifecycle-continuity-consumption-contract.ts` | exposes downstream-safe fields only | PASS |
+| `lifecycle-continuity-consumption-adapter.ts` | rejects runtime-private, execution, and queue fields while preserving safe evidence refs | PASS |
+| `lifecycle-continuity-consumption-adapter.test.ts` | covers safe adaptation, boundary rejection, project consistency, and non-queue posture | PASS |
+| `README.md` | states downstream-safe continuity consumption without runtime-private access or execution widening | PASS |
+| `CHANGELOG.md` | records continuity consumption scaffold without overclaiming capability or release status | PASS |
+
+### J2. Boundary Verification
+
+| Boundary | Result | Evidence |
+|---|---|---|
+| no direct Cognitive_OS import | PASS | local contract and adapter use local structural types only; no direct upstream source import exists |
+| no runtime-private field exposure | PASS | local contract fields remain projection-safe and adapter rejects forbidden raw/private fields recursively |
+| no provider/channel execution | PASS | adapter rejects execution/provider fields and README/CHANGELOG remain exclusion-only |
+| no approve/reject/dispatch/execute | PASS | adapter rejects execution wording and tests keep direct-control wording out of output copy |
+| no founder queue | PASS | pending review remains visibility-only and tests reject founder-queue claims |
+| no queue implementation | PASS | pending review is explicitly below queue semantics and no queue state/model is added |
+| no autonomous company operation | PASS | no autonomy semantics or product overclaim were added in this wave |
+| no tag/release/seal | PASS | planning/verification only; no tag, GitHub Release, or seal record created |
+
+Decision:
+
+`SOLOCREW_V1_4_CONSUMPTION_VERIFICATION_PASS`
+
+### J3. Implementation Slice Selection
+
+| Slice | User value | Files likely touched | Risk | Decision |
+|---|---|---|---|---|
+| continuity summary page-model integration | high | page model, page-model tests, README | medium | selected |
+| pending review visibility panel below queue semantics | high | page model, page-model tests, continuity adapter/tests | medium | selected |
+| continuity snapshot display/export | medium | page model, page-model tests, README | medium | defer behind summary/visibility slice |
+| packet lifecycle + continuity combined view | high | page model, flow, flow tests, app tests | medium-high | candidate follow-on after selected slice |
+| provider/channel execution | none for bounded V1.4 | not applicable | unacceptable | rejected |
+| approve/reject/dispatch/execute | none for bounded V1.4 | not applicable | unacceptable | rejected |
+| founder queue | none for bounded V1.4 | not applicable | unacceptable | rejected |
+
+Selected slice: `continuity summary page-model integration + pending review visibility below queue semantics`
+
+### J4. File-Level Implementation Task Map
+
+| Area | File | Planned change | Boundary |
+|---|---|---|---|
+| app shell page model | `app/shell/create-v1-2-packet-revision-page-model.ts` | optionally consume local continuity views and expose continuity summary / pending review visibility fields | summary-only, review-only, non-executing |
+| app tests | `tests/app/create-v1-2-packet-revision-page-model.test.ts` | verify continuity summary, pending review visibility, and no forbidden execution/queue wording | no runtime-private fields, no control semantics |
+| flow assembly | `projection/assembly/packet-revision-flow.ts`, only if needed | optionally thread continuity summary into existing page-model input shape without widening packet revision law | no provider/channel, no queue semantics |
+| flow tests | `tests/projection/packet-revision-flow.test.ts`, only if needed | verify combined packet-lifecycle plus continuity summary stays non-executing | exclusion-only for execution/queue terms |
+| continuity adapter | `projection/adapters/lifecycle-continuity-consumption-adapter.ts`, only if needed | tighten shaping helpers only if page-model integration reveals a missing safe field or derived label | keep rejection rules and local-only typing |
+| continuity adapter tests | `tests/projection/lifecycle-continuity-consumption-adapter.test.ts`, only if needed | add regression coverage only if shaping changes are required | preserve downstream-safe boundary rejection |
+| product docs | `README.md` | explain the bounded implementation slice once landed | no capability overclaim |
+
+### J5. Test Plan
+
+| Test area | Test file | Required assertion |
+|---|---|---|
+| page model can display continuity summary | `tests/app/create-v1-2-packet-revision-page-model.test.ts` | continuity summary renders as bounded read-only context |
+| page model can display pending review visibility below queue semantics | `tests/app/create-v1-2-packet-revision-page-model.test.ts` | pending review is visible and explicitly not a queue/dispatch surface |
+| page model can display continuity snapshot summary if available | `tests/app/create-v1-2-packet-revision-page-model.test.ts` | snapshot summary is displayable without runtime-private detail |
+| no provider/channel execution claim | `tests/app/create-v1-2-packet-revision-page-model.test.ts` and `tests/projection/lifecycle-continuity-consumption-adapter.test.ts` | copy/output remain below provider/channel semantics |
+| no approve/reject/dispatch/execute claim | `tests/app/create-v1-2-packet-revision-page-model.test.ts` and `tests/projection/lifecycle-continuity-consumption-adapter.test.ts` | copy/output remain below direct-control semantics |
+| no founder queue claim | `tests/app/create-v1-2-packet-revision-page-model.test.ts` and `tests/projection/lifecycle-continuity-consumption-adapter.test.ts` | visibility remains below founder queue semantics |
+| no runtime-private fields exposed | `tests/projection/lifecycle-continuity-consumption-adapter.test.ts` | adapter/page-model boundary exposes projection-safe fields only |
+
+### J6. DoR / DoD
+
+#### DoR
+
+- consumption scaffold exists
+- consumption verification passes
+- implementation slice selected
+- file-level task map defined
+- test plan defined
+- no upstream change needed
+
+#### DoD
+
+- page model consumes local continuity views
+- pending review is displayed as visibility-only
+- tests pass
+- README updated
+- no execution/approval/dispatch/queue semantics
+
+Decision:
+
+`SOLOCREW_V1_4_IMPLEMENTATION_PLANNING_READY`
