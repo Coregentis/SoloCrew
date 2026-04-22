@@ -13,10 +13,12 @@ verification in one combined artifact to avoid governance document sprawl.
 - `tag`: `solocrew-v1.6-rc-session-continuity-ux-20260422`
 - `release_title`: `SoloCrew V1.6 RC — Session Continuity UX`
 - `pre_release_readiness_commit`: `8a8fa431c5bf7ea2e93b37041c604112584ce8f1`
-- `seal_artifact_commit`: `PENDING_THIS_WAVE`
-- `tag_target_commit`: `PENDING_THIS_WAVE`
-- `github_prerelease`: `PENDING_THIS_WAVE`
-- `post_release_verification`: `PENDING_THIS_WAVE`
+- `seal_artifact_commit`: `ea8b5a8d933d102442f12d51c910059354289d25`
+- `tag_object_sha`: `1cab88d4a4ad761d4140bf31454a964fa73636a1`
+- `tag_target_commit`: `ea8b5a8d933d102442f12d51c910059354289d25`
+- `github_prerelease`: `VERIFIED`
+- `post_release_verification`: `PASS`
+- `final_test_count`: `313`
 
 ## C. Boundary
 
@@ -55,18 +57,24 @@ This does not claim protocol certification.
 | validation rerun | `PASS` | full suite and focused reruns passed pre-release |
 | release notes draft reviewed | `PASS` | existing V1.6 RC release notes draft confirmed usable for prerelease notes |
 | combined seal/execution/post-release record created | `PASS` | this artifact created before first RC release commit |
-| seal artifact commit created | `PENDING_THIS_WAVE` | to be recorded after first RC release artifact commit |
-| main pushed | `PENDING_THIS_WAVE` | to be recorded after pushing the seal artifact commit |
-| annotated tag created | `PENDING_THIS_WAVE` | to be recorded after local annotated tag creation |
-| tag pushed | `PENDING_THIS_WAVE` | to be recorded after remote tag push |
-| GitHub prerelease created | `PENDING_THIS_WAVE` | to be recorded after `gh release create` |
-| remote tag verified | `PENDING_THIS_WAVE` | to be recorded after local and remote tag verification |
-| GitHub prerelease verified | `PENDING_THIS_WAVE` | to be recorded after `gh release view` verification |
-| post-release test rerun | `PENDING_THIS_WAVE` | to be recorded after post-release `npm test` rerun |
-| post-release boundary grep | `PENDING_THIS_WAVE` | to be recorded after final boundary verification |
-| final record updated | `PENDING_THIS_WAVE` | to be recorded after final field closure |
-| final commit pushed | `PENDING_THIS_WAVE` | to be recorded after post-release record finalization commit |
+| seal artifact commit created | `PASS` | `ea8b5a8d933d102442f12d51c910059354289d25` |
+| main pushed | `PASS` | seal artifact commit pushed to `origin/main` |
+| annotated tag created | `PASS` | local annotated tag object `1cab88d4a4ad761d4140bf31454a964fa73636a1` created |
+| tag pushed | `PASS` | remote tag `solocrew-v1.6-rc-session-continuity-ux-20260422` created |
+| GitHub prerelease created | `PASS` | `gh release create` succeeded |
+| remote tag verified | `PASS` | remote tag object and peeled target match expected values |
+| GitHub prerelease verified | `PASS` | `gh release view` confirmed title, tag, and `prerelease: true` |
+| post-release test rerun | `PASS` | post-release `npm test` passed with 313 tests |
+| post-release boundary grep | `PASS` | matches remained exclusion-only, RC-boundary, warning, or negative-fixture only |
+| final record updated | `PASS` | combined record finalized with execution and post-release verification results |
+| final commit pushed | `PASS` | this final record commit is pushed to `origin/main` in this wave |
 
 Initial decision:
 
 `SOLOCREW_V1_6_RC_RELEASE_EXECUTION_PENDING_TAG_RELEASE`
+
+Final decision after full post-release verification:
+
+`SOLOCREW_V1_6_RC_RELEASE_EXECUTED_AND_POST_VERIFIED`
+
+- `final_decision`: `SOLOCREW_V1_6_RC_RELEASE_EXECUTED_AND_POST_VERIFIED`
