@@ -2,6 +2,12 @@
 
 ## 2026-04-22
 
+- implemented SoloCrew V1.4 continuity page-model integration, exposing
+  bounded continuity summary and pending review visibility below queue
+  semantics while preserving review-only, non-executing boundaries; no
+  Cognitive_OS/MPLP change, no runtime-private import, no
+  provider/channel execution, no approve/reject/dispatch/execute, no founder
+  queue, no tag, no GitHub Release, and no seal record
 - verified SoloCrew V1.4 downstream-safe lifecycle continuity consumption
   scaffold and prepared implementation planning for continuity summary
   page-model integration plus pending review visibility below queue
