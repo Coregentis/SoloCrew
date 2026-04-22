@@ -333,3 +333,137 @@ Decision:
   no provider/channel execution, no approve/reject/dispatch/execute, no
   founder queue, no queue implementation, no runtime-private import, no
   protocol certification, and no stable/GA claim
+
+## N. V1.6 Stable-Readiness and Stable Release Planning
+
+`SOLOCREW_V1_6_STABLE_READINESS_PASS`
+
+`SOLOCREW_V1_6_STABLE_RELEASE_EXECUTION_READINESS_PASS`
+
+`SOLOCREW_V1_6_STABLE_RELEASE_TYPE_SELECTED_FOR_PLANNING`
+
+### N1. Planning Purpose
+
+This section combines V1.6 stable-readiness and stable release planning in
+one wave to avoid release-line fragmentation. It does not create a stable
+tag, GitHub Release, seal record, implementation change, Cognitive_OS change,
+or MPLP change.
+
+### N2. Stable Evidence Matrix
+
+| Evidence area | Current evidence | Stable-readiness status | Notes |
+|---|---|---|---|
+| RC release surface exists | RC tag and GitHub prerelease exist | PASS | V1.6 RC identity is already frozen on remote truth |
+| RC tag and GitHub prerelease verified | local/remote tag and `gh release view` checks pass | PASS | title, prerelease flag, and tag identity match |
+| combined RC seal/execution/post-release record closed | final record commit exists on `main` | PASS | RC closure is complete and not partial |
+| `npm test` count stable at 313 | full suite passes at 313 tests | PASS | suite remains stable at current repo truth |
+| focused V1.6 adapter tests pass | focused `npm test -- tests/projection/session-continuity-ux-adapter.test.ts` completed successfully | PASS | adapter safety and boundary checks remain green |
+| focused V1.6 page-model tests pass | focused `npm test -- tests/app/create-v1-6-session-continuity-page-model.test.ts` completed successfully | PASS | page-model display-only checks remain green |
+| boundary grep pass | grep remains exclusion-only, boundary-only, or negative-fixture only | PASS | no positive forbidden claims found |
+| README / CHANGELOG aligned | README and CHANGELOG describe current RC truth and bounded scope | PASS | no stable overclaim present |
+| release notes explicit about non-capabilities | RC notes list non-capabilities and no-GA posture explicitly | PASS | release notes already preserve bounded scope language |
+| no Cognitive_OS change | no Cognitive_OS files changed across V1.6 line | PASS | stable-readiness remains downstream-only |
+| no MPLP change | no MPLP files changed across V1.6 line | PASS | no protocol/schema/binding drift |
+| no durable multi-session persistence | V1.6 scaffold and release docs remain below persistence claims | PASS | persistence remains deferred |
+| no action-preparation | V1.6 surfaces stay below action-preparation semantics | PASS | action-preparation remains out of scope |
+| no provider/channel execution | release and product surfaces remain non-executing | PASS | no provider/channel capability introduced |
+| no approve/reject/dispatch/execute | control-surface semantics remain excluded | PASS | no decision/dispatch surface introduced |
+| no founder queue | founder queue remains absent | PASS | review trail remains below queue semantics |
+| no GA/stable overclaim | current V1.6 surfaces still label the released line as RC only | PASS | stable-readiness is planning only, not promotion |
+
+### N3. Blocker / Correction Assessment
+
+| Potential blocker | Status | Required correction |
+|---|---|---|
+| release surface inconsistency | NOT_OPEN | none currently required |
+| test instability | NOT_OPEN | continue to rerun full suite in later stable-execution wave |
+| README / CHANGELOG overclaim | NOT_OPEN | maintain current bounded wording |
+| release notes overclaim | NOT_OPEN | keep stable draft explicit about non-capabilities and no-GA posture |
+| boundary overclaim | NOT_OPEN | preserve exclusion-only wording |
+| runtime-private exposure | NOT_OPEN | preserve current contract / adapter / page-model boundary |
+| Cognitive_OS dependency gap | NOT_OPEN | no upstream change required for stable planning |
+| MPLP protocol/schema risk | NOT_OPEN | no protocol/schema/binding changes are implicated |
+| stable/GA naming risk | OPEN_FOR_CONTROL | keep all stable planning surfaces below GA claim until explicit execution authorization |
+
+### N4. Stable Release Type Decision
+
+| Option | Meaning | Decision | Reason |
+|---|---|---|---|
+| V1.6 stable | Stable release for downstream-only Session Continuity UX scaffold | SELECTED_FOR_PLANNING | RC release and post-verification passed |
+| V1.6 GA | General availability claim | REJECTED | current scope is bounded stable, not GA |
+| V1.7 planning | next feature line | DEFERRED | V1.6 stable release should close first |
+
+Decision:
+
+`SOLOCREW_V1_6_STABLE_RELEASE_TYPE_SELECTED_FOR_PLANNING`
+
+### N5. Proposed Stable Tag / Release Identity
+
+- `tag`: `solocrew-v1.6-stable-session-continuity-ux-20260422`
+- `release_title`: `SoloCrew V1.6 Stable — Session Continuity UX`
+- `release_type`: `GitHub release`
+- `prerelease`: `false`
+
+This is proposed only. No stable tag or GitHub Release is created in this
+wave.
+This is a bounded stable release planning identity, not a GA claim.
+
+### N6. Stable Scope
+
+- downstream-only session continuity panel
+- local history timeline display
+- review trail display
+- continuity replay guided display
+- continuity snapshot display support
+- safe evidence refs
+- `runtime_private_fields_omitted` boundary marker
+- 313-test suite passing
+
+### N7. Stable Non-Scope
+
+- no durable multi-session persistence
+- no action-preparation
+- no provider/channel execution
+- no approve/reject/dispatch/execute
+- no founder queue
+- no queue implementation
+- no autonomous company operation
+- no Cognitive_OS change
+- no MPLP change
+- no runtime-private import
+- no protocol certification
+- no GA claim
+
+### N8. Stable / GA Naming Risk Control
+
+| Naming risk | Control | Status |
+|---|---|---|
+| stable mistaken as GA | use `Stable` only for this bounded V1.6 display-only UX surface and explicitly avoid `GA` | PASS |
+| stable mistaken as durable persistence | stable docs explicitly state no durable multi-session persistence | PASS |
+| stable mistaken as action-preparation | stable docs explicitly state no action-preparation | PASS |
+| stable mistaken as execution-capable | stable docs keep display-only / review-only / non-executing wording explicit | PASS |
+| stable mistaken as provider/channel capable | stable docs explicitly state no provider/channel execution | PASS |
+| stable mistaken as queue-capable | stable docs explicitly state no founder queue or queue implementation | PASS |
+| stable mistaken as protocol-certified | stable docs explicitly state no protocol certification | PASS |
+
+### N9. Stable Execution Readiness Matrix
+
+| Requirement | Required evidence | Status |
+|---|---|---|
+| repo clean and local/remote aligned | `git status --short` clean and local/remote HEAD match | PASS |
+| V1.6 RC release surface verified | RC tag and GitHub prerelease verified on remote truth | PASS |
+| stable-readiness passed | stable evidence matrix and blocker assessment completed in this baseline | PASS |
+| `npm test` passes | full suite passes at 313 tests | PASS |
+| focused V1.6 adapter and page-model tests pass | focused `npm test -- ...` commands complete successfully | PASS |
+| boundary grep passes | boundary grep remains exclusion-only, stable-boundary-only, warning-only, or negative-fixture only | PASS |
+| no existing stable V1.6 tag | `git tag --list "solocrew-v1.6-stable*"` returns no tag | PASS |
+| no existing stable V1.6 GitHub Release | `gh release view solocrew-v1.6-stable-session-continuity-ux-20260422` returns release not found | PASS |
+| stable release notes draft created | stable GitHub release notes draft exists in `governance/releases` | PASS |
+| README / CHANGELOG / baseline aligned | all three surfaces describe current stable-planning truth | PASS |
+| explicit user authorization required for stable execution | stable execution remains blocked until a later explicit authorization wave | PASS |
+
+Decision:
+
+`SOLOCREW_V1_6_STABLE_READINESS_PASS`
+
+`SOLOCREW_V1_6_STABLE_RELEASE_EXECUTION_READINESS_PASS`

@@ -187,6 +187,9 @@ prerelease. It remains display-only, review-only, and non-executing.
 It does not add durable multi-session persistence, action-preparation,
 execution, approval, dispatch, provider/channel send, or founder queue
 behavior.
+SoloCrew V1.6 stable-readiness and stable release planning are complete for
+the downstream-only Session Continuity / Local History UX scaffold. Stable
+execution still requires explicit authorization.
 Current V1.6 planning baseline:
 `governance/baselines/SOLOCREW-V1.6-PLANNING-BASELINE-v0.1.md`.
 
