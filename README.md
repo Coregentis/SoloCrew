@@ -188,6 +188,9 @@ and continuity replay views over existing safe continuity summaries.
 It does not add durable multi-session persistence, action-preparation,
 execution, approval, dispatch, provider/channel send, or founder queue
 behavior.
+SoloCrew V1.6 implementation verification and RC release readiness are
+complete for this downstream-only UX scaffold. RC execution still requires
+explicit authorization.
 Current V1.6 planning baseline:
 `governance/baselines/SOLOCREW-V1.6-PLANNING-BASELINE-v0.1.md`.
 

@@ -2,6 +2,14 @@
 
 ## 2026-04-22
 
+- verified SoloCrew V1.6 downstream-only Session Continuity / Local History
+  UX scaffold and prepared RC release readiness, including implementation
+  verification, boundary verification, proposed RC tag/release identity,
+  release notes draft, and readiness matrix; no Cognitive_OS/MPLP change, no
+  runtime-private import, no durable multi-session persistence, no
+  action-preparation, no provider/channel execution, no
+  approve/reject/dispatch/execute, no founder queue, no tag, no GitHub
+  Release, and no seal record
 - implemented SoloCrew V1.6 downstream-only Session Continuity / Local
   History UX scaffold, including local UX contract types, adapter scaffold,
   session continuity page model, tests, and V1.6 baseline alignment; no
