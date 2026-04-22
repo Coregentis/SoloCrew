@@ -2,6 +2,12 @@
 
 ## 2026-04-22
 
+- prepared SoloCrew V1.4 RC release planning and execution readiness for the
+  bounded continuity page-model slice, adding proposed tag/release identity,
+  release notes draft, readiness matrix, and release scope/non-scope
+  alignment; no Cognitive_OS/MPLP change, no runtime-private import, no
+  provider/channel execution, no approve/reject/dispatch/execute, no founder
+  queue, no tag, no GitHub Release, and no seal record
 - verified SoloCrew V1.4 continuity page-model implementation and
   release-readiness posture, confirming bounded continuity summary, pending
   review visibility below queue semantics, safe evidence ref handling, old

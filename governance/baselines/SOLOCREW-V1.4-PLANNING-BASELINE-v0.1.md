@@ -345,3 +345,77 @@ Decision:
 `SOLOCREW_V1_4_IMPLEMENTATION_VERIFICATION_PASS`
 
 `SOLOCREW_V1_4_RELEASE_PLANNING_READY`
+
+## M. V1.4 RC Release Planning and Execution Readiness
+
+### M1. Release Planning Purpose
+
+This section prepares SoloCrew V1.4 continuity page-model implementation for
+a later explicit user-authorized RC release execution wave. It does not create
+a tag, GitHub Release, seal record, stable/GA claim, provider/channel
+execution, approve/reject/dispatch/execute, or founder queue behavior.
+
+### M2. Release Type Decision
+
+| Option | Meaning | Decision | Reason |
+|---|---|---|---|
+| V1.4 RC | Release candidate for bounded continuity page-model slice | SELECTED | implementation and verification passed, but release execution still needs explicit authorization |
+| V1.4 stable / GA | Stable public release | REJECTED_FOR_NOW | no stable/GA claim in this wave |
+| V1.5 planning | next product planning line | DEFERRED | V1.4 RC release must close first |
+
+Decision:
+
+`SOLOCREW_V1_4_RELEASE_TYPE_RC_SELECTED`
+
+### M3. Proposed Tag / Release Identity
+
+- `tag`: `solocrew-v1.4-rc-continuity-page-model-20260422`
+- `release_title`: `SoloCrew V1.4 RC — Continuity Page Model`
+- `release_type`: `GitHub prerelease`
+
+This is proposed only. No tag or GitHub Release is created in this wave.
+
+### M4. Release Scope
+
+- bounded continuity summary page-model integration
+- pending review visibility below queue semantics
+- continuity lifecycle label
+- continuity history summary
+- pending review count and summaries
+- continuity review posture
+- continuity non-executing posture
+- safe evidence refs
+- `runtime_private_fields_omitted` boundary marker
+- 287-test suite passing
+
+### M5. Release Non-Scope
+
+- no provider/channel execution
+- no approve/reject/dispatch/execute
+- no founder queue
+- no queue implementation
+- no autonomous company operation
+- no Cognitive_OS change
+- no MPLP change
+- no runtime-private import
+- no protocol certification
+- no GA/stable release claim
+
+### M6. Release Execution Readiness Matrix
+
+| Requirement | Required evidence | Status |
+|---|---|---|
+| repo clean and local/remote aligned | `git status --short` clean and local/remote HEAD match | PASS |
+| implementation verification passed | baseline decision `SOLOCREW_V1_4_IMPLEMENTATION_VERIFICATION_PASS` recorded | PASS |
+| `npm test` passes | full suite passes at 287 tests | PASS |
+| focused page-model and continuity adapter tests pass | focused `npm test -- ...` commands complete successfully | PASS |
+| boundary grep passes | boundary grep remains exclusion-only, planning-only, warning-only, or negative-fixture only | PASS |
+| no existing V1.4 tag | `git tag --list "solocrew-v1.4*"` returns no tag | PASS |
+| no existing V1.4 GitHub Release | `gh release view solocrew-v1.4-rc-continuity-page-model-20260422` returns release not found | PASS |
+| release notes draft created | V1.4 RC GitHub release notes draft exists in `governance/releases` | PASS |
+| README / CHANGELOG aligned | README and CHANGELOG describe current bounded V1.4 RC planning truth | PASS |
+| explicit user authorization required for execution | this wave is planning/readiness only and does not authorize tag/release/seal creation by itself | PASS |
+
+Decision:
+
+`SOLOCREW_V1_4_RELEASE_EXECUTION_READINESS_PASS`

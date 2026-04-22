@@ -142,9 +142,10 @@ Current V1.3 RC references:
 
 SoloCrew V1.4 planning is open after the V1.3 RC lifecycle clarity release
 and post-release hardening.
-SoloCrew V1.4 now exposes bounded continuity summary and pending review
-visibility in the page model. Pending review remains visibility-only, not a
-queue, approval, dispatch, or execution surface.
+SoloCrew V1.4 RC release planning is open for the bounded continuity
+page-model slice. The proposed RC remains review-only and non-executing, with
+no provider/channel execution, approve/reject/dispatch/execute, or founder
+queue behavior.
 Current V1.4 planning baseline:
 `governance/baselines/SOLOCREW-V1.4-PLANNING-BASELINE-v0.1.md`.
 
