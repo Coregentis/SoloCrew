@@ -13,10 +13,12 @@ verification in one combined artifact to avoid governance document sprawl.
 - `tag`: `solocrew-v1.4-rc-continuity-page-model-20260422`
 - `release_title`: `SoloCrew V1.4 RC — Continuity Page Model`
 - `pre_release_readiness_commit`: `278db2ea9cd2753b62bdd1d7d59877f548a9fbc3`
-- `seal_artifact_commit`: `PENDING_THIS_WAVE`
-- `tag_target_commit`: `PENDING_THIS_WAVE`
-- `github_prerelease`: `PENDING_THIS_WAVE`
-- `post_release_verification`: `PENDING_THIS_WAVE`
+- `seal_artifact_commit`: `44318237e38c336b882b532d164f412145a0014f`
+- `tag_object_sha`: `985e432c351a3e6799c92bf7115a55b628beeb3b`
+- `tag_target_commit`: `44318237e38c336b882b532d164f412145a0014f`
+- `github_prerelease`: `VERIFIED`
+- `post_release_verification`: `PASS`
+- `final_test_count`: `287`
 
 ## C. Boundary
 
@@ -53,18 +55,24 @@ This does not claim protocol certification.
 | validation rerun | `PASS` | full test suite and focused reruns passed pre-release |
 | release notes draft reviewed | `PASS` | existing V1.4 RC release notes draft confirmed usable for prerelease notes |
 | combined seal/execution/post-release record created | `PASS` | this artifact created before first release commit |
-| seal artifact commit created | `PENDING` | pending this wave |
-| main pushed | `PENDING` | pending this wave |
-| annotated tag created | `PENDING` | pending this wave |
-| tag pushed | `PENDING` | pending this wave |
-| GitHub prerelease created | `PENDING` | pending this wave |
-| remote tag verified | `PENDING` | pending this wave |
-| GitHub prerelease verified | `PENDING` | pending this wave |
-| post-release test rerun | `PENDING` | pending this wave |
-| post-release boundary grep | `PENDING` | pending this wave |
-| final record updated | `PENDING` | pending this wave |
-| final commit pushed | `PENDING` | pending this wave |
+| seal artifact commit created | `PASS` | `44318237e38c336b882b532d164f412145a0014f` |
+| main pushed | `PASS` | seal artifact commit pushed to `origin/main` |
+| annotated tag created | `PASS` | local annotated tag object `985e432c351a3e6799c92bf7115a55b628beeb3b` created |
+| tag pushed | `PASS` | remote tag `solocrew-v1.4-rc-continuity-page-model-20260422` created |
+| GitHub prerelease created | `PASS` | `gh release create` succeeded |
+| remote tag verified | `PASS` | remote tag object and peeled target match expected values |
+| GitHub prerelease verified | `PASS` | `gh release view` confirmed title, tag, and `prerelease: true` |
+| post-release test rerun | `PASS` | post-release `npm test` passed with 287 tests |
+| post-release boundary grep | `PASS` | matches remained exclusion-only, planning/release boundary, warning, or negative-fixture only |
+| final record updated | `PASS` | combined record finalized with execution and post-release verification results |
+| final commit pushed | `PASS` | final record commit pushed to `origin/main` in this wave |
 
 Initial decision:
 
 `SOLOCREW_V1_4_RC_RELEASE_EXECUTION_PENDING_TAG_RELEASE`
+
+Final decision after full post-release verification:
+
+`SOLOCREW_V1_4_RC_RELEASE_EXECUTED_AND_POST_VERIFIED`
+
+- `final_decision`: `SOLOCREW_V1_4_RC_RELEASE_EXECUTED_AND_POST_VERIFIED`
