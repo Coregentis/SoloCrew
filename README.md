@@ -168,6 +168,15 @@ Current V1.4 RC references:
 Current V1.4 planning baseline:
 `governance/baselines/SOLOCREW-V1.4-PLANNING-BASELINE-v0.1.md`.
 
+## Current V1.5 Planning Line
+
+SoloCrew V1.5 planning is open after the V1.4 RC continuity page-model
+release, post-release verification, and product hardening.
+V1.5 is evaluating whether the next line should be V1.4 stable-readiness,
+downstream feature expansion, or a new Cognitive_OS dependency path.
+Current V1.5 planning baseline:
+`governance/baselines/SOLOCREW-V1.5-PLANNING-BASELINE-v0.1.md`.
+
 The sealed `v0.3` line remains the first bounded single-cell usable release
 line inside that delivered platform baseline, and it extends the sealed `v0.2`
 and `v0.1` baselines with:

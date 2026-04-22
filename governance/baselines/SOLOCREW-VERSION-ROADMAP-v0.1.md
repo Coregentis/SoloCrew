@@ -196,7 +196,8 @@ That closure pack does not widen the line into `v0.5`.
 - V1.2 packet revision loop was released as a bounded non-executing RC.
 - V1.3 lifecycle clarity was released as a bounded GitHub prerelease RC and
   then post-release hardened.
-- V1.4 planning is now open.
-- The current leading V1.4 direction is durable packet lifecycle continuity,
-  which likely requires `Cognitive_OS` dependency planning before SoloCrew
-  implementation begins.
+- V1.4 continuity page-model was released as a bounded GitHub prerelease RC,
+  post-verified, and post-release hardened.
+- V1.5 planning is now open.
+- The current leading V1.5 direction is V1.4 stable-readiness rather than
+  immediate feature expansion or a new upstream dependency wave.
