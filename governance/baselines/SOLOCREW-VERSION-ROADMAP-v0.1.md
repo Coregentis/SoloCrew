@@ -199,5 +199,15 @@ That closure pack does not widen the line into `v0.5`.
 - V1.4 Stable — Continuity Page Model has been released as a bounded stable
   line after RC release, post-verification, product hardening, and
   stable-readiness closure.
-- V1.5 remains the planning line for deciding the next feature or readiness
-  direction after the bounded V1.4 stable release.
+- V1.4 stable is now closed as the bounded continuity page-model release
+  line.
+- V1.5 stable-readiness / release-line closure is complete and now closed.
+- V1.6 opens as the feature-line for Session Continuity / Local History
+  Usable UX.
+- V1.6 begins with downstream-only usable UX over the existing local
+  continuity scaffold, while durable multi-session persistence remains
+  deferred pending Cognitive_OS planning.
+- Future V1.7 = Bounded Action-Preparation.
+- Future V1.8 = Human-Confirmed Execution Boundary.
+- Future V1.9 = Execution RC Hardening.
+- Future V2.0 = First Usable SoloCrew Operating Loop.

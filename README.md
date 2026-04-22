@@ -172,13 +172,21 @@ Current V1.4 planning baseline:
 
 ## Current V1.5 Planning Line
 
-SoloCrew V1.5 planning remains open after the V1.4 continuity page-model RC
-release, stable release, post-release verification, and product hardening.
-SoloCrew V1.4 Stable — Continuity Page Model has now been released as a
-bounded stable line, and V1.5 remains the planning line for deciding the next
-feature or readiness direction.
+SoloCrew V1.5 served as the V1.4 stable-readiness / release-line closure.
+That V1.5 line is now closed and is not the next feature-line.
 Current V1.5 planning baseline:
 `governance/baselines/SOLOCREW-V1.5-PLANNING-BASELINE-v0.1.md`.
+
+## Current V1.6 Planning Line
+
+SoloCrew V1.6 planning is open as a feature-line for Session Continuity /
+Local History Usable UX after the V1.4 Stable release and V1.5 release-line
+closure.
+V1.6 starts with downstream-only usable UX over the existing local continuity
+scaffold. Durable multi-session persistence remains deferred until separately
+planned with Cognitive_OS.
+Current V1.6 planning baseline:
+`governance/baselines/SOLOCREW-V1.6-PLANNING-BASELINE-v0.1.md`.
 
 The sealed `v0.3` line remains the first bounded single-cell usable release
 line inside that delivered platform baseline, and it extends the sealed `v0.2`

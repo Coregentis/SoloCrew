@@ -2,6 +2,13 @@
 
 ## 2026-04-22
 
+- opened SoloCrew V1.6 planning baseline as a feature-line for Session
+  Continuity / Local History Usable UX, locking version semantics after V1.4
+  Stable and V1.5 release-line closure, evaluating product options,
+  Cognitive_OS dependency posture, MPLP posture, selected direction, and
+  embedded readiness gate; no implementation, no Cognitive_OS/MPLP change,
+  no provider/channel execution, no approve/reject/dispatch/execute, no
+  founder queue, no tag, no GitHub Release, and no seal record
 - executed SoloCrew V1.4 stable release and post-release verification as a
   combined high-ROI wave, creating a combined stable
   seal/execution/post-release record, publishing the stable tag and GitHub
