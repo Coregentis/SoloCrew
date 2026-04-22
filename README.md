@@ -138,6 +138,15 @@ Current V1.3 RC references:
 - known limitations:
   `governance/guides/SOLOCREW-V1.2-RC-KNOWN-LIMITATIONS-v0.1.md`
 
+## Current V1.4 Planning Line
+
+SoloCrew V1.4 planning is open after the V1.3 RC lifecycle clarity release
+and post-release hardening.
+The V1.4 direction is being evaluated for whether it remains downstream-only
+or requires Cognitive_OS dependency planning.
+Current V1.4 planning baseline:
+`governance/baselines/SOLOCREW-V1.4-PLANNING-BASELINE-v0.1.md`.
+
 The sealed `v0.3` line remains the first bounded single-cell usable release
 line inside that delivered platform baseline, and it extends the sealed `v0.2`
 and `v0.1` baselines with:

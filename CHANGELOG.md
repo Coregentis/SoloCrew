@@ -2,6 +2,12 @@
 
 ## 2026-04-22
 
+- opened SoloCrew V1.4 planning baseline with high-ROI upstream dependency
+  assessment, evaluating V1.4 product options, Cognitive_OS dependency
+  posture, MPLP mapping posture, selected direction, and embedded readiness
+  gate; no implementation, no Cognitive_OS/MPLP change, no
+  provider/channel execution, no approve/reject/dispatch/execute, no founder
+  queue, no tag, no GitHub Release, and no seal record
 - completed SoloCrew V1.3 post-release product hardening by aligning README,
   existing walkthrough, known limitations, demo scenario guide, and V1.3
   baseline with the released lifecycle-clarity RC; release surface

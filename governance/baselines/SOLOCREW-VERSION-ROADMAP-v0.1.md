@@ -188,3 +188,15 @@ It does not by itself require changing the private package version or claiming a
 
 `v0.4` now also carries a formal closure record and boundary-clarification pack.
 That closure pack does not widen the line into `v0.5`.
+
+## Current Planning Note
+
+- V1.1 founder-loop improvement line was released as a bounded non-executing
+  RC.
+- V1.2 packet revision loop was released as a bounded non-executing RC.
+- V1.3 lifecycle clarity was released as a bounded GitHub prerelease RC and
+  then post-release hardened.
+- V1.4 planning is now open.
+- The current leading V1.4 direction is durable packet lifecycle continuity,
+  which likely requires `Cognitive_OS` dependency planning before SoloCrew
+  implementation begins.
