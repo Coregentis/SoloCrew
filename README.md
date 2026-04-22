@@ -117,6 +117,14 @@ The V1.2 RC line explicitly excludes:
 V1.2 RC remains review-only and not sent. Safe clarification prompts remain
 copy-only and do not become provider/channel send.
 
+## Current V1.3 Planning Line
+
+SoloCrew V1.2 RC is released, verified, and product-hardened.
+SoloCrew V1.3 planning is open through
+`governance/baselines/SOLOCREW-V1.3-PLANNING-BASELINE-v0.1.md`.
+V1.3 remains bounded and non-executing unless a later explicit plan changes
+scope.
+
 The sealed `v0.3` line remains the first bounded single-cell usable release
 line inside that delivered platform baseline, and it extends the sealed `v0.2`
 and `v0.1` baselines with:

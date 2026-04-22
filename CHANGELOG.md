@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-22
+
+- opened SoloCrew V1.3 planning baseline with documentation budget control,
+  V1.2 baseline summary, V1.3 product direction, scope/non-scope, Cognitive_OS
+  dependency assessment, and embedded readiness gate; no app/projection
+  implementation, no Cognitive_OS/MPLP change, no provider/channel execution,
+  no approve/reject/dispatch/execute, no founder queue, no tag, no GitHub
+  Release, and no seal record
+
 ## 2026-04-21
 
 - recorded SoloCrew V1.2 post-release backflow source evidence, including RC
