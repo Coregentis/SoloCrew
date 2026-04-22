@@ -2,6 +2,12 @@
 
 ## 2026-04-22
 
+- prepared SoloCrew V1.3 release planning inside the existing V1.3 baseline,
+  selecting a bounded lifecycle-clarity RC line and proposed tag/release
+  identity; no new governance document, no app/projection change, no
+  Cognitive_OS/MPLP change, no provider/channel execution, no
+  approve/reject/dispatch/execute, no founder queue, no tag, no GitHub
+  Release, and no seal record
 - verified SoloCrew V1.3 lifecycle clarity implementation against the existing
   planning baseline, confirming lifecycle fields, evidence gap visibility,
   revision relationship display, review-only posture, tests, and

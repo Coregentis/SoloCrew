@@ -224,3 +224,87 @@ GitHub Release, seal record, or new governance documents.
 ### K5. Decision
 
 `SOLOCREW_V1_3_POST_IMPLEMENTATION_VERIFICATION_PASS`
+
+## L. V1.3 Release Planning
+
+### L1. Release Planning Purpose
+
+This section prepares SoloCrew V1.3 lifecycle clarity for a later explicit
+user-authorized release execution wave. It does not create a tag, GitHub
+Release, seal record, or stable/GA claim.
+
+### L2. Release Type Decision
+
+| Option | Meaning | Decision | Reason |
+|---|---|---|---|
+| V1.3 RC | Release candidate for bounded lifecycle clarity slice | SELECTED | implementation and verification passed, but post-release verification still required |
+| V1.3 stable / GA | Stable public release | REJECTED_FOR_NOW | no GA/stable claim in this wave |
+| V1.4 planning | next planning line | DEFERRED | V1.3 release must close first |
+
+Decision:
+
+`SOLOCREW_V1_3_RELEASE_TYPE_RC_SELECTED`
+
+### L3. Proposed Tag / Release Identity
+
+- `tag`: `solocrew-v1.3-rc-lifecycle-clarity-20260422`
+- `release_title`: `SoloCrew V1.3 RC — Lifecycle Clarity`
+- `release_type`: `GitHub prerelease`
+
+This is proposed only. No tag or GitHub Release is created in this wave.
+
+### L4. Release Scope
+
+- bounded packet lifecycle clarity
+- lifecycle labels
+- evidence gap visibility
+- revision relationship display
+- review-only posture
+- non-executing posture
+- README / CHANGELOG alignment
+- 267-test suite passing
+
+### L5. Release Non-Scope
+
+- no provider/channel execution
+- no approve/reject/dispatch/execute
+- no founder queue
+- no autonomous company operation
+- no Cognitive_OS change
+- no MPLP change
+- no protocol certification
+- no GA/stable release claim
+
+### L6. Future Release Execution Requirements
+
+| Requirement | Required evidence |
+|---|---|
+| repo clean and local/remote aligned | `git status --short` clean and `git rev-parse HEAD` equals `git rev-parse origin/main` |
+| `npm test` passes | full SoloCrew suite passes in the future release wave |
+| focused lifecycle tests pass or full test suite confirms coverage | packet revision adapter / flow / page-model checks pass, or full suite pass is used as the bounded substitute |
+| boundary grep passes | forbidden-claim grep remains exclusion-only, warning-only, or negative-fixture only |
+| no existing V1.3 tag | `git tag --list "solocrew-v1.3*"` returns no conflicting tag |
+| no existing V1.3 GitHub Release | `gh release view solocrew-v1.3-rc-lifecycle-clarity-20260422 --repo Coregentis/SoloCrew` returns not found before execution |
+| release notes created | future release wave creates bounded V1.3 RC release notes |
+| combined seal/execution record created | future release wave records seal and execution truth before/after tag and prerelease creation |
+| annotated tag pushed | future release wave creates and pushes the annotated RC tag |
+| GitHub prerelease created | future release wave creates the RC GitHub prerelease against the same tag |
+| final verification passes | future release wave rechecks repo truth, tag truth, release truth, tests, and boundary grep after execution |
+
+### L7. Embedded Release Planning Gate
+
+| Gate | Requirement | Status |
+|---|---|---|
+| implementation verification passed | `SOLOCREW_V1_3_POST_IMPLEMENTATION_VERIFICATION_PASS` exists | PASS |
+| release type selected | RC line selected for V1.3 | PASS |
+| tag naming proposed | V1.3 RC tag naming is proposed and bounded | PASS |
+| release scope bounded | scope stays on lifecycle clarity slice only | PASS |
+| release non-scope explicit | execution / queue / autonomy / upstream widening remain excluded | PASS |
+| documentation budget respected | release planning stays inside existing baseline | PASS |
+| no tag created | no V1.3 tag was created in this wave | PASS |
+| no GitHub Release created | no V1.3 GitHub Release was created in this wave | PASS |
+| no seal record created | no seal record was created in this wave | PASS |
+
+Decision:
+
+`SOLOCREW_V1_3_RELEASE_PLANNING_READY`
