@@ -2,8 +2,8 @@
 
 ## Summary
 
-SoloCrew V1.4 Stable promotes the bounded continuity page-model surface from
-RC-readiness to stable-release readiness.
+SoloCrew V1.4 Stable releases the bounded continuity page-model surface as a
+bounded stable GitHub release.
 
 This stable release remains review-only and non-executing. It is not a GA
 claim.
@@ -45,6 +45,6 @@ claim.
 - Boundary grep passed.
 - V1.4 stable-readiness passed.
 
-## Proposed Tag
+## Tag
 
 solocrew-v1.4-stable-continuity-page-model-20260422

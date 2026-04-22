@@ -138,26 +138,28 @@ Current V1.3 RC references:
 - known limitations:
   `governance/guides/SOLOCREW-V1.2-RC-KNOWN-LIMITATIONS-v0.1.md`
 
-## Current V1.4 Planning Line
+## Current V1.4 Stable Line
 
-SoloCrew V1.4 planning is open after the V1.3 RC lifecycle clarity release
-and post-release hardening.
-SoloCrew V1.4 RC — Continuity Page Model has been released as a GitHub
-prerelease. It adds bounded continuity summary and pending review visibility
-to the page model.
-It remains review-only and non-executing.
+SoloCrew V1.4 continuity page-model line progressed from the V1.3 RC
+lifecycle clarity release and post-release hardening into the current bounded
+stable surface.
+SoloCrew V1.4 Stable — Continuity Page Model has been released as a bounded
+GitHub release. It adds bounded continuity summary and pending review
+visibility to the page model.
+It remains review-only and non-executing and is not a GA claim.
 It does not include provider/channel execution,
 approve/reject/dispatch/execute, or founder queue behavior.
-It is not a stable / GA release.
 
-Current V1.4 RC references:
+Current V1.4 stable references:
 
-- GitHub prerelease notes:
-  `governance/releases/SOLOCREW-V1.4-RC-GITHUB-RELEASE-NOTES-DRAFT-v0.1.md`
-- combined seal / execution / post-release record:
+- GitHub release notes:
+  `governance/releases/SOLOCREW-V1.4-STABLE-GITHUB-RELEASE-NOTES-DRAFT-v0.1.md`
+- combined stable seal / execution / post-release record:
+  `governance/releases/SOLOCREW-V1.4-STABLE-SEAL-EXECUTION-POST-RELEASE-RECORD-v0.1.md`
+- stable-readiness baseline:
+  `governance/baselines/SOLOCREW-V1.4-STABLE-READINESS-BASELINE-v0.1.md`
+- original RC combined record:
   `governance/releases/SOLOCREW-V1.4-RC-SEAL-EXECUTION-POST-RELEASE-RECORD-v0.1.md`
-- planning baseline:
-  `governance/baselines/SOLOCREW-V1.4-PLANNING-BASELINE-v0.1.md`
 - user walkthrough:
   `governance/guides/SOLOCREW-V1.2-RC-USER-WALKTHROUGH-v0.1.md`
 - known limitations:
@@ -170,12 +172,11 @@ Current V1.4 planning baseline:
 
 ## Current V1.5 Planning Line
 
-SoloCrew V1.5 planning is open after the V1.4 RC continuity page-model
-release, post-release verification, and product hardening.
-SoloCrew V1.4 stable release planning is open for the bounded continuity
-page-model surface. This prepares a later stable release decision but does
-not make a GA claim and does not add execution, approval, dispatch,
-provider/channel, or founder-queue behavior.
+SoloCrew V1.5 planning remains open after the V1.4 continuity page-model RC
+release, stable release, post-release verification, and product hardening.
+SoloCrew V1.4 Stable — Continuity Page Model has now been released as a
+bounded stable line, and V1.5 remains the planning line for deciding the next
+feature or readiness direction.
 Current V1.5 planning baseline:
 `governance/baselines/SOLOCREW-V1.5-PLANNING-BASELINE-v0.1.md`.
 

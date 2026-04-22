@@ -238,3 +238,17 @@ scope and may optionally include later product-hardening follow-up.
 Decision:
 
 `SOLOCREW_V1_4_STABLE_RELEASE_EXECUTION_READINESS_PASS`
+
+## M. V1.4 Stable Release Execution and Post-Release Verification
+
+- `release_decision`: `SOLOCREW_V1_4_STABLE_RELEASE_EXECUTED_AND_POST_VERIFIED`
+- `stable_tag`: `solocrew-v1.4-stable-continuity-page-model-20260422`
+- `GitHub_stable_release_status`: released as a bounded GitHub release in
+  this wave
+- `post_release_verification_result`: `PASS` with `287` tests and boundary
+  grep preserved
+- `boundary_confirmation`: bounded stable only; review-only, non-executing,
+  no provider/channel execution, no approve/reject/dispatch/execute, no
+  founder queue, no queue implementation, no autonomous company operation, no
+  runtime-private import, no protocol certification, and no GA claim
+- `existing_RC_preserved`: V1.4 RC tag and prerelease remain preserved

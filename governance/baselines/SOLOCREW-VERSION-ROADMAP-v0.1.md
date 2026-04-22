@@ -196,8 +196,8 @@ That closure pack does not widen the line into `v0.5`.
 - V1.2 packet revision loop was released as a bounded non-executing RC.
 - V1.3 lifecycle clarity was released as a bounded GitHub prerelease RC and
   then post-release hardened.
-- V1.4 continuity page-model was released as a bounded GitHub prerelease RC,
-  post-verified, and post-release hardened.
-- V1.5 planning is now open.
-- The current leading V1.5 direction is V1.4 stable release planning and
-  readiness closure before feature expansion.
+- V1.4 Stable — Continuity Page Model has been released as a bounded stable
+  line after RC release, post-verification, product hardening, and
+  stable-readiness closure.
+- V1.5 remains the planning line for deciding the next feature or readiness
+  direction after the bounded V1.4 stable release.

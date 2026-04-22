@@ -23,11 +23,13 @@ audit/gate/dependency/stable-readiness documents.
 
 ## C. V1.4 Current Baseline
 
-- V1.4 RC released as GitHub prerelease.
+- V1.4 RC released as GitHub prerelease and remains preserved as historical
+  release truth.
+- V1.4 stable released as a bounded GitHub release.
 - V1.4 post-release verification passed.
 - V1.4 final combined record closed.
 - V1.4 post-release product hardening completed.
-- V1.4 remains RC/prerelease, not stable/GA.
+- V1.4 is stable but not GA.
 - V1.4 remains review-only and non-executing.
 
 ## D. V1.5 Strategic Question
@@ -88,6 +90,8 @@ V1.4 stable-readiness baseline has been opened as the selected V1.5
 direction.
 V1.4 stable release planning has been opened under the V1.5 stable-readiness
 line.
+V1.4 stable release has now been executed as the bounded stable line while
+V1.5 remains the planning line for the next direction choice.
 
 ## I. V1.5 Scope / Non-Scope
 
