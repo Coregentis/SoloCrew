@@ -13,10 +13,12 @@ verification in one combined artifact to avoid governance sprawl.
 - `tag`: `solocrew-v1.7-rc-bounded-action-preparation-20260422`
 - `release_title`: `SoloCrew V1.7 RC — Bounded Action Preparation`
 - `pre_release_readiness_commit`: `c76023e134734b7f81961e211492663e9f3608ee`
-- `seal_artifact_commit`: `PENDING_THIS_WAVE`
-- `tag_target_commit`: `PENDING_THIS_WAVE`
-- `github_prerelease`: `PENDING_THIS_WAVE`
-- `post_release_verification`: `PENDING_THIS_WAVE`
+- `seal_artifact_commit`: `14ec3367dd895e366c23233cd6075f818ed362f4`
+- `tag_object_sha`: `a99549cdf1463c2da3f2201842f4c4d2e36e3e9d`
+- `tag_target_commit`: `14ec3367dd895e366c23233cd6075f818ed362f4`
+- `github_prerelease`: `VERIFIED`
+- `post_release_verification`: `PASS`
+- `final_test_count`: `327`
 
 ## C. Boundary
 
@@ -52,17 +54,17 @@ This does not claim protocol certification.
 | validation rerun | `PASS` | full suite and focused reruns passed pre-release |
 | release notes draft reviewed | `PASS` | existing V1.7 RC release notes draft confirmed usable for prerelease notes |
 | combined seal/execution/post-release record created | `PASS` | this artifact created before first RC release commit |
-| seal artifact commit created | `PENDING_THIS_WAVE` | first RC release artifact commit not yet created in this artifact version |
-| main pushed | `PENDING_THIS_WAVE` | first RC release artifact push pending |
-| annotated tag created | `PENDING_THIS_WAVE` | local annotated tag not yet created in this artifact version |
-| tag pushed | `PENDING_THIS_WAVE` | remote tag creation pending |
-| GitHub prerelease created | `PENDING_THIS_WAVE` | `gh release create` pending |
-| remote tag verified | `PENDING_THIS_WAVE` | remote tag verification pending |
-| GitHub prerelease verified | `PENDING_THIS_WAVE` | `gh release view` verification pending |
-| post-release test rerun | `PENDING_THIS_WAVE` | post-release `npm test` pending |
-| post-release boundary grep | `PENDING_THIS_WAVE` | post-release grep pending |
-| final record updated | `PENDING_THIS_WAVE` | final execution/post-release values pending |
-| final commit pushed | `PENDING_THIS_WAVE` | final record push pending |
+| seal artifact commit created | `PASS` | `14ec3367dd895e366c23233cd6075f818ed362f4` |
+| main pushed | `PASS` | seal artifact commit pushed to `origin/main` |
+| annotated tag created | `PASS` | local annotated tag object `a99549cdf1463c2da3f2201842f4c4d2e36e3e9d` created |
+| tag pushed | `PASS` | remote tag `solocrew-v1.7-rc-bounded-action-preparation-20260422` created |
+| GitHub prerelease created | `PASS` | `gh release create` succeeded with `--prerelease` |
+| remote tag verified | `PASS` | remote tag object and peeled target match expected values |
+| GitHub prerelease verified | `PASS` | `gh release view` confirmed title, tag, and `prerelease: true` |
+| post-release test rerun | `PASS` | post-release `npm test` passed with 327 tests |
+| post-release boundary grep | `PASS` | matches remained exclusion-only, RC-boundary, warning, or negative-fixture only |
+| final record updated | `PASS` | combined record finalized with execution and post-release verification results |
+| final commit pushed | `PASS` | this final record commit is pushed to `origin/main` in this wave |
 
 Initial decision:
 
@@ -71,3 +73,5 @@ Initial decision:
 Final decision after full post-release verification:
 
 `SOLOCREW_V1_7_RC_RELEASE_EXECUTED_AND_POST_VERIFIED`
+
+- `final_decision`: `SOLOCREW_V1_7_RC_RELEASE_EXECUTED_AND_POST_VERIFIED`
