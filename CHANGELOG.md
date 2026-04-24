@@ -2,6 +2,13 @@
 
 ## 2026-04-24
 
+- verified the SoloCrew V1.7 bounded action-preparation implementation and
+  prepared RC release readiness, including implementation verification,
+  boundary verification, proposed RC tag/release identity, release notes
+  draft, and execution readiness matrix; no Cognitive_OS/MPLP change, no
+  runtime-private import, no provider/channel execution, no
+  approve/reject/dispatch/execute, no founder queue, no queue
+  implementation, no tag, no GitHub Release, and no seal record
 - implemented the bounded SoloCrew V1.7 action-preparation slice, adding a
   product-local prepared-action contract, adapter, page model, and tests over
   the neutral Cognitive_OS prepared-action scaffold; no Cognitive_OS/MPLP
