@@ -188,11 +188,11 @@ behavior.
 Current V1.6 planning baseline:
 `governance/baselines/SOLOCREW-V1.6-PLANNING-BASELINE-v0.1.md`.
 
-## Current V1.7 Implementation Planning Line
+## Current V1.7 Implementation Slice
 
-SoloCrew V1.7 has advanced from dependency-blocked planning to implementation
-planning for bounded action-preparation. The current intended slice remains
-draft-only, non-executing, non-approving, non-dispatching, and
+SoloCrew V1.7 now includes a bounded action-preparation implementation slice
+over the neutral Cognitive_OS prepared-action scaffold. The slice remains
+draft-only, non-executing, non-approving, non-dispatching, non-provider, and
 non-queueing.
 Current V1.7 planning baseline:
 `governance/baselines/SOLOCREW-V1.7-PLANNING-BASELINE-v0.1.md`.

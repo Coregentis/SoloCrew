@@ -2,6 +2,12 @@
 
 ## 2026-04-24
 
+- implemented the bounded SoloCrew V1.7 action-preparation slice, adding a
+  product-local prepared-action contract, adapter, page model, and tests over
+  the neutral Cognitive_OS prepared-action scaffold; no Cognitive_OS/MPLP
+  change, no runtime-private import, no provider/channel execution, no
+  approve/reject/dispatch/execute, no founder queue, no queue
+  implementation, no tag, no GitHub Release, and no seal record
 - advanced SoloCrew V1.7 from dependency-blocked planning to implementation
   planning, selecting the smallest bounded action-preparation slice, mapping
   Cognitive_OS neutral prepared-action surfaces into product-facing fields,

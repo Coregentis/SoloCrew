@@ -251,3 +251,26 @@ Consumption boundary:
 ### L6. Implementation Readiness Decision
 
 `SOLOCREW_V1_7_IMPLEMENTATION_READY`
+
+## M. V1.7 Bounded Action-Preparation Implementation
+
+Implementation completion marker:
+
+`SOLOCREW_V1_7_BOUNDED_ACTION_PREPARATION_IMPLEMENTED`
+
+Delivered surfaces:
+
+- product-local prepared-action contract
+- product-local prepared-action adapter
+- product-local prepared-action page model
+- focused projection and app tests
+
+Boundary confirmation:
+
+- draft-only
+- non-executing
+- non-approving
+- non-dispatching
+- non-provider
+- non-queueing
+- no runtime-private import
