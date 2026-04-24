@@ -348,3 +348,117 @@ Decision enum:
 - `github_prerelease_status`: `PENDING_THIS_WAVE`
 - `post_release_verification_result`: `PENDING_THIS_WAVE`
 - `boundary_confirmation`: bounded RC only; no provider/channel execution, no approve/reject/dispatch/execute, no founder queue, no queue implementation, no autonomous company operation, no Cognitive_OS/MPLP change, and no protocol certification claim
+
+## O. V1.7 Stable-Readiness and Stable Release Planning
+
+### O1. Planning Purpose
+
+This section combines V1.7 stable-readiness and stable release planning in
+one wave to avoid release-line fragmentation. It does not create a stable
+tag, GitHub Release, or seal record.
+
+### O2. Stable Evidence Matrix
+
+| Evidence area | Current evidence | Stable-readiness status | Notes |
+|---|---|---|---|
+| RC release surface exists | V1.7 RC tag and GitHub prerelease exist | PASS | RC release surface is live and verifiable |
+| RC tag and GitHub prerelease verified | tag object, peeled target, and `gh release view` all align | PASS | title and `prerelease: true` verified |
+| combined RC seal/execution/post-release record closed | combined RC record finalized | PASS | post-release verification already recorded |
+| `npm test` count stable at 327 | full suite reruns remain green | PASS | no regression discovered after RC release |
+| focused V1.7 adapter/page-model tests pass | focused reruns complete successfully | PASS | current `npm test` script still reruns the suite globs |
+| boundary grep pass | matches remain exclusion-only, boundary-only, or negative-test-only | PASS | no positive forbidden capability claim found |
+| README / CHANGELOG aligned | repo status docs reflect RC implementation and readiness truth | PASS | no stable/GA overclaim introduced |
+| release notes explicit about non-capabilities | RC notes draft already preserves exclusions clearly | PASS | stable notes draft created in this wave |
+| no Cognitive_OS change | SoloCrew-only release wave | PASS | no upstream runtime changes required |
+| no MPLP change | MPLP untouched | PASS | protocol/schema/binding remain unchanged |
+| no provider/channel execution | implementation and docs remain bounded | PASS | exclusion remains explicit |
+| no approve/reject/dispatch/execute | control semantics remain excluded | PASS | no direct-control surface added |
+| no founder queue | queue semantics remain excluded | PASS | exclusion remains explicit |
+| no queue implementation | no queue state/model/control introduced | PASS | exclusion remains explicit |
+| no GA/stable overclaim | current state remains RC only before stable execution | PASS | stable identity stays planning-only in this wave |
+
+### O3. Blocker / Correction Assessment
+
+| Potential blocker | Status | Required correction |
+|---|---|---|
+| implementation regression since RC release | NOT_OPEN | none |
+| test instability | NOT_OPEN | none |
+| boundary wording drift | NOT_OPEN | none |
+| README / CHANGELOG overclaim | NOT_OPEN | none |
+| stable identity conflict | NOT_OPEN | none |
+| release-surface inconsistency | NOT_OPEN | none |
+
+Expected conclusion:
+
+- No blocker requiring correction before stable planning.
+
+### O4. Stable Release Type Decision
+
+| Option | Meaning | Decision | Reason |
+|---|---|---|---|
+| V1.7 stable | Stable release for bounded action-preparation slice | SELECTED_FOR_PLANNING | RC release and post-verification passed |
+| V1.7 GA | General availability claim | REJECTED | bounded stable is not GA |
+| V1.8 planning | next feature line | DEFERRED | V1.7 stable release should close first |
+
+Decision:
+
+`SOLOCREW_V1_7_STABLE_RELEASE_TYPE_SELECTED_FOR_PLANNING`
+
+### O5. Proposed Stable Tag / Release Identity
+
+- `tag: solocrew-v1.7-stable-bounded-action-preparation-20260422`
+- `release_title: SoloCrew V1.7 Stable — Bounded Action Preparation`
+- `release_type: GitHub release`
+- `prerelease: false`
+
+This is proposed only. No stable tag or GitHub Release is created in this
+wave.
+This is a bounded stable release planning identity, not a GA claim.
+
+### O6. Stable Scope / Non-Scope
+
+Stable scope:
+
+- prepared action draft card
+- action intent summary
+- evidence sufficiency panel
+- missing information panel
+- risk / boundary summary
+- human confirmation requirement display
+- safe evidence refs
+- `runtime_private_fields_omitted` boundary marker
+
+Stable non-scope:
+
+- no dry-run preparation view
+- no provider/channel execution
+- no approve/reject/dispatch/execute
+- no founder queue
+- no queue implementation
+- no autonomous company operation
+- no Cognitive_OS change
+- no MPLP change
+- no protocol certification
+- no GA claim
+
+### O7. Stable Execution Readiness Matrix
+
+| Requirement | Required evidence | Status |
+|---|---|---|
+| repo clean and local/remote aligned | `HEAD == origin/main` and clean worktree | PASS |
+| V1.7 RC release surface verified | RC tag and GitHub prerelease verified | PASS |
+| stable-readiness passed | stable evidence matrix complete with no blockers | PASS |
+| `npm test` passes | full suite remains green at 327 tests | PASS |
+| focused V1.7 adapter and page-model tests pass | focused reruns complete successfully | PASS |
+| boundary grep passes | matches remain exclusion-only, warning-only, or negative-test-only | PASS |
+| no existing stable V1.7 tag | stable tag precheck returns empty | PASS |
+| no existing stable V1.7 GitHub Release | stable `gh release view` precheck returns `release not found` | PASS |
+| stable release notes draft created | stable GitHub release notes draft exists in `governance/releases` | PASS |
+| README / CHANGELOG / baseline aligned | status and planning docs align with stable planning truth | PASS |
+| explicit user authorization required for stable execution | stable execution deferred to a later authorized wave | PASS |
+
+Decision enums:
+
+`SOLOCREW_V1_7_STABLE_READINESS_PASS`
+
+`SOLOCREW_V1_7_STABLE_RELEASE_EXECUTION_READINESS_PASS`

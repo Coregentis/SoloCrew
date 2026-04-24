@@ -197,6 +197,9 @@ non-queueing.
 SoloCrew V1.7 RC — Bounded Action Preparation has been released as a GitHub
 prerelease. It remains bounded, draft-only, non-executing, non-approving,
 non-dispatching, non-provider, and non-queueing.
+SoloCrew V1.7 stable-readiness and stable release planning are complete for
+the bounded action-preparation slice. Stable execution still requires
+explicit authorization.
 Current V1.7 planning baseline:
 `governance/baselines/SOLOCREW-V1.7-PLANNING-BASELINE-v0.1.md`.
 
