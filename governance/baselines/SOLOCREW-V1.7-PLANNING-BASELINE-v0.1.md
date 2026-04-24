@@ -159,3 +159,95 @@ projection/runtime contract first, then let SoloCrew consume it downstream.
 Decision enum:
 
 `SOLOCREW_V1_7_PLANNING_BLOCKED_PENDING_COGNITIVE_OS`
+
+## L. V1.7 Implementation Planning
+
+### L1. Implementation Objective
+
+Implement the smallest bounded product-facing action-preparation slice over
+the neutral Cognitive_OS prepared-action scaffold, while remaining draft-only,
+non-executing, non-approving, non-dispatching, non-provider, and
+non-queueing.
+
+Upstream blocker status:
+
+- `SOLOCREW_V1_7_PLANNING_BLOCKED_PENDING_COGNITIVE_OS` is now cleared.
+- Cognitive_OS now exposes a minimal prepared-action scaffold through neutral
+  constructors and contract tests.
+
+### L2. Minimal Product Slice Selection
+
+| Candidate slice | User value | Boundary risk | Decision |
+|---|---|---|---|
+| prepared action draft card | high | medium if mistaken for executable task | selected |
+| action intent summary | high | medium if mistaken for command intent | selected |
+| evidence sufficiency panel | high | medium if mistaken for readiness gate | selected |
+| missing information panel | high | medium if mistaken for workflow blocker state | selected |
+| risk / boundary summary | high | medium-high if mistaken for policy verdict | selected |
+| human confirmation requirement display | high | medium-high if mistaken for approval control | selected |
+| dry-run preparation view | medium | medium-high if it drifts into execution simulation | deferred |
+| provider/channel execution | none for bounded V1.7 | unacceptable | not selected |
+| approve/reject/dispatch/execute | none for bounded V1.7 | unacceptable | not selected |
+| founder queue | none for bounded V1.7 | unacceptable | not selected |
+| queue implementation | none for bounded V1.7 | unacceptable | not selected |
+
+Selected minimal slice:
+
+- prepared action draft card
+- action intent summary
+- evidence sufficiency panel
+- missing information panel
+- risk / boundary summary
+- human confirmation requirement display
+
+Deferred:
+
+- dry-run preparation view
+
+### L3. Upstream-to-Downstream Field Mapping
+
+| Cognitive_OS neutral surface | SoloCrew product surface | Boundary note |
+|---|---|---|
+| `PreparedActionIntentSummary` | product-facing action intent summary | summary-only, not an executable command |
+| `PreparedActionRiskSummary` | product-facing risk / boundary summary | explanatory only, not policy verdict |
+| `PreparedActionEvidenceSufficiency` | product-facing evidence sufficiency panel | visibility only, not execution eligibility |
+| `PreparedActionMissingInformation` | product-facing missing information panel | gap visibility only, not queue or gate state |
+| `PreparedActionConfirmationRequirement` | product-facing human confirmation requirement display | display-only, not approval control |
+| `PreparedActionBoundaryPosture` | product-facing draft-only / non-executing posture copy | keep explicit non-executing and non-queueing wording |
+| `PreparedActionSafeEvidenceRef` | product-facing safe evidence refs | references only, not proof or raw runtime detail |
+
+Consumption boundary:
+
+- No execution eligibility is consumed.
+- No approval control is consumed.
+- No dispatch/provider semantics are consumed.
+- No queue semantics are consumed.
+- No runtime-private internals are imported.
+
+### L4. File-Level Implementation Task Map
+
+| Area | File | Planned change | Boundary |
+|---|---|---|---|
+| prepared-action product contract | `projection/contracts/v1-7-prepared-action-contract.ts` | add product-local prepared-action card/panel view types mapped from neutral upstream fields | no runtime-private import; no execution controls |
+| prepared-action adapter | `projection/adapters/v1-7-prepared-action-adapter.ts` | map upstream neutral prepared-action projection into SoloCrew product-facing draft card sections | no provider/channel, no approval, no queue semantics |
+| projection adapter tests | `tests/projection/v1-7-prepared-action-adapter.test.ts` | verify mapping, forbidden-field rejection, wording boundaries, safe evidence refs | references-only evidence; no execution wording drift |
+| app shell page model | `app/shell/create-v1-7-prepared-action-page-model.ts` | assemble product-facing view model for the bounded prepared-action slice | display-only and human-visible only |
+| app page-model tests | `tests/app/create-v1-7-prepared-action-page-model.test.ts` | verify copy, field presence, omission boundaries, and non-capability wording | no approve/reject/dispatch/execute; no queue |
+| existing continuity surfaces | `projection/contracts/session-continuity-ux-contract.ts` and `projection/adapters/session-continuity-ux-adapter.ts` | remain untouched unless shared safe evidence ref helpers are strictly needed | avoid widening V1.6 scope |
+| repo status docs | `README.md`, `CHANGELOG.md`, `governance/baselines/SOLOCREW-VERSION-ROADMAP-v0.1.md` | reflect implementation-ready V1.7 planning status | no tag/release/seal language |
+
+### L5. Test / Boundary / Copy Plan
+
+| Surface | Required check |
+|---|---|
+| draft-only wording | output copy states the slice is draft-only |
+| non-executing wording | output copy states the slice is non-executing |
+| non-approval-control wording | confirmation requirement remains display-only, not approval control |
+| no dispatch/provider wording | no provider/channel send or dispatch wording appears as capability |
+| no queue wording | no founder queue or queue implementation wording appears as capability |
+| safe evidence refs remain references only | evidence refs stay as bounded references and do not widen into proof/raw payload |
+| `runtime_private_fields_omitted` boundary preserved if surfaced | any surfaced omission marker remains explicit and truthful |
+
+### L6. Implementation Readiness Decision
+
+`SOLOCREW_V1_7_IMPLEMENTATION_READY`

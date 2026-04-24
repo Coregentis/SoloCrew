@@ -188,14 +188,12 @@ behavior.
 Current V1.6 planning baseline:
 `governance/baselines/SOLOCREW-V1.6-PLANNING-BASELINE-v0.1.md`.
 
-## Current V1.7 Planning Line
+## Current V1.7 Implementation Planning Line
 
-SoloCrew V1.7 planning is open as a feature-line for Bounded
-Action-Preparation after the V1.6 Stable Session Continuity UX release.
-V1.7 planning does not add execution, approval, dispatch, provider/channel
-send, founder queue, or queue implementation.
-The selected planning posture is to assess Cognitive_OS neutral dependency
-requirements before implementation.
+SoloCrew V1.7 has advanced from dependency-blocked planning to implementation
+planning for bounded action-preparation. The current intended slice remains
+draft-only, non-executing, non-approving, non-dispatching, and
+non-queueing.
 Current V1.7 planning baseline:
 `governance/baselines/SOLOCREW-V1.7-PLANNING-BASELINE-v0.1.md`.
 

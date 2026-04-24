@@ -207,8 +207,9 @@ That closure pack does not widen the line into `v0.5`.
 - V1.6 stable is now closed as the bounded Session Continuity / Local History
   UX release line.
 - V1.7 opens as the feature-line for Bounded Action-Preparation.
-- V1.7 requires Cognitive_OS dependency planning before implementation if
-  authoritative action-preparation semantics are selected.
+- V1.7 implementation planning is now complete for the bounded
+  action-preparation slice, and the next wave is bounded product
+  implementation.
 - Future V1.7 = Bounded Action-Preparation.
 - Future V1.8 = Human-Confirmed Execution Boundary.
 - Future V1.9 = Execution RC Hardening.

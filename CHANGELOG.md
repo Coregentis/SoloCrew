@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-04-24
+
+- advanced SoloCrew V1.7 from dependency-blocked planning to implementation
+  planning, selecting the smallest bounded action-preparation slice, mapping
+  Cognitive_OS neutral prepared-action surfaces into product-facing fields,
+  and defining file-level implementation tasks and boundary checks; no
+  Cognitive_OS/MPLP change, no provider/channel execution, no
+  approve/reject/dispatch/execute, no founder queue, no tag, no GitHub
+  Release, and no seal record
+
 ## 2026-04-22
 
 - opened SoloCrew V1.7 planning baseline as a feature-line for Bounded
