@@ -194,9 +194,9 @@ SoloCrew V1.7 now includes a bounded action-preparation implementation slice
 over the neutral Cognitive_OS prepared-action scaffold. The slice remains
 draft-only, non-executing, non-approving, non-dispatching, non-provider, and
 non-queueing.
-SoloCrew V1.7 implementation verification and RC readiness are complete for
-the bounded action-preparation slice. RC execution still requires explicit
-authorization.
+SoloCrew V1.7 RC — Bounded Action Preparation has been released as a GitHub
+prerelease. It remains bounded, draft-only, non-executing, non-approving,
+non-dispatching, non-provider, and non-queueing.
 Current V1.7 planning baseline:
 `governance/baselines/SOLOCREW-V1.7-PLANNING-BASELINE-v0.1.md`.
 
