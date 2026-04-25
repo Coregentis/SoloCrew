@@ -207,9 +207,9 @@ That closure pack does not widen the line into `v0.5`.
 - V1.6 stable is now closed as the bounded Session Continuity / Local History
   UX release line.
 - V1.7 opens as the feature-line for Bounded Action-Preparation.
-- V1.7 implementation is complete for the bounded action-preparation slice.
-- V1.7 stable-readiness and stable release planning are complete.
-- The next V1.7 wave is stable release execution + post-release verification.
+- V1.7 Stable — Bounded Action Preparation has been released as a bounded
+  stable line.
+- V1.8 remains the next feature-line.
 - Future V1.7 = Bounded Action-Preparation.
 - Future V1.8 = Human-Confirmed Execution Boundary.
 - Future V1.9 = Execution RC Hardening.

@@ -462,3 +462,11 @@ Decision enums:
 `SOLOCREW_V1_7_STABLE_READINESS_PASS`
 
 `SOLOCREW_V1_7_STABLE_RELEASE_EXECUTION_READINESS_PASS`
+
+## P. V1.7 Stable Release Execution and Post-Release Verification
+
+- `release_decision`: `SOLOCREW_V1_7_STABLE_RELEASE_EXECUTION_PENDING_TAG_RELEASE`
+- `stable_tag`: `solocrew-v1.7-stable-bounded-action-preparation-20260422`
+- `github_stable_release_status`: `PENDING_THIS_WAVE`
+- `post_release_verification_result`: `PENDING_THIS_WAVE`
+- `boundary_confirmation`: bounded stable only; no provider/channel execution, no approve/reject/dispatch/execute, no founder queue, no queue implementation, no autonomous company operation, no protocol certification claim, and existing V1.7 RC prerelease preserved
