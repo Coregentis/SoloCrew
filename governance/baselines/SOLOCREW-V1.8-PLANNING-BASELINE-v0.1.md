@@ -261,3 +261,7 @@ Consumption boundary:
 ### L6. Implementation Readiness Decision
 
 `SOLOCREW_V1_8_IMPLEMENTATION_READY`
+
+Implementation markers:
+
+- `SOLOCREW_V1_8_BOUNDED_EXECUTION_BOUNDARY_IMPLEMENTED`

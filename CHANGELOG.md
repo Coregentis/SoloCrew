@@ -2,6 +2,13 @@
 
 ## 2026-04-25
 
+- implemented the bounded SoloCrew V1.8 execution-boundary slice, adding a
+  product-local execution-boundary contract, adapter, page model, and tests
+  over the neutral Cognitive_OS execution-boundary scaffold; no
+  Cognitive_OS/MPLP change, no runtime-private import, no
+  provider/channel execution, no automated
+  approve/reject/dispatch/execute, no founder queue, no queue
+  implementation, no tag, no GitHub Release, and no seal record
 - advanced SoloCrew V1.8 from dependency-blocked planning to implementation
   planning, selecting the smallest bounded human-confirmed
   execution-boundary slice, mapping Cognitive_OS neutral
