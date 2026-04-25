@@ -2,6 +2,13 @@
 
 ## 2026-04-25
 
+- verified the SoloCrew V1.8 bounded execution-boundary implementation and
+  prepared RC release readiness, including implementation verification,
+  boundary verification, proposed RC tag/release identity, release notes
+  draft, and execution readiness matrix; no Cognitive_OS/MPLP change, no
+  runtime-private import, no provider/channel execution, no automated
+  approve/reject/dispatch/execute, no founder queue, no queue
+  implementation, no tag, no GitHub Release, and no seal record
 - implemented the bounded SoloCrew V1.8 execution-boundary slice, adding a
   product-local execution-boundary contract, adapter, page model, and tests
   over the neutral Cognitive_OS execution-boundary scaffold; no

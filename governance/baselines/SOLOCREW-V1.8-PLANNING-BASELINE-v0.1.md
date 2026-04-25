@@ -265,3 +265,96 @@ Consumption boundary:
 Implementation markers:
 
 - `SOLOCREW_V1_8_BOUNDED_EXECUTION_BOUNDARY_IMPLEMENTED`
+
+## M. V1.8 Implementation Verification and RC Readiness
+
+### M1. Verification Purpose
+
+This section verifies the bounded V1.8 execution-boundary implementation and
+prepares RC release readiness. It does not create a tag, GitHub Release, or
+seal record.
+
+### M2. Implementation Surface Verification
+
+Implementation markers:
+
+- `SOLOCREW_V1_8_BOUNDED_EXECUTION_BOUNDARY_IMPLEMENTED`
+- `SOLOCREW_V1_8_IMPLEMENTATION_VERIFICATION_PASS`
+
+| Surface | Expected behavior | Verification result |
+|---|---|---|
+| `projection/contracts/v1-8-execution-boundary-contract.ts` | bounded product-local execution-boundary view types only | PASS |
+| `projection/adapters/v1-8-execution-boundary-adapter.ts` | bounded mapping only; reject raw/runtime-private, authoritative, execution, provider, and queue fields | PASS |
+| `app/shell/create-v1-8-execution-boundary-page-model.ts` | expose human-visible display-only page sections only | PASS |
+| `tests/projection/v1-8-execution-boundary-adapter.test.ts` | verify mapping, guardrails, and wording boundaries | PASS |
+| `tests/app/create-v1-8-execution-boundary-page-model.test.ts` | verify page sections, copy, and non-capability boundaries | PASS |
+| `README.md` | implementation status remains bounded and non-authoritative | PASS |
+| `CHANGELOG.md` | implementation and verification history remain aligned | PASS |
+
+### M3. Boundary Verification
+
+| Boundary | Result | Evidence |
+|---|---|---|
+| no Cognitive_OS change | PASS | changed files remain product-local in SoloCrew only |
+| no MPLP change | PASS | no MPLP files changed |
+| no runtime-private import | PASS | implementation maps bounded fields only and keeps `runtime_private_fields_omitted` as marker |
+| no provider/channel execution | PASS | adapter/page-model/tests remain exclusion-only and fail closed on provider/channel fields |
+| no automated approve/reject/dispatch/execute | PASS | no automation fields surfaced and wording stays non-capability-only |
+| no founder queue | PASS | queue/founder wording remains exclusion-only or negative-test-only |
+| no queue implementation | PASS | no queue state/model/control was added |
+| no autonomous operation | PASS | no autonomy claim or behavior was added |
+| no authoritative acknowledgment capture | PASS | acknowledgment remains display-only and non-authoritative |
+| no authoritative transition state | PASS | transition posture remains explanatory and rejects authoritative fields |
+
+### M4. V1.8 RC Scope / Non-Scope
+
+Scope:
+
+- execution-boundary card
+- requirement summary panel
+- risk warning panel
+- preflight checklist panel
+- acknowledgment requirement display
+- transition posture display
+- safe evidence refs display
+
+Non-scope:
+
+- no authoritative acknowledgment capture
+- no authoritative confirmation transition state
+- no provider/channel execution
+- no approve/reject/dispatch/execute
+- no founder queue
+- no queue implementation
+- no autonomous company operation
+- no Cognitive_OS change
+- no MPLP change
+- no protocol certification
+- no GA claim
+
+### M5. Proposed RC Tag / Release Identity
+
+- `tag: solocrew-v1.8-rc-bounded-execution-boundary-20260425`
+- `release_title: SoloCrew V1.8 RC — Bounded Execution Boundary`
+- `release_type: GitHub prerelease`
+
+This is proposed only. No tag or GitHub Release is created in this wave.
+
+### M6. RC Execution Readiness Matrix
+
+| Requirement | Required evidence | Status |
+|---|---|---|
+| repo clean and local/remote aligned | `HEAD == origin/main` and clean worktree before edits | PASS |
+| implementation verification passed | bounded V1.8 surfaces and tests verified | PASS |
+| `npm test` passes | full suite remains green | PASS |
+| focused V1.8 adapter/page-model tests pass | focused reruns complete under current test script behavior | PASS |
+| boundary grep passes | matches remain exclusion-only, warning-only, or negative-test-only | PASS |
+| no existing V1.8 RC tag | tag precheck returns empty | PASS |
+| no existing V1.8 RC GitHub Release | `gh release view ... || true` returns `release not found` | PASS |
+| release notes draft created | V1.8 RC notes draft exists | PASS |
+| README / CHANGELOG aligned | repo status copy reflects verification + RC readiness | PASS |
+| explicit user authorization required for RC execution | execution still deferred to a later authorized wave | PASS |
+
+Decision enum:
+
+`SOLOCREW_V1_8_RC_RELEASE_EXECUTION_READINESS_PASS`

@@ -203,10 +203,9 @@ Current V1.7 planning baseline:
 
 ## Current V1.8 Planning Line
 
-SoloCrew V1.8 now includes a bounded execution-boundary implementation
-slice over the neutral Cognitive_OS execution-boundary scaffold. The
-slice remains display-oriented, non-executing, non-approving,
-non-dispatching, non-provider, non-queueing, and non-authoritative.
+SoloCrew V1.8 implementation verification and RC readiness are complete
+for the bounded execution-boundary slice. RC execution still requires
+explicit authorization.
 Current V1.8 planning baseline:
 `governance/baselines/SOLOCREW-V1.8-PLANNING-BASELINE-v0.1.md`.
 
