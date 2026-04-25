@@ -13,11 +13,13 @@ verification in one combined artifact to avoid governance document sprawl.
 - `tag`: `solocrew-v1.7-stable-bounded-action-preparation-20260422`
 - `release_title`: `SoloCrew V1.7 Stable — Bounded Action Preparation`
 - `pre_release_readiness_commit`: `51e332e85995fddef848d30d8f71d1229b961c17`
-- `stable_seal_artifact_commit`: `PENDING_THIS_WAVE`
-- `stable_tag_target_commit`: `PENDING_THIS_WAVE`
-- `github_stable_release`: `PENDING_THIS_WAVE`
-- `existing_rc_prerelease`: `PENDING_THIS_WAVE`
-- `post_release_verification`: `PENDING_THIS_WAVE`
+- `stable_seal_artifact_commit`: `b4abdfc2ae1881fd31df0d228bbde48e51f4a4d6`
+- `stable_tag_object_sha`: `6a21b9be73a6cfd73a6271a023591c26fde0375c`
+- `stable_tag_target_commit`: `b4abdfc2ae1881fd31df0d228bbde48e51f4a4d6`
+- `github_stable_release`: `VERIFIED`
+- `existing_rc_prerelease`: `PRESERVED`
+- `post_release_verification`: `PASS`
+- `final_test_count`: `327`
 
 ## C. Boundary
 
@@ -55,18 +57,18 @@ Existing V1.7 RC tag/release is preserved.
 | validation rerun | `PASS` | full suite and focused reruns passed pre-release |
 | stable release notes draft reviewed | `PASS` | existing stable release notes draft confirmed usable for GitHub stable release notes |
 | combined stable seal/execution/post-release record created | `PASS` | this artifact created before first stable release commit |
-| stable seal artifact commit created | `PENDING_THIS_WAVE` | first stable release artifact commit not yet created in this artifact version |
-| main pushed | `PENDING_THIS_WAVE` | first stable release artifact push pending |
-| annotated stable tag created | `PENDING_THIS_WAVE` | local annotated stable tag not yet created in this artifact version |
-| stable tag pushed | `PENDING_THIS_WAVE` | remote stable tag creation pending |
-| GitHub stable release created | `PENDING_THIS_WAVE` | `gh release create` pending |
-| remote stable tag verified | `PENDING_THIS_WAVE` | remote stable tag verification pending |
-| GitHub stable release verified | `PENDING_THIS_WAVE` | `gh release view` verification pending |
-| existing V1.7 RC prerelease preserved | `PENDING_THIS_WAVE` | RC prerelease preservation verification pending |
-| post-release test rerun | `PENDING_THIS_WAVE` | post-release `npm test` pending |
-| post-release boundary grep | `PENDING_THIS_WAVE` | post-release grep pending |
-| final stable record updated | `PENDING_THIS_WAVE` | final execution/post-release values pending |
-| final commit pushed | `PENDING_THIS_WAVE` | final record push pending |
+| stable seal artifact commit created | `PASS` | `b4abdfc2ae1881fd31df0d228bbde48e51f4a4d6` |
+| main pushed | `PASS` | stable seal artifact commit pushed to `origin/main` |
+| annotated stable tag created | `PASS` | local annotated stable tag object `6a21b9be73a6cfd73a6271a023591c26fde0375c` created |
+| stable tag pushed | `PASS` | remote tag `solocrew-v1.7-stable-bounded-action-preparation-20260422` created |
+| GitHub stable release created | `PASS` | `gh release create` succeeded without `--prerelease` |
+| remote stable tag verified | `PASS` | remote tag object and peeled target match expected values |
+| GitHub stable release verified | `PASS` | `gh release view` confirmed title, tag, and `prerelease: false` |
+| existing V1.7 RC prerelease preserved | `PASS` | RC prerelease remained available after stable release creation |
+| post-release test rerun | `PASS` | post-release `npm test` passed with 327 tests |
+| post-release boundary grep | `PASS` | matches remained exclusion-only, stable-boundary, warning, or negative-fixture only |
+| final stable record updated | `PASS` | combined record finalized with stable execution and post-release verification results |
+| final commit pushed | `PASS` | this final record commit is pushed to `origin/main` in this wave |
 
 Initial decision:
 
@@ -75,3 +77,5 @@ Initial decision:
 Final decision after full post-release verification:
 
 `SOLOCREW_V1_7_STABLE_RELEASE_EXECUTED_AND_POST_VERIFIED`
+
+- `final_decision`: `SOLOCREW_V1_7_STABLE_RELEASE_EXECUTED_AND_POST_VERIFIED`
