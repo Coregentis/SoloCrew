@@ -358,3 +358,11 @@ This is proposed only. No tag or GitHub Release is created in this wave.
 Decision enum:
 
 `SOLOCREW_V1_8_RC_RELEASE_EXECUTION_READINESS_PASS`
+
+## N. V1.8 RC Release Execution and Post-Release Verification
+
+- `release_decision`: `SOLOCREW_V1_8_RC_RELEASE_EXECUTION_PENDING_TAG_RELEASE`
+- `tag`: `solocrew-v1.8-rc-bounded-execution-boundary-20260425`
+- `github_prerelease_status`: `PENDING_THIS_WAVE`
+- `post_release_verification_result`: `PENDING_THIS_WAVE`
+- `boundary_confirmation`: bounded RC only; no provider/channel execution, no automated approve/reject/dispatch/execute, no founder queue, no queue implementation, no autonomous company operation, no protocol certification claim, no authoritative acknowledgment capture, and no authoritative confirmation transition state
