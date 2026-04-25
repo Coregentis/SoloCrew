@@ -209,9 +209,10 @@ That closure pack does not widen the line into `v0.5`.
 - V1.7 Stable — Bounded Action Preparation has been released as a bounded
   stable line.
 - V1.7 stable is now closed as the bounded action-preparation stable line.
-- V1.8 implementation planning is complete for a bounded
-  Human-Confirmed Execution Boundary slice.
-- V1.8 next wave is bounded product implementation.
+- V1.8 bounded execution-boundary implementation is complete and RC release
+  plus post-verification are complete.
+- V1.8 stable-readiness and stable release planning are complete.
+- V1.8 next wave is stable release execution + post-release verification.
 - Future V1.7 = Bounded Action-Preparation.
 - Future V1.8 = Human-Confirmed Execution Boundary.
 - Future V1.9 = Execution RC Hardening.

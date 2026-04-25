@@ -361,8 +361,123 @@ Decision enum:
 
 ## N. V1.8 RC Release Execution and Post-Release Verification
 
-- `release_decision`: `SOLOCREW_V1_8_RC_RELEASE_EXECUTION_PENDING_TAG_RELEASE`
+- `release_decision`: `SOLOCREW_V1_8_RC_RELEASE_EXECUTED_AND_POST_VERIFIED`
 - `tag`: `solocrew-v1.8-rc-bounded-execution-boundary-20260425`
-- `github_prerelease_status`: `PENDING_THIS_WAVE`
-- `post_release_verification_result`: `PENDING_THIS_WAVE`
+- `github_prerelease_status`: `VERIFIED`
+- `post_release_verification_result`: `PASS`
 - `boundary_confirmation`: bounded RC only; no provider/channel execution, no automated approve/reject/dispatch/execute, no founder queue, no queue implementation, no autonomous company operation, no protocol certification claim, no authoritative acknowledgment capture, and no authoritative confirmation transition state
+
+## O. V1.8 Stable-Readiness and Stable Release Planning
+
+### O1. Planning Purpose
+
+This section combines V1.8 stable-readiness and stable release planning in
+one wave to avoid release-line fragmentation. It does not create a stable
+tag, GitHub Release, or seal record.
+
+### O2. Stable Evidence Matrix
+
+| Evidence area | Current evidence | Stable-readiness status | Notes |
+|---|---|---|---|
+| RC release surface exists | V1.8 RC tag and GitHub prerelease exist | PASS | RC release surface is live and verifiable |
+| RC tag and GitHub prerelease verified | tag object, peeled target, and `gh release view` all align | PASS | title and `prerelease: true` verified |
+| combined RC seal/execution/post-release record closed | combined RC record finalized | PASS | post-release verification already recorded |
+| `npm test` count stable at 343 | full suite reruns remain green | PASS | no regression discovered after RC release |
+| focused V1.8 adapter/page-model tests pass | focused reruns complete successfully | PASS | current `npm test` script still reruns the suite globs |
+| boundary grep pass | matches remain exclusion-only, boundary-only, or negative-test-only | PASS | no positive forbidden capability claim found |
+| README / CHANGELOG aligned | repo status docs reflect RC truth and stable planning truth | PASS | no stable or GA overclaim introduced |
+| release notes explicit about non-capabilities | RC notes draft already preserves exclusions clearly | PASS | stable notes draft created in this wave |
+| no Cognitive_OS change | SoloCrew-only release wave | PASS | no upstream runtime changes required |
+| no MPLP change | MPLP untouched | PASS | protocol/schema/binding remain unchanged |
+| no provider/channel execution | implementation and docs remain bounded | PASS | exclusion remains explicit |
+| no automated approve/reject/dispatch/execute | control semantics remain excluded | PASS | no direct-control surface added |
+| no founder queue | queue semantics remain excluded | PASS | exclusion remains explicit |
+| no queue implementation | no queue state/model/control introduced | PASS | exclusion remains explicit |
+| no GA/stable overclaim | current state remains RC plus planning-only stable readiness | PASS | stable identity stays planning-only in this wave |
+
+### O3. Blocker / Correction Assessment
+
+| Potential blocker | Status | Required correction |
+|---|---|---|
+| implementation regression since RC release | NOT_OPEN | none |
+| test instability | NOT_OPEN | none |
+| boundary wording drift | NOT_OPEN | none |
+| README / CHANGELOG overclaim | NOT_OPEN | none |
+| stable identity conflict | NOT_OPEN | none |
+| release-surface inconsistency | NOT_OPEN | none |
+
+Expected conclusion:
+
+- No blocker requiring correction before stable planning.
+
+### O4. Stable Release Type Decision
+
+| Option | Meaning | Decision | Reason |
+|---|---|---|---|
+| V1.8 stable | Stable release for bounded execution-boundary slice | SELECTED_FOR_PLANNING | RC release and post-verification passed |
+| V1.8 GA | General availability claim | REJECTED | bounded stable is not GA |
+| V1.9 planning | next feature line | DEFERRED | V1.8 stable release should close first |
+
+Decision:
+
+`SOLOCREW_V1_8_STABLE_RELEASE_TYPE_SELECTED_FOR_PLANNING`
+
+### O5. Proposed Stable Tag / Release Identity
+
+- `tag: solocrew-v1.8-stable-bounded-execution-boundary-20260425`
+- `release_title: SoloCrew V1.8 Stable — Bounded Execution Boundary`
+- `release_type: GitHub release`
+- `prerelease: false`
+
+This is proposed only. No stable tag or GitHub Release is created in this
+wave.
+This is a bounded stable release planning identity, not a GA claim.
+
+### O6. Stable Scope / Non-Scope
+
+Stable scope:
+
+- execution-boundary card
+- requirement summary panel
+- risk warning panel
+- preflight checklist panel
+- acknowledgment requirement display
+- transition posture display
+- safe evidence refs display
+- `runtime_private_fields_omitted` boundary marker when surfaced
+
+Stable non-scope:
+
+- no authoritative acknowledgment capture
+- no authoritative confirmation transition state
+- no provider/channel execution
+- no approve/reject/dispatch/execute
+- no founder queue
+- no queue implementation
+- no autonomous company operation
+- no Cognitive_OS change
+- no MPLP change
+- no protocol certification
+- no GA claim
+
+### O7. Stable Execution Readiness Matrix
+
+| Requirement | Required evidence | Status |
+|---|---|---|
+| repo clean and local/remote aligned | `HEAD == origin/main` and clean worktree | PASS |
+| V1.8 RC release surface verified | RC tag and GitHub prerelease verified | PASS |
+| stable-readiness passed | stable evidence matrix complete with no blockers | PASS |
+| `npm test` passes | full suite remains green at 343 tests | PASS |
+| focused V1.8 adapter and page-model tests pass | focused reruns complete successfully | PASS |
+| boundary grep passes | matches remain exclusion-only, warning-only, or negative-test-only | PASS |
+| no existing stable V1.8 tag | stable tag precheck returns empty | PASS |
+| no existing stable V1.8 GitHub Release | stable `gh release view` precheck returns `release not found` | PASS |
+| stable release notes draft created | stable GitHub release notes draft exists in `governance/releases` | PASS |
+| README / CHANGELOG / baseline aligned | status and planning docs align with stable planning truth | PASS |
+| explicit user authorization required for stable execution | stable execution deferred to a later authorized wave | PASS |
+
+Decision enums:
+
+`SOLOCREW_V1_8_STABLE_READINESS_PASS`
+
+`SOLOCREW_V1_8_STABLE_RELEASE_EXECUTION_READINESS_PASS`

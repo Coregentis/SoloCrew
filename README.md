@@ -207,6 +207,9 @@ SoloCrew V1.8 RC — Bounded Execution Boundary has been released as a
 GitHub prerelease. It remains bounded, display-oriented, non-executing,
 non-approving, non-dispatching, non-provider, non-queueing, and
 non-authoritative.
+SoloCrew V1.8 stable-readiness and stable release planning are complete for
+the bounded execution-boundary slice. Stable execution still requires
+explicit authorization.
 Current V1.8 planning baseline:
 `governance/baselines/SOLOCREW-V1.8-PLANNING-BASELINE-v0.1.md`.
 
