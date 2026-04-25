@@ -4,7 +4,7 @@
 
 ## A. Status
 
-- `status`: `PENDING_FINAL_POST_RELEASE_VERIFICATION`
+- `status`: `CLOSED_POST_RELEASE_VERIFIED`
 
 ## B. Purpose
 
@@ -25,13 +25,13 @@ verification in one combined artifact to avoid governance sprawl.
 - `prerelease`: `false`
 - `ga_claim`: `false`
 - `pre_release_readiness_commit`: `9b79144460096fc9c2f2777d7814011e8da19131`
-- `stable_seal_artifact_commit`: `PENDING_THIS_WAVE`
-- `stable_tag_object_sha`: `PENDING_THIS_WAVE`
-- `stable_tag_target_commit`: `PENDING_THIS_WAVE`
-- `github_stable_release`: `PENDING_THIS_WAVE`
+- `stable_seal_artifact_commit`: `be4cfe232b376f6015663290dc1b67cff0d076c0`
+- `stable_tag_object_sha`: `37c551ab64bdff3147eb1f865ac8b9b7c5df877d`
+- `stable_tag_target_commit`: `be4cfe232b376f6015663290dc1b67cff0d076c0`
+- `github_stable_release`: `VERIFIED`
 - `existing_rc_prerelease`: `VERIFIED`
-- `post_release_verification`: `PENDING_THIS_WAVE`
-- `final_test_count`: `PENDING_THIS_WAVE`
+- `post_release_verification`: `PASS`
+- `final_test_count`: `343`
 
 ## E. Stable Scope
 
@@ -96,18 +96,18 @@ verification in one combined artifact to avoid governance sprawl.
 | validation rerun | `PASS` | full suite and focused reruns passed pre-release |
 | stable release notes draft reviewed | `PASS` | existing stable release notes draft confirmed usable for GitHub stable release notes |
 | combined stable seal/execution/post-release record created | `PASS` | this artifact created before first stable release commit |
-| stable seal artifact commit created | `PENDING` | pending first release commit |
-| main pushed | `PENDING` | pending first release push |
-| annotated stable tag created | `PENDING` | pending local annotated tag creation |
-| stable tag pushed | `PENDING` | pending remote tag creation |
-| GitHub stable release created | `PENDING` | pending `gh release create` |
-| remote stable tag verified | `PENDING` | pending remote tag verification |
-| GitHub stable release verified | `PENDING` | pending `gh release view --json` verification |
-| existing V1.8 RC prerelease preserved | `PENDING` | pending post-release verification |
-| post-release test rerun | `PENDING` | pending post-release `npm test` |
-| post-release boundary grep | `PENDING` | pending post-release grep rerun |
-| final stable record updated | `PENDING` | pending final verification update |
-| final commit pushed | `PENDING` | pending final post-verification commit push |
+| stable seal artifact commit created | `PASS` | `be4cfe232b376f6015663290dc1b67cff0d076c0` |
+| main pushed | `PASS` | stable seal artifact commit pushed to `origin/main` |
+| annotated stable tag created | `PASS` | local annotated stable tag object `37c551ab64bdff3147eb1f865ac8b9b7c5df877d` created |
+| stable tag pushed | `PASS` | remote tag `solocrew-v1.8-stable-bounded-execution-boundary-20260425` created |
+| GitHub stable release created | `PASS` | `gh release create` succeeded without `--prerelease` |
+| remote stable tag verified | `PASS` | annotated tag object and peeled target match expected values |
+| GitHub stable release verified | `PASS` | `gh release view --json` confirmed title, tag, and `isPrerelease: false` |
+| existing V1.8 RC prerelease preserved | `PASS` | RC prerelease remained available after stable release creation |
+| post-release test rerun | `PASS` | post-release `npm test` passed with 343 tests |
+| post-release boundary grep | `PASS` | matches remained exclusion-only, boundary warning, negative test, or phrase-deny blocklist only |
+| final stable record updated | `PASS` | combined record finalized with stable execution and post-release verification results |
+| final commit pushed | `PASS` | this final post-verification commit is pushed to `origin/main` in this wave |
 
 Initial decision:
 
@@ -119,9 +119,12 @@ Final decision after full post-release verification:
 
 ## K. Post-Release Verification Evidence
 
-- `post_release_verification_status`: `PENDING_THIS_WAVE`
-- `github_release_url`: `PENDING_THIS_WAVE`
-- `latest_false_support_note`: `PENDING_THIS_WAVE`
+- `post_release_verification_status`: `PASS`
+- `github_release_url`: `https://github.com/Coregentis/SoloCrew/releases/tag/solocrew-v1.8-stable-bounded-execution-boundary-20260425`
+- `github_release_title_verified`: `SoloCrew V1.8 Stable — Bounded Execution Boundary`
+- `github_release_prerelease_verified`: `false`
+- `existing_rc_prerelease_verified`: `true`
+- `latest_false_support_note`: ``gh release edit ... --latest=false`` succeeded under `gh version 2.90.0`
 
 ## L. Final Boundary Confirmation
 
@@ -137,6 +140,8 @@ This does not claim protocol certification.
 This does not introduce authoritative acknowledgment capture.
 This does not introduce authoritative confirmation transition state.
 Existing V1.8 RC tag/release is preserved.
+
+- `final_decision`: `SOLOCREW_V1_8_STABLE_RELEASE_EXECUTED_AND_POST_VERIFIED`
 
 ## M. Next Allowed Line
 
