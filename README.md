@@ -201,15 +201,14 @@ GA claim.
 Current V1.7 planning baseline:
 `governance/baselines/SOLOCREW-V1.7-PLANNING-BASELINE-v0.1.md`.
 
-## Current V1.8 Planning Line
+## Current V1.8 Stable Line
 
-SoloCrew V1.8 RC — Bounded Execution Boundary has been released as a
-GitHub prerelease. It remains bounded, display-oriented, non-executing,
-non-approving, non-dispatching, non-provider, non-queueing, and
-non-authoritative.
-SoloCrew V1.8 stable-readiness and stable release planning are complete for
-the bounded execution-boundary slice. Stable execution still requires
-explicit authorization.
+SoloCrew V1.8 RC — Bounded Execution Boundary remains available as the
+existing GitHub prerelease.
+SoloCrew V1.8 Stable — Bounded Execution Boundary has been released as a
+bounded GitHub release. It remains bounded, display-oriented,
+non-executing, non-approving, non-dispatching, non-provider,
+non-queueing, and non-authoritative. It is not a GA claim.
 Current V1.8 planning baseline:
 `governance/baselines/SOLOCREW-V1.8-PLANNING-BASELINE-v0.1.md`.
 

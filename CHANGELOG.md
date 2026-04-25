@@ -2,6 +2,14 @@
 
 ## 2026-04-25
 
+- executed SoloCrew V1.8 stable release and post-release verification as a
+  combined high-ROI wave, creating a combined stable
+  seal/execution/post-release record, publishing the stable tag and GitHub
+  release, preserving the existing V1.8 RC prerelease, and re-verifying
+  tests and boundaries; no Cognitive_OS/MPLP change, no runtime-private
+  import, no provider/channel execution, no automated
+  approve/reject/dispatch/execute, no founder queue, no queue
+  implementation, no GA claim, and no protocol certification claim
 - completed SoloCrew V1.8 stable-readiness and stable release planning in
   one high-ROI wave, adding stable evidence matrix, blocker assessment,
   proposed stable tag/release identity, stable release notes draft, and

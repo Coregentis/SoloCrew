@@ -44,6 +44,6 @@ non-authoritative. It is not a GA claim.
 - RC release surface and post-verification record were verified before
   stable planning.
 
-## Proposed Tag
+## Tag
 
 solocrew-v1.8-stable-bounded-execution-boundary-20260425
