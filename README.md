@@ -203,10 +203,11 @@ Current V1.7 planning baseline:
 
 ## Current V1.8 Planning Line
 
-SoloCrew V1.8 planning is open as a feature-line for Human-Confirmed
-Execution Boundary after the V1.7 Stable Bounded Action Preparation release.
-V1.8 planning does not add provider/channel execution, automated
-approve/reject/dispatch/execute, founder queue, or queue implementation.
+SoloCrew V1.8 has advanced from dependency-blocked planning to
+implementation planning for a bounded human-confirmed execution-boundary
+slice. The current intended slice remains display-oriented,
+non-executing, non-approving, non-dispatching, non-provider, and
+non-queueing.
 Current V1.8 planning baseline:
 `governance/baselines/SOLOCREW-V1.8-PLANNING-BASELINE-v0.1.md`.
 

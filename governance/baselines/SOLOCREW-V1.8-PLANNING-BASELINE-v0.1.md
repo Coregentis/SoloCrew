@@ -171,14 +171,93 @@ Decision enum:
 
 `SOLOCREW_V1_8_PLANNING_BLOCKED_PENDING_COGNITIVE_OS`
 
-## L. File-Level Follow-Up Direction
+## L. V1.8 Implementation Planning
 
-| Lane | Area | File direction | Boundary |
+### L1. Implementation Objective
+
+Implement the smallest bounded product-facing human-confirmed
+execution-boundary slice over the neutral Cognitive_OS execution-boundary
+scaffold, while remaining display-oriented, non-executing,
+non-approving, non-dispatching, non-provider, and non-queueing.
+
+Upstream blocker status:
+
+- `SOLOCREW_V1_8_PLANNING_BLOCKED_PENDING_COGNITIVE_OS` is now cleared.
+- Cognitive_OS now exposes a minimal execution-boundary scaffold through
+  neutral constructors, validation helpers, and contract tests.
+
+### L2. Minimal Product Slice Selection
+
+| Candidate slice | User value | Boundary risk | Decision |
 |---|---|---|---|
-| downstream display-only candidate | product-local contract | `projection/contracts/v1-8-human-confirmed-execution-boundary-contract.ts` if a thin display-only slice is later selected | no runtime-private import; no authoritative boundary state |
-| downstream display-only candidate | adapter | `projection/adapters/v1-8-human-confirmed-execution-boundary-adapter.ts` for warning/checklist/acknowledgment copy-only mapping | no provider/channel, no approval automation, no queue semantics |
-| downstream display-only candidate | app shell | `app/shell/create-v1-8-human-confirmed-execution-boundary-page-model.ts` for human-visible boundary panels | non-executing and human-visible only |
-| downstream display-only candidate | tests | `tests/projection/v1-8-human-confirmed-execution-boundary-adapter.test.ts` and `tests/app/create-v1-8-human-confirmed-execution-boundary-page-model.test.ts` | prove no execution/dispatch/provider/queue drift |
-| upstream dependency planning target | neutral runtime contract | `Cognitive_OS/runtime/core/prepared-action-types.ts` and `Cognitive_OS/runtime/core/prepared-action-contract.ts` if authoritative boundary state is required | planning target only, not modified in this wave |
-| upstream dependency planning target | neutral runtime tests | `Cognitive_OS/tests/runtime/prepared-action-contract.test.mjs` or successor execution-boundary test surface | planning target only, not modified in this wave |
-| protocol layer | MPLP | no file direction in this wave | no MPLP protocol/schema/binding change |
+| execution-boundary card | high | medium if mistaken for executable release state | selected |
+| requirement summary panel | high | medium if mistaken for authoritative execution grant | selected |
+| risk warning panel | high | medium if mistaken for policy verdict | selected |
+| preflight checklist panel | high | medium if mistaken for mandatory gate state | selected |
+| acknowledgment requirement display | high | medium-high if mistaken for authoritative acknowledgment capture | selected |
+| transition posture display | high | medium if mistaken for transition execution readiness | selected |
+| safe evidence refs display | medium-high | low if kept reference-only | selected |
+| authoritative acknowledgment capture | none for bounded V1.8 | unacceptable | not selected |
+| authoritative confirmation transition state | none for bounded V1.8 | unacceptable | not selected |
+| provider/channel execution | none for bounded V1.8 | unacceptable | not selected |
+| approve/reject/dispatch/execute | none for bounded V1.8 | unacceptable | not selected |
+| founder queue | none for bounded V1.8 | unacceptable | not selected |
+| queue implementation | none for bounded V1.8 | unacceptable | not selected |
+
+Selected minimal slice:
+
+- execution-boundary card
+- requirement summary panel
+- risk warning panel
+- preflight checklist panel
+- acknowledgment requirement display
+- transition posture display
+- safe evidence refs display
+
+### L3. Upstream-to-Downstream Field Mapping
+
+| Cognitive_OS neutral surface | SoloCrew product surface | Boundary note |
+|---|---|---|
+| `ExecutionBoundaryRequirementSummary` | product-facing requirement summary | requirement-only and not execution permission |
+| `ExecutionBoundaryRiskWarning` | product-facing risk warning | explanatory only and not policy verdict |
+| `ExecutionBoundaryPreflightChecklist` | product-facing preflight checklist panel | human-visible checklist only and not authoritative gate state |
+| `ExecutionBoundaryAcknowledgmentRequirement` | product-facing acknowledgment requirement display | display-only and not authoritative acknowledgment capture |
+| `ExecutionBoundaryTransitionPosture` | product-facing transition posture / boundary copy | explicit non-executing / non-provider / non-queueing posture only |
+| `ExecutionBoundarySafeEvidenceRef` | product-facing safe evidence refs | references only and not raw runtime detail |
+| `ExecutionBoundaryProjection` | bounded execution-boundary page/card envelope | projection-safe container only |
+
+Consumption boundary:
+
+- No authoritative confirmation-required transition state is consumed.
+- No authoritative acknowledgment capture is consumed.
+- No execution, dispatch, provider/channel, or queue semantics are consumed.
+- No runtime-private internals are imported.
+
+### L4. File-Level Implementation Task Map
+
+| Area | File | Planned change | Boundary |
+|---|---|---|---|
+| product-local execution-boundary contract | `projection/contracts/v1-8-execution-boundary-contract.ts` | add product-local execution-boundary card/panel view types mapped from neutral upstream fields | no runtime-private import; no authoritative state |
+| execution-boundary adapter | `projection/adapters/v1-8-execution-boundary-adapter.ts` | map upstream neutral execution-boundary projection into SoloCrew display-oriented sections | no execution, no provider/channel, no queue semantics |
+| adapter tests | `tests/projection/v1-8-execution-boundary-adapter.test.ts` | verify mapping, forbidden-field rejection, wording boundaries, and reference-only evidence refs | no authoritative acknowledgment or transition-state language |
+| app shell page model | `app/shell/create-v1-8-execution-boundary-page-model.ts` | assemble human-visible page model for the bounded V1.8 slice | display-only and non-executing |
+| app page-model tests | `tests/app/create-v1-8-execution-boundary-page-model.test.ts` | verify copy, field presence, omission markers, and non-capability wording | no dispatch/provider/queue/authoritative language drift |
+| repo status docs | `README.md`, `CHANGELOG.md`, `governance/baselines/SOLOCREW-VERSION-ROADMAP-v0.1.md` | reflect implementation-planning completion and next bounded product implementation wave | no tag/release/seal language |
+
+### L5. Test / Boundary / Copy Plan
+
+| Surface | Required check |
+|---|---|
+| display-only wording | copy states the slice is display-oriented and review-oriented |
+| non-executing wording | copy states the slice is non-executing |
+| non-approval-automation wording | copy states acknowledgment/requirement remains below approval automation |
+| no dispatch/provider wording | no provider/channel send or dispatch wording appears as capability |
+| no queue wording | no founder queue or queue implementation wording appears as capability |
+| safe evidence refs remain references only | evidence refs stay reference-only and do not widen into proof/raw payload |
+| `runtime_private_fields_omitted` boundary preserved if surfaced | omission marker remains explicit and truthful |
+| no authoritative acknowledgment language | UI copy must not imply acknowledgment was captured or recorded as state |
+| no authoritative transition-state language | UI copy must not imply confirmation-required transition state exists as runtime truth |
+
+### L6. Implementation Readiness Decision
+
+`SOLOCREW_V1_8_IMPLEMENTATION_READY`

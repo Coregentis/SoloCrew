@@ -209,9 +209,9 @@ That closure pack does not widen the line into `v0.5`.
 - V1.7 Stable — Bounded Action Preparation has been released as a bounded
   stable line.
 - V1.7 stable is now closed as the bounded action-preparation stable line.
-- V1.8 opens as the feature-line for Human-Confirmed Execution Boundary.
-- V1.8 requires Cognitive_OS dependency planning before implementation if
-  authoritative execution-boundary state is selected.
+- V1.8 implementation planning is complete for a bounded
+  Human-Confirmed Execution Boundary slice.
+- V1.8 next wave is bounded product implementation.
 - Future V1.7 = Bounded Action-Preparation.
 - Future V1.8 = Human-Confirmed Execution Boundary.
 - Future V1.9 = Execution RC Hardening.

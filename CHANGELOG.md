@@ -2,6 +2,14 @@
 
 ## 2026-04-25
 
+- advanced SoloCrew V1.8 from dependency-blocked planning to implementation
+  planning, selecting the smallest bounded human-confirmed
+  execution-boundary slice, mapping Cognitive_OS neutral
+  execution-boundary surfaces into product-facing fields, and defining
+  file-level implementation tasks and boundary checks; no
+  Cognitive_OS/MPLP change, no provider/channel execution, no automated
+  approve/reject/dispatch/execute, no founder queue, no tag, no GitHub
+  Release, and no seal record
 - opened SoloCrew V1.8 planning baseline as a feature-line for
   Human-Confirmed Execution Boundary, locking version semantics after V1.7
   Stable, evaluating product options, user-value/risk posture,
