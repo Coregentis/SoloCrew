@@ -201,6 +201,15 @@ GA claim.
 Current V1.7 planning baseline:
 `governance/baselines/SOLOCREW-V1.7-PLANNING-BASELINE-v0.1.md`.
 
+## Current V1.8 Planning Line
+
+SoloCrew V1.8 planning is open as a feature-line for Human-Confirmed
+Execution Boundary after the V1.7 Stable Bounded Action Preparation release.
+V1.8 planning does not add provider/channel execution, automated
+approve/reject/dispatch/execute, founder queue, or queue implementation.
+Current V1.8 planning baseline:
+`governance/baselines/SOLOCREW-V1.8-PLANNING-BASELINE-v0.1.md`.
+
 The sealed `v0.3` line remains the first bounded single-cell usable release
 line inside that delivered platform baseline, and it extends the sealed `v0.2`
 and `v0.1` baselines with:

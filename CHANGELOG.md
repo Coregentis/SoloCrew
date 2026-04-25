@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-04-25
+
+- opened SoloCrew V1.8 planning baseline as a feature-line for
+  Human-Confirmed Execution Boundary, locking version semantics after V1.7
+  Stable, evaluating product options, user-value/risk posture,
+  Cognitive_OS dependency posture, MPLP posture, selected direction, and
+  embedded readiness gate; no implementation, no Cognitive_OS/MPLP change,
+  no provider/channel execution, no automated
+  approve/reject/dispatch/execute, no founder queue, no tag, no GitHub
+  Release, and no seal record
+
 ## 2026-04-24
 
 - executed SoloCrew V1.7 stable release and post-release verification as a
