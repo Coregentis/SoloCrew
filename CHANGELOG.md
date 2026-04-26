@@ -2,6 +2,10 @@
 
 ## 2026-04-26
 
+- added the SoloCrew V2.0 Wave 2 starter-cell product baseline and fixtures
+  for Development Company, E-commerce, and Personal Media; no V2.0 delivery
+  claim; no real artifact-generation runtime yet; no provider/channel
+  execution; next allowed wave is V2.0 Wave 3 Founder Dashboard Productization
 - started the SoloCrew V2.0 planning line with the First Runnable AIGC
   Operating Product baseline; no implementation yet; no provider/channel
   execution; and no V2.0 delivery claim

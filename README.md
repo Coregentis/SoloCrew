@@ -76,6 +76,14 @@ V2.0 Wave 1 planning has now started with the baseline:
 
 - `governance/baselines/SOLOCREW-V2.0-FIRST-RUNNABLE-AIGC-OPERATING-PRODUCT-BASELINE-v0.1.md`
 
+V2.0 Wave 2 starter-cell baseline and fixtures have now been added:
+
+- `governance/baselines/SOLOCREW-V2.0-STARTER-CELL-PRODUCT-BASELINE-AND-FIXTURES-v0.1.md`
+
+The next allowed wave is `V2.0 Wave 3 — Founder Dashboard Productization`.
+There is still no real artifact-generation runtime, no provider/channel
+execution, and no V2.0 delivery claim in this repo state.
+
 That does not mean V2.0 is delivered, ready, GA, provider/channel capable, or
 an autonomous company operating release.
 
