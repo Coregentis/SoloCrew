@@ -222,6 +222,10 @@ That closure pack does not widen the line into `v0.5`.
 - V1.9 is closed as a readiness / hardening line and is not V2.0 delivery.
 - V2.0 is the next line and is defined as First Runnable AIGC Operating
   Product.
+- V2.0 Wave 1 planning baseline has started after V1.9 closure:
+  `governance/baselines/SOLOCREW-V2.0-FIRST-RUNNABLE-AIGC-OPERATING-PRODUCT-BASELINE-v0.1.md`.
+- The next allowed wave is `V2.0 Wave 2 — Starter Cell Product Baseline and
+  Fixtures`.
 - V2.0 is allowed to start after V1.9 closure, but it is not yet delivered,
   not yet ready, and not a provider/channel execution, autonomous company, or
   GA claim.

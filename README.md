@@ -72,6 +72,10 @@ Current V1.9 closure reference:
 V2.0 is allowed to start only in the sense that planning and implementation
 may begin after the verified V1.9 closure.
 The V2.0 line is defined as `First Runnable AIGC Operating Product`.
+V2.0 Wave 1 planning has now started with the baseline:
+
+- `governance/baselines/SOLOCREW-V2.0-FIRST-RUNNABLE-AIGC-OPERATING-PRODUCT-BASELINE-v0.1.md`
+
 That does not mean V2.0 is delivered, ready, GA, provider/channel capable, or
 an autonomous company operating release.
 

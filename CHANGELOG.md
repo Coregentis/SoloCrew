@@ -2,6 +2,9 @@
 
 ## 2026-04-26
 
+- started the SoloCrew V2.0 planning line with the First Runnable AIGC
+  Operating Product baseline; no implementation yet; no provider/channel
+  execution; and no V2.0 delivery claim
 - closed SoloCrew V1.9 as Runtime Readiness Closure by publishing the verified
   RC prerelease and stable release over the completed Wave 1 crosswalk, Wave 2
   Cognitive_OS runtime readiness foundation, Wave 3 projection contracts, and
