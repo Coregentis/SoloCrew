@@ -2,11 +2,7 @@ import type {
   CellSummaryProjection,
 } from "../../projection/contracts/cell-summary-projection-contract.ts";
 import type {
-  ApprovalRequestRuntimeRecord,
-  CellRuntimeScopeRecord,
-  CellSummaryRuntimeRecord,
-  DeliveryReturnRuntimeRecord,
-  ManagementDirectiveRuntimeRecord,
+  WorkforceCellProjectionInput,
 } from "../../projection/adapters/upstream-record-types.ts";
 
 export type MultiCellFoundationManagementObjectStatus =
@@ -20,13 +16,7 @@ export interface MultiCellFoundationManagementObjectFamilyStatus {
   approval_request: MultiCellFoundationManagementObjectStatus;
 }
 
-export interface MultiCellFoundationRuntimeCellInput {
-  cell_runtime_scope: CellRuntimeScopeRecord;
-  cell_summary_runtime_record?: CellSummaryRuntimeRecord;
-  management_directive_record?: ManagementDirectiveRuntimeRecord;
-  delivery_return_record?: DeliveryReturnRuntimeRecord;
-  approval_request_record?: ApprovalRequestRuntimeRecord;
-}
+export type MultiCellFoundationRuntimeCellInput = WorkforceCellProjectionInput;
 
 export interface MultiCellFoundationTruthBoundary {
   product_projection_only: true;

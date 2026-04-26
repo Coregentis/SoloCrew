@@ -2,6 +2,9 @@ import {
   assembleManagementObjectInspectionProjection,
 } from "../../projection/assembly/management-object-inspection.ts";
 import {
+  asProjectionSafeWorkforceCellInput,
+} from "../../projection/adapters/cell-summary-runtime-adapter.ts";
+import {
   composeCellDetailViewShellFromRuntimeInput,
   buildCellDetailRoute,
 } from "./cell-detail-view.ts";
@@ -19,8 +22,10 @@ export function buildManagementObjectInspectionRoute(cell_id: string): string {
 export function composeManagementObjectInspectionViewShellFromRuntimeInput(
   runtime_input: MultiCellFoundationRuntimeCellInput
 ): ManagementObjectInspectionViewShell {
+  const projection_input = asProjectionSafeWorkforceCellInput(runtime_input);
+  const scope_ref = projection_input.workforce_envelope.scope_ref;
   const detail_shell =
-    composeCellDetailViewShellFromRuntimeInput(runtime_input);
+    composeCellDetailViewShellFromRuntimeInput(projection_input);
   const management_object_inspection_projection =
     assembleManagementObjectInspectionProjection(
       detail_shell.cell_detail_projection
@@ -28,7 +33,7 @@ export function composeManagementObjectInspectionViewShellFromRuntimeInput(
 
   return {
     inspection_shell_id:
-      `${runtime_input.cell_runtime_scope.object_id}-management-object-inspection-shell`,
+      `${scope_ref}-management-object-inspection-shell`,
     inspection_scope: "multi_cell_foundation_management_object_inspection_only",
     operator_surface: "multi_cell_foundation_management_object_inspection",
     authority_boundary: "app_shell_projection_consumer",
@@ -44,12 +49,8 @@ export function composeManagementObjectInspectionViewShellFromRuntimeInput(
     management_object_inspection_projection,
     navigation: {
       overview_route: "/cells",
-      detail_route: buildCellDetailRoute(
-        runtime_input.cell_runtime_scope.object_id
-      ),
-      inspection_route: buildManagementObjectInspectionRoute(
-        runtime_input.cell_runtime_scope.object_id
-      ),
+      detail_route: buildCellDetailRoute(scope_ref),
+      inspection_route: buildManagementObjectInspectionRoute(scope_ref),
       read_mode: "inspect_only",
     },
     truth_boundary: {
@@ -61,7 +62,7 @@ export function composeManagementObjectInspectionViewShellFromRuntimeInput(
     },
     projection_notes: [
       "Management-object inspection view stays read-only and below Secretary beta.",
-      "The shell reuses the existing runtime-private-to-detail projection path and adds no executable management control.",
+      "The shell reuses the projection-safe workforce envelope path and adds no executable management control.",
     ],
     deferred_items: [...management_object_inspection_projection.deferred_items],
   };

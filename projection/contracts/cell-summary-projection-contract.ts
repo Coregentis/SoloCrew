@@ -15,10 +15,10 @@ export type CellSummaryProjectionReadiness =
   | "attention_required";
 export type CellSummaryProjectionSourceMode =
   | "single_cell_shell_composition"
-  | "upstream_runtime_private_records";
+  | "upstream_projection_safe_envelope";
 export type CellSummaryProjectionTruthSource =
   | SingleCellViewTruthSource
-  | "upstream_runtime_private_truth";
+  | "upstream_projection_safe_envelope";
 
 export interface CellSummaryProjection {
   summary_projection_id: string;

@@ -1,3 +1,8 @@
+// Compatibility bridge for already-sealed SoloCrew runtime-session surfaces.
+// New workforce projection consumption must not import raw Cognitive_OS
+// runtime-private records through this file. Canonical workforce consumption
+// uses SoloCrew projection-safe envelope DTOs under projection/adapters.
+
 // lifecycle
 export {
   WorkerLifecycleRuntime,
@@ -37,7 +42,6 @@ export {
 } from "../../Cognitive_OS/runtime/state/preference-store.ts";
 export type {
   StateStorePort,
-  WorkforceStateRecord,
   WorkforceObjectType,
 } from "../../Cognitive_OS/runtime/state/state-store-port.ts";
 export type {
@@ -57,7 +61,6 @@ export type {
 export type {
   RuntimeActionClass,
   RuntimeActionReadinessStatus,
-  RuntimeObjectRecord,
 } from "../../Cognitive_OS/runtime/core/runtime-types.ts";
 
 export type {
@@ -136,7 +139,7 @@ export type {
 } from "../../Cognitive_OS/runtime/execution/execution-bridge.ts";
 
 export const COGNITIVE_RUNTIME_ALLOWED_SURFACES = [
-  "runtime/core/runtime-types.ts",
+  "runtime/core/runtime-types.ts#projection-safe-enums-only",
   "runtime/core/projection-types.ts",
   "runtime/lifecycle/worker-state-machine.ts",
   "runtime/lifecycle/worker-lifecycle.ts",

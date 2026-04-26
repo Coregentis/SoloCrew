@@ -14,104 +14,14 @@ import {
 import {
   RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE,
 } from "../../projection/contracts/runtime-backed-management-projection-contract.ts";
+import {
+  createWorkforceCellProjectionInputWithManagement,
+} from "../../projection/fixtures/workforce-envelope-fixtures.ts";
 
-function create_runtime_input() {
-  return {
-    cell_runtime_scope: {
-      object_id: "cell-scope-01",
-      object_type: "cell-runtime-scope" as const,
-      authority_class: "coregentis_private_runtime" as const,
-      primary_layer: "organization_runtime_layer" as const,
-      status: "active" as const,
-      project_id: "project-01",
-      scope_name: "Runtime Delivery Cell",
-      scope_summary: "Bounded runtime scope for delivery work.",
-      scope_mode: "multi_scope_bounded" as const,
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-    cell_summary_runtime_record: {
-      object_id: "cell-summary-01",
-      object_type: "cell-summary-runtime-record" as const,
-      authority_class: "coregentis_private_runtime" as const,
-      primary_layer: "organization_runtime_layer" as const,
-      status: "current" as const,
-      project_id: "project-01",
-      cell_runtime_scope_id: "cell-scope-01",
-      summary_headline: "Ship one bounded runtime-backed review.",
-      summary_delivery_posture: "attention" as const,
-      active_work_item_count: 2,
-      blocked_work_item_count: 1,
-      continuity_hint: "Continuity remains bounded to runtime-private summary truth.",
-      summary_mode: "bounded_runtime_private" as const,
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-    management_directive_record: {
-      object_id: "directive-01",
-      object_type: "management-directive-record" as const,
-      authority_class: "coregentis_private_runtime" as const,
-      primary_layer: "organization_runtime_layer" as const,
-      status: "active" as const,
-      project_id: "project-01",
-      cell_runtime_scope_id: "cell-scope-01",
-      objective_id: "objective-01",
-      management_record_kind: "directive" as const,
-      directive_summary: "Keep delivery visible and bounded.",
-      directive_priority: "focus_now" as const,
-      approval_posture: "operator_required" as const,
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-    delivery_return_record: {
-      object_id: "delivery-return-01",
-      object_type: "delivery-return-record" as const,
-      authority_class: "coregentis_private_runtime" as const,
-      primary_layer: "organization_runtime_layer" as const,
-      status: "ready_for_review" as const,
-      project_id: "project-01",
-      cell_runtime_scope_id: "cell-scope-01",
-      objective_id: "objective-01",
-      management_record_kind: "delivery_return" as const,
-      completed_summary: "Review package assembled.",
-      blocked_summary: "One follow-up item remains.",
-      next_directive_needed: false,
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-    approval_request_record: {
-      object_id: "approval-request-01",
-      object_type: "approval-request-record" as const,
-      authority_class: "coregentis_private_runtime" as const,
-      primary_layer: "organization_runtime_layer" as const,
-      status: "pending" as const,
-      project_id: "project-01",
-      cell_runtime_scope_id: "cell-scope-01",
-      objective_id: "objective-01",
-      management_record_kind: "approval_request" as const,
-      request_kind: "approval" as const,
-      request_summary: "Operator review requested.",
-      requested_decision: "Approve bounded release.",
-      urgency: "normal" as const,
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-  };
-}
 
 test("[app] cell detail page stays read-only and below secretary beta", () => {
   const detail_shell =
-    composeCellDetailViewShellFromRuntimeInput(create_runtime_input());
+    composeCellDetailViewShellFromRuntimeInput(createWorkforceCellProjectionInputWithManagement());
   const page = renderCellDetailPage(detail_shell);
 
   assert.equal(page.route_path, buildCellDetailRoute("cell-scope-01"));
@@ -157,7 +67,7 @@ test("[app] cell detail page stays read-only and below secretary beta", () => {
 
 test("[app] cell detail page exposes no executable management actions", () => {
   const detail_shell =
-    composeCellDetailViewShellFromRuntimeInput(create_runtime_input());
+    composeCellDetailViewShellFromRuntimeInput(createWorkforceCellProjectionInputWithManagement());
   const page = renderCellDetailPage(detail_shell);
 
   assert.equal(page.executable_management_actions_present, false);

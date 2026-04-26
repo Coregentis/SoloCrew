@@ -11,50 +11,15 @@ import {
 import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
 } from "../../projection/contracts/structural-boundary.ts";
+import {
+  createWorkforceCellProjectionInputWithManagement,
+} from "../../projection/fixtures/workforce-envelope-fixtures.ts";
 
-function create_runtime_input() {
-  return {
-    cell_runtime_scope: {
-      object_id: "cell-scope-01",
-      object_type: "cell-runtime-scope" as const,
-      authority_class: "coregentis_private_runtime" as const,
-      primary_layer: "organization_runtime_layer" as const,
-      status: "active" as const,
-      project_id: "project-01",
-      scope_name: "Runtime Delivery Cell",
-      scope_summary: "Bounded runtime scope for delivery work.",
-      scope_mode: "multi_scope_bounded" as const,
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-    cell_summary_runtime_record: {
-      object_id: "cell-summary-01",
-      object_type: "cell-summary-runtime-record" as const,
-      authority_class: "coregentis_private_runtime" as const,
-      primary_layer: "organization_runtime_layer" as const,
-      status: "current" as const,
-      project_id: "project-01",
-      cell_runtime_scope_id: "cell-scope-01",
-      summary_headline: "Ship one bounded runtime-backed review.",
-      summary_delivery_posture: "attention" as const,
-      active_work_item_count: 2,
-      blocked_work_item_count: 1,
-      continuity_hint: "Continuity remains bounded to runtime-private summary truth.",
-      summary_mode: "bounded_runtime_private" as const,
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-  };
-}
 
 test("[app] continuity inspection page stays inspect-only and below secretary beta", () => {
   const inspection_shell =
     composeContinuityInspectionViewShellFromRuntimeInput(
-      create_runtime_input()
+      createWorkforceCellProjectionInputWithManagement()
     );
   const page = renderContinuityInspectionPage(inspection_shell);
 
@@ -103,7 +68,7 @@ test("[app] continuity inspection page stays inspect-only and below secretary be
 test("[app] continuity inspection page exposes no executable continuity actions", () => {
   const inspection_shell =
     composeContinuityInspectionViewShellFromRuntimeInput(
-      create_runtime_input()
+      createWorkforceCellProjectionInputWithManagement()
     );
   const page = renderContinuityInspectionPage(inspection_shell);
 
@@ -117,7 +82,7 @@ test("[app] continuity inspection page exposes no executable continuity actions"
     "blocked_attention_visible"
   );
   assert.match(page.html, /Continuity state: blocked_visible/);
-  assert.match(page.html, /Known input: runtime_private_summary_record_presence/);
+  assert.match(page.html, /Known input: projection_safe_workforce_envelope_presence/);
   assert.match(page.html, /Unknown input: recovery_workflow_execution/);
   assert.doesNotMatch(page.html, /<button\b/);
   assert.doesNotMatch(page.html, /<form\b/);

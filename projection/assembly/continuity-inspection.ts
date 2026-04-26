@@ -28,15 +28,14 @@ function filter_continuity_refs(
 ): ProjectionUpstreamRef[] {
   return refs.filter(
     (ref) =>
-      ref.upstream_object_type === "cell-runtime-scope" ||
-      ref.upstream_object_type === "cell-summary-runtime-record"
+      ref.upstream_object_type === "workforce_projection_safe_envelope"
   );
 }
 
 function derive_continuity_visibility(
   detail_projection: CellDetailProjection
 ): ContinuityInspectionVisibility {
-  return detail_projection.source_mode === "upstream_runtime_private_records"
+  return detail_projection.source_mode === "upstream_projection_safe_envelope"
     ? "runtime_backed_visible"
     : "bounded_scope_visible";
 }
@@ -71,10 +70,10 @@ function derive_known_inputs(
 
   if (
     detail_projection.upstream_refs.some(
-      (ref) => ref.upstream_object_type === "cell-summary-runtime-record"
+      (ref) => ref.upstream_object_type === "workforce_projection_safe_envelope"
     )
   ) {
-    known_inputs.push("runtime_private_summary_record_presence");
+    known_inputs.push("projection_safe_workforce_envelope_presence");
   }
 
   return known_inputs;
@@ -91,10 +90,10 @@ function derive_unknown_inputs(
 
   if (
     !detail_projection.upstream_refs.some(
-      (ref) => ref.upstream_object_type === "cell-summary-runtime-record"
+      (ref) => ref.upstream_object_type === "workforce_projection_safe_envelope"
     )
   ) {
-    unknown_inputs.push("runtime_private_summary_record_absent");
+    unknown_inputs.push("projection_safe_workforce_envelope_absent");
   }
 
   return unknown_inputs;

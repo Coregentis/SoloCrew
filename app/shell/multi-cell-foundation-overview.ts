@@ -1,6 +1,5 @@
 import {
   adaptRuntimePrivateCellSummaryToProjection,
-  type RuntimePrivateCellSummaryAdapterInput,
 } from "../../projection/adapters/cell-summary-runtime-adapter.ts";
 import {
   assembleCellSummaryProjection,
@@ -34,9 +33,9 @@ function unique_items(values: readonly string[]): string[] {
 function derive_management_status(
   runtime_inputs: readonly MultiCellFoundationRuntimeCellInput[],
   object_family:
-    | "management_directive_record"
-    | "delivery_return_record"
-    | "approval_request_record"
+    | "management_directive"
+    | "delivery_return"
+    | "approval_request"
 ): MultiCellFoundationManagementObjectStatus {
   if (runtime_inputs.some((input) => Boolean(input[object_family]))) {
     return "runtime_record_present_non_executable";
@@ -97,9 +96,7 @@ export function composeMultiCellFoundationOverviewShellFromRuntimeInputs(
   runtime_inputs: readonly MultiCellFoundationRuntimeCellInput[]
 ): MultiCellFoundationOverviewShell {
   const cell_summary_units = runtime_inputs.map((input) =>
-    adaptRuntimePrivateCellSummaryToProjection(
-      input as RuntimePrivateCellSummaryAdapterInput
-    )
+    adaptRuntimePrivateCellSummaryToProjection(input)
   );
   const deferred_items = unique_items(
     cell_summary_units.flatMap((summary) => summary.deferred_items)
@@ -127,15 +124,15 @@ export function composeMultiCellFoundationOverviewShellFromRuntimeInputs(
     management_object_family_status: {
       management_directive: derive_management_status(
         runtime_inputs,
-        "management_directive_record"
+        "management_directive"
       ),
       delivery_return: derive_management_status(
         runtime_inputs,
-        "delivery_return_record"
+        "delivery_return"
       ),
       approval_request: derive_management_status(
         runtime_inputs,
-        "approval_request_record"
+        "approval_request"
       ),
     },
     truth_boundary: {
@@ -147,8 +144,8 @@ export function composeMultiCellFoundationOverviewShellFromRuntimeInputs(
     },
     projection_notes: [
       "Multi-cell foundation overview is read/inspect-oriented only.",
-      "Overview shell now consumes bounded upstream runtime-private workforce inputs through a downstream projection adapter.",
-      "Upstream runtime-private objects remain upstream truth and are not rendered as product-law or protocol-law identity.",
+      "Overview shell consumes projection-safe workforce envelope inputs through a downstream projection adapter.",
+      "Raw runtime-private workforce objects are not rendered as product-law or protocol-law identity.",
     ],
     deferred_items,
   };

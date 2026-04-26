@@ -109,7 +109,7 @@ export function assembleManagementObjectInspectionProjection(
           product_projection: management_directive,
           upstream_refs: filter_upstream_refs(
             detail_projection.upstream_refs,
-            "management-directive-record"
+            "workforce-management-directive-projection"
           ),
           projection_notes: [
             "Management directive inspection remains read-only and non-executable.",
@@ -122,7 +122,7 @@ export function assembleManagementObjectInspectionProjection(
             RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE,
           summary_label: "Directive summary",
           absent_note:
-            "No upstream management-directive-record is currently projected into this detail surface.",
+            "No upstream workforce management directive projection is currently projected into this detail surface.",
         }),
     delivery_return
       ? {
@@ -144,7 +144,7 @@ export function assembleManagementObjectInspectionProjection(
           product_projection: delivery_return,
           upstream_refs: filter_upstream_refs(
             detail_projection.upstream_refs,
-            "delivery-return-record"
+            "workforce-delivery-return-projection"
           ),
           projection_notes: [
             "Delivery return inspection remains read-only and non-executable.",
@@ -156,7 +156,7 @@ export function assembleManagementObjectInspectionProjection(
           product_object_type: "delivery-return",
           summary_label: "Delivery return",
           absent_note:
-            "No upstream delivery-return-record is currently projected into this detail surface.",
+            "No upstream workforce delivery return projection is currently projected into this detail surface.",
         }),
     approval_request
       ? {
@@ -178,7 +178,7 @@ export function assembleManagementObjectInspectionProjection(
           product_projection: approval_request,
           upstream_refs: filter_upstream_refs(
             detail_projection.upstream_refs,
-            "approval-request-record"
+            "workforce-approval-request-projection"
           ),
           projection_notes: [
             "Approval request inspection remains read-only and non-executable.",
@@ -190,7 +190,7 @@ export function assembleManagementObjectInspectionProjection(
           product_object_type: "escalation-approval-request",
           summary_label: "Approval request",
           absent_note:
-            "No upstream approval-request-record is currently projected into this detail surface.",
+            "No upstream workforce approval request projection is currently projected into this detail surface.",
         }),
   ];
 

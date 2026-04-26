@@ -2,6 +2,9 @@ import {
   assembleContinuityInspectionProjection,
 } from "../../projection/assembly/continuity-inspection.ts";
 import {
+  asProjectionSafeWorkforceCellInput,
+} from "../../projection/adapters/cell-summary-runtime-adapter.ts";
+import {
   buildCellDetailRoute,
   composeCellDetailViewShellFromRuntimeInput,
 } from "./cell-detail-view.ts";
@@ -19,14 +22,16 @@ export function buildContinuityInspectionRoute(cell_id: string): string {
 export function composeContinuityInspectionViewShellFromRuntimeInput(
   runtime_input: MultiCellFoundationRuntimeCellInput
 ): ContinuityInspectionViewShell {
+  const projection_input = asProjectionSafeWorkforceCellInput(runtime_input);
+  const scope_ref = projection_input.workforce_envelope.scope_ref;
   const detail_shell =
-    composeCellDetailViewShellFromRuntimeInput(runtime_input);
+    composeCellDetailViewShellFromRuntimeInput(projection_input);
   const continuity_inspection_projection =
     assembleContinuityInspectionProjection(detail_shell.cell_detail_projection);
 
   return {
     inspection_shell_id:
-      `${runtime_input.cell_runtime_scope.object_id}-continuity-inspection-shell`,
+      `${scope_ref}-continuity-inspection-shell`,
     inspection_scope: "multi_cell_foundation_continuity_inspection_only",
     operator_surface: "multi_cell_foundation_continuity_inspection",
     authority_boundary: "app_shell_projection_consumer",
@@ -42,12 +47,8 @@ export function composeContinuityInspectionViewShellFromRuntimeInput(
     continuity_inspection_projection,
     navigation: {
       overview_route: "/cells",
-      detail_route: buildCellDetailRoute(
-        runtime_input.cell_runtime_scope.object_id
-      ),
-      inspection_route: buildContinuityInspectionRoute(
-        runtime_input.cell_runtime_scope.object_id
-      ),
+      detail_route: buildCellDetailRoute(scope_ref),
+      inspection_route: buildContinuityInspectionRoute(scope_ref),
       read_mode: "inspect_only",
     },
     truth_boundary: {
@@ -59,7 +60,7 @@ export function composeContinuityInspectionViewShellFromRuntimeInput(
     },
     projection_notes: [
       "Continuity inspection view stays read-only and below Secretary beta.",
-      "The shell reuses the existing runtime-private-to-detail projection path and adds no executable continuity control.",
+      "The shell reuses the projection-safe workforce envelope path and adds no executable continuity control.",
     ],
     deferred_items: [...continuity_inspection_projection.deferred_items],
   };

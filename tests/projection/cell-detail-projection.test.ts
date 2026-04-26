@@ -11,106 +11,21 @@ import {
   RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_PROJECTION_OBJECT_TYPE,
   RUNTIME_BACKED_MANAGEMENT_DIRECTIVE_UPSTREAM_RECORD_TYPE,
 } from "../../projection/contracts/runtime-backed-management-projection-contract.ts";
+import {
+  createWorkforceCellProjectionInputWithManagement,
+} from "../../projection/fixtures/workforce-envelope-fixtures.ts";
 
 test("[projection] cell detail projection stays product-projected when derived from upstream runtime-backed inputs", () => {
-  const detail_projection = assembleCellDetailProjectionFromRuntimeInput({
-    cell_runtime_scope: {
-      object_id: "cell-scope-01",
-      object_type: "cell-runtime-scope",
-      authority_class: "coregentis_private_runtime",
-      primary_layer: "organization_runtime_layer",
-      status: "active",
-      project_id: "project-01",
-      scope_name: "Runtime Delivery Cell",
-      scope_summary: "Bounded runtime scope for delivery work.",
-      scope_mode: "multi_scope_bounded",
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-    cell_summary_runtime_record: {
-      object_id: "cell-summary-01",
-      object_type: "cell-summary-runtime-record",
-      authority_class: "coregentis_private_runtime",
-      primary_layer: "organization_runtime_layer",
-      status: "current",
-      project_id: "project-01",
-      cell_runtime_scope_id: "cell-scope-01",
-      summary_headline: "Ship one bounded runtime-backed review.",
-      summary_delivery_posture: "blocked",
-      active_work_item_count: 2,
-      blocked_work_item_count: 1,
-      continuity_hint: "Upstream runtime summary remains bounded and current.",
-      summary_mode: "bounded_runtime_private",
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-    management_directive_record: {
-      object_id: "directive-01",
-      object_type: "management-directive-record",
-      authority_class: "coregentis_private_runtime",
-      primary_layer: "organization_runtime_layer",
-      status: "active",
-      project_id: "project-01",
-      cell_runtime_scope_id: "cell-scope-01",
-      objective_id: "objective-01",
-      management_record_kind: "directive",
-      directive_summary: "Keep review work bounded and operator-visible.",
-      directive_priority: "review_first",
-      approval_posture: "operator_required",
-      constraint_tags: ["bounded-review", "operator-visible"],
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-    delivery_return_record: {
-      object_id: "delivery-return-01",
-      object_type: "delivery-return-record",
-      authority_class: "coregentis_private_runtime",
-      primary_layer: "organization_runtime_layer",
-      status: "blocked",
-      project_id: "project-01",
-      cell_runtime_scope_id: "cell-scope-01",
-      objective_id: "objective-01",
-      management_record_kind: "delivery_return",
-      completed_summary: "One work item completed.",
-      blocked_summary: "One work item blocked.",
-      next_directive_needed: true,
-      requested_follow_up: "Operator review before resuming.",
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-    approval_request_record: {
-      object_id: "approval-request-01",
-      object_type: "approval-request-record",
-      authority_class: "coregentis_private_runtime",
-      primary_layer: "organization_runtime_layer",
-      status: "pending",
-      project_id: "project-01",
-      cell_runtime_scope_id: "cell-scope-01",
-      objective_id: "objective-01",
-      management_record_kind: "approval_request",
-      request_kind: "approval",
-      request_summary: "Operator review needed before resuming.",
-      requested_decision: "Approve next bounded step.",
-      urgency: "high",
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-  });
+  const detail_projection = assembleCellDetailProjectionFromRuntimeInput(
+    createWorkforceCellProjectionInputWithManagement({
+      delivery_posture: "blocked",
+    })
+  );
 
   assert.equal(detail_projection.detail_scope, "cell_detail_projection");
   assert.equal(detail_projection.authority_boundary, "product_projection_only");
   assert.equal(detail_projection.phase_boundary, "runtime_adjacent_detail");
-  assert.equal(detail_projection.source_mode, "upstream_runtime_private_records");
+  assert.equal(detail_projection.source_mode, "upstream_projection_safe_envelope");
   assert.equal(detail_projection.detail_projection_is_runtime_law, false);
   assert.equal(detail_projection.secretary_behavior_available, false);
   assert.equal(detail_projection.provider_execution_available, false);
@@ -164,9 +79,9 @@ test("[projection] cell detail projection stays product-projected when derived f
       ?.affected_objective_id,
     "objective-01"
   );
-  assert.equal(detail_projection.upstream_refs.length, 5);
+  assert.equal(detail_projection.upstream_refs.length, 4);
   assert.ok(
-    detail_projection.truth_sources.includes("upstream_runtime_private_truth")
+    detail_projection.truth_sources.includes("upstream_projection_safe_envelope")
   );
   assert.ok(
     detail_projection.non_claims.includes(

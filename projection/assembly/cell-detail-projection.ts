@@ -1,5 +1,6 @@
 import {
   adaptRuntimePrivateCellSummaryToProjection,
+  asProjectionSafeWorkforceCellInput,
   type RuntimePrivateCellSummaryAdapterInput,
 } from "../adapters/cell-summary-runtime-adapter.ts";
 import {
@@ -30,8 +31,8 @@ function unique_items(values: readonly string[]): string[] {
 }
 
 function map_delivery_return_status(
-  status: RuntimePrivateCellSummaryAdapterInput["delivery_return_record"] extends infer T
-    ? T extends { status: infer TStatus }
+  status: RuntimePrivateCellSummaryAdapterInput["delivery_return"] extends infer T
+    ? T extends { delivery_status: infer TStatus }
       ? TStatus
       : never
     : never
@@ -58,59 +59,61 @@ function derive_management_status(
 function derive_recency_hint(
   input: RuntimePrivateCellSummaryAdapterInput
 ): string {
-  if (input.cell_summary_runtime_record) {
-    return `Runtime summary record status: ${input.cell_summary_runtime_record.status}.`;
+  if (input.workforce_envelope.summary_headline) {
+    return `Projection-safe workforce envelope status: ${input.workforce_envelope.scope_status}.`;
   }
 
-  return `Runtime summary record is absent; detail inspection falls back to bounded scope truth only.`;
+  return `Projection-safe workforce envelope has no summary headline; detail inspection falls back to bounded scope truth only.`;
 }
 
 export function assembleCellDetailProjectionFromRuntimeInput(
   input: RuntimePrivateCellSummaryAdapterInput
 ): CellDetailProjection {
-  const summary_projection = adaptRuntimePrivateCellSummaryToProjection(input);
-  const management_directive = input.management_directive_record
+  const projection_input = asProjectionSafeWorkforceCellInput(input);
+  const summary_projection =
+    adaptRuntimePrivateCellSummaryToProjection(projection_input);
+  const management_directive = projection_input.management_directive
     ? createRuntimeBackedManagementDirectiveProjection({
         projection_id:
-          `${input.cell_runtime_scope.object_id}:detail-management-directive`,
-        cell_id: input.cell_runtime_scope.object_id,
-        upstream_record_id: input.management_directive_record.object_id,
-        priority: input.management_directive_record.directive_priority,
-        delivery_target: input.management_directive_record.directive_summary,
-        approval_posture: input.management_directive_record.approval_posture,
-        constraint_emphasis: input.management_directive_record.constraint_tags,
+          `${projection_input.workforce_envelope.scope_ref}:detail-management-directive`,
+        cell_id: projection_input.workforce_envelope.scope_ref,
+        upstream_record_id: projection_input.management_directive.directive_ref,
+        priority: projection_input.management_directive.directive_priority,
+        delivery_target: projection_input.management_directive.directive_summary,
+        approval_posture: projection_input.management_directive.approval_posture,
+        constraint_emphasis: projection_input.management_directive.constraint_tags,
       })
     : undefined;
-  const delivery_return = input.delivery_return_record
+  const delivery_return = projection_input.delivery_return
     ? createDeliveryReturn({
-        projection_id: `${input.cell_runtime_scope.object_id}:detail-delivery-return`,
-        delivery_return_id: input.delivery_return_record.object_id,
-        cell_id: input.cell_runtime_scope.object_id,
+        projection_id: `${projection_input.workforce_envelope.scope_ref}:detail-delivery-return`,
+        delivery_return_id: projection_input.delivery_return.delivery_return_ref,
+        cell_id: projection_input.workforce_envelope.scope_ref,
         delivery_status: map_delivery_return_status(
-          input.delivery_return_record.status
+          projection_input.delivery_return.delivery_status
         ),
-        completed_summary: input.delivery_return_record.completed_summary,
-        blocked_summary: input.delivery_return_record.blocked_summary,
-        next_directive_needed: input.delivery_return_record.next_directive_needed,
-        requested_follow_up: input.delivery_return_record.requested_follow_up,
+        completed_summary: projection_input.delivery_return.completed_summary,
+        blocked_summary: projection_input.delivery_return.blocked_summary,
+        next_directive_needed: projection_input.delivery_return.next_directive_needed,
+        requested_follow_up: projection_input.delivery_return.requested_follow_up,
         projection_notes: [
-          "Delivery return detail is inspection-only downstream projection over a runtime-private record.",
+          "Delivery return detail is inspection-only downstream projection over projection-safe workforce input.",
           "No mutation or workflow-return action is exposed here.",
         ],
       })
     : undefined;
-  const approval_request = input.approval_request_record
+  const approval_request = projection_input.approval_request
     ? createEscalationApprovalRequest({
-        projection_id: `${input.cell_runtime_scope.object_id}:detail-approval-request`,
-        escalation_approval_request_id: input.approval_request_record.object_id,
-        cell_id: input.cell_runtime_scope.object_id,
-        request_kind: input.approval_request_record.request_kind,
-        reason: input.approval_request_record.request_summary,
-        affected_objective_id: input.approval_request_record.objective_id,
-        requested_decision: input.approval_request_record.requested_decision,
-        urgency: input.approval_request_record.urgency,
+        projection_id: `${projection_input.workforce_envelope.scope_ref}:detail-approval-request`,
+        escalation_approval_request_id: projection_input.approval_request.approval_request_ref,
+        cell_id: projection_input.workforce_envelope.scope_ref,
+        request_kind: projection_input.approval_request.request_kind,
+        reason: projection_input.approval_request.request_summary,
+        affected_objective_id: projection_input.approval_request.objective_ref,
+        requested_decision: projection_input.approval_request.requested_decision,
+        urgency: projection_input.approval_request.urgency,
         projection_notes: [
-          "Approval request detail is inspection-only downstream projection over a runtime-private record.",
+          "Approval request detail is inspection-only downstream projection over projection-safe workforce input.",
           "No approval action button or escalation workflow is exposed here.",
         ],
       })
@@ -118,7 +121,7 @@ export function assembleCellDetailProjectionFromRuntimeInput(
 
   return {
     detail_projection_id:
-      `${input.cell_runtime_scope.object_id}-cell-detail-projection`,
+      `${projection_input.workforce_envelope.scope_ref}-cell-detail-projection`,
     detail_scope: "cell_detail_projection",
     authority_boundary: "product_projection_only",
     phase_boundary: "runtime_adjacent_detail",
@@ -137,13 +140,12 @@ export function assembleCellDetailProjectionFromRuntimeInput(
     upstream_refs: [...summary_projection.upstream_refs],
     summary_projection,
     cell_identity: {
-      cell_id: input.cell_runtime_scope.object_id,
-      cell_name: input.cell_runtime_scope.scope_name,
-      scope_status: input.cell_runtime_scope.status,
-      scope_mode:
-        input.cell_runtime_scope.scope_mode ?? "unspecified_bounded_scope",
+      cell_id: projection_input.workforce_envelope.scope_ref,
+      cell_name: projection_input.workforce_envelope.scope_label,
+      scope_status: projection_input.workforce_envelope.scope_status,
+      scope_mode: projection_input.workforce_envelope.scope_mode,
       scope_summary:
-        input.cell_runtime_scope.scope_summary ??
+        projection_input.workforce_envelope.summary_headline ??
         "No additional runtime scope summary is currently projected.",
     },
     objective_and_work_status: {
@@ -162,7 +164,7 @@ export function assembleCellDetailProjectionFromRuntimeInput(
     continuity_and_recency: {
       continuity_status: "bounded_and_honest",
       continuity_hint: summary_projection.continuity_hint,
-      recency_hint: derive_recency_hint(input),
+      recency_hint: derive_recency_hint(projection_input),
     },
     management_object_family: {
       management_directive_status: derive_management_status(
@@ -188,7 +190,7 @@ export function assembleCellDetailProjectionFromRuntimeInput(
       ...CELL_DETAIL_NON_CLAIMS,
     ]),
     projection_notes: [
-      "Cell detail projection is a downstream product inspection surface over upstream runtime-private inputs.",
+      "Cell detail projection is a downstream product inspection surface over upstream projection-safe workforce input.",
       "Management-object-family visibility remains non-executable and read-only.",
       "SoloCrew renders product projections here and does not take ownership of mother-runtime law.",
     ],

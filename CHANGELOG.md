@@ -2,6 +2,13 @@
 
 ## 2026-04-26
 
+- migrated SoloCrew workforce consumption from raw Cognitive_OS
+  runtime-private mirror records to a projection-safe workforce envelope DTO,
+  quarantined the runtime import bridge as compatibility-only for sealed
+  runtime-session surfaces, fixed the `scope_mode` required-field boundary,
+  and refreshed README status wording; no Cognitive_OS/MPLP change, no V2.1
+  work, no provider/channel execution, no external dispatch, and no
+  autonomous operation is introduced
 - added the V2.0 post-release monitoring and V2.0.x maintenance baseline;
   no product behavior change, no V2.1 implementation, and no provider/channel
   execution, external dispatch, autonomous operation, GA,

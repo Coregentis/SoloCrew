@@ -16,6 +16,9 @@ import {
 import {
   SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS,
 } from "../../projection/contracts/structural-boundary.ts";
+import {
+  createWorkforceCellProjectionInputWithManagement,
+} from "../../projection/fixtures/workforce-envelope-fixtures.ts";
 
 test("[projection] cell summary projection stays product-projected and bounded for multi-cell foundation", () => {
   const assembly = initializeSingleCellStructuralAssembly({
@@ -66,99 +69,13 @@ test("[projection] cell summary projection stays product-projected and bounded f
 });
 
 test("[projection] runtime-private workforce records are transformed into product summary projection rather than runtime law", () => {
-  const summary_projection = adaptRuntimePrivateCellSummaryToProjection({
-    cell_runtime_scope: {
-      object_id: "cell-scope-01",
-      object_type: "cell-runtime-scope",
-      authority_class: "coregentis_private_runtime",
-      primary_layer: "organization_runtime_layer",
-      status: "active",
-      project_id: "project-01",
-      scope_name: "Runtime Delivery Cell",
-      scope_summary: "Bounded runtime scope for delivery work.",
-      scope_mode: "multi_scope_bounded",
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-    cell_summary_runtime_record: {
-      object_id: "cell-summary-01",
-      object_type: "cell-summary-runtime-record",
-      authority_class: "coregentis_private_runtime",
-      primary_layer: "organization_runtime_layer",
-      status: "current",
-      project_id: "project-01",
-      cell_runtime_scope_id: "cell-scope-01",
-      summary_headline: "Ship one bounded runtime-backed review.",
-      summary_delivery_posture: "blocked",
-      active_work_item_count: 2,
-      blocked_work_item_count: 1,
-      continuity_hint: "Upstream runtime summary remains bounded and current.",
-      summary_mode: "bounded_runtime_private",
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-    management_directive_record: {
-      object_id: "directive-01",
-      object_type: "management-directive-record",
-      authority_class: "coregentis_private_runtime",
-      primary_layer: "organization_runtime_layer",
-      status: "active",
-      project_id: "project-01",
-      cell_runtime_scope_id: "cell-scope-01",
-      objective_id: "objective-01",
-      management_record_kind: "directive",
-      directive_summary: "Keep review work bounded and operator-visible.",
-      directive_priority: "review_first",
-      approval_posture: "operator_required",
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-    delivery_return_record: {
-      object_id: "delivery-return-01",
-      object_type: "delivery-return-record",
-      authority_class: "coregentis_private_runtime",
-      primary_layer: "organization_runtime_layer",
-      status: "blocked",
-      project_id: "project-01",
-      cell_runtime_scope_id: "cell-scope-01",
-      objective_id: "objective-01",
-      management_record_kind: "delivery_return",
-      completed_summary: "One work item completed.",
-      blocked_summary: "One work item blocked.",
-      next_directive_needed: true,
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-    approval_request_record: {
-      object_id: "approval-request-01",
-      object_type: "approval-request-record",
-      authority_class: "coregentis_private_runtime",
-      primary_layer: "organization_runtime_layer",
-      status: "pending",
-      project_id: "project-01",
-      cell_runtime_scope_id: "cell-scope-01",
-      objective_id: "objective-01",
-      management_record_kind: "approval_request",
-      request_kind: "approval",
-      request_summary: "Operator review needed before resuming.",
-      requested_decision: "Approve next bounded step.",
-      urgency: "high",
-      temporal: {},
-      mutation: {},
-      lineage: {},
-      governance: {},
-    },
-  });
+  const summary_projection = adaptRuntimePrivateCellSummaryToProjection(
+    createWorkforceCellProjectionInputWithManagement({
+      delivery_posture: "blocked",
+    })
+  );
 
-  assert.equal(summary_projection.source_mode, "upstream_runtime_private_records");
+  assert.equal(summary_projection.source_mode, "upstream_projection_safe_envelope");
   assert.equal(summary_projection.summary_scope, "cell_summary_projection");
   assert.equal(summary_projection.authority_boundary, "product_projection_only");
   assert.equal(summary_projection.summary_projection_is_runtime_law, false);
@@ -168,19 +85,18 @@ test("[projection] runtime-private workforce records are transformed into produc
   assert.equal(summary_projection.readiness_signal, "attention_required");
   assert.equal(summary_projection.cell_summary_card.cell_name, "Runtime Delivery Cell");
   assert.equal(summary_projection.cell_summary_card.delivery_posture, "blocked");
-  assert.equal(summary_projection.upstream_refs.length, 5);
+  assert.equal(summary_projection.upstream_refs.length, 4);
   assert.deepEqual(
     summary_projection.upstream_refs.map((ref) => ref.upstream_object_type),
     [
-      "cell-runtime-scope",
-      "cell-summary-runtime-record",
-      "management-directive-record",
-      "delivery-return-record",
-      "approval-request-record",
+      "workforce_projection_safe_envelope",
+      "workforce-management-directive-projection",
+      "workforce-delivery-return-projection",
+      "workforce-approval-request-projection",
     ]
   );
   assert.ok(
-    summary_projection.truth_sources.includes("upstream_runtime_private_truth")
+    summary_projection.truth_sources.includes("upstream_projection_safe_envelope")
   );
   assert.ok(
     summary_projection.non_claims.includes(

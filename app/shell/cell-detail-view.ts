@@ -1,6 +1,9 @@
 import {
   assembleCellDetailProjectionFromRuntimeInput,
 } from "../../projection/assembly/cell-detail-projection.ts";
+import {
+  asProjectionSafeWorkforceCellInput,
+} from "../../projection/adapters/cell-summary-runtime-adapter.ts";
 import type {
   MultiCellFoundationRuntimeCellInput,
 } from "./multi-cell-foundation-overview-contract.ts";
@@ -17,12 +20,13 @@ export function buildCellDetailRoute(cell_id: string): string {
 export function composeCellDetailViewShellFromRuntimeInput(
   runtime_input: MultiCellFoundationRuntimeCellInput
 ): CellDetailViewShell {
+  const projection_input = asProjectionSafeWorkforceCellInput(runtime_input);
+  const scope_ref = projection_input.workforce_envelope.scope_ref;
   const cell_detail_projection =
-    assembleCellDetailProjectionFromRuntimeInput(runtime_input);
+    assembleCellDetailProjectionFromRuntimeInput(projection_input);
 
   return {
-    detail_shell_id:
-      `${runtime_input.cell_runtime_scope.object_id}-cell-detail-shell`,
+    detail_shell_id: `${scope_ref}-cell-detail-shell`,
     detail_scope: "multi_cell_foundation_cell_detail_only",
     operator_surface: "multi_cell_foundation_cell_detail_inspection",
     authority_boundary: "app_shell_projection_consumer",
@@ -38,9 +42,7 @@ export function composeCellDetailViewShellFromRuntimeInput(
     cell_detail_projection,
     navigation: {
       overview_route: "/cells",
-      detail_route: buildCellDetailRoute(
-        runtime_input.cell_runtime_scope.object_id
-      ),
+      detail_route: buildCellDetailRoute(scope_ref),
       read_mode: "inspect_only",
     },
     truth_boundary: {
@@ -52,7 +54,7 @@ export function composeCellDetailViewShellFromRuntimeInput(
     },
     projection_notes: [
       "Cell detail view shell is read/inspect-only and remains below Secretary beta.",
-      "The shell consumes already-adapted runtime-backed detail inputs without collapsing product and runtime object identity.",
+      "The shell consumes projection-safe workforce envelope input without collapsing product and runtime object identity.",
     ],
     deferred_items: [...cell_detail_projection.deferred_items],
   };

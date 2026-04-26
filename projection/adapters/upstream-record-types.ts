@@ -1,59 +1,40 @@
-import type {
-  WorkforceStateRecord,
-  AgentWorkerRecord,
-  ObjectiveRecord,
-  MemoryProfileRecord,
-  PreferenceProfileRecord,
-  RuntimeObjectRecord,
-} from "../../runtime-imports/cognitive-runtime.ts";
+export type WorkforceEnvelopeScopeStatus =
+  | "forming"
+  | "active"
+  | "paused"
+  | "archived";
 
-export type {
-  AgentWorkerRecord,
-  ObjectiveRecord,
-  MemoryProfileRecord,
-  PreferenceProfileRecord,
-};
+export type WorkforceEnvelopeScopeMode =
+  | "single_operator_bounded"
+  | "multi_scope_bounded";
 
-export interface CellRuntimeScopeRecord extends RuntimeObjectRecord {
-  object_type: "cell-runtime-scope";
-  authority_class: "coregentis_private_runtime";
-  primary_layer: "organization_runtime_layer";
-  status: "forming" | "active" | "paused" | "archived";
+export type WorkforceEnvelopeDeliveryPosture =
+  | "steady"
+  | "attention"
+  | "blocked"
+  | "unknown";
+
+export interface WorkforceProjectionSafeEnvelope {
+  envelope_version: "0.1";
+  envelope_kind: "workforce_projection_safe_envelope";
+  source_runtime_family: "workforce";
   project_id: string;
-  group_id?: string;
-  scope_name: string;
-  scope_summary?: string;
-  worker_ids?: string[];
-  objective_ids?: string[];
-  summary_record_id?: string;
-  scope_mode?: "single_operator_bounded" | "multi_scope_bounded";
+  scope_ref: string;
+  scope_label: string;
+  scope_status: WorkforceEnvelopeScopeStatus;
+  scope_mode: WorkforceEnvelopeScopeMode;
+  summary_headline?: string;
+  delivery_posture?: WorkforceEnvelopeDeliveryPosture;
+  safe_evidence_refs: string[];
+  projection_notes: string[];
+  runtime_private_fields_omitted: true;
+  non_executing: true;
+  created_at?: string;
 }
 
-export interface CellSummaryRuntimeRecord extends RuntimeObjectRecord {
-  object_type: "cell-summary-runtime-record";
-  authority_class: "coregentis_private_runtime";
-  primary_layer: "organization_runtime_layer";
-  status: "draft" | "current" | "stale" | "archived";
-  project_id: string;
-  cell_runtime_scope_id: string;
-  source_object_ids?: string[];
-  summary_headline: string;
-  summary_delivery_posture: "steady" | "attention" | "blocked";
-  active_work_item_count: number;
-  blocked_work_item_count: number;
-  continuity_hint: string;
-  summary_mode: "bounded_runtime_private";
-}
-
-export interface ManagementDirectiveRuntimeRecord extends RuntimeObjectRecord {
-  object_type: "management-directive-record";
-  authority_class: "coregentis_private_runtime";
-  primary_layer: "organization_runtime_layer";
-  status: "draft" | "active" | "superseded" | "closed";
-  project_id: string;
-  cell_runtime_scope_id: string;
-  objective_id?: string;
-  management_record_kind: "directive";
+export interface WorkforceManagementDirectiveProjectionInput {
+  directive_ref: string;
+  objective_ref?: string;
   directive_summary: string;
   directive_priority: "focus_now" | "stabilize" | "review_first";
   approval_posture:
@@ -61,39 +42,47 @@ export interface ManagementDirectiveRuntimeRecord extends RuntimeObjectRecord {
     | "bounded_autonomy"
     | "escalate_on_stop";
   constraint_tags?: string[];
+  safe_evidence_refs?: string[];
 }
 
-export interface DeliveryReturnRuntimeRecord extends RuntimeObjectRecord {
-  object_type: "delivery-return-record";
-  authority_class: "coregentis_private_runtime";
-  primary_layer: "organization_runtime_layer";
-  status: "in_progress" | "ready_for_review" | "blocked" | "returned" | "archived";
-  project_id: string;
-  cell_runtime_scope_id: string;
-  objective_id?: string;
-  management_record_kind: "delivery_return";
+export interface WorkforceDeliveryReturnProjectionInput {
+  delivery_return_ref: string;
+  objective_ref?: string;
+  delivery_status:
+    | "in_progress"
+    | "ready_for_review"
+    | "blocked"
+    | "returned"
+    | "archived";
   completed_summary: string;
   blocked_summary: string;
   next_directive_needed: boolean;
   requested_follow_up?: string;
+  safe_evidence_refs?: string[];
 }
 
-export interface ApprovalRequestRuntimeRecord extends RuntimeObjectRecord {
-  object_type: "approval-request-record";
-  authority_class: "coregentis_private_runtime";
-  primary_layer: "organization_runtime_layer";
-  status: "pending" | "resolved" | "withdrawn" | "archived";
-  project_id: string;
-  cell_runtime_scope_id: string;
-  objective_id?: string;
-  management_record_kind: "approval_request";
+export interface WorkforceApprovalRequestProjectionInput {
+  approval_request_ref: string;
+  objective_ref?: string;
   request_kind: "approval" | "escalation";
+  request_status: "pending" | "resolved" | "withdrawn" | "archived";
   request_summary: string;
   requested_decision: string;
   urgency: "normal" | "high" | "critical";
+  safe_evidence_refs?: string[];
 }
 
-export interface AgentGroupRecord extends WorkforceStateRecord {
+export interface WorkforceCellProjectionInput {
+  workforce_envelope: WorkforceProjectionSafeEnvelope;
+  active_work_item_count?: number;
+  blocked_work_item_count?: number;
+  continuity_hint?: string;
+  management_directive?: WorkforceManagementDirectiveProjectionInput;
+  delivery_return?: WorkforceDeliveryReturnProjectionInput;
+  approval_request?: WorkforceApprovalRequestProjectionInput;
+}
+
+export type AgentGroupRecord = {
   object_type: "agent-group";
   status: "forming" | "active" | "paused" | "archived";
   group_name: string;
@@ -103,9 +92,9 @@ export interface AgentGroupRecord extends WorkforceStateRecord {
   objective_ids?: string[];
   review_cycle_id?: string;
   continuity_mode?: "single_operator" | "scheduled_runtime" | "continuous_runtime";
-}
+};
 
-export interface RoleProfileRecord extends WorkforceStateRecord {
+export type RoleProfileRecord = {
   object_type: "role-profile";
   status: "draft" | "active" | "deprecated" | "archived";
   profile_name: string;
@@ -113,7 +102,7 @@ export interface RoleProfileRecord extends WorkforceStateRecord {
   instruction_brief: string;
   capability_tags?: string[];
   operating_constraints?: string[];
-}
+};
 
 export type WorkItemKind =
   | "analysis"
@@ -122,7 +111,7 @@ export type WorkItemKind =
   | "coordination"
   | "operations";
 
-export interface WorkItemRecord extends WorkforceStateRecord {
+export type WorkItemRecord = {
   object_type: "work-item";
   status: "queued" | "active" | "blocked" | "completed" | "cancelled";
   objective_id: string;
@@ -132,9 +121,9 @@ export interface WorkItemRecord extends WorkforceStateRecord {
   instruction_brief?: string;
   dependency_ids?: string[];
   deliverable_refs?: string[];
-}
+};
 
-export interface ReviewCycleRecord extends WorkforceStateRecord {
+export type ReviewCycleRecord = {
   object_type: "review-cycle";
   status: "scheduled" | "active" | "closed" | "archived";
   group_id?: string;
@@ -144,60 +133,52 @@ export interface ReviewCycleRecord extends WorkforceStateRecord {
   participant_worker_ids?: string[];
   next_review_at: string;
   last_review_at?: string;
+};
+
+export function is_workforce_projection_safe_envelope(
+  value: unknown
+): value is WorkforceProjectionSafeEnvelope {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return false;
+  }
+
+  const record = value as Partial<WorkforceProjectionSafeEnvelope>;
+  return (
+    record.envelope_version === "0.1" &&
+    record.envelope_kind === "workforce_projection_safe_envelope" &&
+    record.source_runtime_family === "workforce" &&
+    record.runtime_private_fields_omitted === true &&
+    record.non_executing === true &&
+    typeof record.project_id === "string" &&
+    typeof record.scope_ref === "string" &&
+    typeof record.scope_label === "string" &&
+    typeof record.scope_status === "string" &&
+    typeof record.scope_mode === "string"
+  );
 }
 
 export function is_agent_group_record(
-  record: WorkforceStateRecord
+  record: { object_type?: string }
 ): record is AgentGroupRecord {
   return record.object_type === "agent-group";
 }
 
 export function is_role_profile_record(
-  record: WorkforceStateRecord
+  record: { object_type?: string }
 ): record is RoleProfileRecord {
   return record.object_type === "role-profile";
 }
 
 export function is_work_item_record(
-  record: WorkforceStateRecord
+  record: { object_type?: string }
 ): record is WorkItemRecord {
   return record.object_type === "work-item";
 }
 
 export function is_review_cycle_record(
-  record: WorkforceStateRecord
+  record: { object_type?: string }
 ): record is ReviewCycleRecord {
   return record.object_type === "review-cycle";
-}
-
-export function is_cell_runtime_scope_record(
-  record: RuntimeObjectRecord
-): record is CellRuntimeScopeRecord {
-  return record.object_type === "cell-runtime-scope";
-}
-
-export function is_cell_summary_runtime_record(
-  record: RuntimeObjectRecord
-): record is CellSummaryRuntimeRecord {
-  return record.object_type === "cell-summary-runtime-record";
-}
-
-export function is_management_directive_runtime_record(
-  record: RuntimeObjectRecord
-): record is ManagementDirectiveRuntimeRecord {
-  return record.object_type === "management-directive-record";
-}
-
-export function is_delivery_return_runtime_record(
-  record: RuntimeObjectRecord
-): record is DeliveryReturnRuntimeRecord {
-  return record.object_type === "delivery-return-record";
-}
-
-export function is_approval_request_runtime_record(
-  record: RuntimeObjectRecord
-): record is ApprovalRequestRuntimeRecord {
-  return record.object_type === "approval-request-record";
 }
 
 export function list_unique_strings(values: Array<string | undefined>): string[] {

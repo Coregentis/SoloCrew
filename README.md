@@ -20,14 +20,19 @@ This repository is:
 
 ## Current Release Status
 
-Current release status is `v1.0-solo-operator-platform delivered and closed`.
+Current release status is `V2.0 Stable released / post-Stable verified /
+V2.0.x maintenance`.
 
-For the formal boundary between current repo/platform `v1.0` and later
+SoloCrew V2.0 is closed as the bounded local-first First Runnable AIGC
+Operating Product. Current work is limited to V2.0.x maintenance corrections;
+V2.1 planning remains blocked unless explicitly owner-authorized.
+
+For the historical formal boundary between repo/platform `v1.0` and later
 Operational V1.0 closure, see
 `governance/baselines/SOLOCREW-REPO-V1-VS-OPERATIONAL-V1-BOUNDARY-v0.1.md`.
 
-That formal delivery judgment means the repo now has the mandatory `v1.0`
-baseline in bounded form:
+That historical delivery judgment means the repo has the mandatory `v1.0`
+baseline in bounded form, but it is not the current release line:
 
 - a stable single-cell operating core
 - a bounded portfolio / Secretary layer
@@ -47,10 +52,10 @@ That delivery judgment does **not** mean:
 - SoloCrew owns protocol authority
 - bounded downstream truth has become delivery authorization
 
-## Current V1.9 Stable Line
+## Historical V1.9 Stable Line
 
 SoloCrew V1.9 Stable — Runtime Readiness Closure has been released and
-verified as the current readiness / hardening line closure for this repo.
+verified as the readiness / hardening line closure for this repo.
 It closes the V1.9 chain across:
 
 - Wave 1 tri-repo runtime/product readiness crosswalk
@@ -69,10 +74,8 @@ Current V1.9 closure reference:
 
 ## Current V2.0 Status
 
-V2.0 is allowed to start only in the sense that planning and implementation
-may begin after the verified V1.9 closure.
-The V2.0 line is defined as `First Runnable AIGC Operating Product`.
-V2.0 Wave 1 planning has now started with the baseline:
+The V2.0 line is defined as `First Runnable AIGC Operating Product` and is
+now closed as Stable. Its delivery chain began with Wave 1 planning:
 
 - `governance/baselines/SOLOCREW-V2.0-FIRST-RUNNABLE-AIGC-OPERATING-PRODUCT-BASELINE-v0.1.md`
 
@@ -326,7 +329,9 @@ This repo contains multiple bounded `v0.4` implementation surfaces:
 - one bounded management-object inspection page over the same downstream detail path
 - one bounded continuity inspection page over the same downstream detail path
 - bounded per-cell summary projections derived from existing single-cell product truth
-- bounded downstream consumption of `Cognitive_OS` runtime-private workforce surfaces for multi-cell overview summaries
+- bounded downstream consumption of projection-safe workforce envelope output
+  for multi-cell overview summaries; raw `Cognitive_OS` runtime-private
+  workforce records are not canonical SoloCrew API
 - hardened separation between compile-only management directives and runtime-backed management directive inspection projections
 
 It does not mean `v0.4` is fully implemented.
