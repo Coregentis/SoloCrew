@@ -10,6 +10,13 @@
   ready by itself, does not implement product UI, does not implement
   provider/channel execution, and prepares the projection contract required
   before a later V1.9 Wave 4 thin product-surface consumption wave
+- implemented SoloCrew V1.9 Wave 4 as product-surface thin consumption over
+  V1.9 Wave 3 projection contracts, adding bounded Founder Dashboard and Cell
+  Operations Panel page models, thin page renderers, focused app tests, and a
+  small projection-helper validation refinement; this is not V2.0, does not
+  make SoloCrew V2.0 ready by itself, does not implement full product UI, does
+  not implement external provider/channel execution, and prepares the final
+  V1.9 closure wave
 
 ## 2026-04-25
 

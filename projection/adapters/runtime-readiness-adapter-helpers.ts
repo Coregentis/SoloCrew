@@ -96,6 +96,33 @@ const FORBIDDEN_STRING_RULES = [
   },
 ] as const;
 
+const FORBIDDEN_POSITIVE_CLAIM_RULES = [
+  {
+    pattern: /provider\/channel execution is available/i,
+    message: "forbidden positive provider/channel claim",
+  },
+  {
+    pattern: /provider execution is available/i,
+    message: "forbidden positive provider claim",
+  },
+  {
+    pattern: /channel execution is available/i,
+    message: "forbidden positive channel claim",
+  },
+  {
+    pattern: /autonomous company operation is available/i,
+    message: "forbidden positive autonomous company claim",
+  },
+  {
+    pattern: /autonomous operation is available/i,
+    message: "forbidden positive autonomous operation claim",
+  },
+  {
+    pattern: /V2_0_ALLOWED/i,
+    message: "forbidden positive v2.0 allowance claim",
+  },
+] as const;
+
 const FORBIDDEN_DIRECT_ACTION_LABELS = [
   "approve",
   "reject",
@@ -229,6 +256,43 @@ export function collect_forbidden_string_errors(
 
   for (const [key, nested] of Object.entries(value)) {
     collect_forbidden_string_errors(nested, `${path}.${key}`, target);
+  }
+
+  return target;
+}
+
+export function collect_forbidden_positive_claim_errors(
+  value: unknown,
+  path = "input",
+  target: string[] = []
+): string[] {
+  if (typeof value === "string") {
+    for (const rule of FORBIDDEN_POSITIVE_CLAIM_RULES) {
+      if (rule.pattern.test(value)) {
+        target.push(`${rule.message} at ${path}`);
+      }
+    }
+
+    return target;
+  }
+
+  if (Array.isArray(value)) {
+    value.forEach((entry, index) => {
+      collect_forbidden_positive_claim_errors(
+        entry,
+        `${path}[${index}]`,
+        target
+      );
+    });
+    return target;
+  }
+
+  if (!value || typeof value !== "object") {
+    return target;
+  }
+
+  for (const [key, nested] of Object.entries(value)) {
+    collect_forbidden_positive_claim_errors(nested, `${path}.${key}`, target);
   }
 
   return target;
