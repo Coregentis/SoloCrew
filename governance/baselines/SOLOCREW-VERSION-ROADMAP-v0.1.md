@@ -226,7 +226,9 @@ That closure pack does not widen the line into `v0.5`.
   `governance/baselines/SOLOCREW-V2.0-FIRST-RUNNABLE-AIGC-OPERATING-PRODUCT-BASELINE-v0.1.md`.
 - V2.0 Wave 2 starter-cell product baseline and fixtures are now added:
   `governance/baselines/SOLOCREW-V2.0-STARTER-CELL-PRODUCT-BASELINE-AND-FIXTURES-v0.1.md`.
-- The next allowed wave is `V2.0 Wave 3 — Founder Dashboard Productization`.
+- V2.0 Wave 3 Founder Dashboard Productization is now added over the V2
+  starter-cell fixtures.
+- The next allowed wave is `V2.0 Wave 4 — Cell Operations Panel Productization`.
 - V2.0 is allowed to start after V1.9 closure, but it is not yet delivered,
   not yet ready, and not a provider/channel execution, autonomous company, or
   GA claim.

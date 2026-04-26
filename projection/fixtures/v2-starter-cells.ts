@@ -226,7 +226,7 @@ type StarterCellSeed = {
   priority_rationale: string;
   review_title: string;
   review_summary: string;
-  evidence_gap_summary: string;
+  evidence_gap_summary?: string;
   artifacts: ReadonlyArray<{
     artifact_kind: string;
     title: string;
@@ -286,8 +286,6 @@ const STARTER_CELL_SEEDS: Record<V2StarterCellId, StarterCellSeed> = {
     review_title: "Review implementation plan packet",
     review_summary:
       "Review the implementation package before reusing it in the next planning step.",
-    evidence_gap_summary:
-      "Dependency notes are still incomplete for the current milestone.",
     artifacts: [
       {
         artifact_kind: "implementation_plan",
@@ -311,7 +309,7 @@ const STARTER_CELL_SEEDS: Record<V2StarterCellId, StarterCellSeed> = {
       },
       {
         title: "Draft the current task breakdown update",
-        status: "blocked",
+        status: "active",
         task_kind: "task_breakdown",
         related_artifact_indexes: [0, 1],
       },
@@ -517,7 +515,7 @@ const STARTER_CELL_SEEDS: Record<V2StarterCellId, StarterCellSeed> = {
       drift_kind: "catalog_change",
       impact_summary:
         "Updated product facts changed the current listing package.",
-      recommendation: "clarify",
+      recommendation: "block",
       confidence_posture: "bounded",
     },
     suggested_actions: [
@@ -542,7 +540,7 @@ const STARTER_CELL_SEEDS: Record<V2StarterCellId, StarterCellSeed> = {
     ],
   },
   personal_media: {
-    status: "active",
+    status: "paused",
     scope_summary:
       "Content planning and draft production stays bounded inside one publishing lane.",
     priority_title: "Refresh the current article package",
@@ -552,8 +550,6 @@ const STARTER_CELL_SEEDS: Record<V2StarterCellId, StarterCellSeed> = {
     review_title: "Review article draft package",
     review_summary:
       "Review the article package before reusing it in another content step.",
-    evidence_gap_summary:
-      "The current audience note still needs one more bounded clarification pass.",
     artifacts: [
       {
         artifact_kind: "content_calendar_suggestion",
@@ -577,7 +573,7 @@ const STARTER_CELL_SEEDS: Record<V2StarterCellId, StarterCellSeed> = {
       },
       {
         title: "Refresh the weekly content calendar suggestion",
-        status: "blocked",
+        status: "active",
         task_kind: "calendar_planning",
         related_artifact_indexes: [0, 1],
       },

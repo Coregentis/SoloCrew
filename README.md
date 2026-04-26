@@ -80,9 +80,11 @@ V2.0 Wave 2 starter-cell baseline and fixtures have now been added:
 
 - `governance/baselines/SOLOCREW-V2.0-STARTER-CELL-PRODUCT-BASELINE-AND-FIXTURES-v0.1.md`
 
-The next allowed wave is `V2.0 Wave 3 — Founder Dashboard Productization`.
-There is still no real artifact-generation runtime, no provider/channel
-execution, and no V2.0 delivery claim in this repo state.
+V2.0 Wave 3 Founder Dashboard Productization has now been added over the V2
+starter-cell fixtures.
+It does not implement Cell Operations Panel productization, real
+artifact-generation runtime, provider/channel execution, or V2.0 delivery.
+The next allowed wave is `V2.0 Wave 4 — Cell Operations Panel Productization`.
 
 That does not mean V2.0 is delivered, ready, GA, provider/channel capable, or
 an autonomous company operating release.
