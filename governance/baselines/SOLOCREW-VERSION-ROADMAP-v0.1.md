@@ -243,11 +243,11 @@ That closure pack does not widen the line into `v0.5`.
   execution.
 - V2.0 Wave 9 RC Release Execution + Post-RC Verification is complete as a
   GitHub prerelease for the First Runnable AIGC Operating Product candidate.
-- V2.0 Wave 10 Stable Release Execution has been prepared and is pending
-  Stable tag/release creation plus post-Stable verification.
-- V2.0 Stable is not complete until post-Stable verification and pointer
-  alignment pass, and this is not a provider/channel execution, autonomous
-  company, or GA claim.
+- V2.0 Wave 10 Stable Release Execution + Post-Stable Verification is complete
+  as the bounded local-first Stable release for the First Runnable AIGC
+  Operating Product.
+- V2.0 Stable remains below provider/channel execution, autonomous company
+  operation, GA, MPLP certification, and irreversible external actions.
 - Historical V1.7 = Bounded Action Preparation.
 - Historical V1.8 = Human-Confirmed Execution Boundary.
 - Historical V1.9 = Execution RC Hardening / Runtime Readiness Closure.

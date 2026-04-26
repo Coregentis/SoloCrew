@@ -5,7 +5,7 @@
 - `doc_id`:
   - `SOLOCREW-V2.0-STABLE-RELEASE-AND-POST-STABLE-VERIFICATION-v0.1`
 - `status`:
-  - `STABLE_RELEASED_POST_STABLE_VERIFICATION_PENDING_POINTER_ALIGNMENT`
+  - `STABLE_RELEASED_POST_STABLE_VERIFIED`
 - `authority_order`:
   - `MPLP -> Cognitive_OS -> Projection -> SoloCrew`
 - `version_line`:
@@ -166,7 +166,7 @@ Explicit exclusions:
 ## 9. Post-Stable Verification
 
 - `post_stable_verification_commit`:
-  - `pending until committed`
+  - `a7b1d7ffe8635f189f03a973848fe7742fe67929`
 - `npm_test`:
   - `PASS`
   - `430/430`
@@ -194,10 +194,15 @@ Explicit exclusions:
 
 - Stable tag intentionally points to the Stable release commit.
 - Post-Stable verification is preserved on main after Stable release creation.
-- A final pointer-alignment commit will replace the placeholder post-Stable verification pointer after this commit is created.
+- The final post-Stable verification commit is:
+  - `a7b1d7ffe8635f189f03a973848fe7742fe67929`
+- The Stable tag remains pointed at the Stable release commit:
+  - `4e75156b94b7cbc8eb676eeee024162ba381ac2a`
+- The post-Stable verification commit is preserved on main.
 - No tag was force-moved.
 - No release target was changed.
 - No GA tag or GA GitHub Release was created.
+- This final pointer alignment replaces the placeholder post-Stable verification pointer.
 - This note prevents audit confusion between Stable tag snapshot truth and final main post-Stable verification truth.
 
 ## 11. Post-Stable Verification Decision
@@ -207,6 +212,6 @@ Explicit exclusions:
 - `post_stable_verification_result`:
   - `V2_0_POST_STABLE_VERIFICATION_PASS`
 - `pointer_alignment`:
-  - `pending`
-- `next_action`:
-  - `V2_0_STABLE_POINTER_ALIGNMENT_REQUIRED`
+  - `V2_0_STABLE_POINTER_ALIGNMENT_PASS`
+- `final_release_status`:
+  - `V2_0_STABLE_RELEASED_POST_STABLE_VERIFIED`
