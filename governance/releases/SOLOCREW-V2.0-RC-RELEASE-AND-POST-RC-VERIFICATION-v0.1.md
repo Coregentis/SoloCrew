@@ -142,7 +142,7 @@ Explicit exclusions:
 ## 8. Post-RC Verification
 
 - `post_rc_verification_commit`:
-  - `pending until committed`
+  - `a83c750c286fadc45b8fff8cb4bdc6673fad9aa7`
 - `npm_test`:
   - `PASS`
   - `430/430`
@@ -171,8 +171,16 @@ Explicit exclusions:
 - RC tag intentionally points to the RC release commit.
 - Post-RC verification is preserved on main after RC release creation.
 - If the tag snapshot shows post-RC verification pending, use the main post-RC verification commit as final verification truth.
+- The final post-RC verification commit is:
+  - `a83c750c286fadc45b8fff8cb4bdc6673fad9aa7`
+- The RC tag remains pointed at the RC release commit:
+  - `27d51a3440a8058c8c7d57b85b2a5421049879f4`
+- The post-RC verification commit is preserved on main.
 - No tag was force-moved.
 - No release target was changed.
+- No Stable tag or Stable GitHub Release was created in Wave 9A.
+- This patch only replaces the prior placeholder post-RC verification pointer.
+- GitHub release body contains the post-RC verification pointer.
 - This alignment note prevents audit confusion between tag snapshot truth and final main post-RC verification truth.
 
 ## 10. Final RC Decision
