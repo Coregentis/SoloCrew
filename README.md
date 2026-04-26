@@ -108,11 +108,11 @@ V2.0 Wave 8 RC / Stable Release Readiness has passed and allowed RC release
 execution.
 V2.0 Wave 9 RC Release Execution + Post-RC Verification is complete as a
 GitHub prerelease for the First Runnable AIGC Operating Product candidate.
-The next allowed wave is
-`V2.0 Wave 10 — Stable Release Execution + Post-Stable Verification`.
-This is not a Stable release or GA claim.
+V2.0 Wave 10 Stable Release Execution has been prepared and is pending Stable
+tag/release creation plus post-Stable verification.
+This is not yet a completed Stable release or GA claim.
 
-That does not mean V2.0 Stable is released, GA, provider/channel capable, or
+That does not mean V2.0 Stable is fully verified, GA, provider/channel capable, or
 an autonomous company operating release.
 
 ## Current V1.1 Line

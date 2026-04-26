@@ -2,6 +2,11 @@
 
 ## 2026-04-26
 
+- prepared the SoloCrew V2.0 Stable release for the First Runnable AIGC
+  Operating Product, pending Stable tag/release creation and post-Stable
+  verification; no GA claim, provider/channel execution, external dispatch,
+  autonomous operation, payment/trading/purchase/legal action, or MPLP
+  certification is introduced
 - executed the SoloCrew V2.0 RC prerelease and post-RC verification for the
   First Runnable AIGC Operating Product candidate; no Stable release, GA
   claim, provider/channel execution, external dispatch, autonomous operation,
