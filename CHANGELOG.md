@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-04-26
+
+- implemented SoloCrew V1.9 Wave 3 as a projection-contract wave over the
+  neutral Cognitive_OS runtime readiness foundation, adding Founder Dashboard
+  and Cell Operations Panel projection contracts, runtime-state-compatible
+  adapters, assembly helpers, safe runtime import-boundary extensions, and
+  focused projection tests; this is not V2.0, does not make SoloCrew V2.0
+  ready by itself, does not implement product UI, does not implement
+  provider/channel execution, and prepares the projection contract required
+  before a later V1.9 Wave 4 thin product-surface consumption wave
+
 ## 2026-04-25
 
 - executed SoloCrew V1.8 stable release and post-release verification as a

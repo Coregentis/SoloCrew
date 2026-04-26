@@ -55,8 +55,33 @@ export type {
 
 // runtime core truth
 export type {
+  RuntimeActionClass,
+  RuntimeActionReadinessStatus,
   RuntimeObjectRecord,
 } from "../../Cognitive_OS/runtime/core/runtime-types.ts";
+
+export type {
+  RuntimeScopeKind,
+  RuntimePriorityLevel,
+  RuntimeArtifactClass,
+  RuntimeLearningApplicationScope,
+  RuntimeScopedLearningStatus,
+  RuntimeContinuationRecommendation,
+  RuntimeScopeSummary,
+  RuntimePrioritySummary,
+  RuntimeReviewSummary,
+  RuntimeTaskSummary,
+  RuntimeArtifactSummary,
+  RuntimeActionSummary,
+  PreferenceSuggestion,
+  LearningScope,
+  ScopedLearningCandidate,
+  RuntimeLearningSummary,
+  RuntimeDriftImpactSummary,
+  RuntimeSuggestedNextAction,
+  OperationalUnitRuntimeProjection,
+  RuntimeStateProjection,
+} from "../../Cognitive_OS/runtime/core/projection-types.ts";
 
 // learning
 export {
@@ -112,6 +137,7 @@ export type {
 
 export const COGNITIVE_RUNTIME_ALLOWED_SURFACES = [
   "runtime/core/runtime-types.ts",
+  "runtime/core/projection-types.ts",
   "runtime/lifecycle/worker-state-machine.ts",
   "runtime/lifecycle/worker-lifecycle.ts",
   "runtime/state/state-store-port.ts",
