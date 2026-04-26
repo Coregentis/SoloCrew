@@ -222,6 +222,25 @@ Verified execution sequence:
   - `PASS`
   - matches remained exclusion-only, release-definition-only, helper denylist, or negative tests only
 
+## 9A. Release Artifact Alignment Note
+
+- The RC and stable release tags intentionally point to the closure commit:
+  - `3b67a783b2ab07ae9ba5a8ac54102ca11d269cb1`
+- The closure commit records the pre/post-release transition state and may show:
+  - `CLOSED_PENDING_RELEASE_VERIFICATION`
+  - `V2_0_SCOPE_REQUIRES_DECISION`
+  - when read from the tag snapshot.
+- The final post-release verification record is preserved on `main` at:
+  - `897a4b2dc02909c62f7394b47642b55a3522c612`
+- The authoritative post-release decisions on `main` are:
+  - `V1_9_RC_STABLE_CLOSURE_PASS`
+  - `V2_0_ALLOWED_TO_START`
+- No tag was force-moved.
+- No release target was changed.
+- This alignment note exists only to prevent audit confusion between release tag snapshot truth and final `main` post-release verification truth.
+- `V2_0_ALLOWED_TO_START` means V2.0 planning and implementation may begin.
+- It does not mean V2.0 is delivered, ready, GA, provider/channel capable, autonomous-company capable, or protocol-certified.
+
 ## 10. Final Decision
 
 - V1.9 closure decision:
