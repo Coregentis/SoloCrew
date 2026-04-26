@@ -1,7 +1,7 @@
 import type {
-  CorrectionCaptureTarget,
-  PreferenceWritebackDisposition,
-} from "../../runtime-imports/cognitive-runtime.ts";
+  SoloCrewCorrectionCaptureTarget,
+  SoloCrewPreferenceWritebackDisposition,
+} from "./runtime-session-facade.ts";
 import type { RuntimeSessionMode } from "./create-runtime-session.ts";
 import type {
   SingleCellCorrectionReviewSupportLevel,
@@ -43,7 +43,7 @@ export interface SingleCellOperatorCorrectionApplyTarget {
   display_label: string;
   target_ref_id: string;
   support_level: SingleCellCorrectionReviewSupportLevel;
-  runtime_mapping_target: CorrectionCaptureTarget;
+  runtime_mapping_target: SoloCrewCorrectionCaptureTarget;
   notes: string[];
 }
 
@@ -72,10 +72,10 @@ export interface SingleCellOperatorCorrectionApplyCurrentTruth {
 
 export interface SingleCellOperatorCorrectionApplyUpdatedTruth {
   correction_id: string;
-  correction_target: CorrectionCaptureTarget;
+  correction_target: SoloCrewCorrectionCaptureTarget;
   correction_summary: string;
   corrected_value: string;
-  writeback_disposition: PreferenceWritebackDisposition;
+  writeback_disposition: SoloCrewPreferenceWritebackDisposition;
   updated_memory_summary_count: number;
   updated_preference_continuity_visible: boolean;
   updated_recent_correction_visible_in_session: boolean;

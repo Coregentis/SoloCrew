@@ -60,7 +60,10 @@ export interface BaselineSeedOptions {
   include_review_cycle?: boolean;
 }
 
-function create_base_record<
+// Sealed bootstrap/runtime-session compatibility only. These private
+// runtime-shaped fields seed local stores for V2.0 session tests; callers
+// must adapt records before anything reaches product DTOs or projection API.
+function create_bootstrap_runtime_record<
   TRecord extends Record<string, unknown> & {
     temporal?: Record<string, unknown>;
     mutation?: Record<string, unknown>;
@@ -217,7 +220,7 @@ function seed_role_profiles(
   ids: BaselineSeedIds["role_profile_ids"]
 ): RoleProfileRecord[] {
   const records: RoleProfileRecord[] = [
-    create_base_record(project_id, {
+    create_bootstrap_runtime_record(project_id, {
       object_id: ids.builder,
       object_type: "role-profile",
       status: "active",
@@ -226,7 +229,7 @@ function seed_role_profiles(
       instruction_brief: "Keep scope crisp and ship bounded progress.",
       capability_tags: ["build", "delivery"],
     }),
-    create_base_record(project_id, {
+    create_bootstrap_runtime_record(project_id, {
       object_id: ids.growth,
       object_type: "role-profile",
       status: "active",
@@ -235,7 +238,7 @@ function seed_role_profiles(
       instruction_brief: "Prefer evidence-backed acquisition moves.",
       capability_tags: ["growth", "research"],
     }),
-    create_base_record(project_id, {
+    create_bootstrap_runtime_record(project_id, {
       object_id: ids.content,
       object_type: "role-profile",
       status: "active",
@@ -244,7 +247,7 @@ function seed_role_profiles(
       instruction_brief: "Keep outputs reusable across channels.",
       capability_tags: ["content", "copy"],
     }),
-    create_base_record(project_id, {
+    create_bootstrap_runtime_record(project_id, {
       object_id: ids.ops,
       object_type: "role-profile",
       status: "active",
@@ -271,7 +274,7 @@ function seed_agent_workers(
   objective_id: string
 ): AgentWorkerRecord[] {
   const records: AgentWorkerRecord[] = [
-    create_base_record(project_id, {
+    create_bootstrap_runtime_record(project_id, {
       object_id: worker_ids.builder,
       object_type: "agent-worker",
       status: "idle",
@@ -283,7 +286,7 @@ function seed_agent_workers(
       capability_tags: ["build", "typescript"],
       default_objective_ids: [objective_id],
     }),
-    create_base_record(project_id, {
+    create_bootstrap_runtime_record(project_id, {
       object_id: worker_ids.growth,
       object_type: "agent-worker",
       status: "idle",
@@ -295,7 +298,7 @@ function seed_agent_workers(
       capability_tags: ["growth", "research"],
       default_objective_ids: [objective_id],
     }),
-    create_base_record(project_id, {
+    create_bootstrap_runtime_record(project_id, {
       object_id: worker_ids.content,
       object_type: "agent-worker",
       status: "idle",
@@ -307,7 +310,7 @@ function seed_agent_workers(
       capability_tags: ["content", "copy"],
       default_objective_ids: [objective_id],
     }),
-    create_base_record(project_id, {
+    create_bootstrap_runtime_record(project_id, {
       object_id: worker_ids.ops,
       object_type: "agent-worker",
       status: "idle",
@@ -333,7 +336,7 @@ function seed_agent_group(
   project_id: string,
   ids: BaselineSeedIds
 ): AgentGroupRecord {
-  const record: AgentGroupRecord = create_base_record(project_id, {
+  const record: AgentGroupRecord = create_bootstrap_runtime_record(project_id, {
     object_id: ids.group_id,
     object_type: "agent-group",
     status: "active",
@@ -355,7 +358,7 @@ function seed_objective(
   project_id: string,
   ids: BaselineSeedIds
 ): ObjectiveRecord {
-  const record: ObjectiveRecord = create_base_record(project_id, {
+  const record: ObjectiveRecord = create_bootstrap_runtime_record(project_id, {
     object_id: ids.objective_id,
     object_type: "objective",
     status: "active",
@@ -382,7 +385,7 @@ function seed_work_items(
   ids: BaselineSeedIds
 ): WorkItemRecord[] {
   const records: WorkItemRecord[] = [
-    create_base_record(project_id, {
+    create_bootstrap_runtime_record(project_id, {
       object_id: ids.work_item_ids[0],
       object_type: "work-item",
       status: "queued",
@@ -393,7 +396,7 @@ function seed_work_items(
       instruction_brief: "Map neutral workforce records to projection DTOs.",
       deliverable_refs: ["projection/adapters"],
     }),
-    create_base_record(project_id, {
+    create_bootstrap_runtime_record(project_id, {
       object_id: ids.work_item_ids[1],
       object_type: "work-item",
       status: "queued",
@@ -404,7 +407,7 @@ function seed_work_items(
       instruction_brief: "Keep wow claims bounded to implemented surfaces.",
       deliverable_refs: ["README.md"],
     }),
-    create_base_record(project_id, {
+    create_bootstrap_runtime_record(project_id, {
       object_id: ids.work_item_ids[2],
       object_type: "work-item",
       status: "queued",
@@ -415,7 +418,7 @@ function seed_work_items(
       instruction_brief: "Prefer short summaries and explicit upstream traceability.",
       deliverable_refs: ["projection/assembly"],
     }),
-    create_base_record(project_id, {
+    create_bootstrap_runtime_record(project_id, {
       object_id: ids.work_item_ids[3],
       object_type: "work-item",
       status: "queued",
@@ -441,7 +444,7 @@ function seed_memory_profiles(
   ids: BaselineSeedIds
 ): MemoryProfileRecord[] {
   const records: MemoryProfileRecord[] = [
-    create_base_record(project_id, {
+    create_bootstrap_runtime_record(project_id, {
       object_id: ids.memory_profile_ids[0],
       object_type: "memory-profile",
       status: "active",
@@ -452,7 +455,7 @@ function seed_memory_profiles(
       update_basis: "manual",
       last_revised_at: BASELINE_TIMESTAMPS.created,
     }),
-    create_base_record(project_id, {
+    create_bootstrap_runtime_record(project_id, {
       object_id: ids.memory_profile_ids[1],
       object_type: "memory-profile",
       status: "active",
@@ -477,7 +480,8 @@ function seed_preference_profile(
   project_id: string,
   preference_profile_id: string
 ): PreferenceProfileRecord {
-  const record: PreferenceProfileRecord = create_base_record(project_id, {
+  const record: PreferenceProfileRecord =
+    create_bootstrap_runtime_record(project_id, {
     object_id: preference_profile_id,
     object_type: "preference-profile",
     status: "active",
@@ -498,7 +502,7 @@ function seed_review_cycle(
   project_id: string,
   ids: BaselineSeedIds
 ): ReviewCycleRecord {
-  const record: ReviewCycleRecord = create_base_record(project_id, {
+  const record: ReviewCycleRecord = create_bootstrap_runtime_record(project_id, {
     object_id: ids.review_cycle_id,
     object_type: "review-cycle",
     status: "active",

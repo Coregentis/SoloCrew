@@ -1,6 +1,5 @@
 import {
   ActionDispatcher,
-  COGNITIVE_RUNTIME_ALLOWED_SURFACES,
   InMemoryCorrectionCapture,
   InMemoryObjectiveAnchor,
   InMemoryStateStore,
@@ -13,6 +12,9 @@ import {
   WorkerStore,
   type StateStorePort,
 } from "../../runtime-imports/cognitive-runtime.ts";
+import {
+  SOLOCREW_SEALED_RUNTIME_SESSION_COMPATIBILITY_SURFACES,
+} from "./runtime-session-facade.ts";
 
 export type RuntimeSessionMode = "memory" | "sqlite";
 
@@ -95,7 +97,8 @@ function build_runtime_session(
     correction_capture,
     preference_writeback,
     action_dispatcher,
-    consumed_surfaces: COGNITIVE_RUNTIME_ALLOWED_SURFACES,
+    consumed_surfaces:
+      SOLOCREW_SEALED_RUNTIME_SESSION_COMPATIBILITY_SURFACES,
     close() {
       if (typeof state_store.close === "function") {
         state_store.close();

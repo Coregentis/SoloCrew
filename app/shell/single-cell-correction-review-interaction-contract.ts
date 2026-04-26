@@ -1,6 +1,6 @@
 import type {
-  CorrectionCaptureTarget,
-} from "../../runtime-imports/cognitive-runtime.ts";
+  SoloCrewCorrectionCaptureTarget,
+} from "./runtime-session-facade.ts";
 import type { RuntimeSessionMode } from "./create-runtime-session.ts";
 
 export type SingleCellCorrectionReviewInteractionAuthorityBoundary =
@@ -28,7 +28,7 @@ export interface SingleCellCorrectionInputSeed {
   summary_placeholder: string;
   corrected_value_placeholder: string;
   suggested_target_scope: SingleCellCorrectionReviewTargetScope;
-  suggested_runtime_target: CorrectionCaptureTarget;
+  suggested_runtime_target: SoloCrewCorrectionCaptureTarget;
   suggested_target_ref_id: string;
   preference_profile_id: string;
 }
@@ -45,7 +45,7 @@ export interface SingleCellCorrectionReviewTargetScopeHint {
   display_label: string;
   target_ref_id: string;
   support_level: SingleCellCorrectionReviewSupportLevel;
-  runtime_mapping_target: CorrectionCaptureTarget;
+  runtime_mapping_target: SoloCrewCorrectionCaptureTarget;
   notes: string[];
 }
 

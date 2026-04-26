@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 
 import {
@@ -107,4 +108,25 @@ test("[projection] runtime-private workforce records are transformed into produc
   for (const field_name of SOLOCREW_NO_UPWARD_LAW_LEAKAGE_FIELDS) {
     assert.equal(field_name in summary_projection, false);
   }
+});
+
+test("[projection] canonical workforce projection paths do not import the runtime bridge", () => {
+  const canonical_workforce_paths = [
+    "projection/adapters/upstream-record-types.ts",
+    "projection/adapters/cell-summary-runtime-adapter.ts",
+    "projection/fixtures/workforce-envelope-fixtures.ts",
+  ];
+
+  for (const path of canonical_workforce_paths) {
+    const source = readFileSync(path, "utf8");
+
+    assert.doesNotMatch(source, /runtime-imports\/cognitive-runtime/u);
+  }
+
+  const adapter_source = readFileSync(
+    "projection/adapters/cell-summary-runtime-adapter.ts",
+    "utf8"
+  );
+  assert.match(adapter_source, /WorkforceProjectionSafeEnvelope/u);
+  assert.match(adapter_source, /runtime_private_fields_omitted/u);
 });

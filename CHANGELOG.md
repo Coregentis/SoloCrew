@@ -2,6 +2,12 @@
 
 ## 2026-04-26
 
+- narrowed the SoloCrew runtime-session compatibility bridge by removing
+  unused broad Cognitive_OS re-exports, moving app-shell correction/writeback
+  DTO vocabulary behind a SoloCrew-local runtime-session facade, quarantining
+  baseline seed private fields as bootstrap-only, and adding focused boundary
+  gates; no Cognitive_OS/MPLP change, no V2.1 work, no provider/channel
+  execution, no external dispatch, and no autonomous operation is introduced
 - migrated SoloCrew workforce consumption from raw Cognitive_OS
   runtime-private mirror records to a projection-safe workforce envelope DTO,
   quarantined the runtime import bridge as compatibility-only for sealed

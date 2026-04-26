@@ -1,25 +1,13 @@
-// Compatibility bridge for already-sealed SoloCrew runtime-session surfaces.
-// New workforce projection consumption must not import raw Cognitive_OS
-// runtime-private records through this file. Canonical workforce consumption
-// uses SoloCrew projection-safe envelope DTOs under projection/adapters.
+// Sealed compatibility bridge for already-shipped SoloCrew V2.0
+// runtime-session surfaces only. This is not a product projection API,
+// protocol surface, or place for new workforce consumption. Canonical
+// workforce paths must use projection-safe envelope DTOs under
+// projection/adapters.
 
 // lifecycle
 export {
   WorkerLifecycleRuntime,
 } from "../../Cognitive_OS/runtime/lifecycle/worker-lifecycle.ts";
-export {
-  WORKER_LIFECYCLE_STATES,
-  is_worker_lifecycle_state,
-  list_allowed_worker_state_transitions,
-  can_transition_worker_state,
-  assert_worker_state_transition,
-} from "../../Cognitive_OS/runtime/lifecycle/worker-state-machine.ts";
-export type {
-  WorkerLifecycleClock,
-} from "../../Cognitive_OS/runtime/lifecycle/worker-lifecycle.ts";
-export type {
-  WorkerLifecycleState,
-} from "../../Cognitive_OS/runtime/lifecycle/worker-state-machine.ts";
 
 // state
 export {
@@ -42,7 +30,6 @@ export {
 } from "../../Cognitive_OS/runtime/state/preference-store.ts";
 export type {
   StateStorePort,
-  WorkforceObjectType,
 } from "../../Cognitive_OS/runtime/state/state-store-port.ts";
 export type {
   AgentWorkerRecord,
@@ -64,24 +51,12 @@ export type {
 } from "../../Cognitive_OS/runtime/core/runtime-types.ts";
 
 export type {
-  RuntimeScopeKind,
   RuntimePriorityLevel,
   RuntimeArtifactClass,
   RuntimeLearningApplicationScope,
   RuntimeScopedLearningStatus,
   RuntimeContinuationRecommendation,
-  RuntimeScopeSummary,
   RuntimePrioritySummary,
-  RuntimeReviewSummary,
-  RuntimeTaskSummary,
-  RuntimeArtifactSummary,
-  RuntimeActionSummary,
-  PreferenceSuggestion,
-  LearningScope,
-  ScopedLearningCandidate,
-  RuntimeLearningSummary,
-  RuntimeDriftImpactSummary,
-  RuntimeSuggestedNextAction,
   OperationalUnitRuntimeProjection,
   RuntimeStateProjection,
 } from "../../Cognitive_OS/runtime/core/projection-types.ts";
@@ -97,20 +72,14 @@ export {
   PreferenceWritebackService,
 } from "../../Cognitive_OS/runtime/learning/preference-writeback.ts";
 export type {
-  ObjectiveAnchorPort,
-  ObjectiveAnchorSnapshot,
   ObjectiveAnchorComparison,
 } from "../../Cognitive_OS/runtime/learning/objective-anchor.ts";
 export type {
   CorrectionCaptureInput,
-  CorrectionCapturePort,
   CorrectionCaptureRecord,
-  CorrectionCaptureStatus,
 } from "../../Cognitive_OS/runtime/learning/correction-capture.ts";
 export type {
-  PreferenceWritebackRequest,
   PreferenceWritebackResult,
-  PreferenceWritebackDisposition,
 } from "../../Cognitive_OS/runtime/learning/preference-writeback.ts";
 
 // execution
@@ -120,41 +89,10 @@ export {
 export type {
   ActionDispatchHandler,
   ActionDispatchOutcome,
-  ActionDispatchDisposition,
 } from "../../Cognitive_OS/runtime/execution/action-dispatcher.ts";
 export type {
   ExecutionRequestEnvelope,
-  ExecutionResultEnvelope,
-  ExecutionWorkerRef,
-  ExecutionContextRef,
-  ExecutionInstructionSet,
 } from "../../Cognitive_OS/runtime/execution/execution-envelope.ts";
 export type {
   ExecutionEventContract,
-  ExecutionEventType,
 } from "../../Cognitive_OS/runtime/execution/execution-events.ts";
-export type {
-  ExecutionBridgeCapabilities,
-  ExecutionBridgeContract,
-} from "../../Cognitive_OS/runtime/execution/execution-bridge.ts";
-
-export const COGNITIVE_RUNTIME_ALLOWED_SURFACES = [
-  "runtime/core/runtime-types.ts#projection-safe-enums-only",
-  "runtime/core/projection-types.ts",
-  "runtime/lifecycle/worker-state-machine.ts",
-  "runtime/lifecycle/worker-lifecycle.ts",
-  "runtime/state/state-store-port.ts",
-  "runtime/state/in-memory-state-store.ts",
-  "runtime/state/sqlite-state-store.ts",
-  "runtime/state/worker-store.ts",
-  "runtime/state/objective-store.ts",
-  "runtime/state/memory-store.ts",
-  "runtime/state/preference-store.ts",
-  "runtime/learning/objective-anchor.ts",
-  "runtime/learning/correction-capture.ts",
-  "runtime/learning/preference-writeback.ts",
-  "runtime/execution/execution-envelope.ts",
-  "runtime/execution/execution-events.ts",
-  "runtime/execution/execution-bridge.ts",
-  "runtime/execution/action-dispatcher.ts",
-] as const;
