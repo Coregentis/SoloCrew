@@ -235,7 +235,11 @@ That closure pack does not widen the line into `v0.5`.
 - V2.0 Wave 6 Learning and Drift Productization is now added with product-local
   feedback capture, learning candidates, status transitions, drift signals,
   drift impacts, and deterministic recommendations.
-- The next allowed wave is `V2.0 Wave 7 — Bounded Action-Class Connection`.
+- V2.0 Wave 7 Bounded Action-Class Connection is now added with product-local
+  A0/A1/A2/A3/A4 action request routing, local-only outcomes, review-required
+  proposals, deferred strong-confirmation records, and blocked irreversible
+  records.
+- The next allowed wave is `V2.0 Wave 8 — RC / Stable Release Readiness`.
 - V2.0 is allowed to start after V1.9 closure, but it is not yet delivered,
   not yet ready, and not a provider/channel execution, autonomous company, or
   GA claim.

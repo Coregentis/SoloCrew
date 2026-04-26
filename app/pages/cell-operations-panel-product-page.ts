@@ -113,7 +113,7 @@ export function renderCellOperationsPanelProductPage(
     `<p>${escape_html(action_readiness_summary)}</p>`,
     ...model.action_section.items.map(
       (action) =>
-        `<p>${escape_html(action.title)} [${escape_html(action.action_kind_label)} / ${escape_html(action.display_readiness)}]</p>`
+        `<p>${escape_html(action.title)} [${escape_html(action.action_kind_label)} / ${escape_html(action.display_readiness)}${action.status ? ` / ${escape_html(action.status)}` : ""}]</p>`
     ),
     `<p>${escape_html(model.action_section.boundary_notice)}</p>`,
     "</section>",
@@ -180,7 +180,7 @@ export function renderCellOperationsPanelProductPage(
       ? [`<p>${escape_html(model.suggested_next_action_section.empty_notice)}</p>`]
       : model.suggested_next_action_section.items.map(
           (action) =>
-            `<p>${escape_html(action.title)} [${escape_html(action.action_kind_label)} / ${escape_html(action.display_readiness)}]</p>`
+            `<p>${escape_html(action.title)} [${escape_html(action.action_kind_label)} / ${escape_html(action.display_readiness)}${action.status ? ` / ${escape_html(action.status)}` : ""}]</p>`
         )),
     `<p>${escape_html(model.suggested_next_action_section.boundary_notice)}</p>`,
     "</section>",
@@ -224,7 +224,7 @@ export function renderCellOperationsPanelProductPage(
     metric_summary,
     suggested_next_actions_summary,
     boundary_summary,
-    next_allowed_wave: "V2.0 Wave 5 — Artifact Workflow and Persistence",
+    next_allowed_wave: model.next_wave_hint,
     html,
   };
 }

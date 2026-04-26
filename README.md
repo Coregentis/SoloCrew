@@ -99,7 +99,12 @@ artifact feedback capture, product-local learning candidates, accepted,
 rejected, and deferred learning, plus drift signals, drift impacts, and
 deterministic recommendations. It still does not implement provider/channel
 execution, model training, autonomous global learning, or V2.0 delivery.
-The next allowed wave is `V2.0 Wave 7 — Bounded Action-Class Connection`.
+V2.0 Wave 7 Bounded Action-Class Connection has now been added with
+product-local A0/A1/A2/A3/A4 action request routing, local-only outcomes,
+review-required proposals, deferred strong-confirmation records, and blocked
+irreversible records. It still does not implement provider/channel execution,
+external dispatch, autonomous operation, or V2.0 delivery.
+The next allowed wave is `V2.0 Wave 8 — RC / Stable Release Readiness`.
 
 That does not mean V2.0 is delivered, ready, GA, provider/channel capable, or
 an autonomous company operating release.

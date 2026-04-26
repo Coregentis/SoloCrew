@@ -2,6 +2,13 @@
 
 ## 2026-04-26
 
+- added V2.0 Wave 7 Bounded Action-Class Connection with product-local
+  A0/A1/A2/A3/A4 action request routing, local outcomes, review-required
+  proposals, deferred strong-confirmation records, blocked irreversible
+  records, and local action persistence; it does not deliver full V2.0; it
+  does not implement provider/channel execution, external dispatch, or
+  autonomous operation; next allowed wave is V2.0 Wave 8 RC / Stable Release
+  Readiness
 - added V2.0 Wave 6 Learning and Drift Productization with artifact feedback,
   product-local learning candidates, accepted/rejected/deferred learning,
   drift signals, drift impacts, deterministic recommendations, and local

@@ -18,6 +18,11 @@ import type {
   ProductArtifactRecord,
 } from "../artifacts/artifact-contract.ts";
 import type {
+  ProductActionOutcomeRecord,
+  ProductActionRequestRecord,
+  ProductReviewProposalRecord,
+} from "../actions/action-contract.ts";
+import type {
   ProductDriftImpactRecord,
   ProductLearningCandidateRecord,
 } from "../learning/learning-drift-contract.ts";
@@ -49,6 +54,9 @@ export interface CreateCellOperationsPanelProductPageModelOptions {
   source_runtime_projection_ref?: string;
   persisted_artifacts?: ProductArtifactRecord[];
   persisted_artifact_history?: ProductArtifactRecord[];
+  persisted_action_requests?: ProductActionRequestRecord[];
+  persisted_action_outcomes?: ProductActionOutcomeRecord[];
+  persisted_review_proposals?: ProductReviewProposalRecord[];
   persisted_learning_candidates?: ProductLearningCandidateRecord[];
   persisted_drift_impacts?: ProductDriftImpactRecord[];
 }
@@ -88,6 +96,7 @@ export interface CellOperationsPanelProductActionItem {
   title: string;
   action_kind_label: string;
   display_readiness: ProductActionReadinessState;
+  status?: string;
   readiness_summary: string;
   requires_confirmation: boolean;
   blocked: boolean;
@@ -188,6 +197,123 @@ function build_persisted_drift_items(
       non_executing: true as const,
     })),
     "drift_summary_id"
+  );
+}
+
+function build_persisted_action_items(args: {
+  requests: ProductActionRequestRecord[];
+  outcomes: ProductActionOutcomeRecord[];
+  review_proposals: ProductReviewProposalRecord[];
+}): CellOperationsPanelProductActionItem[] {
+  const outcome_by_request_id = new Map(
+    args.outcomes.map((outcome) => [outcome.action_request_id, outcome])
+  );
+  const review_by_request_id = new Map(
+    args.review_proposals.map((proposal) => [proposal.action_request_id, proposal])
+  );
+
+  return stable_sort_by_key(
+    args.requests.map((request) => {
+      const outcome = outcome_by_request_id.get(request.action_request_id);
+      const review_proposal = review_by_request_id.get(request.action_request_id);
+      const status_summary =
+        request.status === "completed_local"
+          ? "A local-only outcome has been recorded."
+          : request.status === "review_required"
+            ? "A local review proposal remains required before any later application."
+            : request.status === "draft_created"
+              ? "A draft-only local artifact exists and no dispatch occurred."
+              : request.status === "deferred_strong_confirmation"
+                ? "This action remains deferred and requires stronger confirmation in a later wave."
+                : request.status === "blocked"
+                  ? "This action remains blocked by the irreversible boundary."
+                  : request.status === "rejected"
+                    ? "This action was rejected inside the bounded local workflow."
+                    : "This action request remains visible and local-only.";
+      const related_artifact_refs = unique_strings([
+        ...request.related_artifact_refs,
+        ...(outcome?.produced_artifact_refs ?? []),
+      ]);
+      const source_evidence_refs = unique_strings([
+        ...request.source_evidence_refs,
+        ...(outcome?.produced_evidence_refs ?? []),
+        ...(review_proposal?.source_evidence_refs ?? []),
+      ]);
+      const risk_notes = unique_strings([
+        outcome?.outcome_summary ?? "",
+        review_proposal?.proposal_summary ?? "",
+      ]);
+
+      return {
+        action_id: request.action_request_id,
+        title: request.title,
+        action_kind_label: create_action_kind_label(request.action_class),
+        display_readiness: create_action_display_readiness(request.action_class),
+        status: request.status,
+        readiness_summary: [
+          status_summary,
+          outcome?.outcome_summary,
+          review_proposal?.proposal_summary,
+        ]
+          .filter((value): value is string => value !== undefined)
+          .join(" "),
+        requires_confirmation:
+          request.action_class !== "auto_local" &&
+          request.action_class !== "forbidden_irreversible",
+        blocked: request.status === "blocked",
+        reason: status_summary,
+        related_task_refs: [...request.related_task_refs],
+        related_artifact_refs,
+        risk_notes,
+        source_evidence_refs,
+        non_executing: true as const,
+      };
+    }),
+    "action_id"
+  );
+}
+
+function build_persisted_review_items(
+  review_proposals: ProductReviewProposalRecord[]
+): CellOperationsPanelProductReviewItem[] {
+  return stable_sort_by_key(
+    review_proposals.map((proposal) => ({
+      review_id: proposal.review_proposal_id,
+      title: proposal.proposal_title,
+      status: proposal.status,
+      review_kind: "local_action_review_proposal",
+      review_summary: proposal.proposal_summary,
+      review_posture:
+        "Local review remains required before any later application of the proposed change.",
+      source_evidence_refs: [...proposal.source_evidence_refs],
+      non_executing: true as const,
+    })),
+    "review_id"
+  );
+}
+
+function build_persisted_action_history_items(args: {
+  requests: ProductActionRequestRecord[];
+  outcomes: ProductActionOutcomeRecord[];
+}): CellOperationsPanelProductHistoryItem[] {
+  const request_by_id = new Map(
+    args.requests.map((request) => [request.action_request_id, request])
+  );
+
+  return stable_sort_by_key(
+    args.outcomes.map((outcome) => {
+      const request = request_by_id.get(outcome.action_request_id);
+      return {
+        history_id: outcome.action_outcome_id,
+        history_kind: "action_outcome",
+        title: request?.title ?? outcome.outcome_kind,
+        summary: outcome.outcome_summary,
+        source_ref_id: outcome.action_request_id,
+        source_evidence_refs: [...outcome.produced_evidence_refs],
+        non_executing: true as const,
+      };
+    }),
+    "history_id"
   );
 }
 
@@ -484,6 +610,15 @@ export function createCellOperationsPanelProductPageModel(
   const persisted_artifact_history = (
     options.persisted_artifact_history ?? []
   ).filter((record) => record.cell_id === projection.cell_id);
+  const persisted_action_requests = (
+    options.persisted_action_requests ?? []
+  ).filter((record) => record.cell_id === projection.cell_id);
+  const persisted_action_outcomes = (
+    options.persisted_action_outcomes ?? []
+  ).filter((record) => record.cell_id === projection.cell_id);
+  const persisted_review_proposals = (
+    options.persisted_review_proposals ?? []
+  ).filter((record) => record.cell_id === projection.cell_id);
   const persisted_learning_candidates = (
     options.persisted_learning_candidates ?? []
   ).filter((record) => record.cell_id === projection.cell_id);
@@ -532,14 +667,22 @@ export function createCellOperationsPanelProductPageModel(
         })
       : fixture_artifact_items;
   const action_items = stable_sort_by_key(
-    projection.action_summaries.map((action) =>
-      create_action_product_item({
-        action,
-        blocked: action.blocked,
-        requires_confirmation: action.requires_confirmation,
-        reason: action.reason,
-        risk_notes: action.risk_notes,
-      })
+    (
+      persisted_action_requests.length > 0
+        ? build_persisted_action_items({
+            requests: persisted_action_requests,
+            outcomes: persisted_action_outcomes,
+            review_proposals: persisted_review_proposals,
+          })
+        : projection.action_summaries.map((action) =>
+            create_action_product_item({
+              action,
+              blocked: action.blocked,
+              requires_confirmation: action.requires_confirmation,
+              reason: action.reason,
+              risk_notes: action.risk_notes,
+            })
+          )
     ),
     "action_id"
   );
@@ -614,17 +757,20 @@ export function createCellOperationsPanelProductPageModel(
       ? build_persisted_drift_items(persisted_drift_impacts)
       : fixture_drift_items;
   const review_items = stable_sort_by_key(
-    projection.review_summaries.map((review) => ({
-      review_id: review.review_id,
-      title: review.title,
-      status: review.status,
-      review_kind: review.review_kind,
-      review_summary: review.review_summary,
-      evidence_gap_summary: review.evidence_gap_summary,
-      review_posture,
-      source_evidence_refs: [...review.source_evidence_refs],
-      non_executing: true as const,
-    })),
+    [
+      ...projection.review_summaries.map((review) => ({
+        review_id: review.review_id,
+        title: review.title,
+        status: review.status,
+        review_kind: review.review_kind,
+        review_summary: review.review_summary,
+        evidence_gap_summary: review.evidence_gap_summary,
+        review_posture,
+        source_evidence_refs: [...review.source_evidence_refs],
+        non_executing: true as const,
+      })),
+      ...build_persisted_review_items(persisted_review_proposals),
+    ],
     "review_id"
   );
   const fixture_history_items = stable_sort_by_key(
@@ -643,8 +789,19 @@ export function createCellOperationsPanelProductPageModel(
     persisted_artifact_history.length > 0
       ? build_persisted_history_items(persisted_artifact_history)
       : [];
+  const persisted_action_history_items =
+    persisted_action_outcomes.length > 0
+      ? build_persisted_action_history_items({
+          requests: persisted_action_requests,
+          outcomes: persisted_action_outcomes,
+        })
+      : [];
   const history_items = stable_sort_by_key(
-    [...fixture_history_items, ...persisted_history_items],
+    [
+      ...fixture_history_items,
+      ...persisted_history_items,
+      ...persisted_action_history_items,
+    ],
     "history_id"
   );
   const metric_items = stable_sort_by_key(
@@ -739,10 +896,13 @@ export function createCellOperationsPanelProductPageModel(
     },
     action_section: {
       title: "Actions",
-      summary: `${action_items.length} action summaries remain visible with bounded readiness and no execution in this wave.`,
+      summary:
+        persisted_action_requests.length > 0
+          ? `${action_items.length} persisted action requests remain visible with local-only bounded outcomes.`
+          : `${action_items.length} action summaries remain visible with bounded readiness and no execution in this wave.`,
       items: action_items,
       boundary_notice:
-        "Action readiness is display-only here. Local updates may be ready, reviewable work stays review-gated, external drafts stay draft-only, deferred handoff stays deferred, and irreversible actions stay blocked.",
+        "Action readiness is display-only here. Auto-local work remains local-only, reviewable-local work remains review-gated, external drafts remain draft-only, deferred handoff remains deferred, and irreversible actions remain blocked.",
       non_executing: true,
     },
     learning_section: {
@@ -808,13 +968,12 @@ export function createCellOperationsPanelProductPageModel(
       non_executing: true,
     },
     boundary_notices: [
-      "V2.0 Wave 4 Cell Operations Panel productization is backed by canonical starter-cell fixtures.",
+      "The Cell Operations Panel product surface is backed by canonical starter-cell fixtures and may consume local artifact, learning, drift, and action records.",
       "This panel is non-executing and projection-safe.",
       "It does not deliver V2.0.",
-      "It does not implement real artifact-generation runtime.",
-      "It does not implement artifact persistence workflow.",
-      "It does not implement provider/channel execution.",
+      "It does not implement provider/channel execution or external dispatch.",
+      "It does not implement autonomous operation.",
     ],
-    next_wave_hint: "Next wave: Artifact Workflow and Persistence.",
+    next_wave_hint: "Next wave: RC / Stable Release Readiness.",
   };
 }

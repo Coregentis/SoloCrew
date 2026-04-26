@@ -45,7 +45,7 @@ test("[app] productized Cell Operations Panel renderer exposes product-facing se
   assert.match(page.boundary_summary, /non-executing/i);
   assert.equal(
     page.next_allowed_wave,
-    "V2.0 Wave 5 — Artifact Workflow and Persistence"
+    "Next wave: RC / Stable Release Readiness."
   );
 });
 
@@ -68,7 +68,7 @@ test("[app] productized Cell Operations Panel renderer shows all product-facing 
   assert.match(page.html, /Suggested Next Actions/);
   assert.match(page.html, /Boundary Summary/);
   assert.match(page.html, /provider\/channel execution/i);
-  assert.match(page.html, /Next wave: Artifact Workflow and Persistence\./);
+  assert.match(page.html, /Next wave: RC \/ Stable Release Readiness\./);
 
   assert.doesNotMatch(
     page.html,
