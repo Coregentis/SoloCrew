@@ -94,7 +94,12 @@ local-only create/save/list/retrieve/revise/archive/history/reload behavior.
 It still does not implement provider/channel execution, full LLM provider
 generation, learning feedback productization, interactive drift resolution, or
 V2.0 delivery.
-The next allowed wave is `V2.0 Wave 6 — Learning and Drift Productization`.
+V2.0 Wave 6 Learning and Drift Productization has now been added with
+artifact feedback capture, product-local learning candidates, accepted,
+rejected, and deferred learning, plus drift signals, drift impacts, and
+deterministic recommendations. It still does not implement provider/channel
+execution, model training, autonomous global learning, or V2.0 delivery.
+The next allowed wave is `V2.0 Wave 7 — Bounded Action-Class Connection`.
 
 That does not mean V2.0 is delivered, ready, GA, provider/channel capable, or
 an autonomous company operating release.

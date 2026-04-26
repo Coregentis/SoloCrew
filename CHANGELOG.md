@@ -2,6 +2,13 @@
 
 ## 2026-04-26
 
+- added V2.0 Wave 6 Learning and Drift Productization with artifact feedback,
+  product-local learning candidates, accepted/rejected/deferred learning,
+  drift signals, drift impacts, deterministic recommendations, and local
+  persisted learning/drift records; it does not deliver full V2.0; it does
+  not implement provider/channel execution; it does not perform model
+  training or autonomous global learning; it does not implement action
+  execution; next allowed wave is V2.0 Wave 7 Bounded Action-Class Connection
 - added V2.0 Wave 5 Artifact Workflow and Persistence with local-only
   create/save/list/retrieve/revise/archive/history/reload behavior; it does
   not deliver full V2.0; it does not implement provider/channel execution; it

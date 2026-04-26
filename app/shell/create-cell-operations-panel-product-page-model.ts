@@ -17,6 +17,13 @@ import {
 import type {
   ProductArtifactRecord,
 } from "../artifacts/artifact-contract.ts";
+import type {
+  ProductDriftImpactRecord,
+  ProductLearningCandidateRecord,
+} from "../learning/learning-drift-contract.ts";
+import {
+  summarizeLearningForCell,
+} from "../learning/learning-workflow.ts";
 import {
   assert_valid,
   collect_forbidden_field_errors,
@@ -42,6 +49,8 @@ export interface CreateCellOperationsPanelProductPageModelOptions {
   source_runtime_projection_ref?: string;
   persisted_artifacts?: ProductArtifactRecord[];
   persisted_artifact_history?: ProductArtifactRecord[];
+  persisted_learning_candidates?: ProductLearningCandidateRecord[];
+  persisted_drift_impacts?: ProductDriftImpactRecord[];
 }
 
 export type ProductActionReadinessState =
@@ -95,6 +104,7 @@ export interface CellOperationsPanelProductDriftItem {
   drift_kind: string;
   impact_summary: string;
   recommendation: string;
+  status?: string;
   confidence_posture?: string;
   affected_scope_refs: string[];
   affected_artifact_refs: string[];
@@ -159,6 +169,25 @@ function build_persisted_history_items(
       non_executing: true as const,
     })),
     "history_id"
+  );
+}
+
+function build_persisted_drift_items(
+  records: ProductDriftImpactRecord[]
+): CellOperationsPanelProductDriftItem[] {
+  return stable_sort_by_key(
+    records.map((record) => ({
+      drift_summary_id: record.drift_impact_id,
+      drift_kind: record.source_drift_signal_id.split(":")[1] ?? "drift_signal",
+      impact_summary: record.impact_summary,
+      recommendation: record.recommendation,
+      status: record.status,
+      affected_scope_refs: [record.cell_id],
+      affected_artifact_refs: [...record.affected_artifact_refs],
+      source_evidence_refs: [...record.source_evidence_refs],
+      non_executing: true as const,
+    })),
+    "drift_summary_id"
   );
 }
 
@@ -455,6 +484,16 @@ export function createCellOperationsPanelProductPageModel(
   const persisted_artifact_history = (
     options.persisted_artifact_history ?? []
   ).filter((record) => record.cell_id === projection.cell_id);
+  const persisted_learning_candidates = (
+    options.persisted_learning_candidates ?? []
+  ).filter((record) => record.cell_id === projection.cell_id);
+  const persisted_learning_summary = summarizeLearningForCell(
+    persisted_learning_candidates,
+    projection.cell_id as typeof persisted_learning_candidates[number]["cell_id"]
+  );
+  const persisted_drift_impacts = (
+    options.persisted_drift_impacts ?? []
+  ).filter((record) => record.cell_id === projection.cell_id);
 
   const task_items = stable_sort_by_key(
     projection.task_summaries.map((task) => ({
@@ -504,10 +543,10 @@ export function createCellOperationsPanelProductPageModel(
     ),
     "action_id"
   );
-  const learning_source_evidence_refs = unique_strings(
+  const fixture_learning_source_evidence_refs = unique_strings(
     projection.learning_summaries.flatMap((summary) => summary.source_evidence_refs)
   );
-  const accepted_scope_only_learning = projection.learning_summaries.flatMap(
+  const fixture_accepted_scope_only_learning = projection.learning_summaries.flatMap(
     (summary) => summary.preference_summaries
       .filter(
         (preference) =>
@@ -517,19 +556,46 @@ export function createCellOperationsPanelProductPageModel(
       .map((preference) => preference.summary)
       .concat(summary.active_candidate_summaries)
   );
-  const global_candidate_learning = projection.learning_summaries.flatMap(
+  const fixture_global_candidate_learning = projection.learning_summaries.flatMap(
     (summary) => summary.global_candidate_summaries
   );
-  const inactive_learning = projection.learning_summaries.flatMap((summary) =>
+  const fixture_inactive_learning = projection.learning_summaries.flatMap((summary) =>
     summary.inactive_candidate_summaries
   );
-  const preference_summaries = projection.learning_summaries.flatMap((summary) =>
+  const fixture_preference_summaries = projection.learning_summaries.flatMap((summary) =>
     summary.preference_summaries.map(
       (preference) =>
         `${preference.summary} (${preference.application_scope} / ${preference.status})`
     )
   );
-  const drift_items = stable_sort_by_key(
+  const learning_source_evidence_refs =
+    persisted_learning_candidates.length > 0
+      ? unique_strings(
+          persisted_learning_candidates.flatMap(
+            (candidate) => candidate.source_evidence_refs
+          )
+        )
+      : fixture_learning_source_evidence_refs;
+  const accepted_scope_only_learning =
+    persisted_learning_candidates.length > 0
+      ? persisted_learning_summary.accepted_scope_only_learning
+      : fixture_accepted_scope_only_learning;
+  const global_candidate_learning =
+    persisted_learning_candidates.length > 0
+      ? persisted_learning_summary.global_candidate_learning
+      : fixture_global_candidate_learning;
+  const inactive_learning =
+    persisted_learning_candidates.length > 0
+      ? persisted_learning_summary.inactive_learning
+      : fixture_inactive_learning;
+  const preference_summaries =
+    persisted_learning_candidates.length > 0
+      ? persisted_learning_candidates.map(
+          (candidate) =>
+            `${candidate.summary} (${candidate.application_scope} / ${candidate.status})`
+        )
+      : fixture_preference_summaries;
+  const fixture_drift_items = stable_sort_by_key(
     projection.drift_summaries.map((drift) => ({
       drift_summary_id: drift.drift_summary_id,
       drift_kind: drift.drift_kind,
@@ -543,6 +609,10 @@ export function createCellOperationsPanelProductPageModel(
     })),
     "drift_summary_id"
   );
+  const drift_items =
+    persisted_drift_impacts.length > 0
+      ? build_persisted_drift_items(persisted_drift_impacts)
+      : fixture_drift_items;
   const review_items = stable_sort_by_key(
     projection.review_summaries.map((review) => ({
       review_id: review.review_id,

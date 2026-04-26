@@ -232,7 +232,10 @@ That closure pack does not widen the line into `v0.5`.
   canonical starter-cell fixtures.
 - V2.0 Wave 5 Artifact Workflow and Persistence is now added with local-only
   create/save/list/retrieve/revise/archive/history/reload behavior.
-- The next allowed wave is `V2.0 Wave 6 — Learning and Drift Productization`.
+- V2.0 Wave 6 Learning and Drift Productization is now added with product-local
+  feedback capture, learning candidates, status transitions, drift signals,
+  drift impacts, and deterministic recommendations.
+- The next allowed wave is `V2.0 Wave 7 — Bounded Action-Class Connection`.
 - V2.0 is allowed to start after V1.9 closure, but it is not yet delivered,
   not yet ready, and not a provider/channel execution, autonomous company, or
   GA claim.
