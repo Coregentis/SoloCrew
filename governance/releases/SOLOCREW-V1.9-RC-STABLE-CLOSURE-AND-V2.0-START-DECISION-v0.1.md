@@ -3,18 +3,19 @@
 ## 1. Document Control
 
 - `doc_id`: `SOLOCREW-V1.9-RC-STABLE-CLOSURE-AND-V2.0-START-DECISION-v0.1`
-- `status`: `CLOSED_PENDING_RELEASE_VERIFICATION`
+- `status`: `CLOSED_POST_RELEASE_VERIFIED`
 - `authority_order`: `MPLP -> Cognitive_OS -> Projection -> SoloCrew`
 - `scope`:
   - close SoloCrew V1.9 as a readiness / hardening line
   - verify the Wave 1 through Wave 4 evidence chain
+  - verify RC / stable release execution
   - decide whether V2.0 may start
-  - plan RC / stable release execution and post-release verification
 - `non_goals`:
   - not V2.0
   - not V2.0 implementation
   - not full product UI
   - not provider/channel execution
+  - not external dispatch
   - not autonomous company operation
   - not GA
   - not MPLP certification
@@ -68,28 +69,35 @@
 - message: `app: add v1.9 product surface thin consumption`
 - result: `V1_9_WAVE4_SOLOCREW_PRODUCT_SURFACE_THIN_CONSUMPTION_PASS`
 
-### Current Closure Wave
+### Closure Wave
 
 - closure commit:
-  - `pending_first_closure_commit`
-- post-release verification commit:
-  - `pending_if_needed`
+  - `3b67a783b2ab07ae9ba5a8ac54102ca11d269cb1`
+- closure commit message:
+  - `release: close solocrew v1.9 runtime readiness line`
+- post-release verification record update:
+  - recorded in a follow-on SoloCrew `main` documentation update after release publication
 
-### Pre-Release Test Evidence
-
-| Evidence | Result | Notes |
-| --- | --- | --- |
-| `npm test` | `PASS` | full SoloCrew suite passed before release execution |
-| focused V1.9 Wave 3 / Wave 4 tests | `PASS` | founder-dashboard and cell-operations projection/app tests passed |
-| evidence-chain file existence checks | `PASS` | Wave 1, Wave 3, and Wave 4 required files exist |
-
-### Pre-Release Boundary Evidence
+### Test Evidence
 
 | Evidence | Result | Notes |
 | --- | --- | --- |
-| broad boundary grep | `PASS` | matches are exclusion-only, release-definition-only, helper denylist, or negative tests only |
-| positive provider/channel execution claim | `NOT_FOUND` | no new positive provider/channel execution claim found |
+| `npm test` before release execution | `PASS` | `372/372` tests passed |
+| focused V1.9 Wave 3 / Wave 4 tests before release execution | `PASS` | `29/29` tests passed |
+| `npm test` after release execution | `PASS` | `372/372` tests passed again |
+| focused V1.9 Wave 3 / Wave 4 tests after release execution | `PASS` | `29/29` tests passed again |
+| evidence-chain file existence checks | `PASS` | required Wave 1, Wave 3, and Wave 4 files exist |
+
+### Boundary Evidence
+
+| Evidence | Result | Notes |
+| --- | --- | --- |
+| broad boundary grep before release execution | `PASS` | matches were exclusion-only, release-definition-only, helper denylist, or negative tests only |
+| broad boundary grep after release execution | `PASS` | matches remained exclusion-only, release-definition-only, helper denylist, or negative tests only |
+| positive provider/channel execution claim | `NOT_FOUND` | no positive provider/channel execution claim found |
 | positive V2.0 ready / delivered claim | `NOT_FOUND` | no positive V2.0 ready / delivered claim found |
+| positive autonomous company claim | `NOT_FOUND` | no positive autonomous company claim found |
+| positive GA / certification claim | `NOT_FOUND` | no positive GA or certification claim found |
 
 ## 4. V1.9 Capability Closure
 
@@ -123,24 +131,20 @@ V1.9 still does not provide:
 
 ## 6. V2.0 Start Decision
 
-Current decision before release verification:
-
-- `V2_0_SCOPE_REQUIRES_DECISION`
+- `V2_0_ALLOWED_TO_START`
 
 Decision meaning:
 
-- `V2_0_ALLOWED_TO_START` means V2.0 planning and implementation may begin.
+- V2.0 planning and implementation may begin.
 - It does not mean V2.0 is ready.
 - It does not mean V2.0 is delivered.
 - It does not mean provider/channel execution exists.
-
-Expected final decision if release execution and post-release verification pass:
-
-- `V2_0_ALLOWED_TO_START`
+- It does not mean autonomous company operation exists.
+- It does not mean GA or certification.
 
 ## 7. V2.0 Start Boundary
 
-If `V2_0_ALLOWED_TO_START` after post-release verification, the allowed V2.0 start scope is:
+Allowed V2.0 start scope:
 
 - first runnable AIGC operating product line may begin
 - starter cells may be planned and implemented
@@ -149,7 +153,7 @@ If `V2_0_ALLOWED_TO_START` after post-release verification, the allowed V2.0 sta
 - persistence / learning / drift acceptance may be productized
 - selected action classes may be connected to product flows under bounded confirmation
 
-If V2.0 start is allowed, the initial forbidden V2.0 scope remains:
+Initial forbidden V2.0 scope:
 
 - no payment / trading / purchase / legal irreversible actions
 - no uncontrolled provider/channel dispatch
@@ -160,59 +164,67 @@ If V2.0 start is allowed, the initial forbidden V2.0 scope remains:
 
 ## 8. Release / Tag Plan
 
-- preferred RC tag:
+Verified release state:
+
+- RC tag:
   - `solocrew-v1.9-rc-runtime-readiness-20260426`
-- preferred stable tag:
+- stable tag:
   - `solocrew-v1.9-stable-runtime-readiness-20260426`
-- preferred RC release title:
+- RC GitHub release title:
   - `SoloCrew V1.9 RC — Runtime Readiness Closure`
-- preferred stable release title:
+- stable GitHub release title:
   - `SoloCrew V1.9 Stable — Runtime Readiness Closure`
+- stable GitHub release was created with:
+  - `--latest=false`
 
-Pre-release checks:
+Verified execution sequence:
 
-- local RC tag exists: `NO`
-- local stable tag exists: `NO`
-- remote RC tag exists: `NO`
-- remote stable tag exists: `NO`
-- RC GitHub release exists: `NO`
-- stable GitHub release exists: `NO`
-- `gh` support for `--latest=false`: `YES` under `gh version 2.90.0`
-
-Planned sequence:
-
-1. create and push RC tag
-2. create RC GitHub prerelease
-3. create and push stable tag
-4. create stable GitHub release with `--latest=false`
+1. created and pushed RC tag
+2. created RC GitHub prerelease
+3. created and pushed stable tag
+4. created stable GitHub release
 
 ## 9. Post-Release Verification
 
-Pending update after release execution:
-
-- final local `HEAD`
-- final remote `HEAD`
-- RC tag object SHA
-- RC peeled target SHA
-- stable tag object SHA
-- stable peeled target SHA
-- RC release URL and `gh release view` summary
-- stable release URL and `gh release view` summary
-- post-release `npm test`
-- post-release focused V1.9 tests
-- post-release boundary grep
+- release-target local `HEAD`:
+  - `3b67a783b2ab07ae9ba5a8ac54102ca11d269cb1`
+- release-target remote `origin/main`:
+  - `3b67a783b2ab07ae9ba5a8ac54102ca11d269cb1`
+- RC tag object SHA:
+  - `163185dbf1ec2a8c47ca99a247420cb4ad87cdb2`
+- RC peeled target SHA:
+  - `3b67a783b2ab07ae9ba5a8ac54102ca11d269cb1`
+- stable tag object SHA:
+  - `f64c78b1397918753d95b501d4e6e7c7abf49029`
+- stable peeled target SHA:
+  - `3b67a783b2ab07ae9ba5a8ac54102ca11d269cb1`
+- RC release URL:
+  - `https://github.com/Coregentis/SoloCrew/releases/tag/solocrew-v1.9-rc-runtime-readiness-20260426`
+- stable release URL:
+  - `https://github.com/Coregentis/SoloCrew/releases/tag/solocrew-v1.9-stable-runtime-readiness-20260426`
+- RC `gh release view` summary:
+  - `isDraft=false`
+  - `isPrerelease=true`
+  - `targetCommitish=main`
+  - `publishedAt=2026-04-26T02:14:37Z`
+- stable `gh release view` summary:
+  - `isDraft=false`
+  - `isPrerelease=false`
+  - `targetCommitish=main`
+  - `publishedAt=2026-04-26T02:16:56Z`
+- post-release `npm test`:
+  - `PASS`
+  - `372/372`
+- post-release focused V1.9 tests:
+  - `PASS`
+  - `29/29`
+- post-release boundary grep:
+  - `PASS`
+  - matches remained exclusion-only, release-definition-only, helper denylist, or negative tests only
 
 ## 10. Final Decision
 
-Current closure decision before release verification:
-
-- `V1_9_RC_STABLE_CLOSURE_PARTIAL`
-
-Current V2.0 start decision before release verification:
-
-- `V2_0_SCOPE_REQUIRES_DECISION`
-
-Expected final decisions if release execution and post-release verification pass:
-
-- `V1_9_RC_STABLE_CLOSURE_PASS`
-- `V2_0_ALLOWED_TO_START`
+- V1.9 closure decision:
+  - `V1_9_RC_STABLE_CLOSURE_PASS`
+- V2.0 start decision:
+  - `V2_0_ALLOWED_TO_START`

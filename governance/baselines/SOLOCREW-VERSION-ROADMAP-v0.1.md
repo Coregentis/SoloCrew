@@ -215,9 +215,17 @@ That closure pack does not widen the line into `v0.5`.
   stable line after RC release, post-verification, stable-readiness, and
   stable release execution closure.
 - V1.8 stable is now closed as the bounded execution-boundary stable line.
-- V1.9 planning / execution RC hardening may begin only after V1.8 stable is
-  verified and closed.
-- Future V1.7 = Bounded Action-Preparation.
-- Future V1.8 = Human-Confirmed Execution Boundary.
-- Future V1.9 = Execution RC Hardening.
-- Future V2.0 = First Usable SoloCrew Operating Loop.
+- V1.9 Runtime Readiness Closure is complete, released, verified, and closed
+  after the Wave 1 crosswalk, Wave 2 Cognitive_OS runtime readiness
+  foundation, Wave 3 SoloCrew projection contracts, and Wave 4 thin
+  product-surface consumption path.
+- V1.9 is closed as a readiness / hardening line and is not V2.0 delivery.
+- V2.0 is the next line and is defined as First Runnable AIGC Operating
+  Product.
+- V2.0 is allowed to start after V1.9 closure, but it is not yet delivered,
+  not yet ready, and not a provider/channel execution, autonomous company, or
+  GA claim.
+- Historical V1.7 = Bounded Action Preparation.
+- Historical V1.8 = Human-Confirmed Execution Boundary.
+- Historical V1.9 = Execution RC Hardening / Runtime Readiness Closure.
+- V2.0 = First Runnable AIGC Operating Product.

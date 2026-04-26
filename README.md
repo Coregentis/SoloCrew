@@ -47,6 +47,34 @@ That delivery judgment does **not** mean:
 - SoloCrew owns protocol authority
 - bounded downstream truth has become delivery authorization
 
+## Current V1.9 Stable Line
+
+SoloCrew V1.9 Stable — Runtime Readiness Closure has been released and
+verified as the current readiness / hardening line closure for this repo.
+It closes the V1.9 chain across:
+
+- Wave 1 tri-repo runtime/product readiness crosswalk
+- Wave 2 Cognitive_OS runtime readiness foundation
+- Wave 3 SoloCrew projection contracts
+- Wave 4 SoloCrew product-surface thin consumption
+
+V1.9 is not V2.0.
+It does not deliver the first runnable AIGC operating product.
+It does not introduce provider/channel execution, external dispatch,
+autonomous company operation, GA, or protocol certification.
+
+Current V1.9 closure reference:
+
+- `governance/releases/SOLOCREW-V1.9-RC-STABLE-CLOSURE-AND-V2.0-START-DECISION-v0.1.md`
+
+## Current V2.0 Status
+
+V2.0 is allowed to start only in the sense that planning and implementation
+may begin after the verified V1.9 closure.
+The V2.0 line is defined as `First Runnable AIGC Operating Product`.
+That does not mean V2.0 is delivered, ready, GA, provider/channel capable, or
+an autonomous company operating release.
+
 ## Current V1.1 Line
 
 Operational V1 is sealed at tag

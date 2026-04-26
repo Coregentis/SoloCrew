@@ -2,6 +2,15 @@
 
 ## 2026-04-26
 
+- closed SoloCrew V1.9 as Runtime Readiness Closure by publishing the verified
+  RC prerelease and stable release over the completed Wave 1 crosswalk, Wave 2
+  Cognitive_OS runtime readiness foundation, Wave 3 projection contracts, and
+  Wave 4 thin product-surface consumption chain; recorded the combined closure
+  and V2.0 start decision record; and allowed V2.0 to start as the next line
+  only in the sense that planning and implementation may begin; this is not
+  V2.0 delivery, not V2.0 ready, does not implement full product UI, does not
+  implement provider/channel execution, and does not claim autonomous company
+  operation, GA, or protocol certification
 - implemented SoloCrew V1.9 Wave 3 as a projection-contract wave over the
   neutral Cognitive_OS runtime readiness foundation, adding Founder Dashboard
   and Cell Operations Panel projection contracts, runtime-state-compatible
