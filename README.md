@@ -112,6 +112,13 @@ V2.0 Wave 10 Stable Release Execution + Post-Stable Verification is complete
 as the bounded local-first Stable release for the First Runnable AIGC
 Operating Product.
 This is not a GA claim.
+V2.0 has entered post-release monitoring and V2.0.x maintenance under:
+
+- `governance/baselines/SOLOCREW-V2.0-POST-RELEASE-MONITORING-AND-MAINTENANCE-BASELINE-v0.1.md`
+
+V2.0.x maintenance is limited to defects, boundary corrections, documentation
+alignment, release artifact corrections, deterministic bug fixes, and safety
+hardening. V2.1 planning requires owner authorization.
 
 That does not mean V2.0 is GA, provider/channel capable, or an autonomous
 company operating release.

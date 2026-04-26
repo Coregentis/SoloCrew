@@ -246,6 +246,12 @@ That closure pack does not widen the line into `v0.5`.
 - V2.0 Wave 10 Stable Release Execution + Post-Stable Verification is complete
   as the bounded local-first Stable release for the First Runnable AIGC
   Operating Product.
+- V2.0 has entered post-release monitoring and V2.0.x maintenance under
+  `governance/baselines/SOLOCREW-V2.0-POST-RELEASE-MONITORING-AND-MAINTENANCE-BASELINE-v0.1.md`.
+- V2.0.x maintenance is limited to defects, boundary corrections,
+  documentation alignment, release artifact corrections, deterministic bug
+  fixes, and safety hardening.
+- V2.1 planning requires owner authorization.
 - V2.0 Stable remains below provider/channel execution, autonomous company
   operation, GA, MPLP certification, and irreversible external actions.
 - Historical V1.7 = Bounded Action Preparation.

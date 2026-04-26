@@ -2,6 +2,10 @@
 
 ## 2026-04-26
 
+- added the V2.0 post-release monitoring and V2.0.x maintenance baseline;
+  no product behavior change, no V2.1 implementation, and no provider/channel
+  execution, external dispatch, autonomous operation, GA,
+  payment/trading/purchase/legal action, or MPLP certification is introduced
 - released SoloCrew V2.0 Stable as the bounded local-first First Runnable
   AIGC Operating Product and completed post-Stable verification plus pointer
   alignment; no GA claim, provider/channel execution, external dispatch,
