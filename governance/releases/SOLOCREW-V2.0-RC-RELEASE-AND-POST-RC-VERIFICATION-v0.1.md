@@ -5,7 +5,7 @@
 - `doc_id`:
   - `SOLOCREW-V2.0-RC-RELEASE-AND-POST-RC-VERIFICATION-v0.1`
 - `status`:
-  - `RC_RELEASE_PREPARED_PENDING_POST_RC_VERIFICATION`
+  - `RC_RELEASED_POST_RC_VERIFIED`
 - `authority_order`:
   - `MPLP -> Cognitive_OS -> Projection -> SoloCrew`
 - `version_line`:
@@ -117,3 +117,74 @@ Explicit exclusions:
   - `pending`
 - `initial_decision`:
   - `V2_0_RC_RELEASE_PREPARED_PENDING_POST_RC_VERIFICATION`
+
+## 7. RC Artifact Truth
+
+- `rc_release_commit`:
+  - `27d51a3440a8058c8c7d57b85b2a5421049879f4`
+- `rc_tag`:
+  - `solocrew-v2.0-rc-first-runnable-aigc-20260426`
+- `rc_tag_object`:
+  - `d40fd4c8307e22ffead615d15ba8b732223b8b9e`
+- `rc_tag_peeled_target`:
+  - `27d51a3440a8058c8c7d57b85b2a5421049879f4`
+- `github_prerelease`:
+  - `true`
+- `github_release_url`:
+  - `https://github.com/Coregentis/SoloCrew/releases/tag/solocrew-v2.0-rc-first-runnable-aigc-20260426`
+- `release_target_changed`:
+  - `false`
+- `tag_force_moved`:
+  - `false`
+- `stable_release_created`:
+  - `false`
+
+## 8. Post-RC Verification
+
+- `post_rc_verification_commit`:
+  - `pending until committed`
+- `npm_test`:
+  - `PASS`
+  - `430/430`
+- `focused_v2_journey_tests`:
+  - `PASS`
+  - `58/58`
+- `boundary_grep`:
+  - `PASS`
+- `naming_grep`:
+  - `PASS`
+- `product_journey`:
+  - `PASS`
+- `provider_channel_execution`:
+  - `false`
+- `external_dispatch`:
+  - `false`
+- `autonomous_operation`:
+  - `false`
+- `stable_release`:
+  - `false`
+- `GA`:
+  - `false`
+
+## 9. Release Artifact Alignment Note
+
+- RC tag intentionally points to the RC release commit.
+- Post-RC verification is preserved on main after RC release creation.
+- If the tag snapshot shows post-RC verification pending, use the main post-RC verification commit as final verification truth.
+- No tag was force-moved.
+- No release target was changed.
+- This alignment note prevents audit confusion between tag snapshot truth and final main post-RC verification truth.
+
+## 10. Final RC Decision
+
+- `rc_release_result`:
+  - `V2_0_RC_RELEASE_EXECUTION_PASS`
+- `post_rc_verification_result`:
+  - `V2_0_POST_RC_VERIFICATION_PASS`
+- `next_action`:
+  - `V2_0_STABLE_RELEASE_EXECUTION_ALLOWED`
+- `next_allowed_wave`:
+  - `V2.0 Wave 10 — Stable Release Execution + Post-Stable Verification`
+
+Stable release execution is allowed only because post-RC verification passed.
+No Stable release, Stable tag, or Stable GitHub Release is created in this wave.

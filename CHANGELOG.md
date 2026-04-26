@@ -2,10 +2,12 @@
 
 ## 2026-04-26
 
-- prepared the SoloCrew V2.0 RC release record after Wave 8 readiness passed;
-  post-RC verification is pending; no Stable release, GA claim,
-  provider/channel execution, external dispatch, autonomous operation, or
-  MPLP certification is introduced
+- executed the SoloCrew V2.0 RC prerelease and post-RC verification for the
+  First Runnable AIGC Operating Product candidate; no Stable release, GA
+  claim, provider/channel execution, external dispatch, autonomous operation,
+  payment/trading/purchase/legal action, or MPLP certification is introduced;
+  next allowed wave is V2.0 Wave 10 Stable Release Execution + Post-Stable
+  Verification
 - added V2.0 Wave 7 Bounded Action-Class Connection with product-local
   A0/A1/A2/A3/A4 action request routing, local outcomes, review-required
   proposals, deferred strong-confirmation records, blocked irreversible
