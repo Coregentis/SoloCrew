@@ -2,6 +2,12 @@
 
 ## 2026-04-26
 
+- added V2.0 Wave 4 Cell Operations Panel Productization over canonical
+  starter-cell fixtures; it productizes per-Cell operations surfaces; it does
+  not deliver V2.0; it does not implement real artifact-generation runtime;
+  it does not implement artifact persistence workflow; it does not implement
+  provider/channel execution; next allowed wave is V2.0 Wave 5 Artifact
+  Workflow and Persistence
 - consolidated starter-cell fixture canonical naming with legacy
   `v2-starter-cells` compatibility re-export; no behavior change and no
   V2.0 delivery claim

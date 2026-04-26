@@ -84,7 +84,12 @@ V2.0 Wave 3 Founder Dashboard Productization has now been added over the V2
 starter-cell fixtures.
 It does not implement Cell Operations Panel productization, real
 artifact-generation runtime, provider/channel execution, or V2.0 delivery.
-The next allowed wave is `V2.0 Wave 4 — Cell Operations Panel Productization`.
+V2.0 Wave 4 Cell Operations Panel Productization has now been added over the
+canonical starter-cell fixtures.
+It productizes per-Cell operations surfaces, but it does not implement real
+artifact-generation runtime, artifact persistence workflow, provider/channel
+execution, or V2.0 delivery.
+The next allowed wave is `V2.0 Wave 5 — Artifact Workflow and Persistence`.
 
 That does not mean V2.0 is delivered, ready, GA, provider/channel capable, or
 an autonomous company operating release.
