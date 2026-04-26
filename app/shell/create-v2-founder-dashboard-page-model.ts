@@ -6,10 +6,9 @@ import {
   assembleFounderDashboardProjection,
 } from "../../projection/assembly/founder-dashboard-projection.ts";
 import {
-  V2_STARTER_CELL_DEFINITIONS,
-  V2_STARTER_CELLS_PROJECT_ID,
-  createV2StarterCellsRuntimeStateProjection,
-} from "../../projection/fixtures/v2-starter-cells.ts";
+  STARTER_CELL_DEFINITIONS,
+  createStarterCellsRuntimeStateProjection,
+} from "../../projection/fixtures/starter-cell-fixtures.ts";
 import {
   createV19FounderDashboardPageModel,
 } from "./create-v1-9-founder-dashboard-page-model.ts";
@@ -23,7 +22,7 @@ import {
 } from "../../projection/adapters/runtime-readiness-adapter-helpers.ts";
 
 export const V2_FOUNDER_DASHBOARD_SOURCE_FIXTURE_REF =
-  "projection/fixtures/v2-starter-cells.ts#createV2StarterCellsRuntimeStateProjection";
+  "projection/fixtures/starter-cell-fixtures.ts#createStarterCellsRuntimeStateProjection";
 
 export type V2FounderDashboardReadinessState =
   | "ready_for_review"
@@ -109,7 +108,7 @@ export interface V2FounderDashboardPageModel {
 }
 
 function find_definition(cell_id: string) {
-  return V2_STARTER_CELL_DEFINITIONS.find((definition) => definition.cell_id === cell_id);
+  return STARTER_CELL_DEFINITIONS.find((definition) => definition.cell_id === cell_id);
 }
 
 function derive_readiness_state(
@@ -279,7 +278,7 @@ function build_drift_and_blocked_summary(
 
 export function createV2FounderDashboardPageModel(
   runtime_state_projection: RuntimeStateProjection =
-    createV2StarterCellsRuntimeStateProjection()
+    createStarterCellsRuntimeStateProjection()
 ): V2FounderDashboardPageModel {
   const founder_dashboard_projection =
     assembleFounderDashboardProjection(runtime_state_projection);

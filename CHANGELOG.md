@@ -2,6 +2,9 @@
 
 ## 2026-04-26
 
+- consolidated starter-cell fixture canonical naming with legacy
+  `v2-starter-cells` compatibility re-export; no behavior change and no
+  V2.0 delivery claim
 - added V2.0 Wave 3 Founder Dashboard Productization over the V2
   starter-cell fixtures; it does not deliver V2.0; it does not implement Cell
   Operations Panel productization; it does not implement real

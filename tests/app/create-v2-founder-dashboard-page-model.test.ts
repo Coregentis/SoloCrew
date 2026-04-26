@@ -5,13 +5,13 @@ import {
   createV2FounderDashboardPageModel,
 } from "../../app/shell/create-v2-founder-dashboard-page-model.ts";
 import {
-  V2_STARTER_CELL_IDS,
-  createV2StarterCellsRuntimeStateProjection,
-} from "../../projection/fixtures/v2-starter-cells.ts";
+  STARTER_CELL_IDS,
+  createStarterCellsRuntimeStateProjection,
+} from "../../projection/fixtures/starter-cell-fixtures.ts";
 
 test("[app] V2 Founder Dashboard page model consumes V2 starter-cell fixtures", () => {
   const model = createV2FounderDashboardPageModel(
-    createV2StarterCellsRuntimeStateProjection()
+    createStarterCellsRuntimeStateProjection()
   );
 
   assert.equal(model.page_kind, "v2_founder_dashboard_productized");
@@ -21,7 +21,10 @@ test("[app] V2 Founder Dashboard page model consumes V2 starter-cell fixtures", 
   );
   assert.equal(model.product_line, "v2_0");
   assert.equal(model.product_surface, "founder_dashboard");
-  assert.equal(model.source_fixture_ref.includes("v2-starter-cells.ts"), true);
+  assert.equal(
+    model.source_fixture_ref.includes("starter-cell-fixtures.ts"),
+    true
+  );
 });
 
 test("[app] V2 Founder Dashboard page model includes exactly three starter cells with the required labels", () => {
@@ -30,7 +33,7 @@ test("[app] V2 Founder Dashboard page model includes exactly three starter cells
   assert.equal(model.cells_overview.length, 3);
   assert.deepEqual(
     model.cells_overview.map((item) => item.cell_id),
-    [...V2_STARTER_CELL_IDS]
+    [...STARTER_CELL_IDS]
   );
   assert.deepEqual(
     model.cells_overview.map((item) => item.cell_label),
@@ -102,7 +105,7 @@ test("[app] V2 Founder Dashboard has productized copy and avoids forbidden posit
 });
 
 test("[app] V2 Founder Dashboard output is deterministic across repeated construction", () => {
-  const input = createV2StarterCellsRuntimeStateProjection();
+  const input = createStarterCellsRuntimeStateProjection();
   const first = createV2FounderDashboardPageModel(input);
   const second = createV2FounderDashboardPageModel(input);
 
@@ -110,7 +113,7 @@ test("[app] V2 Founder Dashboard output is deterministic across repeated constru
 });
 
 test("[app] V2 Founder Dashboard missing optional artifact or learning sections degrade gracefully", () => {
-  const runtime_state_projection = createV2StarterCellsRuntimeStateProjection();
+  const runtime_state_projection = createStarterCellsRuntimeStateProjection();
   const model = createV2FounderDashboardPageModel({
     ...runtime_state_projection,
     operational_unit_projections: runtime_state_projection.operational_unit_projections.map(

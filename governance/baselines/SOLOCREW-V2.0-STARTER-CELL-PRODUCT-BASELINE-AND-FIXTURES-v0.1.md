@@ -342,7 +342,10 @@ Minimum fixture fields:
 
 Fixture implementation:
 
-- `projection/fixtures/v2-starter-cells.ts`
+- canonical fixture surface:
+  - `projection/fixtures/starter-cell-fixtures.ts`
+- legacy compatibility re-export:
+  - `projection/fixtures/v2-starter-cells.ts`
 - exports:
   - `V2_STARTER_CELL_IDS`
   - `V2_STARTER_CELL_DEFINITIONS`

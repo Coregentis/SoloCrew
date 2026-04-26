@@ -15,11 +15,16 @@ import {
   assembleFounderDashboardProjection,
 } from "../../projection/assembly/founder-dashboard-projection.ts";
 import {
+  STARTER_CELL_DEFINITIONS,
+  STARTER_CELL_IDS,
+  createStarterCellOperationalUnitProjections,
+  createStarterCellsRuntimeStateProjection,
   V2_STARTER_CELL_DEFINITIONS,
   V2_STARTER_CELL_IDS,
   createV2StarterCellOperationalUnitProjections,
   createV2StarterCellsRuntimeStateProjection,
-} from "../../projection/fixtures/v2-starter-cells.ts";
+} from "../../projection/fixtures/starter-cell-fixtures.ts";
+import * as legacyStarterCellFixtures from "../../projection/fixtures/v2-starter-cells.ts";
 
 function assert_unique_serialized_sets(
   values: readonly unknown[],
@@ -34,41 +39,62 @@ function assert_unique_serialized_sets(
 }
 
 test("[projection fixtures] exports exactly three stable starter cells", () => {
-  assert.equal(V2_STARTER_CELL_IDS.length, 3);
-  assert.deepEqual(V2_STARTER_CELL_IDS, [
+  assert.equal(STARTER_CELL_IDS.length, 3);
+  assert.deepEqual(STARTER_CELL_IDS, [
     "development_company",
     "ecommerce",
     "personal_media",
   ]);
-  assert.equal(new Set(V2_STARTER_CELL_IDS).size, 3);
+  assert.equal(new Set(STARTER_CELL_IDS).size, 3);
 
-  const ids = V2_STARTER_CELL_DEFINITIONS.map((definition) => definition.cell_id);
-  assert.deepEqual(ids, [...V2_STARTER_CELL_IDS]);
+  const ids = STARTER_CELL_DEFINITIONS.map((definition) => definition.cell_id);
+  assert.deepEqual(ids, [...STARTER_CELL_IDS]);
+});
+
+test("[projection fixtures] canonical aliases and legacy compatibility re-export stay behavior-equal", () => {
+  assert.deepEqual(STARTER_CELL_IDS, V2_STARTER_CELL_IDS);
+  assert.deepEqual(STARTER_CELL_DEFINITIONS, V2_STARTER_CELL_DEFINITIONS);
+  assert.deepEqual(
+    createStarterCellsRuntimeStateProjection(),
+    createV2StarterCellsRuntimeStateProjection()
+  );
+  assert.deepEqual(
+    createStarterCellOperationalUnitProjections(),
+    createV2StarterCellOperationalUnitProjections()
+  );
+  assert.deepEqual(
+    createStarterCellsRuntimeStateProjection(),
+    legacyStarterCellFixtures.createV2StarterCellsRuntimeStateProjection()
+  );
+  assert.deepEqual(
+    createStarterCellOperationalUnitProjections(),
+    legacyStarterCellFixtures.createV2StarterCellOperationalUnitProjections()
+  );
 });
 
 test("[projection fixtures] starter cell definitions stay distinct across tasks artifacts memory learning and drift", () => {
   assert_unique_serialized_sets(
-    V2_STARTER_CELL_DEFINITIONS.map((definition) => definition.default_tasks),
+    STARTER_CELL_DEFINITIONS.map((definition) => definition.default_tasks),
     "default_tasks"
   );
   assert_unique_serialized_sets(
-    V2_STARTER_CELL_DEFINITIONS.map((definition) => definition.default_artifacts),
+    STARTER_CELL_DEFINITIONS.map((definition) => definition.default_artifacts),
     "default_artifacts"
   );
   assert_unique_serialized_sets(
-    V2_STARTER_CELL_DEFINITIONS.map(
+    STARTER_CELL_DEFINITIONS.map(
       (definition) => definition.default_memory_fields
     ),
     "default_memory_fields"
   );
   assert_unique_serialized_sets(
-    V2_STARTER_CELL_DEFINITIONS.map(
+    STARTER_CELL_DEFINITIONS.map(
       (definition) => definition.default_learning_fields
     ),
     "default_learning_fields"
   );
   assert_unique_serialized_sets(
-    V2_STARTER_CELL_DEFINITIONS.map(
+    STARTER_CELL_DEFINITIONS.map(
       (definition) => definition.default_drift_risks
     ),
     "default_drift_risks"
@@ -76,7 +102,7 @@ test("[projection fixtures] starter cell definitions stay distinct across tasks 
 });
 
 test("[projection fixtures] runtime state projection includes one bounded operational unit per starter cell", () => {
-  const runtime_state_projection = createV2StarterCellsRuntimeStateProjection();
+  const runtime_state_projection = createStarterCellsRuntimeStateProjection();
   const operational_units = runtime_state_projection.operational_unit_projections;
 
   assert.equal(operational_units.length, 3);
@@ -84,7 +110,7 @@ test("[projection fixtures] runtime state projection includes one bounded operat
   assert.equal(runtime_state_projection.non_executing, true);
   assert.deepEqual(
     operational_units.map((unit) => unit.scope_summary.scope_id),
-    [...V2_STARTER_CELL_IDS]
+    [...STARTER_CELL_IDS]
   );
 
   for (const unit of operational_units) {
@@ -95,7 +121,7 @@ test("[projection fixtures] runtime state projection includes one bounded operat
 });
 
 test("[projection fixtures] founder dashboard and v1.9 founder page model consume the starter cell runtime state projection", () => {
-  const runtime_state_projection = createV2StarterCellsRuntimeStateProjection();
+  const runtime_state_projection = createStarterCellsRuntimeStateProjection();
   const dashboard_projection =
     assembleFounderDashboardProjection(runtime_state_projection);
   const founder_page_model =
@@ -105,7 +131,7 @@ test("[projection fixtures] founder dashboard and v1.9 founder page model consum
   assert.equal(founder_page_model.dashboard_surface.cell_cards.length, 3);
   assert.deepEqual(
     dashboard_projection.cell_cards.map((card) => card.cell_id),
-    [...V2_STARTER_CELL_IDS]
+    [...STARTER_CELL_IDS]
   );
   assert.equal(dashboard_projection.non_executing, true);
   assert.equal(dashboard_projection.runtime_private_fields_omitted, true);
@@ -113,13 +139,13 @@ test("[projection fixtures] founder dashboard and v1.9 founder page model consum
 });
 
 test("[projection fixtures] cell operations assembly and v1.9 cell page model consume every starter cell", () => {
-  const runtime_state_projection = createV2StarterCellsRuntimeStateProjection();
+  const runtime_state_projection = createStarterCellsRuntimeStateProjection();
   const panel_projections =
     assembleCellOperationsPanelProjections(runtime_state_projection);
 
   assert.equal(panel_projections.length, 3);
 
-  for (const operational_unit_projection of createV2StarterCellOperationalUnitProjections()) {
+  for (const operational_unit_projection of createStarterCellOperationalUnitProjections()) {
     const panel_projection = assembleCellOperationsPanelProjection(
       runtime_state_projection.state_projection_id,
       operational_unit_projection
@@ -143,7 +169,7 @@ test("[projection fixtures] cell operations assembly and v1.9 cell page model co
 });
 
 test("[projection fixtures] each starter cell includes artifact learning drift and suggested-next-action coverage", () => {
-  const operational_units = createV2StarterCellOperationalUnitProjections();
+  const operational_units = createStarterCellOperationalUnitProjections();
 
   for (const unit of operational_units) {
     assert.ok(unit.recent_artifact_summaries.length >= 1);
@@ -177,7 +203,7 @@ test("[projection fixtures] each starter cell includes artifact learning drift a
 });
 
 test("[projection fixtures] action readiness stays bounded and forbidden irreversible actions never become executable", () => {
-  const operational_units = createV2StarterCellOperationalUnitProjections();
+  const operational_units = createStarterCellOperationalUnitProjections();
 
   for (const unit of operational_units) {
     const auto_local = unit.action_summaries.find(
@@ -214,7 +240,7 @@ test("[projection fixtures] action readiness stays bounded and forbidden irrever
 });
 
 test("[projection fixtures] global candidate learning remains candidate-only in projection consumption", () => {
-  const unit = createV2StarterCellOperationalUnitProjections()[0];
+  const unit = createStarterCellOperationalUnitProjections()[0];
   const panel_projection = assembleCellOperationsPanelProjection(
     "starter-runtime-state",
     unit
@@ -230,8 +256,8 @@ test("[projection fixtures] global candidate learning remains candidate-only in 
 });
 
 test("[projection fixtures] fixture construction and projection output remain deterministic and free of positive execution claims", () => {
-  const first_runtime_state = createV2StarterCellsRuntimeStateProjection();
-  const second_runtime_state = createV2StarterCellsRuntimeStateProjection();
+  const first_runtime_state = createStarterCellsRuntimeStateProjection();
+  const second_runtime_state = createStarterCellsRuntimeStateProjection();
   const first_dashboard = assembleFounderDashboardProjection(first_runtime_state);
   const second_dashboard = assembleFounderDashboardProjection(second_runtime_state);
   const first_panels = assembleCellOperationsPanelProjections(first_runtime_state);
