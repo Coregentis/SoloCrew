@@ -5,7 +5,7 @@
 - `doc_id`:
   - `SOLOCREW-V2.0-STABLE-RELEASE-AND-POST-STABLE-VERIFICATION-v0.1`
 - `status`:
-  - `STABLE_RELEASE_PREPARED_PENDING_POST_STABLE_VERIFICATION`
+  - `STABLE_RELEASED_POST_STABLE_VERIFICATION_PENDING_POINTER_ALIGNMENT`
 - `authority_order`:
   - `MPLP -> Cognitive_OS -> Projection -> SoloCrew`
 - `version_line`:
@@ -137,3 +137,76 @@ Explicit exclusions:
   - `pending`
 - `initial_decision`:
   - `V2_0_STABLE_RELEASE_PREPARED_PENDING_POST_STABLE_VERIFICATION`
+
+## 8. Stable Artifact Truth
+
+- `stable_release_commit`:
+  - `4e75156b94b7cbc8eb676eeee024162ba381ac2a`
+- `stable_tag`:
+  - `solocrew-v2.0-stable-first-runnable-aigc-20260426`
+- `stable_tag_object`:
+  - `d2c7425bf68b4aca1737aa38363c49790d3d709f`
+- `stable_tag_peeled_target`:
+  - `4e75156b94b7cbc8eb676eeee024162ba381ac2a`
+- `github_stable_release`:
+  - `true`
+- `github_release_url`:
+  - `https://github.com/Coregentis/SoloCrew/releases/tag/solocrew-v2.0-stable-first-runnable-aigc-20260426`
+- `github_prerelease`:
+  - `false`
+- `release_target_changed`:
+  - `false`
+- `tag_force_moved`:
+  - `false`
+- `ga_release_created`:
+  - `false`
+- `rc_tag_unchanged`:
+  - `true`
+
+## 9. Post-Stable Verification
+
+- `post_stable_verification_commit`:
+  - `pending until committed`
+- `npm_test`:
+  - `PASS`
+  - `430/430`
+- `focused_v2_journey_tests`:
+  - `PASS`
+  - `58/58`
+- `boundary_grep`:
+  - `PASS`
+- `naming_grep`:
+  - `PASS`
+- `product_journey`:
+  - `PASS`
+- `provider_channel_execution`:
+  - `false`
+- `external_dispatch`:
+  - `false`
+- `autonomous_operation`:
+  - `false`
+- `GA`:
+  - `false`
+- `MPLP_certification`:
+  - `false`
+
+## 10. Release Artifact Alignment Note
+
+- Stable tag intentionally points to the Stable release commit.
+- Post-Stable verification is preserved on main after Stable release creation.
+- A final pointer-alignment commit will replace the placeholder post-Stable verification pointer after this commit is created.
+- No tag was force-moved.
+- No release target was changed.
+- No GA tag or GA GitHub Release was created.
+- This note prevents audit confusion between Stable tag snapshot truth and final main post-Stable verification truth.
+
+## 11. Post-Stable Verification Decision
+
+- `stable_release_result`:
+  - `V2_0_STABLE_RELEASE_EXECUTION_PASS`
+- `post_stable_verification_result`:
+  - `V2_0_POST_STABLE_VERIFICATION_PASS`
+- `pointer_alignment`:
+  - `pending`
+- `next_action`:
+  - `V2_0_STABLE_POINTER_ALIGNMENT_REQUIRED`
