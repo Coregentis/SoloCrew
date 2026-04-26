@@ -2,6 +2,12 @@
 
 ## 2026-04-26
 
+- added V2.0 Wave 5 Artifact Workflow and Persistence with local-only
+  create/save/list/retrieve/revise/archive/history/reload behavior; it does
+  not deliver full V2.0; it does not implement provider/channel execution; it
+  does not implement full LLM provider generation; it does not implement
+  learning feedback productization or interactive drift resolution; next
+  allowed wave is V2.0 Wave 6 Learning and Drift Productization
 - added V2.0 Wave 4 Cell Operations Panel Productization over canonical
   starter-cell fixtures; it productizes per-Cell operations surfaces; it does
   not deliver V2.0; it does not implement real artifact-generation runtime;

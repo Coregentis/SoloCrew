@@ -14,6 +14,9 @@ import {
   STARTER_CELL_IDS,
   createStarterCellsRuntimeStateProjection,
 } from "../../projection/fixtures/starter-cell-fixtures.ts";
+import type {
+  ProductArtifactRecord,
+} from "../artifacts/artifact-contract.ts";
 import {
   assert_valid,
   collect_forbidden_field_errors,
@@ -37,6 +40,8 @@ export type CellOperationsPanelProductPageModelInput =
 export interface CreateCellOperationsPanelProductPageModelOptions {
   target_cell_id?: CellOperationsPanelProductTargetCellId;
   source_runtime_projection_ref?: string;
+  persisted_artifacts?: ProductArtifactRecord[];
+  persisted_artifact_history?: ProductArtifactRecord[];
 }
 
 export type ProductActionReadinessState =
@@ -117,6 +122,44 @@ export interface CellOperationsPanelProductHistoryItem {
   source_ref_id: string;
   source_evidence_refs: string[];
   non_executing: true;
+}
+
+function build_persisted_artifact_items(args: {
+  records: ProductArtifactRecord[];
+  review_posture: string;
+}): CellOperationsPanelProductArtifactItem[] {
+  return stable_sort_by_key(
+    args.records.map((record) => ({
+      artifact_id: record.artifact_id,
+      title: record.title,
+      artifact_kind: record.artifact_kind,
+      artifact_class: record.artifact_class,
+      status: record.status,
+      related_task_refs: [...record.related_task_refs],
+      source_refs: [record.source_fixture_ref],
+      source_evidence_refs: [...record.source_evidence_refs],
+      review_posture: args.review_posture,
+      non_executing: true as const,
+    })),
+    "artifact_id"
+  );
+}
+
+function build_persisted_history_items(
+  records: ProductArtifactRecord[]
+): CellOperationsPanelProductHistoryItem[] {
+  return stable_sort_by_key(
+    records.map((record) => ({
+      history_id: `${record.artifact_id}:${record.artifact_version_id}`,
+      history_kind: "artifact",
+      title: record.title,
+      summary: `${record.status} revision ${record.revision_index} remains persisted locally.`,
+      source_ref_id: record.artifact_id,
+      source_evidence_refs: [...record.source_evidence_refs],
+      non_executing: true as const,
+    })),
+    "history_id"
+  );
 }
 
 export interface CellOperationsPanelProductMetricItem {
@@ -406,6 +449,12 @@ export function createCellOperationsPanelProductPageModel(
   const review_posture =
     definition?.default_review_posture ??
     "Review remains required before using fixture-backed artifacts outside the Cell.";
+  const persisted_artifact_records = (options.persisted_artifacts ?? []).filter(
+    (record) => record.cell_id === projection.cell_id
+  );
+  const persisted_artifact_history = (
+    options.persisted_artifact_history ?? []
+  ).filter((record) => record.cell_id === projection.cell_id);
 
   const task_items = stable_sort_by_key(
     projection.task_summaries.map((task) => ({
@@ -419,7 +468,7 @@ export function createCellOperationsPanelProductPageModel(
     })),
     "task_id"
   );
-  const artifact_items = stable_sort_by_key(
+  const fixture_artifact_items = stable_sort_by_key(
     projection.artifact_summaries.map((artifact) => ({
       artifact_id: artifact.artifact_id,
       title: artifact.title,
@@ -436,6 +485,13 @@ export function createCellOperationsPanelProductPageModel(
     })),
     "artifact_id"
   );
+  const artifact_items =
+    persisted_artifact_records.length > 0
+      ? build_persisted_artifact_items({
+          records: persisted_artifact_records,
+          review_posture,
+        })
+      : fixture_artifact_items;
   const action_items = stable_sort_by_key(
     projection.action_summaries.map((action) =>
       create_action_product_item({
@@ -501,7 +557,7 @@ export function createCellOperationsPanelProductPageModel(
     })),
     "review_id"
   );
-  const history_items = stable_sort_by_key(
+  const fixture_history_items = stable_sort_by_key(
     projection.history_summaries.map((history) => ({
       history_id: history.history_id,
       history_kind: history.history_kind,
@@ -511,6 +567,14 @@ export function createCellOperationsPanelProductPageModel(
       source_evidence_refs: [...history.source_evidence_refs],
       non_executing: true as const,
     })),
+    "history_id"
+  );
+  const persisted_history_items =
+    persisted_artifact_history.length > 0
+      ? build_persisted_history_items(persisted_artifact_history)
+      : [];
+  const history_items = stable_sort_by_key(
+    [...fixture_history_items, ...persisted_history_items],
     "history_id"
   );
   const metric_items = stable_sort_by_key(

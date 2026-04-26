@@ -89,7 +89,12 @@ canonical starter-cell fixtures.
 It productizes per-Cell operations surfaces, but it does not implement real
 artifact-generation runtime, artifact persistence workflow, provider/channel
 execution, or V2.0 delivery.
-The next allowed wave is `V2.0 Wave 5 — Artifact Workflow and Persistence`.
+V2.0 Wave 5 Artifact Workflow and Persistence has now been added with
+local-only create/save/list/retrieve/revise/archive/history/reload behavior.
+It still does not implement provider/channel execution, full LLM provider
+generation, learning feedback productization, interactive drift resolution, or
+V2.0 delivery.
+The next allowed wave is `V2.0 Wave 6 — Learning and Drift Productization`.
 
 That does not mean V2.0 is delivered, ready, GA, provider/channel capable, or
 an autonomous company operating release.
