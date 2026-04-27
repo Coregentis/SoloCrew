@@ -29,6 +29,7 @@ export type WorkspaceHistoryEvent = {
     | "workspace_created"
     | "user_request_recorded"
     | "v2_1_review_chain_placeholder_recorded"
+    | "review_packet_exported"
     | "workspace_saved"
     | "continuation_restored";
   summary: string;
