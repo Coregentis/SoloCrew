@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-04-28
+
+- prepared V2.2 RC gates and documentation alignment for the private-alpha
+  local review-only journey; no tag, package, publishing, commercial readiness,
+  public line, provider/channel execution, marketplace behavior, autonomous
+  execution, or protocol authority claim is introduced
+- audited V2.2 RC readiness and found the private-alpha journey suitable for a
+  later owner-authorized RC execution wave after minor documentation gates
+- hardened the V2.2 private-alpha journey E2E across workspace history,
+  continuation restore, local review packet JSON/Markdown output, recorded
+  `review_packet_exported` history, and founder dashboard continuation
+- added V2.2 IMPL-03 founder dashboard continuation with CGOS consumption,
+  surfacing saved workspace state and local review packet status while staying
+  local, review-only, and non-executing
+- added V2.2 IMPL-02 deterministic local review packet export with CGOS
+  consumption, including JSON/Markdown rendering and workspace history
+  recording while avoiding dispatch, marketplace, and autonomous behavior
+- added V2.2 IMPL-01 workspace/session continuity with CGOS consumption,
+  including deterministic file-backed workspace persistence, history, restore,
+  private-alpha fixture, and CGOS posture refs/bounded summaries
+
 ## 2026-04-26
 
 - sealed the V2.1 RC-01 candidate for owner review; no stable release, no
