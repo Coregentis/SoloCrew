@@ -2,6 +2,11 @@
 
 ## 2026-04-26
 
+- implemented V2.1 IMPL-03 Cell CEO Assembly Plan Preview and asset-type
+  vocabulary constants as bounded product-projection surfaces; no V2.1
+  release opening, no actual Cell CEO Assembly execution, no asset
+  installation, no marketplace, no provider/channel/autonomous execution, and
+  no Cognitive_OS/MPLP changes are introduced
 - implemented V2.1 IMPL-02 Management Directive product object and selected
   Cell handoff preview as a bounded product-projection slice; no V2.1 release
   opening, no Cell CEO Assembly implementation, no marketplace, no
