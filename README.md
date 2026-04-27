@@ -86,6 +86,10 @@ V2.0 Wave 2 starter-cell baseline and fixtures have now been added:
 V2.0.x has clarified that these three starter experiences are official starter
 blueprint / assembly fixtures over Cell operating-unit semantics; they are not
 constitutional Cell kinds and do not expand V2.0 scope.
+Post-cell-drift architecture baseline has been added to freeze Secretary
+routing, Cell CEO / Crew Compiler assembly authority, Open Asset Plane concept
+boundaries, and TracePilot non-Cell positioning before any future V2.1
+planning. V2.1 remains blocked unless explicitly owner-authorized.
 
 V2.0 Wave 3 Founder Dashboard Productization has now been added over the V2
 starter-cell fixtures.

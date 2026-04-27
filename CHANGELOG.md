@@ -2,6 +2,11 @@
 
 ## 2026-04-26
 
+- added the post-cell-drift SoloCrew architecture baseline, freezing Cell
+  semantics, Secretary routing, Cell CEO / Crew Compiler assembly authority,
+  Open Asset Plane concept boundaries, and TracePilot non-Cell positioning; no
+  V2.1 opening, no feature expansion, and no Cognitive_OS/MPLP change is
+  introduced
 - clarified SoloCrew V2.0 starter-cell semantic drift by preserving the three
   starter experiences as official starter blueprint / assembly fixtures while
   restoring `cell_kind` to generic Cell operating-unit vocabulary; no feature
