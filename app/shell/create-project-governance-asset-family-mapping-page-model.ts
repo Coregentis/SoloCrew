@@ -1,40 +1,40 @@
 import {
-  createTracePilotAssetFamilyMapping,
-} from "../../projection/assembly/tracepilot-asset-family-mapping.ts";
+  createProjectGovernanceAssetFamilyMapping,
+} from "../../projection/assembly/project-governance-asset-family-mapping.ts";
 import type {
-  TracePilotAssetFamilyBoundaryFlags,
-  TracePilotAssetFamilyMapping,
-  TracePilotAssetFamilyMappingInput,
-} from "../../projection/contracts/tracepilot-asset-family-mapping-contract.ts";
+  ProjectGovernanceAssetFamilyBoundaryFlags,
+  ProjectGovernanceAssetFamilyMapping,
+  ProjectGovernanceAssetFamilyMappingInput,
+} from "../../projection/contracts/project-governance-asset-family-mapping-contract.ts";
 
-export interface TracePilotAssetFamilyMappingPageModel {
+export interface ProjectGovernanceAssetFamilyMappingPageModel {
   surface_id: string;
-  page_title: "TracePilot Asset-Family Mapping";
+  page_title: "Project Governance Asset-Family Mapping";
   status: "review_required";
-  mapping: TracePilotAssetFamilyMapping;
+  mapping: ProjectGovernanceAssetFamilyMapping;
   review_banner: string;
   target_cell_summary: string;
   asset_family_summary: readonly string[];
-  boundary_summary: TracePilotAssetFamilyBoundaryFlags;
+  boundary_summary: ProjectGovernanceAssetFamilyBoundaryFlags;
   next_allowed_user_actions: readonly string[];
   forbidden_actions: readonly string[];
   v2_1_implementation_scope:
-    "impl_04_tracepilot_asset_family_mapping_only";
+    "impl_04_project_governance_asset_family_mapping_only";
 }
 
-export function createTracePilotAssetFamilyMappingPageModel(
-  input: TracePilotAssetFamilyMappingInput
-): TracePilotAssetFamilyMappingPageModel {
-  const mapping = createTracePilotAssetFamilyMapping(input);
+export function createProjectGovernanceAssetFamilyMappingPageModel(
+  input: ProjectGovernanceAssetFamilyMappingInput
+): ProjectGovernanceAssetFamilyMappingPageModel {
+  const mapping = createProjectGovernanceAssetFamilyMapping(input);
 
   return {
     surface_id: `${mapping.mapping_id}-page-model`,
-    page_title: "TracePilot Asset-Family Mapping",
+    page_title: "Project Governance Asset-Family Mapping",
     status: "review_required",
     mapping,
     review_banner:
-      "Review this TracePilot asset-family mapping before any future integration planning wave.",
-    target_cell_summary: `${mapping.target_cell_label} is evaluated for TracePilot-style asset-family mapping only; no Cell is created.`,
+      "Review this project-governance asset-family mapping before any future integration planning wave.",
+    target_cell_summary: `${mapping.target_cell_label} is evaluated for project-governance asset-family mapping only; no Cell is created.`,
     asset_family_summary: mapping.member_references.map(
       (member_reference) =>
         `${member_reference.label}: ${member_reference.planning_use}`
@@ -63,10 +63,10 @@ export function createTracePilotAssetFamilyMappingPageModel(
       cognitive_os_runtime_law: false,
     },
     next_allowed_user_actions: [
-      "review TracePilot asset-family mapping",
+      "review project-governance asset-family mapping",
       "return to Cell CEO Assembly Plan Preview",
       "reject mapping",
-      "authorize future TracePilot integration planning wave",
+      "authorize future project-governance integration planning wave",
     ],
     forbidden_actions: [
       "create TracePilot Cell",
@@ -81,6 +81,6 @@ export function createTracePilotAssetFamilyMappingPageModel(
       "approve external business action",
     ],
     v2_1_implementation_scope:
-      "impl_04_tracepilot_asset_family_mapping_only",
+      "impl_04_project_governance_asset_family_mapping_only",
   };
 }

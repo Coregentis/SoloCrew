@@ -11,9 +11,9 @@ import {
   createSecretaryRoutingProposal,
 } from "../../projection/assembly/secretary-routing-proposal.ts";
 import {
-  canCreateTracePilotAssetFamilyMappingFromPreview,
-  createTracePilotAssetFamilyMapping,
-} from "../../projection/assembly/tracepilot-asset-family-mapping.ts";
+  canCreateProjectGovernanceAssetFamilyMappingFromPreview,
+  createProjectGovernanceAssetFamilyMapping,
+} from "../../projection/assembly/project-governance-asset-family-mapping.ts";
 import {
   SOLOCREW_ASSET_TYPE_KINDS,
 } from "../../projection/contracts/asset-type-vocabulary.ts";
@@ -21,8 +21,8 @@ import type {
   CellCEOAssemblyPlanPreview,
 } from "../../projection/contracts/cell-ceo-assembly-plan-preview-contract.ts";
 import type {
-  TracePilotAssetFamilyMapping,
-} from "../../projection/contracts/tracepilot-asset-family-mapping-contract.ts";
+  ProjectGovernanceAssetFamilyMapping,
+} from "../../projection/contracts/project-governance-asset-family-mapping-contract.ts";
 import {
   V2_STARTER_CELL_IDS,
   V2_STARTER_CELL_KIND,
@@ -32,7 +32,7 @@ function create_preview(
   founder_request: string
 ): CellCEOAssemblyPlanPreview {
   const proposal = createSecretaryRoutingProposal({
-    request_id: "request-tracepilot-mapping-001",
+    request_id: "request-project-governance-mapping-001",
     founder_request,
     created_at: "2026-04-27T00:00:00.000Z",
     requested_by: "founder",
@@ -40,7 +40,7 @@ function create_preview(
   });
 
   const directive = createManagementDirective({
-    directive_id: "directive-tracepilot-mapping-001",
+    directive_id: "directive-project-governance-mapping-001",
     source_proposal: proposal,
     accepted_target_kind: "existing_cell",
     accepted_by: "founder",
@@ -48,7 +48,7 @@ function create_preview(
   });
 
   return createCellCEOAssemblyPlanPreview({
-    preview_id: "assembly-preview-tracepilot-mapping-001",
+    preview_id: "assembly-preview-project-governance-mapping-001",
     source_directive: directive,
     prepared_by: "cell-ceo-preview",
     created_at: "2026-04-27T00:10:00.000Z",
@@ -57,9 +57,9 @@ function create_preview(
 
 function create_mapping(
   founder_request: string
-): TracePilotAssetFamilyMapping {
-  return createTracePilotAssetFamilyMapping({
-    mapping_id: "tracepilot-mapping-001",
+): ProjectGovernanceAssetFamilyMapping {
+  return createProjectGovernanceAssetFamilyMapping({
+    mapping_id: "project-governance-mapping-001",
     source_preview: create_preview(founder_request),
     prepared_by: "secretary-planning",
     created_at: "2026-04-27T00:15:00.000Z",
@@ -67,7 +67,7 @@ function create_mapping(
 }
 
 function assert_boundary_flags(
-  mapping: TracePilotAssetFamilyMapping
+  mapping: ProjectGovernanceAssetFamilyMapping
 ): void {
   assert.equal(mapping.product_projection_only, true);
   assert.equal(mapping.runtime_private_fields_omitted, true);
@@ -90,8 +90,8 @@ function assert_boundary_flags(
   assert.equal(mapping.cell_ceo_assembly_preview_remains_review_only, true);
   assert.equal(mapping.mplp_object, false);
   assert.equal(mapping.cognitive_os_runtime_law, false);
-  assert.equal(mapping.tracepilot_modeled_as_cell, false);
-  assert.equal(mapping.tracepilot_integration_implemented, false);
+  assert.equal(mapping.external_product_modeled_as_cell, false);
+  assert.equal(mapping.external_product_integration_implemented, false);
   assert.equal(mapping.review_posture, "review_required");
 
   for (const member_reference of mapping.member_references) {
@@ -117,7 +117,7 @@ function assert_boundary_flags(
   }
 }
 
-test("[tracepilot mapping] creates Development Company mapping-only asset-family references", () => {
+test("[project governance mapping] creates Development Company mapping-only asset-family references", () => {
   const mapping = create_mapping(
     "Review TracePilot repo project governance and release drift."
   );
@@ -125,16 +125,25 @@ test("[tracepilot mapping] creates Development Company mapping-only asset-family
     (member_reference) => member_reference.member_kind
   );
 
-  assert.equal(mapping.mapping_scope, "tracepilot_asset_family_mapping");
+  assert.equal(mapping.mapping_scope, "project_governance_asset_family_mapping");
+  assert.notEqual(mapping.mapping_scope, "tracepilot_asset_family_mapping");
   assert.equal(mapping.status, "draft_review_required");
   assert.equal(mapping.target_cell_id, "development_company");
   assert.equal(mapping.starter_blueprint_id, "development_company");
   assert.equal(mapping.cell_kind, V2_STARTER_CELL_KIND);
   assert.equal(
     mapping.asset_family_id,
+    "developer_project_governance_asset_family"
+  );
+  assert.notEqual(
+    mapping.asset_family_id,
     "tracepilot_project_governance_asset_family"
   );
   assert.equal(
+    mapping.asset_family_label,
+    "Developer Project Governance Asset Family"
+  );
+  assert.notEqual(
     mapping.asset_family_label,
     "TracePilot Project Governance Asset Family"
   );
@@ -150,7 +159,7 @@ test("[tracepilot mapping] creates Development Company mapping-only asset-family
   assert_boundary_flags(mapping);
 });
 
-test("[tracepilot mapping] marks E-commerce and Personal Media previews not applicable", () => {
+test("[project governance mapping] marks E-commerce and Personal Media previews not applicable", () => {
   const ecommerce_mapping = create_mapping(
     "Prepare a product listing campaign for customer offers."
   );
@@ -163,15 +172,15 @@ test("[tracepilot mapping] marks E-commerce and Personal Media previews not appl
     assert.notEqual(mapping.target_cell_id, "development_company");
     assert.equal(mapping.member_references.length, 0);
     assert.ok(mapping.non_applicability_notes.length > 0);
-    assert.equal(mapping.tracepilot_modeled_as_cell, false);
-    assert.equal(mapping.tracepilot_integration_implemented, false);
+    assert.equal(mapping.external_product_modeled_as_cell, false);
+    assert.equal(mapping.external_product_integration_implemented, false);
     assert.equal(mapping.project_import_started, false);
     assert.equal(mapping.drift_detection_started, false);
     assert_boundary_flags(mapping);
   }
 });
 
-test("[tracepilot mapping] exposes every execution boundary as unavailable", () => {
+test("[project governance mapping] exposes every execution boundary as unavailable", () => {
   const mapping = create_mapping(
     "Review TracePilot repo project governance and release drift."
   );
@@ -181,7 +190,7 @@ test("[tracepilot mapping] exposes every execution boundary as unavailable", () 
   assert.equal(mapping.next_review_step.includes("Human reviews"), true);
 });
 
-test("[tracepilot mapping] remains non-Cell and non-integrated in serialized output", () => {
+test("[project governance mapping] remains non-Cell and non-integrated in serialized output", () => {
   const mapping = create_mapping(
     "Review TracePilot repo architecture drift before a release."
   );
@@ -190,6 +199,15 @@ test("[tracepilot mapping] remains non-Cell and non-integrated in serialized out
   assert.equal(mapping.target_cell_id, "development_company");
   assert.equal(mapping.cell_kind, V2_STARTER_CELL_KIND);
   assert.doesNotMatch(serialized, /tracepilot_cell/i);
+  assert.doesNotMatch(serialized, /tracepilot_asset_family_mapping/i);
+  assert.doesNotMatch(
+    serialized,
+    /tracepilot_project_governance_asset_family/i
+  );
+  assert.doesNotMatch(
+    serialized,
+    /TracePilot Project Governance Asset Family/
+  );
   assert.doesNotMatch(
     serialized,
     /TracePilot integration is available|drift detection executed|project import executed|evidence pack generated/i
@@ -198,23 +216,23 @@ test("[tracepilot mapping] remains non-Cell and non-integrated in serialized out
   assert.notEqual(mapping.cell_kind, "tracepilot_cell");
 });
 
-test("[tracepilot mapping] same preview and input produce same mapping", () => {
+test("[project governance mapping] same preview and input produce same mapping", () => {
   const source_preview = create_preview(
     "Review TracePilot repo project governance and release drift."
   );
   const input = {
-    mapping_id: "tracepilot-mapping-deterministic-001",
+    mapping_id: "project-governance-mapping-deterministic-001",
     source_preview,
     prepared_by: "secretary-planning",
     created_at: "2026-04-27T00:15:00.000Z",
   };
 
   assert.equal(
-    canCreateTracePilotAssetFamilyMappingFromPreview(source_preview),
+    canCreateProjectGovernanceAssetFamilyMappingFromPreview(source_preview),
     true
   );
   assert.deepEqual(
-    createTracePilotAssetFamilyMapping(input),
-    createTracePilotAssetFamilyMapping(input)
+    createProjectGovernanceAssetFamilyMapping(input),
+    createProjectGovernanceAssetFamilyMapping(input)
   );
 });

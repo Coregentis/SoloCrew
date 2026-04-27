@@ -10,18 +10,18 @@ import type {
   V2StarterCellKind,
 } from "../fixtures/starter-cell-fixtures.ts";
 
-export type TracePilotAssetFamilyMappingStatus =
+export type ProjectGovernanceAssetFamilyMappingStatus =
   | "draft_review_required"
   | "not_applicable_to_selected_cell";
-export type TracePilotAssetFamilyReviewPosture = "review_required";
-export type TracePilotAssetFamilyMappingScope =
-  "tracepilot_asset_family_mapping";
-export type TracePilotAssetFamilyId =
-  "tracepilot_project_governance_asset_family";
-export type TracePilotAssetFamilyLabel =
-  "TracePilot Project Governance Asset Family";
+export type ProjectGovernanceAssetFamilyReviewPosture = "review_required";
+export type ProjectGovernanceAssetFamilyMappingScope =
+  "project_governance_asset_family_mapping";
+export type ProjectGovernanceAssetFamilyId =
+  "developer_project_governance_asset_family";
+export type ProjectGovernanceAssetFamilyLabel =
+  "Developer Project Governance Asset Family";
 
-export type TracePilotAssetFamilyMemberKind =
+export type ProjectGovernanceAssetFamilyMemberKind =
   | "project_import_capability"
   | "drift_detection_capability"
   | "architecture_review_workflow"
@@ -29,15 +29,15 @@ export type TracePilotAssetFamilyMemberKind =
   | "evidence_template_family"
   | "developerops_role_projection_template";
 
-export interface TracePilotAssetFamilyMappingInput {
+export interface ProjectGovernanceAssetFamilyMappingInput {
   mapping_id: string;
   source_preview: CellCEOAssemblyPlanPreview;
   created_at: string;
   prepared_by?: string;
 }
 
-export interface TracePilotAssetFamilyMemberReference {
-  member_kind: TracePilotAssetFamilyMemberKind;
+export interface ProjectGovernanceAssetFamilyMemberReference {
+  member_kind: ProjectGovernanceAssetFamilyMemberKind;
   label: string;
   maps_to_asset_type_kind: SoloCrewAssetTypeKind;
   planning_use: string;
@@ -50,7 +50,7 @@ export interface TracePilotAssetFamilyMemberReference {
   concrete_asset_instance_created: false;
 }
 
-export interface TracePilotAssetFamilyBoundaryFlags {
+export interface ProjectGovernanceAssetFamilyBoundaryFlags {
   non_executing: true;
   no_dispatch: true;
   no_autonomous_execution: true;
@@ -74,10 +74,10 @@ export interface TracePilotAssetFamilyBoundaryFlags {
   cognitive_os_runtime_law: false;
 }
 
-export interface TracePilotAssetFamilyMapping
-  extends TracePilotAssetFamilyBoundaryFlags {
+export interface ProjectGovernanceAssetFamilyMapping
+  extends ProjectGovernanceAssetFamilyBoundaryFlags {
   mapping_id: string;
-  mapping_scope: TracePilotAssetFamilyMappingScope;
+  mapping_scope: ProjectGovernanceAssetFamilyMappingScope;
   source_preview_id: string;
   source_directive_id: string;
   source_proposal_id: string;
@@ -88,14 +88,14 @@ export interface TracePilotAssetFamilyMapping
   target_cell_label: string;
   starter_blueprint_id: V2OfficialStarterBlueprintId;
   cell_kind: V2StarterCellKind;
-  status: TracePilotAssetFamilyMappingStatus;
-  review_posture: TracePilotAssetFamilyReviewPosture;
-  asset_family_id: TracePilotAssetFamilyId;
-  asset_family_label: TracePilotAssetFamilyLabel;
+  status: ProjectGovernanceAssetFamilyMappingStatus;
+  review_posture: ProjectGovernanceAssetFamilyReviewPosture;
+  asset_family_id: ProjectGovernanceAssetFamilyId;
+  asset_family_label: ProjectGovernanceAssetFamilyLabel;
   applies_to_development_company_only: true;
-  tracepilot_modeled_as_cell: false;
-  tracepilot_integration_implemented: false;
-  member_references: readonly TracePilotAssetFamilyMemberReference[];
+  external_product_modeled_as_cell: false;
+  external_product_integration_implemented: false;
+  member_references: readonly ProjectGovernanceAssetFamilyMemberReference[];
   rationale: readonly string[];
   non_applicability_notes: readonly string[];
   next_review_step: string;

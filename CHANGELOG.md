@@ -2,7 +2,13 @@
 
 ## 2026-04-26
 
-- implemented V2.1 IMPL-04 TracePilot Asset-Family Mapping as a
+- corrected V2.1 IMPL-04 naming from TracePilot-branded internal objects to
+  Project Governance Asset-Family Mapping; naming/product-boundary correction
+  only, no V2.1 release opening, no TracePilot integration, no project import,
+  no drift detection execution, no evidence generation, no asset installation,
+  no marketplace, no provider/channel/autonomous execution, and no
+  Cognitive_OS/MPLP changes are introduced
+- implemented V2.1 IMPL-04 Project Governance Asset-Family Mapping as a
   non-executing planning surface; no V2.1 release opening, no TracePilot
   integration, no project import, no drift detection execution, no evidence
   generation, no asset installation, no marketplace, no

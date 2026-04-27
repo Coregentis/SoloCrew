@@ -5,14 +5,14 @@ import type {
   SoloCrewAssetTypeKind,
 } from "../contracts/asset-type-vocabulary.ts";
 import type {
-  TracePilotAssetFamilyMapping,
-  TracePilotAssetFamilyMappingInput,
-  TracePilotAssetFamilyMemberKind,
-  TracePilotAssetFamilyMemberReference,
-} from "../contracts/tracepilot-asset-family-mapping-contract.ts";
+  ProjectGovernanceAssetFamilyMapping,
+  ProjectGovernanceAssetFamilyMappingInput,
+  ProjectGovernanceAssetFamilyMemberKind,
+  ProjectGovernanceAssetFamilyMemberReference,
+} from "../contracts/project-governance-asset-family-mapping-contract.ts";
 
-const TRACEPILOT_MEMBER_ASSET_TYPE_MAP: Record<
-  TracePilotAssetFamilyMemberKind,
+const PROJECT_GOVERNANCE_MEMBER_ASSET_TYPE_MAP: Record<
+  ProjectGovernanceAssetFamilyMemberKind,
   SoloCrewAssetTypeKind
 > = {
   project_import_capability: "capability_plugin",
@@ -23,8 +23,8 @@ const TRACEPILOT_MEMBER_ASSET_TYPE_MAP: Record<
   developerops_role_projection_template: "role_projection_template",
 };
 
-const TRACEPILOT_MEMBER_LABELS: Record<
-  TracePilotAssetFamilyMemberKind,
+const PROJECT_GOVERNANCE_MEMBER_LABELS: Record<
+  ProjectGovernanceAssetFamilyMemberKind,
   string
 > = {
   project_import_capability: "Project Import Capability",
@@ -36,8 +36,8 @@ const TRACEPILOT_MEMBER_LABELS: Record<
     "DeveloperOps Role Projection Template",
 };
 
-const TRACEPILOT_MEMBER_PLANNING_USE: Record<
-  TracePilotAssetFamilyMemberKind,
+const PROJECT_GOVERNANCE_MEMBER_PLANNING_USE: Record<
+  ProjectGovernanceAssetFamilyMemberKind,
   string
 > = {
   project_import_capability:
@@ -54,7 +54,8 @@ const TRACEPILOT_MEMBER_PLANNING_USE: Record<
     "Plan how a future role template family could describe DeveloperOps review posture without creating roles.",
 };
 
-const TRACEPILOT_MEMBER_KINDS: readonly TracePilotAssetFamilyMemberKind[] = [
+const PROJECT_GOVERNANCE_MEMBER_KINDS:
+  readonly ProjectGovernanceAssetFamilyMemberKind[] = [
   "project_import_capability",
   "drift_detection_capability",
   "architecture_review_workflow",
@@ -77,25 +78,26 @@ function assert_review_only_preview(
     preview.management_directive_remains_review_only !== true
   ) {
     throw new Error(
-      "TracePilot Asset-Family Mapping requires a review-only Cell CEO Assembly Plan Preview."
+      "Project Governance Asset-Family Mapping requires a review-only Cell CEO Assembly Plan Preview."
     );
   }
 }
 
-export function canCreateTracePilotAssetFamilyMappingFromPreview(
+export function canCreateProjectGovernanceAssetFamilyMappingFromPreview(
   preview: CellCEOAssemblyPlanPreview
 ): boolean {
   return preview.starter_blueprint_id === "development_company";
 }
 
-export function createTracePilotMemberReference(
-  member_kind: TracePilotAssetFamilyMemberKind
-): TracePilotAssetFamilyMemberReference {
+export function createProjectGovernanceMemberReference(
+  member_kind: ProjectGovernanceAssetFamilyMemberKind
+): ProjectGovernanceAssetFamilyMemberReference {
   return {
     member_kind,
-    label: TRACEPILOT_MEMBER_LABELS[member_kind],
-    maps_to_asset_type_kind: TRACEPILOT_MEMBER_ASSET_TYPE_MAP[member_kind],
-    planning_use: TRACEPILOT_MEMBER_PLANNING_USE[member_kind],
+    label: PROJECT_GOVERNANCE_MEMBER_LABELS[member_kind],
+    maps_to_asset_type_kind:
+      PROJECT_GOVERNANCE_MEMBER_ASSET_TYPE_MAP[member_kind],
+    planning_use: PROJECT_GOVERNANCE_MEMBER_PLANNING_USE[member_kind],
     implementation_status: "mapping_only",
     integration_implemented: false,
     execution_available: false,
@@ -106,10 +108,10 @@ export function createTracePilotMemberReference(
   };
 }
 
-export function listTracePilotAssetFamilyMemberReferences():
-  TracePilotAssetFamilyMemberReference[] {
-  return TRACEPILOT_MEMBER_KINDS.map((member_kind) =>
-    createTracePilotMemberReference(member_kind)
+export function listProjectGovernanceAssetFamilyMemberReferences():
+  ProjectGovernanceAssetFamilyMemberReference[] {
+  return PROJECT_GOVERNANCE_MEMBER_KINDS.map((member_kind) =>
+    createProjectGovernanceMemberReference(member_kind)
   );
 }
 
@@ -117,9 +119,9 @@ function development_company_rationale(
   preview: CellCEOAssemblyPlanPreview
 ): string[] {
   return [
-    `${preview.target_cell_label} is the only current starter blueprint eligible for TracePilot-style project governance asset-family mapping.`,
+    `${preview.target_cell_label} is the only current starter blueprint eligible for developer project-governance asset-family mapping.`,
     "The mapping is product projection vocabulary only; it does not run project import, codebase analysis, drift detection, or evidence generation.",
-    "TracePilot remains a future asset-family planning path, not a SoloCrew Cell.",
+    "TracePilot may remain a future optional Coregentis product integration/provider candidate, not a SoloCrew Cell or canonical SoloCrew internal object.",
   ];
 }
 
@@ -131,23 +133,23 @@ function non_applicability_notes(
   }
 
   return [
-    `TracePilot-style developer/project governance mapping is not applicable to ${preview.target_cell_label} in this implementation wave.`,
+    `project-governance mapping is not applicable to ${preview.target_cell_label} in this implementation wave.`,
     "No TracePilot integration, project import, drift detection, architecture review execution, or evidence generation is started.",
   ];
 }
 
-export function createTracePilotAssetFamilyMapping(
-  input: TracePilotAssetFamilyMappingInput
-): TracePilotAssetFamilyMapping {
+export function createProjectGovernanceAssetFamilyMapping(
+  input: ProjectGovernanceAssetFamilyMappingInput
+): ProjectGovernanceAssetFamilyMapping {
   assert_review_only_preview(input.source_preview);
 
   const preview = input.source_preview;
   const applicable =
-    canCreateTracePilotAssetFamilyMappingFromPreview(preview);
+    canCreateProjectGovernanceAssetFamilyMappingFromPreview(preview);
 
   return {
     mapping_id: input.mapping_id,
-    mapping_scope: "tracepilot_asset_family_mapping",
+    mapping_scope: "project_governance_asset_family_mapping",
     source_preview_id: preview.preview_id,
     source_directive_id: preview.source_directive_id,
     source_proposal_id: preview.source_proposal_id,
@@ -162,19 +164,19 @@ export function createTracePilotAssetFamilyMapping(
       ? "draft_review_required"
       : "not_applicable_to_selected_cell",
     review_posture: "review_required",
-    asset_family_id: "tracepilot_project_governance_asset_family",
-    asset_family_label: "TracePilot Project Governance Asset Family",
+    asset_family_id: "developer_project_governance_asset_family",
+    asset_family_label: "Developer Project Governance Asset Family",
     applies_to_development_company_only: true,
-    tracepilot_modeled_as_cell: false,
-    tracepilot_integration_implemented: false,
+    external_product_modeled_as_cell: false,
+    external_product_integration_implemented: false,
     member_references: applicable
-      ? listTracePilotAssetFamilyMemberReferences()
+      ? listProjectGovernanceAssetFamilyMemberReferences()
       : [],
     rationale: applicable ? development_company_rationale(preview) : [],
     non_applicability_notes: non_applicability_notes(preview),
     next_review_step: applicable
-      ? "Human reviews this mapping before any future TracePilot integration planning wave is authorized."
-      : "Return to the selected Cell's assembly preview; TracePilot mapping is not applicable to this Cell.",
+      ? "Human reviews this mapping before any future project-governance integration planning wave is authorized."
+      : "Return to the selected Cell's assembly preview; project governance mapping is not applicable to this Cell.",
     non_executing: true,
     no_dispatch: true,
     no_autonomous_execution: true,
