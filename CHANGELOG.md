@@ -2,6 +2,12 @@
 
 ## 2026-04-26
 
+- implemented V2.1 IMPL-01 Secretary Routing Proposal DTO, deterministic
+  product projection assembly, review-only page model, and focused tests as a
+  bounded implementation slice; no V2.1 release opening, no Management
+  Directive implementation, no Cell CEO Assembly implementation, no
+  marketplace, no provider/channel/autonomous execution, and no
+  Cognitive_OS/MPLP changes are introduced
 - added the V2.1 scope planning baseline for Secretary routing, Management
   Directive product planning, Cell CEO assembly preview, asset-type vocabulary,
   and TracePilot asset-family mapping; planning only, no implementation, no
