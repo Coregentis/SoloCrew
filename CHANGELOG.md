@@ -2,6 +2,10 @@
 
 ## 2026-04-26
 
+- added the V2.1 scope planning baseline for Secretary routing, Management
+  Directive product planning, Cell CEO assembly preview, asset-type vocabulary,
+  and TracePilot asset-family mapping; planning only, no implementation, no
+  release opening, and no Cognitive_OS/MPLP changes are introduced
 - added the post-cell-drift SoloCrew architecture baseline, freezing Cell
   semantics, Secretary routing, Cell CEO / Crew Compiler assembly authority,
   Open Asset Plane concept boundaries, and TracePilot non-Cell positioning; no

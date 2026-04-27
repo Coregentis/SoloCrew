@@ -25,7 +25,8 @@ V2.0.x maintenance`.
 
 SoloCrew V2.0 is closed as the bounded local-first First Runnable AIGC
 Operating Product. Current work is limited to V2.0.x maintenance corrections;
-V2.1 planning remains blocked unless explicitly owner-authorized.
+V2.1 scope planning is owner-authorized as planning only; V2.1 implementation
+and release remain blocked unless explicitly owner-authorized.
 
 For the historical formal boundary between repo/platform `v1.0` and later
 Operational V1.0 closure, see
@@ -90,6 +91,8 @@ Post-cell-drift architecture baseline has been added to freeze Secretary
 routing, Cell CEO / Crew Compiler assembly authority, Open Asset Plane concept
 boundaries, and TracePilot non-Cell positioning before any future V2.1
 planning. V2.1 remains blocked unless explicitly owner-authorized.
+V2.1 scope planning baseline has been added; implementation remains blocked
+pending separate owner authorization.
 
 V2.0 Wave 3 Founder Dashboard Productization has now been added over the V2
 starter-cell fixtures.
