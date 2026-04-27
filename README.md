@@ -29,8 +29,10 @@ V2.1 IMPL-01 Secretary Routing Proposal implementation is owner-authorized as
 a bounded implementation slice, and V2.1 IMPL-02 Management Directive preview
 is owner-authorized as a bounded product-projection slice. V2.1 IMPL-03 Cell
 CEO Assembly Plan Preview and asset-type vocabulary are owner-authorized as
-bounded product-projection surfaces. V2.1 release and any V2.1 scope beyond
-IMPL-03 remain blocked unless explicitly owner-authorized.
+bounded product-projection surfaces. V2.1 IMPL-04 TracePilot Asset-Family
+Mapping is owner-authorized as a non-executing planning surface. V2.1 release
+and any V2.1 scope beyond IMPL-04 remain blocked unless explicitly
+owner-authorized.
 
 For the historical formal boundary between repo/platform `v1.0` and later
 Operational V1.0 closure, see
@@ -99,9 +101,12 @@ V2.1 scope planning baseline has been added. V2.1 IMPL-01 Secretary Routing
 Proposal surface and V2.1 IMPL-02 Management Directive preview have been added
 as bounded product-projection implementation slices. V2.1 IMPL-03 Cell CEO
 Assembly Plan Preview and asset-type vocabulary have been added as bounded
-product-projection surfaces. V2.1 release remains unopened; actual Cell CEO
-Assembly execution, asset installation, marketplace, provider/channel
-dispatch, and autonomous execution remain unimplemented.
+product-projection surfaces. V2.1 IMPL-04 TracePilot Asset-Family Mapping has
+been added as a non-executing planning surface. V2.1 release remains
+unopened; actual Cell CEO Assembly execution, TracePilot integration, project
+import, drift detection execution, evidence generation, tool adapter
+execution, asset installation, marketplace, provider/channel dispatch, and
+autonomous execution remain unimplemented.
 
 V2.0 Wave 3 Founder Dashboard Productization has now been added over the V2
 starter-cell fixtures.

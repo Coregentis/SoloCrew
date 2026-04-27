@@ -2,6 +2,12 @@
 
 ## 2026-04-26
 
+- implemented V2.1 IMPL-04 TracePilot Asset-Family Mapping as a
+  non-executing planning surface; no V2.1 release opening, no TracePilot
+  integration, no project import, no drift detection execution, no evidence
+  generation, no asset installation, no marketplace, no
+  provider/channel/autonomous execution, and no Cognitive_OS/MPLP changes are
+  introduced
 - implemented V2.1 IMPL-03 Cell CEO Assembly Plan Preview and asset-type
   vocabulary constants as bounded product-projection surfaces; no V2.1
   release opening, no actual Cell CEO Assembly execution, no asset
