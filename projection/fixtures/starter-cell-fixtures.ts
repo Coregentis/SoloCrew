@@ -11,21 +11,40 @@ import type {
 export const V2_STARTER_CELLS_PROJECT_ID = "v2-starter-cells-project";
 export const V2_STARTER_RUNTIME_STATE_PROJECTION_ID =
   "v2-starter-cells-runtime-state-projection";
+export const V2_STARTER_CELL_KIND = "solo_business_operating_unit" as const;
 
-export const V2_STARTER_CELL_IDS = [
+export const V2_OFFICIAL_STARTER_BLUEPRINT_IDS = [
   "development_company",
   "ecommerce",
   "personal_media",
 ] as const;
 
-export type V2StarterCellId = (typeof V2_STARTER_CELL_IDS)[number];
+export const V2_OFFICIAL_STARTER_ASSEMBLY_IDS = [
+  "development_company_starter_assembly",
+  "ecommerce_starter_assembly",
+  "personal_media_starter_assembly",
+] as const;
+
+// Compatibility fixture IDs remain stable; they are not constitutional Cell kinds.
+export const V2_STARTER_CELL_IDS = V2_OFFICIAL_STARTER_BLUEPRINT_IDS;
+
+export type V2OfficialStarterBlueprintId =
+  (typeof V2_OFFICIAL_STARTER_BLUEPRINT_IDS)[number];
+export type V2OfficialStarterAssemblyId =
+  (typeof V2_OFFICIAL_STARTER_ASSEMBLY_IDS)[number];
+export type V2StarterCellKind = typeof V2_STARTER_CELL_KIND;
+export type V2StarterCellId = V2OfficialStarterBlueprintId;
 
 export interface V2StarterCellDefinition {
   cell_id: V2StarterCellId;
   cell_label: string;
-  cell_kind: V2StarterCellId;
+  cell_kind: V2StarterCellKind;
+  starter_blueprint_id: V2OfficialStarterBlueprintId;
+  starter_blueprint_label: string;
+  starter_assembly_id: V2OfficialStarterAssemblyId;
   purpose: string;
   default_job_to_be_done: string;
+  // These defaults belong to the starter blueprint/assembly, not to Cell kind law.
   default_tasks: readonly string[];
   default_artifacts: readonly string[];
   default_memory_fields: readonly string[];
@@ -44,7 +63,10 @@ export const V2_STARTER_CELL_DEFINITIONS: readonly V2StarterCellDefinition[] = [
   {
     cell_id: "development_company",
     cell_label: "Development Company Cell",
-    cell_kind: "development_company",
+    cell_kind: V2_STARTER_CELL_KIND,
+    starter_blueprint_id: "development_company",
+    starter_blueprint_label: "Development Company Starter Blueprint",
+    starter_assembly_id: "development_company_starter_assembly",
     purpose:
       "Operate product, engineering, and release work for a software or agent project.",
     default_job_to_be_done:
@@ -104,7 +126,10 @@ export const V2_STARTER_CELL_DEFINITIONS: readonly V2StarterCellDefinition[] = [
   {
     cell_id: "ecommerce",
     cell_label: "E-commerce Cell",
-    cell_kind: "ecommerce",
+    cell_kind: V2_STARTER_CELL_KIND,
+    starter_blueprint_id: "ecommerce",
+    starter_blueprint_label: "E-commerce Starter Blueprint",
+    starter_assembly_id: "ecommerce_starter_assembly",
     purpose:
       "Operate product-listing, merchandising, campaign, and customer-response drafting work.",
     default_job_to_be_done:
@@ -161,7 +186,10 @@ export const V2_STARTER_CELL_DEFINITIONS: readonly V2StarterCellDefinition[] = [
   {
     cell_id: "personal_media",
     cell_label: "Personal Media Cell",
-    cell_kind: "personal_media",
+    cell_kind: V2_STARTER_CELL_KIND,
+    starter_blueprint_id: "personal_media",
+    starter_blueprint_label: "Personal Media Starter Blueprint",
+    starter_assembly_id: "personal_media_starter_assembly",
     purpose:
       "Operate repeatable content planning and draft-production work for personal publishing.",
     default_job_to_be_done:

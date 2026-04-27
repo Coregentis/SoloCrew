@@ -33,13 +33,33 @@
 - It does not implement provider/channel execution.
 - It does not deliver V2.0.
 
-## 3. Starter Cell Inventory
+V2.0.x semantic correction:
 
-### 1. Development Company Cell
+- The historical term "starter cell" is product shorthand for official starter
+  blueprint / starter assembly fixtures projected into Cell operating units.
+- `Cell` remains the constitutional SoloCrew operating unit.
+- Development Company, E-commerce, and Personal Media are not constitutional
+  Cell kinds.
+- Business/domain defaults in this baseline belong to starter blueprint /
+  starter assembly defaults, not to the definition of Cell itself.
+- `cell_id` remains a stable product fixture / compatibility slug for the V2.0
+  starter experiences.
+- `cell_kind` must remain generic operating-unit vocabulary.
+- Secretary or future routing surfaces may choose or route to a Cell, but they
+  do not create new constitutional Cell kinds.
+- The Cell CEO / Crew Compiler owns internal asset, crew, capability, workflow,
+  memory, learning, and review organization inside Cell boundaries.
+
+## 3. Starter Blueprint Fixture Inventory
+
+### 1. Development Company starter blueprint / assembly
 
 - `cell_id`: `development_company`
 - `cell_label`: `Development Company Cell`
-- `cell_kind`: `development_company`
+- `cell_kind`: `solo_business_operating_unit`
+- `starter_blueprint_id`: `development_company`
+- `starter_blueprint_label`: `Development Company Starter Blueprint`
+- `starter_assembly_id`: `development_company_starter_assembly`
 - `purpose`:
   - operate product, engineering, and release work for a software or agent project
 - `default job-to-be-done`:
@@ -87,11 +107,14 @@
 - `minimum acceptance example`:
   - open the Cell, request a feature-plan package, receive a usable PRD or task-breakdown artifact, revise it, and resume it after restart
 
-### 2. E-commerce Cell
+### 2. E-commerce starter blueprint / assembly
 
 - `cell_id`: `ecommerce`
 - `cell_label`: `E-commerce Cell`
-- `cell_kind`: `ecommerce`
+- `cell_kind`: `solo_business_operating_unit`
+- `starter_blueprint_id`: `ecommerce`
+- `starter_blueprint_label`: `E-commerce Starter Blueprint`
+- `starter_assembly_id`: `ecommerce_starter_assembly`
 - `purpose`:
   - operate product-listing, merchandising, campaign, and customer-response drafting work
 - `default job-to-be-done`:
@@ -136,11 +159,14 @@
 - `minimum acceptance example`:
   - open the Cell, request a listing package, receive usable listing artifacts, revise them, and preserve brand-tone learning inside that Cell
 
-### 3. Personal Media Cell
+### 3. Personal Media starter blueprint / assembly
 
 - `cell_id`: `personal_media`
 - `cell_label`: `Personal Media Cell`
-- `cell_kind`: `personal_media`
+- `cell_kind`: `solo_business_operating_unit`
+- `starter_blueprint_id`: `personal_media`
+- `starter_blueprint_label`: `Personal Media Starter Blueprint`
+- `starter_assembly_id`: `personal_media_starter_assembly`
 - `purpose`:
   - operate repeatable content planning and draft-production work for personal publishing
 - `default job-to-be-done`:
@@ -186,7 +212,7 @@
 - `minimum acceptance example`:
   - open the Cell, request an article package, receive article, title, summary, tags, and calendar suggestion artifacts, and keep style learning scoped to that Cell
 
-## 4. Development Company Cell Baseline
+## 4. Development Company starter blueprint baseline
 
 - `purpose`:
   - operate product, engineering, and release work for a software or agent project
@@ -232,7 +258,7 @@
   - provider or channel dispatch
   - irreversible financial or legal actions
 
-## 5. E-commerce Cell Baseline
+## 5. E-commerce starter blueprint baseline
 
 - `purpose`:
   - operate product-listing, merchandising, campaign, and customer-response drafting work
@@ -275,7 +301,7 @@
   - uncontrolled external dispatch
   - irreversible financial or legal actions
 
-## 6. Personal Media Cell Baseline
+## 6. Personal Media starter blueprint baseline
 
 - `purpose`:
   - operate repeatable content planning and draft-production work for personal publishing
@@ -325,7 +351,7 @@ Minimum fixture fields:
 
 - `project_id`
 - `runtime_state_projection_id`
-- operational units for all three starter cells
+- operational units for all three starter blueprint-backed Cell fixtures
 - each operational unit has:
   - scope summary
   - priorities
@@ -347,6 +373,8 @@ Fixture implementation:
 - legacy compatibility re-export:
   - `projection/fixtures/v2-starter-cells.ts`
 - exports:
+  - `V2_OFFICIAL_STARTER_BLUEPRINT_IDS`
+  - `V2_STARTER_CELL_KIND`
   - `V2_STARTER_CELL_IDS`
   - `V2_STARTER_CELL_DEFINITIONS`
   - `createV2StarterCellsRuntimeStateProjection()`
@@ -354,8 +382,8 @@ Fixture implementation:
 
 Fixture requirements:
 
-- all three cells are present
-- each cell has distinct purpose, tasks, artifacts, memory, learning, and drift risks
+- all three starter blueprint-backed Cell fixtures are present
+- each starter blueprint has distinct purpose, tasks, artifacts, memory, learning, and drift risks
 - each cell includes at least one `external_draft` artifact
 - each cell includes at least one accepted `scope_only` learning candidate
 - each cell includes at least one `global_candidate` learning candidate
@@ -383,7 +411,7 @@ This wave does not implement new UI.
 
 ## 9. Acceptance Gates for Wave 2
 
-- three starter cells defined
+- three starter blueprint-backed Cell fixtures defined
 - fixture data exists
 - fixtures are projection-compatible
 - fixtures can feed FounderDashboardProjection
@@ -391,7 +419,7 @@ This wave does not implement new UI.
 - fixtures preserve runtime-private omission
 - fixtures preserve non-executing boundary
 - fixtures preserve action-class readiness
-- fixtures prove starter-cell distinction
+- fixtures prove starter blueprint distinction without making business domains Cell kinds
 - fixtures prove scoped learning distinction
 - fixtures do not claim V2.0 delivery or readiness
 

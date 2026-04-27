@@ -83,6 +83,10 @@ V2.0 Wave 2 starter-cell baseline and fixtures have now been added:
 
 - `governance/baselines/SOLOCREW-V2.0-STARTER-CELL-PRODUCT-BASELINE-AND-FIXTURES-v0.1.md`
 
+V2.0.x has clarified that these three starter experiences are official starter
+blueprint / assembly fixtures over Cell operating-unit semantics; they are not
+constitutional Cell kinds and do not expand V2.0 scope.
+
 V2.0 Wave 3 Founder Dashboard Productization has now been added over the V2
 starter-cell fixtures.
 It does not implement Cell Operations Panel productization, real

@@ -15,6 +15,7 @@ import {
 import {
   STARTER_CELL_DEFINITIONS,
   STARTER_CELL_IDS,
+  V2_STARTER_CELL_KIND,
 } from "../../projection/fixtures/starter-cell-fixtures.ts";
 
 export interface CreateArtifactWorkflowPageModelOptions {
@@ -83,7 +84,7 @@ export function createArtifactWorkflowPageModel(
     cell_identity: {
       cell_id: options.cell_id,
       cell_label: definition?.cell_label ?? options.cell_id,
-      cell_kind: definition?.cell_kind ?? options.cell_id,
+      cell_kind: definition?.cell_kind ?? V2_STARTER_CELL_KIND,
     },
     artifacts,
     selected_artifact,

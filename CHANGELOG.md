@@ -2,6 +2,11 @@
 
 ## 2026-04-26
 
+- clarified SoloCrew V2.0 starter-cell semantic drift by preserving the three
+  starter experiences as official starter blueprint / assembly fixtures while
+  restoring `cell_kind` to generic Cell operating-unit vocabulary; no feature
+  expansion, no V2.1 opening, no Cognitive_OS/MPLP change, no provider/channel
+  execution, no external dispatch, and no autonomous operation is introduced
 - narrowed the SoloCrew runtime-session compatibility bridge by removing
   unused broad Cognitive_OS re-exports, moving app-shell correction/writeback
   DTO vocabulary behind a SoloCrew-local runtime-session facade, quarantining

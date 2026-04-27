@@ -12,6 +12,7 @@ import type {
 import {
   STARTER_CELL_DEFINITIONS,
   STARTER_CELL_IDS,
+  V2_STARTER_CELL_KIND,
   createStarterCellsRuntimeStateProjection,
 } from "../../projection/fixtures/starter-cell-fixtures.ts";
 import type {
@@ -863,7 +864,7 @@ export function createCellOperationsPanelProductPageModel(
     cell_identity: {
       cell_id: projection.cell_id,
       cell_label: projection.cell_label,
-      cell_kind: definition?.cell_kind ?? projection.cell_id,
+      cell_kind: definition?.cell_kind ?? V2_STARTER_CELL_KIND,
       status: projection.status,
       purpose_summary,
     },

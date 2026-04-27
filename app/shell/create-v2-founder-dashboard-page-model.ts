@@ -7,6 +7,7 @@ import {
 } from "../../projection/assembly/founder-dashboard-projection.ts";
 import {
   STARTER_CELL_DEFINITIONS,
+  V2_STARTER_CELL_KIND,
   createStarterCellsRuntimeStateProjection,
 } from "../../projection/fixtures/starter-cell-fixtures.ts";
 import {
@@ -177,7 +178,7 @@ function build_cell_overview_item(
   return {
     cell_id: operational_unit_projection.scope_summary.scope_id,
     cell_label: operational_unit_projection.scope_summary.title,
-    cell_kind: definition?.cell_kind ?? "unknown_cell_kind",
+    cell_kind: definition?.cell_kind ?? V2_STARTER_CELL_KIND,
     status: operational_unit_projection.status,
     purpose_summary:
       definition?.purpose ??

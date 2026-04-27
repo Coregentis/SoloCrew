@@ -19,8 +19,10 @@ import {
   STARTER_CELL_IDS,
   createStarterCellOperationalUnitProjections,
   createStarterCellsRuntimeStateProjection,
+  V2_OFFICIAL_STARTER_BLUEPRINT_IDS,
   V2_STARTER_CELL_DEFINITIONS,
   V2_STARTER_CELL_IDS,
+  V2_STARTER_CELL_KIND,
   createV2StarterCellOperationalUnitProjections,
   createV2StarterCellsRuntimeStateProjection,
 } from "../../projection/fixtures/starter-cell-fixtures.ts";
@@ -49,6 +51,31 @@ test("[projection fixtures] exports exactly three stable starter cells", () => {
 
   const ids = STARTER_CELL_DEFINITIONS.map((definition) => definition.cell_id);
   assert.deepEqual(ids, [...STARTER_CELL_IDS]);
+});
+
+test("[projection fixtures] starter blueprint ids are not Cell kinds", () => {
+  assert.deepEqual(V2_OFFICIAL_STARTER_BLUEPRINT_IDS, [
+    "development_company",
+    "ecommerce",
+    "personal_media",
+  ]);
+  assert.deepEqual(V2_OFFICIAL_STARTER_BLUEPRINT_IDS, STARTER_CELL_IDS);
+
+  for (const definition of STARTER_CELL_DEFINITIONS) {
+    assert.equal(definition.cell_kind, V2_STARTER_CELL_KIND);
+    assert.notEqual(definition.cell_kind, definition.cell_id);
+    assert.notEqual(definition.cell_kind, definition.starter_blueprint_id);
+    assert.equal(definition.cell_id, definition.starter_blueprint_id);
+    assert.match(definition.starter_blueprint_label, /Starter Blueprint$/);
+    assert.match(definition.starter_assembly_id, /_starter_assembly$/);
+    assert.ok(definition.default_tasks.length > 0);
+    assert.ok(definition.default_artifacts.length > 0);
+    assert.ok(definition.default_memory_fields.length > 0);
+    assert.ok(definition.default_learning_fields.length > 0);
+    assert.ok(definition.default_drift_risks.length > 0);
+    assert.ok(definition.default_action_classes.length > 0);
+    assert.ok(definition.default_review_posture.length > 0);
+  }
 });
 
 test("[projection fixtures] canonical aliases and legacy compatibility re-export stay behavior-equal", () => {

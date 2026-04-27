@@ -14,6 +14,7 @@ import {
 } from "../artifacts/artifact-workflow.ts";
 import {
   STARTER_CELL_DEFINITIONS,
+  V2_STARTER_CELL_KIND,
 } from "../../projection/fixtures/starter-cell-fixtures.ts";
 import type {
   ProductActionOutcomeRecord,
@@ -136,7 +137,7 @@ export function createActionWorkflowPageModel(
     cell_identity: {
       cell_id: options.cell_id,
       cell_label: definition?.cell_label ?? options.cell_id,
-      cell_kind: definition?.cell_kind ?? options.cell_id,
+      cell_kind: definition?.cell_kind ?? V2_STARTER_CELL_KIND,
     },
     action_requests,
     policy_decisions: action_requests.map((request) => {
