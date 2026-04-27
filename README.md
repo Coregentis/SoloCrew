@@ -35,6 +35,8 @@ optional Coregentis product integration/provider candidate, not a SoloCrew
 Cell or canonical internal object. V2.1 hardening baseline has been added for
 the review-only chain. V2.1 release and any feature scope beyond IMPL-04A
 remain blocked unless explicitly owner-authorized.
+V2.1 RC-01 candidate has been sealed for owner review; stable release and
+package publication remain blocked pending owner authorization.
 
 For the historical formal boundary between repo/platform `v1.0` and later
 Operational V1.0 closure, see
@@ -112,6 +114,8 @@ project import, drift detection execution, evidence generation, tool adapter
 execution, asset installation, marketplace, provider/channel dispatch, and
 autonomous execution remain unimplemented. Release execution requires a
 separate owner-authorized wave.
+V2.1 RC-01 candidate has been sealed for owner review; stable release and
+package publication remain blocked pending owner authorization.
 
 V2.0 Wave 3 Founder Dashboard Productization has now been added over the V2
 starter-cell fixtures.

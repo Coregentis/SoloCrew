@@ -2,6 +2,8 @@
 
 ## 2026-04-26
 
+- sealed the V2.1 RC-01 candidate for owner review; no stable release, no
+  package publication, and no feature expansion are introduced
 - added the V2.1 hardening and release-readiness planning baseline with
   focused negative boundary tests for the review-only chain; no V2.1 release
   opening, no feature expansion, no marketplace, no provider/channel or
