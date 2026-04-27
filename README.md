@@ -32,8 +32,9 @@ CEO Assembly Plan Preview and asset-type vocabulary are owner-authorized as
 bounded product-projection surfaces. V2.1 IMPL-04A corrected IMPL-04 naming
 to Project Governance Asset-Family Mapping; TracePilot remains a future
 optional Coregentis product integration/provider candidate, not a SoloCrew
-Cell or canonical internal object. V2.1 release and any V2.1 scope beyond
-IMPL-04 remain blocked unless explicitly owner-authorized.
+Cell or canonical internal object. V2.1 hardening baseline has been added for
+the review-only chain. V2.1 release and any feature scope beyond IMPL-04A
+remain blocked unless explicitly owner-authorized.
 
 For the historical formal boundary between repo/platform `v1.0` and later
 Operational V1.0 closure, see
@@ -109,7 +110,8 @@ candidate, not a SoloCrew Cell or canonical internal object. V2.1 release
 remains unopened; actual Cell CEO Assembly execution, TracePilot integration,
 project import, drift detection execution, evidence generation, tool adapter
 execution, asset installation, marketplace, provider/channel dispatch, and
-autonomous execution remain unimplemented.
+autonomous execution remain unimplemented. Release execution requires a
+separate owner-authorized wave.
 
 V2.0 Wave 3 Founder Dashboard Productization has now been added over the V2
 starter-cell fixtures.
