@@ -104,6 +104,12 @@ test("[v2.4] pilot onboarding packet workflow enforces blocked and final transit
     packet: blocked,
     reviewed_at: "2026-04-28T17:40:00.000Z",
   });
+  const direct_acknowledged_from_draft =
+    mark_pilot_onboarding_packet_acknowledged_manually({
+      packet: create_packet(),
+      acknowledged_at: "2026-04-28T17:42:00.000Z",
+      manual_acknowledgement_ref: "manual-ack:invalid-direct",
+    });
   const acknowledged = mark_pilot_onboarding_packet_acknowledged_manually({
     packet: mark_pilot_onboarding_packet_ready_for_manual_review({
       packet: create_packet(),
@@ -116,11 +122,23 @@ test("[v2.4] pilot onboarding packet workflow enforces blocked and final transit
     packet: acknowledged,
     cancelled_at: "2026-04-28T17:55:00.000Z",
   });
+  const cancelled = cancel_pilot_onboarding_packet({
+    packet: create_packet(),
+    cancelled_at: "2026-04-28T17:56:00.000Z",
+  });
+  const after_cancelled_ready = mark_pilot_onboarding_packet_ready_for_manual_review({
+    packet: cancelled,
+    reviewed_at: "2026-04-28T17:57:00.000Z",
+  });
 
   assert.equal(blocked.status, "blocked");
   assert.equal(after_blocked_ready.status, "blocked");
+  assert.equal(direct_acknowledged_from_draft.status, "draft");
+  assert.equal(direct_acknowledged_from_draft.manual_acknowledgement_ref, undefined);
   assert.equal(acknowledged.status, "acknowledged_manually");
   assert.equal(after_acknowledged_cancel.status, "acknowledged_manually");
+  assert.equal(cancelled.status, "cancelled");
+  assert.equal(after_cancelled_ready.status, "cancelled");
 });
 
 test("[v2.4] pilot onboarding packet summaries are deterministic", () => {
