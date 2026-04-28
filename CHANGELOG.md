@@ -2,6 +2,10 @@
 
 ## 2026-04-28
 
+- opened V2.4 product scope and commercialization planning only; no
+  implementation, release, tag, package, paid/public/commercial readiness
+  claim, production-ready claim, Cognitive_OS change, or MPLP change is
+  introduced
 - released V2.3 Stable as the stable repo line for the bounded first paid
   pilot loop only; manual-first, design-partner-only, local-only, review-only,
   non-executing, manual payment/invoice status tracking only, with no package
