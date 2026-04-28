@@ -2,6 +2,11 @@
 
 ## 2026-04-28
 
+- added V2.4 IMPL-01 pilot onboarding packet with deterministic local
+  contract, workflow, fixture, boundary, and determinism tests; no release,
+  tag, package, public beta, paid/commercial/production readiness, payment,
+  dispatch, CRM/email, LLM/model/agent/tool, SaaS, autonomy, Cognitive_OS
+  change, or MPLP change is introduced
 - prepared V2.4 implementation readiness and slice ordering for
   commercialization readiness planning; no implementation, release, tag,
   package, public beta, paid/commercial/production readiness, Cognitive_OS
