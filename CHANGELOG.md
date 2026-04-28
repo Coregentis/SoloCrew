@@ -2,6 +2,15 @@
 
 ## 2026-04-28
 
+- released V2.3 Stable as the stable repo line for the bounded first paid
+  pilot loop only; manual-first, design-partner-only, local-only, review-only,
+  non-executing, manual payment/invoice status tracking only, with no package
+  publication, paid-product readiness, public beta readiness, commercial
+  readiness, production-ready claim, payment processor, checkout,
+  subscription, automated billing, provider/channel dispatch, marketplace,
+  CRM, email dispatch, public publishing, LLM/model/agent/tool invocation,
+  SaaS sharing, autonomous execution, V3.0, MPLP certification, or MPLP
+  endorsement
 - prepared the V2.3 RC gate and conditional prerelease path for the bounded
   first paid pilot loop; no stable release, package publication, paid-product
   readiness, public beta readiness, commercial readiness, production-ready

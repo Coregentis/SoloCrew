@@ -38,7 +38,7 @@ remain blocked unless explicitly owner-authorized.
 V2.1 RC-01 candidate has been sealed for owner review; stable release and
 package publication remain blocked pending owner authorization.
 
-## Current V2.2 Stable and V2.3 RC Prep Status
+## Current V2.2 and V2.3 Stable Status
 
 SoloCrew V2.2 Stable has been released and verified as the private-alpha,
 local review-only journey:
@@ -66,7 +66,8 @@ pilot intake / design partner qualification -> manual payment and invoice
 status -> review-only next-action proposal -> local feedback capture and
 permission-gated case-study path -> paid pilot loop E2E hardening.
 
-V2.3 is RC-prep eligible, not stable. The paid pilot loop is manual-first,
+V2.3 Stable has been released as the stable repo line for this bounded first
+paid pilot loop only. The paid pilot loop is manual-first,
 design-partner-only, local-only, review-only, and non-executing. It tracks
 manual payment/invoice status only and does not claim paid product readiness,
 public beta readiness, commercial readiness, or production-ready status.
