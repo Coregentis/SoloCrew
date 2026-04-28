@@ -20,6 +20,7 @@ Top findings:
 
 - Severity high: version numbers are valid in release evidence, historical governance, fixtures, and regression tests, but they also appear in active app contracts, workflow helper signatures, source-ref field names, routes, page models, and current product semantics.
 - Severity high: current V2.3/V2.4 product concepts are modeled as release-line objects instead of stable product lifecycle objects. Examples include `V2_4PilotOnboardingPacket`, `V2_4CommercializationReadinessDashboard`, `V2_4PilotFeedbackEvidenceRecord`, `V2_4CaseStudyConversionGate`, `V2_3PilotIntakeRecord`, and `V2_3ManualPaymentRecord`.
+- Severity high: targeted active-surface inspection found versioned names in `app/dashboard`, `app/pages`, `app/shell`, `projection/contracts`, and `projection/adapters`, including `app/dashboard/v2-2-founder-dashboard-continuation-contract.ts`, `app/pages/v2-founder-dashboard-page.ts`, `app/shell/create-v1-1-intake-to-packet-page-model.ts`, `projection/contracts/v1-7-prepared-action-contract.ts`, and `projection/contracts/v1-8-execution-boundary-contract.ts`. These are not merely tests or release fixtures; they sit in active product/runtime-facing modules.
 - Severity high: field names encode historical release lines, including `v2_3_stable_tag`, `v2_3_stable_commit`, `v2_4_dashboard_ref`, `v2_4_onboarding_packet_ref`, `v2_4_feedback_evidence_ref`, `v2_2_stable_tag`, `related_v2_2_workspace_id`, and `related_v2_3_intake_status`.
 - Severity medium: README currently functions more like a release-history ledger than a product entry point. It accurately preserves boundaries but leads with release-line status rather than stable SoloCrew product concepts.
 - Severity medium: `paid pilot` and `commercialization readiness` are encoded as root capability names. They should become lifecycle stage/mode or review-view terminology inside a stable Engagement model.
@@ -92,8 +93,8 @@ Summary by file family:
 | `governance/**` | 194 | Mostly valid release/audit/history evidence. |
 | `tests/**` | 59 | Mostly valid release/regression evidence; suspicious only if tests force future canonical names to remain versioned. |
 | `projection/fixtures/**` | 15 | Valid as historical release fixtures, but should not be the only source of current product truth. |
-| `app/**` | 11 | Suspicious because active product/runtime semantics contain versioned names. |
-| `projection/adapters/**` and `projection/contracts/**` | 4 | Potentially allowed compatibility markers, but should be isolated as legacy adapters. |
+| targeted active `app/dashboard`, `app/pages`, and `app/shell` surface | 30 | Suspicious because active product/page/runtime semantics contain versioned names, routes, fields, and helper exports. |
+| targeted active `projection/contracts` and `projection/adapters` surface | 14 | Mixed: some contracts use stable type names with versioned constants, while V1.7/V1.8 adapters are potentially valid only as quarantined compatibility markers. |
 
 Additional targeted counts:
 
@@ -149,10 +150,19 @@ Suspicious version-scoped domain names found:
 - `V2_2ReviewPacketExport`
 - `V2_2FounderDashboardContinuationPageModel`
 - `V2FounderDashboardReadinessState`
+- `V2FounderDashboardPage`
+- `V2FounderDashboardPageModel`
+- `V11IntakeToPacketPageModel`
+- `V12PacketRevisionPageModel`
+- `V14ContinuityPageModelInput`
+- `V16SessionContinuityPageModel`
 - `V17PreparedActionPageModel`
+- `V17PreparedActionAdapterInput`
 - `V18ExecutionBoundaryPageModel`
+- `V18ExecutionBoundaryAdapterInput`
 - `V19FounderDashboardPageModel`
 - `V19CellOperationsPanelPageModel`
+- `CreateV2_2FounderDashboardContinuationInput`
 
 Suspicious versioned helper names found:
 
@@ -167,7 +177,17 @@ Suspicious versioned helper names found:
 - `createV22PrivateAlphaWorkspaceFixture`
 - `create_v2_2_workspace_with_cgos_consumption`
 - `create_v2_2_founder_dashboard_continuation_page_model`
+- `createV11IntakeToPacketPageModel`
+- `createV12PacketRevisionPageModel`
+- `createV16SessionContinuityPageModel`
+- `createV17PreparedActionPageModel`
+- `createV18ExecutionBoundaryPageModel`
+- `createV19FounderDashboardPageModel`
+- `createV19CellOperationsPanelPageModel`
 - `createV2FounderDashboardPageModel`
+- `renderV2FounderDashboardPage`
+- `adapt_v1_7_prepared_action_card`
+- `adapt_v1_8_execution_boundary_card`
 
 Audit conclusion:
 
@@ -193,6 +213,13 @@ Suspicious field/source-ref examples:
 - `v2_1_implementation_scope`
 - `product_line: "v2_0"`
 - `phase_boundary: "v2_0_wave..."`
+- `V2_FOUNDER_DASHBOARD_ROUTE`
+- `route_path: "/portfolio/v2/founder-dashboard"`
+- `page_kind: "v2_founder_dashboard_page"`
+- `operator_surface: "v2_founder_dashboard_productized"`
+- `page_id: "v2_2_founder_dashboard_continuation"`
+- `V17_PREPARED_ACTION_BOUNDARY_LINES`
+- `V18_EXECUTION_BOUNDARY_LINES`
 
 Audit conclusion:
 
@@ -229,12 +256,61 @@ Suspicious current product file names:
 - `app/shell/create-v2-founder-dashboard-page-model.ts`
 - `app/shell/create-v2-2-founder-dashboard-continuation-page-model.ts`
 - `app/dashboard/v2-2-founder-dashboard-continuation-contract.ts`
+- `app/shell/create-v1-1-intake-to-packet-page-model.ts`
+- `app/shell/create-v1-2-packet-revision-page-model.ts`
+- `app/shell/create-v1-6-session-continuity-page-model.ts`
+- `app/shell/create-v1-7-prepared-action-page-model.ts`
+- `app/shell/create-v1-8-execution-boundary-page-model.ts`
+- `app/shell/create-v1-9-founder-dashboard-page-model.ts`
+- `app/shell/create-v1-9-cell-operations-panel-page-model.ts`
+- `projection/contracts/v1-7-prepared-action-contract.ts`
+- `projection/contracts/v1-8-execution-boundary-contract.ts`
 
 Current V2.4 files under `app/commercialization/` are not versioned by filename, which is good, but their exported record types and constants are versioned.
 
 Audit conclusion:
 
-File-name versioning is mostly contained to governance, tests, fixtures, and older app shell surfaces. The priority should be exported symbols and source-ref fields before any broad file rename.
+File-name versioning is not limited to tests and fixtures. It is present in active page, shell, dashboard, projection contract, and adapter modules. The priority should be canonical stable exports and source-ref fields before broad file renames, but the active app/projection file names must be included in the correction plan rather than treated as harmless historical evidence.
+
+## Active App / Projection Versioned Surface Audit
+
+Targeted follow-up scope:
+
+- `app/dashboard`
+- `app/pages`
+- `app/shell`
+- `projection/contracts`
+- `projection/adapters`
+
+Targeted active-surface inventory found 44 version-bearing files: 30 under active app dashboard/page/shell surfaces and 14 under active projection contract/adapter surfaces. Tests were intentionally not used as the basis for this follow-up finding.
+
+| Path | Versioned surface found | Why it matters | Recommended disposition |
+| --- | --- | --- | --- |
+| `app/dashboard/v2-2-founder-dashboard-continuation-contract.ts` | `V2_2FounderDashboardContinuationStatus`, `V2_2FounderDashboardContinuationPageModel`, `V2_2_FOUNDER_DASHBOARD_BOUNDARY_FLAGS`, `no_v2_2_completion_claim` | This is an active app contract, not only release evidence. It makes dashboard continuation semantics release-line-specific. | Introduce stable `FounderDashboardContinuation*` or `EngagementReadinessContinuation*` contract names; keep V2.2 names as deprecated compatibility aliases until callers migrate. |
+| `app/pages/v2-founder-dashboard-page.ts` | `V2_FOUNDER_DASHBOARD_ROUTE`, `/portfolio/v2/founder-dashboard`, `V2FounderDashboardPage`, `page_kind: "v2_founder_dashboard_page"`, `operator_surface: "v2_founder_dashboard_productized"`, `v2_0_delivered`, `v2_0_ready` | This is a user-facing page/route surface. Versioned route and page semantics make the current product read like a release artifact. | Add stable founder dashboard route/page model; retain `/portfolio/v2/founder-dashboard` only as compatibility/archive route if needed. |
+| `app/shell/create-v2-founder-dashboard-page-model.ts` | `V2FounderDashboardPageModel`, `createV2FounderDashboardPageModel`, `product_line: "v2_0"`, `phase_boundary: "v2_0_wave3_founder_dashboard_productization"`, `V2_FOUNDER_DASHBOARD_SOURCE_FIXTURE_REF` | The product dashboard model is treated as a V2.0 productization slice. | Introduce stable `FounderDashboardPageModel` and `createFounderDashboardPageModel`; move release-line values to metadata. |
+| `app/shell/create-v2-2-founder-dashboard-continuation-page-model.ts` | imports V2.2 dashboard contract, `CreateV2_2FounderDashboardContinuationInput`, `create_v2_2_founder_dashboard_continuation_page_model`, `page_id: "v2_2_founder_dashboard_continuation"` | Active continuation workflow/helper is bound to V2.2 naming. | Introduce stable dashboard continuation page model and helper; keep V2.2 wrapper as compatibility alias. |
+| `app/shell/create-v1-1-intake-to-packet-page-model.ts` | `V11IntakeToPacketPageModel`, `createV11IntakeToPacketPageModel` | Current intake-to-packet page model remains named after a V1.1 slice. | Rename canonical concept to a stable intake/request packet page model; keep V11 wrapper for regression compatibility. |
+| `app/shell/create-v1-2-packet-revision-page-model.ts` | `V12PacketRevisionPageModel`, `V14ContinuityPageModelInput`, `createV12PacketRevisionPageModel` | Packet revision and continuity are stable product concepts but are encoded as V1.2/V1.4 implementation slices. | Introduce stable packet revision and continuity input names; preserve historical alias exports. |
+| `app/shell/create-v1-6-session-continuity-page-model.ts` | `V16SessionContinuityPageModel`, `createV16SessionContinuityPageModel` | Session continuity is a durable product concept, not a V1.6-only concept. | Introduce stable session continuity page model and helper. |
+| `app/shell/create-v1-7-prepared-action-page-model.ts` | `V17PreparedActionPageModel`, `createV17PreparedActionPageModel` | Prepared action review is active product language but named as a V1.7 slice. | Introduce stable prepared-action page model helper; keep V1.7 alias only for release evidence and compatibility. |
+| `app/shell/create-v1-8-execution-boundary-page-model.ts` | `V18ExecutionBoundaryPageModel`, `createV18ExecutionBoundaryPageModel` | Execution boundary is core product safety language, not a V1.8-only domain. | Introduce stable execution-boundary page model helper; keep V1.8 alias. |
+| `app/shell/create-v1-9-founder-dashboard-page-model.ts` | `V19FounderDashboardPageModel`, `createV19FounderDashboardPageModel`, `phase_boundary: "v1_9_wave4_product_surface_thin_consumption"`, `v2_0_ready` | Founder dashboard is a current product surface encoded through V1.9/V2.0 readiness fields. | Fold into stable founder dashboard model; represent historical phase in metadata. |
+| `app/shell/create-v1-9-cell-operations-panel-page-model.ts` | `V19CellOperationsPanelPageModel`, `createV19CellOperationsPanelPageModel`, `v2_0_ready` | Cell operations panel is a product surface, not only a V1.9 artifact. | Introduce stable cell operations panel model and compatibility alias. |
+| `app/pages/founder-request-intake-page.ts`, `app/pages/secretary-handoff-page.ts`, `app/pages/secretary-handoff-review-page.ts` | imports `V11IntakeToPacketPageModel`, fields `v11_packet_candidate`, HTML section `v1-1-packet-candidate` | Versioned shell model leaks into active pages and rendered sections. | Replace with stable packet candidate naming; preserve V1.1 only in evidence metadata. |
+| `app/pages/founder-dashboard-page.ts`, `app/pages/cell-operations-panel-page.ts` | imports V1.9 page models, renders `V2.0 ready` from `v2_0_ready` | Current pages expose release readiness fields as product view fields. | Replace with stable readiness/release metadata fields; avoid current product UI wording centered on V2.0. |
+| `app/pages/action-workflow-page.ts`, `app/pages/artifact-workflow-page.ts`, `app/pages/learning-drift-page.ts`, `app/pages/cell-operations-panel-product-page.ts` | `phase_boundary: "v2_0_wave..."`, `v2_0_delivered`, `v2_0_ready` | Active product page records carry V2.0 wave state fields. | Replace with `release_line`, `phase_ref`, or `readiness_claim_boundary` metadata fields. |
+| `projection/contracts/v1-7-prepared-action-contract.ts` | stable `SoloCrewPreparedAction*` types but versioned `V17_PREPARED_ACTION_BOUNDARY_LINES` and `V17_PREPARED_ACTION_BOUNDARY_SUMMARY` constants | This contract is mostly stable, but constants keep V1.7 as canonical naming. | Keep file as historical/compatibility if needed, but introduce stable boundary constants and export V17 aliases as deprecated compatibility. |
+| `projection/contracts/v1-8-execution-boundary-contract.ts` | stable `SoloCrewExecutionBoundary*` types but versioned `V18_EXECUTION_BOUNDARY_LINES` and `V18_EXECUTION_BOUNDARY_SUMMARY` constants | Execution boundary is a stable safety concept; V1.8 constants should not remain canonical. | Introduce stable execution boundary constants and V18 compatibility aliases. |
+| `projection/adapters/v1-7-prepared-action-adapter.ts` | `V17PreparedActionAdapterInput`, `adapt_v1_7_prepared_action_card` | Potentially valid as a compatibility adapter, but should not be the canonical product adapter name. | Quarantine as legacy adapter or wrap from stable `adaptPreparedActionCard` canonical helper. |
+| `projection/adapters/v1-8-execution-boundary-adapter.ts` | `V18ExecutionBoundaryAdapterInput`, `adapt_v1_8_execution_boundary_card` | Potentially valid as compatibility adapter, but active import paths should not force V1.8 naming forward. | Quarantine as legacy adapter or wrap from stable `adaptExecutionBoundaryCard` canonical helper. |
+| `projection/contracts/cell-ceo-assembly-plan-preview-contract.ts`, `projection/contracts/project-governance-asset-family-mapping-contract.ts`, `projection/contracts/management-directive-contract.ts`, `projection/contracts/secretary-routing-proposal-contract.ts` | imports `V2OfficialStarterBlueprintId`, `V2StarterCellId`, `V2StarterCellKind` | Starter-cell identity is a domain concept but still version-prefixed. | Add stable starter blueprint/cell identity aliases; retain V2 aliases for historical release compatibility. |
+
+Correction to the earlier audit interpretation:
+
+- It is not enough to say file-name versioning is mostly contained to governance, tests, fixtures, and older app shell surfaces.
+- Active product surfaces still carry version-bearing filenames, exported types, helper functions, routes, page kinds, operator surfaces, phase boundaries, and readiness fields.
+- This makes the semantic correction wave more urgent because a future production product would otherwise inherit V1.x/V2.x naming through active app and projection APIs.
 
 ## Product Semantics Audit
 
@@ -462,6 +538,8 @@ Phase 1: introduce stable naming aliases / canonical names
 
 - Add stable aliases such as `EngagementOnboardingPacket` over `V2_4PilotOnboardingPacket`.
 - Add stable aliases for V2.3 paid-pilot records as engagement intake/payment/feedback source concepts.
+- Add stable page/shell aliases for current app surfaces: `FounderDashboardPageModel`, `FounderDashboardPage`, `FounderDashboardContinuationPageModel`, `IntakeToPacketPageModel`, `PacketRevisionPageModel`, `SessionContinuityPageModel`, `PreparedActionPageModel`, `ExecutionBoundaryPageModel`, and `CellOperationsPanelPageModel`.
+- Add stable projection aliases for `SoloCrewPreparedAction*` and `SoloCrewExecutionBoundary*` boundary constants so `V17_*` and `V18_*` names become compatibility exports rather than canonical constants.
 - Add canonical metadata wrappers for source release and commit references.
 
 Phase 2: migrate domain types/functions/fields
@@ -470,6 +548,8 @@ Phase 2: migrate domain types/functions/fields
 - Keep deprecated aliases during transition.
 - Replace `v2_3_stable_tag` and similar fields with `baseline_release_ref` and `baseline_commit_ref`.
 - Replace `v2_4_*_ref` fields with stable source refs such as `readiness_view_ref`, `onboarding_packet_ref`, and `evidence_record_ref`.
+- Replace active route/page fields such as `V2_FOUNDER_DASHBOARD_ROUTE`, `page_kind: "v2_founder_dashboard_page"`, `operator_surface: "v2_founder_dashboard_productized"`, `product_line: "v2_0"`, `v2_0_ready`, and `v2_0_delivered` with stable route and product metadata names.
+- Replace `createV11*`, `createV12*`, `createV16*`, `createV17*`, `createV18*`, `createV19*`, `createV2*`, and `create_v2_2*` as canonical helpers with stable helper names, while preserving the versioned helpers as thin compatibility wrappers.
 
 Phase 3: update tests/fixtures without losing release evidence
 
