@@ -2,6 +2,15 @@
 
 ## 2026-04-28
 
+- prepared V2.2 stable gates for the private-alpha local review-only journey;
+  stable release remains conditional on passing tests, no-claim grep, RC truth
+  checks, and upstream non-modification gates
+- verified the V2.2 RC tag/prerelease after release execution and assessed
+  stable readiness with minor documentation gates only
+- created the V2.2 RC prerelease for the private-alpha local review-only
+  journey, with no package publication, paid readiness, public line,
+  provider/channel execution, marketplace behavior, autonomous execution, or
+  protocol authority claim
 - prepared V2.2 RC gates and documentation alignment for the private-alpha
   local review-only journey; no tag, package, publishing, commercial readiness,
   public line, provider/channel execution, marketplace behavior, autonomous

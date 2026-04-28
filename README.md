@@ -38,10 +38,13 @@ remain blocked unless explicitly owner-authorized.
 V2.1 RC-01 candidate has been sealed for owner review; stable release and
 package publication remain blocked pending owner authorization.
 
-## Current V2.2 RC Preparation Status
+## Current V2.2 Stable Preparation Status
 
-SoloCrew V2.2 is prepared for a later owner-authorized RC execution wave as a
-private-alpha, local review-only journey. The implemented V2.2 chain is:
+SoloCrew V2.2 has an RC prerelease:
+`solocrew-v2.2-rc-private-alpha-journey-20260428`. Stable release has not yet
+been executed and remains gated by owner-authorized stable preparation and
+release execution. V2.2 remains a private-alpha, local review-only journey.
+The implemented V2.2 chain is:
 
 workspace/session continuity -> local review packet JSON/Markdown export ->
 founder dashboard continuation -> private-alpha journey E2E hardening.
@@ -53,13 +56,11 @@ MPLP module semantics, Kernel Duty semantics, object/export binding semantics,
 state-sync posture, transaction posture, security omission posture,
 observability evidence posture, or protocol versioning posture.
 
-V2.2 remains local, review-only, non-executing, and below commercial/public
-product claims. It does not include provider/channel dispatch, marketplace
-implementation, autonomous execution, paid product readiness, public beta,
-V3.0, MPLP certification, or MPLP endorsement.
-
-V2.2 is not released until a separate owner-authorized RC execution wave
-creates the tag and release record.
+V2.2 remains local-only, review-only, non-executing, and below
+commercial/public product claims. It does not include provider/channel dispatch,
+marketplace implementation, autonomous execution, PDF export, SaaS sharing,
+package publication, paid product readiness, public beta, V3.0, MPLP
+certification, or MPLP endorsement.
 
 For the historical formal boundary between repo/platform `v1.0` and later
 Operational V1.0 closure, see
