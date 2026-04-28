@@ -79,7 +79,7 @@ publication, autonomous execution, MPLP certification, or MPLP endorsement.
 Cognitive_OS and MPLP-Protocol were not modified for the V2.3 product-local
 pilot loop.
 
-## Current V2.4 RC Prep Status
+## Current V2.4 Stable Status
 
 SoloCrew V2.4 has completed its commercialization readiness implementation
 slices and E2E hardening:
@@ -88,8 +88,8 @@ pilot onboarding packet -> commercialization readiness dashboard -> pilot
 feedback evidence strengthening -> case-study permission and conversion
 readiness gate -> commercialization readiness loop E2E hardening.
 
-The V2.4 RC readiness audit passed with minor documentation gates. V2.4 is
-RC-prep eligible, not stable. The V2.4 commercialization readiness loop remains
+V2.4 Stable is the stable repo line for the bounded local commercialization
+readiness loop only. The V2.4 commercialization readiness loop remains
 manual-first, design-partner-only, local-only, review-only, and non-executing.
 It composes V2.3 paid pilot loop references through onboarding, dashboard,
 feedback evidence, and case-study conversion gate records for founder review.

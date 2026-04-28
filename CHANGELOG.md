@@ -2,6 +2,16 @@
 
 ## 2026-04-28
 
+- released V2.4 Stable as the stable repo line for the bounded local
+  commercialization readiness loop only; manual-first, design-partner-only,
+  local-only, review-only, non-executing, with no package publication,
+  public beta, paid/commercial/production readiness, payment processor,
+  checkout, subscription, automated billing, provider/channel dispatch,
+  marketplace, CRM/email automation, public publishing, testimonial/public
+  case-study publishing, external analytics, LLM/model/agent/tool invocation,
+  SaaS sharing, customer account provisioning, automatic conversion,
+  autonomous execution, V3.0, MPLP certification, MPLP endorsement,
+  Cognitive_OS change, or MPLP change
 - hardened V2.4 commercialization readiness loop E2E and RC readiness audit;
   no release, tag, package, public beta, paid/commercial/production readiness,
   payment, dispatch, CRM/email, testimonial/public case-study, analytics,
