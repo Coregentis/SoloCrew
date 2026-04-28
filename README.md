@@ -38,13 +38,10 @@ remain blocked unless explicitly owner-authorized.
 V2.1 RC-01 candidate has been sealed for owner review; stable release and
 package publication remain blocked pending owner authorization.
 
-## Current V2.2 Stable Preparation Status
+## Current V2.2 Stable and V2.3 RC Prep Status
 
-SoloCrew V2.2 has an RC prerelease:
-`solocrew-v2.2-rc-private-alpha-journey-20260428`. Stable release has not yet
-been executed and remains gated by owner-authorized stable preparation and
-release execution. V2.2 remains a private-alpha, local review-only journey.
-The implemented V2.2 chain is:
+SoloCrew V2.2 Stable has been released and verified as the private-alpha,
+local review-only journey:
 
 workspace/session continuity -> local review packet JSON/Markdown export ->
 founder dashboard continuation -> private-alpha journey E2E hardening.
@@ -61,6 +58,25 @@ commercial/public product claims. It does not include provider/channel dispatch,
 marketplace implementation, autonomous execution, PDF export, SaaS sharing,
 package publication, paid product readiness, public beta, V3.0, MPLP
 certification, or MPLP endorsement.
+
+SoloCrew V2.3 has completed its first paid pilot implementation slices and E2E
+hardening:
+
+pilot intake / design partner qualification -> manual payment and invoice
+status -> review-only next-action proposal -> local feedback capture and
+permission-gated case-study path -> paid pilot loop E2E hardening.
+
+V2.3 is RC-prep eligible, not stable. The paid pilot loop is manual-first,
+design-partner-only, local-only, review-only, and non-executing. It tracks
+manual payment/invoice status only and does not claim paid product readiness,
+public beta readiness, commercial readiness, or production-ready status.
+
+V2.3 does not implement payment processor, checkout, subscription, automated
+billing, provider/channel dispatch, marketplace behavior, CRM integration,
+email dispatch, LLM/model/agent/tool invocation, SaaS sharing, package
+publication, autonomous execution, MPLP certification, or MPLP endorsement.
+Cognitive_OS and MPLP-Protocol were not modified for the V2.3 product-local
+pilot loop.
 
 For the historical formal boundary between repo/platform `v1.0` and later
 Operational V1.0 closure, see

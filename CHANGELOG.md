@@ -2,6 +2,30 @@
 
 ## 2026-04-28
 
+- prepared the V2.3 RC gate and conditional prerelease path for the bounded
+  first paid pilot loop; no stable release, package publication, paid-product
+  readiness, public beta readiness, commercial readiness, production-ready
+  claim, provider/channel dispatch, marketplace behavior, autonomy, payment
+  processor, checkout, subscription, CRM, email dispatch, LLM/model/agent/tool
+  invocation, Cognitive_OS change, or MPLP change is introduced
+- hardened the V2.3 paid pilot loop E2E across pilot intake, design partner
+  qualification, manual payment/invoice status, V2.2 workspace/review
+  packet/dashboard refs, review-only next-action proposal, local feedback
+  capture, and permission-gated case-study path; no release, tag, package, or
+  paid/public/commercial readiness claim is introduced
+- added V2.3 IMPL-04 local feedback capture and permission-gated case-study
+  path; local-only, no public publishing, no CRM, no email/channel/provider
+  dispatch, no autonomous follow-up, and no external analytics
+- added V2.3 IMPL-03 review-only next-action proposal model; manual-only and
+  non-executing, with no provider/channel dispatch, marketplace behavior,
+  autonomy, LLM/model/agent/tool invocation, payment processor, checkout, or
+  subscription
+- added V2.3 IMPL-02 manual payment and invoice status model; manual-only
+  tracking with no payment processor, checkout, subscription, automated
+  billing, card token, bank execution, or crypto execution
+- added V2.3 IMPL-01 pilot intake and design partner qualification model;
+  manual-first, design-partner-only, local-only, review-only, and bounded below
+  paid product readiness and public beta readiness
 - prepared V2.2 stable gates for the private-alpha local review-only journey;
   stable release remains conditional on passing tests, no-claim grep, RC truth
   checks, and upstream non-modification gates
