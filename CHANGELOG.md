@@ -2,6 +2,13 @@
 
 ## 2026-04-28
 
+- added V2.4 IMPL-04 case-study permission and conversion readiness gate with
+  deterministic local contract, workflow, fixture, boundary, determinism,
+  feedback/dashboard/onboarding regressions, and no
+  testimonial/public case-study/analytics/CRM/email/payment/dispatch/LLM/tool/SaaS
+  or autonomy behavior; no release, tag, package, public beta,
+  paid/commercial/production readiness, Cognitive_OS change, or MPLP change is
+  introduced
 - added V2.4 IMPL-03 pilot feedback evidence strengthening with deterministic
   local contract, workflow, fixture, boundary, determinism, dashboard/onboarding
   regressions, and no public/testimonial/analytics automation; no release, tag,
