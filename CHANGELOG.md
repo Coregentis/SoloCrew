@@ -2,6 +2,12 @@
 
 ## 2026-04-28
 
+- added V2.4 IMPL-03 pilot feedback evidence strengthening with deterministic
+  local contract, workflow, fixture, boundary, determinism, dashboard/onboarding
+  regressions, and no public/testimonial/analytics automation; no release, tag,
+  package, public beta, paid/commercial/production readiness, payment, dispatch,
+  CRM/email, public publishing, LLM/model/agent/tool, SaaS, autonomy,
+  Cognitive_OS change, or MPLP change is introduced
 - added V2.4 IMPL-02 commercialization readiness dashboard with deterministic
   local contract, workflow, fixture, boundary, determinism, and IMPL-01
   regression coverage; no release, tag, package, public beta,
