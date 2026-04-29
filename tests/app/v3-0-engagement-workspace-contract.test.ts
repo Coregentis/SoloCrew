@@ -19,6 +19,7 @@ import {
   ENGAGEMENT_WORKSPACE_BOUNDARY_FLAG_NAMES,
   ENGAGEMENT_WORKSPACE_BOUNDARY_FLAGS,
   ENGAGEMENT_WORKSPACE_FIELD_NAMES,
+  ENGAGEMENT_WORKSPACE_SOURCE_METADATA,
   V3_0_WORKSPACE_SOURCE_METADATA,
 } from "../../app/engagement/engagement-workspace-contract.ts";
 import {
@@ -120,6 +121,17 @@ test("[v3.0] engagement workspace contract preserves required boundary flags", (
   }
 });
 
+test("[v3.0] engagement workspace source metadata exposes canonical and compatibility constants", () => {
+  assert.equal(
+    ENGAGEMENT_WORKSPACE_SOURCE_METADATA,
+    V3_0_WORKSPACE_SOURCE_METADATA
+  );
+  assert.equal(
+    ENGAGEMENT_WORKSPACE_SOURCE_METADATA.baseline_release_ref,
+    "solocrew-v2.5-stable-semantic-stabilization-20260429"
+  );
+});
+
 test("[v3.0] engagement workspace contract composes V2.5 canonical types", () => {
   const stage: EngagementStage = ENGAGEMENT_STAGE_VALUES[2];
   const commercial_mode: CommercialMode = COMMERCIAL_MODE_VALUES[1];
@@ -128,7 +140,7 @@ test("[v3.0] engagement workspace contract composes V2.5 canonical types", () =>
     stage,
     commercial_mode,
     participant_ids: ["participant-founder", "participant-reviewer"],
-    metadata: V3_0_WORKSPACE_SOURCE_METADATA,
+    metadata: ENGAGEMENT_WORKSPACE_SOURCE_METADATA,
   };
 
   const workspace = create_engagement_workspace({

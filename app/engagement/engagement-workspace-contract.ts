@@ -223,7 +223,7 @@ export const ENGAGEMENT_HISTORY_RECORD_FIELD_NAMES = [
   "boundary_flags",
 ] as const satisfies (keyof EngagementHistoryRecord)[];
 
-export const V3_0_WORKSPACE_SOURCE_METADATA = {
+export const ENGAGEMENT_WORKSPACE_SOURCE_METADATA = {
   contract_version: "engagement-workspace-contract-v0.1",
   schema_version: "engagement-workspace-v3.0-impl-01",
   release_line: "v3.0-impl-01-engagement-workspace-contract",
@@ -231,3 +231,6 @@ export const V3_0_WORKSPACE_SOURCE_METADATA = {
   baseline_commit_ref: "4061f0df0cf6e5f151563c11ac94e27dabbd23b8",
   compatibility_profile: "v2.5-canonical-engagement-compatible",
 } as const satisfies EngagementWorkspaceSourceMetadata;
+
+export const V3_0_WORKSPACE_SOURCE_METADATA =
+  ENGAGEMENT_WORKSPACE_SOURCE_METADATA;

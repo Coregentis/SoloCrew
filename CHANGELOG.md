@@ -2,6 +2,11 @@
 
 ## 2026-04-30
 
+- added V3.0 IMPL-02 local engagement entry/load/create surface and canonical
+  workspace metadata alias correction; no route change, persistence,
+  execution/autonomy, release, tag, package, public/private beta,
+  paid/commercial/production readiness, Cognitive_OS change, or MPLP change is
+  introduced
 - added V3.0 IMPL-01 engagement workspace/session/loop/history contracts and
   deterministic constructors; no UI, route change, persistence,
   execution/autonomy, release, tag, package, public/private beta,

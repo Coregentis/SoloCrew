@@ -36,7 +36,7 @@ import {
   ENGAGEMENT_HISTORY_EVENT_KIND_VALUES,
   ENGAGEMENT_SESSION_STATUS_VALUES,
   ENGAGEMENT_WORKSPACE_BOUNDARY_FLAGS,
-  V3_0_WORKSPACE_SOURCE_METADATA,
+  ENGAGEMENT_WORKSPACE_SOURCE_METADATA,
 } from "./engagement-workspace-contract.ts";
 
 type RefRecord = Record<string, unknown>;
@@ -202,14 +202,14 @@ function create_source_metadata(
   input: EngagementWorkspaceSourceMetadataInput = {}
 ): EngagementWorkspaceSourceMetadata {
   const release_metadata = normalize_engagement_release_metadata(input, {
-    ...V3_0_WORKSPACE_SOURCE_METADATA,
+    ...ENGAGEMENT_WORKSPACE_SOURCE_METADATA,
   } satisfies EngagementSourceMetadata);
 
   return {
     ...release_metadata,
     compatibility_profile:
       read_string(input, "compatibility_profile") ??
-      V3_0_WORKSPACE_SOURCE_METADATA.compatibility_profile,
+      ENGAGEMENT_WORKSPACE_SOURCE_METADATA.compatibility_profile,
     migration_from: clone_migration_ref(input.migration_from),
     migration_to: clone_migration_ref(input.migration_to),
   };

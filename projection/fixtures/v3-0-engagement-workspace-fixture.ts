@@ -3,7 +3,7 @@ import type {
   EngagementParticipant,
 } from "../../app/engagement/engagement-canonical-contract.ts";
 import {
-  V3_0_WORKSPACE_SOURCE_METADATA,
+  ENGAGEMENT_WORKSPACE_SOURCE_METADATA,
 } from "../../app/engagement/engagement-workspace-contract.ts";
 import {
   create_engagement_workspace_bundle,
@@ -27,7 +27,7 @@ const ENGAGEMENT: Engagement = {
   stage: "onboarding",
   commercial_mode: "manual_paid_pilot",
   participant_ids: PARTICIPANTS.map((participant) => participant.participant_id),
-  metadata: V3_0_WORKSPACE_SOURCE_METADATA,
+  metadata: ENGAGEMENT_WORKSPACE_SOURCE_METADATA,
 };
 
 export function createEngagementWorkspaceFixture() {
@@ -53,8 +53,8 @@ export function createEngagementWorkspaceFixture() {
     fixture_id: "engagement-workspace-v3-0-fixture",
     fixture_kind: "engagement_workspace_contract",
     v2_5_stable_baseline: {
-      tag: V3_0_WORKSPACE_SOURCE_METADATA.baseline_release_ref,
-      target_commit: V3_0_WORKSPACE_SOURCE_METADATA.baseline_commit_ref,
+      tag: ENGAGEMENT_WORKSPACE_SOURCE_METADATA.baseline_release_ref,
+      target_commit: ENGAGEMENT_WORKSPACE_SOURCE_METADATA.baseline_commit_ref,
     },
     participants: PARTICIPANTS.map((participant) => ({ ...participant })),
     engagement: {
