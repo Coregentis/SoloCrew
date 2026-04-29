@@ -11,11 +11,13 @@ export interface FounderDashboardPage {
   operator_surface: "founder_dashboard_thin_consumption";
   authority_boundary: "app_page_projection_consumer";
   phase_boundary: "v1_9_wave4_product_surface_thin_consumption";
+  phase_ref: "founder_dashboard_thin_consumption";
   non_executing: true;
   runtime_private_fields_omitted: true;
   provider_execution_available: false;
   channel_entry_available: false;
   autonomous_operation_available: false;
+  readiness_status: false;
   v2_0_ready: false;
   sections: {
     header: {
@@ -143,11 +145,13 @@ export function renderFounderDashboardPage(
     operator_surface: "founder_dashboard_thin_consumption",
     authority_boundary: "app_page_projection_consumer",
     phase_boundary: "v1_9_wave4_product_surface_thin_consumption",
+    phase_ref: "founder_dashboard_thin_consumption",
     non_executing: true,
     runtime_private_fields_omitted: true,
     provider_execution_available: false,
     channel_entry_available: false,
     autonomous_operation_available: false,
+    readiness_status: false,
     v2_0_ready: false,
     sections,
     html,

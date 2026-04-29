@@ -1,27 +1,33 @@
 import type {
-  V2FounderDashboardPageModel,
+  FounderDashboardProductPageModel,
 } from "../shell/create-v2-founder-dashboard-page-model.ts";
 
 export const V2_FOUNDER_DASHBOARD_ROUTE = "/portfolio/v2/founder-dashboard";
+export const FOUNDER_DASHBOARD_PRODUCT_ROUTE = V2_FOUNDER_DASHBOARD_ROUTE;
 
 export interface V2FounderDashboardPage {
   route_path: string;
   page_kind: "v2_founder_dashboard_page";
+  canonical_page_kind: "founder_dashboard_product_page";
   page_scope: "founder_dashboard_product_surface";
   operator_surface: "v2_founder_dashboard_productized";
+  canonical_operator_surface: "founder_dashboard_productized";
   authority_boundary: "app_page_projection_consumer";
   phase_boundary: "v2_0_wave3_founder_dashboard_productization";
+  phase_ref: "founder_dashboard_productization";
   non_executing: true;
   runtime_private_fields_omitted: true;
   provider_execution_available: false;
   channel_entry_available: false;
   autonomous_operation_available: false;
   v2_0_delivered: false;
+  delivery_status: false;
   v2_0_ready: false;
+  readiness_status: false;
   ga_available: false;
   page_title: string;
   hero_summary: string;
-  starter_cell_cards: V2FounderDashboardPageModel["cells_overview"];
+  starter_cell_cards: FounderDashboardProductPageModel["cells_overview"];
   review_queue_summary: string;
   artifact_activity_summary: string;
   learning_summary: string;
@@ -41,37 +47,37 @@ function escape_html(value: string): string {
 }
 
 function summarize_review_queue(
-  model: V2FounderDashboardPageModel
+  model: FounderDashboardProductPageModel
 ): string {
   return `${model.pending_reviews.length} pending review items remain visible across the starter-cell dashboard.`;
 }
 
 function summarize_artifact_activity(
-  model: V2FounderDashboardPageModel
+  model: FounderDashboardProductPageModel
 ): string {
   return `${model.recent_artifacts.length} recent artifacts are surfaced from the starter-cell fixtures.`;
 }
 
 function summarize_learning(
-  model: V2FounderDashboardPageModel
+  model: FounderDashboardProductPageModel
 ): string {
   return `${model.learned_preferences.length} learned preference summaries remain visible across the starter-cell fixtures.`;
 }
 
 function summarize_drift(
-  model: V2FounderDashboardPageModel
+  model: FounderDashboardProductPageModel
 ): string {
   return `${model.drift_and_blocked_items.length} starter-cell drift or bounded attention summaries remain visible in the founder overview.`;
 }
 
 function summarize_suggested_actions(
-  model: V2FounderDashboardPageModel
+  model: FounderDashboardProductPageModel
 ): string {
   return `${model.suggested_next_actions.length} suggested next actions remain visible without widening execution scope.`;
 }
 
 export function renderV2FounderDashboardPage(
-  model: V2FounderDashboardPageModel
+  model: FounderDashboardProductPageModel
 ): V2FounderDashboardPage {
   const review_queue_summary = summarize_review_queue(model);
   const artifact_activity_summary = summarize_artifact_activity(model);
@@ -173,17 +179,22 @@ export function renderV2FounderDashboardPage(
   return {
     route_path: V2_FOUNDER_DASHBOARD_ROUTE,
     page_kind: "v2_founder_dashboard_page",
+    canonical_page_kind: "founder_dashboard_product_page",
     page_scope: "founder_dashboard_product_surface",
     operator_surface: "v2_founder_dashboard_productized",
+    canonical_operator_surface: "founder_dashboard_productized",
     authority_boundary: "app_page_projection_consumer",
     phase_boundary: "v2_0_wave3_founder_dashboard_productization",
+    phase_ref: "founder_dashboard_productization",
     non_executing: true,
     runtime_private_fields_omitted: true,
     provider_execution_available: false,
     channel_entry_available: false,
     autonomous_operation_available: false,
     v2_0_delivered: false,
+    delivery_status: false,
     v2_0_ready: false,
+    readiness_status: false,
     ga_available: false,
     page_title: model.dashboard_title,
     hero_summary: model.dashboard_summary,
@@ -198,3 +209,8 @@ export function renderV2FounderDashboardPage(
     html,
   };
 }
+
+export type FounderDashboardProductPage = V2FounderDashboardPage;
+
+export const renderFounderDashboardProductPage =
+  renderV2FounderDashboardPage;

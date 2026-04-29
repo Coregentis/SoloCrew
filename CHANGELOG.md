@@ -2,6 +2,11 @@
 
 ## 2026-04-29
 
+- continued V2.5 active shell/page model canonicalization with stable helper
+  aliases and product metadata fields while preserving compatibility; no file
+  rename, route change, runtime behavior change, release, tag, package,
+  public/private beta, paid/commercial/production readiness, Cognitive_OS
+  change, or MPLP change is introduced
 - migrated source-ref metadata and canonical helper surfaces toward stable
   Engagement naming while preserving compatibility; no file rename, broad
   rename, runtime behavior change, release, tag, package, public/private beta,

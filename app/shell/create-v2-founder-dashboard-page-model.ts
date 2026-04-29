@@ -21,6 +21,9 @@ import {
   stable_sort_by_key,
   unique_strings,
 } from "../../projection/adapters/runtime-readiness-adapter-helpers.ts";
+import {
+  normalize_engagement_operational_refs,
+} from "../engagement/engagement-source-ref-normalizer.ts";
 
 export const V2_FOUNDER_DASHBOARD_SOURCE_FIXTURE_REF =
   "projection/fixtures/starter-cell-fixtures.ts#createStarterCellsRuntimeStateProjection";
@@ -72,8 +75,11 @@ export interface V2FounderDashboardDriftAndBlockedItemSummary {
 export interface V2FounderDashboardPageModel {
   page_id: string;
   page_kind: "v2_founder_dashboard_productized";
+  canonical_page_kind: "founder_dashboard_productized";
   phase_boundary: "v2_0_wave3_founder_dashboard_productization";
+  phase_ref: "founder_dashboard_productization";
   product_line: "v2_0";
+  release_line: "v2_0";
   product_surface: "founder_dashboard";
   source_fixture_ref: string;
   source_projection_ref: string;
@@ -84,7 +90,9 @@ export interface V2FounderDashboardPageModel {
   channel_entry_available: false;
   autonomous_operation_available: false;
   v2_0_delivered: false;
+  delivery_status: false;
   v2_0_ready: false;
+  readiness_status: false;
   ga_available: false;
   dashboard_title: string;
   dashboard_summary: string;
@@ -277,6 +285,18 @@ function build_drift_and_blocked_summary(
   };
 }
 
+const FOUNDER_DASHBOARD_PRODUCT_METADATA =
+  normalize_engagement_operational_refs({
+    release_line: "v2_0",
+    product_line: "v2_0",
+    phase_ref: "founder_dashboard_productization",
+    phase_boundary: "v2_0_wave3_founder_dashboard_productization",
+    delivery_status: false,
+    v2_0_delivered: false,
+    readiness_status: false,
+    v2_0_ready: false,
+  });
+
 export function createV2FounderDashboardPageModel(
   runtime_state_projection: RuntimeStateProjection =
     createStarterCellsRuntimeStateProjection()
@@ -338,8 +358,13 @@ export function createV2FounderDashboardPageModel(
   return {
     page_id: `${founder_dashboard_projection.dashboard_id}-v2-product-page-model`,
     page_kind: "v2_founder_dashboard_productized",
+    canonical_page_kind: "founder_dashboard_productized",
     phase_boundary: "v2_0_wave3_founder_dashboard_productization",
+    phase_ref:
+      FOUNDER_DASHBOARD_PRODUCT_METADATA.phase_ref as
+        "founder_dashboard_productization",
     product_line: "v2_0",
+    release_line: FOUNDER_DASHBOARD_PRODUCT_METADATA.release_line as "v2_0",
     product_surface: "founder_dashboard",
     source_fixture_ref: V2_FOUNDER_DASHBOARD_SOURCE_FIXTURE_REF,
     source_projection_ref: founder_dashboard_projection.dashboard_id,
@@ -350,7 +375,11 @@ export function createV2FounderDashboardPageModel(
     channel_entry_available: false,
     autonomous_operation_available: false,
     v2_0_delivered: false,
+    delivery_status:
+      FOUNDER_DASHBOARD_PRODUCT_METADATA.delivery_status as false,
     v2_0_ready: false,
+    readiness_status:
+      FOUNDER_DASHBOARD_PRODUCT_METADATA.readiness_status as false,
     ga_available: false,
     dashboard_title: "V2.0 Founder Dashboard productization",
     dashboard_summary:
@@ -378,3 +407,8 @@ export function createV2FounderDashboardPageModel(
     next_wave_hint: "Next wave: Cell Operations Panel Productization.",
   };
 }
+
+export type FounderDashboardProductPageModel = V2FounderDashboardPageModel;
+
+export const createFounderDashboardProductPageModel =
+  createV2FounderDashboardPageModel;

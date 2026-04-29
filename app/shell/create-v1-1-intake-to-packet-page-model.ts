@@ -115,3 +115,8 @@ export function createV11IntakeToPacketPageModel(input: {
     non_executing: true,
   };
 }
+
+export type IntakeToPacketPageModel = V11IntakeToPacketPageModel;
+
+export const createIntakeToPacketPageModel =
+  createV11IntakeToPacketPageModel;

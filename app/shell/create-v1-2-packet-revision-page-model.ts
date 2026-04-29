@@ -268,3 +268,9 @@ export function createV12PacketRevisionPageModel(
     },
   };
 }
+
+export type ContinuityPageModelInput = V14ContinuityPageModelInput;
+export type PacketRevisionPageModel = V12PacketRevisionPageModel;
+
+export const createPacketRevisionPageModel =
+  createV12PacketRevisionPageModel;

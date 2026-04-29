@@ -59,3 +59,8 @@ export function createV17PreparedActionPageModel(
       `${view.non_executing_posture} This slice remains non-approving, non-dispatching, non-provider, and non-queueing.`,
   };
 }
+
+export type PreparedActionPageModel = V17PreparedActionPageModel;
+
+export const createPreparedActionPageModel =
+  createV17PreparedActionPageModel;

@@ -117,3 +117,8 @@ export function createV16SessionContinuityPageModel(
       `${view.non_executing_posture} Continuity replay remains guided viewing only and not execution replay.`,
   };
 }
+
+export type SessionContinuityPageModel = V16SessionContinuityPageModel;
+
+export const createSessionContinuityPageModel =
+  createV16SessionContinuityPageModel;

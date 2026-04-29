@@ -15,6 +15,9 @@ import {
   stable_sort_by_key,
   unique_strings,
 } from "../../projection/adapters/runtime-readiness-adapter-helpers.ts";
+import {
+  normalize_engagement_operational_refs,
+} from "../engagement/engagement-source-ref-normalizer.ts";
 
 export type V19FounderDashboardPageModelInput =
   FounderDashboardProjection | RuntimeStateProjection;
@@ -23,12 +26,14 @@ export interface V19FounderDashboardPageModel {
   page_id: string;
   page_kind: "founder_dashboard_thin_consumption";
   phase_boundary: "v1_9_wave4_product_surface_thin_consumption";
+  phase_ref: "founder_dashboard_thin_consumption";
   projection_scope: "founder_dashboard_projection";
   non_executing: true;
   runtime_private_fields_omitted: true;
   provider_execution_available: false;
   channel_entry_available: false;
   autonomous_operation_available: false;
+  readiness_status: false;
   v2_0_ready: false;
   project_id: string;
   dashboard_surface: {
@@ -64,6 +69,14 @@ function normalize_founder_dashboard_projection(
     : assembleFounderDashboardProjection(input);
 }
 
+const FOUNDER_DASHBOARD_SHELL_METADATA =
+  normalize_engagement_operational_refs({
+    phase_ref: "founder_dashboard_thin_consumption",
+    phase_boundary: "v1_9_wave4_product_surface_thin_consumption",
+    readiness_status: false,
+    v2_0_ready: false,
+  });
+
 export function createV19FounderDashboardPageModel(
   input: V19FounderDashboardPageModelInput
 ): V19FounderDashboardPageModel {
@@ -89,12 +102,17 @@ export function createV19FounderDashboardPageModel(
     page_id: `${projection.dashboard_id}-page-model`,
     page_kind: "founder_dashboard_thin_consumption",
     phase_boundary: "v1_9_wave4_product_surface_thin_consumption",
+    phase_ref:
+      FOUNDER_DASHBOARD_SHELL_METADATA.phase_ref as
+        "founder_dashboard_thin_consumption",
     projection_scope: "founder_dashboard_projection",
     non_executing: true,
     runtime_private_fields_omitted: true,
     provider_execution_available: false,
     channel_entry_available: false,
     autonomous_operation_available: false,
+    readiness_status:
+      FOUNDER_DASHBOARD_SHELL_METADATA.readiness_status as false,
     v2_0_ready: false,
     project_id: projection.project_id,
     dashboard_surface: {
@@ -136,3 +154,9 @@ export function createV19FounderDashboardPageModel(
     ],
   };
 }
+
+export type FounderDashboardShellPageModel = V19FounderDashboardPageModel;
+export type FounderDashboardPageModelFromV19 = V19FounderDashboardPageModel;
+
+export const createFounderDashboardShellPageModel =
+  createV19FounderDashboardPageModel;

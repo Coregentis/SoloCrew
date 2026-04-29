@@ -57,3 +57,8 @@ export function createV18ExecutionBoundaryPageModel(
       `${view.non_authoritative_posture} This slice does not capture acknowledgment and does not create transition state.`,
   };
 }
+
+export type ExecutionBoundaryPageModel = V18ExecutionBoundaryPageModel;
+
+export const createExecutionBoundaryPageModel =
+  createV18ExecutionBoundaryPageModel;

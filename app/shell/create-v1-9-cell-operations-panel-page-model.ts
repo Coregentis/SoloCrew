@@ -15,6 +15,9 @@ import {
   stable_sort_by_key,
   unique_strings,
 } from "../../projection/adapters/runtime-readiness-adapter-helpers.ts";
+import {
+  normalize_engagement_operational_refs,
+} from "../engagement/engagement-source-ref-normalizer.ts";
 
 export type V19CellOperationsPanelPageModelInput =
   CellOperationsPanelProjection | OperationalUnitRuntimeProjection;
@@ -27,12 +30,14 @@ export interface V19CellOperationsPanelPageModel {
   page_id: string;
   page_kind: "cell_operations_panel_thin_consumption";
   phase_boundary: "v1_9_wave4_product_surface_thin_consumption";
+  phase_ref: "cell_operations_panel_thin_consumption";
   projection_scope: "cell_operations_panel_projection";
   non_executing: true;
   runtime_private_fields_omitted: true;
   provider_execution_available: false;
   channel_entry_available: false;
   autonomous_operation_available: false;
+  readiness_status: false;
   v2_0_ready: false;
   project_id: string;
   cell_identity: {
@@ -85,6 +90,14 @@ function normalize_cell_operations_panel_projection(
   );
 }
 
+const CELL_OPERATIONS_PANEL_METADATA =
+  normalize_engagement_operational_refs({
+    phase_ref: "cell_operations_panel_thin_consumption",
+    phase_boundary: "v1_9_wave4_product_surface_thin_consumption",
+    readiness_status: false,
+    v2_0_ready: false,
+  });
+
 export function createV19CellOperationsPanelPageModel(
   input: V19CellOperationsPanelPageModelInput,
   options: CreateV19CellOperationsPanelPageModelOptions = {}
@@ -111,12 +124,16 @@ export function createV19CellOperationsPanelPageModel(
     page_id: `${projection.panel_id}-page-model`,
     page_kind: "cell_operations_panel_thin_consumption",
     phase_boundary: "v1_9_wave4_product_surface_thin_consumption",
+    phase_ref:
+      CELL_OPERATIONS_PANEL_METADATA.phase_ref as
+        "cell_operations_panel_thin_consumption",
     projection_scope: "cell_operations_panel_projection",
     non_executing: true,
     runtime_private_fields_omitted: true,
     provider_execution_available: false,
     channel_entry_available: false,
     autonomous_operation_available: false,
+    readiness_status: CELL_OPERATIONS_PANEL_METADATA.readiness_status as false,
     v2_0_ready: false,
     project_id: projection.project_id,
     cell_identity: {
@@ -180,3 +197,12 @@ export function createV19CellOperationsPanelPageModel(
     ],
   };
 }
+
+export type CellOperationsPanelPageModelInput =
+  V19CellOperationsPanelPageModelInput;
+export type CreateCellOperationsPanelPageModelOptions =
+  CreateV19CellOperationsPanelPageModelOptions;
+export type CellOperationsPanelPageModel = V19CellOperationsPanelPageModel;
+
+export const createCellOperationsPanelPageModel =
+  createV19CellOperationsPanelPageModel;

@@ -79,6 +79,7 @@ export type V2_2FounderDashboardDiagnosticRef = {
 
 export type V2_2FounderDashboardContinuationPageModel = {
   page_id: string;
+  page_ref: "founder_dashboard_continuation";
   generated_at: string;
   status: V2_2FounderDashboardContinuationStatus;
   workspace_summary: V2_2FounderDashboardWorkspaceSummary | null;
@@ -103,3 +104,18 @@ export const V2_2_FOUNDER_DASHBOARD_BOUNDARY_FLAGS =
     no_mplp_certification: true,
     no_mplp_endorsement: true,
   } as const satisfies V2_2FounderDashboardBoundaryFlags;
+
+export type FounderDashboardContinuationStatus =
+  V2_2FounderDashboardContinuationStatus;
+export type FounderDashboardWorkspaceSummary =
+  V2_2FounderDashboardWorkspaceSummary;
+export type FounderDashboardReviewPacketSummary =
+  V2_2FounderDashboardReviewPacketSummary;
+export type FounderDashboardCgosSummary = V2_2FounderDashboardCgosSummary;
+export type FounderDashboardBoundaryFlags = V2_2FounderDashboardBoundaryFlags;
+export type FounderDashboardDiagnosticRef = V2_2FounderDashboardDiagnosticRef;
+export type FounderDashboardContinuationPageModel =
+  V2_2FounderDashboardContinuationPageModel;
+
+export const FOUNDER_DASHBOARD_CONTINUATION_BOUNDARY_FLAGS =
+  V2_2_FOUNDER_DASHBOARD_BOUNDARY_FLAGS;

@@ -2,13 +2,13 @@ import {
   assert_cgos_projection_safe_consumption,
 } from "../cgos/cgos-projection-safe-consumption-contract.ts";
 import {
-  V2_2_FOUNDER_DASHBOARD_BOUNDARY_FLAGS,
-  type V2_2FounderDashboardCgosSummary,
-  type V2_2FounderDashboardContinuationPageModel,
-  type V2_2FounderDashboardContinuationStatus,
-  type V2_2FounderDashboardDiagnosticRef,
-  type V2_2FounderDashboardReviewPacketSummary,
-  type V2_2FounderDashboardWorkspaceSummary,
+  FOUNDER_DASHBOARD_CONTINUATION_BOUNDARY_FLAGS,
+  type FounderDashboardCgosSummary,
+  type FounderDashboardContinuationPageModel,
+  type FounderDashboardContinuationStatus,
+  type FounderDashboardDiagnosticRef,
+  type FounderDashboardReviewPacketSummary,
+  type FounderDashboardWorkspaceSummary,
 } from "../dashboard/v2-2-founder-dashboard-continuation-contract.ts";
 import type {
   V2_2ReviewPacketExport,
@@ -48,7 +48,7 @@ function resolve_workspace(
 
 function build_workspace_summary(
   workspace: SoloCrewWorkspaceRecord
-): V2_2FounderDashboardWorkspaceSummary {
+): FounderDashboardWorkspaceSummary {
   return {
     workspace_id: workspace.workspace_id,
     workspace_label: workspace.workspace_label,
@@ -62,7 +62,7 @@ function build_workspace_summary(
 
 function build_review_packet_summary(
   export_packet: V2_2ReviewPacketExport | null | undefined
-): V2_2FounderDashboardReviewPacketSummary | null {
+): FounderDashboardReviewPacketSummary | null {
   if (!export_packet) {
     return null;
   }
@@ -80,7 +80,7 @@ function build_review_packet_summary(
 
 function build_cgos_summary(
   workspace: SoloCrewWorkspaceRecord
-): V2_2FounderDashboardCgosSummary {
+): FounderDashboardCgosSummary {
   const cgos = workspace.cgos_consumption;
   assert_cgos_projection_safe_consumption(cgos);
 
@@ -110,8 +110,8 @@ function build_cgos_summary(
 
 function build_status(
   workspace: SoloCrewWorkspaceRecord | null,
-  review_packet_summary: V2_2FounderDashboardReviewPacketSummary | null
-): V2_2FounderDashboardContinuationStatus {
+  review_packet_summary: FounderDashboardReviewPacketSummary | null
+): FounderDashboardContinuationStatus {
   if (!workspace) {
     return "no_workspace";
   }
@@ -124,9 +124,9 @@ function build_status(
 }
 
 function build_user_facing_summary(input: {
-  workspace_summary: V2_2FounderDashboardWorkspaceSummary | null;
-  review_packet_summary: V2_2FounderDashboardReviewPacketSummary | null;
-  status: V2_2FounderDashboardContinuationStatus;
+  workspace_summary: FounderDashboardWorkspaceSummary | null;
+  review_packet_summary: FounderDashboardReviewPacketSummary | null;
+  status: FounderDashboardContinuationStatus;
 }): string {
   if (!input.workspace_summary) {
     return "No saved V2.2 workspace is available yet.";
@@ -141,10 +141,10 @@ function build_user_facing_summary(input: {
 
 function build_diagnostic_refs(input: {
   workspace: SoloCrewWorkspaceRecord | null;
-  review_packet_summary: V2_2FounderDashboardReviewPacketSummary | null;
-  cgos_summary: V2_2FounderDashboardCgosSummary | null;
-}): V2_2FounderDashboardDiagnosticRef[] {
-  const refs: V2_2FounderDashboardDiagnosticRef[] = [];
+  review_packet_summary: FounderDashboardReviewPacketSummary | null;
+  cgos_summary: FounderDashboardCgosSummary | null;
+}): FounderDashboardDiagnosticRef[] {
+  const refs: FounderDashboardDiagnosticRef[] = [];
 
   if (input.workspace) {
     refs.push({
@@ -198,7 +198,7 @@ function build_diagnostic_refs(input: {
 
 export function create_v2_2_founder_dashboard_continuation_page_model(
   input: CreateV2_2FounderDashboardContinuationInput = {}
-): V2_2FounderDashboardContinuationPageModel {
+): FounderDashboardContinuationPageModel {
   const workspace = resolve_workspace(input);
   const workspace_summary =
     workspace === null ? null : build_workspace_summary(workspace);
@@ -210,12 +210,13 @@ export function create_v2_2_founder_dashboard_continuation_page_model(
 
   return {
     page_id: "v2_2_founder_dashboard_continuation",
+    page_ref: "founder_dashboard_continuation",
     generated_at: input.generated_at ?? new Date(0).toISOString(),
     status,
     workspace_summary,
     review_packet_summary,
     cgos_summary,
-    boundary_flags: V2_2_FOUNDER_DASHBOARD_BOUNDARY_FLAGS,
+    boundary_flags: FOUNDER_DASHBOARD_CONTINUATION_BOUNDARY_FLAGS,
     boundary_notices: [
       "Dashboard continuation is local, review-only, and non-executing.",
       "The main summary hides protocol/runtime complexity; diagnostic refs preserve auditability.",
@@ -233,3 +234,9 @@ export function create_v2_2_founder_dashboard_continuation_page_model(
     }),
   };
 }
+
+export type CreateFounderDashboardContinuationInput =
+  CreateV2_2FounderDashboardContinuationInput;
+
+export const createFounderDashboardContinuationPageModel =
+  create_v2_2_founder_dashboard_continuation_page_model;
