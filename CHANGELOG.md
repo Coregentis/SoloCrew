@@ -2,6 +2,10 @@
 
 ## 2026-04-29
 
+- added V2.5 RC readiness and release-line decision gate for semantic
+  stabilization; no release, tag, package, public/private beta,
+  paid/commercial/production readiness, V3.0 planning, Cognitive_OS change, or
+  MPLP change is introduced
 - hardened V2.5 semantic stabilization E2E and added closure audit while
   preserving compatibility; no file rename, route change, runtime behavior
   change, release, tag, package, public/private beta, paid/commercial/
