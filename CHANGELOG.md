@@ -2,6 +2,17 @@
 
 ## 2026-04-29
 
+- verified the existing V2.5 Stable release and set the V2.5 maintenance
+  boundary after reconciling local stale/factual doc drift; no release or tag
+  recreation, package publish, package asset, public/private beta,
+  paid/commercial/production readiness, V3.0 implementation, Cognitive_OS
+  change, MPLP change, MPLP certification, or MPLP endorsement is introduced
+- released V2.5 Stable as the stable repo line for Product Semantic
+  Stabilization / Engagement Canonicalization only, preserving remaining
+  compatibility debt and release evidence; no package publish, package asset,
+  public/private beta, paid/commercial/production readiness, V3.0 planning,
+  Cognitive_OS change, MPLP change, MPLP certification, or MPLP endorsement is
+  introduced
 - prepared the V2.5 Stable prep/seal and conditional release gate for semantic
   stabilization with remaining compatibility debt preserved and package
   publication excluded; no package asset, public/private beta,

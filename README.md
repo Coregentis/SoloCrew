@@ -51,28 +51,33 @@ protocol/runtime authority.
 
 Current stable release:
 
-- title: `SoloCrew V2.4 Stable - Commercialization Readiness Loop`
-- tag: `solocrew-v2.4-stable-commercialization-readiness-loop-20260428`
-- target: `12d7ccb00506670992b798d82aa81fbc0f5578f6`
+- title: `SoloCrew V2.5 Stable - Semantic Stabilization`
+- tag: `solocrew-v2.5-stable-semantic-stabilization-20260429`
+- target: `4061f0df0cf6e5f151563c11ac94e27dabbd23b8`
 
-V2.4 Stable is a stable repository line for the bounded local
-commercialization readiness loop only. It composes V2.3 paid pilot loop
-references through onboarding packet, readiness dashboard, feedback evidence,
-and case-study conversion gate records for founder review.
+V2.5 Stable is a stable repository line for Product Semantic Stabilization /
+Engagement Canonicalization only. It validates canonical Engagement aliases,
+metadata/source-ref normalization, active surface compatibility aliases,
+shell/page canonicalization, product-entry README alignment, and release
+evidence preservation.
 
-That release is historical evidence for a verified repo line. It does not mean
-the current product object model should keep encoding `V2.4` in canonical
-domain names, field names, source-ref names, or active product language.
-Release records and tags preserve evidence; current product semantics should
-move toward stable Engagement language.
+Remaining V1/V2 versioned names are preserved as compatibility aliases,
+release evidence, fixture/regression evidence, or later-authorized active
+product debt. V2.5 Stable does not remove existing versioned exports, rename
+source files, rename historical governance or release files, change route
+URLs, publish packages, or create package assets.
 
-V2.4 Stable remains manual-first, design-partner-only, local-only,
-review-only, and non-executing.
+V2.5 Stable remains local-only, manual-first, review-only, deterministic,
+non-executing, and below public/private beta, paid product readiness,
+commercial readiness, production readiness, V3.0, MPLP certification, and
+MPLP endorsement.
 
 ## Semantic Stabilization Line
 
 V2.5 is the Product Semantic Stabilization / Engagement Canonicalization line.
 It is not a cosmetic detour and it is not a shortcut into V3.0.
+This line keeps current product semantics in stable Engagement language while
+preserving release evidence.
 
 Completed V2.5 stabilization work:
 
@@ -167,7 +172,8 @@ Recent release evidence:
 
 | Line | Identity | Evidence |
 | --- | --- | --- |
-| V2.5 stable readiness | proposed stable identity only, no stable release yet | `governance/releases/SOLOCREW-V2.5-RC-POST-RELEASE-VERIFICATION-AND-STABLE-READINESS-GATE-v0.1.md` |
+| V2.5 post-stable maintenance gate | `solocrew-v2.5-stable-semantic-stabilization-20260429` -> `4061f0df0cf6e5f151563c11ac94e27dabbd23b8` | `governance/releases/SOLOCREW-V2.5-POST-STABLE-VERIFICATION-MAINTENANCE-GATE-v0.1.md` |
+| V2.5 Stable | `solocrew-v2.5-stable-semantic-stabilization-20260429` -> `4061f0df0cf6e5f151563c11ac94e27dabbd23b8` | `governance/releases/SOLOCREW-V2.5-STABLE-PREP-SEAL-AND-CONDITIONAL-RELEASE-RECORD-v0.1.md` |
 | V2.5 RC | `solocrew-v2.5-rc-semantic-stabilization-20260429` -> `f98b29a9ab20bb02e9928f844d4fb1f761ba2031` | `governance/releases/SOLOCREW-V2.5-RC-PREP-SEAL-AND-CONDITIONAL-RELEASE-RECORD-v0.1.md` |
 | V2.5 semantic stabilization | canonical Engagement aliases and active-surface migration | `governance/planning/SOLOCREW-SEMANTIC-NAMING-CORRECTION-AND-DELIVERY-LINE-GOVERNANCE-v0.1.md`; `CHANGELOG.md` |
 | V2.4 Stable | `solocrew-v2.4-stable-commercialization-readiness-loop-20260428` -> `12d7ccb00506670992b798d82aa81fbc0f5578f6` | `governance/releases/SOLOCREW-V2.4-POST-STABLE-VERIFICATION-MAINTENANCE-GATE-v0.1.md` |
@@ -198,15 +204,18 @@ part of the current line.
 
 ## Next Line
 
-The next allowed line after V2.5 RC post-release verification is the bounded
-stable prep and conditional release gate for semantic stabilization, not V3.0
-planning.
+The next allowed line after V2.5 post-stable verification is owner-authorized
+V3.0 planning only after this maintenance boundary is reviewed, not V3.0
+implementation.
 
-Next allowed task:
+Owner-authorized next task candidate:
 
-`SOLOCREW-V2.5-STABLE-PREP-GATE-AND-CONDITIONAL-RELEASE-EXECUTION-01`
+`SOLOCREW-V3.0-DELIVERABLE-ENGAGEMENT-OPERATING-LOOP-PLANNING-01`
+
+This next task requires explicit owner authorization after V2.5 post-stable
+closure review.
 
 V3.0 remains reserved for a future First Deliverable Engagement Operating Loop.
-V3.0 planning is blocked until V2.5 semantic stabilization reaches a
-maintenance or final-seal gate. No V3.0 implementation is opened by this
-README structure.
+V3.0 planning is blocked until V2.5 post-stable closure is reviewed and
+explicitly authorized by the owner.
+No V3.0 implementation is opened by this README structure.
