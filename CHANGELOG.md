@@ -2,6 +2,11 @@
 
 ## 2026-04-30
 
+- added V3.0 IMPL-05 local session history ledger and deterministic in-memory
+  export package; no filesystem write, database storage, route change, public
+  publishing, email/CRM, execution/autonomy, release, tag, package,
+  public/private beta, paid/commercial/production readiness, Cognitive_OS
+  change, or MPLP change is introduced
 - added V3.0 IMPL-04 founder review packet output object; no file export,
   persistence, route change, public publishing, email/CRM, execution/autonomy,
   release, tag, package, public/private beta, paid/commercial/production
