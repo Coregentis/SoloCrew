@@ -2,6 +2,10 @@
 
 ## 2026-04-29
 
+- added V2.5 canonical Engagement aliases and metadata contracts; no broad
+  rename, file rename, runtime behavior change, release, tag, package, public
+  beta, paid/commercial/production readiness, Cognitive_OS change, or MPLP
+  change is introduced
 - added semantic naming correction and delivery-line governance; no runtime
   changes, broad renames, file renames, release, tag, package, V2.5
   implementation, V3.0 implementation, public beta, paid/commercial/production
