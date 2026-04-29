@@ -84,11 +84,14 @@ Completed V2.5 stabilization work:
   `app/engagement/engagement-compatibility-aliases.ts`
 - active app/page/shell/projection import migration toward compatibility
   aliases, covered by `tests/app/engagement-active-surface-import-migration.test.ts`
+- RC readiness gate passed with remaining compatibility debt, making V2.5
+  eligible for the bounded RC prep and conditional prerelease gate only.
 
-Remaining active version-bearing runtime/product semantics are technical debt
-and must continue through follow-up V2.5 waves. The next cleanup should focus
-on source-ref metadata field migration and canonical helper cleanup before any
-V3.0 planning is opened.
+Remaining active version-bearing runtime/product semantics are expected
+compatibility debt for this line. They are preserved as compatibility aliases,
+release evidence, fixture/regression evidence, or active product debt for a
+later authorized cleanup, not treated as a reason to rename historical files or
+remove versioned exports during RC prep.
 
 Version numbers remain valid in release evidence, changelog entries,
 governance records, migration records, compatibility adapters, and historical
@@ -188,12 +191,12 @@ part of the current line.
 
 ## Next Line
 
-The next allowed line after this README restructure remains V2.5 semantic
-stabilization cleanup, not V3.0 planning.
+The next allowed line after V2.5 RC readiness is the bounded RC prep and
+conditional prerelease gate for semantic stabilization, not V3.0 planning.
 
 Next allowed task:
 
-`SOLOCREW-V2.5-SOURCE-REF-METADATA-FIELD-MIGRATION-AND-CANONICAL-HELPER-CLEANUP-01`
+`SOLOCREW-V2.5-RC-PREP-GATE-AND-CONDITIONAL-RELEASE-EXECUTION-01`
 
 V3.0 remains reserved for a future First Deliverable Engagement Operating Loop.
 V3.0 planning is blocked until V2.5 semantic stabilization reaches a

@@ -1,0 +1,228 @@
+# SOLOCREW-V2.5-RC-PREP-SEAL-AND-CONDITIONAL-RELEASE-RECORD-v0.1
+
+## Document Control
+
+- doc_id: SOLOCREW-V2.5-RC-PREP-SEAL-AND-CONDITIONAL-RELEASE-RECORD-v0.1
+- task_id: SOLOCREW-V2.5-RC-PREP-GATE-AND-CONDITIONAL-RELEASE-EXECUTION-01
+- status: RC prep seal and conditional prerelease execution record
+- date: 2026-04-29
+- authority_order: MPLP -> Cognitive_OS -> SoloCrew
+- repo: https://github.com/Coregentis/SoloCrew.git
+- branch: main
+- proposed_rc_tag: solocrew-v2.5-rc-semantic-stabilization-20260429
+- proposed_rc_title: SoloCrew V2.5 RC - Semantic Stabilization
+- proposed_rc_prerelease: true
+- proposed_rc_draft: false
+- package_publish: false
+- assets: empty
+
+## Remote Truth Snapshot
+
+| Item | Expected / observed | Result |
+| --- | --- | --- |
+| SoloCrew local HEAD before prep edits | 83c5ec5bdce9f35db737550c859c9b359c7415b3 | pass |
+| SoloCrew origin/main before prep edits | 83c5ec5bdce9f35db737550c859c9b359c7415b3 | pass |
+| Worktree before prep edits | clean | pass |
+| Proposed V2.5 RC tag | absent locally after fetch --tags | pass |
+| V2.4 stable tag | solocrew-v2.4-stable-commercialization-readiness-loop-20260428 -> 12d7ccb00506670992b798d82aa81fbc0f5578f6 | preserved |
+| V2.4 RC tag | solocrew-v2.4-rc-commercialization-readiness-loop-20260428 -> ea882d590b1b59c5b9ce703869fdd7abe66ff77d | preserved |
+| V2.3 stable tag | solocrew-v2.3-stable-first-paid-pilot-loop-20260428 -> c111e2dd7811ec77903a1a139c33bb1a7bc0c27a | preserved |
+| V2.3 RC tag | solocrew-v2.3-rc-first-paid-pilot-loop-20260428 -> 2dbdba7b8b3824d0e332c5237ab307ae1fe1ba65 | preserved |
+| V2.2 stable tag | solocrew-v2.2-stable-private-alpha-journey-20260428 -> aaef0147290848c35e68d8eb4e84616f904454e3 | preserved |
+| V2.2 RC tag | solocrew-v2.2-rc-private-alpha-journey-20260428 -> cb9ee1420181318d7198bd0bddc4896c6d3fe1d7 | preserved |
+| Cognitive_OS inspected HEAD | ec681a4d77368b71c1cc76964618f3151038861b | inspected only, clean |
+| MPLP-Protocol inspected HEAD | 0cf0477938340a443614d03d9fb51ac764b960c7 | inspected only, clean |
+
+## Source References
+
+Readiness gate source:
+
+- `governance/audits/SOLOCREW-V2.5-RC-READINESS-GATE-AND-RELEASE-LINE-DECISION-v0.1.md`
+- consumed decision: SOLOCREW_V2_5_RC_READINESS_PASS_WITH_REMAINING_COMPATIBILITY_DEBT
+
+Closure audit source:
+
+- `governance/audits/SOLOCREW-V2.5-SEMANTIC-STABILIZATION-CLOSURE-AUDIT-v0.1.md`
+- consumed decision: SOLOCREW_V2_5_SEMANTIC_STABILIZATION_CLOSURE_PASS_WITH_REMAINING_COMPATIBILITY_DEBT
+
+The readiness gate did not create a tag, GitHub release, package, or package asset. The proposed RC identity in that gate matches this record.
+
+## V2.5 Artifact Inventory
+
+| Artifact | Role | RC prep posture |
+| --- | --- | --- |
+| `app/engagement/engagement-metadata-contract.ts` | canonical metadata field contract | included |
+| `app/engagement/engagement-canonical-contract.ts` | canonical Engagement alias contract | included |
+| `app/engagement/engagement-compatibility-aliases.ts` | active-surface compatibility alias layer | included with compatibility debt |
+| `app/engagement/engagement-source-ref-normalizer.ts` | legacy-to-canonical source-ref normalization | included |
+| `tests/app/engagement-canonical-aliases.test.ts` | canonical alias coverage | included |
+| `tests/app/engagement-metadata-contract.test.ts` | metadata field coverage | included |
+| `tests/app/engagement-compatibility-aliases.test.ts` | compatibility alias coverage | included |
+| `tests/app/engagement-active-surface-import-migration.test.ts` | active-surface import migration coverage | included |
+| `tests/app/engagement-source-ref-normalizer.test.ts` | source-ref normalization coverage | included |
+| `tests/app/engagement-canonical-helper-cleanup.test.ts` | canonical helper wrapper coverage | included |
+| `tests/app/engagement-active-shell-page-model-canonicalization.test.ts` | active shell/page canonicalization coverage | included |
+| `tests/app/engagement-semantic-stabilization-e2e.test.ts` | closure E2E proof | included |
+| `README.md` | product-entry and RC-prep alignment | aligned in this prep wave |
+| `CHANGELOG.md` | release history and prep record | aligned in this prep wave |
+
+## Semantic Stabilization Scope
+
+V2.5 RC is a Product Semantic Stabilization / Engagement Canonicalization candidate. It introduces or validates canonical Engagement aliases, metadata/source-ref normalization, active surface compatibility aliases, shell/page canonicalization, and product-entry README alignment.
+
+V2.5 is not a product capability release. It does not materially change rendered product behavior, rename source files, rename historical governance or release files, change route URLs, remove versioned exports, publish packages, or create package assets.
+
+## Remaining Compatibility Debt Statement
+
+Remaining V1/V2 versioned names are preserved as compatibility aliases, release evidence, fixture/regression evidence, or active product debt for later owner-authorized cleanup. This is expected and preserved in the RC line. The readiness decision is a pass with remaining compatibility debt, not a full semantic-debt removal claim.
+
+## Final Test Evidence Matrix
+
+| Gate | Command / evidence | Result |
+| --- | --- | --- |
+| diff hygiene | `git diff --check` | pass |
+| staged diff hygiene | `git diff --cached --check` | pass before staging; must be repeated after staging |
+| V2.5 closure E2E | `node --test tests/app/engagement-semantic-stabilization-e2e.test.ts` | pass |
+| active shell/page canonicalization | `node --test tests/app/engagement-active-shell-page-model-canonicalization.test.ts` | pass |
+| source-ref normalizer | `node --test tests/app/engagement-source-ref-normalizer.test.ts` | pass |
+| canonical helper cleanup | `node --test tests/app/engagement-canonical-helper-cleanup.test.ts` | pass |
+| canonical Engagement aliases | `node --test tests/app/engagement-canonical-aliases.test.ts` | pass |
+| metadata contract | `node --test tests/app/engagement-metadata-contract.test.ts` | pass |
+| compatibility aliases | `node --test tests/app/engagement-compatibility-aliases.test.ts` | pass |
+| active-surface import migration | `node --test tests/app/engagement-active-surface-import-migration.test.ts` | pass |
+| V2.4 commercialization readiness loop tests | `node --test tests/app/v2-4-commercialization-readiness-loop-*.test.ts` | pass |
+| V2.4 IMPL-04 gate tests | `node --test tests/app/v2-4-case-study-conversion-gate-*.test.ts` | pass |
+| V2.4 IMPL-03 feedback evidence tests | `node --test tests/app/v2-4-pilot-feedback-evidence-*.test.ts` | pass |
+| V2.4 IMPL-02 dashboard tests | `node --test tests/app/v2-4-commercialization-readiness-dashboard-*.test.ts` | pass |
+| V2.4 IMPL-01 onboarding tests | `node --test tests/app/v2-4-pilot-onboarding-packet-*.test.ts` | pass |
+| V2.3 paid pilot loop regression tests | `node --test tests/app/v2-3-*.test.ts` | pass |
+| focused V2.5/V2.4/V2.3 aggregate | grouped `node --test` validation | pass, 131/131 |
+| full suite | `npm test` | pass, 628/628 |
+
+## Semantic-Debt Grep Classification
+
+Grep terms:
+
+- V11, V12, V16, V17, V18, V19
+- V2FounderDashboard, V2_2FounderDashboard
+- createV11, createV12, createV16, createV17, createV18, createV19, createV2, create_v2_2
+- v2_0_ready, v2_0_delivered, product_line, phase_boundary, page_kind, operator_surface, no_v2_2_completion_claim
+- v2_3_stable_tag, v2_3_stable_commit, v2_4_dashboard_ref, v2_4_onboarding_packet_ref, v2_4_feedback_evidence_ref
+- createV23, createV24, V2_3, V2_4
+
+Observed grep footprint before final validation: `app`, `governance`, `projection`, and `tests`.
+
+| Class | Result |
+| --- | --- |
+| allowed historical/governance | present in governance and changelog evidence |
+| allowed fixture/regression evidence | present in projection fixtures and tests |
+| allowed compatibility alias | present in active compatibility wrappers and preserved exports |
+| active product debt remaining | present and intentionally carried as compatibility debt |
+| blocking | none identified before final validation |
+
+## No-Claim Grep Classification
+
+Grep terms:
+
+- public beta, private beta, paid product ready, commercial ready, production-ready, V3.0 released
+- MPLP certification, MPLP endorsement
+- payment processor, checkout, subscription, automated billing
+- CRM, email dispatch, public publishing, testimonial, public case study, external analytics
+- LLM call, model call, agent dispatch, tool invocation
+- SaaS sharing, autonomous execution, package publish, npm publish
+- Cognitive_OS, MPLP, raw_runtime_private_payload
+
+Observed grep footprint before final validation: `CHANGELOG.md`, `Files_GPT`, `README.md`, `app`, `governance`, `package.json`, `projection`, `runtime-imports`, `scripts`, and `tests`.
+
+| Class | Result |
+| --- | --- |
+| allowed boundary/no-claim | present |
+| allowed governance/historical | present |
+| allowed compatibility alias | present where terms protect compatibility or boundary posture |
+| active product debt remaining | none blocking |
+| blocking positive claim | none identified before final validation |
+
+## Package Publish Verification
+
+Command:
+
+`npm view @coregentis/solocrew version --json`
+
+Observed result before final validation:
+
+- npm returned `E404 Not Found`.
+- No npm package publication exists for `@coregentis/solocrew`.
+- No package publish is authorized or performed by this RC prep wave.
+
+## RC Release Notes Constraints
+
+The GitHub prerelease notes must explicitly state:
+
+- V2.5 RC is a semantic stabilization / Engagement canonicalization candidate.
+- It introduces or validates canonical Engagement aliases, metadata/source-ref normalization, active surface compatibility aliases, shell/page canonicalization, and product-entry README.
+- Remaining V1/V2 versioned names are preserved as compatibility aliases, release evidence, or regression evidence.
+- It does not implement new product capability.
+- It does not create public beta or private beta.
+- It is not paid product ready, commercial ready, or production-ready.
+- It is not V3.0.
+- It does not publish npm/package artifacts.
+- It does not implement payment processor, checkout, subscription, automated billing, provider/channel dispatch, marketplace, CRM/email automation, public publishing, testimonial/public case-study publishing, external analytics, LLM/model/agent/tool invocation, SaaS sharing, customer account provisioning, automatic conversion, or autonomous execution.
+- Cognitive_OS and MPLP-Protocol were not modified.
+- It is not MPLP certification or MPLP endorsement.
+
+## Conditional RC Release Execution Rule
+
+Create the annotated RC tag and GitHub prerelease only after all of the following are true:
+
+- this RC prep record and any README/CHANGELOG alignment are committed and pushed to `origin/main`
+- local HEAD equals `origin/main`
+- all final validation tests pass
+- semantic-debt grep has no blockers
+- no-claim grep has no blocking positive claims
+- npm package publish exclusion is verified
+- README and CHANGELOG are aligned
+- Cognitive_OS remains at ec681a4d77368b71c1cc76964618f3151038861b and unmodified
+- MPLP-Protocol remains at 0cf0477938340a443614d03d9fb51ac764b960c7 and unmodified
+- release notes satisfy the constraints above
+
+Stop without creating the tag or release if any condition fails.
+
+## Post-RC Verification Result
+
+Pending at document time. This record must be committed and pushed before the annotated RC tag and GitHub prerelease can be created, so post-RC verification is intentionally performed after this document lands on `origin/main`.
+
+Required post-RC verification:
+
+- RC tag exists locally and remotely
+- RC tag target equals the final RC prep commit
+- GitHub release title is `SoloCrew V2.5 RC - Semantic Stabilization`
+- GitHub release has `prerelease=true`
+- GitHub release has `draft=false`
+- GitHub release assets are empty
+- npm package publish still returns E404
+- V2.4/V2.3/V2.2 tags remain preserved
+- README/CHANGELOG remain aligned
+- local HEAD equals `origin/main`
+- SoloCrew worktree is clean
+- Cognitive_OS and MPLP-Protocol remain unchanged
+
+## Final Decision
+
+Document-time decision:
+
+SOLOCREW_V2_5_RC_PREP_GATE_PASS_CONDITIONAL_RELEASE_EXECUTION_ALLOWED_IF_FINAL_GATES_PASS
+
+Execution-time final decision must be one of:
+
+- SOLOCREW_V2_5_RC_PREP_GATE_PASS_CONDITIONAL_RELEASE_EXECUTED
+- SOLOCREW_V2_5_RC_PREP_GATE_BLOCKED
+
+## Next Allowed Task
+
+If final validation and post-RC verification pass:
+
+SOLOCREW-V2.5-RC-POST-RELEASE-VERIFICATION-AND-STABLE-READINESS-GATE-01
+
+If final validation blocks:
+
+SOLOCREW-V2.5-RC-PREP-BLOCKER-REMEDIATION-01

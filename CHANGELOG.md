@@ -2,6 +2,11 @@
 
 ## 2026-04-29
 
+- prepared the V2.5 RC prep/seal and conditional prerelease gate for semantic
+  stabilization with package publication excluded and remaining compatibility
+  debt preserved; no stable release, package asset, public/private beta,
+  paid/commercial/production readiness, V3.0 planning, Cognitive_OS change,
+  MPLP change, MPLP certification, or MPLP endorsement is introduced
 - added V2.5 RC readiness and release-line decision gate for semantic
   stabilization; no release, tag, package, public/private beta,
   paid/commercial/production readiness, V3.0 planning, Cognitive_OS change, or
