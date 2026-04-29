@@ -161,3 +161,6 @@ export function createV24PilotFeedbackEvidenceFixture() {
     },
   } as const;
 }
+
+export const createEngagementEvidenceRecordFixture =
+  createV24PilotFeedbackEvidenceFixture;

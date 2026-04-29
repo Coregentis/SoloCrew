@@ -47,6 +47,8 @@ export type NextActionSourceRefs = {
   workspace_id?: WorkspaceId;
   review_packet_export_id?: ReviewPacketExportId;
   dashboard_page_id?: string;
+  baseline_release_ref?: string;
+  baseline_commit_ref?: string;
   v2_2_stable_tag: string;
   v2_2_stable_commit: string;
 };
@@ -134,6 +136,8 @@ export const V2_3_NEXT_ACTION_BOUNDARY_NOTICES = [
 ] as const;
 
 export const V2_2_STABLE_SOURCE_REFS = {
+  baseline_release_ref: "solocrew-v2.2-stable-private-alpha-journey-20260428",
+  baseline_commit_ref: "aaef0147290848c35e68d8eb4e84616f904454e3",
   v2_2_stable_tag: "solocrew-v2.2-stable-private-alpha-journey-20260428",
   v2_2_stable_commit: "aaef0147290848c35e68d8eb4e84616f904454e3",
 } as const;

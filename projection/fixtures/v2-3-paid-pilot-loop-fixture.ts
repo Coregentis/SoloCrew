@@ -299,3 +299,6 @@ export function createV23PaidPilotLoopFixture() {
     },
   } as const;
 }
+
+export const createPaidPilotEngagementLoopFixture =
+  createV23PaidPilotLoopFixture;

@@ -77,6 +77,10 @@ export type PilotFeedbackEvidenceSourceRefs = {
   manual_payment_status?: ManualPaymentStatus;
   payment_record_id?: ManualPaymentRecordId;
   next_action_proposal_id?: NextActionProposalId;
+  baseline_release_ref?: string;
+  baseline_commit_ref?: string;
+  readiness_view_ref?: string;
+  onboarding_packet_ref?: string;
   v2_3_stable_tag: string;
   v2_3_stable_commit: string;
   v2_4_dashboard_ref?: string;

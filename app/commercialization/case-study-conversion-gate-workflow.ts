@@ -215,7 +215,7 @@ function derive_source_refs(input: {
 }): CaseStudyConversionSourceRefs {
   const evidence_refs = input.feedback_evidence_summary?.source_refs;
 
-  return {
+  const source_refs = {
     ...V2_3_STABLE_SOURCE_REFS,
     feedback_evidence_id: input.feedback_evidence_summary?.evidence_id,
     feedback_evidence_strength_band:
@@ -237,9 +237,28 @@ function derive_source_refs(input: {
     v2_4_feedback_evidence_ref: input.feedback_evidence_summary?.evidence_id
       ? `summary:${input.feedback_evidence_summary.evidence_id}`
       : undefined,
+    evidence_record_ref: input.feedback_evidence_summary?.evidence_id
+      ? `summary:${input.feedback_evidence_summary.evidence_id}`
+      : undefined,
     v2_4_dashboard_ref: evidence_refs?.v2_4_dashboard_ref,
+    readiness_view_ref:
+      evidence_refs?.readiness_view_ref ?? evidence_refs?.v2_4_dashboard_ref,
     v2_4_onboarding_packet_ref: evidence_refs?.v2_4_onboarding_packet_ref,
+    onboarding_packet_ref:
+      evidence_refs?.onboarding_packet_ref ??
+      evidence_refs?.v2_4_onboarding_packet_ref,
     ...input.source_refs,
+  };
+
+  return {
+    ...source_refs,
+    evidence_record_ref:
+      source_refs.v2_4_feedback_evidence_ref ?? source_refs.evidence_record_ref,
+    readiness_view_ref:
+      source_refs.v2_4_dashboard_ref ?? source_refs.readiness_view_ref,
+    onboarding_packet_ref:
+      source_refs.v2_4_onboarding_packet_ref ??
+      source_refs.onboarding_packet_ref,
   };
 }
 

@@ -60,6 +60,7 @@ export type V2_3ManualPaymentRecord = {
   manual_payment_instruction_ref: string;
   manual_confirmation_ref?: string;
   manual_exception_reason?: string;
+  related_intake_status: PilotIntakeStatus;
   related_v2_3_intake_status: PilotIntakeStatus;
   boundary_flags: ManualPaymentBoundaryFlags;
   boundary_notices: string[];

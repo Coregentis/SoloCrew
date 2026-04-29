@@ -94,6 +94,7 @@ export function create_manual_payment_record(
     amount_display: format_amount(input.currency_code, input.amount_minor_units),
     invoice_label: input.invoice_label,
     manual_payment_instruction_ref: input.manual_payment_instruction_ref,
+    related_intake_status: input.intake.status,
     related_v2_3_intake_status: input.intake.status,
     boundary_flags: V2_3_MANUAL_PAYMENT_BOUNDARY_FLAGS,
     boundary_notices: [...V2_3_MANUAL_PAYMENT_BOUNDARY_NOTICES],
@@ -241,11 +242,20 @@ export function create_manual_payment_summary(
 
 export function update_related_intake_status(input: {
   record: V2_3ManualPaymentRecord;
-  related_v2_3_intake_status: PilotIntakeStatus;
+  related_intake_status?: PilotIntakeStatus;
+  related_v2_3_intake_status?: PilotIntakeStatus;
 }): V2_3ManualPaymentRecord {
+  const related_intake_status =
+    input.related_intake_status ?? input.related_v2_3_intake_status;
+
+  if (!related_intake_status) {
+    return clone_payment(input.record);
+  }
+
   return {
     ...clone_payment(input.record),
-    related_v2_3_intake_status: input.related_v2_3_intake_status,
+    related_intake_status,
+    related_v2_3_intake_status: related_intake_status,
     boundary_flags: V2_3_MANUAL_PAYMENT_BOUNDARY_FLAGS,
   };
 }

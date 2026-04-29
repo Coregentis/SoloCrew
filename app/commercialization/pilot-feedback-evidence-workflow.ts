@@ -202,7 +202,7 @@ function derive_source_refs(input: {
   dashboard_summary?: CommercializationReadinessDashboardSummary;
   source_refs?: Partial<PilotFeedbackEvidenceSourceRefs>;
 }): PilotFeedbackEvidenceSourceRefs {
-  return {
+  const source_refs = {
     ...V2_3_STABLE_SOURCE_REFS,
     feedback_id: input.feedback?.feedback_id,
     case_study_permission_id: input.permission?.permission_id,
@@ -228,9 +228,24 @@ function derive_source_refs(input: {
     v2_4_dashboard_ref: input.dashboard_summary?.dashboard_id
       ? `summary:${input.dashboard_summary.dashboard_id}`
       : undefined,
+    readiness_view_ref: input.dashboard_summary?.dashboard_id
+      ? `summary:${input.dashboard_summary.dashboard_id}`
+      : undefined,
     v2_4_onboarding_packet_ref:
       input.dashboard_summary?.source_refs.v2_4_onboarding_packet_ref,
+    onboarding_packet_ref:
+      input.dashboard_summary?.source_refs.onboarding_packet_ref ??
+      input.dashboard_summary?.source_refs.v2_4_onboarding_packet_ref,
     ...input.source_refs,
+  };
+
+  return {
+    ...source_refs,
+    readiness_view_ref:
+      source_refs.v2_4_dashboard_ref ?? source_refs.readiness_view_ref,
+    onboarding_packet_ref:
+      source_refs.v2_4_onboarding_packet_ref ??
+      source_refs.onboarding_packet_ref,
   };
 }
 

@@ -200,3 +200,6 @@ export function createV24CaseStudyConversionGateFixture() {
     },
   } as const;
 }
+
+export const createEngagementReviewGateFixture =
+  createV24CaseStudyConversionGateFixture;

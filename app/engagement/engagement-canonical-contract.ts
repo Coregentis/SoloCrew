@@ -145,6 +145,17 @@ export type EngagementReadinessRefs =
     review_gate_ref?: CaseStudyConversionGateId;
   };
 
+export type EngagementOperationalRefs = {
+  workspace_ref?: string;
+  review_packet_export_ref?: string;
+  related_intake_status?: string;
+  no_completion_claim?: boolean;
+  readiness_status?: string | boolean;
+  delivery_status?: string | boolean;
+  release_line?: string;
+  phase_ref?: string;
+};
+
 export const ENGAGEMENT_SOURCE_REF_FIELD_NAMES = [
   "baseline_release_ref",
   "baseline_commit_ref",
@@ -156,4 +167,15 @@ export const ENGAGEMENT_SOURCE_REF_FIELD_NAMES = [
   "review_gate_ref",
   "participant_ref",
   "engagement_ref",
+] as const;
+
+export const ENGAGEMENT_OPERATIONAL_REF_FIELD_NAMES = [
+  "workspace_ref",
+  "review_packet_export_ref",
+  "related_intake_status",
+  "no_completion_claim",
+  "readiness_status",
+  "delivery_status",
+  "release_line",
+  "phase_ref",
 ] as const;

@@ -21,6 +21,8 @@ export type CreatePilotIntakeInput = {
   applicant_profile: PilotApplicantProfile;
   pain_profile: PilotPainProfile;
   expectation_profile: PilotExpectationProfile;
+  workspace_ref?: string;
+  review_packet_export_ref?: string;
   related_v2_2_workspace_id?: string;
   related_v2_2_review_packet_export_id?: string;
 };
@@ -50,9 +52,15 @@ export function create_pilot_intake_record(
     qualification_reasons: [],
     disqualification_reasons: [],
     recommended_next_manual_step: "submit_intake_for_manual_first_qualification",
-    related_v2_2_workspace_id: input.related_v2_2_workspace_id,
-    related_v2_2_review_packet_export_id:
+    workspace_ref: input.workspace_ref ?? input.related_v2_2_workspace_id,
+    review_packet_export_ref:
+      input.review_packet_export_ref ??
       input.related_v2_2_review_packet_export_id,
+    related_v2_2_workspace_id:
+      input.related_v2_2_workspace_id ?? input.workspace_ref,
+    related_v2_2_review_packet_export_id:
+      input.related_v2_2_review_packet_export_id ??
+      input.review_packet_export_ref,
     boundary_flags: V2_3_PILOT_BOUNDARY_FLAGS,
   };
 }

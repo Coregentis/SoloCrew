@@ -58,6 +58,7 @@ export type V2_2FounderDashboardBoundaryFlags = {
   no_marketplace_implementation: true;
   no_autonomous_execution: true;
   no_paid_product_claim: true;
+  no_completion_claim: true;
   no_v2_2_completion_claim: true;
   no_mplp_certification: true;
   no_mplp_endorsement: true;
@@ -97,6 +98,7 @@ export const V2_2_FOUNDER_DASHBOARD_BOUNDARY_FLAGS =
     no_marketplace_implementation: true,
     no_autonomous_execution: true,
     no_paid_product_claim: true,
+    no_completion_claim: true,
     no_v2_2_completion_claim: true,
     no_mplp_certification: true,
     no_mplp_endorsement: true,

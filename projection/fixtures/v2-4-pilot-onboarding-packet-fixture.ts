@@ -239,3 +239,6 @@ export function createV24PilotOnboardingPacketFixture() {
     source_loop_summary: loop.final_loop_summary,
   } as const;
 }
+
+export const createEngagementOnboardingPacketFixture =
+  createV24PilotOnboardingPacketFixture;

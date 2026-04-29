@@ -173,3 +173,6 @@ export function createV24CommercializationReadinessDashboardFixture() {
     },
   } as const;
 }
+
+export const createEngagementReadinessViewFixture =
+  createV24CommercializationReadinessDashboardFixture;

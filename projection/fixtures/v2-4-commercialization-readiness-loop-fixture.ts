@@ -116,6 +116,21 @@ export function createV24CommercializationReadinessLoopFixture() {
         .evidence_id,
     conversion_gate_id:
       conversion_gate_fixture.gates.manual_conversion_review_candidate.gate_id,
+    baseline_release_ref:
+      conversion_gate_fixture.gates.manual_conversion_review_candidate
+        .source_refs.baseline_release_ref,
+    baseline_commit_ref:
+      conversion_gate_fixture.gates.manual_conversion_review_candidate
+        .source_refs.baseline_commit_ref,
+    onboarding_packet_ref:
+      conversion_gate_fixture.gates.manual_conversion_review_candidate
+        .source_refs.onboarding_packet_ref,
+    readiness_view_ref:
+      conversion_gate_fixture.gates.manual_conversion_review_candidate
+        .source_refs.readiness_view_ref,
+    evidence_record_ref:
+      conversion_gate_fixture.gates.manual_conversion_review_candidate
+        .source_refs.evidence_record_ref,
     v2_3_stable_tag:
       conversion_gate_fixture.gates.manual_conversion_review_candidate
         .source_refs.v2_3_stable_tag,
@@ -300,3 +315,6 @@ export function createV24CommercializationReadinessLoopFixture() {
     },
   } as const;
 }
+
+export const createEngagementReadinessLoopFixture =
+  createV24CommercializationReadinessLoopFixture;

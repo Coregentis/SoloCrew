@@ -195,9 +195,14 @@ export function create_commercialization_readiness_dashboard(
     onboarding_packet_summary_ref: input.onboarding_packet_summary?.packet_id
       ? `summary:${input.onboarding_packet_summary.packet_id}`
       : undefined,
+    onboarding_packet_ref: input.onboarding_packet_summary?.packet_id
+      ? `summary:${input.onboarding_packet_summary.packet_id}`
+      : undefined,
     ...input.onboarding_packet_summary?.source_refs,
     ...input.source_refs,
   };
+  source_refs.onboarding_packet_ref =
+    source_refs.v2_4_onboarding_packet_ref ?? source_refs.onboarding_packet_ref;
   const evidence_signals = sort_unique(input.evidence_signals ?? []);
   const support_burden_signals = sort_unique(
     input.support_burden_signals ?? []

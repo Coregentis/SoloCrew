@@ -74,6 +74,8 @@ export type PilotOnboardingSourceRefs = {
   next_action_proposal_id?: NextActionProposalId;
   feedback_id?: PilotFeedbackId;
   case_study_permission_id?: CaseStudyPermissionId;
+  baseline_release_ref?: string;
+  baseline_commit_ref?: string;
   v2_3_stable_tag: string;
   v2_3_stable_commit: string;
 };
@@ -150,6 +152,8 @@ export type PilotOnboardingPacketSummary = {
 };
 
 export const V2_3_STABLE_SOURCE_REFS = {
+  baseline_release_ref: "solocrew-v2.3-stable-first-paid-pilot-loop-20260428",
+  baseline_commit_ref: "c111e2dd7811ec77903a1a139c33bb1a7bc0c27a",
   v2_3_stable_tag: "solocrew-v2.3-stable-first-paid-pilot-loop-20260428",
   v2_3_stable_commit: "c111e2dd7811ec77903a1a139c33bb1a7bc0c27a",
 } as const;

@@ -83,6 +83,9 @@ export type CommercializationReadinessSourceRefs = {
   next_action_proposal_id?: NextActionProposalId;
   feedback_id?: PilotFeedbackId;
   case_study_permission_id?: CaseStudyPermissionId;
+  baseline_release_ref?: string;
+  baseline_commit_ref?: string;
+  onboarding_packet_ref?: string;
   v2_3_stable_tag: string;
   v2_3_stable_commit: string;
   v2_4_onboarding_packet_ref?: string;

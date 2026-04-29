@@ -84,6 +84,8 @@ export type V2_3PilotIntakeRecord = {
   qualification_reasons: string[];
   disqualification_reasons: string[];
   recommended_next_manual_step: string;
+  workspace_ref?: string;
+  review_packet_export_ref?: string;
   related_v2_2_workspace_id?: string;
   related_v2_2_review_packet_export_id?: string;
   boundary_flags: PilotBoundaryFlags;
