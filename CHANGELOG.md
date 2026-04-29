@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-04-29
+
+- added semantic naming correction and delivery-line governance; no runtime
+  changes, broad renames, file renames, release, tag, package, V2.5
+  implementation, V3.0 implementation, public beta, paid/commercial/production
+  readiness, Cognitive_OS change, or MPLP change is introduced
+
 ## 2026-04-28
 
 - released V2.4 Stable as the stable repo line for the bounded local
