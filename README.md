@@ -86,6 +86,9 @@ Completed V2.5 stabilization work:
   aliases, covered by `tests/app/engagement-active-surface-import-migration.test.ts`
 - RC readiness gate passed with remaining compatibility debt, making V2.5
   eligible for the bounded RC prep and conditional prerelease gate only.
+- RC prerelease executed as semantic stabilization evidence:
+  `solocrew-v2.5-rc-semantic-stabilization-20260429` ->
+  `f98b29a9ab20bb02e9928f844d4fb1f761ba2031`.
 
 Remaining active version-bearing runtime/product semantics are expected
 compatibility debt for this line. They are preserved as compatibility aliases,
@@ -162,6 +165,7 @@ Recent release evidence:
 
 | Line | Identity | Evidence |
 | --- | --- | --- |
+| V2.5 RC | `solocrew-v2.5-rc-semantic-stabilization-20260429` -> `f98b29a9ab20bb02e9928f844d4fb1f761ba2031` | `governance/releases/SOLOCREW-V2.5-RC-PREP-SEAL-AND-CONDITIONAL-RELEASE-RECORD-v0.1.md` |
 | V2.5 semantic stabilization | canonical Engagement aliases and active-surface migration | `governance/planning/SOLOCREW-SEMANTIC-NAMING-CORRECTION-AND-DELIVERY-LINE-GOVERNANCE-v0.1.md`; `CHANGELOG.md` |
 | V2.4 Stable | `solocrew-v2.4-stable-commercialization-readiness-loop-20260428` -> `12d7ccb00506670992b798d82aa81fbc0f5578f6` | `governance/releases/SOLOCREW-V2.4-POST-STABLE-VERIFICATION-MAINTENANCE-GATE-v0.1.md` |
 | V2.4 RC | `solocrew-v2.4-rc-commercialization-readiness-loop-20260428` -> `ea882d590b1b59c5b9ce703869fdd7abe66ff77d` | `governance/releases/SOLOCREW-V2.4-RC-POST-RELEASE-VERIFICATION-AND-STABLE-READINESS-GATE-v0.1.md` |
@@ -178,9 +182,9 @@ new canonical product object names.
 
 ## Development / Test Status
 
-The latest full repository suite run for this README restructure reported:
+The latest full repository suite run for the V2.5 RC verification line reported:
 
-- `npm test` -> pass, 609/609
+- `npm test` -> pass, 628/628
 - canonical Engagement alias and metadata tests -> pass
 - active-surface import migration test -> pass
 - V2.4 commercialization readiness loop regression tests -> pass
@@ -191,12 +195,13 @@ part of the current line.
 
 ## Next Line
 
-The next allowed line after V2.5 RC readiness is the bounded RC prep and
-conditional prerelease gate for semantic stabilization, not V3.0 planning.
+The next allowed line after V2.5 RC post-release verification is the bounded
+stable prep and conditional release gate for semantic stabilization, not V3.0
+planning.
 
 Next allowed task:
 
-`SOLOCREW-V2.5-RC-PREP-GATE-AND-CONDITIONAL-RELEASE-EXECUTION-01`
+`SOLOCREW-V2.5-STABLE-PREP-GATE-AND-CONDITIONAL-RELEASE-EXECUTION-01`
 
 V3.0 remains reserved for a future First Deliverable Engagement Operating Loop.
 V3.0 planning is blocked until V2.5 semantic stabilization reaches a
