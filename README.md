@@ -1,563 +1,201 @@
 # SoloCrew
 
-SoloCrew is the product repository for a one-person-company AI team experience built downstream of the Coregentis stack.
+## Product Identity
 
-Authority order for this repo is:
+SoloCrew is a local, founder-facing Engagement Operating product surface for
+one-person-company operations. It sits downstream of the Coregentis authority
+stack and turns bounded product/app evidence into reviewable local surfaces
+for a founder or operator.
+
+Authority order:
 
 `MPLP Protocol -> Cognitive_OS -> SoloCrew`
 
-This repository is not:
-
-- the MPLP protocol source of truth
-- the neutral mother-runtime repository
-- a claim that full runtime capability already exists here
-
-This repository is:
-
-- the SoloCrew product repo
-- the place where SoloCrew projection and app baselines are frozen
-- the place where downstream product contracts are mapped over upstream mother-runtime truth
-
-## Current Release Status
-
-Current release status is `V2.0 Stable released / post-Stable verified /
-V2.0.x maintenance`.
-
-SoloCrew V2.0 is closed as the bounded local-first First Runnable AIGC
-Operating Product. Current V2.0.x work remains maintenance/correction only;
-V2.1 IMPL-01 Secretary Routing Proposal implementation is owner-authorized as
-a bounded implementation slice, and V2.1 IMPL-02 Management Directive preview
-is owner-authorized as a bounded product-projection slice. V2.1 IMPL-03 Cell
-CEO Assembly Plan Preview and asset-type vocabulary are owner-authorized as
-bounded product-projection surfaces. V2.1 IMPL-04A corrected IMPL-04 naming
-to Project Governance Asset-Family Mapping; TracePilot remains a future
-optional Coregentis product integration/provider candidate, not a SoloCrew
-Cell or canonical internal object. V2.1 hardening baseline has been added for
-the review-only chain. V2.1 release and any feature scope beyond IMPL-04A
-remain blocked unless explicitly owner-authorized.
-V2.1 RC-01 candidate has been sealed for owner review; stable release and
-package publication remain blocked pending owner authorization.
-
-## Current V2.2 and V2.3 Stable Status
-
-SoloCrew V2.2 Stable has been released and verified as the private-alpha,
-local review-only journey:
-
-workspace/session continuity -> local review packet JSON/Markdown export ->
-founder dashboard continuation -> private-alpha journey E2E hardening.
-
-V2.2 consumes Cognitive_OS projection-safe posture references and bounded
-summaries through a SoloCrew-local CGOS consumption adapter. SoloCrew stores
-references and summaries only; it does not redefine Cognitive_OS runtime law,
-MPLP module semantics, Kernel Duty semantics, object/export binding semantics,
-state-sync posture, transaction posture, security omission posture,
-observability evidence posture, or protocol versioning posture.
-
-V2.2 remains local-only, review-only, non-executing, and below
-commercial/public product claims. It does not include provider/channel dispatch,
-marketplace implementation, autonomous execution, PDF export, SaaS sharing,
-package publication, paid product readiness, public beta, V3.0, MPLP
-certification, or MPLP endorsement.
-
-SoloCrew V2.3 has completed its first paid pilot implementation slices and E2E
-hardening:
-
-pilot intake / design partner qualification -> manual payment and invoice
-status -> review-only next-action proposal -> local feedback capture and
-permission-gated case-study path -> paid pilot loop E2E hardening.
-
-V2.3 Stable has been released as the stable repo line for this bounded first
-paid pilot loop only. The paid pilot loop is manual-first,
-design-partner-only, local-only, review-only, and non-executing. It tracks
-manual payment/invoice status only and does not claim paid product readiness,
-public beta readiness, commercial readiness, or production-ready status.
-
-V2.3 does not implement payment processor, checkout, subscription, automated
-billing, provider/channel dispatch, marketplace behavior, CRM integration,
-email dispatch, LLM/model/agent/tool invocation, SaaS sharing, package
-publication, autonomous execution, MPLP certification, or MPLP endorsement.
-Cognitive_OS and MPLP-Protocol were not modified for the V2.3 product-local
-pilot loop.
-
-## Current V2.4 Stable Status
-
-SoloCrew V2.4 has completed its commercialization readiness implementation
-slices and E2E hardening:
-
-pilot onboarding packet -> commercialization readiness dashboard -> pilot
-feedback evidence strengthening -> case-study permission and conversion
-readiness gate -> commercialization readiness loop E2E hardening.
-
-V2.4 Stable is the stable repo line for the bounded local commercialization
-readiness loop only. The V2.4 commercialization readiness loop remains
-manual-first, design-partner-only, local-only, review-only, and non-executing.
-It composes V2.3 paid pilot loop references through onboarding, dashboard,
-feedback evidence, and case-study conversion gate records for founder review.
-
-V2.4 is not public beta, not paid product ready, not commercial ready, and not
-production-ready. It does not implement package publication, payment processor,
-checkout, subscription, automated billing, provider/channel dispatch,
-marketplace behavior, CRM integration, email dispatch, public publishing,
-testimonial or public case-study publishing, external analytics,
-LLM/model/agent/tool invocation, SaaS sharing, customer account provisioning,
-automatic conversion, autonomous execution, MPLP certification, or MPLP
-endorsement. Cognitive_OS and MPLP-Protocol were not modified for the V2.4
-product-local commercialization readiness loop.
-
-For the historical formal boundary between repo/platform `v1.0` and later
-Operational V1.0 closure, see
-`governance/baselines/SOLOCREW-REPO-V1-VS-OPERATIONAL-V1-BOUNDARY-v0.1.md`.
-
-That historical delivery judgment means the repo has the mandatory `v1.0`
-baseline in bounded form, but it is not the current release line:
-
-- a stable single-cell operating core
-- a bounded portfolio / Secretary layer
-- a lawful business-pack / metrics-pack mount model
-- coherent management, organization, execution-adjacent, and
-  memory/evidence planes
-- explicit upstream boundary discipline preserved
-- a bounded platform summary / delivery-readiness layer
-- bounded runtime-dependent downstream truth hardening over current upstream
-  confirm / trace / omission-aware truth
-
-That delivery judgment does **not** mean:
-
-- direct approve, reject, dispatch, or execute behavior now exists here
-- provider or channel execution now exists here
-- SoloCrew owns runtime authority
-- SoloCrew owns protocol authority
-- bounded downstream truth has become delivery authorization
-
-## Historical V1.9 Stable Line
-
-SoloCrew V1.9 Stable — Runtime Readiness Closure has been released and
-verified as the readiness / hardening line closure for this repo.
-It closes the V1.9 chain across:
-
-- Wave 1 tri-repo runtime/product readiness crosswalk
-- Wave 2 Cognitive_OS runtime readiness foundation
-- Wave 3 SoloCrew projection contracts
-- Wave 4 SoloCrew product-surface thin consumption
-
-V1.9 is not V2.0.
-It does not deliver the first runnable AIGC operating product.
-It does not introduce provider/channel execution, external dispatch,
-autonomous company operation, GA, or protocol certification.
-
-Current V1.9 closure reference:
-
-- `governance/releases/SOLOCREW-V1.9-RC-STABLE-CLOSURE-AND-V2.0-START-DECISION-v0.1.md`
-
-## Current V2.0 Status
-
-The V2.0 line is defined as `First Runnable AIGC Operating Product` and is
-now closed as Stable. Its delivery chain began with Wave 1 planning:
-
-- `governance/baselines/SOLOCREW-V2.0-FIRST-RUNNABLE-AIGC-OPERATING-PRODUCT-BASELINE-v0.1.md`
-
-V2.0 Wave 2 starter-cell baseline and fixtures have now been added:
-
-- `governance/baselines/SOLOCREW-V2.0-STARTER-CELL-PRODUCT-BASELINE-AND-FIXTURES-v0.1.md`
-
-V2.0.x has clarified that these three starter experiences are official starter
-blueprint / assembly fixtures over Cell operating-unit semantics; they are not
-constitutional Cell kinds and do not expand V2.0 scope.
-Post-cell-drift architecture baseline has been added to freeze Secretary
-routing, Cell CEO / Crew Compiler assembly authority, Open Asset Plane concept
-boundaries, and TracePilot non-Cell positioning before any future V2.1
-planning. V2.1 remains blocked unless explicitly owner-authorized.
-V2.1 scope planning baseline has been added. V2.1 IMPL-01 Secretary Routing
-Proposal surface and V2.1 IMPL-02 Management Directive preview have been added
-as bounded product-projection implementation slices. V2.1 IMPL-03 Cell CEO
-Assembly Plan Preview and asset-type vocabulary have been added as bounded
-product-projection surfaces. V2.1 IMPL-04 Project Governance Asset-Family
-Mapping has been naming-corrected as a non-executing planning surface.
-TracePilot remains a future optional Coregentis product integration/provider
-candidate, not a SoloCrew Cell or canonical internal object. V2.1 release
-remains unopened; actual Cell CEO Assembly execution, TracePilot integration,
-project import, drift detection execution, evidence generation, tool adapter
-execution, asset installation, marketplace, provider/channel dispatch, and
-autonomous execution remain unimplemented. Release execution requires a
-separate owner-authorized wave.
-V2.1 RC-01 candidate has been sealed for owner review; stable release and
-package publication remain blocked pending owner authorization.
-
-V2.0 Wave 3 Founder Dashboard Productization has now been added over the V2
-starter-cell fixtures.
-It does not implement Cell Operations Panel productization, real
-artifact-generation runtime, provider/channel execution, or V2.0 delivery.
-V2.0 Wave 4 Cell Operations Panel Productization has now been added over the
-canonical starter-cell fixtures.
-It productizes per-Cell operations surfaces, but it does not implement real
-artifact-generation runtime, artifact persistence workflow, provider/channel
-execution, or V2.0 delivery.
-V2.0 Wave 5 Artifact Workflow and Persistence has now been added with
-local-only create/save/list/retrieve/revise/archive/history/reload behavior.
-It still does not implement provider/channel execution, full LLM provider
-generation, learning feedback productization, interactive drift resolution, or
-V2.0 delivery.
-V2.0 Wave 6 Learning and Drift Productization has now been added with
-artifact feedback capture, product-local learning candidates, accepted,
-rejected, and deferred learning, plus drift signals, drift impacts, and
-deterministic recommendations. It still does not implement provider/channel
-execution, model training, autonomous global learning, or V2.0 delivery.
-V2.0 Wave 7 Bounded Action-Class Connection has now been added with
-product-local A0/A1/A2/A3/A4 action request routing, local-only outcomes,
-review-required proposals, deferred strong-confirmation records, and blocked
-irreversible records. It still does not implement provider/channel execution,
-external dispatch, autonomous operation, or V2.0 delivery.
-V2.0 Wave 8 RC / Stable Release Readiness has passed and allowed RC release
-execution.
-V2.0 Wave 9 RC Release Execution + Post-RC Verification is complete as a
-GitHub prerelease for the First Runnable AIGC Operating Product candidate.
-V2.0 Wave 10 Stable Release Execution + Post-Stable Verification is complete
-as the bounded local-first Stable release for the First Runnable AIGC
-Operating Product.
-This is not a GA claim.
-V2.0 has entered post-release monitoring and V2.0.x maintenance under:
-
-- `governance/baselines/SOLOCREW-V2.0-POST-RELEASE-MONITORING-AND-MAINTENANCE-BASELINE-v0.1.md`
-
-V2.0.x maintenance is limited to defects, boundary corrections, documentation
-alignment, release artifact corrections, deterministic bug fixes, and safety
-hardening. V2.1 planning requires owner authorization.
-
-That does not mean V2.0 is GA, provider/channel capable, or an autonomous
-company operating release.
-
-## Current V1.1 Line
-
-Operational V1 is sealed at tag
-`solocrew-operational-v1-rc-seal-20260420` on commit
-`2dea8c96052c28cacdc89c80bb30ea35c6e62468`.
-SoloCrew V1.1 is now opened as the current usable founder-loop improvement
-line above that sealed boundary.
-
-SoloCrew V1.1 improves the founder request intake-to-packet-to-review loop. It
-does not include provider/channel execution, approve/reject/dispatch/execute
-behavior, founder queue execution, external business action execution,
-autonomous company operation, protocol certification, or closed live founder
-scenario validation.
-
-V1.1 RC is a bounded, non-executing founder request-to-packet review loop.
-
-Current RC references:
-
-- release tag: `solocrew-v1.1-rc-non-executing-founder-loop-20260420`
-- seal record:
-  `governance/releases/SOLOCREW-V1.1-RC-SEAL-RECORD-v0.1.md`
-- post-RC verification record:
-  `governance/releases/SOLOCREW-V1.1-POST-RC-VERIFICATION-RECORD-v0.1.md`
-- user walkthrough:
-  `governance/guides/SOLOCREW-V1.1-RC-USER-WALKTHROUGH-v0.1.md`
-- known limitations:
-  `governance/guides/SOLOCREW-V1.1-RC-KNOWN-LIMITATIONS-v0.1.md`
-
-The V1.1 RC line explicitly excludes:
-
-- provider/channel execution
-- approve/reject/dispatch/execute
-- founder queue
-- autonomous company operation
-- protocol certification
-
-## Current V1.2 RC Line
-
-SoloCrew V1.2 RC is a bounded, non-executing packet revision loop for revising
-packet candidates after evidence insufficiency, stale context, operator
-clarification, or contract-blocked states.
-
-Current V1.2 RC references:
-
-- release tag: `solocrew-v1.2-rc-packet-revision-loop-20260421`
-- GitHub release notes file:
-  `governance/releases/SOLOCREW-V1.2-RC-GITHUB-RELEASE-NOTES-v0.1.md`
-- seal record:
-  `governance/releases/SOLOCREW-V1.2-RC-SEAL-RECORD-v0.1.md`
-- post-RC verification record:
-  `governance/releases/SOLOCREW-V1.2-POST-RC-VERIFICATION-RECORD-v0.1.md`
-- user walkthrough:
-  `governance/guides/SOLOCREW-V1.2-RC-USER-WALKTHROUGH-v0.1.md`
-- known limitations:
-  `governance/guides/SOLOCREW-V1.2-RC-KNOWN-LIMITATIONS-v0.1.md`
-- demo scenario guide:
-  `governance/guides/SOLOCREW-V1.2-RC-DEMO-SCENARIO-GUIDE-v0.1.md`
-
-The V1.2 RC line explicitly excludes:
-
-- provider/channel execution
-- approve/reject/dispatch/execute
-- founder queue
-- autonomous company operation
-- protocol certification
-- GA/stable release claim
-
-V1.2 RC remains review-only and not sent. Safe clarification prompts remain
-copy-only and do not become provider/channel send.
-
-## Current V1.3 Line
-
-SoloCrew V1.3 RC — Lifecycle Clarity has been released as a GitHub
-prerelease. It improves bounded packet lifecycle clarity while remaining
-non-executing.
-It does not introduce provider/channel execution,
-approve/reject/dispatch/execute, or founder queue behavior.
-
-Current V1.3 RC references:
-
-- GitHub prerelease notes:
-  `governance/releases/SOLOCREW-V1.3-RC-GITHUB-RELEASE-NOTES-v0.1.md`
-- combined seal / execution / post-release record:
-  `governance/releases/SOLOCREW-V1.3-RC-SEAL-EXECUTION-POST-RELEASE-RECORD-v0.1.md`
-- planning baseline:
-  `governance/baselines/SOLOCREW-V1.3-PLANNING-BASELINE-v0.1.md`
-- demo scenario guide:
-  `governance/guides/SOLOCREW-V1.2-RC-DEMO-SCENARIO-GUIDE-v0.1.md`
-- known limitations:
-  `governance/guides/SOLOCREW-V1.2-RC-KNOWN-LIMITATIONS-v0.1.md`
-
-## Current V1.4 Stable Line
-
-SoloCrew V1.4 continuity page-model line progressed from the V1.3 RC
-lifecycle clarity release and post-release hardening into the current bounded
-stable surface.
-SoloCrew V1.4 Stable — Continuity Page Model has been released as a bounded
-GitHub release. It adds bounded continuity summary and pending review
-visibility to the page model.
-It remains review-only and non-executing and is not a GA claim.
-It does not include provider/channel execution,
-approve/reject/dispatch/execute, or founder queue behavior.
-
-Current V1.4 stable references:
-
-- GitHub release notes:
-  `governance/releases/SOLOCREW-V1.4-STABLE-GITHUB-RELEASE-NOTES-DRAFT-v0.1.md`
-- combined stable seal / execution / post-release record:
-  `governance/releases/SOLOCREW-V1.4-STABLE-SEAL-EXECUTION-POST-RELEASE-RECORD-v0.1.md`
-- stable-readiness baseline:
-  `governance/baselines/SOLOCREW-V1.4-STABLE-READINESS-BASELINE-v0.1.md`
-- original RC combined record:
-  `governance/releases/SOLOCREW-V1.4-RC-SEAL-EXECUTION-POST-RELEASE-RECORD-v0.1.md`
-- user walkthrough:
-  `governance/guides/SOLOCREW-V1.2-RC-USER-WALKTHROUGH-v0.1.md`
-- known limitations:
-  `governance/guides/SOLOCREW-V1.2-RC-KNOWN-LIMITATIONS-v0.1.md`
-- demo scenario guide:
-  `governance/guides/SOLOCREW-V1.2-RC-DEMO-SCENARIO-GUIDE-v0.1.md`
-
-Current V1.4 planning baseline:
-`governance/baselines/SOLOCREW-V1.4-PLANNING-BASELINE-v0.1.md`.
-
-## Current V1.5 Planning Line
-
-SoloCrew V1.5 served as the V1.4 stable-readiness / release-line closure.
-That V1.5 line is now closed and is not the next feature-line.
-Current V1.5 planning baseline:
-`governance/baselines/SOLOCREW-V1.5-PLANNING-BASELINE-v0.1.md`.
-
-## Current V1.6 Stable Line
-
-SoloCrew V1.6 Stable — Session Continuity UX has been released as a bounded
-GitHub release. It remains display-only, review-only, and non-executing and
-is not a GA claim.
-It does not add durable multi-session persistence, action-preparation,
-execution, approval, dispatch, provider/channel send, or founder queue
-behavior.
-Current V1.6 planning baseline:
-`governance/baselines/SOLOCREW-V1.6-PLANNING-BASELINE-v0.1.md`.
-
-## Current V1.7 Implementation Slice
-
-SoloCrew V1.7 now includes a bounded action-preparation implementation slice
-over the neutral Cognitive_OS prepared-action scaffold. The slice remains
-draft-only, non-executing, non-approving, non-dispatching, non-provider, and
-non-queueing.
-SoloCrew V1.7 Stable — Bounded Action Preparation has been released as a
-bounded GitHub release. It remains bounded, draft-only, non-executing,
-non-approving, non-dispatching, non-provider, and non-queueing and is not a
-GA claim.
-Current V1.7 planning baseline:
-`governance/baselines/SOLOCREW-V1.7-PLANNING-BASELINE-v0.1.md`.
-
-## Current V1.8 Stable Line
-
-SoloCrew V1.8 RC — Bounded Execution Boundary remains available as the
-existing GitHub prerelease.
-SoloCrew V1.8 Stable — Bounded Execution Boundary has been released as a
-bounded GitHub release. It remains bounded, display-oriented,
-non-executing, non-approving, non-dispatching, non-provider,
-non-queueing, and non-authoritative. It is not a GA claim.
-Current V1.8 planning baseline:
-`governance/baselines/SOLOCREW-V1.8-PLANNING-BASELINE-v0.1.md`.
-
-The sealed `v0.3` line remains the first bounded single-cell usable release
-line inside that delivered platform baseline, and it extends the sealed `v0.2`
-and `v0.1` baselines with:
-
-- one actual bounded single-cell operator console page
-- one actual bounded single-cell bootstrap path
-- visible current objective, work, delivery, continuity, deferred-surface, and truth-boundary sections
-- bounded operator-facing interaction and presentation layers for correction/review, continuity, task focus, action intents, input drafts, request packaging, request preview, and readiness
-- one bounded console-side correction/apply path over the sealed `v0.1` correction/writeback truth
-
-This sealed `v0.3` line does not claim:
-
-- multi-cell portfolio behavior
-- Secretary behavior
-- provider execution
-- channel integrations
-- broad KPI cockpit behavior
-- broad business-pack execution breadth
-- actual request submission
-- runtime-complete workflow state
-- runtime-complete product state
-
-The sealed `v0.3` line is the first bounded single-cell usable release line for
-SoloCrew.
-
-## Current Governed Foundation Line
-
-The current governed foundation line beyond sealed `v0.3` is `v0.4-multi-cell-foundation`.
-
-This repo now records `v0.4` as a governed multi-cell foundation line rather than a loose chain of bounded additions.
-
-This repo contains multiple bounded `v0.4` implementation surfaces:
-
-- one read/inspect-oriented multi-cell foundation overview page
-- one bounded per-cell inspection page over the same downstream runtime-backed input path
-- one bounded management-object inspection page over the same downstream detail path
-- one bounded continuity inspection page over the same downstream detail path
-- bounded per-cell summary projections derived from existing single-cell product truth
-- bounded downstream consumption of projection-safe workforce envelope output
-  for multi-cell overview summaries; raw `Cognitive_OS` runtime-private
-  workforce records are not canonical SoloCrew API
-- hardened separation between compile-only management directives and runtime-backed management directive inspection projections
-
-It does not mean `v0.4` is fully implemented.
-It does not mean Secretary beta, recovery workflow execution, approval workflow execution, portfolio orchestration, provider execution, or channel behavior now exist in this repo.
-It does mean the repo now has explicit version-line closure, multi-cell boundary closure, and cross-repo non-promotion records for the current `v0.4` line.
-
-## Historical v0.5 Line
-
-The historical `v0.5` line is `v0.5-portfolio-secretary-beta`.
-
-This repo has now begun bounded `v0.5` implementation with Waves 1 through 5.
-That current Wave 1 through Wave 5 line is accepted as a bounded non-executing
-beta lane with rationale and evidence visibility hardening now present.
-It was previously paused for feature expansion and has now been reopened only
-with explicit limits for one bounded downstream explanatory wave.
-
-That means `v0.5` currently includes:
-
-- one top-level portfolio / Secretary beta shell page
-- bounded Secretary view vs cell view separation
-- bounded portfolio-level navigation and selection over the existing `v0.4` cell surfaces
-- bounded status, queue, review, and posture shelves with non-executing framing
-- one bounded Secretary-to-cell handoff staging surface with target-cell selection, handoff framing, posture framing, and staged-only state labels
-- one bounded Secretary-to-cell handoff review packet surface with review-readiness framing, packet-state visualization, and non-executing packet posture
-- one bounded revision / return consistency hardening pass that keeps portfolio shelves, handoff staging, and handoff review packets aligned around shared non-executing packet states
-- one bounded rationale / evidence / provenance visibility hardening pass that explains why a handoff exists, what evidence is visible, and what remains omitted without introducing direct control
-
-That also means `v0.5` is the line that may later introduce:
-
-- a top-level portfolio / Secretary beta surface
-- bounded management of multiple cells as cells
-- bounded Secretary-to-cell coordination semantics
-- the first beta-level management interface beyond read-only inspection
-
-These first `v0.5` waves do not add direct approve, reject, dispatch, or execute behavior.
-They do not add handoff execution, approval/rejection execution, provider/channel execution, runtime authority, or protocol promotion.
-It does not mean runtime authority, protocol promotion, provider execution, or full portfolio operating-platform behavior now exist here.
-
-The current reopened lane remains:
-
-- downstream
-- product-projected
+SoloCrew currently provides bounded local engagement evidence and review
+capabilities. It is a product repository and app/projection baseline, not the
+MPLP protocol source of truth and not the neutral Cognitive_OS runtime
+foundation.
+
+## What SoloCrew Does Today
+
+Current SoloCrew product truth is best described with stable Engagement
+language rather than release-line object names.
+
+Today the repo contains local, deterministic, review-oriented support for:
+
+- Engagement lifecycle framing across candidate, onboarding, paid-pilot,
+  post-pilot review, conversion review, and archival stages.
+- A local founder review loop over app, shell, and projection-safe evidence.
+- Engagement onboarding packet semantics for expectations, required inputs,
+  support boundaries, source references, and no-claim posture.
+- Engagement readiness view semantics for founder review of onboarding,
+  feedback, support burden, and local evidence signals.
+- Engagement evidence record semantics for feedback usefulness, continuation
+  signals, permission posture, and support review context.
+- Engagement review gate semantics for private reference review, anonymized
+  quote review, legal review, hold decisions, deny-public-use decisions, and
+  manual conversion review preparation.
+- Active app/page/shell/projection surfaces migrating toward canonical
+  Engagement aliases while retaining compatibility exports for historical
+  V1.x/V2.x code.
+- V2.5 semantic stabilization work that introduces canonical Engagement
+  aliases, metadata contracts, and active-surface import migration without
+  broad file renames or behavior changes.
+
+These capabilities are local-only, manual-first, review-only, deterministic,
+and non-executing. They do not create external execution, public publication,
+automatic conversion, payment execution, package publication, or upstream
+protocol/runtime authority.
+
+## Current Stable Release
+
+Current stable release:
+
+- title: `SoloCrew V2.4 Stable - Commercialization Readiness Loop`
+- tag: `solocrew-v2.4-stable-commercialization-readiness-loop-20260428`
+- target: `12d7ccb00506670992b798d82aa81fbc0f5578f6`
+
+V2.4 Stable is a stable repository line for the bounded local
+commercialization readiness loop only. It composes V2.3 paid pilot loop
+references through onboarding packet, readiness dashboard, feedback evidence,
+and case-study conversion gate records for founder review.
+
+That release is historical evidence for a verified repo line. It does not mean
+the current product object model should keep encoding `V2.4` in canonical
+domain names, field names, source-ref names, or active product language.
+Release records and tags preserve evidence; current product semantics should
+move toward stable Engagement language.
+
+V2.4 Stable remains manual-first, design-partner-only, local-only,
+review-only, and non-executing.
+
+## Semantic Stabilization Line
+
+V2.5 is the Product Semantic Stabilization / Engagement Canonicalization line.
+It is not a cosmetic detour and it is not a shortcut into V3.0.
+
+Completed V2.5 stabilization work:
+
+- canonical Engagement metadata contract:
+  `app/engagement/engagement-metadata-contract.ts`
+- canonical Engagement alias contract:
+  `app/engagement/engagement-canonical-contract.ts`
+- active compatibility alias layer:
+  `app/engagement/engagement-compatibility-aliases.ts`
+- active app/page/shell/projection import migration toward compatibility
+  aliases, covered by `tests/app/engagement-active-surface-import-migration.test.ts`
+
+Remaining active version-bearing runtime/product semantics are technical debt
+and must continue through follow-up V2.5 waves. The next cleanup should focus
+on source-ref metadata field migration and canonical helper cleanup before any
+V3.0 planning is opened.
+
+Version numbers remain valid in release evidence, changelog entries,
+governance records, migration records, compatibility adapters, and historical
+fixtures/tests. They should not be the canonical shape of new domain objects,
+workflow helper names, field names, source-ref names, route constants, or
+current product capability names.
+
+## Architecture / Authority Boundary
+
+SoloCrew is the downstream product/app repository.
+
+Cognitive_OS is the upstream runtime foundation inspected by this repo. This
+repo consumes projection-safe runtime posture and bounded summaries where
+authorized, but it does not redefine Cognitive_OS law or mutate Cognitive_OS.
+
+MPLP-Protocol is the protocol authority above Cognitive_OS and SoloCrew. This
+repo does not redefine MPLP law, does not publish MPLP artifacts, and does not
+claim MPLP certification or MPLP endorsement.
+
+Current SoloCrew surfaces preserve local product boundaries:
+
+- local-only
+- manual-first
+- review-only
 - non-executing
-- below direct-control semantics
+- deterministic
+- product-local unless a separately authorized upstream wave says otherwise
 
-## Version Semantics
+## What This Is Not
 
-SoloCrew uses two different version labels for different purposes:
+SoloCrew currently is not:
 
-- repo release lines such as `v0.1`, `v0.2`, `v0.3`, `v0.4`, `v0.5`, and now
-  `v1.0`
-- the private workspace/package version in `package.json`
+- public beta
+- private beta
+- paid product ready
+- commercial ready
+- production-ready
+- V3.0
+- SaaS
+- package published
+- MPLP certification
+- MPLP endorsement
 
-The release line is the authoritative product-governance label for this repo.
-The current `package.json` value `0.1.0-baseline` remains a private workspace/tooling version and is not a claim that the repo release line is still only `v0.1`.
+SoloCrew currently does not implement:
 
-Current structural foundation under that line remains the sealed `v0.2-structural-constitution`.
+- payment processor
+- checkout
+- subscription
+- automated billing
+- CRM or email automation
+- public publishing
+- testimonial or public case-study publishing
+- external analytics
+- LLM/model/agent/tool invocation
+- provider/channel dispatch
+- marketplace
+- customer account provisioning
+- automatic conversion
+- autonomous execution
 
-The sealed `v0.2` line extends the sealed `v0.1` baseline with:
+## Release History and Evidence
 
-- post-`v0.1` structural constitution documents
-- structural object and management contract layers
-- single-cell structural assembly, console state, view-model, shell composition, and shell entry adapter scaffolds
+Release history is preserved in tags, release records, audit records,
+planning records, and `CHANGELOG.md`. The list below is a concise product-entry
+index, not a replacement for immutable governance evidence.
 
-This sealed `v0.2` line does not claim:
+Recent release evidence:
 
-- a usable-product UI release
-- multi-cell portfolio or Secretary behavior
-- provider execution or channel integration
-- business-pack execution logic
-- a broad KPI cockpit
-- a runtime-complete product state
+| Line | Identity | Evidence |
+| --- | --- | --- |
+| V2.5 semantic stabilization | canonical Engagement aliases and active-surface migration | `governance/planning/SOLOCREW-SEMANTIC-NAMING-CORRECTION-AND-DELIVERY-LINE-GOVERNANCE-v0.1.md`; `CHANGELOG.md` |
+| V2.4 Stable | `solocrew-v2.4-stable-commercialization-readiness-loop-20260428` -> `12d7ccb00506670992b798d82aa81fbc0f5578f6` | `governance/releases/SOLOCREW-V2.4-POST-STABLE-VERIFICATION-MAINTENANCE-GATE-v0.1.md` |
+| V2.4 RC | `solocrew-v2.4-rc-commercialization-readiness-loop-20260428` -> `ea882d590b1b59c5b9ce703869fdd7abe66ff77d` | `governance/releases/SOLOCREW-V2.4-RC-POST-RELEASE-VERIFICATION-AND-STABLE-READINESS-GATE-v0.1.md` |
+| V2.3 Stable | `solocrew-v2.3-stable-first-paid-pilot-loop-20260428` -> `c111e2dd7811ec77903a1a139c33bb1a7bc0c27a` | `governance/releases/SOLOCREW-V2.3-POST-STABLE-VERIFICATION-MAINTENANCE-AND-V2.4-OPENING-GATE-v0.1.md` |
+| V2.3 RC | `solocrew-v2.3-rc-first-paid-pilot-loop-20260428` -> `2dbdba7b8b3824d0e332c5237ab307ae1fe1ba65` | `governance/releases/SOLOCREW-V2.3-RC-POST-RELEASE-VERIFICATION-AND-STABLE-READINESS-GATE-v0.1.md` |
+| V2.2 Stable | `solocrew-v2.2-stable-private-alpha-journey-20260428` -> `aaef0147290848c35e68d8eb4e84616f904454e3` | `governance/releases/SOLOCREW-V2.2-STABLE-POST-RELEASE-VERIFICATION-AND-V2.3-ENTRY-GATE-v0.1.md` |
+| V2.2 RC | `solocrew-v2.2-rc-private-alpha-journey-20260428` -> `cb9ee1420181318d7198bd0bddc4896c6d3fe1d7` | `governance/releases/SOLOCREW-V2.2-RC-POST-RELEASE-VERIFICATION-AND-STABLE-READINESS-GATE-v0.1.md` |
 
-The implementation line was established as `v0.1-baseline` and then closed with:
+Earlier V1.x, V2.0, and V2.1 evidence remains available through
+`CHANGELOG.md`, `governance/releases/`, `governance/release/`,
+`governance/baselines/`, `governance/planning/`, and `governance/audits/`.
+Those historical records should be preserved as release trace, not copied into
+new canonical product object names.
 
-- projection assembly over bounded upstream runtime surfaces
-- memory-backed and sqlite-backed runtime sessions
-- executable truth tests for continuity, bounded motion, failure, recovery, and correction/writeback
-- product requirement revalidation and closure documentation
+## Development / Test Status
 
-The sealed `v0.1` line establishes:
+The latest full repository suite run for this README restructure reported:
 
-- governance and reconciliation documents
-- projection boundary and DTO contracts
-- workflow baseline for the first five flows
-- projection adapters and flow assembly helpers
-- runtime session entrypoints for memory/sqlite shell loading
-- executable projection and app shell truth tests
+- `npm test` -> pass, 609/609
+- canonical Engagement alias and metadata tests -> pass
+- active-surface import migration test -> pass
+- V2.4 commercialization readiness loop regression tests -> pass
+- V2.3 paid pilot loop regression tests -> pass
 
-The sealed `v0.1` line does not claim:
+This repository remains private package metadata only. No package publish is
+part of the current line.
 
-- full SoloCrew runtime
-- provider execution implementation
-- Telegram or other live channel integration
-- full AEL, VSL, PSG, budget runtime, or autonomous learning
+## Next Line
 
-## Relationship To Upstream Repos
+The next allowed line after this README restructure remains V2.5 semantic
+stabilization cleanup, not V3.0 planning.
 
-- `MPLP-Protocol`
-  - protocol constitution and upstream semantic authority
-- `Cognitive_OS`
-  - neutral mother-runtime foundation and consumable workforce/runtime surfaces
-- `SoloCrew`
-  - downstream product projection and app packaging over those surfaces
+Next allowed task:
 
-## Repository Layout
+`SOLOCREW-V2.5-SOURCE-REF-METADATA-FIELD-MIGRATION-AND-CANONICAL-HELPER-CLEANUP-01`
 
-- `Files_GPT/`
-  - preserved planning inputs and historical drafts
-- `governance/research/`
-  - reconciliation, upstream inventory, and old-plan crosswalk notes
-- `governance/contracts/`
-  - runtime-consumption, DTO, and workflow contracts
-- `governance/baselines/`
-  - frozen SoloCrew projection and structural constitution baselines
-- `governance/audits/`
-  - structural inventory, deferred-surface, and acceptance-gate audit packs
-- `governance/releases/`
-  - release notes and closure records for sealed product lines
-- `projection/`
-  - projection contracts, objects, adapters, mappings, and flow assembly helpers
-- `app/`
-  - product shell boundary, runtime session entry, bounded single-cell console bootstrap, and current bounded page surface
-- `tests/`
-  - executable projection and app shell truth checks for the sealed `v0.1`, `v0.2`, and `v0.3` lines
-
-## Scope Discipline
-
-SoloCrew may consume upstream truth from `Cognitive_OS`, but it must not write product DTO law back upward as runtime authority.
+V3.0 remains reserved for a future First Deliverable Engagement Operating Loop.
+V3.0 planning is blocked until V2.5 semantic stabilization reaches a
+maintenance or final-seal gate. No V3.0 implementation is opened by this
+README structure.

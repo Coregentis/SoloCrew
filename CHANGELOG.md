@@ -2,6 +2,11 @@
 
 ## 2026-04-29
 
+- restructured README into product-entry-first form while preserving release
+  history and no-claim boundaries; V2.5 remains semantic stabilization and
+  does not open V3.0 planning; no runtime behavior change, release, tag,
+  package, public/private beta, paid/commercial/production readiness,
+  Cognitive_OS change, or MPLP change is introduced
 - migrated active app/page/shell/projection surfaces toward canonical
   Engagement compatibility aliases; no file rename, broad rename, runtime
   behavior change, release, tag, package, public beta, paid/commercial/
