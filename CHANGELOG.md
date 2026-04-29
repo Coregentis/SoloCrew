@@ -2,6 +2,11 @@
 
 ## 2026-04-30
 
+- added V3.0 IMPL-01 engagement workspace/session/loop/history contracts and
+  deterministic constructors; no UI, route change, persistence,
+  execution/autonomy, release, tag, package, public/private beta,
+  paid/commercial/production readiness, Cognitive_OS change, or MPLP change is
+  introduced
 - defined V3.0 implementation readiness and slice ordering after deliverable
   engagement loop planning; planning only, no implementation, release, tag,
   package, public/private beta, paid/commercial/production readiness,
