@@ -1,6 +1,6 @@
 import type {
-  V19CellOperationsPanelPageModel,
-} from "../shell/create-v1-9-cell-operations-panel-page-model.ts";
+  CellOperationsPanelPageModel,
+} from "../engagement/engagement-compatibility-aliases.ts";
 import {
   buildCellDetailRoute,
 } from "../shell/cell-detail-view.ts";
@@ -29,9 +29,9 @@ export interface CellOperationsPanelPage {
       source_projection_ref: string;
       boundary_notes: string[];
     };
-    cell_identity: V19CellOperationsPanelPageModel["cell_identity"];
-    panel_sections: V19CellOperationsPanelPageModel["panel_sections"];
-    metric_summary_status: V19CellOperationsPanelPageModel["metric_summary_status"];
+    cell_identity: CellOperationsPanelPageModel["cell_identity"];
+    panel_sections: CellOperationsPanelPageModel["panel_sections"];
+    metric_summary_status: CellOperationsPanelPageModel["metric_summary_status"];
     source_evidence_refs: string[];
     deferred_items: string[];
     non_claims: string[];
@@ -48,7 +48,7 @@ function escape_html(value: string): string {
 }
 
 export function renderCellOperationsPanelPage(
-  model: V19CellOperationsPanelPageModel
+  model: CellOperationsPanelPageModel
 ): CellOperationsPanelPage {
   const route_path = buildCellOperationsPanelRoute(model.cell_identity.cell_id);
   const sections = {

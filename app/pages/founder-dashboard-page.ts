@@ -1,6 +1,6 @@
 import type {
-  V19FounderDashboardPageModel,
-} from "../shell/create-v1-9-founder-dashboard-page-model.ts";
+  FounderDashboardShellPageModel,
+} from "../engagement/engagement-compatibility-aliases.ts";
 
 export const FOUNDER_DASHBOARD_ROUTE = "/portfolio/founder-dashboard";
 
@@ -24,7 +24,7 @@ export interface FounderDashboardPage {
       source_projection_ref: string;
       boundary_notes: string[];
     };
-    dashboard_surface: V19FounderDashboardPageModel["dashboard_surface"];
+    dashboard_surface: FounderDashboardShellPageModel["dashboard_surface"];
     source_evidence_refs: string[];
     deferred_items: string[];
     non_claims: string[];
@@ -41,7 +41,7 @@ function escape_html(value: string): string {
 }
 
 export function renderFounderDashboardPage(
-  model: V19FounderDashboardPageModel
+  model: FounderDashboardShellPageModel
 ): FounderDashboardPage {
   const sections = {
     header: {

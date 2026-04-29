@@ -2,8 +2,8 @@ import type {
   SecretaryHandoffReviewPacketShell,
 } from "../shell/secretary-handoff-review-packet-contract.ts";
 import type {
-  V11IntakeToPacketPageModel,
-} from "../shell/create-v1-1-intake-to-packet-page-model.ts";
+  IntakeToPacketPageModel,
+} from "../engagement/engagement-compatibility-aliases.ts";
 
 export interface SecretaryHandoffReviewPage {
   route_path: string;
@@ -53,7 +53,7 @@ export interface SecretaryHandoffReviewPage {
     };
     rationale_evidence:
       SecretaryHandoffReviewPacketShell["handoff_review_packet_projection"]["rationale_evidence"];
-    v11_packet_candidate?: V11IntakeToPacketPageModel;
+    v11_packet_candidate?: IntakeToPacketPageModel;
     founder_request_exception_display?: {
       request_ref: string;
       request_label: string;
@@ -173,7 +173,7 @@ function summarize_terminal_boundary(terminal: boolean): string {
 
 export function renderSecretaryHandoffReviewPage(
   review_packet_shell: SecretaryHandoffReviewPacketShell,
-  v11_packet_candidate?: V11IntakeToPacketPageModel
+  v11_packet_candidate?: IntakeToPacketPageModel
 ): SecretaryHandoffReviewPage {
   const review_packet_projection =
     review_packet_shell.handoff_review_packet_projection;

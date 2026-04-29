@@ -4,7 +4,7 @@ import type {
   SoloCrewPreparedActionEvidenceSufficiencyState,
 } from "../contracts/v1-7-prepared-action-contract.ts";
 import {
-  V17_PREPARED_ACTION_BOUNDARY_SUMMARY,
+  PREPARED_ACTION_BOUNDARY_SUMMARY,
 } from "../contracts/v1-7-prepared-action-contract.ts";
 
 type PreparedActionRecord = Record<string, unknown>;
@@ -584,6 +584,6 @@ export function adapt_v1_7_prepared_action_card(
     runtime_private_fields_omitted: true,
     draft_only_posture,
     non_executing_posture:
-      `${non_executing_posture} ${normalized.intent_non_executing_posture} ${normalized.confirmation_non_executing_posture} ${V17_PREPARED_ACTION_BOUNDARY_SUMMARY}`.trim(),
+      `${non_executing_posture} ${normalized.intent_non_executing_posture} ${normalized.confirmation_non_executing_posture} ${PREPARED_ACTION_BOUNDARY_SUMMARY}`.trim(),
   };
 }

@@ -5,8 +5,8 @@ import {
   FOUNDER_REQUEST_INTAKE_ROUTE,
 } from "../shell/founder-request-intake.ts";
 import type {
-  V11IntakeToPacketPageModel,
-} from "../shell/create-v1-1-intake-to-packet-page-model.ts";
+  IntakeToPacketPageModel,
+} from "../engagement/engagement-compatibility-aliases.ts";
 import type {
   FounderRequestStateEvaluationExposure,
 } from "../../projection/contracts/founder-request-exception-packet-contract.ts";
@@ -63,7 +63,7 @@ export interface FounderRequestIntakePage {
       risk_hint?: string;
       evidence_hint?: string;
     };
-    v11_packet_candidate?: V11IntakeToPacketPageModel;
+    v11_packet_candidate?: IntakeToPacketPageModel;
     state_evaluation_summary?: FounderRequestIntakeStateEvaluationSummary;
     truth_boundary: FounderRequestIntakeShell["truth_boundary"];
   };
@@ -116,7 +116,7 @@ function summarize_terminal_boundary(terminal: boolean): string {
 export function renderFounderRequestIntakePage(
   intake_shell: FounderRequestIntakeShell,
   state_evaluation_summary?: FounderRequestIntakeStateEvaluationSummary,
-  v11_packet_candidate?: V11IntakeToPacketPageModel
+  v11_packet_candidate?: IntakeToPacketPageModel
 ): FounderRequestIntakePage {
   const sections = {
     header: {

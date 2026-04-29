@@ -3,7 +3,7 @@ import type {
   SoloCrewExecutionBoundaryCardView,
 } from "../contracts/v1-8-execution-boundary-contract.ts";
 import {
-  V18_EXECUTION_BOUNDARY_SUMMARY,
+  EXECUTION_BOUNDARY_SUMMARY,
 } from "../contracts/v1-8-execution-boundary-contract.ts";
 
 type ExecutionBoundaryRecord = Record<string, unknown>;
@@ -563,6 +563,6 @@ export function adapt_v1_8_execution_boundary_card(
     display_only_posture,
     non_executing_posture,
     non_authoritative_posture:
-      `${non_authoritative_posture} ${V18_EXECUTION_BOUNDARY_SUMMARY}`.trim(),
+      `${non_authoritative_posture} ${EXECUTION_BOUNDARY_SUMMARY}`.trim(),
   };
 }

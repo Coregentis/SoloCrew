@@ -2,8 +2,8 @@ import type {
   SecretaryHandoffStagingShell,
 } from "../shell/secretary-handoff-staging-contract.ts";
 import type {
-  V11IntakeToPacketPageModel,
-} from "../shell/create-v1-1-intake-to-packet-page-model.ts";
+  IntakeToPacketPageModel,
+} from "../engagement/engagement-compatibility-aliases.ts";
 
 export interface SecretaryHandoffPage {
   route_path: string;
@@ -49,7 +49,7 @@ export interface SecretaryHandoffPage {
     };
     rationale_evidence:
       SecretaryHandoffStagingShell["handoff_staging_projection"]["rationale_evidence"];
-    v11_packet_candidate?: V11IntakeToPacketPageModel;
+    v11_packet_candidate?: IntakeToPacketPageModel;
     founder_request_exception_preview?: {
       request_ref: string;
       request_label: string;
@@ -162,7 +162,7 @@ function summarize_terminal_boundary(terminal: boolean): string {
 
 export function renderSecretaryHandoffPage(
   staging_shell: SecretaryHandoffStagingShell,
-  v11_packet_candidate?: V11IntakeToPacketPageModel
+  v11_packet_candidate?: IntakeToPacketPageModel
 ): SecretaryHandoffPage {
   const staging_projection = staging_shell.handoff_staging_projection;
   const founder_request_exception_preview =
