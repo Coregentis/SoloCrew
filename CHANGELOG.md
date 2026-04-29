@@ -2,6 +2,10 @@
 
 ## 2026-04-29
 
+- opened V3.0 deliverable Engagement Operating Loop planning after V2.5 stable
+  post-release closure; planning only, no implementation, release, tag,
+  package, public/private beta, paid/commercial/production readiness,
+  Cognitive_OS change, or MPLP change is introduced
 - verified the existing V2.5 Stable release and set the V2.5 maintenance
   boundary after reconciling local stale/factual doc drift; no release or tag
   recreation, package publish, package asset, public/private beta,
