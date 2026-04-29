@@ -2,6 +2,10 @@
 
 ## 2026-04-29
 
+- hardened V2.5 semantic stabilization E2E and added closure audit while
+  preserving compatibility; no file rename, route change, runtime behavior
+  change, release, tag, package, public/private beta, paid/commercial/
+  production readiness, Cognitive_OS change, or MPLP change is introduced
 - continued V2.5 active shell/page model canonicalization with stable helper
   aliases and product metadata fields while preserving compatibility; no file
   rename, route change, runtime behavior change, release, tag, package,
