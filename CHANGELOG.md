@@ -2,6 +2,8 @@
 
 ## 2026-04-30
 
+- added tri-repo CGOS handoff consumption closure audit; audit only, no
+  implementation, no V3.1 planning, no release/tag/package
 - added additive CGOS projection-safe adapter implementation path with adapter
   contract, workflow, fixture bridge, and dual-path tests; preserves V3.0 local
   path; no V3.1 planning, no release/tag/package, no Cognitive_OS/MPLP
