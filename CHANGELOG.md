@@ -2,6 +2,9 @@
 
 ## 2026-04-30
 
+- planned additive adapter from Cognitive_OS neutral operator review loop
+  projection-safe output to SoloCrew V3.0 local product objects; no
+  implementation, no V3.1 planning, no release/tag/package
 - planned projection-safe handoff and future downstream consumption strategy for
   Cognitive_OS neutral operator review loop contracts; no implementation, no
   V3.1 planning, no release/tag/package
