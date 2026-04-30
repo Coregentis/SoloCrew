@@ -23,7 +23,7 @@ language rather than release-line object names.
 
 Today the repo contains local, deterministic, review-oriented support for:
 
-- A V3.0 deliverable Engagement Operating Loop candidate that composes local
+- A V3.0 deliverable Engagement Operating Loop stable line that composes local
   create/load engagement workspace records, a review-only local loop runner,
   a founder review packet object, a local session history ledger, and a
   deterministic in-memory export package object.
@@ -55,31 +55,39 @@ protocol/runtime authority.
 
 Current stable release:
 
-- title: `SoloCrew V2.5 Stable - Semantic Stabilization`
+- title: `SoloCrew V3.0 Stable - Deliverable Engagement Operating Loop`
+- tag: `solocrew-v3.0-stable-deliverable-engagement-loop-20260430`
+- package_publish: false
+- assets: empty
+
+V3.0 Stable is a stable repository line for the Deliverable Engagement
+Operating Loop with limited local scope only. It validates local create/load
+engagement, workspace/session/loop/history composition, a review-only loop
+runner, founder review packet output, local session history ledger, and
+deterministic in-memory export package object.
+
+V3.0 Stable remains local-only, manual-first, review-only, deterministic,
+non-executing, and in-memory. It does not create filesystem writes, database
+storage, persistence adapters, file export paths, cloud sync, SaaS sharing,
+public publishing, email/CRM automation, external analytics, LLM/model/agent/
+tool invocation, customer account provisioning, automatic conversion,
+provider/channel dispatch, marketplace behavior, autonomous execution, package
+publication, or package assets.
+
+V3.0 Stable remains below public/private beta, paid product readiness,
+commercial readiness, production readiness, MPLP certification, and MPLP
+endorsement.
+
+V2.5 Stable remains preserved as the Product Semantic Stabilization /
+Engagement Canonicalization baseline:
+
 - tag: `solocrew-v2.5-stable-semantic-stabilization-20260429`
 - target: `4061f0df0cf6e5f151563c11ac94e27dabbd23b8`
 
-V2.5 Stable is a stable repository line for Product Semantic Stabilization /
-Engagement Canonicalization only. It validates canonical Engagement aliases,
-metadata/source-ref normalization, active surface compatibility aliases,
-shell/page canonicalization, product-entry README alignment, and release
-evidence preservation.
+## V3.0 Stable Scope
 
-Remaining V1/V2 versioned names are preserved as compatibility aliases,
-release evidence, fixture/regression evidence, or later-authorized active
-product debt. V2.5 Stable does not remove existing versioned exports, rename
-source files, rename historical governance or release files, change route
-URLs, publish packages, or create package assets.
-
-V2.5 Stable remains local-only, manual-first, review-only, deterministic,
-non-executing, and below public/private beta, paid product readiness,
-commercial readiness, production readiness, V3.0, MPLP certification, and
-MPLP endorsement.
-
-## V3.0 RC Status
-
-V3.0 RC prerelease has been executed after the bounded readiness audit and RC
-prep gate for the First Deliverable Engagement Operating Loop. This line is
+V3.0 became stable-prep eligible after the bounded post-RC stable readiness
+gate for the First Deliverable Engagement Operating Loop. The stable line is
 limited local scope only:
 
 - local-only
@@ -89,21 +97,21 @@ limited local scope only:
 - non-executing
 - in-memory export object only
 
-V3.0 RC covers local engagement create/load, workspace/session/loop/history
+V3.0 Stable covers local engagement create/load, workspace/session/loop/history
 contracts, the review-only loop runner, founder review packet output, local
 session history ledger, and deterministic in-memory export package object.
 
-V3.0 RC does not publish packages, create package assets, change route URLs,
-create filesystem writes, create database storage, introduce a persistence
-adapter, create a file export path, add cloud sync or SaaS sharing, publish
-public material, send email, automate CRM, add external analytics, invoke
-LLM/model/agent/tool calls, provision customer accounts, automate conversion,
-dispatch to providers/channels, create marketplace behavior, or add autonomous
-execution.
+V3.0 Stable does not publish packages, create package assets, change route
+URLs, create filesystem writes, create database storage, introduce a
+persistence adapter, create a file export path, add cloud sync or SaaS sharing,
+publish public material, send email, automate CRM, add external analytics,
+invoke LLM/model/agent/tool calls, provision customer accounts, automate
+conversion, dispatch to providers/channels, create marketplace behavior, or add
+autonomous execution.
 
-V3.0 RC does not modify Cognitive_OS or MPLP-Protocol. It does not claim public
-beta, private beta, paid product readiness, commercial readiness, production
-readiness, MPLP certification, or MPLP endorsement.
+V3.0 Stable does not modify Cognitive_OS or MPLP-Protocol. It does not claim
+public beta, private beta, paid product readiness, commercial readiness,
+production readiness, MPLP certification, or MPLP endorsement.
 
 ## Semantic Stabilization Line
 
@@ -172,7 +180,6 @@ SoloCrew currently is not:
 - paid product ready
 - commercial ready
 - production-ready
-- V3.0 stable release
 - SaaS
 - package published
 - MPLP certification
@@ -205,6 +212,7 @@ Recent release evidence:
 
 | Line | Identity | Evidence |
 | --- | --- | --- |
+| V3.0 Stable | `solocrew-v3.0-stable-deliverable-engagement-loop-20260430` | `governance/releases/SOLOCREW-V3.0-STABLE-PREP-SEAL-AND-CONDITIONAL-RELEASE-RECORD-v0.1.md` |
 | V3.0 RC | `solocrew-v3.0-rc-deliverable-engagement-loop-20260430` -> `11bc8666553f32548eb2dd997fdac1316bbdd490` | `governance/releases/SOLOCREW-V3.0-RC-POST-RELEASE-VERIFICATION-AND-STABLE-READINESS-GATE-v0.1.md` |
 | V2.5 post-stable maintenance gate | `solocrew-v2.5-stable-semantic-stabilization-20260429` -> `4061f0df0cf6e5f151563c11ac94e27dabbd23b8` | `governance/releases/SOLOCREW-V2.5-POST-STABLE-VERIFICATION-MAINTENANCE-GATE-v0.1.md` |
 | V2.5 Stable | `solocrew-v2.5-stable-semantic-stabilization-20260429` -> `4061f0df0cf6e5f151563c11ac94e27dabbd23b8` | `governance/releases/SOLOCREW-V2.5-STABLE-PREP-SEAL-AND-CONDITIONAL-RELEASE-RECORD-v0.1.md` |
@@ -225,8 +233,7 @@ new canonical product object names.
 
 ## Development / Test Status
 
-The latest full repository suite run for the V3.0 post-RC stable readiness line
-reported:
+The latest full repository suite run for the V3.0 stable prep line reported:
 
 - `npm test` -> pass, 716/716
 - V3.0 deliverable engagement loop E2E tests -> pass
@@ -239,16 +246,16 @@ part of the current line.
 
 ## Next Line
 
-The next allowed line after V3.0 post-RC verification and stable readiness is
-the bounded stable prep/seal and conditional stable release execution gate.
+The next allowed line after V3.0 Stable release execution is the bounded
+post-stable verification and maintenance gate.
 
 Owner-authorized next task candidate:
 
-`SOLOCREW-V3.0-STABLE-PREP-GATE-AND-CONDITIONAL-RELEASE-EXECUTION-01`
+`SOLOCREW-V3.0-POST-STABLE-VERIFICATION-MAINTENANCE-GATE-01`
 
-This task may create only the bounded V3.0 Stable release if all stable prep
-gates pass. It must not create a package publish, package asset,
+This task may verify only the bounded V3.0 Stable release and set the
+maintenance posture. It must not create package publish, package asset,
 public/private beta claim, paid/commercial/production readiness claim,
-Cognitive_OS change, MPLP-Protocol change, MPLP certification, or MPLP
-endorsement.
+Cognitive_OS change, MPLP-Protocol change, MPLP certification, MPLP
+endorsement, V3.1 planning, or new product capability.
 No additional V3.0 implementation scope is opened by this README structure.

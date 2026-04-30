@@ -200,7 +200,7 @@ test("[engagement e2e] README is product-entry-first and keeps V3.0 bounded", ()
     "## Product Identity",
     "## What SoloCrew Does Today",
     "## Current Stable Release",
-    "## V3.0 RC Status",
+    "## V3.0 Stable Scope",
     "## Semantic Stabilization Line",
     "## Architecture / Authority Boundary",
     "## What This Is Not",
@@ -223,7 +223,7 @@ test("[engagement e2e] README is product-entry-first and keeps V3.0 bounded", ()
   );
   assert.match(
     readme,
-    /V3\.0 RC prerelease has been executed after the bounded readiness audit/
+    /V3\.0 became stable-prep eligible after the bounded post-RC stable readiness/
   );
   assert.match(readme, /limited local scope only/);
   assert.match(readme, /in-memory export object only/);
