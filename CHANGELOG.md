@@ -2,6 +2,10 @@
 
 ## 2026-04-30
 
+- added additive CGOS projection-safe adapter implementation path with adapter
+  contract, workflow, fixture bridge, and dual-path tests; preserves V3.0 local
+  path; no V3.1 planning, no release/tag/package, no Cognitive_OS/MPLP
+  modification, no public/private beta, no paid/commercial/production readiness
 - planned additive adapter from Cognitive_OS neutral operator review loop
   projection-safe output to SoloCrew V3.0 local product objects; no
   implementation, no V3.1 planning, no release/tag/package
