@@ -2,6 +2,8 @@
 
 ## 2026-04-30
 
+- created tri-repo architecture drift correction plan; planning only, no code, no
+  release/tag/package, no Cognitive_OS/MPLP code change
 - added tri-repo architecture drift origin audit across SoloCrew, Cognitive_OS,
   and MPLP-Protocol; no correction, implementation, release, tag, package,
   Cognitive_OS change, or MPLP change is introduced
