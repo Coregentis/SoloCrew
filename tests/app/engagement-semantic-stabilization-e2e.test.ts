@@ -223,11 +223,13 @@ test("[engagement e2e] README is product-entry-first and keeps V3.0 bounded", ()
   );
   assert.match(
     readme,
-    /V3\.0 became stable-prep eligible after the bounded post-RC stable readiness/
+    /V3\.0 Stable release is verified for the First Deliverable Engagement Operating\s+Loop/
   );
+  assert.match(readme, /0bf949959ac1275d33e7983d64feed5ed5098b9e/);
   assert.match(readme, /limited local scope only/);
   assert.match(readme, /in-memory export object only/);
   assert.doesNotMatch(readme, /V3\.0 released/);
+  assert.match(readme, /No V3\.1 planning is opened automatically/);
 
   assert.match(
     readme,

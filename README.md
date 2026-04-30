@@ -57,6 +57,7 @@ Current stable release:
 
 - title: `SoloCrew V3.0 Stable - Deliverable Engagement Operating Loop`
 - tag: `solocrew-v3.0-stable-deliverable-engagement-loop-20260430`
+- target: `0bf949959ac1275d33e7983d64feed5ed5098b9e`
 - package_publish: false
 - assets: empty
 
@@ -86,9 +87,8 @@ Engagement Canonicalization baseline:
 
 ## V3.0 Stable Scope
 
-V3.0 became stable-prep eligible after the bounded post-RC stable readiness
-gate for the First Deliverable Engagement Operating Loop. The stable line is
-limited local scope only:
+V3.0 Stable release is verified for the First Deliverable Engagement Operating
+Loop. The stable line is limited local scope only:
 
 - local-only
 - manual-first
@@ -212,7 +212,7 @@ Recent release evidence:
 
 | Line | Identity | Evidence |
 | --- | --- | --- |
-| V3.0 Stable | `solocrew-v3.0-stable-deliverable-engagement-loop-20260430` | `governance/releases/SOLOCREW-V3.0-STABLE-PREP-SEAL-AND-CONDITIONAL-RELEASE-RECORD-v0.1.md` |
+| V3.0 Stable | `solocrew-v3.0-stable-deliverable-engagement-loop-20260430` -> `0bf949959ac1275d33e7983d64feed5ed5098b9e` | `governance/releases/SOLOCREW-V3.0-POST-STABLE-VERIFICATION-MAINTENANCE-GATE-v0.1.md` |
 | V3.0 RC | `solocrew-v3.0-rc-deliverable-engagement-loop-20260430` -> `11bc8666553f32548eb2dd997fdac1316bbdd490` | `governance/releases/SOLOCREW-V3.0-RC-POST-RELEASE-VERIFICATION-AND-STABLE-READINESS-GATE-v0.1.md` |
 | V2.5 post-stable maintenance gate | `solocrew-v2.5-stable-semantic-stabilization-20260429` -> `4061f0df0cf6e5f151563c11ac94e27dabbd23b8` | `governance/releases/SOLOCREW-V2.5-POST-STABLE-VERIFICATION-MAINTENANCE-GATE-v0.1.md` |
 | V2.5 Stable | `solocrew-v2.5-stable-semantic-stabilization-20260429` -> `4061f0df0cf6e5f151563c11ac94e27dabbd23b8` | `governance/releases/SOLOCREW-V2.5-STABLE-PREP-SEAL-AND-CONDITIONAL-RELEASE-RECORD-v0.1.md` |
@@ -233,7 +233,8 @@ new canonical product object names.
 
 ## Development / Test Status
 
-The latest full repository suite run for the V3.0 stable prep line reported:
+The latest full repository suite run for the V3.0 post-stable verification line
+reported:
 
 - `npm test` -> pass, 716/716
 - V3.0 deliverable engagement loop E2E tests -> pass
@@ -246,16 +247,19 @@ part of the current line.
 
 ## Next Line
 
-The next allowed line after V3.0 Stable release execution is the bounded
-post-stable verification and maintenance gate.
+The next allowed work after V3.0 post-stable verification is V3.0 maintenance
+only.
 
-Owner-authorized next task candidate:
+Allowed maintenance examples include release artifact correction, documentation
+alignment, test/gate correction, no-claim hardening, compatibility alias
+repair, deterministic fixture/test repair, typo/link correction, evidence
+backfill, non-behavioral governance cleanup, or a limited local loop bugfix
+that does not add new capability.
 
-`SOLOCREW-V3.0-POST-STABLE-VERIFICATION-MAINTENANCE-GATE-01`
-
-This task may verify only the bounded V3.0 Stable release and set the
-maintenance posture. It must not create package publish, package asset,
-public/private beta claim, paid/commercial/production readiness claim,
-Cognitive_OS change, MPLP-Protocol change, MPLP certification, MPLP
-endorsement, V3.1 planning, or new product capability.
+No V3.1 planning is opened automatically. Any future V3.1 planning or
+commercial-readiness planning requires explicit owner authorization first.
+Maintenance must not create package publish, package asset, public/private
+beta claim, paid/commercial/production readiness claim, Cognitive_OS change,
+MPLP-Protocol change, MPLP certification, MPLP endorsement, or new product
+capability.
 No additional V3.0 implementation scope is opened by this README structure.
