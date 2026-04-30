@@ -194,12 +194,13 @@ test("[engagement e2e] active compatibility aliases preserve shell/page behavior
   assert.match(page.html, /Boundary Summary/);
 });
 
-test("[engagement e2e] README is product-entry-first and keeps V3.0 closed", () => {
+test("[engagement e2e] README is product-entry-first and keeps V3.0 bounded", () => {
   const readme = readFileSync("README.md", "utf8");
   const ordered_sections = [
     "## Product Identity",
     "## What SoloCrew Does Today",
     "## Current Stable Release",
+    "## V3.0 RC Prep Eligibility",
     "## Semantic Stabilization Line",
     "## Architecture / Authority Boundary",
     "## What This Is Not",
@@ -220,8 +221,13 @@ test("[engagement e2e] README is product-entry-first and keeps V3.0 closed", () 
     readme,
     /V2\.5 is the Product Semantic Stabilization \/ Engagement Canonicalization line\./
   );
-  assert.match(readme, /V3\.0 planning is blocked until V2\.5/);
-  assert.doesNotMatch(readme, /Next allowed task:\n\n`SOLOCREW-V3\.0-/);
+  assert.match(
+    readme,
+    /V3\.0 is RC-prep eligible after the bounded readiness audit/
+  );
+  assert.match(readme, /limited local scope only/);
+  assert.match(readme, /in-memory export object only/);
+  assert.doesNotMatch(readme, /V3\.0 released/);
 
   assert.match(
     readme,
