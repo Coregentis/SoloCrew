@@ -76,10 +76,11 @@ non-executing, and below public/private beta, paid product readiness,
 commercial readiness, production readiness, V3.0, MPLP certification, and
 MPLP endorsement.
 
-## V3.0 RC Prep Eligibility
+## V3.0 RC Status
 
-V3.0 is RC-prep eligible after the bounded readiness audit for the First
-Deliverable Engagement Operating Loop. This line is limited local scope only:
+V3.0 RC prerelease has been executed after the bounded readiness audit and RC
+prep gate for the First Deliverable Engagement Operating Loop. This line is
+limited local scope only:
 
 - local-only
 - manual-first
@@ -88,21 +89,21 @@ Deliverable Engagement Operating Loop. This line is limited local scope only:
 - non-executing
 - in-memory export object only
 
-V3.0 RC prep covers local engagement create/load, workspace/session/loop/history
+V3.0 RC covers local engagement create/load, workspace/session/loop/history
 contracts, the review-only loop runner, founder review packet output, local
 session history ledger, and deterministic in-memory export package object.
 
-V3.0 RC prep does not publish packages, create package assets, change route
-URLs, create filesystem writes, create database storage, introduce a
-persistence adapter, create a file export path, add cloud sync or SaaS sharing,
-publish public material, send email, automate CRM, add external analytics,
-invoke LLM/model/agent/tool calls, provision customer accounts, automate
-conversion, dispatch to providers/channels, create marketplace behavior, or add
-autonomous execution.
+V3.0 RC does not publish packages, create package assets, change route URLs,
+create filesystem writes, create database storage, introduce a persistence
+adapter, create a file export path, add cloud sync or SaaS sharing, publish
+public material, send email, automate CRM, add external analytics, invoke
+LLM/model/agent/tool calls, provision customer accounts, automate conversion,
+dispatch to providers/channels, create marketplace behavior, or add autonomous
+execution.
 
-V3.0 RC prep does not modify Cognitive_OS or MPLP-Protocol. It does not claim
-public beta, private beta, paid product readiness, commercial readiness,
-production readiness, MPLP certification, or MPLP endorsement.
+V3.0 RC does not modify Cognitive_OS or MPLP-Protocol. It does not claim public
+beta, private beta, paid product readiness, commercial readiness, production
+readiness, MPLP certification, or MPLP endorsement.
 
 ## Semantic Stabilization Line
 
@@ -204,7 +205,7 @@ Recent release evidence:
 
 | Line | Identity | Evidence |
 | --- | --- | --- |
-| V3.0 RC prep eligibility | `solocrew-v3.0-rc-deliverable-engagement-loop-20260430` candidate identity | `governance/audits/SOLOCREW-V3.0-RC-READINESS-AUDIT-v0.1.md` |
+| V3.0 RC | `solocrew-v3.0-rc-deliverable-engagement-loop-20260430` -> `11bc8666553f32548eb2dd997fdac1316bbdd490` | `governance/releases/SOLOCREW-V3.0-RC-POST-RELEASE-VERIFICATION-AND-STABLE-READINESS-GATE-v0.1.md` |
 | V2.5 post-stable maintenance gate | `solocrew-v2.5-stable-semantic-stabilization-20260429` -> `4061f0df0cf6e5f151563c11ac94e27dabbd23b8` | `governance/releases/SOLOCREW-V2.5-POST-STABLE-VERIFICATION-MAINTENANCE-GATE-v0.1.md` |
 | V2.5 Stable | `solocrew-v2.5-stable-semantic-stabilization-20260429` -> `4061f0df0cf6e5f151563c11ac94e27dabbd23b8` | `governance/releases/SOLOCREW-V2.5-STABLE-PREP-SEAL-AND-CONDITIONAL-RELEASE-RECORD-v0.1.md` |
 | V2.5 RC | `solocrew-v2.5-rc-semantic-stabilization-20260429` -> `f98b29a9ab20bb02e9928f844d4fb1f761ba2031` | `governance/releases/SOLOCREW-V2.5-RC-PREP-SEAL-AND-CONDITIONAL-RELEASE-RECORD-v0.1.md` |
@@ -224,7 +225,8 @@ new canonical product object names.
 
 ## Development / Test Status
 
-The latest full repository suite run for the V3.0 RC readiness line reported:
+The latest full repository suite run for the V3.0 post-RC stable readiness line
+reported:
 
 - `npm test` -> pass, 716/716
 - V3.0 deliverable engagement loop E2E tests -> pass
@@ -237,15 +239,15 @@ part of the current line.
 
 ## Next Line
 
-The next allowed line after V3.0 RC prep eligibility is the bounded RC
-prep/seal and conditional prerelease execution gate.
+The next allowed line after V3.0 post-RC verification and stable readiness is
+the bounded stable prep/seal and conditional stable release execution gate.
 
 Owner-authorized next task candidate:
 
-`SOLOCREW-V3.0-RC-PREP-GATE-AND-CONDITIONAL-RELEASE-EXECUTION-01`
+`SOLOCREW-V3.0-STABLE-PREP-GATE-AND-CONDITIONAL-RELEASE-EXECUTION-01`
 
-This task may create only the bounded V3.0 RC prerelease if all prep gates
-pass. It must not create a stable release, package publish, package asset,
+This task may create only the bounded V3.0 Stable release if all stable prep
+gates pass. It must not create a package publish, package asset,
 public/private beta claim, paid/commercial/production readiness claim,
 Cognitive_OS change, MPLP-Protocol change, MPLP certification, or MPLP
 endorsement.
