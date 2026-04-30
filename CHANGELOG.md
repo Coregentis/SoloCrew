@@ -2,6 +2,9 @@
 
 ## 2026-04-30
 
+- planned projection-safe handoff and future downstream consumption strategy for
+  Cognitive_OS neutral operator review loop contracts; no implementation, no
+  V3.1 planning, no release/tag/package
 - created tri-repo architecture drift correction plan; planning only, no code, no
   release/tag/package, no Cognitive_OS/MPLP code change
 - added tri-repo architecture drift origin audit across SoloCrew, Cognitive_OS,
